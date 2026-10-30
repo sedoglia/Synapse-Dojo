@@ -5,26 +5,34 @@ import { store } from '../storage';
 import { t } from '../i18n';
 import { render, page, countUp, rankName } from '../ui';
 import { DAILY_CHECK, type Exercise, type ExerciseResult } from '../exercises';
+import { dailyPlan } from '../stats';
 import { showHome } from './home';
 import { showTraining } from './training';
 
+const pace = () => (store.data.settings.relaxed ? 1.4 : 1);
+const levelText = (ex: Exercise, level: number) => ex.levelLabel?.(level) ?? String(level);
+
+export function whyBox(ex: Exercise): HTMLElement {
+  return h('details', { class: 'why' }, h('summary', {}, `🔬 ${t('common.why')}`), h('p', {}, t(ex.why)));
+}
+
 /** Intro card; resolves true when the player presses start. */
-function intro(ex: Exercise, step: string | null, onBack: () => void): Promise<boolean> {
+function intro(ex: Exercise, step: string | null): Promise<boolean> {
   return new Promise((resolve) => {
+    const level = ex.levels && store.hasLevel(ex.id) ? store.level(ex.id, ex.levels.start) : null;
     render(
       page(
         step ?? t(ex.name),
-        () => {
-          onBack();
-          resolve(false);
-        },
+        () => resolve(false),
         h(
           'div',
           { class: 'card intro' },
           h('div', { class: 'intro-icon' }, ex.icon),
           h('h2', {}, t(ex.name)),
-          h('span', { class: `chip skill-${ex.skill}` }, t(`skill.${ex.skill}`)),
+          h('span', { class: `chip domain-${ex.domain}` }, t(`domain.${ex.domain}`)),
           h('p', {}, t(ex.desc)),
+          level !== null ? h('div', { class: 'muted' }, `${t('common.level')}: ${levelText(ex, level)}`) : null,
+          whyBox(ex),
           h('button', { class: 'btn primary big', onClick: () => resolve(true) }, t('common.start')),
         ),
       ),
@@ -33,11 +41,11 @@ function intro(ex: Exercise, step: string | null, onBack: () => void): Promise<b
 }
 
 /** Runs a single exercise in the play view. Returns null if the player quit. */
-async function runExercise(ex: Exercise, quick: boolean): Promise<ExerciseResult | null> {
+async function runExercise(ex: Exercise, quick: boolean, level: number): Promise<ExerciseResult | null> {
   const bar = h('div', { class: 'progress-fill' });
   const label = h('span', { class: 'progress-label' });
-  const stage = h('div', { class: 'stage' });
-  const ctx = new Ctx(stage, quick, (fraction, text) => {
+  const stage = h('div', { class: `stage stage-${ex.id}` });
+  const ctx = new Ctx(stage, quick, level, pace(), (fraction, text) => {
     bar.style.width = `${Math.round(fraction * 100)}%`;
     label.textContent = text;
   });
@@ -71,45 +79,95 @@ async function runExercise(ex: Exercise, quick: boolean): Promise<ExerciseResult
     throw e;
   } finally {
     ctx.abort(); // releases any listener an exercise might still hold
+    if ('speechSynthesis' in window) speechSynthesis.cancel();
   }
 }
 
-export async function playPractice(ex: Exercise) {
-  if (!(await intro(ex, null, showTraining))) return;
-  const res = await runExercise(ex, false);
-  if (!res) return showTraining();
+type After = 'retry' | 'next' | 'menu' | 'quit';
+
+/** Intro → exercise → saved result. `step` is set when running inside the daily plan. */
+async function practiceRound(ex: Exercise, step: { i: number; n: number } | null): Promise<After> {
+  if (!(await intro(ex, step ? t('plan.step', step) : null))) return 'quit';
+  const before = ex.levels ? store.level(ex.id, ex.levels.start) : 1;
+  const res = await runExercise(ex, false, before);
+  if (!res) return 'quit';
 
   const prevBest = store.best(ex.id);
   const score = Math.round(res.score);
   store.addRun({ ex: ex.id, date: todayKey(), score, detail: res.detail });
+  if (res.level !== undefined) store.setLevel(ex.id, res.level);
   const isBest = prevBest === null || score > prevBest;
   if (isBest) sfx.fanfare();
 
   const num = h('div', { class: 'big-score' }, '0');
+  return new Promise<After>((resolve) => {
+    const levelLine =
+      ex.levels && res.level !== undefined
+        ? h(
+            'div',
+            { class: `level-change ${res.level > before ? 'up' : res.level < before ? 'down' : ''}` },
+            res.level === before
+              ? `${t('common.level')}: ${levelText(ex, before)}`
+              : t('common.levelChange', { from: levelText(ex, before), to: levelText(ex, res.level) }),
+          )
+        : null;
+    render(
+      page(
+        t('result.title'),
+        () => resolve('menu'),
+        h(
+          'div',
+          { class: 'card result' },
+          h('div', { class: 'intro-icon' }, ex.icon),
+          h('h2', {}, t(ex.name)),
+          num,
+          h('div', { class: 'muted' }, `/ 100 · ${res.detail}`),
+          levelLine,
+          isBest
+            ? h('div', { class: 'badge-best' }, `🏆 ${t('common.newBest')}`)
+            : h('div', { class: 'muted' }, `${t('common.best')}: ${prevBest}`),
+          h(
+            'div',
+            { class: 'row' },
+            h('button', { class: 'btn', onClick: () => resolve('menu') }, t('common.menu')),
+            step
+              ? h('button', { class: 'btn primary', onClick: () => resolve('next') }, t('common.next'))
+              : h('button', { class: 'btn primary', onClick: () => resolve('retry') }, t('common.retry')),
+          ),
+        ),
+      ),
+    );
+    countUp(num, score);
+  });
+}
+
+export async function playPractice(ex: Exercise) {
+  while ((await practiceRound(ex, null)) === 'retry');
+  showTraining();
+}
+
+export async function playPlan() {
+  const plan = dailyPlan();
+  for (let i = 0; i < plan.length; i++) {
+    if (store.playedToday(plan[i].id)) continue;
+    const after = await practiceRound(plan[i], { i: i + 1, n: plan.length });
+    if (after === 'quit' || after === 'menu') return showHome();
+  }
+  sfx.fanfare();
   render(
     page(
-      t('result.title'),
-      showTraining,
+      t('plan.title'),
+      showHome,
       h(
         'div',
         { class: 'card result' },
-        h('div', { class: 'intro-icon' }, ex.icon),
-        h('h2', {}, t(ex.name)),
-        num,
-        h('div', { class: 'muted' }, `/ 100 · ${res.detail}`),
-        isBest
-          ? h('div', { class: 'badge-best' }, `🏆 ${t('common.newBest')}`)
-          : h('div', { class: 'muted' }, `${t('common.best')}: ${prevBest}`),
-        h(
-          'div',
-          { class: 'row' },
-          h('button', { class: 'btn', onClick: showTraining }, t('common.menu')),
-          h('button', { class: 'btn primary', onClick: () => playPractice(ex) }, t('common.retry')),
-        ),
+        h('div', { class: 'intro-icon' }, '🎉'),
+        h('h2', {}, t('plan.done')),
+        h('p', { class: 'muted' }, t('plan.doneSub')),
+        h('button', { class: 'btn primary', onClick: showHome }, t('common.menu')),
       ),
     ),
   );
-  countUp(num, score);
 }
 
 export async function playDailyCheck() {
@@ -119,9 +177,8 @@ export async function playDailyCheck() {
   const parts: Record<string, number> = {};
   for (let i = 0; i < DAILY_CHECK.length; i++) {
     const ex = DAILY_CHECK[i];
-    const step = t('common.step', { i: i + 1, n: DAILY_CHECK.length });
-    if (!(await intro(ex, step, showHome))) return;
-    const res = await runExercise(ex, true);
+    if (!(await intro(ex, t('common.step', { i: i + 1, n: DAILY_CHECK.length })))) return showHome();
+    const res = await runExercise(ex, true, ex.levels?.start ?? 1);
     if (!res) return showHome();
     parts[ex.id] = Math.round(res.score);
   }
@@ -165,7 +222,7 @@ function showCheckResult(score: number, alreadyDone: boolean) {
                 h(
                   'div',
                   { class: 'part' },
-                  h('span', {}, `${ex.icon} ${t(ex.name)}`),
+                  h('span', {}, `${ex.icon} ${t(`domain.${ex.domain}`)}`),
                   h('div', { class: 'part-bar' }, h('div', { style: { width: `${todays.parts[ex.id] ?? 0}%` } })),
                   h('b', {}, String(todays.parts[ex.id] ?? 0)),
                 ),

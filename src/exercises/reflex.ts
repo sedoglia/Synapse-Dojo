@@ -1,72 +1,72 @@
-import { h, rand, scale } from '../dom';
+import { h, rand } from '../dom';
 import { sfx } from '../audio';
 import { t } from '../i18n';
+import { Staircase } from '../adaptive';
 import type { Exercise } from './types';
 
-const FALSE_START_PENALTY = 150; // ms added to the average per false start
-
-type Tap = { early: true } | { early: false; rt: number };
+const windowFor = (level: number) => Math.max(250, Math.round(1100 * Math.pow(0.9, level - 1)));
+const noGoFor = (level: number) => (level >= 3 ? 0.25 : 0);
 
 export const reflex: Exercise = {
   id: 'reflex',
   icon: '⚡',
-  skill: 'speed',
+  domain: 'speed',
   name: 'ex.reflex.name',
   desc: 'ex.reflex.desc',
+  why: 'ex.reflex.why',
+  minutes: 1.5,
+  levels: { min: 1, max: 14, start: 1 },
+  levelLabel: (l) => `${windowFor(l)} ms${noGoFor(l) ? ' · go/no-go' : ''}`,
 
   async run(ctx) {
-    const trials = ctx.quick ? 4 : 6;
-    const pad = h('button', { class: 'reflex-pad' });
-    const last = h('div', { class: 'reflex-last' });
-    ctx.stage.append(pad, last);
-
-    const times: number[] = [];
-    let falseStarts = 0;
-    while (times.length < trials) {
-      ctx.progress(times.length / trials, `${times.length + 1}/${trials}`);
-      pad.className = 'reflex-pad waiting';
-      pad.textContent = t('ex.reflex.wait');
-
-      const res = await ctx.input<Tap>((done) => {
-        let goAt = 0;
-        const id = setTimeout(() => {
-          pad.className = 'reflex-pad go';
-          pad.textContent = t('ex.reflex.tap');
-          sfx.go();
-          goAt = performance.now();
-        }, rand(1200, 3800));
-        const tap = (e: Event) => {
+    const trials = 30;
+    const st = new Staircase(ctx.level, 1, 14, 2);
+    let onTap: ((i: number) => void) | null = null;
+    const pads = Array.from({ length: 4 }, (_, i) =>
+      h('button', {
+        class: 'reflex-pad',
+        onPointerdown: (e: PointerEvent) => {
           e.preventDefault();
-          done(goAt ? { early: false, rt: performance.now() - goAt } : { early: true });
-        };
-        const kb = (e: KeyboardEvent) => {
-          if (e.key === ' ') tap(e);
-        };
-        pad.addEventListener('pointerdown', tap);
-        window.addEventListener('keydown', kb);
-        return () => {
-          clearTimeout(id);
-          pad.removeEventListener('pointerdown', tap);
-          window.removeEventListener('keydown', kb);
-        };
-      });
+          onTap?.(i);
+        },
+      }),
+    );
+    ctx.stage.append(h('div', { class: 'reflex-hint' }, t('ex.reflex.hint')), h('div', { class: 'reflex-grid' }, ...pads));
 
-      if (res.early) {
-        falseStarts++;
-        sfx.bad();
-        pad.className = 'reflex-pad early';
-        pad.textContent = t('ex.reflex.early');
+    let correct = 0;
+    const rts: number[] = [];
+    for (let i = 0; i < trials; i++) {
+      ctx.progress(i / trials, `${i + 1}/${trials}`);
+      await ctx.wait(rand(500, 1300));
+
+      const k = rand(0, 3);
+      const noGo = Math.random() < noGoFor(st.level);
+      pads[k].classList.add(noGo ? 'nogo' : 'go');
+      const shown = performance.now();
+      const tapped = await ctx.timed<number | null>(windowFor(st.level) * ctx.pace, null, (done) => {
+        onTap = done;
+        return () => (onTap = null);
+      });
+      const rt = performance.now() - shown;
+      pads[k].classList.remove('go', 'nogo');
+
+      const ok = noGo ? tapped === null : tapped === k;
+      st.record(ok);
+      if (ok) {
+        correct++;
+        if (!noGo) rts.push(rt);
+        sfx.ok();
       } else {
-        times.push(res.rt);
-        pad.className = 'reflex-pad result';
-        pad.textContent = `${Math.round(res.rt)} ms`;
+        sfx.bad();
+        const wrong = tapped ?? k;
+        pads[wrong].classList.add('wrong');
+        await ctx.wait(350);
+        pads[wrong].classList.remove('wrong');
       }
-      last.textContent = times.map((x) => Math.round(x)).join(' · ');
-      await ctx.wait(900);
     }
     ctx.progress(1);
 
-    const avg = times.reduce((a, b) => a + b, 0) / trials + falseStarts * FALSE_START_PENALTY;
-    return { score: scale(avg, 230, 650), detail: t('ex.reflex.avg', { ms: Math.round(avg) }) };
+    const avg = rts.length ? Math.round(rts.reduce((a, b) => a + b, 0) / rts.length) : 0;
+    return { score: st.score(), detail: t('ex.reflex.detail', { ms: avg, ok: correct, n: trials }), level: st.next() };
   },
 };

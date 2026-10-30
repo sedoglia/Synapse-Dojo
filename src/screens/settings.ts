@@ -1,10 +1,23 @@
 import { h } from '../dom';
-import { store } from '../storage';
+import { store, type Settings } from '../storage';
 import { t, type Lang } from '../i18n';
 import { APP_NAME } from '../config';
-import { render, page } from '../ui';
+import { render, page, applySettings } from '../ui';
 import { showHome } from './home';
 import { showOnboarding } from './onboarding';
+
+function toggle(key: 'sound' | 'relaxed' | 'bigText', label: string): HTMLElement {
+  const box = h('input', {
+    type: 'checkbox',
+    checked: store.data.settings[key],
+    onChange: (e: Event) => {
+      (store.data.settings as Settings)[key] = (e.target as HTMLInputElement).checked;
+      store.save();
+      applySettings();
+    },
+  });
+  return h('label', { class: 'inline' }, box, label);
+}
 
 export function showSettings() {
   const nameInput = h('input', { class: 'input', value: store.data.name, maxlength: 24 });
@@ -20,22 +33,13 @@ export function showSettings() {
       onChange: (e: Event) => {
         store.data.settings.lang = (e.target as HTMLSelectElement).value as Lang;
         store.save();
-        document.documentElement.lang = store.data.settings.lang;
+        applySettings();
         showSettings();
       },
     },
     h('option', { value: 'it', selected: store.data.settings.lang === 'it' }, 'Italiano'),
     h('option', { value: 'en', selected: store.data.settings.lang === 'en' }, 'English'),
   );
-
-  const sound = h('input', {
-    type: 'checkbox',
-    checked: store.data.settings.sound,
-    onChange: (e: Event) => {
-      store.data.settings.sound = (e.target as HTMLInputElement).checked;
-      store.save();
-    },
-  });
 
   render(
     page(
@@ -46,7 +50,9 @@ export function showSettings() {
         { class: 'card form' },
         h('label', {}, t('settings.name'), nameInput),
         h('label', {}, t('settings.lang'), langSelect),
-        h('label', { class: 'inline' }, sound, t('settings.sound')),
+        toggle('sound', t('settings.sound')),
+        toggle('relaxed', t('settings.relaxed')),
+        toggle('bigText', t('settings.bigText')),
       ),
       h(
         'section',
@@ -58,6 +64,7 @@ export function showSettings() {
             onClick: () => {
               if (confirm(t('settings.resetConfirm'))) {
                 store.reset();
+                applySettings();
                 showOnboarding();
               }
             },
@@ -65,7 +72,7 @@ export function showSettings() {
           t('settings.reset'),
         ),
       ),
-      h('p', { class: 'muted small center' }, `${APP_NAME} v0.1.0 · ${t('settings.about')}`),
+      h('p', { class: 'muted small center' }, `${APP_NAME} v0.2.0 · ${t('settings.about')}`),
     ),
   );
 }

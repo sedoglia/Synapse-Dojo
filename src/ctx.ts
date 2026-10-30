@@ -7,7 +7,12 @@ export class Ctx {
 
   constructor(
     public stage: HTMLElement,
+    /** Short, fixed-difficulty version used by the daily check. */
     public quick: boolean,
+    /** Starting difficulty for adaptive exercises. */
+    public level: number,
+    /** Time multiplier (> 1 in relaxed mode) applied to response windows and stimulus pacing. */
+    public pace: number,
     private onProgress: (fraction: number, label: string) => void,
   ) {}
 
@@ -23,6 +28,37 @@ export class Ctx {
     return this.input<void>((done) => {
       const id = setTimeout(() => done(), ms);
       return () => clearTimeout(id);
+    });
+  }
+
+  /** Resolves after the next paint plus at least `ms`: tighter than setTimeout for brief stimuli. */
+  frames(ms: number): Promise<void> {
+    return this.input<void>((done) => {
+      let start = 0;
+      let id = 0;
+      const tick = (now: number) => {
+        if (!start) start = now;
+        if (now - start >= ms - 4) return done();
+        id = requestAnimationFrame(tick);
+      };
+      id = requestAnimationFrame(tick);
+      const fallback = setTimeout(() => done(), ms + 250); // rAF is paused in background tabs
+      return () => {
+        cancelAnimationFrame(id);
+        clearTimeout(fallback);
+      };
+    });
+  }
+
+  /** Waits for `setup` to call `done`, or for `ms` to pass (resolving with `onTimeout`). */
+  timed<T>(ms: number, onTimeout: T, setup: (done: (value: T) => void) => void | (() => void)): Promise<T> {
+    return this.input<T>((done) => {
+      const id = setTimeout(() => done(onTimeout), ms);
+      const cleanup = setup(done);
+      return () => {
+        clearTimeout(id);
+        cleanup?.();
+      };
     });
   }
 

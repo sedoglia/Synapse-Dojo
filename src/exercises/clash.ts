@@ -1,6 +1,7 @@
 import { h, pick, scale, flash } from '../dom';
 import { sfx } from '../audio';
 import { t } from '../i18n';
+import { Staircase } from '../adaptive';
 import type { Exercise } from './types';
 
 const COLORS = [
@@ -12,16 +13,22 @@ const COLORS = [
 
 type ColorId = (typeof COLORS)[number]['id'];
 const label = (id: ColorId) => t(`color.${id}`);
+const limitFor = (level: number) => Math.round(3000 * Math.pow(0.88, level - 1));
 
 export const clash: Exercise = {
   id: 'clash',
   icon: '🎨',
-  skill: 'attention',
+  domain: 'executive',
   name: 'ex.clash.name',
   desc: 'ex.clash.desc',
+  why: 'ex.clash.why',
+  minutes: 2,
+  levels: { min: 1, max: 14, start: 1 },
+  levelLabel: (l) => `${limitFor(l)} ms${l >= 3 ? ' · 🎨/📖' : ''}`,
 
   async run(ctx) {
-    const total = ctx.quick ? 14 : 24;
+    const total = ctx.quick ? 14 : 30;
+    const st = new Staircase(ctx.level, 1, 14, 2);
     const rule = h('div', { class: 'clash-rule' });
     const word = h('div', { class: 'clash-word' });
     let onPick: ((id: ColorId) => void) | null = null;
@@ -34,8 +41,8 @@ export const clash: Exercise = {
     let rtSum = 0;
     for (let i = 0; i < total; i++) {
       ctx.progress(i / total, `${i + 1}/${total}`);
-      // The gym version mixes in a second rule that flips which feature counts.
-      const byWord = !ctx.quick && Math.random() < 0.4;
+      // From level 3 a second rule appears that flips which feature counts.
+      const byWord = !ctx.quick && st.level >= 3 && Math.random() < 0.35;
       const meaning = pick(COLORS);
       const congruent = Math.random() < 0.25;
       const ink = congruent ? meaning : pick(COLORS.filter((c) => c.id !== meaning.id));
@@ -48,28 +55,29 @@ export const clash: Exercise = {
       flash(word, 'pop', 200);
 
       const shown = performance.now();
-      const choice = await ctx.input<ColorId>((done) => {
+      const limit = ctx.quick ? 60_000 : limitFor(st.level) * ctx.pace;
+      const choice = await ctx.timed<ColorId | null>(limit, null, (done) => {
         onPick = done;
         return () => (onPick = null);
       });
       rtSum += performance.now() - shown;
 
-      const btn = buttons[COLORS.findIndex((c) => c.id === choice)];
-      if (choice === target) {
+      const ok = choice === target;
+      st.record(ok);
+      if (ok) {
         correct++;
         sfx.ok();
-        flash(btn, 'good');
-      } else {
-        sfx.bad();
-        flash(btn, 'bad');
-      }
-      word.textContent = '';
-      await ctx.wait(220);
+      } else sfx.bad();
+      if (choice) flash(buttons[COLORS.findIndex((c) => c.id === choice)], ok ? 'good' : 'bad');
+      word.textContent = choice ? '' : `⏱ ${t('common.timeout')}`;
+      word.style.color = '';
+      await ctx.wait(choice ? 220 : 600);
     }
     ctx.progress(1);
 
     const avg = rtSum / total;
-    const score = (correct / total) * scale(avg, 650, 2200);
-    return { score, detail: `${correct}/${total} · ${Math.round(avg)} ms` };
+    const detail = `${correct}/${total} · ${Math.round(avg)} ms`;
+    if (ctx.quick) return { score: (correct / total) * scale(avg, 650, 2200), detail };
+    return { score: st.score(), detail, level: st.next() };
   },
 };

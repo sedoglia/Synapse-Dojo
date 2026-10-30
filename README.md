@@ -7,20 +7,24 @@ Gioco open source di allenamento cognitivo: pochi minuti al giorno, nel browser,
 
 ## Cosa c'è dentro
 
-- **Check quotidiano** – 3 prove rapide che producono un **Neuro Score** (0–1000) con 5 livelli, da *Scintilla* a *Maestro delle sinapsi*.
-- **Palestra** – 6 esercizi da allenare liberamente, con record personali e timbro giornaliero:
+- **Allenamento di oggi**: circa 10–12 minuti, con 4 esercizi scelti ogni giorno tra le abilità allenate meno di recente.
+- **Check quotidiano**: 4 prove rapide a difficoltà fissa (velocità, controllo, memoria di lavoro, calcolo) che producono un **Neuro Score** da 0 a 1000.
+- **Palestra**: 17 esercizi su 8 abilità. Ognuno ha **difficoltà adattiva**: diventa più difficile mentre migliori e il livello resta salvato.
 
-| Esercizio | Abilità | Ispirato a |
-|---|---|---|
-| ➗ Sprint di calcolo | Calcolo | aritmetica mentale a tempo |
-| 🎨 Scontro di colori | Attenzione | effetto Stroop, con regola che si inverte |
-| 🔢 Sentiero dei numeri | Velocità | Trail Making Test (A e B) |
-| 💡 Griglia di luci | Memoria | test di Corsi (span visuo-spaziale) |
-| 🔐 Cassaforte di parole | Memoria | riconoscimento di parole (vecchie/nuove) |
-| ⚡ Riflesso lampo | Velocità | tempo di reazione semplice |
+| Abilità | Esercizi |
+|---|---|
+| Velocità | 👁️ Colpo d'occhio (campo visivo utile), ⚡ Riflesso a scelta, 🔢 Sentiero dei numeri |
+| Attenzione | 🏎️ Pilota (multitasking), 🎯 Radar (inseguimento di più oggetti) |
+| Controllo | 🎨 Scontro di colori (Stroop), 🔀 Doppia regola (task switching) |
+| Memoria di lavoro | 🔁 Eco (n-back duale), 💡 Griglia di luci (Corsi), 🔟 Ultime cifre |
+| Memoria | 🔐 Cassaforte di parole, 🔗 Coppie |
+| Spaziale | 🧊 Rotazioni |
+| Ragionamento | 🗼 Torri (Torre di Londra), 🧩 L'intruso |
+| Calcolo e lettura | ➗ Sprint di calcolo, 📖 Lettura veloce |
 
-- **Progressi** – grafico del Neuro Score, calendario delle ultime 4 settimane, record per esercizio, serie di giorni consecutivi.
-- Italiano e inglese, tema chiaro/scuro automatico, installabile come app (PWA) e giocabile offline.
+- **Progressi**: profilo radar per abilità, grafico del Neuro Score, calendario e obiettivo settimanale.
+- Ogni esercizio ha una scheda **"Perché funziona"** con il paradigma scientifico e lo studio di riferimento. La ricerca completa è in [docs/ricerca-e-proposta.md](docs/ricerca-e-proposta.md).
+- Italiano e inglese, tema chiaro e scuro, ritmo rilassato e testo grande, installabile come app (PWA) e giocabile offline.
 - Nessun server e nessun tracciamento: i dati restano nel `localStorage` del browser.
 
 ## Sviluppo
@@ -39,16 +43,20 @@ Stack: TypeScript + Vite, nessun framework UI. Struttura:
 src/
   exercises/   un file per esercizio + index.ts (elenco e composizione del check)
   screens/     home, palestra, sessione di gioco, progressi, impostazioni
-  ctx.ts       runtime degli esercizi (attese annullabili, input, progresso)
-  i18n.ts      testi IT/EN e liste di parole
-  storage.ts   salvataggi locali, record, serie
+  adaptive.ts  staircase per la difficoltà adattiva
+  stats.ts     capacità per abilità e scelta dell'allenamento di oggi
+  ctx.ts       runtime degli esercizi (attese annullabili, input, livello, ritmo)
+  widgets.ts   tastierino, canvas e altri componenti condivisi
+  i18n.ts      testi IT/EN, liste di parole e brani di lettura
+  storage.ts   salvataggi locali, livelli, record, serie
 ```
 
 ### Aggiungere un esercizio
 
-1. Crea `src/exercises/mio.ts` che esporta un oggetto `Exercise` con `run(ctx)` che restituisce `{ score: 0–100, detail }`.
-2. Usa `ctx.stage` per disegnare, `ctx.input()` per attendere l'input e `ctx.wait()` per le pause: così l'uscita a metà partita è gestita automaticamente.
-3. Aggiungi nome e descrizione in `src/i18n.ts` e registra l'esercizio in `src/exercises/index.ts`.
+1. Crea `src/exercises/mio.ts` che esporta un oggetto `Exercise`, con dominio, `levels` e `run(ctx)`. `run` restituisce `{ score: 0–100, detail, level }`.
+2. Usa `ctx.stage` per disegnare, `ctx.input()` / `ctx.timed()` per attendere l'input e `ctx.wait()` per le pause: così l'uscita a metà partita è gestita automaticamente.
+3. Per la difficoltà parti da `ctx.level`, registra ogni prova con `Staircase.record(ok)` e restituisci `level: st.next()`. Moltiplica i tempi limite per `ctx.pace` (modalità rilassata).
+4. Aggiungi nome, descrizione e "perché funziona" in `src/i18n.ts` e registra l'esercizio in `src/exercises/index.ts`.
 
 ### Rinominare il gioco
 

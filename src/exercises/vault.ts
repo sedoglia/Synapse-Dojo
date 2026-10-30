@@ -4,16 +4,23 @@ import { store } from '../storage';
 import { t, WORDS } from '../i18n';
 import type { Exercise } from './types';
 
+const MAX_LEVEL = 8;
+const countFor = (level: number) => 4 + level * 2;
+
 export const vault: Exercise = {
   id: 'vault',
   icon: '🔐',
-  skill: 'memory',
+  domain: 'memory',
   name: 'ex.vault.name',
   desc: 'ex.vault.desc',
+  why: 'ex.vault.why',
+  minutes: 2.5,
+  levels: { min: 1, max: MAX_LEVEL, start: 2 },
+  levelLabel: (l) => `${countFor(l)} 📝`,
 
   async run(ctx) {
-    const studyCount = ctx.quick ? 8 : 12;
-    const studySecs = ctx.quick ? 20 : 30;
+    const studyCount = ctx.quick ? 8 : countFor(ctx.level);
+    const studySecs = ctx.quick ? 20 : Math.round(studyCount * 2.5 * ctx.pace);
     const pool = shuffle(WORDS[store.data.settings.lang]);
     const studied = pool.slice(0, studyCount);
     const lures = pool.slice(studyCount, studyCount * 2);
@@ -81,7 +88,12 @@ export const vault: Exercise = {
     }
     ctx.progress(1);
 
-    const score = clamp((hits - falseAlarms) / studyCount, 0, 1) * 100;
-    return { score, detail: t('ex.vault.result', { n: correct, t: probes.length }) };
+    // Hits minus false alarms corrects for answering "seen" to everything.
+    const perf = clamp((hits - falseAlarms) / studyCount, 0, 1);
+    const detail = t('ex.vault.result', { n: correct, t: probes.length });
+    if (ctx.quick) return { score: perf * 100, detail };
+
+    const level = perf >= 0.75 ? Math.min(MAX_LEVEL, ctx.level + 1) : perf < 0.45 ? Math.max(1, ctx.level - 1) : ctx.level;
+    return { score: ((ctx.level - 1 + perf) / MAX_LEVEL) * 100, detail, level };
   },
 };

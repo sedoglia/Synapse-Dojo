@@ -2,7 +2,8 @@ import { h, todayKey } from '../dom';
 import { store } from '../storage';
 import { t } from '../i18n';
 import { render, page } from '../ui';
-import { EXERCISES } from '../exercises';
+import { EXERCISES, DOMAINS } from '../exercises';
+import { capacity, domainScore } from '../stats';
 import { showHome } from './home';
 
 const SVG = 'http://www.w3.org/2000/svg';
@@ -12,6 +13,12 @@ function svg(tag: string, attrs: Record<string, string | number>, text?: string)
   for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, String(v));
   if (text) el.textContent = text;
   return el;
+}
+
+function wrap(el: SVGElement, cls: string): HTMLElement {
+  const box = h('div', { class: cls });
+  box.append(el);
+  return box;
 }
 
 function scoreChart(): HTMLElement {
@@ -35,10 +42,30 @@ function scoreChart(): HTMLElement {
     dot.append(svg('title', {}, `${c.date}: ${c.score}`));
     root.append(dot);
   });
+  return wrap(root, 'chart-wrap');
+}
 
-  const wrap = h('div', { class: 'chart-wrap' });
-  wrap.append(root);
-  return wrap;
+/** Spider chart of the eight skill domains. */
+function domainRadar(): HTMLElement {
+  const S = 300, C = S / 2, R = 92;
+  const n = DOMAINS.length;
+  const pt = (i: number, r: number) => {
+    const a = (i / n) * Math.PI * 2 - Math.PI / 2;
+    return [C + Math.cos(a) * r, C + Math.sin(a) * r];
+  };
+  const root = svg('svg', { viewBox: `0 0 ${S} ${S}`, class: 'radar', role: 'img' });
+  for (const k of [0.25, 0.5, 0.75, 1]) {
+    root.append(svg('polygon', { points: DOMAINS.map((_, i) => pt(i, R * k).join(',')).join(' '), class: 'radar-ring' }));
+  }
+  DOMAINS.forEach((d, i) => {
+    const [x, y] = pt(i, R);
+    root.append(svg('line', { x1: C, y1: C, x2: x, y2: y, class: 'radar-ring' }));
+    const [lx, ly] = pt(i, R + 24);
+    root.append(svg('text', { x: lx, y: ly + 4, class: 'radar-label', 'text-anchor': 'middle' }, t(`domain.${d}`)));
+  });
+  const values = DOMAINS.map((d) => domainScore(d) / 100);
+  root.append(svg('polygon', { points: values.map((v, i) => pt(i, R * Math.max(0.03, v)).join(',')).join(' '), class: 'radar-area' }));
+  return wrap(root, 'chart-wrap');
 }
 
 function calendar(): HTMLElement {
@@ -62,26 +89,30 @@ export function showProgress() {
     page(
       t('progress.title'),
       showHome,
+      h('section', { class: 'card' }, h('h3', {}, t('progress.domains')), domainRadar(), h('p', { class: 'muted small center' }, t('progress.domainsHint'))),
       h('section', { class: 'card' }, h('h3', {}, t('progress.chart')), scoreChart()),
       h(
         'section',
         { class: 'card' },
         h('h3', {}, t('progress.calendar')),
         calendar(),
+        h('p', { class: 'muted small' }, t('progress.week', { n: store.daysThisWeek() })),
         h('p', { class: 'muted small' }, t('progress.stats', { days: store.activeDays().size, runs: runs.length + checks.length })),
       ),
       h(
         'section',
         { class: 'card' },
-        h('h3', {}, t('progress.bests')),
+        h('h3', {}, t('progress.exercises')),
         ...EXERCISES.map((ex) => {
-          const best = store.best(ex.id) ?? 0;
+          const cap = capacity(ex);
+          const level = ex.levels && store.hasLevel(ex.id) ? ex.levelLabel?.(store.level(ex.id, ex.levels.start)) : null;
+          const best = store.best(ex.id);
           return h(
             'div',
             { class: 'part' },
-            h('span', {}, `${ex.icon} ${t(ex.name)}`),
-            h('div', { class: 'part-bar' }, h('div', { style: { width: `${best}%` } })),
-            h('b', {}, best ? String(best) : t('progress.none')),
+            h('span', {}, `${ex.icon} ${t(ex.name)}`, level ? h('small', { class: 'muted level-tag' }, level) : null),
+            h('div', { class: 'part-bar' }, h('div', { style: { width: `${cap ?? 0}%` } })),
+            h('b', {}, best !== null ? String(best) : t('progress.none')),
           );
         }),
       ),

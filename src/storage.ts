@@ -15,27 +15,48 @@ export interface CheckRecord {
   parts: Record<string, number>;
 }
 
+export interface Settings {
+  lang: Lang;
+  sound: boolean;
+  relaxed: boolean;
+  bigText: boolean;
+}
+
 export interface SaveData {
   name: string;
   created: string;
   runs: RunRecord[];
   checks: CheckRecord[];
-  settings: { lang: Lang; sound: boolean };
+  levels: Record<string, number>;
+  plan: { date: string; ids: string[] } | null;
+  settings: Settings;
 }
 
 function defaults(): SaveData {
   const lang: Lang = navigator.language?.toLowerCase().startsWith('it') ? 'it' : 'en';
-  return { name: '', created: todayKey(), runs: [], checks: [], settings: { lang, sound: true } };
+  return {
+    name: '',
+    created: todayKey(),
+    runs: [],
+    checks: [],
+    levels: {},
+    plan: null,
+    settings: { lang, sound: true, relaxed: false, bigText: false },
+  };
 }
 
 function load(): SaveData {
+  const base = defaults();
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) return { ...defaults(), ...JSON.parse(raw) };
+    if (raw) {
+      const saved = JSON.parse(raw) as Partial<SaveData>;
+      return { ...base, ...saved, settings: { ...base.settings, ...saved.settings } };
+    }
   } catch {
     /* corrupted or unavailable storage: start fresh */
   }
-  return defaults();
+  return base;
 }
 
 export const store = {
@@ -66,9 +87,28 @@ export const store = {
     this.save();
   },
 
+  level(id: string, fallback: number): number {
+    return this.data.levels[id] ?? fallback;
+  },
+
+  hasLevel(id: string): boolean {
+    return id in this.data.levels;
+  },
+
+  setLevel(id: string, level: number) {
+    this.data.levels[id] = level;
+    this.save();
+  },
+
   best(ex: string): number | null {
     const scores = this.data.runs.filter((r) => r.ex === ex).map((r) => r.score);
     return scores.length ? Math.max(...scores) : null;
+  },
+
+  lastPlayed(ex: string): string {
+    let last = '';
+    for (const r of this.data.runs) if (r.ex === ex && r.date > last) last = r.date;
+    return last;
   },
 
   playedToday(ex: string) {
@@ -95,6 +135,17 @@ export const store = {
       n++;
       d.setDate(d.getDate() - 1);
     }
+    return n;
+  },
+
+  /** Active days in the current week (Monday to Sunday). */
+  daysThisWeek(): number {
+    const days = this.activeDays();
+    const d = new Date();
+    const monday = new Date(d);
+    monday.setDate(d.getDate() - ((d.getDay() + 6) % 7));
+    let n = 0;
+    for (const x = new Date(monday); x <= d; x.setDate(x.getDate() + 1)) if (days.has(todayKey(x))) n++;
     return n;
   },
 };

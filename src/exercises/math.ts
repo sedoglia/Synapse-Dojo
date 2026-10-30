@@ -1,65 +1,66 @@
 import { h, rand, pick, scale, flash } from '../dom';
 import { sfx } from '../audio';
+import { t } from '../i18n';
+import { Staircase } from '../adaptive';
+import { keypad, keypadKeyboard } from '../widgets';
 import type { Exercise } from './types';
 
-interface Problem {
-  text: string;
-  answer: number;
+type Op = '+' | '−' | '×' | '÷';
+
+interface Config {
+  big: number; // largest operand for + and −
+  ops: Op[];
+  mulMax: number;
 }
 
-function makeProblem(quick: boolean): Problem {
-  const op = pick(['+', '−', '×', '÷'] as const);
-  const big = quick ? 20 : 50;
-  switch (op) {
+// The daily check keeps the original fixed mix so scores stay comparable over time.
+const QUICK: Config = { big: 20, ops: ['+', '−', '×', '÷'], mulMax: 9 };
+const BIG = [10, 15, 20, 30, 40, 50, 60, 75, 90, 99];
+
+function configFor(level: number): Config {
+  return {
+    big: BIG[level - 1],
+    ops: level < 3 ? ['+', '−'] : level < 5 ? ['+', '−', '×'] : ['+', '−', '×', '÷'],
+    mulMax: level < 6 ? 9 : 12,
+  };
+}
+
+function makeProblem(c: Config): { text: string; answer: number } {
+  switch (pick(c.ops)) {
     case '+': {
-      const a = rand(2, big), b = rand(2, big);
+      const a = rand(2, c.big), b = rand(2, c.big);
       return { text: `${a} + ${b}`, answer: a + b };
     }
     case '−': {
-      const a = rand(10, big * 2), b = rand(1, a);
+      const a = rand(5, c.big * 2), b = rand(1, a);
       return { text: `${a} − ${b}`, answer: a - b };
     }
     case '×': {
-      const a = rand(2, 9), b = rand(2, quick ? 9 : 12);
+      const a = rand(2, 9), b = rand(2, c.mulMax);
       return { text: `${a} × ${b}`, answer: a * b };
     }
     case '÷': {
-      const b = rand(2, 9), q = rand(2, 9);
+      const b = rand(2, 9), q = rand(2, c.mulMax);
       return { text: `${b * q} ÷ ${b}`, answer: q };
     }
   }
 }
 
-function keypad(onKey: (k: string) => void): HTMLElement {
-  const keys = ['7', '8', '9', '4', '5', '6', '1', '2', '3', 'del', '0', 'clr'];
-  return h(
-    'div',
-    { class: 'keypad' },
-    ...keys.map((k) =>
-      h(
-        'button',
-        {
-          class: `key ${k.length > 1 ? 'key-fn' : ''}`,
-          onPointerdown: (e: PointerEvent) => {
-            e.preventDefault();
-            onKey(k);
-          },
-        },
-        k === 'del' ? '⌫' : k === 'clr' ? 'C' : k,
-      ),
-    ),
-  );
-}
-
 export const math: Exercise = {
   id: 'math',
   icon: '➗',
-  skill: 'calc',
+  domain: 'language',
   name: 'ex.math.name',
   desc: 'ex.math.desc',
+  why: 'ex.math.why',
+  minutes: 2,
+  levels: { min: 1, max: 10, start: 2 },
+  levelLabel: (l) => `${configFor(l).ops.join(' ')} · ≤${BIG[l - 1]}`,
 
   async run(ctx) {
     const total = ctx.quick ? 12 : 20;
+    const st = new Staircase(ctx.level, 1, 10, 2);
+    const fastEnough = 4000 * ctx.pace;
     const question = h('div', { class: 'math-q' });
     const answer = h('div', { class: 'math-a' });
     let onKey: ((k: string) => void) | null = null;
@@ -72,12 +73,13 @@ export const math: Exercise = {
     const start = performance.now();
     for (let i = 0; i < total; i++) {
       ctx.progress(i / total, `${i + 1}/${total}`);
-      const p = makeProblem(ctx.quick);
+      const p = makeProblem(ctx.quick ? QUICK : configFor(st.level));
       const needed = String(p.answer).length;
       question.textContent = `${p.text} =`;
       answer.textContent = '?';
       let typed = '';
 
+      const shown = performance.now();
       const ok = await ctx.input<boolean>((done) => {
         onKey = (k) => {
           if (k === 'del') typed = typed.slice(0, -1);
@@ -86,16 +88,13 @@ export const math: Exercise = {
           answer.textContent = typed || '?';
           if (typed.length >= needed) done(Number(typed) === p.answer);
         };
-        const kb = (e: KeyboardEvent) => {
-          if (/^[0-9]$/.test(e.key)) onKey?.(e.key);
-          else if (e.key === 'Backspace') onKey?.('del');
-        };
-        window.addEventListener('keydown', kb);
+        const off = keypadKeyboard((k) => onKey?.(k));
         return () => {
-          window.removeEventListener('keydown', kb);
+          off();
           onKey = null;
         };
       });
+      st.record(ok && performance.now() - shown <= fastEnough);
 
       if (ok) {
         correct++;
@@ -111,8 +110,10 @@ export const math: Exercise = {
     ctx.progress(1);
 
     const secs = (performance.now() - start) / 1000;
-    const accuracy = correct / total;
-    const score = accuracy * scale(secs / total, 1.6, 7);
-    return { score, detail: `${correct}/${total} · ${secs.toFixed(1)} s` };
+    const detail = t('ex.math.detail', { ok: correct, n: total, secs: secs.toFixed(1) });
+    if (ctx.quick) {
+      return { score: (correct / total) * scale(secs / total, 1.6, 7), detail };
+    }
+    return { score: st.score(), detail, level: st.next() };
   },
 };

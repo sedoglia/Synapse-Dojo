@@ -2,7 +2,7 @@ import { h } from '../dom';
 import { store } from '../storage';
 import { t } from '../i18n';
 import { render, page } from '../ui';
-import { EXERCISES } from '../exercises';
+import { EXERCISES, DOMAINS } from '../exercises';
 import { playPractice } from './play';
 import { showHome } from './home';
 
@@ -11,21 +11,28 @@ export function showTraining() {
     page(
       t('training.title'),
       showHome,
-      h(
-        'div',
-        { class: 'ex-grid' },
-        ...EXERCISES.map((ex) => {
-          const best = store.best(ex.id);
-          return h(
-            'button',
-            { class: 'ex-card', onClick: () => playPractice(ex) },
-            store.playedToday(ex.id) ? h('span', { class: 'stamp', title: t('training.today') }, '✓') : null,
-            h('span', { class: 'ex-icon' }, ex.icon),
-            h('b', {}, t(ex.name)),
-            h('span', { class: `chip skill-${ex.skill}` }, t(`skill.${ex.skill}`)),
-            h('small', { class: 'muted' }, `${t('common.best')}: ${best ?? t('progress.none')}`),
-          );
-        }),
+      ...DOMAINS.map((d) =>
+        h(
+          'section',
+          { class: 'domain-group' },
+          h('h3', { class: `domain-title domain-${d}` }, t(`domain.${d}`)),
+          h(
+            'div',
+            { class: 'ex-grid' },
+            ...EXERCISES.filter((ex) => ex.domain === d).map((ex) => {
+              const best = store.best(ex.id);
+              const level = ex.levels && store.hasLevel(ex.id) ? ex.levelLabel?.(store.level(ex.id, ex.levels.start)) : null;
+              return h(
+                'button',
+                { class: 'ex-card', onClick: () => playPractice(ex) },
+                store.playedToday(ex.id) ? h('span', { class: 'stamp', title: t('training.today') }, '✓') : null,
+                h('span', { class: 'ex-icon' }, ex.icon),
+                h('b', {}, t(ex.name)),
+                h('small', { class: 'muted' }, level ? `${t('common.level')}: ${level}` : `${t('common.best')}: ${best ?? t('progress.none')}`),
+              );
+            }),
+          ),
+        ),
       ),
     ),
   );

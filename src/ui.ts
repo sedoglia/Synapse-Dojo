@@ -1,5 +1,13 @@
 import { h } from './dom';
 import { t } from './i18n';
+import { store } from './storage';
+
+/** Reflects language and accessibility settings on the document. */
+export function applySettings() {
+  const root = document.documentElement;
+  root.lang = store.data.settings.lang;
+  root.classList.toggle('big-text', store.data.settings.bigText);
+}
 
 const app = () => document.getElementById('app')!;
 
