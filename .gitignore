@@ -1,0 +1,5 @@
+node_modules/
+dist/
+# Never commit disc images or extracted third-party assets
+*.iso
+*.nds
