@@ -60,7 +60,7 @@ src/
 
 ### Rinominare il gioco
 
-Il nome è definito in `src/config.ts`, `index.html` e `public/manifest.webmanifest`.
+Il nome è definito in `src/config.ts`, `index.html` e `public/manifest.json`.
 
 ## Pubblicazione
 
@@ -70,6 +70,21 @@ sul piano gratuito. Quando il repository sarà pubblico:
 
 1. in *Settings → Pages* scegli **Source: GitHub Actions**;
 2. se vuoi il deploy automatico a ogni push, aggiungi `push: { branches: [main] }` sotto `on:` nel workflow.
+
+### Su un server privato con Tailscale
+
+`npm run deploy:vps` compila il gioco e lo copia via SSH su un server Linux del tuo tailnet, dove
+`tailscale serve` lo pubblica in HTTPS sulla porta 8443 (`https://<host>.<tailnet>.ts.net:8443`), visibile solo
+ai tuoi dispositivi. Eventuali altri siti già serviti sulla porta 443 non vengono toccati.
+Servono MagicDNS e i certificati HTTPS attivi nella console di Tailscale.
+
+```bash
+VPS_USER=<utente> npm run deploy:vps -- --setup   # la prima volta
+VPS_USER=<utente> npm run deploy:vps              # aggiornamenti
+```
+
+Variabili opzionali: `VPS_HOST` (predefinito `vps-f2a5538a`), `VPS_DIR` (cartella nella home, predefinita `synapse-gym`)
+e `VPS_PORT` (predefinita `8443`).
 
 ## Licenza
 
