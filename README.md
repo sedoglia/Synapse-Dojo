@@ -56,8 +56,12 @@ Il nome è definito in `src/config.ts`, `index.html` e `public/manifest.webmanif
 
 ## Pubblicazione
 
-Il workflow `.github/workflows/deploy.yml` pubblica su GitHub Pages a ogni push su `main`
-(in *Settings → Pages* scegli **Source: GitHub Actions**).
+Il workflow `.github/workflows/deploy.yml` pubblica su GitHub Pages. Per ora si avvia solo a mano
+(*Actions → Deploy to GitHub Pages → Run workflow*), perché GitHub Pages richiede un repository pubblico
+sul piano gratuito. Quando il repository sarà pubblico:
+
+1. in *Settings → Pages* scegli **Source: GitHub Actions**;
+2. se vuoi il deploy automatico a ogni push, aggiungi `push: { branches: [main] }` sotto `on:` nel workflow.
 
 ## Licenza
 
