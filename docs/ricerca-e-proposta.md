@@ -64,8 +64,8 @@ Differenze rispetto alla proposta iniziale:
 ## 4. Struttura del gioco
 
 - **Motore adattivo** (`src/adaptive.ts`): staircase con livello salvato per esercizio. In genere si sale dopo 2 risposte giuste di fila (circa 71% di successo); gli esercizi a prove lunghe salgono dopo 1. Il punteggio della sessione dipende dal livello medio nella seconda metà della sessione.
-- **Allenamento di oggi** (`src/stats.ts`): 4 esercizi presi dai 4 domini allenati meno di recente (a parità, quelli più deboli), fissi per tutta la giornata.
-- **Check quotidiano**: 4 prove a difficoltà fissa (velocità, controllo, memoria di lavoro, calcolo), Neuro Score 0–1000 confrontabile nel tempo.
+- **Allenamento** (`src/stats.ts`): 4 esercizi presi dai 4 domini allenati meno di recente (a parità, quelli più deboli), fissi per tutta la giornata.
+- **Misura il Neuro Score**: 4 prove a difficoltà fissa (velocità, controllo, memoria di lavoro, calcolo), Neuro Score 0–1000 confrontabile nel tempo.
 - **Progressi**: grafico a radar degli 8 domini basato sui livelli raggiunti, andamento del Neuro Score, calendario, obiettivo di 4 giorni a settimana, livello e record per esercizio.
 - **Perché funziona**: una scheda per ogni esercizio con il paradigma e lo studio di riferimento.
 - **Accessibilità**: ritmo rilassato (tempi ×1,4), testo grande, tema scuro automatico, riduzione delle animazioni.

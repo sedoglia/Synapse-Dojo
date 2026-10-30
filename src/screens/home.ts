@@ -48,7 +48,7 @@ export function showHome() {
         h('button', { class: 'icon-btn settings-btn', 'aria-label': t('home.settings'), onClick: showSettings }, '⚙'),
         h('div', { class: 'logo' }, h('img', { src: './icon.svg', alt: '' }), h('span', {}, APP_NAME)),
         h('h1', {}, t('home.hello', { name })),
-        h('p', { class: 'muted' }, t('app.tagline')),
+        h('p', { class: 'muted' }, t('home.how')),
         h('div', { class: `streak ${streak ? 'on' : ''}` }, `🔥 ${streakText}`),
       ),
       h(
@@ -56,7 +56,7 @@ export function showHome() {
         { class: 'content menu' },
         menuCard('🏋️', t('plan.title'), planSub, playPlan, planDone === plan.length ? 'done' : 'featured'),
         menuCard(
-          '🧠',
+          '📏',
           t('home.check'),
           check ? `${t('home.checkDone', { score: check.score })} · ${rankName(check.score)}` : t('home.checkSub'),
           playDailyCheck,

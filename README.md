@@ -7,8 +7,8 @@ Gioco open source di allenamento cognitivo: pochi minuti al giorno, nel browser,
 
 ## Cosa c'è dentro
 
-- **Allenamento di oggi**: circa 10–12 minuti, con 4 esercizi scelti ogni giorno tra le abilità allenate meno di recente.
-- **Check quotidiano**: 4 prove rapide a difficoltà fissa (velocità, controllo, memoria di lavoro, calcolo) che producono un **Neuro Score** da 0 a 1000.
+- **Allenamento**: circa 10–12 minuti, con 4 esercizi scelti ogni giorno tra le abilità allenate meno di recente.
+- **Misura il Neuro Score**: 4 prove rapide a difficoltà fissa (velocità, controllo, memoria di lavoro, calcolo) che producono un **Neuro Score** da 0 a 1000.
 - **Palestra**: 17 esercizi su 8 abilità. Ognuno ha **difficoltà adattiva**: diventa più difficile mentre migliori e il livello resta salvato.
 
 | Abilità | Esercizi |

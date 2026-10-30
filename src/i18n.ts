@@ -4,6 +4,7 @@ export type Lang = 'it' | 'en';
 
 const it = {
   'app.tagline': 'Pochi minuti al giorno per una mente più agile',
+  'home.how': 'Allenati ogni giorno e misurati per vedere i progressi',
   'onboard.title': 'Benvenuto!',
   'onboard.ask': 'Come ti chiami?',
   'onboard.placeholder': 'Il tuo nome',
@@ -13,8 +14,8 @@ const it = {
   'home.streak': '{n} giorni di fila',
   'home.streak1': '1 giorno di fila',
   'home.streak0': 'Inizia la tua serie oggi',
-  'home.check': 'Check quotidiano',
-  'home.checkSub': '4 prove rapide · misura il tuo Neuro Score',
+  'home.check': 'Misura il Neuro Score',
+  'home.checkSub': 'Le stesse 4 prove ogni giorno · circa 3 min · per vedere se migliori',
   'home.checkDone': 'Fatto oggi: {score}',
   'home.training': 'Palestra',
   'home.trainingSub': 'Tutti gli esercizi, divisi per abilità',
@@ -22,8 +23,8 @@ const it = {
   'home.progressSub': 'Profilo per abilità, livelli e calendario',
   'home.settings': 'Impostazioni',
 
-  'plan.title': 'Allenamento di oggi',
-  'plan.sub': '{n} esercizi su abilità diverse · circa {min} min',
+  'plan.title': 'Allenamento',
+  'plan.sub': '{n} esercizi scelti per te · si adattano al tuo livello · circa {min} min',
   'plan.progress': '{done}/{n} completati',
   'plan.step': 'Esercizio {i} di {n}',
   'plan.done': 'Allenamento completato!',
@@ -219,6 +220,7 @@ type Key = keyof typeof it;
 
 const en: Record<Key, string> = {
   'app.tagline': 'A few minutes a day for a sharper mind',
+  'home.how': 'Train every day and measure yourself to see your progress',
   'onboard.title': 'Welcome!',
   'onboard.ask': 'What’s your name?',
   'onboard.placeholder': 'Your name',
@@ -228,8 +230,8 @@ const en: Record<Key, string> = {
   'home.streak': '{n}-day streak',
   'home.streak1': '1-day streak',
   'home.streak0': 'Start your streak today',
-  'home.check': 'Daily check',
-  'home.checkSub': '4 quick tests · measure your Neuro Score',
+  'home.check': 'Measure your Neuro Score',
+  'home.checkSub': 'The same 4 tests every day · about 3 min · to see if you’re improving',
   'home.checkDone': 'Done today: {score}',
   'home.training': 'Gym',
   'home.trainingSub': 'Every exercise, grouped by skill',
@@ -237,8 +239,8 @@ const en: Record<Key, string> = {
   'home.progressSub': 'Skill profile, levels and calendar',
   'home.settings': 'Settings',
 
-  'plan.title': 'Today’s workout',
-  'plan.sub': '{n} exercises across different skills · about {min} min',
+  'plan.title': 'Workout',
+  'plan.sub': '{n} exercises picked for you · they adapt to your level · about {min} min',
   'plan.progress': '{done}/{n} done',
   'plan.step': 'Exercise {i} of {n}',
   'plan.done': 'Workout complete!',
