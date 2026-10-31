@@ -96,7 +96,7 @@ export const math: Exercise = {
       });
       const took = performance.now() - shown;
       solving += took;
-      ctx.track(st, ok && took <= fastEnough, { heard: ok });
+      ctx.track(st, ok && took <= fastEnough, { heard: ok, was: String(p.answer) });
 
       if (ok) {
         correct++;

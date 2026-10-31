@@ -9,8 +9,19 @@ const SIZE = 16; // 4×4
 const MIN_SPAN = 2;
 const MAX_SPAN = 9;
 
-/** Shows a sequence and asks for it back (reversed if `backward`). Resolves to success. */
-async function round(ctx: Ctx, tiles: HTMLElement[], board: HTMLElement, status: HTMLElement, span: number, backward: boolean) {
+/**
+ * Shows a sequence and asks for it back (reversed if `backward`). Resolves to success.
+ * `judge` reports the result as soon as the last tile is tapped, before the correct order is shown.
+ */
+async function round(
+  ctx: Ctx,
+  tiles: HTMLElement[],
+  board: HTMLElement,
+  status: HTMLElement,
+  span: number,
+  backward: boolean,
+  judge: (ok: boolean) => void,
+) {
   const seq: number[] = [];
   while (seq.length < span) {
     const n = rand(0, SIZE - 1);
@@ -45,6 +56,7 @@ async function round(ctx: Ctx, tiles: HTMLElement[], board: HTMLElement, status:
   });
 
   board.classList.add('locked');
+  judge(ok);
   flash(board, ok ? 'good' : 'bad', 450);
   if (!ok) {
     // Show the order that was expected, numbered on the tiles.
@@ -85,7 +97,7 @@ export const grid: Exercise = {
       let best = 0;
       while (span <= MAX_SPAN) {
         ctx.progress((span - 3) / (MAX_SPAN - 2), `${span}`);
-        if (!ctx.feedback(await round(ctx, tiles, board, status, span, false))) break;
+        if (!(await round(ctx, tiles, board, status, span, false, (ok) => ctx.feedback(ok, { was: t('fb.gridOrder') })))) break;
         best = span++;
       }
       ctx.progress(1);
@@ -102,7 +114,7 @@ export const grid: Exercise = {
       ctx.progress(r / rounds, `${r + 1}/${rounds}`);
       const backward = r % 2 === 1;
       const span = backward ? Math.max(MIN_SPAN, st.int - 1) : st.int;
-      const ok = ctx.track(st, await round(ctx, tiles, board, status, span, backward));
+      const ok = await round(ctx, tiles, board, status, span, backward, (res) => ctx.track(st, res, { was: t('fb.gridOrder') }));
       if (ok && backward) bestB = Math.max(bestB, span);
       if (ok && !backward) bestF = Math.max(bestF, span);
     }

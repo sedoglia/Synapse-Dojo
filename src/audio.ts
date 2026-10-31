@@ -5,6 +5,7 @@ let ac: AudioContext | null = null;
 function tone(freq: number, dur: number, type: OscillatorType = 'sine', gain = 0.08, delay = 0) {
   if (!store.data.settings.sound) return;
   ac ??= new AudioContext();
+  if (ac.state === 'suspended') void ac.resume(); // mobile browsers start audio suspended
   const t = ac.currentTime + delay;
   const osc = ac.createOscillator();
   const g = ac.createGain();

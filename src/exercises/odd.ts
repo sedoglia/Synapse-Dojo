@@ -110,7 +110,7 @@ export const odd: Exercise = {
         onPick = done;
         return () => (onPick = null);
       });
-      const ok = ctx.track(st, said === answer);
+      const ok = ctx.track(st, said === answer, { was: t('fb.oddHere') });
       cells[answer].classList.add('right');
       if (ok) correct++;
       else cells[said].classList.add('wrong');

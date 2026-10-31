@@ -5,6 +5,8 @@ import { fitCanvas, cssVar } from '../widgets';
 import type { Exercise } from './types';
 
 const DURATION = 75; // seconds
+const SIGN_REACH = 20; // px above the top edge at which a sign is already partly visible (radius 15 + outline)
+const PASS_MARGIN = 40; // px below the car after which a sign is judged
 const MAX_LEVEL = 12;
 const speedFor = (l: number) => 150 + l * 18; // px/s of road scrolling
 const curveFor = (l: number) => 0.15 + l * 0.025; // bend amplitude, fraction of half-width
@@ -100,7 +102,6 @@ export const pilot: Exercise = {
     let keyDir = 0;
     const signs: Sign[] = [];
     let nextSign = 1.5;
-    let stray = false;
     let onRoadTime = 0;
     let windowTime = 0;
     let totalOnRoad = 0;
@@ -114,29 +115,50 @@ export const pilot: Exercise = {
       size.w / 2 + amp * (size.w / 2 - laneHalf()) * (0.6 * Math.sin(wy / 300) + 0.4 * Math.sin(wy / 137 + 1.3));
     const toScreen = (wy: number) => carY() - (wy - dist);
 
+    const showStatus = (ok: boolean, text = '') => {
+      status.textContent = ok ? '✓' : `✗ ${text}`;
+      status.className = `pilot-status ${ok ? 'ok' : 'ko'}`;
+    };
+
+    // Responses are judged when you press (right/wrong sign) and when a sign passes the car
+    // (missed green circle, or leaving the road while it was coming).
     const evaluate = (s: Sign) => {
       const roadOk = windowTime === 0 || onRoadTime / windowTime >= 0.75;
-      const ok = s.pressed === s.target && roadOk && !stray;
-      ctx.track(st, ok);
-      evaluated++;
-      if (ok) right++;
-      status.textContent = ok ? '✓' : !roadOk ? '🛣️ ✗' : '✗';
-      status.className = `pilot-status ${ok ? 'ok' : 'ko'}`;
-      stray = false;
       onRoadTime = windowTime = 0;
+      evaluated++;
+      const responseOk = s.pressed === s.target;
+      const ok = responseOk && roadOk;
+      if (ok) right++;
+      if (!roadOk) {
+        ctx.track(st, false, { was: t('fb.pilotRoad') });
+        showStatus(false, '🛣️');
+      } else if (s.target && !s.pressed) {
+        ctx.track(st, false, { was: t('fb.pilotMissed') });
+        showStatus(false);
+      } else if (s.pressed) {
+        st.record(ok); // the press already got its ✓/✗
+      } else {
+        st.record(true); // correctly ignored: no fanfare for doing nothing
+      }
     };
 
     press = () => {
-      // The response goes to the nearest sign that hasn't passed the car yet.
-      const active = signs.filter((s) => !s.pressed && toScreen(s.wy) > 0 && toScreen(s.wy) < carY() + 30);
-      const s = active.sort((a, b) => a.wy - b.wy)[0];
+      // A press goes to the green circle on screen if there is one, otherwise to the nearest sign.
+      // Anything drawn on screen counts, including a sign just peeking in at the top edge.
+      const active = signs.filter((s) => !s.pressed && toScreen(s.wy) > -SIGN_REACH && toScreen(s.wy) < carY() + PASS_MARGIN);
+      const byDistance = active.sort((a, b) => a.wy - b.wy);
+      const s = byDistance.find((x) => x.target) ?? byDistance[0];
       if (!s) {
-        stray = true;
+        // Pressing with no sign in view is its own mistake; it doesn't spoil the next sign.
         flash(btn, 'bad');
+        ctx.track(st, false, { was: t('fb.pilotStray') });
+        showStatus(false);
         return;
       }
       s.pressed = true;
       flash(btn, s.target ? 'good' : 'bad');
+      ctx.feedback(s.target, { was: t('fb.pilotNotTarget') });
+      showStatus(s.target);
     };
 
     const onPointer = (e: PointerEvent) => {
@@ -230,7 +252,7 @@ export const pilot: Exercise = {
             });
             nextSign = gapFor(level) * ctx.pace * (0.8 + Math.random() * 0.4);
           }
-          while (signs.length && toScreen(signs[0].wy) > carY() + 40) evaluate(signs.shift()!);
+          while (signs.length && toScreen(signs[0].wy) > carY() + PASS_MARGIN) evaluate(signs.shift()!);
 
           draw();
           ctx.progress(elapsed / duration, `${Math.ceil(duration - elapsed)}s`);
