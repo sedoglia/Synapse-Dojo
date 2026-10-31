@@ -4,6 +4,42 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
+  src: url('/fonts/nunito-cyrillic-400-normal.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/nunito-cyrillic-700-normal.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('/fonts/nunito-cyrillic-800-normal.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('/fonts/nunito-cyrillic-900-normal.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
   src: url('/fonts/nunito-latin-ext-400-normal.woff2') format('woff2');
   unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
@@ -232,7 +268,7 @@ h3 {
 }
 .settings-btn {
   position: absolute;
-  right: 0;
+  inset-inline-end: 0;
   top: 12px;
 }
 .logo {
@@ -2186,4 +2222,49 @@ html.big-text {
 .legal-links a {
   color: var(--accent);
   font-weight: 700;
+}
+
+/* Language menu */
+.lang-picker {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.9rem;
+}
+.lang-picker select {
+  font: inherit;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 5px 10px;
+  max-width: 10em;
+  cursor: pointer;
+}
+.hero .lang-picker {
+  position: absolute;
+  inset-inline-start: 0;
+  top: 14px;
+}
+.onboard {
+  position: relative;
+}
+.onboard > .lang-picker {
+  position: absolute;
+  top: 16px;
+  inset-inline-end: 16px;
+}
+.legal-links .lang-picker {
+  margin-inline-start: 8px;
+}
+/* Exercises keep the same layout in right-to-left languages; only their text runs right to left. */
+[dir='rtl'] .stage {
+  direction: ltr;
+}
+[dir='rtl'] .stage :is(p, h2, h3, .reading-text, .muted) {
+  direction: rtl;
+}
+/* Arrows that mean "back" or "go on" point the other way in right-to-left languages. */
+[dir='rtl'] :is(.chev, .topbar .icon-btn, .ex-arrow) {
+  transform: scaleX(-1);
 }

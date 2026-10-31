@@ -2,7 +2,7 @@ import { h } from '../dom';
 import { store } from '../storage';
 import { t } from '../i18n';
 import { APP_NAME } from '../config';
-import { render, rankName, xpBar } from '../ui';
+import { render, rankName, xpBar, langPicker } from '../ui';
 import { currentPlan, planMinutes } from '../stats';
 import { playerLevel, nextBadge } from '../rewards';
 import { playDailyCheck, playPlan } from './play';
@@ -56,6 +56,7 @@ export function showHome() {
       h(
         'header',
         { class: 'hero' },
+        langPicker(showHome),
         h('button', { class: 'icon-btn settings-btn', 'aria-label': t('home.settings'), onClick: showSettings }, '⚙'),
         h('div', { class: 'logo' }, h('img', { src: './icon.svg', alt: '' }), h('span', {}, APP_NAME)),
         h('h1', {}, t('home.hello', { name })),

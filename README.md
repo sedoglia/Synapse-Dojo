@@ -28,9 +28,10 @@ Gioco open source di allenamento cognitivo: pochi minuti al giorno, nel browser,
 - **Difficoltà su misura**: punta a circa l'80% di risposte giuste, il punto in cui si impara più in fretta secondo la ricerca.
 - **Motivazione**: combo durante il gioco, punti XP e livello del giocatore, 17 traguardi, obiettivo settimanale, serie che perdona un giorno di riposo, promemoria per il calendario.
 - Ogni esercizio ha una scheda **"Perché funziona"** con il paradigma scientifico e lo studio di riferimento. La ricerca completa è in [docs/ricerca-e-proposta.md](docs/ricerca-e-proposta.md).
-- Italiano e inglese, tema chiaro e scuro, ritmo rilassato e testo grande, installabile come app (PWA) e giocabile offline.
+- 12 lingue (inglese, spagnolo, cinese, hindi, arabo, portoghese, francese, russo, tedesco, giapponese, indonesiano, italiano), con un selettore in alto. La prima volta il gioco è in inglese, poi ricorda la lingua scelta.
+- Tema chiaro e scuro, ritmo rilassato e testo grande, installabile come app (PWA) e giocabile offline.
 - Nessun account e nessun cookie: i dati restano nel `localStorage` del browser e si possono esportare e reimportare da Impostazioni. Font ospitati sul sito, nessuna richiesta a Google.
-- Schermata e pagina [`privacy.html`](privacy.html) con privacy e note legali (IT/EN). La versione pubblica conta le visite con Cloudflare Web Analytics, senza cookie.
+- Schermata e pagina [`privacy.html`](privacy.html) con privacy e note legali in tutte le lingue. La versione pubblica conta le visite con Cloudflare Web Analytics, senza cookie.
 
 ## Sviluppo
 
@@ -54,7 +55,8 @@ src/
   stats.ts     capacità per abilità e scelta dell'allenamento di oggi
   ctx.ts       runtime degli esercizi (attese annullabili, input, livello, ritmo)
   widgets.ts   tastierino, canvas e altri componenti condivisi
-  i18n.ts      testi IT/EN, liste di parole e brani di lettura
+  i18n.ts      elenco delle lingue, caricamento dei testi e funzione t()
+  locales/     un file per lingua: testi, parole e brani di lettura (en.ts è la base)
   storage.ts   salvataggi locali, livelli, record, serie
 ```
 
@@ -63,7 +65,14 @@ src/
 1. Crea `src/exercises/mio.ts` che esporta un oggetto `Exercise`, con dominio, `levels` e `run(ctx)`. `run` restituisce `{ score: 0–100, detail, level }`.
 2. Usa `ctx.stage` per disegnare, `ctx.input()` / `ctx.timed()` per attendere l'input e `ctx.wait()` per le pause: così l'uscita a metà partita è gestita automaticamente.
 3. Per la difficoltà parti da `ctx.level`, registra ogni prova con `ctx.track(st, ok)` (aggiorna livello, combo e avvisi) e restituisci `level: st.next()`. Usa `ctx.count(allenamento, check, prova)` per il numero di tentativi. Moltiplica i tempi limite per `ctx.pace` (modalità rilassata).
-4. Aggiungi nome, descrizione, esempio e "perché funziona" in `src/i18n.ts`, e una scena in `src/examples.ts`, e registra l'esercizio in `src/exercises/index.ts`.
+4. Aggiungi nome, descrizione, esempio e "perché funziona" in `src/locales/en.ts` e in tutti gli altri file di `src/locales/` (il controllo dei tipi segnala le chiavi mancanti), e una scena in `src/examples.ts`, e registra l'esercizio in `src/exercises/index.ts`.
+
+### Aggiungere una lingua
+
+1. Copia `src/locales/en.ts` in `src/locales/<codice>.ts` e traduci testi, 60 parole concrete e 6 brani con domanda (la prima risposta è quella giusta). Tieni invariati i segnaposto come `{n}`.
+2. Aggiungi la lingua a `LANGS` in `src/i18n.ts`: nome, voce per la sintesi vocale, 7 lettere ben distinguibili a voce per *Eco*, `charsPerWord` per le scritture senza spazi e `rtl` per quelle da destra a sinistra.
+
+Ogni lingua è un file separato, scaricato solo quando viene scelta.
 
 ### Rinominare il gioco
 

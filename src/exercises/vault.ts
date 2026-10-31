@@ -1,6 +1,5 @@
 import { h, shuffle, clamp, flash } from '../dom';
-import { store } from '../storage';
-import { t, WORDS } from '../i18n';
+import { t, words } from '../i18n';
 import type { Exercise } from './types';
 
 const MAX_LEVEL = 8;
@@ -22,7 +21,7 @@ export const vault: Exercise = {
     const lvl = Math.round(ctx.level);
     const studyCount = ctx.quick ? 8 : ctx.practice ? 4 : countFor(lvl);
     const studySecs = ctx.quick ? 20 : ctx.practice ? 15 : Math.round(studyCount * 2.5 * ctx.pace);
-    const pool = shuffle(WORDS[store.data.settings.lang]);
+    const pool = shuffle(words());
     const studied = pool.slice(0, studyCount);
     const lures = pool.slice(studyCount, studyCount * 2);
 

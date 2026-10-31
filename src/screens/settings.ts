@@ -1,8 +1,8 @@
 import { h, todayKey } from '../dom';
 import { store, parseSave, type Settings } from '../storage';
-import { t, type Lang } from '../i18n';
+import { t } from '../i18n';
 import { APP_NAME, VERSION } from '../config';
-import { render, page, applySettings } from '../ui';
+import { render, page, applySettings, langSelect, setLang } from '../ui';
 import { showHome } from './home';
 import { showOnboarding } from './onboarding';
 import { showPrivacy } from './privacy';
@@ -56,7 +56,7 @@ async function importSave(file: File) {
   const last = [...data.runs.map((r) => r.date), ...data.checks.map((c) => c.date)].sort().pop() ?? data.created;
   if (!confirm(t('settings.importConfirm', { name: data.name || '—', runs: data.runs.length, last }))) return;
   store.replace(data);
-  applySettings();
+  await setLang(store.data.settings.lang);
   alert(t('settings.importDone'));
   if (store.data.name) showSettings();
   else showOnboarding();
@@ -82,21 +82,6 @@ export function showSettings() {
     store.save();
   });
 
-  const langSelect = h(
-    'select',
-    {
-      class: 'input',
-      onChange: (e: Event) => {
-        store.data.settings.lang = (e.target as HTMLSelectElement).value as Lang;
-        store.save();
-        applySettings();
-        showSettings();
-      },
-    },
-    h('option', { value: 'it', selected: store.data.settings.lang === 'it' }, 'Italiano'),
-    h('option', { value: 'en', selected: store.data.settings.lang === 'en' }, 'English'),
-  );
-
   render(
     page(
       t('settings.title'),
@@ -105,7 +90,7 @@ export function showSettings() {
         'section',
         { class: 'card form' },
         h('label', {}, t('settings.name'), nameInput),
-        h('label', {}, t('settings.lang'), langSelect),
+        h('label', {}, t('settings.lang'), langSelect(showSettings)),
         toggle('sound', t('settings.sound')),
         toggle('relaxed', t('settings.relaxed')),
         toggle('vibration', t('settings.vibration')),

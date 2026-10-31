@@ -111,6 +111,15 @@ Differenze rispetto alla proposta iniziale:
 - **Note legali**: schermata *Privacy e note legali* (da Impostazioni e dalla schermata di benvenuto) e pagina `privacy.html`, in italiano e inglese. Ribadiscono che il gioco non è un dispositivo medico e non promette effetti su salute o demenza, coerentemente con la sezione 1.
 - **Sicurezza**: `public/_headers` imposta una Content Security Policy che consente solo il sito stesso e lo script delle statistiche; il service worker mette in cache solo i file del sito.
 
+## 7. Lingue (v0.6)
+
+- **12 lingue**, scelte tra le più parlate al mondo: inglese, spagnolo, cinese semplificato, hindi, arabo, portoghese, francese, russo, tedesco, giapponese, indonesiano e italiano. La prima visita è in inglese; il selettore in alto (benvenuto e home, oltre che nelle Impostazioni) salva la scelta nel `localStorage`.
+- **Un file per lingua** (`src/locales/`), caricato solo quando serve: il gioco scarica circa 10 KB compressi per lingua invece di tutte insieme.
+- **Esercizi adattati alla lingua**: parole di *Cassaforte* e *Coppie*, brani di *Lettura veloce*, colori di *Scontro di colori*. In *Eco* le 7 lettere sono scelte per essere ben distinguibili quando la sintesi vocale le pronuncia in quella lingua (in cinese numeri come 一 三 五, in giapponese katakana).
+- **Lettura veloce in cinese e giapponese**: senza spazi tra le parole, la velocità si calcola dai caratteri (1,5 per parola in cinese, 2 in giapponese), così il punteggio resta confrontabile con le altre lingue.
+- **Arabo da destra a sinistra**: l'interfaccia si specchia, ma gli esercizi spaziali mantengono la stessa disposizione, perché ne fa parte.
+- Le traduzioni sono state scritte senza revisione madrelingua: conviene farle rileggere prima di promuovere il gioco in quei paesi.
+
 ## Fonti
 
 - Edwards et al. (2017), ACTIVE 10 anni e demenza: <https://pmc.ncbi.nlm.nih.gov/articles/PMC5700828>; sintesi: <https://hscweb3.hsc.usf.edu/blog/2017/11/13/intervention-becomes-first-to-successfully-reduce-risk-of-dementia/>, <https://www.alzdiscovery.org/cognitive-vitality/blog/brain-training-can-reduce-dementia-risk>

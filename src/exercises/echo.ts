@@ -1,7 +1,7 @@
 import { h, rand, flash, clamp } from '../dom';
 import { sfx } from '../audio';
 import { store } from '../storage';
-import { t } from '../i18n';
+import { t, meta } from '../i18n';
 import { onKeys } from '../widgets';
 import type { Exercise } from './types';
 
@@ -10,10 +10,6 @@ const MAX_LEVEL = 12;
  * Letters whose spoken names are easy to tell apart in each language
  * (no "ci"/"ti" or "acca"/"cappa" in Italian, no "bee"/"dee"/"tee" in English).
  */
-const LETTERS: Record<'it' | 'en', string[]> = {
-  it: ['A', 'E', 'I', 'O', 'U', 'H', 'Z'],
-  en: ['H', 'K', 'L', 'O', 'Q', 'R', 'Y'],
-};
 const BLOCKS = 2;
 const TARGET_RATE = 0.3;
 
@@ -53,7 +49,7 @@ function mini(pos: number, letter: string): HTMLElement {
 /** Speaks a letter with a voice for the current language. Returns false when sound is off or unsupported. */
 function speak(letter: string): boolean {
   if (!store.data.settings.sound || !('speechSynthesis' in window)) return false;
-  const lang = store.data.settings.lang === 'it' ? 'it-IT' : 'en-US';
+  const lang = meta().speech;
   const u = new SpeechSynthesisUtterance(letter.toLowerCase());
   u.lang = lang;
   u.rate = 0.95;
@@ -114,7 +110,7 @@ export const echo: Exercise = {
       const len = (ctx.practice ? 8 : 20) + n;
       const back = n === 1 ? t('ex.echo.back1') : t('ex.echo.backN', { n });
       const positions = stream(len, n, [0, 1, 2, 3, 4, 5, 6, 7, 8]);
-      const letters = stream(len, n, LETTERS[store.data.settings.lang]);
+      const letters = stream(len, n, meta().letters);
       series.textContent = t('ex.echo.series', { i: b + 1, n: blocks });
       rule.textContent = dual
         ? t('ex.echo.ruleDual', { n, back })

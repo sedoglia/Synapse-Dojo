@@ -50,7 +50,7 @@ export interface SaveData {
 }
 
 function defaults(): SaveData {
-  const lang: Lang = navigator.language?.toLowerCase().startsWith('it') ? 'it' : 'en';
+  const lang: Lang = 'en';
   return {
     name: '',
     created: todayKey(),

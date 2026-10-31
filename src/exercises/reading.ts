@@ -1,9 +1,14 @@
 import { h, shuffle, scale, flash } from '../dom';
-import { store } from '../storage';
-import { t, PASSAGES } from '../i18n';
+import { t, passages as allPassages, meta } from '../i18n';
 import type { Exercise } from './types';
 
 const ROUNDS = 2;
+
+/** Words in a passage; scripts written without spaces (Chinese, Japanese) count characters instead. */
+function wordCount(text: string): number {
+  const per = meta().charsPerWord;
+  return per ? text.replace(/[\s\p{P}]/gu, '').length / per : text.split(/\s+/).length;
+}
 
 export const reading: Exercise = {
   id: 'reading',
@@ -17,7 +22,7 @@ export const reading: Exercise = {
   practice: false,
 
   async run(ctx) {
-    const passages = shuffle(PASSAGES[store.data.settings.lang]).slice(0, ROUNDS);
+    const passages = shuffle(allPassages()).slice(0, ROUNDS);
     const scores: number[] = [];
     let understood = 0;
     let wpmSum = 0;
@@ -36,7 +41,7 @@ export const reading: Exercise = {
         doneBtn.onclick = () => done();
       });
       const minutes = (performance.now() - start) / 60000;
-      const wpm = Math.round(p.text.split(/\s+/).length / minutes);
+      const wpm = Math.round(wordCount(p.text) / minutes);
       wpmSum += wpm;
 
       // A comprehension question keeps the reading honest.

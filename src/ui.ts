@@ -1,13 +1,43 @@
 import { h } from './dom';
-import { t } from './i18n';
+import { t, LANGS, loadLang, meta, type Lang } from './i18n';
 import { store } from './storage';
 
 /** Reflects language and accessibility settings on the document. */
 export function applySettings() {
   const root = document.documentElement;
   root.lang = store.data.settings.lang;
+  root.dir = meta().rtl ? 'rtl' : 'ltr';
   root.classList.toggle('big-text', store.data.settings.bigText);
 }
+
+/** Switches language (downloading its texts if needed), saves the choice and applies it. */
+export async function setLang(lang: unknown) {
+  store.data.settings.lang = await loadLang(lang);
+  store.save();
+  applySettings();
+}
+
+/** Language menu; `onChange` redraws the current screen once the new texts are ready. */
+export function langSelect(onChange: (lang: Lang) => void, cls = 'input'): HTMLSelectElement {
+  const current = store.data.settings.lang;
+  const select = h(
+    'select',
+    {
+      class: cls,
+      'aria-label': t('settings.lang'),
+      onChange: async () => {
+        await setLang(select.value);
+        onChange(store.data.settings.lang);
+      },
+    },
+    ...(Object.keys(LANGS) as Lang[]).map((l) => h('option', { value: l, selected: l === current, lang: l }, LANGS[l].name)),
+  );
+  return select;
+}
+
+/** Compact language menu for the top of a screen. */
+export const langPicker = (onChange: (lang: Lang) => void) =>
+  h('label', { class: 'lang-picker' }, h('span', { 'aria-hidden': 'true' }, '🌐'), langSelect(onChange, ''));
 
 const app = () => document.getElementById('app')!;
 

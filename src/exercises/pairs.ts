@@ -1,6 +1,5 @@
 import { h, shuffle, flash } from '../dom';
-import { store } from '../storage';
-import { t, WORDS } from '../i18n';
+import { t, words as allWords } from '../i18n';
 import type { Ctx } from '../ctx';
 import type { Exercise } from './types';
 
@@ -11,7 +10,7 @@ const pairsFor = (level: number) => level + 2;
 /** One study + test round; returns the fraction of pairs recalled. */
 async function round(ctx: Ctx, n: number, from: number, of: number): Promise<{ acc: number; ok: number }> {
   const symbols = shuffle(SYMBOLS).slice(0, n);
-  const pool = shuffle(WORDS[store.data.settings.lang]);
+  const pool = shuffle(allWords());
   const words = pool.slice(0, n);
   const spare = pool.slice(n, n + 3);
 

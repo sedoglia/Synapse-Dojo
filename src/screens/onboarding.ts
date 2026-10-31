@@ -2,7 +2,7 @@ import { h } from '../dom';
 import { store } from '../storage';
 import { t } from '../i18n';
 import { APP_NAME } from '../config';
-import { render } from '../ui';
+import { render, langPicker } from '../ui';
 import { showHome } from './home';
 import { showPrivacy } from './privacy';
 
@@ -21,6 +21,7 @@ export function showOnboarding() {
     h(
       'div',
       { class: 'page onboard' },
+      langPicker(showOnboarding),
       h(
         'form',
         { class: 'card intro', onSubmit: submit },
