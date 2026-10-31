@@ -2049,3 +2049,46 @@ html.big-text {
 .pair-word {
   font-weight: 800;
 }
+
+/* ---------- Echo turns and series ---------- */
+.echo-series {
+  font-size: 0.8rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.echo-turn {
+  font-weight: 800;
+  min-height: 1.4rem;
+  text-align: center;
+}
+.echo-turn.wait {
+  color: #b45309;
+}
+.echo-timer {
+  width: min(100%, 320px);
+  height: 6px;
+  border-radius: 99px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.echo-timer div {
+  height: 100%;
+  background: var(--accent-2);
+  border-radius: 99px;
+}
+.echo-grid.between {
+  opacity: 0.45;
+}
+.echo-grid {
+  transition: opacity 0.15s;
+}
+.echo-actions .btn.off {
+  opacity: 0.35;
+  pointer-events: none;
+}
+.echo-actions.single {
+  grid-template-columns: 1fr;
+  width: min(100%, 320px);
+}

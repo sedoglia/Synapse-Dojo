@@ -15,8 +15,16 @@ const nFor = (level: number) => 1 + Math.floor((level - 1) / 2);
 const dualFor = (level: number) => (level - 1) % 2 === 1;
 const labelFor = (level: number) => `${nFor(level)}-back${dualFor(level) ? ' ×2' : ''}`;
 
-/** A stream where roughly TARGET_RATE of items repeat the one N steps back. */
+/** A stream where about TARGET_RATE of items repeat the one N steps back, never fewer than 20% (min 2). */
 function stream<T>(len: number, n: number, values: readonly T[]): T[] {
+  const minTargets = Math.max(2, Math.ceil((len - n) * 0.2));
+  for (;;) {
+    const out = rawStream(len, n, values);
+    if (out.filter((v, i) => i >= n && v === out[i - n]).length >= minTargets) return out;
+  }
+}
+
+function rawStream<T>(len: number, n: number, values: readonly T[]): T[] {
   const out: T[] = [];
   for (let i = 0; i < len; i++) {
     if (i >= n && Math.random() < TARGET_RATE) out.push(out[i - n]);
@@ -58,17 +66,32 @@ export const echo: Exercise = {
   levelLabel: labelFor,
 
   async run(ctx) {
+    const series = h('div', { class: 'echo-series' });
     const rule = h('div', { class: 'echo-rule' });
+    const turn = h('div', { class: 'echo-turn' });
     const cells = Array.from({ length: 9 }, () => h('div', { class: 'echo-cell' }));
     const board = h('div', { class: 'echo-grid' }, ...cells);
+    const timer = h('div', { class: 'echo-timer' }, h('div'));
     let pressPos: (() => void) | null = null;
     let pressLetter: (() => void) | null = null;
     const posBtn = h('button', { class: 'btn big', onPointerdown: () => pressPos?.() }, `${t('ex.echo.pos')} (A)`);
     const letBtn = h('button', { class: 'btn big', onPointerdown: () => pressLetter?.() }, `${t('ex.echo.letter')} (L)`);
     // During practice a strip under the grid shows the last N+1 items and highlights the one to compare with.
     const strip = h('div', { class: 'echo-strip' });
-    ctx.stage.append(rule, board, ...(ctx.practice ? [strip] : []), h('div', { class: 'echo-actions' }, posBtn, letBtn));
+    const actions = h('div', { class: 'echo-actions' }, posBtn, letBtn);
+    ctx.stage.append(series, rule, turn, board, timer, ...(ctx.practice ? [strip] : []), actions);
     onKeys(ctx, { a: () => pressPos?.(), A: () => pressPos?.(), l: () => pressLetter?.(), L: () => pressLetter?.() });
+
+    /** Shows a card over the stage and waits for its button. */
+    const card = async (...content: (HTMLElement | null)[]) => {
+      const go = h('button', { class: 'btn primary' }, t('common.continue'));
+      const note = h('div', { class: 'card interlude' }, ...content.filter((c): c is HTMLElement => !!c), go);
+      ctx.stage.append(note);
+      await ctx.input<void>((done) => {
+        go.onclick = () => done();
+      });
+      note.remove();
+    };
 
     let level = Math.round(ctx.level);
     const blocks = ctx.practice ? 1 : BLOCKS;
@@ -77,29 +100,27 @@ export const echo: Exercise = {
       const n = nFor(level);
       const dual = dualFor(level);
       const len = (ctx.practice ? 8 : 20) + n;
+      const back = n === 1 ? t('ex.echo.back1') : t('ex.echo.backN', { n });
       const positions = stream(len, n, [0, 1, 2, 3, 4, 5, 6, 7, 8]);
       const letters = stream(len, n, LETTERS);
+      series.textContent = t('ex.echo.series', { i: b + 1, n: blocks });
       rule.textContent = n === 1 ? t('ex.echo.rule1') : t('ex.echo.rule', { n });
       letBtn.classList.toggle('hidden', !dual);
+      actions.classList.toggle('single', !dual);
+      turn.textContent = '';
 
-      // The first time the letter stream appears, stop and explain it.
-      if (dual && ctx.mode === 'train' && !store.data.practiced.includes('echo-dual')) {
+      // Every series opens with a card: which one it is, the rule, and how long it lasts.
+      // The first time the letter stream appears, the same card explains it.
+      const firstDual = dual && ctx.mode === 'train' && !store.data.practiced.includes('echo-dual');
+      if (firstDual) {
         store.data.practiced.push('echo-dual');
         store.save();
-        const go = h('button', { class: 'btn primary' }, t('common.continue'));
-        const note = h(
-          'div',
-          { class: 'card interlude' },
-          h('h3', {}, `🔊 ${t('ex.echo.dualTitle')}`),
-          h('p', {}, t('ex.echo.dualText', { back: n === 1 ? t('ex.echo.back1') : t('ex.echo.backN', { n }) })),
-          go,
-        );
-        ctx.stage.append(note);
-        await ctx.input<void>((done) => {
-          go.onclick = () => done();
-        });
-        note.remove();
       }
+      await card(
+        h('h3', {}, `${firstDual ? '🔊 ' : ''}${t('ex.echo.series', { i: b + 1, n: blocks })} · ${labelFor(level)}`),
+        firstDual ? h('p', {}, t('ex.echo.dualText', { back })) : null,
+        h('p', {}, n === 1 ? t('ex.echo.seriesStart1', { len }) : t('ex.echo.seriesStartN', { len, k: n })),
+      );
 
       // Per modality: hits on targets and false alarms on non-targets.
       const tally = { pos: { hit: 0, targets: 0, fa: 0, other: 0 }, let: { hit: 0, targets: 0, fa: 0, other: 0 } };
@@ -112,28 +133,38 @@ export const echo: Exercise = {
           if (pressed) m.fa++;
         }
       };
+
       for (let i = 0; i < len; i++) {
-        ctx.progress((b + i / len) / blocks, `${labelFor(level)}`);
-        const posTarget = i >= n && positions[i] === positions[i - n];
-        const letTarget = i >= n && letters[i] === letters[i - n];
+        ctx.progress((b + i / len) / blocks, `${b + 1}/${blocks} · ${i + 1}/${len}`);
+        const warmup = i < n; // nothing to compare with yet
+        const posTarget = !warmup && positions[i] === positions[i - n];
+        const letTarget = !warmup && letters[i] === letters[i - n];
         let posPressed = false;
         let letPressed = false;
-        // Immediate feedback on each press helps players learn the rule.
-        pressPos = () => {
-          if (posPressed) return;
-          posPressed = true;
-          flash(posBtn, posTarget ? 'good' : 'bad');
-        };
-        pressLetter = dual
-          ? () => {
-              if (letPressed) return;
-              letPressed = true;
-              flash(letBtn, letTarget ? 'good' : 'bad');
-            }
-          : null;
+        turn.textContent = warmup ? t('ex.echo.turnWait', { i: i + 1, len }) : t('ex.echo.turnAsk', { i: i + 1, len, back });
+        turn.classList.toggle('wait', warmup);
+        posBtn.classList.toggle('off', warmup);
+        letBtn.classList.toggle('off', warmup);
 
-        const cell = cells[positions[i]];
-        cell.classList.add('lit');
+        // A press is judged immediately, so the ✓/✗ clearly belongs to the square on screen.
+        pressPos = warmup
+          ? null
+          : () => {
+              if (posPressed) return;
+              posPressed = true;
+              flash(posBtn, posTarget ? 'good' : 'bad');
+              ctx.feedback(posTarget, { was: t('fb.echoNotSame') });
+            };
+        pressLetter =
+          warmup || !dual
+            ? null
+            : () => {
+                if (letPressed) return;
+                letPressed = true;
+                flash(letBtn, letTarget ? 'good' : 'bad');
+                ctx.feedback(letTarget, { was: t('fb.echoNotSame') });
+              };
+
         if (ctx.practice) {
           const from = Math.max(0, i - n);
           strip.replaceChildren(
@@ -151,27 +182,51 @@ export const echo: Exercise = {
                 );
               }),
             ),
-            h('p', { class: 'echo-strip-hint' }, i < n ? t('ex.echo.stripWait') : t(dual ? 'ex.echo.stripCompareDual' : 'ex.echo.stripCompare')),
+            h('p', { class: 'echo-strip-hint' }, warmup ? t('ex.echo.stripWait') : t(dual ? 'ex.echo.stripCompareDual' : 'ex.echo.stripCompare')),
           );
         }
+
+        // The turn: the square lights up with a tick, and a bar shows the time left to answer.
+        const windowMs = 600 + 2200 * ctx.pace;
+        const bar = timer.firstElementChild as HTMLElement;
+        bar.style.transition = 'none';
+        bar.style.width = '100%';
+        void bar.offsetWidth;
+        bar.style.transition = `width ${windowMs}ms linear`;
+        bar.style.width = '0%';
+        board.classList.remove('between');
+        sfx.tick();
+        const cell = cells[positions[i]];
+        cell.classList.add('lit');
         if (dual && !speak(letters[i])) cell.textContent = letters[i]; // no audio: show it instead
         await ctx.wait(600);
         cell.classList.remove('lit');
         cell.textContent = '';
-        await ctx.wait(2200 * ctx.pace);
+        await ctx.wait(windowMs - 600);
 
-        if (i >= n) {
+        // End of the turn: a missed match is reported now, before the next square appears.
+        pressPos = pressLetter = null;
+        let pause = 450;
+        if (!warmup) {
           count(tally.pos, posTarget, posPressed);
           if (dual) count(tally.let, letTarget, letPressed);
-          if (posTarget && !posPressed) flash(posBtn, 'bad');
-          if (dual && letTarget && !letPressed) flash(letBtn, 'bad');
-          // Only trials with something to react to count for the streak; quiet correct rejections don't.
-          const posOk = posPressed === posTarget;
-          const letOk = !dual || letPressed === letTarget;
-          if (posTarget || posPressed || (dual && (letTarget || letPressed))) ctx.feedback(posOk && letOk);
+          const missed = [posTarget && !posPressed ? t('ex.echo.pos') : '', dual && letTarget && !letPressed ? t('ex.echo.letter') : '']
+            .filter(Boolean)
+            .join(' + ');
+          if (missed) {
+            if (posTarget && !posPressed) flash(posBtn, 'bad');
+            if (dual && letTarget && !letPressed) flash(letBtn, 'bad');
+            ctx.feedback(false, { was: t('fb.echoMissed', { btn: missed.toUpperCase() }) });
+            pause = 1200; // leave time to read the message before the next square
+          }
         }
+        board.classList.add('between');
+        await ctx.wait(pause);
       }
       pressPos = pressLetter = null;
+      turn.textContent = '';
+      posBtn.classList.remove('off');
+      letBtn.classList.remove('off');
 
       // Hit rate minus false-alarm rate per modality: pressing nothing (or everything) scores 0,
       // unlike plain percent-correct, where staying silent already gives ~70%.
@@ -184,21 +239,12 @@ export const echo: Exercise = {
       else if (acc < 0.5) level = Math.max(1, level - 1);
       if (acc >= 0.8) sfx.fanfare();
 
-      if (b < blocks - 1) {
-        const go = h('button', { class: 'btn primary' }, t('common.continue'));
-        const note = h(
-          'div',
-          { class: 'card interlude' },
-          h('h3', {}, t('ex.echo.block', { i: b + 1, acc: Math.round(acc * 100) })),
-          h('p', {}, t('common.levelChange', { from: labelFor(before), to: labelFor(level) })),
-          go,
-        );
-        ctx.stage.append(note);
-        await ctx.input<void>((done) => {
-          go.onclick = () => done();
-        });
-        note.remove();
-      }
+      // Every series ends with its own summary, so the boundary between series is unmistakable.
+      await card(
+        h('h3', {}, `🏁 ${t('ex.echo.seriesEnd', { i: b + 1, n: blocks })}`),
+        h('p', {}, t('ex.echo.seriesScore', { acc: Math.round(acc * 100), hit: tally.pos.hit + tally.let.hit, targets: tally.pos.targets + tally.let.targets, fa: tally.pos.fa + tally.let.fa })),
+        ctx.practice ? null : h('p', {}, t('common.levelChange', { from: labelFor(before), to: labelFor(level) })),
+      );
     }
     ctx.progress(1);
 
