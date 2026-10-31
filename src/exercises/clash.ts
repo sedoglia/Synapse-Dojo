@@ -62,12 +62,15 @@ export const clash: Exercise = {
       });
       rtSum += performance.now() - shown;
 
-      const ok = ctx.track(st, choice === target);
+      const targetBtn = buttons[COLORS.findIndex((c) => c.id === target)];
+      const ok = ctx.track(st, choice === target, { was: label(target) });
       if (ok) correct++;
+      else targetBtn.classList.add('correct-hint');
       if (choice) flash(buttons[COLORS.findIndex((c) => c.id === choice)], ok ? 'good' : 'bad');
       word.textContent = choice ? '' : `⏱ ${t('common.timeout')}`;
       word.style.color = '';
-      await ctx.wait(choice ? 220 : 600);
+      await ctx.wait(ok ? 300 : 1100);
+      targetBtn.classList.remove('correct-hint');
     }
     ctx.progress(1);
 

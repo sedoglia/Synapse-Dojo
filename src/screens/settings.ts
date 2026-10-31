@@ -121,7 +121,7 @@ export function showSettings() {
           t('settings.reset'),
         ),
       ),
-      h('p', { class: 'muted small center' }, `${APP_NAME} v0.3.0 · ${t('settings.about')}`),
+      h('p', { class: 'muted small center' }, `${APP_NAME} v0.4.0 · ${t('settings.about')}`),
     ),
   );
 }

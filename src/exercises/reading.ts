@@ -49,7 +49,7 @@ export const reading: Exercise = {
         return () => (onPick = null);
       });
       const ok = said === 0;
-      if (ctx.feedback(ok)) understood++;
+      if (ctx.feedback(ok, { was: p.answers[0] })) understood++;
       flash(btns[options.indexOf(said)], ok ? 'good' : 'bad');
       btns[options.indexOf(0)].classList.add('good-btn');
       // Reading aloud clearly runs at about 150–200 words per minute.

@@ -55,7 +55,7 @@ async function round(ctx: Ctx, n: number, from: number, of: number): Promise<{ a
       return () => (onPick = null);
     });
     const right = said === words[i];
-    if (ctx.feedback(right)) ok++;
+    if (ctx.feedback(right, { was: words[i] })) ok++;
     flash(btns[choices.indexOf(said)], right ? 'good' : 'bad');
     btns[choices.indexOf(words[i])].classList.add('good-btn');
     await ctx.wait(right ? 350 : 900);

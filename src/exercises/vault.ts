@@ -77,11 +77,11 @@ export const vault: Exercise = {
       });
       if (saidOld && p.old) hits++;
       if (saidOld && !p.old) falseAlarms++;
-      if (ctx.feedback(saidOld === p.old)) {
+      if (ctx.feedback(saidOld === p.old, { was: p.old ? t('ex.vault.seen') : t('ex.vault.new') })) {
         correct++;
         flash(card, 'good');
       } else flash(card, 'bad');
-      await ctx.wait(250);
+      await ctx.wait(saidOld === p.old ? 350 : 1000);
     }
     ctx.progress(1);
 

@@ -50,7 +50,9 @@ export const reflex: Exercise = {
       const rt = performance.now() - shown;
       pads[k].classList.remove('go', 'nogo');
 
-      const ok = ctx.track(st, noGo ? tapped === null : tapped === k);
+      const ok = ctx.track(st, noGo ? tapped === null : tapped === k, {
+        was: noGo ? t('fb.noGo') : tapped === null ? t('fb.tooSlow') : t('fb.otherPad'),
+      });
       if (ok) {
         correct++;
         if (!noGo) rts.push(rt);

@@ -9,6 +9,8 @@ export interface StairOptions {
   target?: number;
   /** Size of the step down after an error (in levels). */
   step?: number;
+  /** Climb a full step per correct answer until the first error (default true). */
+  fastStart?: boolean;
 }
 
 /**
@@ -25,7 +27,7 @@ export class Staircase {
   readonly target: number;
   private readonly down: number;
   private readonly up: number;
-  private fast = true;
+  private fast: boolean;
   private trace: number[] = [];
   private results: boolean[] = [];
 
@@ -38,6 +40,7 @@ export class Staircase {
     this.target = opts.target ?? 0.8;
     this.down = opts.step ?? 1;
     this.up = (this.down * (1 - this.target)) / this.target;
+    this.fast = opts.fastStart ?? true;
     this.level = clamp(start, min, max);
   }
 
@@ -77,7 +80,15 @@ export class Staircase {
     return Math.round(clamp(this.threshold() - this.down / 2, this.min, this.max) * 10) / 10;
   }
 
+  /**
+   * Session score: the level reached, scaled down when accuracy falls short of the target.
+   * A converged staircase sits at the target, so normally only the level counts; a player who keeps
+   * failing at the easiest level scores near 0 instead of getting the bottom level's credit.
+   */
   score(): number {
-    return levelScore(this.threshold(), this.min, this.max);
+    // Accuracy over the same window as the threshold, so early errors while the level settles don't count.
+    const tail = this.results.slice(Math.floor(this.results.length / 2));
+    const acc = tail.length ? tail.filter(Boolean).length / tail.length : 0;
+    return levelScore(this.threshold(), this.min, this.max) * clamp(acc / this.target, 0, 1);
   }
 }

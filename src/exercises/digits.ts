@@ -69,7 +69,7 @@ export const digits: Exercise = {
       });
 
       const expected = seq.slice(-n).join('');
-      const ok = ctx.track(st, answer === expected);
+      const ok = ctx.track(st, answer === expected, { was: expected.split('').join(' ') });
       if (ok) {
         correct++;
         best = Math.max(best, n);

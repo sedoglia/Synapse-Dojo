@@ -3,7 +3,7 @@ import { store } from '../storage';
 import { t } from '../i18n';
 import { APP_NAME } from '../config';
 import { render, rankName, xpBar } from '../ui';
-import { dailyPlan, planMinutes } from '../stats';
+import { currentPlan, planMinutes } from '../stats';
 import { playerLevel, nextBadge } from '../rewards';
 import { playDailyCheck, playPlan } from './play';
 import { showTraining } from './training';
@@ -24,8 +24,9 @@ export function showHome() {
   const { name } = store.data;
   const streak = store.streak();
   const check = store.todayCheck();
-  const plan = dailyPlan();
-  const planDone = plan.filter((e) => store.playedToday(e.id)).length;
+  const plan = currentPlan();
+  const planDone = plan.done.size;
+  const planTitle = plan.round > 1 ? t('plan.titleN', { n: plan.round }) : t('plan.title');
   const week = store.daysThisWeek();
   const lvl = playerLevel();
   const goal = nextBadge();
@@ -34,11 +35,17 @@ export function showHome() {
   const planSub = h(
     'small',
     { class: 'plan-sub' },
-    h('span', {}, `${t('plan.sub', { n: plan.length, min: planMinutes(plan) })} · ${t('plan.progress', { done: planDone, n: plan.length })}`),
+    h(
+      'span',
+      {},
+      plan.complete
+        ? t('plan.againSub')
+        : `${t('plan.sub', { n: plan.exercises.length, min: planMinutes(plan.exercises) })} · ${t('plan.progress', { done: planDone, n: plan.exercises.length })}`,
+    ),
     h(
       'span',
       { class: 'plan-icons' },
-      ...plan.map((e) => h('span', { class: store.playedToday(e.id) ? 'done' : '', title: t(e.name) }, e.icon)),
+      ...plan.exercises.map((e) => h('span', { class: plan.done.has(e.id) ? 'done' : '', title: t(e.name) }, e.icon)),
     ),
   );
 
@@ -64,7 +71,13 @@ export function showHome() {
       h(
         'main',
         { class: 'content menu' },
-        menuCard('🏋️', t('plan.title'), planSub, playPlan, planDone === plan.length ? 'done' : 'featured'),
+        menuCard(
+          plan.complete ? '✅' : '🏋️',
+          plan.complete ? `${planTitle} ✓ · ${t('plan.again')}` : planTitle,
+          planSub,
+          playPlan,
+          plan.complete ? 'done' : 'featured',
+        ),
         menuCard(
           '📏',
           t('home.check'),

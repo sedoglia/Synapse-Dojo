@@ -130,7 +130,7 @@ export const towers: Exercise = {
         redraw();
       });
 
-      const ok = ctx.track(st, solved && moves === min);
+      const ok = ctx.track(st, solved && moves === min, { was: t('fb.minMoves', { n: min }) });
       if (ok) perfect++;
       counter.textContent = solved ? (ok ? '✓' : t('ex.towers.moves', { m: moves, min })) : t('ex.towers.too');
       flash(playArea, ok ? 'good' : 'bad', 500);

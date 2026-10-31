@@ -7,7 +7,7 @@ Gioco open source di allenamento cognitivo: pochi minuti al giorno, nel browser,
 
 ## Cosa c'è dentro
 
-- **Allenamento**: circa 10–12 minuti, con 4 esercizi scelti ogni giorno tra le abilità allenate meno di recente.
+- **Allenamento**: circa 10–12 minuti, con 4 esercizi scelti ogni giorno tra le abilità allenate meno di recente. Finito un allenamento puoi farne subito un altro, con esercizi e abilità diverse.
 - **Misura il Neuro Score**: 4 prove rapide a difficoltà fissa (velocità, controllo, memoria di lavoro, calcolo) che producono un **Neuro Score** da 0 a 1000.
 - **Palestra**: 17 esercizi su 8 abilità. Ognuno ha **difficoltà adattiva**: diventa più difficile mentre migliori e il livello resta salvato.
 
@@ -23,6 +23,7 @@ Gioco open source di allenamento cognitivo: pochi minuti al giorno, nel browser,
 | Calcolo e lettura | ➗ Sprint di calcolo, 📖 Lettura veloce |
 
 - **Progressi**: profilo radar per abilità, grafico del Neuro Score, calendario e obiettivo settimanale.
+- **Feedback chiaro**: dopo ogni risposta un ✓ verde o ✗ rosso con bagliore sullo schermo e, se sbagli, la risposta giusta.
 - **Esempi e prova guidata**: ogni esercizio mostra un esempio illustrato e, la prima volta, propone una prova che non conta.
 - **Difficoltà su misura**: punta a circa l'80% di risposte giuste, il punto in cui si impara più in fretta secondo la ricerca.
 - **Motivazione**: combo durante il gioco, punti XP e livello del giocatore, 17 traguardi, obiettivo settimanale, serie che perdona un giorno di riposo, promemoria per il calendario.

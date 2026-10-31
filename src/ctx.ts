@@ -6,12 +6,19 @@ export class Aborted extends Error {}
 /** `train` = adaptive gym session, `check` = fixed daily measurement, `practice` = short unscored tutorial. */
 export type Mode = 'train' | 'check' | 'practice';
 
+export interface FeedbackOptions {
+  /** Sound and streak only, no big ✓/✗ (for rapid, repeated taps such as Number trail). */
+  subtle?: boolean;
+  /** The right answer, shown next to ✗ after a mistake. */
+  was?: string;
+}
+
 /** Visual/haptic feedback the play view provides to exercises. */
 export interface Effects {
   progress(fraction: number, label: string): void;
   combo(streak: number): void;
   toast(text: string, kind: 'up' | 'down' | 'hint'): void;
-  answer(ok: boolean, streak: number): void;
+  answer(ok: boolean, streak: number, opts: FeedbackOptions): void;
 }
 
 /** Runtime handed to each exercise: a stage to draw in, cancellable waits, feedback and difficulty. */
@@ -53,23 +60,24 @@ export class Ctx {
     this.fx.progress(fraction, label);
   }
 
-  /** Reports an answer: updates the streak counter, sound and vibration. Returns `ok`. */
-  feedback(ok: boolean): boolean {
+  /** Reports an answer: big ✓/✗, streak counter, sound and vibration. Returns `ok`. */
+  feedback(ok: boolean, opts: FeedbackOptions = {}): boolean {
     this.streak = ok ? this.streak + 1 : 0;
     this.bestStreak = Math.max(this.bestStreak, this.streak);
-    this.fx.answer(ok, this.streak);
+    this.fx.answer(ok, this.streak, opts);
     this.fx.combo(this.streak);
     return ok;
   }
 
   /**
-   * Records an answer on a staircase and announces level changes. `heard` is what the player is told
-   * (e.g. a correct but too slow answer counts as a miss for difficulty, yet still sounds right). Returns `heard`.
+   * Records an answer on a staircase and announces level changes. `opts.heard` is what the player is told
+   * (e.g. a correct but too slow answer counts as a miss for difficulty, yet still sounds right). Returns it.
    */
-  track(st: Staircase, ok: boolean, heard = ok): boolean {
+  track(st: Staircase, ok: boolean, opts: FeedbackOptions & { heard?: boolean } = {}): boolean {
+    const heard = opts.heard ?? ok;
     const before = st.int;
     st.record(ok);
-    this.feedback(heard);
+    this.feedback(heard, opts);
     if (this.mode === 'train' && st.int > before) {
       this.levelUps++;
       this.fx.toast('⬆', 'up');

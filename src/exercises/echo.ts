@@ -75,8 +75,17 @@ export const echo: Exercise = {
       rule.textContent = t('ex.echo.rule', { n });
       letBtn.classList.toggle('hidden', !dual);
 
-      let right = 0;
-      let scored = 0;
+      // Per modality: hits on targets and false alarms on non-targets.
+      const tally = { pos: { hit: 0, targets: 0, fa: 0, other: 0 }, let: { hit: 0, targets: 0, fa: 0, other: 0 } };
+      const count = (m: typeof tally.pos, isTarget: boolean, pressed: boolean) => {
+        if (isTarget) {
+          m.targets++;
+          if (pressed) m.hit++;
+        } else {
+          m.other++;
+          if (pressed) m.fa++;
+        }
+      };
       for (let i = 0; i < len; i++) {
         ctx.progress((b + i / len) / blocks, `${labelFor(level)}`);
         const posTarget = i >= n && positions[i] === positions[i - n];
@@ -106,12 +115,8 @@ export const echo: Exercise = {
         await ctx.wait(2200 * ctx.pace);
 
         if (i >= n) {
-          scored++;
-          if (posPressed === posTarget) right++;
-          if (dual) {
-            scored++;
-            if (letPressed === letTarget) right++;
-          }
+          count(tally.pos, posTarget, posPressed);
+          if (dual) count(tally.let, letTarget, letPressed);
           if (posTarget && !posPressed) flash(posBtn, 'bad');
           if (dual && letTarget && !letPressed) flash(letBtn, 'bad');
           // Only trials with something to react to count for the streak; quiet correct rejections don't.
@@ -122,13 +127,16 @@ export const echo: Exercise = {
       }
       pressPos = pressLetter = null;
 
-      // Classic n-back rule: ≥85% correct moves up, <65% moves down.
-      const acc = scored ? right / scored : 0;
+      // Hit rate minus false-alarm rate per modality: pressing nothing (or everything) scores 0,
+      // unlike plain percent-correct, where staying silent already gives ~70%.
+      const sens = (m: typeof tally.pos) => (m.targets ? m.hit / m.targets : 1) - (m.other ? m.fa / m.other : 0);
+      const acc = clamp(dual ? (sens(tally.pos) + sens(tally.let)) / 2 : sens(tally.pos), 0, 1);
       blockScores.push(((level - 1 + acc) / MAX_LEVEL) * 100);
       const before = level;
-      if (acc >= 0.85) level = Math.min(MAX_LEVEL, level + 1);
-      else if (acc < 0.65) level = Math.max(1, level - 1);
-      if (acc >= 0.85) sfx.fanfare();
+      // ≥ 0.8 (e.g. 90% hits with 10% false alarms) moves up, < 0.5 moves down.
+      if (acc >= 0.8) level = Math.min(MAX_LEVEL, level + 1);
+      else if (acc < 0.5) level = Math.max(1, level - 1);
+      if (acc >= 0.8) sfx.fanfare();
 
       if (b < blocks - 1) {
         const go = h('button', { class: 'btn primary' }, t('common.continue'));

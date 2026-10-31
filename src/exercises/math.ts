@@ -70,7 +70,7 @@ export const math: Exercise = {
     );
 
     let correct = 0;
-    const start = performance.now();
+    let solving = 0; // time spent answering, excluding the feedback pauses between problems
     for (let i = 0; i < total; i++) {
       ctx.progress(i / total, `${i + 1}/${total}`);
       const p = makeProblem(ctx.quick ? QUICK : configFor(st.int));
@@ -94,7 +94,9 @@ export const math: Exercise = {
           onKey = null;
         };
       });
-      ctx.track(st, ok && performance.now() - shown <= fastEnough, ok);
+      const took = performance.now() - shown;
+      solving += took;
+      ctx.track(st, ok && took <= fastEnough, { heard: ok });
 
       if (ok) {
         correct++;
@@ -107,10 +109,10 @@ export const math: Exercise = {
     }
     ctx.progress(1);
 
-    const secs = (performance.now() - start) / 1000;
+    const secs = solving / 1000;
     const detail = t('ex.math.detail', { ok: correct, n: total, secs: secs.toFixed(1) });
     if (ctx.quick) {
-      return { score: (correct / total) * scale(secs / total, 1.6, 7), detail };
+      return { score: (correct / total) * scale(secs / total, 1.5, 6.5), detail };
     }
     return { score: st.score(), detail, level: st.next() };
   },

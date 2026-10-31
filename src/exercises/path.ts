@@ -70,7 +70,7 @@ async function board(ctx: Ctx, labels: string[], from: number, of: number) {
   await ctx.input<void>((done) => {
     onTap = (i) => {
       if (i === next) {
-        ctx.feedback(true);
+        ctx.feedback(true, { subtle: true });
         nodes[i].classList.add('done');
         next++;
         ctx.progress((from + next / labels.length) / of, `${next}/${labels.length}`);
@@ -78,7 +78,7 @@ async function board(ctx: Ctx, labels: string[], from: number, of: number) {
         hint.textContent = t('ex.path.next', { v: labels[next] });
       } else if (i > next) {
         errors++;
-        ctx.feedback(false);
+        ctx.feedback(false, { was: labels[next] });
         flash(nodes[i], 'shake', 400);
       }
     };

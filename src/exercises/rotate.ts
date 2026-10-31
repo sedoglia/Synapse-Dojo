@@ -107,10 +107,10 @@ export const rotate: Exercise = {
         onAnswer = done;
         return () => (onAnswer = null);
       });
-      const ok = ctx.track(st, said === mirrored);
+      const ok = ctx.track(st, said === mirrored, { was: mirrored ? t('ex.rotate.mirror') : t('ex.rotate.same') });
       if (ok) correct++;
       pair.classList.add(ok ? 'good' : 'bad');
-      await ctx.wait(ok ? 300 : 700);
+      await ctx.wait(ok ? 400 : 1300);
       pair.classList.remove('good', 'bad');
     }
     ctx.progress(1);

@@ -34,7 +34,8 @@ export interface SaveData {
   runs: RunRecord[];
   checks: CheckRecord[];
   levels: Record<string, number>;
-  plan: { date: string; ids: string[] } | null;
+  /** Current workout: `round` counts workouts started today, `done` the exercises finished in this one. */
+  plan: { date: string; ids: string[]; done?: string[]; round?: number } | null;
   /** Level after each gym session, per exercise (most recent last). */
   history: Record<string, LevelPoint[]>;
   /** Exercises whose guided practice has been completed or skipped. */

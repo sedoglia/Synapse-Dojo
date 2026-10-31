@@ -46,7 +46,18 @@ async function round(ctx: Ctx, tiles: HTMLElement[], board: HTMLElement, status:
 
   board.classList.add('locked');
   flash(board, ok ? 'good' : 'bad', 450);
-  await ctx.wait(650);
+  if (!ok) {
+    // Show the order that was expected, numbered on the tiles.
+    expected.forEach((i, k) => {
+      tiles[i].textContent = tiles[i].textContent ? `${tiles[i].textContent}·${k + 1}` : String(k + 1);
+      tiles[i].classList.add('answer');
+    });
+    await ctx.wait(1800);
+    tiles.forEach((tile) => {
+      tile.textContent = '';
+      tile.classList.remove('answer');
+    });
+  } else await ctx.wait(650);
   return ok;
 }
 

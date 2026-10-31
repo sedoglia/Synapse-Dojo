@@ -59,7 +59,7 @@ export const BADGES: Badge[] = [
   { id: 'combo25', icon: '🌩️', name: 'badge.combo25.name', desc: 'badge.combo25.desc', progress: () => frac(store.data.bestStreak, 25) },
   { id: 'nback3', icon: '🔁', name: 'badge.nback3.name', desc: 'badge.nback3.desc', progress: () => frac(level('echo'), 5) },
   { id: 'span7', icon: '💡', name: 'badge.span7.name', desc: 'badge.span7.desc', progress: () => frac(level('grid'), 7) },
-  { id: 'glance50', icon: '👁️', name: 'badge.glance50.name', desc: 'badge.glance50.desc', progress: () => frac(level('glance'), 14) },
+  { id: 'glance50', icon: '👁️', name: 'badge.glance50.name', desc: 'badge.glance50.desc', progress: () => frac(level('glance'), 18) },
   { id: 'neuro800', icon: '🧠', name: 'badge.neuro800.name', desc: 'badge.neuro800.desc', progress: () => frac(Math.max(0, ...store.data.checks.map((c) => c.score)), 800) },
   { id: 'streak30', icon: '🏆', name: 'badge.streak30.name', desc: 'badge.streak30.desc', progress: () => frac(store.streak(), 30) },
 ];

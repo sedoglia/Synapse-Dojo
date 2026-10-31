@@ -18,7 +18,9 @@ function tone(freq: number, dur: number, type: OscillatorType = 'sine', gain = 0
 }
 
 function vibrate(pattern: number | number[]) {
-  if (store.data.settings.vibration && 'vibrate' in navigator) navigator.vibrate(pattern);
+  // Browsers refuse vibration until the user has interacted with the page.
+  const active = (navigator as Navigator & { userActivation?: { hasBeenActive: boolean } }).userActivation?.hasBeenActive ?? true;
+  if (store.data.settings.vibration && active && 'vibrate' in navigator) navigator.vibrate(pattern);
 }
 
 export const sfx = {

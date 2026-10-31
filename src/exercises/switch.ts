@@ -61,14 +61,19 @@ export const ruleSwitch: Exercise = {
         return () => (onAnswer = null);
       });
       const rt = performance.now() - shown;
-      const ok = ctx.track(st, side === answerFor(n, rule));
+      const want = answerFor(n, rule);
+      const wantLabel = rule === 'parity' ? (want === 0 ? t('ex.switch.even') : t('ex.switch.odd')) : want === 0 ? '< 5' : '> 5';
+      const ok = ctx.track(st, side === want, { was: wantLabel });
+      if (!ok) (want === 0 ? left : right).classList.add('correct-hint');
       if (ok) {
         correct++;
         (switched ? rtSwitch : rtRepeat).push(rt);
       }
       if (side !== null) flash(side === 0 ? left : right, ok ? 'good' : 'bad');
       num.textContent = side === null ? '⏱' : '';
-      await ctx.wait(side === null ? 500 : 200);
+      await ctx.wait(ok ? 300 : 1100);
+      left.classList.remove('correct-hint');
+      right.classList.remove('correct-hint');
     }
     ctx.progress(1);
 

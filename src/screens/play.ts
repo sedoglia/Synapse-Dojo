@@ -5,7 +5,7 @@ import { store } from '../storage';
 import { t } from '../i18n';
 import { render, page, countUp, rankName, sparkline, xpBar } from '../ui';
 import { DAILY_CHECK, type Exercise, type ExerciseResult } from '../exercises';
-import { dailyPlan } from '../stats';
+import { nextPlan, markPlanDone } from '../stats';
 import { exampleCard } from '../examples';
 import { XP, addXp, playerLevel, checkBadges, type Badge } from '../rewards';
 import { showHome } from './home';
@@ -94,7 +94,7 @@ async function runExercise(ex: Exercise, mode: Mode, level: number): Promise<{ r
       }
     },
     toast,
-    answer: (ok, streak) => {
+    answer: (ok, streak, opts) => {
       if (ok) {
         sfx.ok(streak);
         haptic.ok();
@@ -103,26 +103,43 @@ async function runExercise(ex: Exercise, mode: Mode, level: number): Promise<{ r
         haptic.bad();
         if (mode === 'practice') toast(t(ex.example), 'hint');
       }
+      if (opts.subtle) return;
+      // Big ✓/✗ in the middle plus a coloured glow around the screen: impossible to miss.
+      verdict.className = `verdict ${ok ? 'ok' : 'bad'}`;
+      verdict.replaceChildren(
+        h('span', { class: 'verdict-icon' }, ok ? '✓' : '✗'),
+        h('span', { class: 'verdict-text' }, ok ? t('fb.right') : t('fb.wrong')),
+      );
+      if (!ok && opts.was) verdict.append(h('span', { class: 'verdict-was' }, t('fb.was', { v: opts.was })));
+      void verdict.offsetWidth; // restart the animation
+      verdict.classList.add('show');
+      clearTimeout(hideVerdict); // also hides it when animations are reduced
+      hideVerdict = setTimeout(() => verdict.classList.remove('show'), ok ? 600 : 1200);
+      playView.classList.remove('glow-ok', 'glow-bad');
+      void playView.offsetWidth;
+      playView.classList.add(ok ? 'glow-ok' : 'glow-bad');
     },
   });
+  const verdict = h('div', { class: 'verdict' });
+  let hideVerdict: ReturnType<typeof setTimeout> | undefined;
 
-  render(
+  const playView = h(
+    'div',
+    { class: `play ${mode === 'practice' ? 'practice' : ''}` },
     h(
-      'div',
-      { class: `play ${mode === 'practice' ? 'practice' : ''}` },
-      h(
-        'header',
-        { class: 'play-bar' },
-        h('button', { class: 'icon-btn', 'aria-label': t('common.quit'), onClick: () => ctx.abort() }, '✕'),
-        mode === 'practice' ? h('span', { class: 'practice-tag' }, `🎓 ${t('practice.tag')}`) : null,
-        h('div', { class: 'progress' }, bar),
-        combo,
-        label,
-      ),
-      toasts,
-      stage,
+      'header',
+      { class: 'play-bar' },
+      h('button', { class: 'icon-btn', 'aria-label': t('common.quit'), onClick: () => ctx.abort() }, '✕'),
+      mode === 'practice' ? h('span', { class: 'practice-tag' }, `🎓 ${t('practice.tag')}`) : null,
+      h('div', { class: 'progress' }, bar),
+      combo,
+      label,
     ),
+    toasts,
+    verdict,
+    stage,
   );
+  render(playView);
 
   try {
     for (const n of ['3', '2', '1']) {
@@ -292,27 +309,27 @@ export async function playPractice(ex: Exercise) {
 
 const CHEERS = ['🎉', '💪', '🌟', '🚀', '🧠'];
 
+/** Plays the current workout; if it's already complete, starts another one with different exercises. */
 export async function playPlan() {
-  const plan = dailyPlan();
-  const wasDone = plan.every((e) => store.playedToday(e.id));
-  for (let i = 0; i < plan.length; i++) {
-    if (store.playedToday(plan[i].id)) continue;
-    const after = await practiceRound(plan[i], { i: i + 1, n: plan.length });
-    if (after === 'quit' || after === 'menu') return showHome();
+  const plan = nextPlan();
+  const n = plan.exercises.length;
+  for (let i = 0; i < n; i++) {
+    const ex = plan.exercises[i];
+    if (plan.done.has(ex.id)) continue;
+    const after = await practiceRound(ex, { i: i + 1, n });
+    if (after === 'quit') return showHome();
+    markPlanDone(ex.id); // the result is saved once the round ends, even if the player then goes to the menu
+    if (after === 'menu') return showHome();
   }
 
-  let reward: HTMLElement | null = null;
-  let badges: Badge[] = [];
-  if (!wasDone) {
-    store.bump('plans');
-    const xp = addXp(XP.plan);
-    badges = checkBadges();
-    reward = xpLine(xp.gained, xp.levelUp);
-  }
+  store.bump('plans');
+  const xp = addXp(XP.plan);
+  const badges = checkBadges();
+  const reward = xpLine(xp.gained, xp.levelUp);
   sfx.fanfare();
   render(
     page(
-      t('plan.title'),
+      plan.round > 1 ? t('plan.titleN', { n: plan.round }) : t('plan.title'),
       showHome,
       h(
         'div',
@@ -322,7 +339,12 @@ export async function playPlan() {
         h('p', { class: 'muted' }, t('plan.doneSub')),
         reward,
         badgeList(badges),
-        h('button', { class: 'btn primary', onClick: showHome }, t('common.menu')),
+        h(
+          'div',
+          { class: 'row' },
+          h('button', { class: 'btn', onClick: showHome }, t('common.menu')),
+          h('button', { class: 'btn primary', onClick: playPlan }, `🏋️ ${t('plan.again')}`),
+        ),
       ),
     ),
   );

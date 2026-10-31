@@ -31,28 +31,72 @@ function domainLastPlayed(d: Domain): string {
     .pop()!;
 }
 
-/**
- * Today's workout: one exercise from each of the four least recently trained domains,
- * weaker domains first on ties, and within a domain the exercise played longest ago.
- * Fixed for the whole day once generated.
- */
-export function dailyPlan(): Exercise[] {
+const runsToday = (ids: string[]) => {
   const today = todayKey();
-  const saved = store.data.plan;
-  if (saved?.date === today) {
-    const exs = saved.ids.map((id) => EXERCISES.find((e) => e.id === id)).filter((e): e is Exercise => !!e);
-    if (exs.length === saved.ids.length) return exs;
-  }
+  return store.data.runs.filter((r) => r.date === today && ids.includes(r.ex)).length;
+};
 
+export interface Plan {
+  exercises: Exercise[];
+  done: Set<string>;
+  /** 1 for the first workout of the day, 2 for the second… */
+  round: number;
+  complete: boolean;
+}
+
+function toPlan(saved: NonNullable<typeof store.data.plan>): Plan | null {
+  const exercises = saved.ids.map((id) => EXERCISES.find((e) => e.id === id)).filter((e): e is Exercise => !!e);
+  if (exercises.length !== saved.ids.length) return null;
+  // Plans saved before rounds existed count today's runs as done.
+  const done = new Set(saved.done ?? saved.ids.filter((id) => store.playedToday(id)));
+  return { exercises, done, round: saved.round ?? 1, complete: exercises.every((e) => done.has(e.id)) };
+}
+
+/**
+ * Builds a workout: one exercise from each of the four domains trained least today, then least
+ * recently, then weakest; within a domain the exercise played least today and longest ago.
+ * So a second workout on the same day covers different skills and exercises.
+ */
+function generate(round: number): Plan {
+  const domainIds = (d: string) => EXERCISES.filter((e) => e.domain === d).map((e) => e.id);
   const domains = shuffle(DOMAINS).sort(
-    (a, b) => domainLastPlayed(a).localeCompare(domainLastPlayed(b)) || domainScore(a) - domainScore(b),
+    (a, b) =>
+      runsToday(domainIds(a)) - runsToday(domainIds(b)) ||
+      domainLastPlayed(a).localeCompare(domainLastPlayed(b)) ||
+      domainScore(a) - domainScore(b),
   );
-  const plan = domains.slice(0, PLAN_SIZE).map((d) =>
-    shuffle(EXERCISES.filter((e) => e.domain === d)).sort((a, b) => store.lastPlayed(a.id).localeCompare(store.lastPlayed(b.id)))[0],
+  const exercises = domains.slice(0, PLAN_SIZE).map(
+    (d) =>
+      shuffle(EXERCISES.filter((e) => e.domain === d)).sort(
+        (a, b) => runsToday([a.id]) - runsToday([b.id]) || store.lastPlayed(a.id).localeCompare(store.lastPlayed(b.id)),
+      )[0],
   );
-  store.data.plan = { date: today, ids: plan.map((e) => e.id) };
+  store.data.plan = { date: todayKey(), ids: exercises.map((e) => e.id), done: [], round };
   store.save();
-  return plan;
+  return { exercises, done: new Set(), round, complete: false };
+}
+
+/** The workout in progress today (created on first use each day). */
+export function currentPlan(): Plan {
+  const saved = store.data.plan;
+  if (saved?.date === todayKey()) {
+    const plan = toPlan(saved);
+    if (plan) return plan;
+  }
+  return generate(1);
+}
+
+/** Starts another workout today after the current one is complete. */
+export function nextPlan(): Plan {
+  const current = currentPlan();
+  return current.complete ? generate(current.round + 1) : current;
+}
+
+export function markPlanDone(id: string) {
+  const saved = store.data.plan;
+  if (!saved || saved.date !== todayKey()) return;
+  saved.done = [...new Set([...(saved.done ?? []), id])];
+  store.save();
 }
 
 export const planMinutes = (plan: Exercise[]) => Math.round(plan.reduce((a, e) => a + e.minutes, 0) + plan.length * 0.5);
