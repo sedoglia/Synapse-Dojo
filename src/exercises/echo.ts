@@ -30,6 +30,11 @@ function stream<T>(len: number, n: number, values: readonly T[]): T[] {
   return out;
 }
 
+/** Small 3×3 picture of one item (lit square, plus its letter in dual mode) for the practice strip. */
+function mini(pos: number, letter: string): HTMLElement {
+  return h('div', { class: 'echo-mini' }, ...Array.from({ length: 9 }, (_, i) => h('span', { class: i === pos ? 'on' : '' }, i === pos ? letter : '')));
+}
+
 function speak(letter: string): boolean {
   if (!store.data.settings.sound || !('speechSynthesis' in window)) return false;
   const u = new SpeechSynthesisUtterance(letter);
@@ -60,7 +65,9 @@ export const echo: Exercise = {
     let pressLetter: (() => void) | null = null;
     const posBtn = h('button', { class: 'btn big', onPointerdown: () => pressPos?.() }, `${t('ex.echo.pos')} (A)`);
     const letBtn = h('button', { class: 'btn big', onPointerdown: () => pressLetter?.() }, `${t('ex.echo.letter')} (L)`);
-    ctx.stage.append(rule, board, h('div', { class: 'echo-actions' }, posBtn, letBtn));
+    // During practice a strip under the grid shows the last N+1 items and highlights the one to compare with.
+    const strip = h('div', { class: 'echo-strip' });
+    ctx.stage.append(rule, board, ...(ctx.practice ? [strip] : []), h('div', { class: 'echo-actions' }, posBtn, letBtn));
     onKeys(ctx, { a: () => pressPos?.(), A: () => pressPos?.(), l: () => pressLetter?.(), L: () => pressLetter?.() });
 
     let level = Math.round(ctx.level);
@@ -72,8 +79,27 @@ export const echo: Exercise = {
       const len = (ctx.practice ? 8 : 20) + n;
       const positions = stream(len, n, [0, 1, 2, 3, 4, 5, 6, 7, 8]);
       const letters = stream(len, n, LETTERS);
-      rule.textContent = t('ex.echo.rule', { n });
+      rule.textContent = n === 1 ? t('ex.echo.rule1') : t('ex.echo.rule', { n });
       letBtn.classList.toggle('hidden', !dual);
+
+      // The first time the letter stream appears, stop and explain it.
+      if (dual && ctx.mode === 'train' && !store.data.practiced.includes('echo-dual')) {
+        store.data.practiced.push('echo-dual');
+        store.save();
+        const go = h('button', { class: 'btn primary' }, t('common.continue'));
+        const note = h(
+          'div',
+          { class: 'card interlude' },
+          h('h3', {}, `🔊 ${t('ex.echo.dualTitle')}`),
+          h('p', {}, t('ex.echo.dualText', { back: n === 1 ? t('ex.echo.back1') : t('ex.echo.backN', { n }) })),
+          go,
+        );
+        ctx.stage.append(note);
+        await ctx.input<void>((done) => {
+          go.onclick = () => done();
+        });
+        note.remove();
+      }
 
       // Per modality: hits on targets and false alarms on non-targets.
       const tally = { pos: { hit: 0, targets: 0, fa: 0, other: 0 }, let: { hit: 0, targets: 0, fa: 0, other: 0 } };
@@ -108,6 +134,26 @@ export const echo: Exercise = {
 
         const cell = cells[positions[i]];
         cell.classList.add('lit');
+        if (ctx.practice) {
+          const from = Math.max(0, i - n);
+          strip.replaceChildren(
+            h(
+              'div',
+              { class: 'echo-strip-items' },
+              ...Array.from({ length: i - from + 1 }, (_, k) => {
+                const j = from + k;
+                const tag = j === i ? t('ex.echo.now') : j === i - n ? t('ex.echo.ago', { n }) : '';
+                return h(
+                  'div',
+                  { class: `echo-strip-item ${j === i ? 'now' : ''} ${j === i - n ? 'compare' : ''}` },
+                  mini(positions[j], dual ? letters[j] : ''),
+                  h('small', {}, tag || ' '),
+                );
+              }),
+            ),
+            h('p', { class: 'echo-strip-hint' }, i < n ? t('ex.echo.stripWait') : t(dual ? 'ex.echo.stripCompareDual' : 'ex.echo.stripCompare')),
+          );
+        }
         if (dual && !speak(letters[i])) cell.textContent = letters[i]; // no audio: show it instead
         await ctx.wait(600);
         cell.classList.remove('lit');

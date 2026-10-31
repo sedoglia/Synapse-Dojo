@@ -1,5 +1,5 @@
 import { h } from './dom';
-import { t } from './i18n';
+import { t, type I18nKey } from './i18n';
 import { chiralShape, render as renderShape } from './exercises/rotate';
 import { renderBoard } from './exercises/towers';
 import { glyph, type Item } from './exercises/odd';
@@ -57,8 +57,42 @@ const SCENES: Record<string, Scene> = {
       arrow(),
       answer('> 5'),
     ),
-  echo: () =>
-    row(miniGrid(9, { 1: '' }), miniGrid(9, { 1: '' }), arrow(), answer(t('ex.echo.pos')), miniGrid(9, { 5: '' }), arrow(), answer('—')),
+  echo: () => {
+    // A looping 1-back walkthrough: the previous square, the current one, and what to do.
+    const steps: { pos: number; press: boolean | null; text: I18nKey }[] = [
+      { pos: 0, press: null, text: 'ex.echo.demo1' },
+      { pos: 4, press: false, text: 'ex.echo.demo2' },
+      { pos: 4, press: true, text: 'ex.echo.demo3' },
+      { pos: 8, press: false, text: 'ex.echo.demo4' },
+    ];
+    const prevBox = h('div', { class: 'echo-demo-cell' });
+    const nowBox = h('div', { class: 'echo-demo-cell' });
+    const verdict = h('span', { class: 'echo-demo-verdict' });
+    const caption = h('p', { class: 'echo-demo-text' });
+    const box = h(
+      'div',
+      { class: 'echo-demo' },
+      row(
+        h('div', { class: 'echo-demo-col' }, h('small', {}, t('ex.echo.before')), prevBox),
+        arrow(),
+        h('div', { class: 'echo-demo-col' }, h('small', {}, t('ex.echo.now')), nowBox),
+        verdict,
+      ),
+      caption,
+    );
+    let k = 0;
+    const show = () => {
+      const s = steps[k];
+      prevBox.replaceChildren(k > 0 ? miniGrid(9, { [steps[k - 1].pos]: '' }) : h('span', { class: 'muted' }, '—'));
+      nowBox.replaceChildren(miniGrid(9, { [s.pos]: '' }));
+      verdict.replaceChildren(s.press === null ? '' : s.press ? answer(`👆 ${t('ex.echo.pos')}`) : h('span', { class: 'ex-chip' }, '✋'));
+      caption.textContent = `${k + 1}/${steps.length} · ${t(s.text)}`;
+      k = (k + 1) % steps.length;
+    };
+    show();
+    const timer = setInterval(() => (box.isConnected ? show() : clearInterval(timer)), 2200);
+    return box;
+  },
   grid: () => row(miniGrid(16, { 1: '1', 6: '2', 11: '3' }), arrow(), answer('1 2 3'), tag('↩'), answer('3 2 1')),
   digits: () => row(h('span', { class: 'ex-seq' }, '4 8 1 ', h('b', {}, '7 2 9')), arrow(), answer('7 2 9')),
   vault: () => row(tag(t('ex.vault.seen')), answer('✓'), tag(t('ex.vault.new')), answer('✗')),
