@@ -6,7 +6,14 @@ import { onKeys } from '../widgets';
 import type { Exercise } from './types';
 
 const MAX_LEVEL = 12;
-const LETTERS = ['C', 'H', 'K', 'L', 'Q', 'R', 'S', 'T'];
+/**
+ * Letters whose spoken names are easy to tell apart in each language
+ * (no "ci"/"ti" or "acca"/"cappa" in Italian, no "bee"/"dee"/"tee" in English).
+ */
+const LETTERS: Record<'it' | 'en', string[]> = {
+  it: ['A', 'E', 'I', 'O', 'U', 'H', 'Z'],
+  en: ['H', 'K', 'L', 'O', 'Q', 'R', 'Y'],
+};
 const BLOCKS = 2;
 const TARGET_RATE = 0.3;
 
@@ -43,13 +50,17 @@ function mini(pos: number, letter: string): HTMLElement {
   return h('div', { class: 'echo-mini' }, ...Array.from({ length: 9 }, (_, i) => h('span', { class: i === pos ? 'on' : '' }, i === pos ? letter : '')));
 }
 
+/** Speaks a letter with a voice for the current language. Returns false when sound is off or unsupported. */
 function speak(letter: string): boolean {
   if (!store.data.settings.sound || !('speechSynthesis' in window)) return false;
-  const u = new SpeechSynthesisUtterance(letter);
-  u.lang = store.data.settings.lang === 'it' ? 'it-IT' : 'en-US';
-  u.rate = 1.1;
-  speechSynthesis.cancel();
-  speechSynthesis.speak(u);
+  const lang = store.data.settings.lang === 'it' ? 'it-IT' : 'en-US';
+  const u = new SpeechSynthesisUtterance(letter.toLowerCase());
+  u.lang = lang;
+  u.rate = 0.95;
+  u.voice = speechSynthesis.getVoices().find((v) => v.lang.replace('_', '-').startsWith(lang.slice(0, 2))) ?? null;
+  // Speaking right after cancel() is sometimes dropped by Chrome, so only cancel when needed and speak a tick later.
+  if (speechSynthesis.speaking || speechSynthesis.pending) speechSynthesis.cancel();
+  setTimeout(() => speechSynthesis.speak(u), 30);
   return true;
 }
 
@@ -93,7 +104,8 @@ export const echo: Exercise = {
       note.remove();
     };
 
-    let level = Math.round(ctx.level);
+    // Practice runs at the player's own level, so the dual version can be practised with the memory strip too.
+    let level = Math.round(ctx.practice ? store.level('echo', 1) : ctx.level);
     const blocks = ctx.practice ? 1 : BLOCKS;
     const blockScores: number[] = [];
     for (let b = 0; b < blocks; b++) {
@@ -102,9 +114,13 @@ export const echo: Exercise = {
       const len = (ctx.practice ? 8 : 20) + n;
       const back = n === 1 ? t('ex.echo.back1') : t('ex.echo.backN', { n });
       const positions = stream(len, n, [0, 1, 2, 3, 4, 5, 6, 7, 8]);
-      const letters = stream(len, n, LETTERS);
+      const letters = stream(len, n, LETTERS[store.data.settings.lang]);
       series.textContent = t('ex.echo.series', { i: b + 1, n: blocks });
-      rule.textContent = n === 1 ? t('ex.echo.rule1') : t('ex.echo.rule', { n });
+      rule.textContent = dual
+        ? t('ex.echo.ruleDual', { n, back })
+        : n === 1
+          ? t('ex.echo.rule1')
+          : t('ex.echo.rule', { n });
       letBtn.classList.toggle('hidden', !dual);
       actions.classList.toggle('single', !dual);
       turn.textContent = '';
@@ -141,7 +157,9 @@ export const echo: Exercise = {
         const letTarget = !warmup && letters[i] === letters[i - n];
         let posPressed = false;
         let letPressed = false;
-        turn.textContent = warmup ? t('ex.echo.turnWait', { i: i + 1, len }) : t('ex.echo.turnAsk', { i: i + 1, len, back });
+        turn.textContent = warmup
+          ? t('ex.echo.turnWait', { i: i + 1, len })
+          : t(dual ? 'ex.echo.turnAskDual' : 'ex.echo.turnAsk', { i: i + 1, len, back });
         turn.classList.toggle('wait', warmup);
         posBtn.classList.toggle('off', warmup);
         letBtn.classList.toggle('off', warmup);
@@ -153,7 +171,7 @@ export const echo: Exercise = {
               if (posPressed) return;
               posPressed = true;
               flash(posBtn, posTarget ? 'good' : 'bad');
-              ctx.feedback(posTarget, { was: t('fb.echoNotSame') });
+              ctx.feedback(posTarget, { was: dual ? `${t('ex.echo.pos').toUpperCase()}: ${t('fb.echoNotSame')}` : t('fb.echoNotSame') });
             };
         pressLetter =
           warmup || !dual
@@ -162,7 +180,7 @@ export const echo: Exercise = {
                 if (letPressed) return;
                 letPressed = true;
                 flash(letBtn, letTarget ? 'good' : 'bad');
-                ctx.feedback(letTarget, { was: t('fb.echoNotSame') });
+                ctx.feedback(letTarget, { was: `${t('ex.echo.letter').toUpperCase()}: ${t('fb.echoNotSameLetter')}` });
               };
 
         if (ctx.practice) {
@@ -198,7 +216,11 @@ export const echo: Exercise = {
         sfx.tick();
         const cell = cells[positions[i]];
         cell.classList.add('lit');
-        if (dual && !speak(letters[i])) cell.textContent = letters[i]; // no audio: show it instead
+        // The letter is spoken and also written in the square, so it can always be double-checked.
+        if (dual) {
+          speak(letters[i]);
+          cell.textContent = letters[i];
+        }
         await ctx.wait(600);
         cell.classList.remove('lit');
         cell.textContent = '';
