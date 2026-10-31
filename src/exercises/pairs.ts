@@ -17,19 +17,32 @@ async function round(ctx: Ctx, n: number, from: number, of: number): Promise<{ a
 
   // Study
   const studySecs = Math.round(n * 3 * ctx.pace);
-  const timer = h('div', { class: 'vault-timer' });
+  const timer = h('div', { class: 'pairs-timer' });
   const doneBtn = h('button', { class: 'btn primary' }, t('ex.vault.done'));
+  // Each pair is drawn as one linked card (symbol 🔗 word) so it reads as a couple, not a list.
   ctx.stage.replaceChildren(
     h('div', { class: 'vault-title' }, t('ex.pairs.study')),
+    h('p', { class: 'pairs-tip' }, t('ex.pairs.tip', { sym: symbols[0], word: words[0] })),
     timer,
-    h('div', { class: 'pairs-list' }, ...symbols.map((s, i) => h('div', { class: 'pair' }, h('span', { class: 'pair-sym' }, s), h('span', {}, words[i])))),
+    h(
+      'div',
+      { class: 'pairs-list' },
+      ...symbols.map((s, i) =>
+        h('div', { class: 'pair' }, h('span', { class: 'pair-sym' }, s), h('span', { class: 'pair-link' }, '🔗'), h('span', { class: 'pair-word' }, words[i])),
+      ),
+    ),
     doneBtn,
   );
   await ctx.input<void>((done) => {
     let left = studySecs;
-    timer.textContent = `${left}`;
+    const tick = () => {
+      timer.textContent = t('ex.pairs.timer', { s: left });
+      ctx.progress((from + 0.5 * (1 - left / studySecs)) / of, `${left}s`);
+    };
+    tick();
     const id = setInterval(() => {
-      timer.textContent = `${--left}`;
+      left--;
+      tick();
       if (left <= 0) done();
     }, 1000);
     doneBtn.onclick = () => done();
@@ -43,7 +56,7 @@ async function round(ctx: Ctx, n: number, from: number, of: number): Promise<{ a
   let ok = 0;
   const order = shuffle(symbols.map((_, i) => i));
   for (let q = 0; q < order.length; q++) {
-    ctx.progress((from + q / order.length) / of, `${q + 1}/${n}`);
+    ctx.progress((from + 0.5 + (0.5 * q) / order.length) / of, `${q + 1}/${n}`);
     const i = order[q];
     card.textContent = symbols[i];
     const choices = shuffle([words[i], ...shuffle([...words.filter((_, k) => k !== i), ...spare]).slice(0, 3)]);

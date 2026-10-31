@@ -2013,3 +2013,39 @@ html.big-text {
 .play.practice .echo-grid {
   width: min(100%, 220px);
 }
+
+/* ---------- Pairs study screen ---------- */
+.pairs-tip {
+  margin: 0;
+  max-width: 460px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.pairs-timer {
+  font-weight: 800;
+  color: var(--accent);
+}
+.stage-pairs .pairs-list {
+  grid-template-columns: 1fr;
+  max-width: 360px;
+}
+.stage-pairs .pair {
+  display: grid;
+  grid-template-columns: 56px 28px 1fr;
+  align-items: center;
+  padding: 10px 16px;
+  border: 2px solid var(--accent-soft);
+  font-size: 1.15rem;
+}
+.stage-pairs .pair-sym {
+  font-size: 2.2rem;
+  text-align: center;
+}
+.pair-link {
+  opacity: 0.7;
+}
+.pair-word {
+  font-weight: 800;
+}

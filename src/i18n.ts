@@ -186,9 +186,11 @@ const it = {
   'ex.vault.result': '{n}/{t} risposte giuste',
 
   'ex.pairs.name': 'Coppie',
-  'ex.pairs.desc': 'Memorizza le coppie simbolo–parola. Poi per ogni simbolo scegli la parola che gli era abbinata.',
+  'ex.pairs.desc': 'Vedrai alcune coppie formate da un simbolo e una parola, per esempio 🍎 🔗 martello. Memorizzale. Poi compare solo il simbolo e devi scegliere la parola che gli era abbinata. Non c’è audio: è tutto da guardare.',
   'ex.pairs.why': 'Associazioni di coppie (paired associates): legare due elementi tra loro è uno dei compiti più sensibili della memoria episodica.',
-  'ex.pairs.study': 'Memorizza le coppie',
+  'ex.pairs.study': 'Ogni simbolo ha la sua parola: ricorda chi va con chi',
+  'ex.pairs.tip': 'Dopo vedrai solo il simbolo e dovrai scegliere la sua parola. Trucco: immagina una scena che li unisce, per esempio {sym} + «{word}».',
+  'ex.pairs.timer': '⏱ {s} secondi',
   'ex.pairs.ask': 'Con quale parola era in coppia?',
   'ex.pairs.detail': '{ok}/{n} coppie ricordate',
 
@@ -505,9 +507,11 @@ const en: Record<Key, string> = {
   'ex.vault.result': '{n}/{t} correct',
 
   'ex.pairs.name': 'Pairs',
-  'ex.pairs.desc': 'Memorize the symbol–word pairs. Then, for each symbol, pick the word it was paired with.',
+  'ex.pairs.desc': 'You’ll see a few pairs made of a symbol and a word, e.g. 🍎 🔗 hammer. Memorize them. Then only the symbol appears and you pick the word it was paired with. There’s no audio: it’s all visual.',
   'ex.pairs.why': 'Paired associates: binding two items together is one of the most sensitive episodic-memory tasks.',
-  'ex.pairs.study': 'Memorize the pairs',
+  'ex.pairs.study': 'Each symbol has its own word: remember which goes with which',
+  'ex.pairs.tip': 'Later you’ll only see the symbol and pick its word. Tip: picture a scene that joins them, e.g. {sym} + “{word}”.',
+  'ex.pairs.timer': '⏱ {s} seconds',
   'ex.pairs.ask': 'Which word was it paired with?',
   'ex.pairs.detail': '{ok}/{n} pairs remembered',
 
