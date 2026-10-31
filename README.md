@@ -104,8 +104,8 @@ Poi, per ogni aggiornamento:
 npm run deploy:web
 ```
 
-Variabile opzionale: `CF_PAGES_PROJECT` (nome del progetto, predefinito `synapse-gym`). Prima di pubblicare
-sostituisci il segnaposto `CONTACT` in `src/config.ts` con il contatto da mostrare nella pagina privacy.
+Variabile opzionale: `CF_PAGES_PROJECT` (nome del progetto, predefinito `synapse-gym`). Il contatto mostrato
+nella pagina privacy è `CONTACT` in `src/config.ts`.
 
 I salvataggi sono legati all'indirizzo del sito: per portare i progressi dalla versione sulla VPS a quella
 pubblica (o viceversa) usa *Impostazioni → Esporta progressi* e poi *Importa progressi* sull'altra.
