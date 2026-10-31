@@ -1,11 +1,19 @@
 // Network-first service worker: always fresh online, still playable offline.
-const CACHE = 'synapse-gym-v1';
+// Only this site's own files are cached; requests to other origins (e.g. analytics) pass through untouched.
+const CACHE = 'synapse-gym-v2';
 
 self.addEventListener('install', () => self.skipWaiting());
-self.addEventListener('activate', (e) => e.waitUntil(self.clients.claim()));
+self.addEventListener('activate', (e) =>
+  e.waitUntil(
+    (async () => {
+      for (const key of await caches.keys()) if (key !== CACHE) await caches.delete(key);
+      await self.clients.claim();
+    })(),
+  ),
+);
 
 self.addEventListener('fetch', (e) => {
-  if (e.request.method !== 'GET') return;
+  if (e.request.method !== 'GET' || new URL(e.request.url).origin !== self.location.origin) return;
   e.respondWith(
     (async () => {
       const cache = await caches.open(CACHE);

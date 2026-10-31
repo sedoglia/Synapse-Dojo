@@ -3,3 +3,7 @@ dist/
 # Never commit disc images or extracted third-party assets
 *.iso
 *.nds
+
+# Local settings, e.g. .env.web.local with the analytics token
+*.local
+.wrangler/

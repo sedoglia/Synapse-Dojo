@@ -38,8 +38,11 @@ const run = (cmd, args) => {
 const ssh = (script) => run('ssh', [target, script]);
 
 // npm is a .cmd shim on Windows, which needs a shell; a fixed string avoids passing unescaped args.
+// The private copy never gets the public site's analytics, even if the token is set in this shell.
+const env = { ...process.env };
+delete env.VITE_CF_ANALYTICS_TOKEN;
 console.log('> npm run build');
-check(spawnSync('npm run build', { stdio: 'inherit', shell: true }));
+check(spawnSync('npm run build', { stdio: 'inherit', shell: true, env }));
 
 // Upload to a fresh folder, then swap it in so visitors never see a half-copied site.
 ssh(`rm -rf ~/${dir}.new`);

@@ -1,10 +1,11 @@
-import { h } from '../dom';
-import { store, type Settings } from '../storage';
+import { h, todayKey } from '../dom';
+import { store, parseSave, type Settings } from '../storage';
 import { t, type Lang } from '../i18n';
-import { APP_NAME } from '../config';
+import { APP_NAME, VERSION } from '../config';
 import { render, page, applySettings } from '../ui';
 import { showHome } from './home';
 import { showOnboarding } from './onboarding';
+import { showPrivacy } from './privacy';
 
 /** A daily recurring calendar event: a reminder that works on any phone, with no server or push service. */
 function downloadReminder(time: string) {
@@ -34,9 +35,31 @@ function downloadReminder(time: string) {
     'END:VEVENT',
     'END:VCALENDAR',
   ].join('\r\n');
-  const a = h('a', { href: URL.createObjectURL(new Blob([ics], { type: 'text/calendar' })), download: 'synapse-gym-reminder.ics' });
+  download(ics, 'text/calendar', 'synapse-gym-reminder.ics');
+}
+
+function download(text: string, type: string, name: string) {
+  const a = h('a', { href: URL.createObjectURL(new Blob([text], { type })), download: name });
   a.click();
   setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+
+/** Replaces the current save with an exported file, after checking it and asking for confirmation. */
+async function importSave(file: File) {
+  let data = null;
+  try {
+    data = parseSave(JSON.parse(await file.text()));
+  } catch {
+    /* not JSON */
+  }
+  if (!data) return alert(t('settings.importBad'));
+  const last = [...data.runs.map((r) => r.date), ...data.checks.map((c) => c.date)].sort().pop() ?? data.created;
+  if (!confirm(t('settings.importConfirm', { name: data.name || '—', runs: data.runs.length, last }))) return;
+  store.replace(data);
+  applySettings();
+  alert(t('settings.importDone'));
+  if (store.data.name) showSettings();
+  else showOnboarding();
 }
 
 function toggle(key: 'sound' | 'vibration' | 'relaxed' | 'bigText', label: string): HTMLElement {
@@ -103,6 +126,27 @@ export function showSettings() {
           ),
         );
       })(),
+      (() => {
+        const file = h('input', { type: 'file', accept: '.json,application/json', hidden: true });
+        file.addEventListener('change', () => {
+          const f = file.files?.[0];
+          file.value = '';
+          if (f) void importSave(f);
+        });
+        return h(
+          'section',
+          { class: 'card form' },
+          h('h3', {}, `💾 ${t('settings.data')}`),
+          h('p', { class: 'muted small' }, t('settings.dataHint')),
+          h(
+            'div',
+            { class: 'row left' },
+            h('button', { class: 'btn', onClick: () => download(store.exportJson(), 'application/json', `synapse-gym-${todayKey()}.json`) }, `⬇️ ${t('settings.export')}`),
+            h('button', { class: 'btn', onClick: () => file.click() }, `⬆️ ${t('settings.import')}`),
+            file,
+          ),
+        );
+      })(),
       h(
         'section',
         { class: 'card' },
@@ -121,7 +165,8 @@ export function showSettings() {
           t('settings.reset'),
         ),
       ),
-      h('p', { class: 'muted small center' }, `${APP_NAME} v0.4.0 · ${t('settings.about')}`),
+      h('p', { class: 'center small' }, h('button', { class: 'link-btn', onClick: () => showPrivacy(showSettings) }, t('privacy.title'))),
+      h('p', { class: 'muted small center' }, `${APP_NAME} v${VERSION} · ${t('settings.about')}`),
     ),
   );
 }

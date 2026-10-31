@@ -68,18 +68,46 @@ function defaults(): SaveData {
   };
 }
 
-function load(): SaveData {
+function withDefaults(saved: Partial<SaveData>): SaveData {
   const base = defaults();
+  return { ...base, ...saved, settings: { ...base.settings, ...saved.settings } };
+}
+
+function load(): SaveData {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) {
-      const saved = JSON.parse(raw) as Partial<SaveData>;
-      return { ...base, ...saved, settings: { ...base.settings, ...saved.settings } };
-    }
+    if (raw) return withDefaults(JSON.parse(raw) as Partial<SaveData>);
   } catch {
     /* corrupted or unavailable storage: start fresh */
   }
-  return base;
+  return defaults();
+}
+
+const isObj = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null && !Array.isArray(v);
+const isDate = (v: unknown) => typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v);
+const numbers = (v: unknown) => isObj(v) && Object.values(v).every((n) => typeof n === 'number' && Number.isFinite(n));
+
+/** Checks the shape of an exported save (or a bare SaveData) and returns it completed with defaults, or null. */
+export function parseSave(json: unknown): SaveData | null {
+  const d = isObj(json) && json.app === 'synapse-gym' ? json.data : json;
+  if (!isObj(d)) return null;
+  const ok =
+    typeof d.name === 'string' &&
+    d.name.length <= 100 &&
+    isDate(d.created) &&
+    Array.isArray(d.runs) &&
+    d.runs.every((r) => isObj(r) && typeof r.ex === 'string' && isDate(r.date) && typeof r.score === 'number' && typeof r.detail === 'string') &&
+    Array.isArray(d.checks) &&
+    d.checks.every((c) => isObj(c) && isDate(c.date) && typeof c.score === 'number' && numbers(c.parts)) &&
+    numbers(d.levels) &&
+    (d.history === undefined || (isObj(d.history) && Object.values(d.history).every((pts) => Array.isArray(pts) && pts.every((p) => isObj(p) && isDate(p.date) && typeof p.level === 'number')))) &&
+    (d.practiced === undefined || (Array.isArray(d.practiced) && d.practiced.every((x) => typeof x === 'string'))) &&
+    (d.plan === undefined || d.plan === null || (isObj(d.plan) && isDate(d.plan.date) && Array.isArray(d.plan.ids))) &&
+    (d.xp === undefined || typeof d.xp === 'number') &&
+    (d.badges === undefined || isObj(d.badges)) &&
+    (d.counters === undefined || numbers(d.counters)) &&
+    (d.settings === undefined || isObj(d.settings));
+  return ok ? withDefaults(d as Partial<SaveData>) : null;
 }
 
 export const store = {
@@ -91,6 +119,16 @@ export const store = {
     } catch {
       /* storage full or blocked: keep playing in memory */
     }
+  },
+
+  /** The whole save wrapped with a marker, ready to be downloaded as a file. */
+  exportJson(): string {
+    return JSON.stringify({ app: 'synapse-gym', version: 1, exported: new Date().toISOString(), data: this.data }, null, 1);
+  },
+
+  replace(data: SaveData) {
+    this.data = data;
+    this.save();
   },
 
   reset() {

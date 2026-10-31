@@ -29,7 +29,8 @@ Gioco open source di allenamento cognitivo: pochi minuti al giorno, nel browser,
 - **Motivazione**: combo durante il gioco, punti XP e livello del giocatore, 17 traguardi, obiettivo settimanale, serie che perdona un giorno di riposo, promemoria per il calendario.
 - Ogni esercizio ha una scheda **"Perché funziona"** con il paradigma scientifico e lo studio di riferimento. La ricerca completa è in [docs/ricerca-e-proposta.md](docs/ricerca-e-proposta.md).
 - Italiano e inglese, tema chiaro e scuro, ritmo rilassato e testo grande, installabile come app (PWA) e giocabile offline.
-- Nessun server e nessun tracciamento: i dati restano nel `localStorage` del browser.
+- Nessun account e nessun cookie: i dati restano nel `localStorage` del browser e si possono esportare e reimportare da Impostazioni. Font ospitati sul sito, nessuna richiesta a Google.
+- Schermata e pagina [`privacy.html`](privacy.html) con privacy e note legali (IT/EN). La versione pubblica conta le visite con Cloudflare Web Analytics, senza cookie.
 
 ## Sviluppo
 
@@ -70,6 +71,47 @@ Il nome è definito in `src/config.ts`, `index.html` e `public/manifest.json`.
 
 ## Pubblicazione
 
+### Versione pubblica su Cloudflare Pages
+
+`npm run deploy:web` compila la versione pubblica e la carica su Cloudflare Pages con il *caricamento
+diretto* di [wrangler](https://developers.cloudflare.com/workers/wrangler/): non serve collegare GitHub,
+quindi il repository può restare privato. Il file `public/_headers` imposta header di sicurezza e cache.
+
+La prima volta:
+
+1. crea un account gratuito su [dash.cloudflare.com](https://dash.cloudflare.com/sign-up);
+2. dal tuo PC, autorizza wrangler (si apre il browser, una volta sola):
+   ```bash
+   npx wrangler login
+   ```
+3. crea il progetto Pages (il sito sarà su `https://synapse-gym.pages.dev`, o un nome simile se è già preso):
+   ```bash
+   npx wrangler pages project create synapse-gym --production-branch main
+   ```
+4. facoltativo, statistiche di visita: in *Analytics & Logs → Web Analytics* aggiungi il sito, copia il token
+   dallo snippet JavaScript e mettilo in un file `.env.web.local` (ignorato da git):
+   ```
+   VITE_CF_ANALYTICS_TOKEN=il-tuo-token
+   ```
+   Lo script viene aggiunto solo da `npm run build:web` / `deploy:web`, mai dalla build per la VPS.
+   In alternativa puoi attivare le statistiche direttamente dal pannello del progetto Pages (*Metrics → Web Analytics*):
+   usa uno solo dei due metodi.
+5. facoltativo, dominio personalizzato: nel progetto Pages, *Custom domains → Set up a custom domain*.
+
+Poi, per ogni aggiornamento:
+
+```bash
+npm run deploy:web
+```
+
+Variabile opzionale: `CF_PAGES_PROJECT` (nome del progetto, predefinito `synapse-gym`). Prima di pubblicare
+sostituisci il segnaposto `CONTACT` in `src/config.ts` con il contatto da mostrare nella pagina privacy.
+
+I salvataggi sono legati all'indirizzo del sito: per portare i progressi dalla versione sulla VPS a quella
+pubblica (o viceversa) usa *Impostazioni → Esporta progressi* e poi *Importa progressi* sull'altra.
+
+### GitHub Pages
+
 Il workflow `.github/workflows/deploy.yml` pubblica su GitHub Pages. Per ora si avvia solo a mano
 (*Actions → Deploy to GitHub Pages → Run workflow*), perché GitHub Pages richiede un repository pubblico
 sul piano gratuito. Quando il repository sarà pubblico:
@@ -96,3 +138,4 @@ e `VPS_PORT` (predefinita `8443`).
 
 [MIT](LICENSE). Progetto originale e indipendente; gli esercizi si basano su paradigmi classici
 della psicologia cognitiva di dominio pubblico. Non è affiliato ad alcun prodotto commerciale.
+Il font Nunito in `public/fonts/` è distribuito con la [SIL Open Font License 1.1](public/fonts/OFL.txt).
