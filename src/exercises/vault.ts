@@ -1,5 +1,4 @@
 import { h, shuffle, clamp, flash } from '../dom';
-import { sfx } from '../audio';
 import { store } from '../storage';
 import { t, WORDS } from '../i18n';
 import type { Exercise } from './types';
@@ -14,13 +13,15 @@ export const vault: Exercise = {
   name: 'ex.vault.name',
   desc: 'ex.vault.desc',
   why: 'ex.vault.why',
+  example: 'ex.vault.example',
   minutes: 2.5,
   levels: { min: 1, max: MAX_LEVEL, start: 2 },
   levelLabel: (l) => `${countFor(l)} 📝`,
 
   async run(ctx) {
-    const studyCount = ctx.quick ? 8 : countFor(ctx.level);
-    const studySecs = ctx.quick ? 20 : Math.round(studyCount * 2.5 * ctx.pace);
+    const lvl = Math.round(ctx.level);
+    const studyCount = ctx.quick ? 8 : ctx.practice ? 4 : countFor(lvl);
+    const studySecs = ctx.quick ? 20 : ctx.practice ? 15 : Math.round(studyCount * 2.5 * ctx.pace);
     const pool = shuffle(WORDS[store.data.settings.lang]);
     const studied = pool.slice(0, studyCount);
     const lures = pool.slice(studyCount, studyCount * 2);
@@ -76,14 +77,10 @@ export const vault: Exercise = {
       });
       if (saidOld && p.old) hits++;
       if (saidOld && !p.old) falseAlarms++;
-      if (saidOld === p.old) {
+      if (ctx.feedback(saidOld === p.old)) {
         correct++;
-        sfx.ok();
         flash(card, 'good');
-      } else {
-        sfx.bad();
-        flash(card, 'bad');
-      }
+      } else flash(card, 'bad');
       await ctx.wait(250);
     }
     ctx.progress(1);
@@ -93,7 +90,7 @@ export const vault: Exercise = {
     const detail = t('ex.vault.result', { n: correct, t: probes.length });
     if (ctx.quick) return { score: perf * 100, detail };
 
-    const level = perf >= 0.75 ? Math.min(MAX_LEVEL, ctx.level + 1) : perf < 0.45 ? Math.max(1, ctx.level - 1) : ctx.level;
-    return { score: ((ctx.level - 1 + perf) / MAX_LEVEL) * 100, detail, level };
+    const level = perf >= 0.75 ? Math.min(MAX_LEVEL, lvl + 1) : perf < 0.45 ? Math.max(1, lvl - 1) : lvl;
+    return { score: ((lvl - 1 + perf) / MAX_LEVEL) * 100, detail, level };
   },
 };

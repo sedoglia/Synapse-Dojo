@@ -2,8 +2,9 @@ import { h } from '../dom';
 import { store } from '../storage';
 import { t } from '../i18n';
 import { APP_NAME } from '../config';
-import { render, rankName } from '../ui';
+import { render, rankName, xpBar } from '../ui';
 import { dailyPlan, planMinutes } from '../stats';
+import { playerLevel, nextBadge } from '../rewards';
 import { playDailyCheck, playPlan } from './play';
 import { showTraining } from './training';
 import { showProgress } from './progress';
@@ -25,7 +26,10 @@ export function showHome() {
   const check = store.todayCheck();
   const plan = dailyPlan();
   const planDone = plan.filter((e) => store.playedToday(e.id)).length;
-  const streakText = streak === 0 ? t('home.streak0') : streak === 1 ? t('home.streak1') : t('home.streak', { n: streak });
+  const week = store.daysThisWeek();
+  const lvl = playerLevel();
+  const goal = nextBadge();
+  const streakText =streak === 0 ? t('home.streak0') : streak === 1 ? t('home.streak1') : t('home.streak', { n: streak });
 
   const planSub = h(
     'small',
@@ -49,7 +53,13 @@ export function showHome() {
         h('div', { class: 'logo' }, h('img', { src: './icon.svg', alt: '' }), h('span', {}, APP_NAME)),
         h('h1', {}, t('home.hello', { name })),
         h('p', { class: 'muted' }, t('home.how')),
-        h('div', { class: `streak ${streak ? 'on' : ''}` }, `🔥 ${streakText}`),
+        h(
+          'div',
+          { class: 'hero-chips' },
+          h('div', { class: `streak ${streak ? 'on' : ''}` }, `🔥 ${streakText}`),
+          h('div', { class: `streak ${week >= 4 ? 'on' : ''}` }, `🎯 ${t('home.week', { n: Math.min(4, week) })}`),
+        ),
+        xpBar(lvl.level, store.data.xp, lvl.from, lvl.to),
       ),
       h(
         'main',
@@ -64,6 +74,21 @@ export function showHome() {
         ),
         menuCard('🧩', t('home.training'), t('home.trainingSub'), showTraining),
         menuCard('📈', t('home.progress'), t('home.progressSub'), showProgress),
+        goal
+          ? h(
+              'button',
+              { class: 'next-goal', onClick: showProgress },
+              h('span', { class: 'goal-icon' }, goal.icon),
+              h(
+                'span',
+                { class: 'menu-text' },
+                h('small', {}, t('home.next')),
+                h('b', {}, t(goal.name)),
+                h('small', { class: 'muted' }, t(goal.desc)),
+              ),
+              h('div', { class: 'goal-bar' }, h('div', { style: { width: `${Math.round(goal.progress() * 100)}%` } })),
+            )
+          : null,
       ),
     ),
   );

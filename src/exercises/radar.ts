@@ -26,13 +26,14 @@ export const radar: Exercise = {
   name: 'ex.radar.name',
   desc: 'ex.radar.desc',
   why: 'ex.radar.why',
+  example: 'ex.radar.example',
   minutes: 2.5,
   levels: { min: 1, max: MAX_LEVEL, start: 1 },
   levelLabel: (l) => `${targetsFor(l)} 🎯 · ${speedFor(l)} px/s`,
 
   async run(ctx) {
-    const trials = 10;
-    const st = new Staircase(ctx.level, 1, MAX_LEVEL, 1);
+    const trials = ctx.count(10, 10, 2);
+    const st = new Staircase(ctx.level, 1, MAX_LEVEL, { target: 0.7 });
     const status = h('div', { class: 'grid-status' });
     const canvas = h('canvas', { class: 'radar-canvas' });
     ctx.stage.append(status, canvas);
@@ -68,7 +69,7 @@ export const radar: Exercise = {
     for (let i = 0; i < trials; i++) {
       ctx.progress(i / trials, `${i + 1}/${trials}`);
       size = resize();
-      const nTargets = targetsFor(st.level);
+      const nTargets = targetsFor(st.int);
       const total = nTargets * 2 + 2;
       const speed = speedFor(st.level) / ctx.pace;
 
@@ -151,13 +152,11 @@ export const radar: Exercise = {
         return () => canvas.removeEventListener('pointerdown', onDown);
       });
 
-      const ok = balls.every((b) => b.picked === b.target);
-      st.record(ok);
+      const ok = ctx.track(st, balls.every((b) => b.picked === b.target));
       if (ok) {
         wins++;
         bestTracked = Math.max(bestTracked, nTargets);
-        sfx.ok();
-      } else sfx.bad();
+      }
       reveal = true;
       draw();
       await ctx.wait(1100);

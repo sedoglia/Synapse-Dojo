@@ -45,8 +45,6 @@ async function round(ctx: Ctx, tiles: HTMLElement[], board: HTMLElement, status:
   });
 
   board.classList.add('locked');
-  if (ok) sfx.ok();
-  else sfx.bad();
   flash(board, ok ? 'good' : 'bad', 450);
   await ctx.wait(650);
   return ok;
@@ -59,6 +57,7 @@ export const grid: Exercise = {
   name: 'ex.grid.name',
   desc: 'ex.grid.desc',
   why: 'ex.grid.why',
+  example: 'ex.grid.example',
   minutes: 2.5,
   levels: { min: MIN_SPAN, max: MAX_SPAN, start: 3 },
   levelLabel: (l) => `span ${l}`,
@@ -75,7 +74,7 @@ export const grid: Exercise = {
       let best = 0;
       while (span <= MAX_SPAN) {
         ctx.progress((span - 3) / (MAX_SPAN - 2), `${span}`);
-        if (!(await round(ctx, tiles, board, status, span, false))) break;
+        if (!ctx.feedback(await round(ctx, tiles, board, status, span, false))) break;
         best = span++;
       }
       ctx.progress(1);
@@ -84,15 +83,15 @@ export const grid: Exercise = {
 
     // Gym: alternating forward/backward rounds on a 1-up/1-down staircase.
     // Backward recall is harder, so it runs one item shorter than the forward span.
-    const st = new Staircase(ctx.level, MIN_SPAN, MAX_SPAN, 1);
-    const rounds = 10;
+    const st = new Staircase(ctx.level, MIN_SPAN, MAX_SPAN, { target: 0.7 });
+    const rounds = ctx.count(10, 10, 3);
     let bestF = 0;
     let bestB = 0;
     for (let r = 0; r < rounds; r++) {
       ctx.progress(r / rounds, `${r + 1}/${rounds}`);
       const backward = r % 2 === 1;
-      const span = backward ? Math.max(MIN_SPAN, st.level - 1) : st.level;
-      const ok = st.record(await round(ctx, tiles, board, status, span, backward));
+      const span = backward ? Math.max(MIN_SPAN, st.int - 1) : st.int;
+      const ok = ctx.track(st, await round(ctx, tiles, board, status, span, backward));
       if (ok && backward) bestB = Math.max(bestB, span);
       if (ok && !backward) bestF = Math.max(bestF, span);
     }

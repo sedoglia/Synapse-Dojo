@@ -18,6 +18,10 @@ export interface Exercise {
   name: I18nKey;
   desc: I18nKey;
   why: I18nKey;
+  /** One-line worked example shown under the illustration (also used as a hint during practice). */
+  example: I18nKey;
+  /** Set to false for exercises that don't need a guided practice round. */
+  practice?: boolean;
   /** Typical duration in minutes, used to size the daily plan. */
   minutes: number;
   /** Difficulty range for adaptive exercises; `start` is the level for new players. */

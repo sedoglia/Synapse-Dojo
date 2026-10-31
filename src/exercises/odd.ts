@@ -1,11 +1,10 @@
 import { h, rand, shuffle } from '../dom';
-import { sfx } from '../audio';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';
 import type { Exercise } from './types';
 
 type Feature = 'shape' | 'color' | 'fill' | 'count';
-type Item = Record<Feature, number>;
+export type Item = Record<Feature, number>;
 const FEATURES: Feature[] = ['shape', 'color', 'fill', 'count'];
 const VALUES: Record<Feature, number> = { shape: 4, color: 4, fill: 2, count: 3 };
 const COLORS = ['var(--c-red)', 'var(--c-blue)', 'var(--c-green)', 'var(--c-yellow)'];
@@ -43,7 +42,7 @@ function puzzle(level: number): { items: Item[]; odd: number } {
   }
 }
 
-function glyph(it: Item): SVGElement {
+export function glyph(it: Item): SVGElement {
   const ns = 'http://www.w3.org/2000/svg';
   const svg = document.createElementNS(ns, 'svg');
   const count = it.count + 1; // feature values are 0-based
@@ -83,20 +82,21 @@ export const odd: Exercise = {
   name: 'ex.odd.name',
   desc: 'ex.odd.desc',
   why: 'ex.odd.why',
+  example: 'ex.odd.example',
   minutes: 2,
   levels: { min: 1, max: MAX_LEVEL, start: 1 },
   levelLabel: (l) => `${itemsFor(l)} · ${variedFor(l)}×`,
 
   async run(ctx) {
-    const trials = 14;
-    const st = new Staircase(ctx.level, 1, MAX_LEVEL, 2);
+    const trials = ctx.count(14, 14, 3);
+    const st = new Staircase(ctx.level, 1, MAX_LEVEL);
     const grid = h('div', { class: 'odd-grid' });
     ctx.stage.append(h('div', { class: 'grid-status' }, t('ex.odd.ask')), grid);
 
     let correct = 0;
     for (let i = 0; i < trials; i++) {
       ctx.progress(i / trials, `${i + 1}/${trials}`);
-      const { items, odd: answer } = puzzle(st.level);
+      const { items, odd: answer } = puzzle(st.int);
       let onPick: ((k: number) => void) | null = null;
       const cells = items.map((it, k) => {
         const b = h('button', { class: 'odd-item', onPointerdown: () => onPick?.(k) });
@@ -110,16 +110,10 @@ export const odd: Exercise = {
         onPick = done;
         return () => (onPick = null);
       });
-      const ok = said === answer;
-      st.record(ok);
+      const ok = ctx.track(st, said === answer);
       cells[answer].classList.add('right');
-      if (ok) {
-        correct++;
-        sfx.ok();
-      } else {
-        sfx.bad();
-        cells[said].classList.add('wrong');
-      }
+      if (ok) correct++;
+      else cells[said].classList.add('wrong');
       await ctx.wait(ok ? 400 : 1100);
     }
     ctx.progress(1);

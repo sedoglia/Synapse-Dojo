@@ -1,5 +1,4 @@
 import { h, shuffle, flash } from '../dom';
-import { sfx } from '../audio';
 import { store } from '../storage';
 import { t, WORDS } from '../i18n';
 import type { Ctx } from '../ctx';
@@ -56,10 +55,7 @@ async function round(ctx: Ctx, n: number, from: number, of: number): Promise<{ a
       return () => (onPick = null);
     });
     const right = said === words[i];
-    if (right) {
-      ok++;
-      sfx.ok();
-    } else sfx.bad();
+    if (ctx.feedback(right)) ok++;
     flash(btns[choices.indexOf(said)], right ? 'good' : 'bad');
     btns[choices.indexOf(words[i])].classList.add('good-btn');
     await ctx.wait(right ? 350 : 900);
@@ -74,23 +70,25 @@ export const pairs: Exercise = {
   name: 'ex.pairs.name',
   desc: 'ex.pairs.desc',
   why: 'ex.pairs.why',
+  example: 'ex.pairs.example',
   minutes: 3,
   levels: { min: 1, max: MAX_LEVEL, start: 2 },
   levelLabel: (l) => `${pairsFor(l)} 🔗`,
 
   async run(ctx) {
-    let level = ctx.level;
+    let level = Math.round(ctx.level);
     const scores: number[] = [];
     let last = { ok: 0, n: 0 };
-    for (let r = 0; r < 2; r++) {
-      const n = pairsFor(level);
-      const res = await round(ctx, n, r, 2);
+    const rounds = ctx.practice ? 1 : 2;
+    for (let r = 0; r < rounds; r++) {
+      const n = ctx.practice ? 3 : pairsFor(level);
+      const res = await round(ctx, n, r, rounds);
       scores.push(((level - 1 + res.acc) / MAX_LEVEL) * 100);
       last = { ok: res.ok, n };
       if (res.acc >= 0.8) level = Math.min(MAX_LEVEL, level + 1);
       else if (res.acc < 0.5) level = Math.max(1, level - 1);
     }
     ctx.progress(1);
-    return { score: (scores[0] + scores[1]) / 2, detail: t('ex.pairs.detail', last), level };
+    return { score: scores.reduce((a, b) => a + b, 0) / scores.length, detail: t('ex.pairs.detail', last), level };
   },
 };

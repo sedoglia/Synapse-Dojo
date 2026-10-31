@@ -42,6 +42,41 @@ export function rankIndex(score: number): 0 | 1 | 2 | 3 | 4 {
 
 export const rankName = (score: number) => t(`rank.${rankIndex(score)}`);
 
+/** Tiny line chart of a series (e.g. an exercise's level over time). */
+export function sparkline(values: number[], w = 220, hgt = 48): HTMLElement {
+  const box = h('div', { class: 'spark' });
+  if (values.length < 2) return box;
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+  const span = max - min || 1;
+  const pts = values.map((v, i) => [(i / (values.length - 1)) * (w - 8) + 4, hgt - 4 - ((v - min) / span) * (hgt - 8)]);
+  const ns = 'http://www.w3.org/2000/svg';
+  const svg = document.createElementNS(ns, 'svg');
+  svg.setAttribute('viewBox', `0 0 ${w} ${hgt}`);
+  const line = document.createElementNS(ns, 'polyline');
+  line.setAttribute('points', pts.map((p) => p.join(',')).join(' '));
+  const dot = document.createElementNS(ns, 'circle');
+  const [lx, ly] = pts[pts.length - 1];
+  dot.setAttribute('cx', String(lx));
+  dot.setAttribute('cy', String(ly));
+  dot.setAttribute('r', '3.5');
+  svg.append(line, dot);
+  box.append(svg);
+  return box;
+}
+
+/** XP bar for the player level. */
+export function xpBar(level: number, xp: number, from: number, to: number): HTMLElement {
+  const pct = Math.round(((xp - from) / (to - from)) * 100);
+  return h(
+    'div',
+    { class: 'xp' },
+    h('span', { class: 'xp-level' }, t('level.player', { n: level })),
+    h('div', { class: 'xp-bar' }, h('div', { style: { width: `${pct}%` } })),
+    h('span', { class: 'xp-num' }, `${xp - from}/${to - from} XP`),
+  );
+}
+
 /** Animates a number counting up inside `el`. */
 export function countUp(el: HTMLElement, to: number, ms = 900) {
   const start = performance.now();

@@ -3,7 +3,7 @@ import { store } from '../storage';
 import { t } from '../i18n';
 import { render, page } from '../ui';
 import { EXERCISES, DOMAINS } from '../exercises';
-import { playPractice } from './play';
+import { playPractice, levelText } from './play';
 import { showHome } from './home';
 
 export function showTraining() {
@@ -21,7 +21,7 @@ export function showTraining() {
             { class: 'ex-grid' },
             ...EXERCISES.filter((ex) => ex.domain === d).map((ex) => {
               const best = store.best(ex.id);
-              const level = ex.levels && store.hasLevel(ex.id) ? ex.levelLabel?.(store.level(ex.id, ex.levels.start)) : null;
+              const level = ex.levels && store.hasLevel(ex.id) ? levelText(ex, store.level(ex.id, ex.levels.start)) : null;
               return h(
                 'button',
                 { class: 'ex-card', onClick: () => playPractice(ex) },

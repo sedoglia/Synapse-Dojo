@@ -1,5 +1,4 @@
 import { h, pick, flash } from '../dom';
-import { sfx } from '../audio';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';
 import { fitCanvas, cssVar } from '../widgets';
@@ -67,12 +66,14 @@ export const pilot: Exercise = {
   name: 'ex.pilot.name',
   desc: 'ex.pilot.desc',
   why: 'ex.pilot.why',
+  example: 'ex.pilot.example',
   minutes: 1.5,
   levels: { min: 1, max: MAX_LEVEL, start: 1 },
   levelLabel: (l) => `${speedFor(l)} px/s${l >= 5 ? ' · ≈' : ''}`,
 
   async run(ctx) {
-    const st = new Staircase(ctx.level, 1, MAX_LEVEL, 2);
+    const st = new Staircase(ctx.level, 1, MAX_LEVEL);
+    const duration = ctx.practice ? 25 : DURATION;
     const status = h('div', { class: 'pilot-status' }, ' ');
     const canvas = h('canvas', { class: 'pilot-canvas' });
     let press: (() => void) | null = null;
@@ -116,12 +117,11 @@ export const pilot: Exercise = {
     const evaluate = (s: Sign) => {
       const roadOk = windowTime === 0 || onRoadTime / windowTime >= 0.75;
       const ok = s.pressed === s.target && roadOk && !stray;
-      st.record(ok);
+      ctx.track(st, ok);
       evaluated++;
       if (ok) right++;
       status.textContent = ok ? '✓' : !roadOk ? '🛣️ ✗' : '✗';
       status.className = `pilot-status ${ok ? 'ok' : 'ko'}`;
-      if (!ok) sfx.bad();
       stray = false;
       onRoadTime = windowTime = 0;
     };
@@ -137,7 +137,6 @@ export const pilot: Exercise = {
       }
       s.pressed = true;
       flash(btn, s.target ? 'good' : 'bad');
-      if (s.target) sfx.ok();
     };
 
     const onPointer = (e: PointerEvent) => {
@@ -219,7 +218,7 @@ export const pilot: Exercise = {
           }
 
           nextSign -= dt;
-          if (nextSign <= 0 && elapsed < DURATION - 3) {
+          if (nextSign <= 0 && elapsed < duration - 3) {
             const target = Math.random() < 0.35;
             const pool = level >= 5 ? [...EASY, ...SIMILAR] : EASY;
             signs.push({
@@ -234,8 +233,8 @@ export const pilot: Exercise = {
           while (signs.length && toScreen(signs[0].wy) > carY() + 40) evaluate(signs.shift()!);
 
           draw();
-          ctx.progress(elapsed / DURATION, `${Math.ceil(DURATION - elapsed)}s`);
-          if (elapsed >= DURATION) return done();
+          ctx.progress(elapsed / duration, `${Math.ceil(duration - elapsed)}s`);
+          if (elapsed >= duration) return done();
           id = requestAnimationFrame(step);
         };
         id = requestAnimationFrame(step);

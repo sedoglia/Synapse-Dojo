@@ -1,5 +1,4 @@
 import { h, rand, pick, scale, flash } from '../dom';
-import { sfx } from '../audio';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';
 import { keypad, keypadKeyboard } from '../widgets';
@@ -53,13 +52,14 @@ export const math: Exercise = {
   name: 'ex.math.name',
   desc: 'ex.math.desc',
   why: 'ex.math.why',
+  example: 'ex.math.example',
   minutes: 2,
   levels: { min: 1, max: 10, start: 2 },
   levelLabel: (l) => `${configFor(l).ops.join(' ')} · ≤${BIG[l - 1]}`,
 
   async run(ctx) {
-    const total = ctx.quick ? 12 : 20;
-    const st = new Staircase(ctx.level, 1, 10, 2);
+    const total = ctx.count(20, 12, 4);
+    const st = new Staircase(ctx.level, 1, 10);
     const fastEnough = 4000 * ctx.pace;
     const question = h('div', { class: 'math-q' });
     const answer = h('div', { class: 'math-a' });
@@ -73,7 +73,7 @@ export const math: Exercise = {
     const start = performance.now();
     for (let i = 0; i < total; i++) {
       ctx.progress(i / total, `${i + 1}/${total}`);
-      const p = makeProblem(ctx.quick ? QUICK : configFor(st.level));
+      const p = makeProblem(ctx.quick ? QUICK : configFor(st.int));
       const needed = String(p.answer).length;
       question.textContent = `${p.text} =`;
       answer.textContent = '?';
@@ -94,14 +94,12 @@ export const math: Exercise = {
           onKey = null;
         };
       });
-      st.record(ok && performance.now() - shown <= fastEnough);
+      ctx.track(st, ok && performance.now() - shown <= fastEnough, ok);
 
       if (ok) {
         correct++;
-        sfx.ok();
         flash(answer, 'good');
       } else {
-        sfx.bad();
         answer.textContent = `${typed} → ${p.answer}`;
         flash(answer, 'bad', 600);
       }

@@ -1,5 +1,4 @@
 import { h, rand, pick, shuffle, flash } from '../dom';
-import { sfx } from '../audio';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';
 import type { Exercise } from './types';
@@ -27,14 +26,15 @@ export const glance: Exercise = {
   name: 'ex.glance.name',
   desc: 'ex.glance.desc',
   why: 'ex.glance.why',
+  example: 'ex.glance.example',
   minutes: 2,
   levels: { min: 1, max: MAX_LEVEL, start: 3 },
   levelLabel: (l) => `${msFor(l)} ms`,
 
   async run(ctx) {
     // The daily check always starts from the same level so results stay comparable.
-    const trials = ctx.quick ? 14 : 24;
-    const st = ctx.quick ? new Staircase(4, 1, MAX_LEVEL, 1) : new Staircase(ctx.level, 1, MAX_LEVEL, 2);
+    const trials = ctx.count(24, 14, 4);
+    const st = ctx.quick ? new Staircase(4, 1, MAX_LEVEL, { target: 0.5 }) : new Staircase(ctx.level, 1, MAX_LEVEL);
 
     const center = h('div', { class: 'glance-center' });
     let onSlot: ((k: number) => void) | null = null;
@@ -116,22 +116,16 @@ export const glance: Exercise = {
         return () => (onSlot = null);
       });
 
-      const ok = saidVehicle === vehicle && saidWhere === where;
-      st.record(ok);
+      const ok = ctx.track(st, saidVehicle === vehicle && saidWhere === where);
       outer[where].textContent = '★';
       outer[where].classList.add('target');
-      if (ok) {
-        correct++;
-        sfx.ok();
-      } else {
-        sfx.bad();
-        flash(outer[saidWhere], 'bad');
-      }
+      if (ok) correct++;
+      else flash(outer[saidWhere], 'bad');
       await ctx.wait(ok ? 350 : 800);
     }
     ctx.progress(1);
 
     const detail = `${t('ex.glance.detail', { ms: msFor(Math.round(st.threshold())) })} · ${t('common.correct', { ok: correct, n: trials })}`;
-    return { score: st.score(), detail, level: ctx.quick ? undefined : st.next() };
+    return { score: st.score(), detail, level: ctx.mode === 'train' ? st.next() : undefined };
   },
 };

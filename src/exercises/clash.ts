@@ -1,5 +1,4 @@
 import { h, pick, scale, flash } from '../dom';
-import { sfx } from '../audio';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';
 import type { Exercise } from './types';
@@ -22,13 +21,14 @@ export const clash: Exercise = {
   name: 'ex.clash.name',
   desc: 'ex.clash.desc',
   why: 'ex.clash.why',
+  example: 'ex.clash.example',
   minutes: 2,
   levels: { min: 1, max: 14, start: 1 },
   levelLabel: (l) => `${limitFor(l)} ms${l >= 3 ? ' · 🎨/📖' : ''}`,
 
   async run(ctx) {
-    const total = ctx.quick ? 14 : 30;
-    const st = new Staircase(ctx.level, 1, 14, 2);
+    const total = ctx.count(30, 14, 4);
+    const st = new Staircase(ctx.level, 1, 14);
     const rule = h('div', { class: 'clash-rule' });
     const word = h('div', { class: 'clash-word' });
     let onPick: ((id: ColorId) => void) | null = null;
@@ -42,7 +42,7 @@ export const clash: Exercise = {
     for (let i = 0; i < total; i++) {
       ctx.progress(i / total, `${i + 1}/${total}`);
       // From level 3 a second rule appears that flips which feature counts.
-      const byWord = !ctx.quick && st.level >= 3 && Math.random() < 0.35;
+      const byWord = !ctx.quick && st.int >= 3 && Math.random() < 0.35;
       const meaning = pick(COLORS);
       const congruent = Math.random() < 0.25;
       const ink = congruent ? meaning : pick(COLORS.filter((c) => c.id !== meaning.id));
@@ -55,19 +55,15 @@ export const clash: Exercise = {
       flash(word, 'pop', 200);
 
       const shown = performance.now();
-      const limit = ctx.quick ? 60_000 : limitFor(st.level) * ctx.pace;
+      const limit = ctx.mode !== 'train' ? 60_000 : limitFor(st.level) * ctx.pace;
       const choice = await ctx.timed<ColorId | null>(limit, null, (done) => {
         onPick = done;
         return () => (onPick = null);
       });
       rtSum += performance.now() - shown;
 
-      const ok = choice === target;
-      st.record(ok);
-      if (ok) {
-        correct++;
-        sfx.ok();
-      } else sfx.bad();
+      const ok = ctx.track(st, choice === target);
+      if (ok) correct++;
       if (choice) flash(buttons[COLORS.findIndex((c) => c.id === choice)], ok ? 'good' : 'bad');
       word.textContent = choice ? '' : `⏱ ${t('common.timeout')}`;
       word.style.color = '';

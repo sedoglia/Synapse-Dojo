@@ -1,5 +1,4 @@
 import { h, rand, flash } from '../dom';
-import { sfx } from '../audio';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';
 import { keypad, keypadKeyboard } from '../widgets';
@@ -15,13 +14,14 @@ export const digits: Exercise = {
   name: 'ex.digits.name',
   desc: 'ex.digits.desc',
   why: 'ex.digits.why',
+  example: 'ex.digits.example',
   minutes: 2.5,
   levels: { min: MIN_SPAN, max: MAX_SPAN, start: 3 },
   levelLabel: (l) => `span ${l}`,
 
   async run(ctx) {
-    const trials = 10;
-    const st = new Staircase(ctx.level, MIN_SPAN, MAX_SPAN, 1);
+    const trials = ctx.count(10, 10, 3);
+    const st = new Staircase(ctx.level, MIN_SPAN, MAX_SPAN, { target: 0.7 });
     const status = h('div', { class: 'grid-status' });
     const display = h('div', { class: 'digits-display' });
     const slots = h('div', { class: 'digits-slots' });
@@ -33,7 +33,7 @@ export const digits: Exercise = {
     let best = 0;
     for (let i = 0; i < trials; i++) {
       ctx.progress(i / trials, `${i + 1}/${trials}`);
-      const n = st.level;
+      const n = st.int;
       // Unpredictable length forces continuous updating instead of memorizing from the start.
       const seq = Array.from({ length: n + rand(0, 4) }, () => rand(0, 9));
       status.textContent = t('ex.digits.watch', { n });
@@ -69,14 +69,12 @@ export const digits: Exercise = {
       });
 
       const expected = seq.slice(-n).join('');
-      const ok = st.record(answer === expected);
+      const ok = ctx.track(st, answer === expected);
       if (ok) {
         correct++;
         best = Math.max(best, n);
-        sfx.ok();
         flash(slots, 'good');
       } else {
-        sfx.bad();
         slots.textContent = expected.split('').join(' ');
         flash(slots, 'bad', 600);
       }

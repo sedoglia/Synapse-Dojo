@@ -1,0 +1,93 @@
+import { h } from './dom';
+import { t } from './i18n';
+import { chiralShape, render as renderShape } from './exercises/rotate';
+import { renderBoard } from './exercises/towers';
+import { glyph, type Item } from './exercises/odd';
+
+/**
+ * Small static scenes that show one round of each exercise with its answer marked.
+ * They reuse the real game styles, so what players see here matches what they'll play.
+ */
+type Scene = () => HTMLElement;
+
+const arrow = () => h('span', { class: 'ex-arrow' }, '→');
+const answer = (text: string) => h('span', { class: 'ex-answer' }, text);
+const row = (...kids: (HTMLElement | string)[]) => h('div', { class: 'ex-row' }, ...kids);
+const tag = (text: string, cls = '') => h('span', { class: `ex-chip ${cls}` }, text);
+
+function miniGrid(size: number, lit: Record<number, string>, cls = 'ex-mini'): HTMLElement {
+  return h(
+    'div',
+    { class: cls, style: { gridTemplateColumns: `repeat(${Math.sqrt(size)}, 1fr)` } },
+    ...Array.from({ length: size }, (_, i) => h('span', { class: i in lit ? 'on' : '' }, lit[i] ?? '')),
+  );
+}
+
+const SCENES: Record<string, Scene> = {
+  glance: () => {
+    const field = h('div', { class: 'ex-glance' }, h('span', { class: 'c' }, '🚗'), h('span', { class: 's' }, '★'));
+    return row(field, arrow(), answer('🚗'), answer('↗ ★'));
+  },
+  reflex: () =>
+    row(
+      h('div', { class: 'ex-pads' }, h('span', { class: 'go' }, '👆'), h('span'), h('span'), h('span')),
+      answer('✓'),
+      h('div', { class: 'ex-pads' }, h('span'), h('span', { class: 'nogo' }, '✋'), h('span'), h('span')),
+      answer('✗'),
+    ),
+  path: () => row(...['1', 'A', '2', 'B', '3'].flatMap((v, i) => [...(i ? [arrow()] : []), h('span', { class: 'ex-node' }, v)])),
+  pilot: () => row(tag('🟢', 'big'), arrow(), answer('!'), tag('🔺', 'big'), tag('🟦', 'big'), arrow(), answer('—')),
+  radar: () =>
+    row(
+      h('div', { class: 'ex-balls' }, h('i', { class: 'on' }), h('i'), h('i', { class: 'on' }), h('i')),
+      arrow(),
+      h('div', { class: 'ex-balls' }, h('i'), h('i', { class: 'pick' }), h('i'), h('i', { class: 'pick' })),
+    ),
+  clash: () => {
+    const word = h('span', { class: 'ex-word' }, t('color.red'));
+    word.style.color = 'var(--c-blue)';
+    return row(word, arrow(), tag('🎨'), answer(t('color.blue')), tag('📖'), answer(t('color.red')));
+  },
+  switch: () =>
+    row(
+      h('span', { class: 'ex-num parity' }, '7'),
+      arrow(),
+      answer(t('ex.switch.odd')),
+      h('span', { class: 'ex-num size' }, '7'),
+      arrow(),
+      answer('> 5'),
+    ),
+  echo: () =>
+    row(miniGrid(9, { 1: '' }), miniGrid(9, { 1: '' }), arrow(), answer(t('ex.echo.pos')), miniGrid(9, { 5: '' }), arrow(), answer('—')),
+  grid: () => row(miniGrid(16, { 1: '1', 6: '2', 11: '3' }), arrow(), answer('1 2 3'), tag('↩'), answer('3 2 1')),
+  digits: () => row(h('span', { class: 'ex-seq' }, '4 8 1 ', h('b', {}, '7 2 9')), arrow(), answer('7 2 9')),
+  vault: () => row(tag(t('ex.vault.seen')), answer('✓'), tag(t('ex.vault.new')), answer('✗')),
+  pairs: () => row(h('span', { class: 'ex-big' }, '🍎'), h('span', {}, '–'), tag('?'), arrow(), answer('🍎 = …')),
+  rotate: () => {
+    const shape = chiralShape(5);
+    const box = (angle: number, flip: boolean) => {
+      const el = renderShape(shape, angle, flip);
+      el.classList.add('ex-shape');
+      return el;
+    };
+    return row(box(0, false), box(90, false), arrow(), answer(t('ex.rotate.same')), box(0, false), box(90, true), arrow(), answer(t('ex.rotate.mirror')));
+  },
+  towers: () => row(renderBoard('GB|R|', true), arrow(), renderBoard('GR|B|', true)),
+  odd: () => {
+    const base: Item = { shape: 0, color: 0, fill: 0, count: 0 };
+    const items = [base, base, { ...base, color: 1 }, base].map((it, i) => {
+      const cell = h('span', { class: `ex-odd ${i === 2 ? 'right' : ''}` });
+      cell.append(glyph(it));
+      return cell;
+    });
+    return row(...items);
+  },
+  math: () => row(h('span', { class: 'ex-big' }, '7 + 8 ='), answer('15')),
+  reading: () => row(tag('🗣️'), arrow(), tag(t('ex.reading.done')), arrow(), tag('?')),
+};
+
+/** The illustrated example for an exercise: a little scene plus its caption. */
+export function exampleCard(id: string, caption: string): HTMLElement {
+  const scene = SCENES[id]?.();
+  return h('div', { class: 'example' }, scene ?? null, h('p', {}, caption));
+}

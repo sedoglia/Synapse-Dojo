@@ -63,7 +63,7 @@ Differenze rispetto alla proposta iniziale:
 
 ## 4. Struttura del gioco
 
-- **Motore adattivo** (`src/adaptive.ts`): staircase con livello salvato per esercizio. In genere si sale dopo 2 risposte giuste di fila (circa 71% di successo); gli esercizi a prove lunghe salgono dopo 1. Il punteggio della sessione dipende dal livello medio nella seconda metà della sessione.
+- **Motore adattivo** (`src/adaptive.ts`): livello salvato per esercizio; dalla v0.3 è continuo e punta all'80% di successo (vedi sezione 5). Il punteggio della sessione dipende dal livello medio nella seconda metà della sessione.
 - **Allenamento** (`src/stats.ts`): 4 esercizi presi dai 4 domini allenati meno di recente (a parità, quelli più deboli), fissi per tutta la giornata.
 - **Misura il Neuro Score**: 4 prove a difficoltà fissa (velocità, controllo, memoria di lavoro, calcolo), Neuro Score 0–1000 confrontabile nel tempo.
 - **Progressi**: grafico a radar degli 8 domini basato sui livelli raggiunti, andamento del Neuro Score, calendario, obiettivo di 4 giorni a settimana, livello e record per esercizio.
@@ -75,6 +75,32 @@ Differenze rispetto alla proposta iniziale:
 - Modalità per daltonici (lo Stroop si basa sui colori: servirebbe una variante con forme o simboli).
 - Più testi per *Lettura veloce* (oggi 6 per lingua).
 - Calibrazione dei livelli con giocatori reali: le soglie sono stimate dalla letteratura e da prove interne.
+
+## 5. Adattamento, istruzioni e motivazione (v0.3)
+
+### Cosa dice la ricerca
+
+| Tema | Prova | Conseguenza per il gioco |
+|---|---|---|
+| **Difficoltà ottimale** | *The Eighty Five Percent Rule for optimal learning* (Wilson, Shenhav, Straccia e Cohen, *Nature Communications* 2019): per compiti a scelta binaria si impara più in fretta con circa l'85% di risposte giuste. Gli autori sottolineano che conta l'esistenza di un "punto giusto" più del numero preciso. | Il motore punta all'80% sugli esercizi rapidi (prima era il 71%) e al 70% su quelli con poche prove lunghe. |
+| **Algoritmo adattivo** | Metodo *weighted up-down* (Kaernbach, 1991): pesando diversamente il passo in salita e in discesa si può puntare a qualsiasi percentuale di successo, e ogni risposta sposta la difficoltà. | Livelli continui: dopo un errore si scende di 1, dopo una risposta giusta si sale di 1·(1−p)/p. |
+| **Gamification** | Revisione sistematica (Lumsden et al., *JMIR Serious Games* 2016) e meta-analisi (Vermeir et al., 2020): gli elementi di gioco aumentano molto la motivazione (g = 0,72) ma non cambiano l'efficacia dell'allenamento. | XP, traguardi, serie e combo si aggiungono intorno agli esercizi senza modificarne il nucleo scientifico. |
+| **Abbandono** | Negli allenamenti cognitivi a casa, dopo 12 settimane continua circa la metà delle persone; il successo nel gioco è uno dei predittori più forti di chi continua (studi su adesione con machine learning, PMC8680657). | Partenza facilitata, freno alla frustrazione, serie che perdona un giorno di riposo e promemoria nel calendario. |
+| **Istruzioni** | Le prove d'esercizio non conteggiate sono la prassi nei protocolli cognitivi; capire bene il compito è necessario perché i dati (e l'allenamento) abbiano senso. | Esempio illustrato in ogni scheda e prova guidata di 2–6 tentativi, proposta automaticamente la prima volta. |
+
+### Cosa è stato implementato
+
+- **Motore adattivo v2** (`src/adaptive.ts`):
+  - livelli continui con il metodo di Kaernbach e obiettivo all'80% o al 70%;
+  - **partenza rapida**: finché non si sbaglia, ogni risposta giusta sale di un livello intero;
+  - **freno alla frustrazione**: tre errori di fila fanno scendere di un livello in più;
+  - **riscaldamento**: la sessione successiva parte mezzo livello sotto la soglia raggiunta, così si inizia con qualche successo;
+  - **pausa lunga**: dopo più di 14 giorni senza giocare un esercizio si riparte un livello più in basso.
+  Una simulazione con giocatori virtuali conferma una precisione media dell'81% (obiettivo 80%) e del 74% (obiettivo 70%).
+- **Istruzioni con esempi**: ogni scheda mostra una piccola scena illustrata con la risposta giusta segnata e una frase d'esempio. La **prova guidata** non conta per livelli e record; in caso di errore ripropone l'esempio come suggerimento.
+- **Durante il gioco**: contatore delle risposte giuste di fila (combo) con un suono che sale di tono, avvisi quando cambia il livello, vibrazione sul telefono.
+- **Dopo il gioco**: messaggio che spiega il cambio di livello, grafico del livello nel tempo, punti XP con livello del giocatore, traguardi sbloccati.
+- **Per tornare**: obiettivo settimanale (4 giorni), prossimo traguardo in home, 17 traguardi in totale, serie che perdona un giorno di riposo a settimana, promemoria giornaliero scaricabile per il calendario (file .ics, senza server e senza notifiche push).
 
 ## Fonti
 
@@ -91,3 +117,7 @@ Differenze rispetto alla proposta iniziale:
 - BrainHQ: <https://support.brainhq.com/hc/en-us/categories/360002071091-Exercises>, <https://www.bostonglobe.com/2022/07/10/metro/flex-your-brain-see-if-you-can-keep-up-with-these-interactive-exercises>
 - Creyos (Cambridge Brain Sciences): <https://creyos.com/why-creyos/foundations>
 - Brain Age, elenco dei minigiochi: <https://www.nintendolife.com/reviews/ds/dr_kawashimas_brain_training_how_old_is_your_brain>
+- Wilson et al. (2019), *The Eighty Five Percent Rule for optimal learning*: <https://pmc.ncbi.nlm.nih.gov/articles/PMC6831579>
+- Kaernbach (1991), weighted up-down: <https://auditory.org/postings/2009/409.html>
+- Lumsden et al. (2016), gamification nei compiti cognitivi: <https://games.jmir.org/2016/2/e11/XML>; Vermeir et al. (2020), meta-analisi: <https://cris.maastrichtuniversity.nl/en/publications/the-effects-of-gamification-on-computerized-cognitive-training-sy/>
+- Adesione all'allenamento cognitivo a casa: <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8680657/>, <https://pure.psu.edu/en/publications/comparing-the-effectiveness-of-two-theory-based-strategies-to-pro/>

@@ -1,5 +1,4 @@
 import { h, rand, scale, flash, clamp } from '../dom';
-import { sfx } from '../audio';
 import { t } from '../i18n';
 import { levelScore } from '../adaptive';
 import type { Ctx } from '../ctx';
@@ -71,7 +70,7 @@ async function board(ctx: Ctx, labels: string[], from: number, of: number) {
   await ctx.input<void>((done) => {
     onTap = (i) => {
       if (i === next) {
-        sfx.tick();
+        ctx.feedback(true);
         nodes[i].classList.add('done');
         next++;
         ctx.progress((from + next / labels.length) / of, `${next}/${labels.length}`);
@@ -79,7 +78,7 @@ async function board(ctx: Ctx, labels: string[], from: number, of: number) {
         hint.textContent = t('ex.path.next', { v: labels[next] });
       } else if (i > next) {
         errors++;
-        sfx.bad();
+        ctx.feedback(false);
         flash(nodes[i], 'shake', 400);
       }
     };
@@ -96,11 +95,17 @@ export const path: Exercise = {
   name: 'ex.path.name',
   desc: 'ex.path.desc',
   why: 'ex.path.why',
+  example: 'ex.path.example',
   minutes: 1.5,
   levels: { min: 1, max: MAX_LEVEL, start: 2 },
   levelLabel: (l) => (alternating(l) ? `1-A-2-B · ${countFor(l)}` : `1→${countFor(l)}`),
 
   async run(ctx) {
+    if (ctx.practice) {
+      await board(ctx, labelsFor(6, false), 0, 2);
+      await board(ctx, labelsFor(6, true), 1, 2);
+      return { score: 0, detail: '' };
+    }
     if (ctx.quick) {
       const r = await board(ctx, labelsFor(12, false), 0, 1);
       const score = scale(r.secs / 12, 0.6, 3) * Math.max(0, 1 - r.errors * 0.06);
@@ -108,7 +113,7 @@ export const path: Exercise = {
     }
 
     // Two boards; the level moves after each one depending on speed and accuracy.
-    let level = ctx.level;
+    let level = Math.round(ctx.level);
     const perf: number[] = [];
     let last = { secs: 0, errors: 0 };
     for (let b = 0; b < 2; b++) {

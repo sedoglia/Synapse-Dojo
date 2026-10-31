@@ -4,36 +4,65 @@ import { clamp } from './dom';
 export const levelScore = (level: number, min: number, max: number) =>
   clamp((level - min + 1) / (max - min + 1), 0, 1) * 100;
 
+export interface StairOptions {
+  /** Accuracy the staircase settles on. ~0.8 follows the "85% rule" for fast learning (Wilson et al., 2019). */
+  target?: number;
+  /** Size of the step down after an error (in levels). */
+  step?: number;
+}
+
 /**
- * Up/down staircase: `up` correct answers in a row make it harder, one error makes it easier.
- * With up = 2 it converges near 71% correct, which keeps the player at the edge of their ability.
+ * Weighted up-down staircase (Kaernbach, 1991) on a continuous level.
+ *
+ * - Every answer moves the level: down by `step` after an error, up by step·(1−p)/p after a correct one,
+ *   so it converges where the player is right a fraction `p` of the time.
+ * - Fast start: until the first error each correct answer climbs a full step, so a session that
+ *   starts too easy catches up within a few trials.
+ * - Frustration guard: three errors in a row drop an extra step.
  */
 export class Staircase {
   level: number;
-  private streak = 0;
+  readonly target: number;
+  private readonly down: number;
+  private readonly up: number;
+  private fast = true;
   private trace: number[] = [];
+  private results: boolean[] = [];
 
   constructor(
     start: number,
     readonly min: number,
     readonly max: number,
-    readonly up = 2,
+    opts: StairOptions = {},
   ) {
-    this.level = clamp(Math.round(start), min, max);
+    this.target = opts.target ?? 0.8;
+    this.down = opts.step ?? 1;
+    this.up = (this.down * (1 - this.target)) / this.target;
+    this.level = clamp(start, min, max);
+  }
+
+  /** Level rounded for difficulty settings that need whole numbers. */
+  get int(): number {
+    return Math.round(this.level);
   }
 
   record(ok: boolean): boolean {
     this.trace.push(this.level);
+    this.results.push(ok);
     if (ok) {
-      if (++this.streak >= this.up) {
-        this.level = Math.min(this.max, this.level + 1);
-        this.streak = 0;
-      }
+      this.level += this.fast ? this.down : this.up;
     } else {
-      this.streak = 0;
-      this.level = Math.max(this.min, this.level - 1);
+      this.fast = false;
+      this.level -= this.down;
+      const last3 = this.results.slice(-3);
+      if (last3.length === 3 && last3.every((r) => !r)) this.level -= this.down;
     }
+    this.level = clamp(this.level, this.min, this.max);
     return ok;
+  }
+
+  get accuracy(): number {
+    return this.results.length ? this.results.filter(Boolean).length / this.results.length : 0;
   }
 
   /** Average level over the second half of the session: a stable estimate of the threshold. */
@@ -43,9 +72,9 @@ export class Staircase {
     return tail.reduce((a, b) => a + b, 0) / tail.length;
   }
 
-  /** Where the next session should start. */
+  /** Next session starts half a step below the threshold: an easy warm-up, then the fast start catches up. */
   next(): number {
-    return clamp(Math.round(this.threshold()), this.min, this.max);
+    return Math.round(clamp(this.threshold() - this.down / 2, this.min, this.max) * 10) / 10;
   }
 
   score(): number {

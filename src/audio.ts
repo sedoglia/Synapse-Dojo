@@ -17,10 +17,22 @@ function tone(freq: number, dur: number, type: OscillatorType = 'sine', gain = 0
   osc.stop(t + dur);
 }
 
+function vibrate(pattern: number | number[]) {
+  if (store.data.settings.vibration && 'vibrate' in navigator) navigator.vibrate(pattern);
+}
+
 export const sfx = {
-  ok: () => tone(880, 0.12, 'triangle'),
+  /** Rises a semitone with every answer in a streak (up to an octave), so a good run sounds like one. */
+  ok: (streak = 0) => tone(880 * Math.pow(2, Math.min(streak, 12) / 12), 0.12, 'triangle'),
   bad: () => tone(180, 0.22, 'sawtooth', 0.05),
   tick: () => tone(520, 0.08, 'sine', 0.05),
   go: () => tone(1040, 0.18, 'triangle'),
+  levelUp: () => [660, 990].forEach((f, i) => tone(f, 0.16, 'triangle', 0.07, i * 0.09)),
   fanfare: () => [523, 659, 784, 1046].forEach((f, i) => tone(f, 0.22, 'triangle', 0.07, i * 0.11)),
+};
+
+export const haptic = {
+  ok: () => vibrate(12),
+  bad: () => vibrate([30, 40, 30]),
+  celebrate: () => vibrate([20, 30, 20, 30, 60]),
 };

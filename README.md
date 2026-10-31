@@ -23,6 +23,9 @@ Gioco open source di allenamento cognitivo: pochi minuti al giorno, nel browser,
 | Calcolo e lettura | ➗ Sprint di calcolo, 📖 Lettura veloce |
 
 - **Progressi**: profilo radar per abilità, grafico del Neuro Score, calendario e obiettivo settimanale.
+- **Esempi e prova guidata**: ogni esercizio mostra un esempio illustrato e, la prima volta, propone una prova che non conta.
+- **Difficoltà su misura**: punta a circa l'80% di risposte giuste, il punto in cui si impara più in fretta secondo la ricerca.
+- **Motivazione**: combo durante il gioco, punti XP e livello del giocatore, 17 traguardi, obiettivo settimanale, serie che perdona un giorno di riposo, promemoria per il calendario.
 - Ogni esercizio ha una scheda **"Perché funziona"** con il paradigma scientifico e lo studio di riferimento. La ricerca completa è in [docs/ricerca-e-proposta.md](docs/ricerca-e-proposta.md).
 - Italiano e inglese, tema chiaro e scuro, ritmo rilassato e testo grande, installabile come app (PWA) e giocabile offline.
 - Nessun server e nessun tracciamento: i dati restano nel `localStorage` del browser.
@@ -43,7 +46,9 @@ Stack: TypeScript + Vite, nessun framework UI. Struttura:
 src/
   exercises/   un file per esercizio + index.ts (elenco e composizione del check)
   screens/     home, palestra, sessione di gioco, progressi, impostazioni
-  adaptive.ts  staircase per la difficoltà adattiva
+  adaptive.ts  motore adattivo (weighted up-down, obiettivo 80%)
+  rewards.ts   XP, livello del giocatore e traguardi
+  examples.ts  esempi illustrati delle schede
   stats.ts     capacità per abilità e scelta dell'allenamento di oggi
   ctx.ts       runtime degli esercizi (attese annullabili, input, livello, ritmo)
   widgets.ts   tastierino, canvas e altri componenti condivisi
@@ -55,8 +60,8 @@ src/
 
 1. Crea `src/exercises/mio.ts` che esporta un oggetto `Exercise`, con dominio, `levels` e `run(ctx)`. `run` restituisce `{ score: 0–100, detail, level }`.
 2. Usa `ctx.stage` per disegnare, `ctx.input()` / `ctx.timed()` per attendere l'input e `ctx.wait()` per le pause: così l'uscita a metà partita è gestita automaticamente.
-3. Per la difficoltà parti da `ctx.level`, registra ogni prova con `Staircase.record(ok)` e restituisci `level: st.next()`. Moltiplica i tempi limite per `ctx.pace` (modalità rilassata).
-4. Aggiungi nome, descrizione e "perché funziona" in `src/i18n.ts` e registra l'esercizio in `src/exercises/index.ts`.
+3. Per la difficoltà parti da `ctx.level`, registra ogni prova con `ctx.track(st, ok)` (aggiorna livello, combo e avvisi) e restituisci `level: st.next()`. Usa `ctx.count(allenamento, check, prova)` per il numero di tentativi. Moltiplica i tempi limite per `ctx.pace` (modalità rilassata).
+4. Aggiungi nome, descrizione, esempio e "perché funziona" in `src/i18n.ts`, e una scena in `src/examples.ts`, e registra l'esercizio in `src/exercises/index.ts`.
 
 ### Rinominare il gioco
 

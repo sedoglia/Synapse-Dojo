@@ -1,5 +1,4 @@
 import { h, shuffle, scale, flash } from '../dom';
-import { sfx } from '../audio';
 import { store } from '../storage';
 import { t, PASSAGES } from '../i18n';
 import type { Exercise } from './types';
@@ -13,7 +12,9 @@ export const reading: Exercise = {
   name: 'ex.reading.name',
   desc: 'ex.reading.desc',
   why: 'ex.reading.why',
+  example: 'ex.reading.example',
   minutes: 2,
+  practice: false,
 
   async run(ctx) {
     const passages = shuffle(PASSAGES[store.data.settings.lang]).slice(0, ROUNDS);
@@ -48,10 +49,7 @@ export const reading: Exercise = {
         return () => (onPick = null);
       });
       const ok = said === 0;
-      if (ok) {
-        understood++;
-        sfx.ok();
-      } else sfx.bad();
+      if (ctx.feedback(ok)) understood++;
       flash(btns[options.indexOf(said)], ok ? 'good' : 'bad');
       btns[options.indexOf(0)].classList.add('good-btn');
       // Reading aloud clearly runs at about 150–200 words per minute.

@@ -57,7 +57,7 @@ function puzzle(moves: number): { start: State; goal: State; min: number } {
   return { start: 'RGB||', goal: 'RG|B|', min: 1 };
 }
 
-function renderBoard(state: State, small: boolean, selected = -1, onPeg?: (i: number) => void): HTMLElement {
+export function renderBoard(state: State, small: boolean, selected = -1, onPeg?: (i: number) => void): HTMLElement {
   return h(
     'div',
     { class: `tower-board ${small ? 'small' : ''}` },
@@ -78,18 +78,19 @@ export const towers: Exercise = {
   name: 'ex.towers.name',
   desc: 'ex.towers.desc',
   why: 'ex.towers.why',
+  example: 'ex.towers.example',
   minutes: 3,
   levels: { min: 1, max: MAX_LEVEL, start: 2 },
   levelLabel: (l) => `${movesFor(l)} ↔`,
 
   async run(ctx) {
-    const puzzles = 6;
-    const st = new Staircase(ctx.level, 1, MAX_LEVEL, 1);
+    const puzzles = ctx.count(6, 6, 2);
+    const st = new Staircase(ctx.level, 1, MAX_LEVEL, { target: 0.7 });
     let perfect = 0;
 
     for (let p = 0; p < puzzles; p++) {
       ctx.progress(p / puzzles, `${p + 1}/${puzzles}`);
-      const { start, goal, min } = puzzle(movesFor(st.level));
+      const { start, goal, min } = puzzle(movesFor(st.int));
       let state = start;
       let moves = 0;
       let selected = -1;
@@ -129,12 +130,8 @@ export const towers: Exercise = {
         redraw();
       });
 
-      const ok = solved && moves === min;
-      st.record(ok);
-      if (ok) {
-        perfect++;
-        sfx.ok();
-      } else sfx.bad();
+      const ok = ctx.track(st, solved && moves === min);
+      if (ok) perfect++;
       counter.textContent = solved ? (ok ? '✓' : t('ex.towers.moves', { m: moves, min })) : t('ex.towers.too');
       flash(playArea, ok ? 'good' : 'bad', 500);
       await ctx.wait(ok ? 600 : 1200);

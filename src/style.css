@@ -1325,3 +1325,461 @@ html.big-text {
     transition: none !important;
   }
 }
+
+/* ---------- examples on the intro card ---------- */
+.example {
+  width: 100%;
+  background: var(--surface-2);
+  border-radius: 14px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+.example p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  text-align: center;
+}
+.ex-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.ex-arrow {
+  color: var(--muted);
+  font-weight: 800;
+}
+.ex-answer {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--good);
+  color: #fff;
+  font-weight: 800;
+  font-size: 0.9rem;
+}
+.ex-chip {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.ex-chip.big {
+  font-size: 1.2rem;
+  padding: 2px 8px;
+}
+.ex-big {
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+.ex-word {
+  font-size: 1.5rem;
+  font-weight: 900;
+}
+.ex-mini {
+  display: grid;
+  gap: 3px;
+  width: 54px;
+}
+.ex-mini span {
+  aspect-ratio: 1;
+  border-radius: 4px;
+  background: var(--surface);
+  font-size: 0.6rem;
+  font-weight: 900;
+  display: grid;
+  place-items: center;
+  color: #fff;
+}
+.ex-mini span.on {
+  background: var(--accent);
+}
+.ex-glance {
+  position: relative;
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: var(--surface);
+}
+.ex-glance .c {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 1.3rem;
+}
+.ex-glance .s {
+  position: absolute;
+  right: 6px;
+  top: 4px;
+  color: var(--accent);
+}
+.ex-pads {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3px;
+  width: 44px;
+}
+.ex-pads span {
+  aspect-ratio: 1;
+  border-radius: 5px;
+  background: var(--surface);
+  font-size: 0.7rem;
+  display: grid;
+  place-items: center;
+}
+.ex-pads .go {
+  background: var(--good);
+}
+.ex-pads .nogo {
+  background: var(--bad);
+}
+.ex-node {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  background: var(--surface);
+}
+.ex-balls {
+  display: flex;
+  gap: 4px;
+}
+.ex-balls i {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--muted);
+}
+.ex-balls i.on {
+  background: var(--accent);
+}
+.ex-balls i.pick {
+  outline: 3px solid var(--good);
+}
+.ex-num {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  font-size: 1.2rem;
+  border: 4px solid;
+  background: var(--surface);
+}
+.ex-num.parity {
+  border-color: #3b82f6;
+}
+.ex-num.size {
+  border-color: #f97316;
+}
+.ex-seq {
+  font-size: 1.2rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+.ex-seq b {
+  color: var(--accent);
+}
+.ex-shape {
+  width: 56px;
+  padding: 8px;
+  box-shadow: none;
+}
+.ex-odd {
+  width: 46px;
+  height: 40px;
+  border-radius: 8px;
+  background: var(--surface);
+  display: grid;
+  place-items: center;
+  padding: 6px;
+}
+.ex-odd svg {
+  width: 26px;
+}
+.ex-odd.right {
+  outline: 3px solid var(--good);
+}
+.tip {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+.btn.ghost {
+  background: transparent;
+}
+.row.left {
+  justify-content: flex-start;
+  align-items: center;
+}
+.input.time {
+  width: auto;
+}
+
+/* ---------- in-game feedback ---------- */
+.combo {
+  min-width: 0;
+  font-weight: 900;
+  color: #ea580c;
+  opacity: 0;
+  transition: opacity 0.2s;
+  white-space: nowrap;
+}
+.combo.on {
+  opacity: 1;
+}
+.combo.bump {
+  animation: pop 0.25s;
+}
+.practice-tag {
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #fef3c7;
+  color: #b45309;
+  white-space: nowrap;
+}
+.play {
+  position: relative;
+}
+.toasts {
+  position: absolute;
+  top: 64px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  pointer-events: none;
+  z-index: 5;
+}
+.toast {
+  padding: 8px 16px;
+  border-radius: 999px;
+  font-weight: 800;
+  box-shadow: var(--shadow);
+  animation: toast-in 0.25s ease-out;
+  background: var(--surface);
+}
+.toast.up {
+  background: #16a34a;
+  color: #fff;
+}
+.toast.down {
+  background: var(--surface-2);
+  color: var(--muted);
+}
+.toast.hint {
+  border-radius: 14px;
+  max-width: 460px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border: 2px solid #f59e0b;
+}
+@keyframes toast-in {
+  from {
+    transform: translateY(-10px);
+    opacity: 0;
+  }
+}
+
+/* ---------- results, XP and badges ---------- */
+.level-box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+.level-box p {
+  margin: 0;
+  text-align: center;
+}
+.history {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  margin-top: 6px;
+}
+.spark svg {
+  width: 100%;
+  max-width: 240px;
+  height: auto;
+  display: block;
+}
+.spark polyline {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.spark circle {
+  fill: var(--accent);
+}
+.ex-progress .spark svg {
+  max-width: 120px;
+}
+.xp {
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.85rem;
+}
+.xp-level {
+  font-weight: 900;
+  color: var(--accent);
+}
+.xp-bar {
+  height: 8px;
+  border-radius: 99px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.xp-bar div {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, #f59e0b, #ea580c);
+  transition: width 0.6s;
+}
+.xp-num {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.hero .xp {
+  max-width: 360px;
+  margin: 14px auto 0;
+}
+.xp-gain {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.xp-chip {
+  font-weight: 900;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: #fff7ed;
+  color: #c2410c;
+  animation: pop 0.4s;
+}
+.level-up {
+  color: #c2410c;
+}
+.new-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+.badge-pill {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  font-weight: 800;
+  animation: pop 0.5s;
+}
+.hero-chips {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.next-goal {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 4px 14px;
+  align-items: center;
+  text-align: left;
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: var(--radius);
+  border: 1px dashed var(--border);
+  background: transparent;
+}
+.goal-icon {
+  font-size: 2rem;
+  grid-row: span 2;
+  text-align: center;
+}
+.goal-bar {
+  height: 6px;
+  border-radius: 99px;
+  background: var(--surface-2);
+  overflow: hidden;
+  width: 100%;
+}
+.goal-bar div {
+  height: 100%;
+  background: var(--accent-2);
+  border-radius: 99px;
+}
+.badges {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 10px;
+}
+.badge {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  text-align: center;
+  padding: 12px 8px;
+  border-radius: 14px;
+  background: var(--surface-2);
+  opacity: 0.6;
+  filter: grayscale(0.8);
+}
+.badge.earned {
+  opacity: 1;
+  filter: none;
+  background: var(--accent-soft);
+}
+.badge-icon {
+  font-size: 1.8rem;
+}
+.badge small {
+  font-size: 0.72rem;
+}
+.badge-date {
+  color: var(--accent);
+  font-weight: 700;
+}
+@media (prefers-color-scheme: dark) {
+  .practice-tag {
+    background: #3b2a12;
+    color: #fbbf24;
+  }
+  .xp-chip {
+    background: #3b2412;
+    color: #fdba74;
+  }
+  .level-up {
+    color: #fdba74;
+  }
+}

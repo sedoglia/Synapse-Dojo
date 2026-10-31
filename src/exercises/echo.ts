@@ -47,6 +47,7 @@ export const echo: Exercise = {
   name: 'ex.echo.name',
   desc: 'ex.echo.desc',
   why: 'ex.echo.why',
+  example: 'ex.echo.example',
   minutes: 3,
   levels: { min: 1, max: MAX_LEVEL, start: 1 },
   levelLabel: labelFor,
@@ -62,12 +63,13 @@ export const echo: Exercise = {
     ctx.stage.append(rule, board, h('div', { class: 'echo-actions' }, posBtn, letBtn));
     onKeys(ctx, { a: () => pressPos?.(), A: () => pressPos?.(), l: () => pressLetter?.(), L: () => pressLetter?.() });
 
-    let level = ctx.level;
+    let level = Math.round(ctx.level);
+    const blocks = ctx.practice ? 1 : BLOCKS;
     const blockScores: number[] = [];
-    for (let b = 0; b < BLOCKS; b++) {
+    for (let b = 0; b < blocks; b++) {
       const n = nFor(level);
       const dual = dualFor(level);
-      const len = 20 + n;
+      const len = (ctx.practice ? 8 : 20) + n;
       const positions = stream(len, n, [0, 1, 2, 3, 4, 5, 6, 7, 8]);
       const letters = stream(len, n, LETTERS);
       rule.textContent = t('ex.echo.rule', { n });
@@ -76,7 +78,7 @@ export const echo: Exercise = {
       let right = 0;
       let scored = 0;
       for (let i = 0; i < len; i++) {
-        ctx.progress((b + i / len) / BLOCKS, `${labelFor(level)}`);
+        ctx.progress((b + i / len) / blocks, `${labelFor(level)}`);
         const posTarget = i >= n && positions[i] === positions[i - n];
         const letTarget = i >= n && letters[i] === letters[i - n];
         let posPressed = false;
@@ -112,6 +114,10 @@ export const echo: Exercise = {
           }
           if (posTarget && !posPressed) flash(posBtn, 'bad');
           if (dual && letTarget && !letPressed) flash(letBtn, 'bad');
+          // Only trials with something to react to count for the streak; quiet correct rejections don't.
+          const posOk = posPressed === posTarget;
+          const letOk = !dual || letPressed === letTarget;
+          if (posTarget || posPressed || (dual && (letTarget || letPressed))) ctx.feedback(posOk && letOk);
         }
       }
       pressPos = pressLetter = null;
@@ -124,7 +130,7 @@ export const echo: Exercise = {
       else if (acc < 0.65) level = Math.max(1, level - 1);
       if (acc >= 0.85) sfx.fanfare();
 
-      if (b < BLOCKS - 1) {
+      if (b < blocks - 1) {
         const go = h('button', { class: 'btn primary' }, t('common.continue'));
         const note = h(
           'div',

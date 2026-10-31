@@ -1,5 +1,4 @@
 import { h, rand } from '../dom';
-import { sfx } from '../audio';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';
 import type { Exercise } from './types';
@@ -14,13 +13,14 @@ export const reflex: Exercise = {
   name: 'ex.reflex.name',
   desc: 'ex.reflex.desc',
   why: 'ex.reflex.why',
+  example: 'ex.reflex.example',
   minutes: 1.5,
   levels: { min: 1, max: 14, start: 1 },
   levelLabel: (l) => `${windowFor(l)} ms${noGoFor(l) ? ' · go/no-go' : ''}`,
 
   async run(ctx) {
-    const trials = 30;
-    const st = new Staircase(ctx.level, 1, 14, 2);
+    const trials = ctx.count(30, 30, 6);
+    const st = new Staircase(ctx.level, 1, 14);
     let onTap: ((i: number) => void) | null = null;
     const pads = Array.from({ length: 4 }, (_, i) =>
       h('button', {
@@ -40,7 +40,7 @@ export const reflex: Exercise = {
       await ctx.wait(rand(500, 1300));
 
       const k = rand(0, 3);
-      const noGo = Math.random() < noGoFor(st.level);
+      const noGo = Math.random() < (ctx.practice ? 0.3 : noGoFor(st.int));
       pads[k].classList.add(noGo ? 'nogo' : 'go');
       const shown = performance.now();
       const tapped = await ctx.timed<number | null>(windowFor(st.level) * ctx.pace, null, (done) => {
@@ -50,14 +50,11 @@ export const reflex: Exercise = {
       const rt = performance.now() - shown;
       pads[k].classList.remove('go', 'nogo');
 
-      const ok = noGo ? tapped === null : tapped === k;
-      st.record(ok);
+      const ok = ctx.track(st, noGo ? tapped === null : tapped === k);
       if (ok) {
         correct++;
         if (!noGo) rts.push(rt);
-        sfx.ok();
       } else {
-        sfx.bad();
         const wrong = tapped ?? k;
         pads[wrong].classList.add('wrong');
         await ctx.wait(350);

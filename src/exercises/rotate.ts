@@ -1,5 +1,4 @@
 import { h, rand, pick } from '../dom';
-import { sfx } from '../audio';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';
 import { onKeys } from '../widgets';
@@ -22,7 +21,7 @@ const rot90 = (cells: Cell[]): Cell[] => cells.map(([x, y]) => [y, -x]);
 const mirror = (cells: Cell[]): Cell[] => cells.map(([x, y]) => [-x, y]);
 
 /** A random polyomino whose mirror image can't be obtained by rotation (otherwise "mirror" is unanswerable). */
-function chiralShape(n: number): Cell[] {
+export function chiralShape(n: number): Cell[] {
   for (;;) {
     const cells: Cell[] = [[0, 0]];
     while (cells.length < n) {
@@ -41,7 +40,7 @@ function chiralShape(n: number): Cell[] {
   }
 }
 
-function render(cells: Cell[], angle: number, flipped: boolean): HTMLElement {
+export function render(cells: Cell[], angle: number, flipped: boolean): HTMLElement {
   const xs = cells.map((c) => c[0]);
   const ys = cells.map((c) => c[1]);
   const minX = Math.min(...xs), minY = Math.min(...ys);
@@ -71,13 +70,14 @@ export const rotate: Exercise = {
   name: 'ex.rotate.name',
   desc: 'ex.rotate.desc',
   why: 'ex.rotate.why',
+  example: 'ex.rotate.example',
   minutes: 2,
   levels: { min: 1, max: MAX_LEVEL, start: 1 },
   levelLabel: (l) => `${cellsFor(l)} ■ · ${(limitFor(l) / 1000).toFixed(1)} s`,
 
   async run(ctx) {
-    const trials = 20;
-    const st = new Staircase(ctx.level, 1, MAX_LEVEL, 2);
+    const trials = ctx.count(20, 20, 4);
+    const st = new Staircase(ctx.level, 1, MAX_LEVEL);
     const pair = h('div', { class: 'rotate-pair' });
     const timer = h('div', { class: 'rotate-timer' }, h('div'));
     let onAnswer: ((mirrored: boolean) => void) | null = null;
@@ -89,13 +89,13 @@ export const rotate: Exercise = {
     let correct = 0;
     for (let i = 0; i < trials; i++) {
       ctx.progress(i / trials, `${i + 1}/${trials}`);
-      const shape = chiralShape(cellsFor(st.level));
+      const shape = chiralShape(cellsFor(st.int));
       const mirrored = Math.random() < 0.5;
       const a1 = rand(0, 11) * 30;
       const a2 = a1 + rand(1, 11) * 30;
       pair.replaceChildren(render(shape, a1, false), render(shape, a2, mirrored));
 
-      const limit = limitFor(st.level) * ctx.pace;
+      const limit = ctx.practice ? 60_000 : limitFor(st.level) * ctx.pace;
       const bar = timer.firstElementChild as HTMLElement;
       bar.style.transition = 'none';
       bar.style.width = '100%';
@@ -107,12 +107,8 @@ export const rotate: Exercise = {
         onAnswer = done;
         return () => (onAnswer = null);
       });
-      const ok = said === mirrored;
-      st.record(ok);
-      if (ok) {
-        correct++;
-        sfx.ok();
-      } else sfx.bad();
+      const ok = ctx.track(st, said === mirrored);
+      if (ok) correct++;
       pair.classList.add(ok ? 'good' : 'bad');
       await ctx.wait(ok ? 300 : 700);
       pair.classList.remove('good', 'bad');

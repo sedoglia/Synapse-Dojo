@@ -1,9 +1,11 @@
 import { h, todayKey } from '../dom';
 import { store } from '../storage';
 import { t } from '../i18n';
-import { render, page } from '../ui';
+import { render, page, sparkline } from '../ui';
 import { EXERCISES, DOMAINS } from '../exercises';
 import { capacity, domainScore } from '../stats';
+import { BADGES, earned } from '../rewards';
+import { levelText } from './play';
 import { showHome } from './home';
 
 const SVG = 'http://www.w3.org/2000/svg';
@@ -105,17 +107,46 @@ export function showProgress() {
         h('h3', {}, t('progress.exercises')),
         ...EXERCISES.map((ex) => {
           const cap = capacity(ex);
-          const level = ex.levels && store.hasLevel(ex.id) ? ex.levelLabel?.(store.level(ex.id, ex.levels.start)) : null;
+          const level = ex.levels && store.hasLevel(ex.id) ? levelText(ex, store.level(ex.id, ex.levels.start)) : null;
           const best = store.best(ex.id);
+          const history = (store.data.history[ex.id] ?? []).map((p) => p.level);
           return h(
             'div',
-            { class: 'part' },
+            { class: 'part ex-progress' },
             h('span', {}, `${ex.icon} ${t(ex.name)}`, level ? h('small', { class: 'muted level-tag' }, level) : null),
-            h('div', { class: 'part-bar' }, h('div', { style: { width: `${cap ?? 0}%` } })),
+            history.length >= 2
+              ? sparkline(history.slice(-20), 120, 28)
+              : h('div', { class: 'part-bar' }, h('div', { style: { width: `${cap ?? 0}%` } })),
             h('b', {}, best !== null ? String(best) : t('progress.none')),
           );
         }),
       ),
+      badgesSection(),
+    ),
+  );
+}
+
+function badgesSection(): HTMLElement {
+  const got = BADGES.filter(earned).length;
+  return h(
+    'section',
+    { class: 'card' },
+    h('h3', {}, `🏅 ${t('badges.title')}`, h('small', { class: 'muted' }, ` · ${t('badges.count', { n: got, t: BADGES.length })}`)),
+    h(
+      'div',
+      { class: 'badges' },
+      ...BADGES.map((b) => {
+        const done = earned(b);
+        const pct = Math.round(b.progress() * 100);
+        return h(
+          'div',
+          { class: `badge ${done ? 'earned' : ''}`, title: t(b.desc) },
+          h('span', { class: 'badge-icon' }, b.icon),
+          h('b', {}, t(b.name)),
+          h('small', { class: 'muted' }, t(b.desc)),
+          done ? h('small', { class: 'badge-date' }, `✓ ${store.data.badges[b.id]}`) : h('div', { class: 'goal-bar' }, h('div', { style: { width: `${pct}%` } })),
+        );
+      }),
     ),
   );
 }

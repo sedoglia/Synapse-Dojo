@@ -1,5 +1,4 @@
 import { h, pick, scale, flash } from '../dom';
-import { sfx } from '../audio';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';
 import { onKeys } from '../widgets';
@@ -20,13 +19,14 @@ export const ruleSwitch: Exercise = {
   name: 'ex.switch.name',
   desc: 'ex.switch.desc',
   why: 'ex.switch.why',
+  example: 'ex.switch.example',
   minutes: 2,
   levels: { min: 1, max: 14, start: 1 },
   levelLabel: (l) => `${limitFor(l)} ms`,
 
   async run(ctx) {
-    const trials = ctx.quick ? 20 : 32;
-    const st = new Staircase(ctx.level, 1, 14, 2);
+    const trials = ctx.count(32, 20, 6);
+    const st = new Staircase(ctx.level, 1, 14);
     const cue = h('div', { class: 'switch-cue' });
     const num = h('div', { class: 'switch-num' });
     let onAnswer: ((side: number) => void) | null = null;
@@ -55,19 +55,17 @@ export const ruleSwitch: Exercise = {
       flash(num, 'pop', 200);
 
       const shown = performance.now();
-      const limit = ctx.quick ? 60_000 : limitFor(st.level) * ctx.pace;
+      const limit = ctx.mode !== 'train' ? 60_000 : limitFor(st.level) * ctx.pace;
       const side = await ctx.timed<number | null>(limit, null, (done) => {
         onAnswer = done;
         return () => (onAnswer = null);
       });
       const rt = performance.now() - shown;
-      const ok = side === answerFor(n, rule);
-      st.record(ok);
+      const ok = ctx.track(st, side === answerFor(n, rule));
       if (ok) {
         correct++;
         (switched ? rtSwitch : rtRepeat).push(rt);
-        sfx.ok();
-      } else sfx.bad();
+      }
       if (side !== null) flash(side === 0 ? left : right, ok ? 'good' : 'bad');
       num.textContent = side === null ? '⏱' : '';
       await ctx.wait(side === null ? 500 : 200);
