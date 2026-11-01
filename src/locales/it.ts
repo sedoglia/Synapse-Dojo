@@ -473,11 +473,23 @@ const ui: Locale['ui'] = {
 
   // sorting
   'ex.sorting.name': 'Ordinamento di Carte',
-  'ex.sorting.desc': 'Indovina la regola di abbinamento e adattati quando cambia',
-  'ex.sorting.why': 'Ispirato al Wisconsin Card Sorting, allena la flessibilità cognitiva, l’induzione di regole e il set-shifting.',
-  'ex.sorting.example': 'Abbina la carta per colore, forma o numero; cambia strategia quando la regola si inverte',
-  'ex.sorting.hint': 'Abbina la carta a una delle 4 carte di riferimento',
+  'ex.sorting.desc': 'Deduci la regola segreta (Colore, Forma o Numero) dai feedback e adattati quando cambia',
+  'ex.sorting.why': 'Ispirato al Wisconsin Card Sorting Test (WCST), allena la flessibilità cognitiva, l\'induzione di regole e il set-shifting.',
+  'ex.sorting.example': 'Carta con 3 triangoli rossi: abbina per forma (triangolo), colore (rosso) o numero (3). Scopri la regola per tentativi!',
+  'ex.sorting.hint': 'Abbina per Colore, Forma o Numero. La regola segreta cambia periodicamente!',
   'ex.sorting.detail': '{ok}/{n} corretti',
+  'ex.sorting.secretRule': 'Trova la regola segreta',
+  'ex.sorting.dimColor': 'Colore',
+  'ex.sorting.dimShape': 'Forma',
+  'ex.sorting.dimCount': 'Numero',
+  'ex.sorting.refLabel': 'Carte di riferimento (tocca per abbinare)',
+  'ex.sorting.targetLabel': 'Carta da abbinare',
+  'ex.sorting.feedbackStart': 'Fai un\'ipotesi: tocca una carta per testare Colore, Forma o Numero',
+  'ex.sorting.correct': 'Corretto! Regola confermata',
+  'ex.sorting.wrong': 'Errato! La regola attiva non è questa',
+  'ex.sorting.ruleShifted': 'La regola è cambiata! Trova il nuovo criterio',
+
+  
 
   // resources
   'ex.resources.name': 'Gestione Risorse',

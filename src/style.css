@@ -2760,47 +2760,157 @@ html.big-text {
 }
 
 /* sorting */
-.sorting-hint {
-  font-size: 0.95rem;
+.stage-sorting {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.sorting-header {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.sorting-title {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--text);
+  letter-spacing: -0.01em;
+}
+.sorting-dims {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.sorting-dim-pill {
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.sorting-section-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   color: var(--muted);
-  margin-bottom: 12px;
+  margin-bottom: 6px;
+  text-align: center;
+}
+.sorting-refs-wrapper {
+  width: 100%;
 }
 .sorting-refs {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
+  gap: 10px;
   width: 100%;
-  margin-bottom: 24px;
 }
 .sorting-ref-btn {
-  padding: 10px 4px;
+  padding: 12px 6px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 80px;
+  min-height: 96px;
+  background: var(--surface);
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  position: relative;
+  transition: transform 0.1s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
+}
+.sorting-ref-btn:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.sorting-ref-btn:active {
+  transform: translateY(0);
+}
+.sorting-ref-num {
+  position: absolute;
+  top: 4px;
+  left: 6px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--muted);
+}
+.sorting-feedback {
+  min-height: 38px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  color: var(--muted);
+  border: 1px solid var(--border);
+  transition: all 0.2s ease;
+  width: 100%;
+}
+.sorting-feedback.good {
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--c-green);
+  border-color: rgba(16, 185, 129, 0.4);
+}
+.sorting-feedback.bad {
+  background: rgba(239, 68, 68, 0.12);
+  color: var(--c-red);
+  border-color: rgba(239, 68, 68, 0.4);
+}
+.sorting-feedback.switch {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--c-yellow);
+  border-color: rgba(245, 158, 11, 0.5);
+}
+.sorting-test-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  width: 100%;
 }
 .sorting-test {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 90px;
-  margin-bottom: 16px;
+  min-height: 100px;
 }
 .sorting-card {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 700;
   display: flex;
   flex-wrap: wrap;
-  gap: 4px;
+  gap: 6px;
   justify-content: center;
   align-items: center;
+  line-height: 1;
 }
 .sorting-card.test-card {
-  font-size: 2.2rem;
-  padding: 16px 24px;
+  font-size: 2.6rem;
+  padding: 18px 36px;
   border-radius: var(--radius);
   background: var(--surface);
-  border: 2px solid var(--border);
+  border: 2px solid var(--accent);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  min-width: 180px;
+  min-height: 96px;
 }
 
 /* resources */

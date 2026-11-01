@@ -473,11 +473,23 @@ export const ui = {
 
   // sorting
   'ex.sorting.name': 'Card Sorting',
-  'ex.sorting.desc': 'Discover the matching rule and adapt when it shifts',
-  'ex.sorting.why': 'Wisconsin-style card sorting exercises cognitive flexibility, hypothesis testing, and set-shifting.',
-  'ex.sorting.example': 'Match the card by color, shape, or count; adapt when the rule changes',
-  'ex.sorting.hint': 'Match the card to one of the 4 reference cards',
+  'ex.sorting.desc': 'Deduce the secret sorting rule (Color, Shape, or Count) from feedback and adapt when it changes',
+  'ex.sorting.why': 'Inspired by the Wisconsin Card Sorting Test (WCST), trains cognitive flexibility, rule induction, and set-shifting.',
+  'ex.sorting.example': 'Card with 3 red triangles: match by shape (triangle), color (red), or count (3). Discover the rule by trial and error!',
+  'ex.sorting.hint': 'Match by Color, Shape, or Count. The secret rule shifts periodically!',
   'ex.sorting.detail': '{ok}/{n} correct',
+  'ex.sorting.secretRule': 'Find the secret rule',
+  'ex.sorting.dimColor': 'Color',
+  'ex.sorting.dimShape': 'Shape',
+  'ex.sorting.dimCount': 'Count',
+  'ex.sorting.refLabel': 'Reference cards (tap to match)',
+  'ex.sorting.targetLabel': 'Card to match',
+  'ex.sorting.feedbackStart': 'Make a guess: tap a card to test Color, Shape, or Count',
+  'ex.sorting.correct': 'Correct! Rule confirmed',
+  'ex.sorting.wrong': 'Wrong! That is not the active rule',
+  'ex.sorting.ruleShifted': 'The rule has changed! Find the new rule',
+
+  
 
   // resources
   'ex.resources.name': 'Resource Planning',
