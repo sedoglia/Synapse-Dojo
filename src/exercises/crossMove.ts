@@ -1,6 +1,7 @@
 import { h, rand, flash } from '../dom';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';
+import { onKeys } from '../widgets';
 import type { Exercise } from './types';
 
 const limitFor = (level: number) => Math.max(380, Math.round(1500 * Math.pow(0.89, level - 1)));
@@ -28,17 +29,30 @@ export const crossMove: Exercise = {
     arena.append(leftHalf, rightHalf);
 
     let onTap: ((side: 'left' | 'right') => void) | null = null;
-    const btnLeft = h('button', { class: 'btn cross-btn left-btn', onPointerdown: () => onTap?.('left') }, '👈 SX');
-    const btnRight = h('button', { class: 'btn cross-btn right-btn', onPointerdown: () => onTap?.('right') }, 'DX 👉');
+    const btnLeft = h(
+      'button',
+      { class: 'btn cross-btn left-btn', onPointerdown: () => onTap?.('left') },
+      h('span', {}, '👈 SX'),
+      h('span', { class: 'pad-key-hint' }, '[A / ←]'),
+    );
+    const btnRight = h(
+      'button',
+      { class: 'btn cross-btn right-btn', onPointerdown: () => onTap?.('right') },
+      h('span', {}, 'DX 👉'),
+      h('span', { class: 'pad-key-hint' }, '[D / →]'),
+    );
     const controls = h('div', { class: 'cross-controls' }, btnLeft, btnRight);
 
     ctx.stage.append(ruleLabel, arena, controls);
 
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft' || e.key.toLowerCase() === 'a') onTap?.('left');
-      if (e.key === 'ArrowRight' || e.key.toLowerCase() === 'd') onTap?.('right');
-    };
-    window.addEventListener('keydown', onKey);
+    onKeys(ctx, {
+      ArrowLeft: () => onTap?.('left'),
+      ArrowRight: () => onTap?.('right'),
+      a: () => onTap?.('left'),
+      A: () => onTap?.('left'),
+      d: () => onTap?.('right'),
+      D: () => onTap?.('right'),
+    });
 
     let correct = 0;
     const rts: number[] = [];
@@ -88,7 +102,6 @@ export const crossMove: Exercise = {
       await ctx.wait(ok ? 200 : 600);
     }
 
-    window.removeEventListener('keydown', onKey);
     ctx.progress(1);
 
     const avg = rts.length ? Math.round(rts.reduce((a, b) => a + b, 0) / rts.length) : 0;

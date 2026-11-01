@@ -1,6 +1,7 @@
 import { h, flash } from '../dom';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';
+import { onKeys } from '../widgets';
 import type { Exercise } from './types';
 
 const bpmFor = (level: number) => 60 + level * 7;
@@ -27,17 +28,30 @@ export const rhythm: Exercise = {
     track.append(indicator);
 
     let onTap: ((side: 'L' | 'R') => void) | null = null;
-    const btnLeft = h('button', { class: 'btn rhythm-pad left-pad', onPointerdown: () => onTap?.('L') }, 'L 🥁');
-    const btnRight = h('button', { class: 'btn rhythm-pad right-pad', onPointerdown: () => onTap?.('R') }, '🥁 R');
+    const btnLeft = h(
+      'button',
+      { class: 'btn rhythm-pad left-pad', onPointerdown: () => onTap?.('L') },
+      h('span', {}, 'L 🥁'),
+      h('span', { class: 'pad-key-hint' }, '[A / ←]'),
+    );
+    const btnRight = h(
+      'button',
+      { class: 'btn rhythm-pad right-pad', onPointerdown: () => onTap?.('R') },
+      h('span', {}, '🥁 R'),
+      h('span', { class: 'pad-key-hint' }, '[D / →]'),
+    );
     const pads = h('div', { class: 'rhythm-pads' }, btnLeft, btnRight);
 
     ctx.stage.append(hint, track, pads);
 
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft' || e.key.toLowerCase() === 'a') onTap?.('L');
-      if (e.key === 'ArrowRight' || e.key.toLowerCase() === 'd') onTap?.('R');
-    };
-    window.addEventListener('keydown', onKey);
+    onKeys(ctx, {
+      ArrowLeft: () => onTap?.('L'),
+      ArrowRight: () => onTap?.('R'),
+      a: () => onTap?.('L'),
+      A: () => onTap?.('L'),
+      d: () => onTap?.('R'),
+      D: () => onTap?.('R'),
+    });
 
     let correct = 0;
     const errors: number[] = [];
@@ -56,7 +70,7 @@ export const rhythm: Exercise = {
     for (let i = 0; i < trials; i++) {
       ctx.progress(i / trials, `${i + 1}/${trials}`);
 
-      // Alternate beats between Left and Right, or sync
+      // Alternate beats between Left and Right
       const targetSide: 'L' | 'R' = i % 2 === 0 ? 'L' : 'R';
       indicator.className = `rhythm-beat-indicator side-${targetSide}`;
       indicator.textContent = targetSide;
@@ -98,7 +112,6 @@ export const rhythm: Exercise = {
       onTap = null;
     }
 
-    window.removeEventListener('keydown', onKey);
     ctx.progress(1);
 
     const avgError = errors.length ? Math.round(errors.reduce((a, b) => a + b, 0) / errors.length) : 0;

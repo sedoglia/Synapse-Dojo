@@ -1,6 +1,7 @@
 import { h, flash } from '../dom';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';
+import { onKeys } from '../widgets';
 import type { Exercise } from './types';
 
 const lenFor = (level: number) => Math.min(12, 3 + level);
@@ -25,17 +26,30 @@ export const tapSeq: Exercise = {
     const seqDisplay = h('div', { class: 'bilateral-seq' });
 
     let onTap: ((side: 'L' | 'R') => void) | null = null;
-    const btnLeft = h('button', { class: 'btn bilateral-pad left-pad', onPointerdown: () => onTap?.('L') }, '👈 L');
-    const btnRight = h('button', { class: 'btn bilateral-pad right-pad', onPointerdown: () => onTap?.('R') }, 'R 👉');
+    const btnLeft = h(
+      'button',
+      { class: 'btn bilateral-pad left-pad', onPointerdown: () => onTap?.('L') },
+      h('span', {}, '👈 L'),
+      h('span', { class: 'pad-key-hint' }, '[A / ←]'),
+    );
+    const btnRight = h(
+      'button',
+      { class: 'btn bilateral-pad right-pad', onPointerdown: () => onTap?.('R') },
+      h('span', {}, 'R 👉'),
+      h('span', { class: 'pad-key-hint' }, '[D / →]'),
+    );
     const controls = h('div', { class: 'bilateral-controls' }, btnLeft, btnRight);
 
     ctx.stage.append(hint, seqDisplay, controls);
 
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft' || e.key.toLowerCase() === 'a') onTap?.('L');
-      if (e.key === 'ArrowRight' || e.key.toLowerCase() === 'd') onTap?.('R');
-    };
-    window.addEventListener('keydown', onKey);
+    onKeys(ctx, {
+      ArrowLeft: () => onTap?.('L'),
+      ArrowRight: () => onTap?.('R'),
+      a: () => onTap?.('L'),
+      A: () => onTap?.('L'),
+      d: () => onTap?.('R'),
+      D: () => onTap?.('R'),
+    });
 
     let correct = 0;
 
@@ -98,7 +112,6 @@ export const tapSeq: Exercise = {
       await ctx.wait(ok ? 300 : 700);
     }
 
-    window.removeEventListener('keydown', onKey);
     ctx.progress(1);
 
     return {

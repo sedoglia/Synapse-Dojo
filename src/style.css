@@ -3298,6 +3298,15 @@ html.big-text {
   font-size: 0.95rem;
   color: var(--muted);
   margin-bottom: 12px;
+  text-align: center;
+}
+.pad-key-hint {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  opacity: 0.75;
+  margin-top: 3px;
+  letter-spacing: 0.02em;
 }
 
 /* tapSeq */
@@ -3335,12 +3344,19 @@ html.big-text {
   display: flex;
   gap: 16px;
   width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
 }
 .bilateral-pad {
   flex: 1;
-  height: 90px;
-  font-size: 1.5rem;
+  min-height: 88px;
+  font-size: 1.4rem;
   font-weight: 800;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
 }
 
 /* swipePattern */
@@ -3348,12 +3364,19 @@ html.big-text {
   display: flex;
   gap: 16px;
   width: 100%;
-  max-width: 360px;
+  max-width: 440px;
   margin: 0 auto 16px;
 }
-.swipe-zone {
+.swipe-col {
   flex: 1;
-  height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.swipe-zone {
+  width: 100%;
+  height: 120px;
   border-radius: var(--radius);
   background: var(--surface);
   border: 2px dashed var(--border);
@@ -3361,19 +3384,49 @@ html.big-text {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 4px;
   cursor: grab;
   user-select: none;
   touch-action: none;
 }
 .swipe-arrow {
-  font-size: 3.2rem;
+  font-size: 2.8rem;
   font-weight: 800;
   color: var(--accent);
+  line-height: 1;
 }
 .swipe-label {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 700;
   color: var(--muted);
+}
+.swipe-dpad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+}
+.swipe-dpad-row {
+  display: flex;
+  gap: 6px;
+  width: 100%;
+  justify-content: center;
+}
+.swipe-dbtn {
+  padding: 6px 12px;
+  min-width: 48px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  touch-action: manipulation;
+}
+.swipe-dbtn .k-hint {
+  font-size: 0.68rem;
+  opacity: 0.7;
 }
 
 /* rhythm */
@@ -3403,12 +3456,19 @@ html.big-text {
   display: flex;
   gap: 16px;
   width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
 }
 .rhythm-pad {
   flex: 1;
-  height: 90px;
+  min-height: 88px;
   font-size: 1.4rem;
   font-weight: 800;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
 }
 
 /* crossMove */
@@ -3432,7 +3492,7 @@ html.big-text {
   display: flex;
   width: 100%;
   max-width: 360px;
-  height: 140px;
+  height: 130px;
   margin: 0 auto 16px;
   border-radius: var(--radius);
   background: var(--surface);
@@ -3455,12 +3515,19 @@ html.big-text {
   display: flex;
   gap: 16px;
   width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
 }
 .cross-btn {
   flex: 1;
-  height: 80px;
+  min-height: 84px;
   font-size: 1.4rem;
   font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
 }
 
 /* dualTask */
@@ -3468,36 +3535,69 @@ html.big-text {
   display: flex;
   gap: 12px;
   width: 100%;
-  margin-bottom: 16px;
+  max-width: 460px;
+  margin: 0 auto 16px;
 }
 .dualtask-panel {
   flex: 1;
   padding: 12px;
   border-radius: var(--radius);
   background: var(--surface);
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
 }
+.dualtask-side-label {
+  font-size: 0.82rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
 .dualtask-hold-btn {
   width: 100%;
-  height: 80px;
-  font-size: 1.1rem;
+  min-height: 84px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
   font-weight: 700;
+  touch-action: none;
+  user-select: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
 }
 .dualtask-hold-btn.holding {
+  background: #10b981 !important;
+  color: white !important;
+  border-color: #059669 !important;
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.5) !important;
+}
+.dualtask-meter {
+  width: 100%;
+  height: 6px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.dualtask-meter .meter-bar {
+  height: 100%;
+  width: 0%;
   background: #10b981;
-  color: white;
-  box-shadow: 0 0 15px rgba(16, 185, 129, 0.5);
+  transition: width 0.1s ease;
+}
+.dualtask-meter.holding .meter-bar {
+  width: 100%;
 }
 .dualtask-card {
-  font-size: 2.6rem;
-  font-weight: 800;
-  height: 50px;
+  font-size: 2.8rem;
+  font-weight: 900;
+  height: 60px;
   display: grid;
   place-items: center;
+  color: var(--accent);
 }
 .dualtask-buttons {
   display: flex;
@@ -3506,6 +3606,12 @@ html.big-text {
 }
 .dualtask-buttons .btn {
   flex: 1;
-  padding: 12px 4px;
+  min-height: 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 4px;
+  touch-action: manipulation;
 }
 
