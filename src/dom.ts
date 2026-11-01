@@ -1,4 +1,4 @@
-type Child = Node | string | number | null | undefined | false;
+﻿type Child = Node | string | number | null | undefined | false;
 type Attrs = Record<string, unknown>;
 
 export function h<K extends keyof HTMLElementTagNameMap>(

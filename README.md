@@ -9,18 +9,19 @@ Gioco open source di allenamento cognitivo: pochi minuti al giorno, nel browser,
 
 - **Allenamento**: circa 10–12 minuti, con 4 esercizi scelti ogni giorno tra le abilità allenate meno di recente. Finito un allenamento puoi farne subito un altro, con esercizi e abilità diverse.
 - **Misura il Neuro Score**: 4 prove rapide a difficoltà fissa (velocità, controllo, memoria di lavoro, calcolo) che producono un **Neuro Score** da 0 a 1000.
-- **Palestra**: 17 esercizi su 8 abilità. Ognuno ha **difficoltà adattiva**: diventa più difficile mentre migliori e il livello resta salvato.
+- **Palestra**: 35 esercizi su 9 abilità cognitive e bilaterali. Ognuno ha **difficoltà adattiva**: diventa più difficile mentre migliori e il livello resta salvato.
 
 | Abilità | Esercizi |
 |---|---|
-| Velocità | 👁️ Colpo d'occhio (campo visivo utile), ⚡ Riflesso a scelta, 🔢 Sentiero dei numeri |
-| Attenzione | 🏎️ Pilota (multitasking), 🎯 Radar (inseguimento di più oggetti) |
-| Controllo | 🎨 Scontro di colori (Stroop), 🔀 Doppia regola (task switching) |
-| Memoria di lavoro | 🔁 Eco (n-back duale), 💡 Griglia di luci (Corsi), 🔟 Ultime cifre |
-| Memoria | 🔐 Cassaforte di parole, 🔗 Coppie |
-| Spaziale | 🧊 Rotazioni |
-| Ragionamento | 🗼 Torri (Torre di Londra), 🧩 L'intruso |
-| Calcolo e lettura | ➗ Sprint di calcolo, 📖 Lettura veloce |
+| Velocità | 👁️ Colpo d'occhio (campo visivo utile), ⚡ Riflesso a scelta, 🔢 Sentiero dei numeri, ⏱️ Tempo di reazione |
+| Attenzione | 🏎️ Pilota (multitasking), 🎯 Radar (inseguimento di più oggetti), 🎯 Test di Flanker, 🚦 Go / No-Go, 🔠 Interferenza multipla (MSIT), 💠 Colore e forma |
+| Controllo | 🎨 Scontro di colori (Stroop), 🔀 Doppia regola (task switching), 🃏 Ordinamento di carte |
+| Memoria di lavoro | 🔁 Eco (n-back duale), 💡 Griglia di luci (Corsi), 🔟 Ultime cifre, 🔢 Span di cifre |
+| Memoria | 🔐 Cassaforte di parole, 🔗 Coppie, 📜 Memoria delle storie |
+| Spaziale | 🧊 Rotazioni, 📐 Matrice spaziale |
+| Ragionamento | 🗼 Torri (Torre di Londra), 🧩 L'intruso, ⚖️ Gestione risorse |
+| Calcolo e lettura | ➗ Sprint di calcolo, 📖 Lettura veloce, 🔴 Calcolo con i punti, 🔤 Anagrammi, 💡 Sprint di parole |
+| Coordinazione bilaterale | 👆 Tap bilaterale, 👋 Swipe bilaterale, 🎵 Ritmo bilaterale, 🔄 Movimenti incrociati, 🤹 Dual-task bilaterale |
 
 - **Progressi**: profilo radar per abilità, grafico del Neuro Score, calendario e obiettivo settimanale.
 - **Feedback chiaro**: dopo ogni risposta un ✓ verde o ✗ rosso con bagliore sullo schermo e, se sbagli, la risposta giusta.

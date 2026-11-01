@@ -1,4 +1,4 @@
-import { shuffle, todayKey } from './dom';
+﻿import { shuffle, todayKey } from './dom';
 import { store } from './storage';
 import { levelScore } from './adaptive';
 import { EXERCISES, DOMAINS, type Domain, type Exercise } from './exercises';

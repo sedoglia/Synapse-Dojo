@@ -1,4 +1,4 @@
-import { h, rand, scale, flash, clamp } from '../dom';
+﻿import { h, rand, scale, flash, clamp } from '../dom';
 import { t } from '../i18n';
 import { levelScore } from '../adaptive';
 import type { Ctx } from '../ctx';

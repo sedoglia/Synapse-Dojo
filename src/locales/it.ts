@@ -9,7 +9,7 @@ const ui: Locale['ui'] = {
   'onboard.go': 'Iniziamo',
 
   'landing.heroTitle': 'Allena la mente pochi minuti al giorno',
-  'landing.heroSub': '17 esercizi cognitivi basati sulle neuroscienze per potenziare memoria, attenzione, velocità di calcolo e riflessi. 100% gratuito, senza pubblicità, nessun account o password.',
+  'landing.heroSub': '35 esercizi cognitivi e bilaterali basati sulle neuroscienze per potenziare memoria, attenzione, coordinazione e riflessi. 100% gratuito, senza pubblicità, nessun account o password.',
   'landing.badgeFree': '100% Gratuito',
   'landing.badgePrivacy': 'Privacy totale · Dati locali',
   'landing.badgeScience': 'Basato su studi clinici',
@@ -24,16 +24,16 @@ const ui: Locale['ui'] = {
   'landing.pillar1Desc': '4 esercizi selezionati ogni giorno che si adattano al tuo livello. Bastano circa 10 minuti.',
   'landing.pillar2Title': 'Neuro Score Quotidiano',
   'landing.pillar2Desc': 'Un test rapido di 3 minuti sulle 4 aree chiave per misurare oggettivamente i tuoi progressi nel tempo.',
-  'landing.pillar3Title': 'Palestra Libera (17 Giochi)',
-  'landing.pillar3Desc': 'Tutti i giochi disponibili liberamente per allenare le 8 abilità cognitive quando vuoi.',
-  'landing.domainsTitle': 'Le 8 Aree Cognitive Allenate',
-  'landing.guideCtaTitle': 'Vuoi scoprire tutti i dettagli dei 17 giochi?',
+  'landing.pillar3Title': 'Palestra Libera (35 Giochi)',
+  'landing.pillar3Desc': 'Tutti i giochi disponibili liberamente per allenare le 9 aree cognitive e bilaterali quando vuoi.',
+  'landing.domainsTitle': 'Le 9 Aree Allenate',
+  'landing.guideCtaTitle': 'Vuoi scoprire tutti i dettagli dei 35 giochi?',
   'landing.guideCtaDesc': 'Leggi la nostra guida dettagliata con la spiegazione scientifica, i benefici e le regole di tutti gli esercizi.',
   'landing.guideCtaBtn': 'Leggi la Guida Completa',
   'landing.footerTagline': 'Synapse Dojo · Allenamento Cognitivo Gratuito',
 
   'guide.title': 'Guida & Istruzioni',
-  'guide.subtitle': 'Come funziona Synapse Dojo, le sezioni dell’app e la spiegazione dettagliata di tutti i 17 giochi cognitivi',
+  'guide.subtitle': 'Come funziona Synapse Dojo, le sezioni dell’app e la spiegazione dettagliata di tutti i giochi cognitivi e bilaterali',
   'guide.navSections': 'Le Sezioni dell’App',
   'guide.introH': 'Perché allenare la mente?',
   'guide.introP': 'Il cervello possiede una straordinaria capacità di riorganizzarsi e creare nuove connessioni sinaptiche lungo tutto l’arco della vita: questo fenomeno è noto come neuroplasticità. Così come l’esercizio fisico mantiene in forma il corpo, stimolare regolarmente le funzioni cognitive aiuta a preservare lucidità mentale, concentrazione, velocità e memoria. Synapse Dojo è una palestra mentale quotidiana rapida e stimolante: bastano pochi minuti al giorno con esercizi calibrati in tempo reale sulle tue abilità attuali.',
@@ -41,13 +41,13 @@ const ui: Locale['ui'] = {
   'guide.planP': 'Ogni giorno Synapse Dojo compone per te una sequenza di 4 esercizi su domini diversi (ad esempio velocità, memoria, controllo esecutivo e ragionamento). Gli esercizi sono adattivi: se rispondi correttamente la difficoltà sale, se commetti errori si calibra per mantenerti nella zona di stimolazione ideale. Completando l’allenamento aumenti la tua serie quotidiana (streak) e guadagni punti XP per salire di livello.',
   'guide.checkH': '📏 Misura il Neuro Score (Daily Check)',
   'guide.checkP': 'Il Neuro Score è un test standardizzato di circa 3 minuti, composto sempre dalle stesse 4 prove: Colpo d’occhio (velocità di elaborazione), Doppia regola (controllo esecutivo e task-switching), Griglia (memoria di lavoro visuo-spaziale) e Calcolo rapido. Poiché le condizioni sono identiche ogni giorno, il punteggio ottenuto (da 0 a 100) rappresenta un barometro oggettivo delle tue prestazioni per monitorare i miglioramenti nel tempo.',
-  'guide.trainingH': '🧩 Palestra Libera (17 Esercizi)',
-  'guide.trainingP': 'Nella sezione Palestra trovi l’intero catalogo dei 17 esercizi, suddivisi nelle 8 abilità cerebrali. Puoi allenarti liberamente su qualunque esercizio senza limiti di tempo, approfondire compiti specifici o superare i tuoi record personali.',
+  'guide.trainingH': '🧩 Palestra Libera (35 Esercizi)',
+  'guide.trainingP': 'Nella sezione Palestra trovi l’intero catalogo dei 35 esercizi, suddivisi nelle 9 abilità cerebrali e di coordinazione bilaterale. Puoi allenarti liberamente su qualunque esercizio senza limiti di tempo, approfondire compiti specifici o superare i tuoi record personali.',
   'guide.progressH': '📈 Progressi e Statistiche',
   'guide.progressP': 'Consulta il tuo profilo cognitivo con i livelli raggiunti in ciascuna abilità, lo storico dei tuoi Neuro Score, i badge e traguardi sbloccati (come serie di giorni consecutivi o livelli avanzati) e il calendario mensile delle tue sessioni di allenamento.',
   'guide.settingsH': '⚙️ Impostazioni e Privacy',
   'guide.settingsP': 'Personalizza la tua esperienza: temi chiaro, scuro o ad alto contrasto, gestione dei suoni e della vibrazione, grandezza del testo ed esportazione/importazione dei dati. Synapse Dojo salva tutto in locale sul tuo browser: puoi salvare un file JSON di backup o trasferirlo su un altro dispositivo in qualsiasi momento.',
-  'guide.gamesH': 'I 17 Esercizi Cognitivi nel Dettaglio',
+  'guide.gamesH': 'Gli Esercizi nel Dettaglio',
   'guide.gameWhy': 'A cosa serve (Perché funziona):',
   'guide.gameHow': 'Come funziona:',
   'guide.faqH': 'Consigli e Domande Frequenti (FAQ)',
@@ -365,9 +365,9 @@ const ui: Locale['ui'] = {
   'badge.combo10.name': 'Lampo',
   'badge.combo10.desc': '10 risposte giuste di fila',
   'badge.explorer.name': 'Esploratore',
-  'badge.explorer.desc': 'Prova tutti i 17 esercizi',
+  'badge.explorer.desc': 'Prova tutti i 35 esercizi',
   'badge.balanced.name': 'Mente completa',
-  'badge.balanced.desc': 'Allena tutte le 8 abilità in 7 giorni',
+  'badge.balanced.desc': 'Allena tutte le 9 abilità in 7 giorni',
   'badge.levelups25.name': 'In salita',
   'badge.levelups25.desc': 'Sali di livello 25 volte',
   'badge.plans10.name': 'Costanza',
@@ -407,6 +407,178 @@ const ui: Locale['ui'] = {
   'privacy.contactH': 'Contatti',
   'privacy.contact': 'Per domande sul gioco o sui dati: {contact}',
   'privacy.open': 'Apri il gioco',
+
+  'domain.coordination': 'Coordinazione',
+
+  'shape.circle': 'Cerchio',
+  'shape.square': 'Quadrato',
+  'shape.triangle': 'Triangolo',
+  'shape.diamond': 'Rombo',
+
+  // span
+  'ex.span.name': 'Span di Cifre',
+  'ex.span.desc': 'Memorizza la sequenza di numeri e digitala nell’ordine richiesto',
+  'ex.span.why': 'Lo span di cifre è la misura standard della capacità della memoria a breve termine e della memoria di lavoro verbale.',
+  'ex.span.example': '4 8 1 9   Scrivi i numeri nell’ordine indicato (in avanti o all’indietro)',
+  'ex.span.forward': 'In avanti',
+  'ex.span.backward': 'All’indietro',
+  'ex.span.watch': 'Memorizza {n} cifre',
+  'ex.span.recallFor': 'Scrivi le cifre nell’ordine visto',
+  'ex.span.recallBack': 'Scrivi le cifre all’indietro!',
+  'ex.span.detail': '{ok}/{n} corretti · span {span}',
+
+  // stories
+  'ex.stories.name': 'Memoria delle Storie',
+  'ex.stories.desc': 'Leggi una breve scena e ricorda i dettagli episodici',
+  'ex.stories.why': 'La memoria episodica collega personaggi, luoghi e tempi, stimolando il richiamo narrativo dipendente dall’ippocampo.',
+  'ex.stories.example': 'Leggi attentamente la storia e rispondi alle domande sui dettagli',
+  'ex.stories.title': 'Scena {n}',
+  'ex.stories.ready': 'Ho letto, sono pronto!',
+  'ex.stories.qItem': 'Cosa portava con sé {name}?',
+  'ex.stories.qPlace': 'Dove si trovava {name}?',
+  'ex.stories.qTime': 'In quale momento si è svolta la scena?',
+  'ex.stories.detail': '{ok}/{n} dettagli corretti',
+
+  // flanker
+  'ex.flanker.name': 'Test di Flanker',
+  'ex.flanker.desc': 'Concentrati sulla freccia centrale e ignora le frecce ai lati',
+  'ex.flanker.why': 'Il compito di Eriksen Flanker misura l’attenzione selettiva e la capacità di inibire i distrattori visivi laterali.',
+  'ex.flanker.example': '← ← → ← ←   Il bersaglio è la freccia al centro (→)',
+  'ex.flanker.instruction': 'Tocca la direzione della freccia centrale',
+  'ex.flanker.detail': '{ok}/{n} corretti · {ms} ms',
+
+  // gonogo
+  'ex.gonogo.name': 'Go / No-Go',
+  'ex.gonogo.desc': 'Tocca rapido sui segnali verdi, frenati quando compare lo stop rosso',
+  'ex.gonogo.why': 'Allena il controllo inibitorio motorio e la soppressione prefrontale delle risposte automatiche e impulsive.',
+  'ex.gonogo.example': '● = Tocca subito!   ✕ = Non toccare!',
+  'ex.gonogo.hint': 'Tocca su ●, fermati su ✕',
+  'ex.gonogo.detail': '{ok}/{n} corretti · {ms} ms',
+
+  // msit
+  'ex.msit.name': 'Interferenza Multipla (MSIT)',
+  'ex.msit.desc': 'Indica quale numero è diverso dagli altri, ignorando dove si trova',
+  'ex.msit.why': 'L’MSIT attiva la corteccia cingolata anteriore creando un conflitto tra identità del numero e la sua posizione spaziale.',
+  'ex.msit.example': '1 2 1   Il numero diverso è 2',
+  'ex.msit.hint': 'Quale numero è diverso?',
+  'ex.msit.detail': '{ok}/{n} corretti · {ms} ms',
+
+  // binding
+  'ex.binding.name': 'Colore e Forma',
+  'ex.binding.desc': 'Trova l’oggetto che abbina sia la forma che il colore corretto',
+  'ex.binding.why': 'L’integrazione di caratteristiche (feature binding) stimola l’elaborazione visiva combinata di colore e forma.',
+  'ex.binding.example': 'Trova il Cerchio Blu tra Quadrati Blu e Cerchi Rossi',
+  'ex.binding.find': 'Trova',
+  'ex.binding.detail': '{ok}/{n} corretti',
+
+  // sorting
+  'ex.sorting.name': 'Ordinamento di Carte',
+  'ex.sorting.desc': 'Indovina la regola di abbinamento e adattati quando cambia',
+  'ex.sorting.why': 'Ispirato al Wisconsin Card Sorting, allena la flessibilità cognitiva, l’induzione di regole e il set-shifting.',
+  'ex.sorting.example': 'Abbina la carta per colore, forma o numero; cambia strategia quando la regola si inverte',
+  'ex.sorting.hint': 'Abbina la carta a una delle 4 carte di riferimento',
+  'ex.sorting.detail': '{ok}/{n} corretti',
+
+  // resources
+  'ex.resources.name': 'Gestione Risorse',
+  'ex.resources.desc': 'Distribuisci il budget energetico per massimizzare il valore',
+  'ex.resources.why': 'La pianificazione con vincoli allena l’ottimizzazione prefrontale, il bilanciamento costi-benefici e la visione strategica.',
+  'ex.resources.example': 'Scegli i progetti per raggiungere il valore massimo senza superare l’energia',
+  'ex.resources.detail': '{ok}/{n} completati',
+
+  // reaction
+  'ex.reaction.name': 'Tempo di Reazione',
+  'ex.reaction.desc': 'Tocca il più velocemente possibile non appena lo schermo diventa verde',
+  'ex.reaction.why': 'Misura la pura velocità di conduzione visuo-motoria e la prontezza riflessa senza ritardi decisionali.',
+  'ex.reaction.example': 'Attendi il verde, poi tocca subito',
+  'ex.reaction.ready': 'Preparati',
+  'ex.reaction.wait': 'Attendi il verde...',
+  'ex.reaction.tapNow': 'TOCCA ORA!',
+  'ex.reaction.early': 'Falsa partenza!',
+  'ex.reaction.penalty': 'Attendi sempre il segnale verde',
+  'ex.reaction.detail': 'Media: {ms} ms · Record: {best} ms ({ok}/{n})',
+
+  // dots
+  'ex.dots.name': 'Calcolo con i Punti',
+  'ex.dots.desc': 'Giudica all’istante quale lato contiene più punti senza contarli',
+  'ex.dots.why': 'Allena il sistema numerico approssimato (ANS) e l’intuito quantitativo parietale (subitizing).',
+  'ex.dots.example': 'Tocca rapido il riquadro con più punti',
+  'ex.dots.hint': 'Quale lato ha più punti?',
+  'ex.dots.left': 'Sinistra',
+  'ex.dots.right': 'Destra',
+  'ex.dots.detail': '{ok}/{n} corretti',
+
+  // anagrams
+  'ex.anagrams.name': 'Anagrammi',
+  'ex.anagrams.desc': 'Ricomponi le lettere nell’ordine giusto per formare la parola',
+  'ex.anagrams.why': 'Coinvolge la memoria di lavoro ortografica, l’accesso lessicale e la ricombinazione mentale di fonemi.',
+  'ex.anagrams.example': 'Tocca le tessere nell’ordine corretto per comporre la parola',
+  'ex.anagrams.hint': 'Tocca le lettere per ricostruire la parola',
+  'ex.anagrams.detail': '{ok}/{n} risolti',
+
+  // fluency
+  'ex.fluency.name': 'Sprint di Parole',
+  'ex.fluency.desc': 'Conferma al volo le parole che iniziano con la lettera bersaglio',
+  'ex.fluency.why': 'La fluenza verbale allena il recupero lessicale rapido dalla memoria semantica sotto vincoli fonetici.',
+  'ex.fluency.example': 'Tocca se la parola inizia con la lettera indicata',
+  'ex.fluency.targetLetter': 'Lettera bersaglio:',
+  'ex.fluency.detail': '{ok}/{n} corretti',
+
+  // matrix
+  'ex.matrix.name': 'Matrice Spaziale',
+  'ex.matrix.desc': 'Memorizza la disposizione spaziale e ricostruiscila ruotata',
+  'ex.matrix.why': 'Esercizio di rotazione mentale avanzata e mappatura delle coordinate spaziali allocentriche.',
+  'ex.matrix.example': 'Memorizza lo schema e posiziona gli elementi dopo la rotazione mentale',
+  'ex.matrix.memorize': 'Memorizza la disposizione',
+  'ex.matrix.same': 'Posiziona gli elementi nella posizione originale',
+  'ex.matrix.rot90': 'Ruota mentalmente di 90° in senso orario!',
+  'ex.matrix.rot180': 'Ruota mentalmente di 180°!',
+  'ex.matrix.detail': '{ok}/{n} corretti',
+
+  // tapSeq
+  'ex.tapSeq.name': 'Tap Bilaterale',
+  'ex.tapSeq.desc': 'Coordina entrambi i pollici per riprodurre sequenze alternate',
+  'ex.tapSeq.why': 'Il tocco bimanuale alternato stimola le cortecce motorie di entrambi gli emisferi e attiva il corpo calloso.',
+  'ex.tapSeq.example': 'L - R - L - R   Segui il ritmo con entrambi i pollici',
+  'ex.tapSeq.hint': 'Tocca sinistra e destra nella sequenza indicata',
+  'ex.tapSeq.detail': '{ok}/{n} sequenze completate',
+
+  // swipePattern
+  'ex.swipePattern.name': 'Swipe Bilaterale',
+  'ex.swipePattern.desc': 'Esegui swipe direzionali contemporanei con entrambe le mani',
+  'ex.swipePattern.why': 'I gesti bimanuali simultanei sfidano il disaccoppiamento spaziale e la coordinazione motoria asimmetrica.',
+  'ex.swipePattern.example': 'Scorri col pollice sinistro in su ↑ e col destro in giù ↓',
+  'ex.swipePattern.hint': 'Esegui entrambi i gesti direzionali contemporaneamente',
+  'ex.swipePattern.detail': '{ok}/{n} schemi corretti',
+
+  // rhythm
+  'ex.rhythm.name': 'Ritmo Bilaterale',
+  'ex.rhythm.desc': 'Sincronizza i tocchi sinistro e destro sul tempo del metronomo',
+  'ex.rhythm.why': 'La sincronizzazione ritmica bilaterale coinvolge il cervelletto e l’area motoria supplementare per la precisione temporale.',
+  'ex.rhythm.example': 'Tocca sinistra e destra a tempo con il battito visivo',
+  'ex.rhythm.hint': 'Tocca a tempo sul battito con la mano indicata',
+  'ex.rhythm.detail': '{ok}/{n} a tempo · errore medio {ms} ms',
+
+  // crossMove
+  'ex.crossMove.name': 'Movimenti Incrociati',
+  'ex.crossMove.desc': 'Attraversa la linea mediana del corpo: rispondi sul lato opposto',
+  'ex.crossMove.why': 'L’attraversamento della linea mediana forza il trasferimento interemisferico e allena l’integrazione controlaterale.',
+  'ex.crossMove.example': 'Bersaglio a sinistra + "Incrocia" -> Tocca il pulsante a DESTRA',
+  'ex.crossMove.same': 'Stesso lato: Tocca il lato corrispondente',
+  'ex.crossMove.cross': 'INCROCIA: Tocca il lato OPPOSTO!',
+  'ex.crossMove.detail': '{ok}/{n} corretti · {ms} ms',
+
+  // dualTask
+  'ex.dualTask.name': 'Dual-Task Bilaterale',
+  'ex.dualTask.desc': 'Tieni premuto a sinistra mentre rispondi con la mano destra',
+  'ex.dualTask.why': 'Il paradigma a doppio compito allena l’attenzione emisferica divisa e la gestione di risorse motorio-cognitive asimmetriche.',
+  'ex.dualTask.example': 'Tieni premuto a sinistra mentre col pollice destro decidi Pari / Dispari',
+  'ex.dualTask.hint': 'Mantieni premuto il pulsante sinistro mentre scegli Pari / Dispari',
+  'ex.dualTask.hold': 'Tieni premuto (SX)',
+  'ex.dualTask.even': 'Pari',
+  'ex.dualTask.odd': 'Dispari',
+  'ex.dualTask.notHolding': 'Non hai tenuto premuto a sinistra!',
+  'ex.dualTask.detail': '{ok}/{n} corretti',
 };
 
 const words: string[] = [

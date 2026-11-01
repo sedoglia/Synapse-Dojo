@@ -1,4 +1,4 @@
-import { h, rand, pick } from '../dom';
+﻿import { h, rand, pick } from '../dom';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';
 import { onKeys } from '../widgets';

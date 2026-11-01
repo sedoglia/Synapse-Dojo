@@ -1,9 +1,9 @@
-import type { Ctx } from '../ctx';
+﻿import type { Ctx } from '../ctx';
 import type { I18nKey } from '../i18n';
 
-export type Domain = 'speed' | 'attention' | 'wm' | 'memory' | 'executive' | 'spatial' | 'reasoning' | 'language';
+export type Domain = 'speed' | 'attention' | 'executive' | 'wm' | 'memory' | 'spatial' | 'reasoning' | 'language' | 'coordination';
 
-export const DOMAINS: Domain[] = ['speed', 'attention', 'executive', 'wm', 'memory', 'spatial', 'reasoning', 'language'];
+export const DOMAINS: Domain[] = ['speed', 'attention', 'executive', 'wm', 'memory', 'spatial', 'reasoning', 'language', 'coordination'];
 
 export interface ExerciseResult {
   score: number; // 0–100

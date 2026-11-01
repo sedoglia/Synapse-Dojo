@@ -1,4 +1,4 @@
-import { h, todayKey } from '../dom';
+﻿import { h, todayKey } from '../dom';
 import { store } from '../storage';
 import { t } from '../i18n';
 import { render, page, sparkline } from '../ui';

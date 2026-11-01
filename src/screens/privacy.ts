@@ -1,4 +1,4 @@
-import { h } from '../dom';
+﻿import { h } from '../dom';
 import { t, type I18nKey } from '../i18n';
 import { CONTACT } from '../config';
 import { render, page } from '../ui';

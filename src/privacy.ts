@@ -1,4 +1,4 @@
-// Entry of the standalone privacy.html page, linkable from outside the game.
+﻿// Entry of the standalone privacy.html page, linkable from outside the game.
 import './style.css';
 import { h } from './dom';
 import { store } from './storage';

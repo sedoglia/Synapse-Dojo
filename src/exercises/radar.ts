@@ -1,4 +1,4 @@
-import { h, rand, shuffle } from '../dom';
+﻿import { h, rand, shuffle } from '../dom';
 import { sfx } from '../audio';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';

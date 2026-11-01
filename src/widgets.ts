@@ -1,4 +1,4 @@
-import { h } from './dom';
+﻿import { h } from './dom';
 import type { Ctx } from './ctx';
 
 /** Numeric keypad; also listens to the physical keyboard while `ctx.input` is pending. */

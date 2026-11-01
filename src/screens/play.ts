@@ -1,4 +1,4 @@
-import { h, todayKey, pick } from '../dom';
+﻿import { h, todayKey, pick } from '../dom';
 import { Ctx, Aborted, type Mode } from '../ctx';
 import { sfx, haptic } from '../audio';
 import { store } from '../storage';

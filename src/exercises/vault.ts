@@ -1,4 +1,4 @@
-import { h, shuffle, clamp, flash } from '../dom';
+﻿import { h, shuffle, clamp, flash } from '../dom';
 import { t, words } from '../i18n';
 import type { Exercise } from './types';
 

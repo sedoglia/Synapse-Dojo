@@ -1,4 +1,4 @@
-import { h, rand, flash, clamp } from '../dom';
+﻿import { h, rand, flash, clamp } from '../dom';
 import { sfx } from '../audio';
 import { store } from '../storage';
 import { t, meta } from '../i18n';

@@ -1,4 +1,4 @@
-import { h } from './dom';
+﻿import { h } from './dom';
 import { t, LANGS, loadLang, meta, type Lang } from './i18n';
 import { store } from './storage';
 

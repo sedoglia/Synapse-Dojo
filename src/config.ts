@@ -1,4 +1,4 @@
-// Single place to rename the game.
+﻿// Single place to rename the game.
 export const APP_NAME = 'Synapse Dojo';
 export const STORAGE_KEY = 'synapse-dojo/v1';
 export const VERSION = '0.6.0';

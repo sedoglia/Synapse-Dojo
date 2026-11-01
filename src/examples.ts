@@ -118,6 +118,29 @@ const SCENES: Record<string, Scene> = {
   },
   math: () => row(h('span', { class: 'ex-big' }, '7 + 8 ='), answer('15')),
   reading: () => row(tag('🗣️'), arrow(), tag(t('ex.reading.done')), arrow(), tag('?')),
+  span: () => row(h('span', { class: 'ex-seq' }, '3 8 2 9'), arrow(), answer('3 8 2 9')),
+  stories: () => row(tag('📖 Elena · Parco'), arrow(), answer('Elena'), answer('Parco')),
+  flanker: () =>
+    row(
+      h('span', { class: 'ex-seq' }, '← ← ', h('b', { style: { color: 'var(--accent)', fontSize: '1.3rem' } }, '→'), ' ← ←'),
+      arrow(),
+      answer('→'),
+    ),
+  gonogo: () => row(tag('●', 'good'), arrow(), answer('👆'), tag('✕', 'bad'), arrow(), answer('✋')),
+  msit: () => row(h('span', { class: 'ex-seq' }, '1 ', h('b', { style: { color: 'var(--accent)' } }, '2'), ' 1'), arrow(), answer('2')),
+  binding: () => row(h('span', { style: { color: 'var(--c-blue)', fontSize: '1.4rem' } }, '●'), arrow(), answer('● Blu')),
+  sorting: () => row(tag('🃏 2 ★'), arrow(), tag('★ Forma'), arrow(), answer('✓')),
+  resources: () => row(tag('⚡ 45/50'), tag('⭐ +65'), arrow(), answer('✓')),
+  reaction: () => row(tag('Attendi...', 'bad'), arrow(), tag('TOCCA!', 'good'), arrow(), answer('210 ms')),
+  dots: () => row(tag('●●●●'), tag('vs'), tag('●●●●●●●'), arrow(), answer('Destra')),
+  anagrams: () => row(h('span', { class: 'ex-seq' }, 'A N O Z I'), arrow(), answer('ZAINO')),
+  fluency: () => row(tag('Lettera: S'), arrow(), tag('SOLE'), answer('✓'), tag('LUNA'), answer('✗')),
+  matrix: () => row(miniGrid(9, { 0: '🔷' }), arrow(), tag('↻ 90°'), arrow(), miniGrid(9, { 2: '🔷' })),
+  tapSeq: () => row(tag('L - R - L - R'), arrow(), answer('👈 L'), answer('R 👉')),
+  swipePattern: () => row(tag('SX: ↑'), tag('DX: ↓'), arrow(), answer('✓')),
+  rhythm: () => row(tag('🥁'), h('span', {}, '♪'), tag('🥁'), arrow(), answer('A tempo')),
+  crossMove: () => row(tag('⚡ Sinistra'), tag('Incrocia!'), arrow(), answer('DX 👉')),
+  dualTask: () => row(tag('Hold SX: 🔒'), tag('Numero: 8'), arrow(), answer('Pari ✓')),
 };
 
 /** The illustrated example for an exercise: a little scene plus its caption. */

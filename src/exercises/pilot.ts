@@ -1,4 +1,4 @@
-import { h, pick, flash } from '../dom';
+﻿import { h, pick, flash } from '../dom';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';
 import { fitCanvas, cssVar } from '../widgets';

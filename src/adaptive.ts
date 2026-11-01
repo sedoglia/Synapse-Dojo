@@ -1,4 +1,4 @@
-import { clamp } from './dom';
+﻿import { clamp } from './dom';
 
 /** Maps a level to 0–100 within its range; the lowest level still earns a little credit. */
 export const levelScore = (level: number, min: number, max: number) =>

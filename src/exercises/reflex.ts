@@ -1,4 +1,4 @@
-import { h, rand } from '../dom';
+﻿import { h, rand } from '../dom';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';
 import type { Exercise } from './types';

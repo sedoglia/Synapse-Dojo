@@ -1,4 +1,4 @@
-import './style.css';
+﻿import './style.css';
 import { store } from './storage';
 import { APP_NAME } from './config';
 import { loadLang } from './i18n';

@@ -1,4 +1,4 @@
-import { todayKey } from './dom';
+﻿import { todayKey } from './dom';
 import { store } from './storage';
 import type { I18nKey } from './i18n';
 import { EXERCISES, DOMAINS } from './exercises';

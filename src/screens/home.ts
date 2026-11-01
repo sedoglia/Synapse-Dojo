@@ -1,4 +1,4 @@
-import { h } from '../dom';
+﻿import { h } from '../dom';
 import { store } from '../storage';
 import { t } from '../i18n';
 import { APP_NAME } from '../config';

@@ -1,4 +1,4 @@
-import { h, shuffle, scale, flash } from '../dom';
+﻿import { h, shuffle, scale, flash } from '../dom';
 import { t, passages as allPassages, meta } from '../i18n';
 import type { Exercise } from './types';
 

@@ -9,7 +9,7 @@ export const ui = {
   'onboard.go': 'Let’s go',
 
   'landing.heroTitle': 'Train your mind a few minutes a day',
-  'landing.heroSub': '17 neuroscience-backed cognitive games to sharpen memory, attention, processing speed, and reflexes. 100% free, no ads, no sign-up or passwords required.',
+  'landing.heroSub': '35 neuroscience-backed cognitive and bilateral games to sharpen memory, attention, coordination, processing speed, and reflexes. 100% free, no ads, no sign-up or passwords required.',
   'landing.badgeFree': '100% Free',
   'landing.badgePrivacy': 'Total Privacy · Local Data',
   'landing.badgeScience': 'Evidence-Based',
@@ -24,16 +24,16 @@ export const ui = {
   'landing.pillar1Desc': '4 personalized exercises picked daily that adapt in real time to your performance. Takes ~10 minutes.',
   'landing.pillar2Title': 'Daily Neuro Score',
   'landing.pillar2Desc': 'A standardized 3-minute benchmark across 4 core areas to objectively measure your progress over time.',
-  'landing.pillar3Title': 'Free Gym (17 Games)',
-  'landing.pillar3Desc': 'Practice freely across all 8 cognitive domains whenever you want to beat your personal bests.',
-  'landing.domainsTitle': 'The 8 Trained Cognitive Domains',
+  'landing.pillar3Title': 'Free Gym (35 Games)',
+  'landing.pillar3Desc': 'Practice freely across all 9 cognitive and bilateral domains whenever you want to beat your personal bests.',
+  'landing.domainsTitle': 'The 9 Trained Skill Domains',
   'landing.guideCtaTitle': 'Want to learn how every exercise works?',
-  'landing.guideCtaDesc': 'Explore our detailed guide with scientific references, cognitive mechanisms, and rules for all 17 games.',
+  'landing.guideCtaDesc': 'Explore our detailed guide with scientific references, cognitive mechanisms, and rules for all 35 games.',
   'landing.guideCtaBtn': 'Read the Full Guide',
   'landing.footerTagline': 'Synapse Dojo · Free Cognitive Training',
 
   'guide.title': 'Guide & Instructions',
-  'guide.subtitle': 'How Synapse Dojo works, the app sections, and detailed explanations of all 17 cognitive exercises',
+  'guide.subtitle': 'How Synapse Dojo works, the app sections, and detailed explanations of all cognitive and bilateral exercises',
   'guide.navSections': 'The App Sections',
   'guide.introH': 'Why Train Your Brain?',
   'guide.introP': 'The brain has an extraordinary capacity to adapt, reorganize, and build new synaptic connections throughout your life: this is known as neuroplasticity. Just as physical exercise strengthens muscles and stamina, regular cognitive stimulation helps maintain mental sharpness, working memory, and focus. Synapse Dojo offers a daily, science-backed workout: just a few minutes a day with exercises that continuously adapt to your current skill level.',
@@ -41,13 +41,13 @@ export const ui = {
   'guide.planP': 'Every day, Synapse Dojo composes a balanced 4-exercise routine across different cognitive domains (e.g., speed, memory, attention, and executive control). The games adapt automatically: succeed and the difficulty increases; make mistakes and it scales down to keep you in the optimal zone of mental stimulation. Finishing your daily workout builds your streak and awards XP towards leveling up.',
   'guide.checkH': '📏 Measure your Neuro Score (Daily Check)',
   'guide.checkP': 'The Neuro Score is a standardized daily benchmark taking ~3 minutes. It consists of the exact same 4 tests every day: Glance (processing speed), Rule Switch (executive control & task switching), Grid (visuo-spatial working memory), and Speed Math (calculation). Because the rules and timing are strictly calibrated, your daily score (0–100) provides an objective measure to monitor your cognitive sharpness over weeks and months.',
-  'guide.trainingH': '🧩 Free Gym (17 Exercises)',
-  'guide.trainingP': 'In the Gym section, you have unlimited access to all 17 cognitive exercises, categorized by domain. Use it to focus on specific skills you want to strengthen, explore different exercise mechanics, or challenge your personal high scores.',
+  'guide.trainingH': '🧩 Free Gym (35 Exercises)',
+  'guide.trainingP': 'In the Gym section, you have unlimited access to all 35 exercises, categorized by domain. Use it to focus on specific skills you want to strengthen, explore different exercise mechanics, or challenge your personal high scores.',
   'guide.progressH': '📈 Progress & Statistics',
-  'guide.progressP': 'Track your cognitive evolution over time. View your radar profile across all 8 brain domains, review your historical Neuro Score curve, unlock achievement badges (such as consecutive day streaks and master levels), and inspect your monthly training calendar.',
+  'guide.progressP': 'Track your cognitive evolution over time. View your radar profile across all 9 skill domains, review your historical Neuro Score curve, unlock achievement badges (such as consecutive day streaks and master levels), and inspect your monthly training calendar.',
   'guide.settingsH': '⚙️ Settings & Privacy',
   'guide.settingsP': 'Customize your experience: choose between Dark, Light, and High Contrast themes, enable or disable sound effects and vibration, adjust text size, and manage your data. Synapse Dojo stores all data strictly in your local browser storage—you can export a full JSON backup or import it onto another device anytime.',
-  'guide.gamesH': 'The 17 Cognitive Exercises Explained',
+  'guide.gamesH': 'The Exercises Explained',
   'guide.gameWhy': 'Scientific purpose:',
   'guide.gameHow': 'How to play:',
   'guide.faqH': 'Tips & Frequently Asked Questions',
@@ -365,9 +365,9 @@ export const ui = {
   'badge.combo10.name': 'Lightning',
   'badge.combo10.desc': '10 correct answers in a row',
   'badge.explorer.name': 'Explorer',
-  'badge.explorer.desc': 'Try all 17 exercises',
+  'badge.explorer.desc': 'Try all 35 exercises',
   'badge.balanced.name': 'Whole mind',
-  'badge.balanced.desc': 'Train all 8 skills within 7 days',
+  'badge.balanced.desc': 'Train all 9 skills within 7 days',
   'badge.levelups25.name': 'Climbing',
   'badge.levelups25.desc': 'Level up 25 times',
   'badge.plans10.name': 'Consistency',
@@ -407,6 +407,178 @@ export const ui = {
   'privacy.contactH': 'Contact',
   'privacy.contact': 'Questions about the game or your data: {contact}',
   'privacy.open': 'Open the game',
+
+  'domain.coordination': 'Coordination',
+
+  'shape.circle': 'Circle',
+  'shape.square': 'Square',
+  'shape.triangle': 'Triangle',
+  'shape.diamond': 'Diamond',
+
+  // span
+  'ex.span.name': 'Digit Span',
+  'ex.span.desc': 'Memorize the number sequence and type it back',
+  'ex.span.why': 'Digit span is the benchmark task for short-term capacity and verbal working memory in cognitive neuropsychology.',
+  'ex.span.example': '4 8 1 9   Type the numbers in the requested order',
+  'ex.span.forward': 'Forward',
+  'ex.span.backward': 'Backward',
+  'ex.span.watch': 'Memorize {n} digits',
+  'ex.span.recallFor': 'Type digits in normal order',
+  'ex.span.recallBack': 'Type digits in reverse order!',
+  'ex.span.detail': '{ok}/{n} correct · span {span}',
+
+  // stories
+  'ex.stories.name': 'Story Memory',
+  'ex.stories.desc': 'Read a scenario and recall episodic details',
+  'ex.stories.why': 'Episodic memory binds characters, actions, and locations together, exercising hippocampus-mediated narrative recall.',
+  'ex.stories.example': 'Read the brief story carefully, then answer specific detail questions',
+  'ex.stories.title': 'Scenario {n}',
+  'ex.stories.ready': 'I’m ready!',
+  'ex.stories.qItem': 'What was {name} carrying?',
+  'ex.stories.qPlace': 'Where was {name} located?',
+  'ex.stories.qTime': 'When did the event take place?',
+  'ex.stories.detail': '{ok}/{n} details correct',
+
+  // flanker
+  'ex.flanker.name': 'Flanker Test',
+  'ex.flanker.desc': 'Focus on the center arrow and ignore flanking arrows',
+  'ex.flanker.why': 'Eriksen flanker task measures selective visual attention and resistance to surrounding distractor interference.',
+  'ex.flanker.example': '← ← → ← ←   Target is the center arrow (→)',
+  'ex.flanker.instruction': 'Tap the direction of the center arrow',
+  'ex.flanker.detail': '{ok}/{n} correct · {ms} ms',
+
+  // gonogo
+  'ex.gonogo.name': 'Go / No-Go',
+  'ex.gonogo.desc': 'Tap quickly on green targets; restrain on red stops',
+  'ex.gonogo.why': 'Inhibitory motor control trains prefrontal response suppression, essential for resisting impulsivity and staying focused.',
+  'ex.gonogo.example': '● = Tap quickly!   ✕ = Do not tap!',
+  'ex.gonogo.hint': 'Tap on ●, do not tap on ✕',
+  'ex.gonogo.detail': '{ok}/{n} correct · {ms} ms',
+
+  // msit
+  'ex.msit.name': 'Multi-Source Interference',
+  'ex.msit.desc': 'Identify the unique number regardless of its position',
+  'ex.msit.why': 'The MSIT paradigm activates the anterior cingulate cortex by triggering spatial-identity cognitive interference.',
+  'ex.msit.example': '1 2 1   The unique digit is 2',
+  'ex.msit.hint': 'Which number is different?',
+  'ex.msit.detail': '{ok}/{n} correct · {ms} ms',
+
+  // binding
+  'ex.binding.name': 'Color & Shape',
+  'ex.binding.desc': 'Find the exact target binding both color and shape',
+  'ex.binding.why': 'Feature binding forces visual cortex networks to integrate separate color and shape streams into a single object.',
+  'ex.binding.example': 'Find the Blue Circle among Blue Squares and Red Circles',
+  'ex.binding.find': 'Find',
+  'ex.binding.detail': '{ok}/{n} correct',
+
+  // sorting
+  'ex.sorting.name': 'Card Sorting',
+  'ex.sorting.desc': 'Discover the matching rule and adapt when it shifts',
+  'ex.sorting.why': 'Wisconsin-style card sorting exercises cognitive flexibility, hypothesis testing, and set-shifting.',
+  'ex.sorting.example': 'Match the card by color, shape, or count; adapt when the rule changes',
+  'ex.sorting.hint': 'Match the card to one of the 4 reference cards',
+  'ex.sorting.detail': '{ok}/{n} correct',
+
+  // resources
+  'ex.resources.name': 'Resource Planning',
+  'ex.resources.desc': 'Allocate energy budget to maximize total project score',
+  'ex.resources.why': 'Knapsack-style planning stimulates prefrontal optimization, trade-off evaluation, and strategic foresight.',
+  'ex.resources.example': 'Select projects to maximize score without exceeding energy budget',
+  'ex.resources.detail': '{ok}/{n} completed',
+
+  // reaction
+  'ex.reaction.name': 'Simple Reaction',
+  'ex.reaction.desc': 'Tap immediately the instant the screen turns green',
+  'ex.reaction.why': 'Measures pure visual-motor conduction velocity and alertness with minimal cognitive processing delay.',
+  'ex.reaction.example': 'Wait for green, then tap immediately',
+  'ex.reaction.ready': 'Get ready',
+  'ex.reaction.wait': 'Wait for green...',
+  'ex.reaction.tapNow': 'TAP NOW!',
+  'ex.reaction.early': 'Too early!',
+  'ex.reaction.penalty': 'Wait for the green signal',
+  'ex.reaction.detail': 'Avg: {ms} ms · Best: {best} ms ({ok}/{n})',
+
+  // dots
+  'ex.dots.name': 'Dot Estimation',
+  'ex.dots.desc': 'Instantly judge which cloud has more dots without counting',
+  'ex.dots.why': 'Trains the approximate number system (ANS) and non-symbolic parietal magnitude representation.',
+  'ex.dots.example': 'Quickly tap the side with more dots',
+  'ex.dots.hint': 'Which side has more dots?',
+  'ex.dots.left': 'Left',
+  'ex.dots.right': 'Right',
+  'ex.dots.detail': '{ok}/{n} correct',
+
+  // anagrams
+  'ex.anagrams.name': 'Word Anagrams',
+  'ex.anagrams.desc': 'Unscramble the letters to reconstruct the hidden word',
+  'ex.anagrams.why': 'Engages orthographic working memory, lexical search, and mental manipulation of phonological units.',
+  'ex.anagrams.example': 'Tap letters in the right order to spell the word',
+  'ex.anagrams.hint': 'Tap letters to reconstruct the word',
+  'ex.anagrams.detail': '{ok}/{n} solved',
+
+  // fluency
+  'ex.fluency.name': 'Word Sprint',
+  'ex.fluency.desc': 'Quickly identify words starting with the target letter',
+  'ex.fluency.why': 'Verbal fluency tests rapid lexical retrieval from semantic memory under phonetic constraints.',
+  'ex.fluency.example': 'Tap if the word starts with the target letter',
+  'ex.fluency.targetLetter': 'Target Letter:',
+  'ex.fluency.detail': '{ok}/{n} correct',
+
+  // matrix
+  'ex.matrix.name': 'Spatial Matrix',
+  'ex.matrix.desc': 'Memorize spatial layout and place tokens after rotation',
+  'ex.matrix.why': 'Demands mental rotation and spatial coordinate transformation, strengthening parieto-frontal circuits.',
+  'ex.matrix.example': 'Memorize the pattern and place elements after mental rotation',
+  'ex.matrix.memorize': 'Memorize the pattern',
+  'ex.matrix.same': 'Place the tokens in their original positions',
+  'ex.matrix.rot90': 'Rotate the pattern 90° clockwise!',
+  'ex.matrix.rot180': 'Rotate the pattern 180°!',
+  'ex.matrix.detail': '{ok}/{n} correct',
+
+  // tapSeq
+  'ex.tapSeq.name': 'Bilateral Tap',
+  'ex.tapSeq.desc': 'Coordinate left and right thumbs to reproduce alternating sequences',
+  'ex.tapSeq.why': 'Alternating bimanual tapping activates motor cortices across both hemispheres and stimulates the corpus callosum.',
+  'ex.tapSeq.example': 'L - R - L - R   Follow the rhythm with both thumbs',
+  'ex.tapSeq.hint': 'Tap left and right in the exact sequence',
+  'ex.tapSeq.detail': '{ok}/{n} sequences completed',
+
+  // swipePattern
+  'ex.swipePattern.name': 'Bilateral Swipe',
+  'ex.swipePattern.desc': 'Execute directional swipes simultaneously with both hands',
+  'ex.swipePattern.why': 'Bimanual directional gestures challenge spatial decoupling and symmetric/asymmetric motor coordination.',
+  'ex.swipePattern.example': 'Swipe left thumb ↑ and right thumb ↓',
+  'ex.swipePattern.hint': 'Perform both directional gestures simultaneously',
+  'ex.swipePattern.detail': '{ok}/{n} patterns correct',
+
+  // rhythm
+  'ex.rhythm.name': 'Bilateral Rhythm',
+  'ex.rhythm.desc': 'Synchronize left and right taps to an alternating beat',
+  'ex.rhythm.why': 'Rhythmic bilateral coordination engages the cerebellum and supplementary motor area for precise temporal synchronization.',
+  'ex.rhythm.example': 'Tap left and right alternately in time with the beat',
+  'ex.rhythm.hint': 'Tap on the beat with the indicated hand',
+  'ex.rhythm.detail': '{ok}/{n} hits · avg error {ms} ms',
+
+  // crossMove
+  'ex.crossMove.name': 'Cross Movements',
+  'ex.crossMove.desc': 'Cross the body midline: respond on the opposite side',
+  'ex.crossMove.why': 'Crossing the midline forces information transmission across the corpus callosum, training contralateral integration.',
+  'ex.crossMove.example': 'Target on left + "Cross" -> Tap RIGHT button',
+  'ex.crossMove.same': 'Same side: Tap matching side',
+  'ex.crossMove.cross': 'CROSS: Tap OPPOSITE side!',
+  'ex.crossMove.detail': '{ok}/{n} correct · {ms} ms',
+
+  // dualTask
+  'ex.dualTask.name': 'Bilateral Dual-Task',
+  'ex.dualTask.desc': 'Hold stabilizer with left hand while answering with right hand',
+  'ex.dualTask.why': 'Dual-task paradigms isolate divided hemispheric attention and asymmetric motor-cognitive resource sharing.',
+  'ex.dualTask.example': 'Hold left button while right thumb answers Even/Odd',
+  'ex.dualTask.hint': 'Keep holding left button while choosing Even / Odd',
+  'ex.dualTask.hold': 'Hold down (SX)',
+  'ex.dualTask.even': 'Even',
+  'ex.dualTask.odd': 'Odd',
+  'ex.dualTask.notHolding': 'Left button was not held!',
+  'ex.dualTask.detail': '{ok}/{n} correct',
 };
 
 const words: string[] = [

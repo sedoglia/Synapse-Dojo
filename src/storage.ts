@@ -1,4 +1,4 @@
-import { STORAGE_KEY } from './config';
+﻿import { STORAGE_KEY } from './config';
 import type { Lang } from './i18n';
 import { todayKey } from './dom';
 

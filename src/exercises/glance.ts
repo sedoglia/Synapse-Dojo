@@ -1,4 +1,4 @@
-import { h, rand, pick, shuffle } from '../dom';
+﻿import { h, rand, pick, shuffle } from '../dom';
 import { t } from '../i18n';
 import { store } from '../storage';
 import { Staircase } from '../adaptive';

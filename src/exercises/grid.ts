@@ -1,4 +1,4 @@
-import { h, rand, scale, flash } from '../dom';
+﻿import { h, rand, scale, flash } from '../dom';
 import { sfx } from '../audio';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';

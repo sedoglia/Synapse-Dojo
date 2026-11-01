@@ -1,4 +1,4 @@
-import { h, rand, pick, scale, flash } from '../dom';
+﻿import { h, rand, pick, scale, flash } from '../dom';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';
 import { keypad, keypadKeyboard } from '../widgets';

@@ -1,4 +1,4 @@
-// Standalone guide.html entry point for external links, bookmarks, and search engine crawlers.
+﻿// Standalone guide.html entry point for external links, bookmarks, and search engine crawlers.
 import './style.css';
 import { h } from './dom';
 import { store } from './storage';

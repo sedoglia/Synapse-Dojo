@@ -1,4 +1,4 @@
-import type { Staircase } from './adaptive';
+﻿import type { Staircase } from './adaptive';
 
 /** Thrown into a running exercise when the player quits. */
 export class Aborted extends Error {}

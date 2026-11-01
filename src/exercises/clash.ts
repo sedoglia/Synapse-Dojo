@@ -1,4 +1,4 @@
-import { h, pick, scale, flash } from '../dom';
+﻿import { h, pick, scale, flash } from '../dom';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';
 import type { Exercise } from './types';
