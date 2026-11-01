@@ -1,16 +1,90 @@
 <!doctype html>
-<html lang="en">
+<html lang="it">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#5b5bf0" />
-    <meta name="description" content="Open-source brain-training game: a few minutes a day." />
+    <title>Synapse Gym · Giochi per Allenare la Mente | Brain Training Gratuito</title>
+    <meta name="description" content="Allena la mente ogni giorno con Synapse Gym: 17 giochi cognitivi gratuiti per memoria, concentrazione, velocità, calcolo e riflessi. Nessuna registrazione, 100% gratis e privato." />
+    <meta name="keywords" content="giochi per allenare la mente, brain training gratis, esercizi per la memoria, ginnastica mentale, giochi cognitivi, allenamento cerebrale, test neuro score, free brain games, neuroplasticità" />
+    <link rel="canonical" href="https://www.synapse-gym.com/" />
+    
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:site_name" content="Synapse Gym" />
+    <meta property="og:title" content="Synapse Gym · Giochi per Allenare la Mente | Brain Training Gratuito" />
+    <meta property="og:description" content="17 esercizi cognitivi basati sulle neuroscienze per potenziare memoria, attenzione, calcolo e riflessi. 100% gratuito e privato." />
+    <meta property="og:url" content="https://www.synapse-gym.com/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="https://www.synapse-gym.com/icon.svg" />
+    <meta property="og:locale" content="it_IT" />
+    <meta property="og:locale:alternate" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Synapse Gym · Giochi per Allenare la Mente" />
+    <meta name="twitter:description" content="Allena la mente ogni giorno con 17 giochi cognitivi gratuiti basati sulle neuroscienze." />
+    <meta name="twitter:image" content="https://www.synapse-gym.com/icon.svg" />
+
     <link rel="icon" href="./icon.svg" type="image/svg+xml" />
     <link rel="manifest" href="./manifest.json" />
-    <title>Synapse Gym</title>
+
+    <!-- Structured Data (Schema.org JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Synapse Gym",
+      "url": "https://www.synapse-gym.com/",
+      "description": "Giochi gratuiti per allenare la mente basati sulle neuroscienze: 17 esercizi cognitivi per memoria, attenzione, velocità di elaborazione e riflessi.",
+      "applicationCategory": "HealthApplication, EducationalApplication, BrainTrainingApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "browserRequirements": "Requires JavaScript. Requires HTML5.",
+      "author": {
+        "@type": "Person",
+        "name": "Sergio Sedoglia",
+        "url": "https://github.com/sedoglia"
+      }
+    }
+    </script>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <noscript>
+        <header>
+          <h1>Synapse Gym · Giochi per Allenare la Mente e Brain Training Gratuito</h1>
+          <p>Pochi minuti al giorno per una mente più agile: 17 esercizi cognitivi basati sulle neuroscienze per memoria, attenzione, logica e riflessi.</p>
+        </header>
+        <main>
+          <h2>I 17 Giochi Scientifici per Allenare la Mente</h2>
+          <ul>
+            <li><strong>Colpo d'occhio:</strong> Allena la velocità di percezione visiva e il campo visivo utile (studio ACTIVE).</li>
+            <li><strong>Riflesso a scelta:</strong> Tempo di reazione rapido e inibizione go/no-go.</li>
+            <li><strong>Sentiero dei numeri:</strong> Trail Making Test per flessibilità mentale e ricerca visiva.</li>
+            <li><strong>Pilota:</strong> Multitasking e coordinazione visuo-motoria (ispirato a NeuroRacer).</li>
+            <li><strong>Radar:</strong> Multiple Object Tracking per attenzione spaziale diffusa.</li>
+            <li><strong>Scontro di colori:</strong> Inibizione cognitiva ed effetto Stroop.</li>
+            <li><strong>Doppia regola:</strong> Flessibilità mentale e task switching rapido.</li>
+            <li><strong>Eco:</strong> Memoria di lavoro uditiva e visiva (N-Back).</li>
+            <li><strong>Griglia:</strong> Memoria di lavoro visuo-spaziale (Corsi blocks).</li>
+            <li><strong>Cifre:</strong> Span di memoria verbale e numerica inversa.</li>
+            <li><strong>Cassaforte:</strong> Memoria associativa e combinatoria.</li>
+            <li><strong>Coppie:</strong> Memory visivo a carte coperte.</li>
+            <li><strong>Rotazione:</strong> Rotazione mentale di figure 2D e 3D.</li>
+            <li><strong>Torri:</strong> Pianificazione logica e problem solving (Torre di Hanoi).</li>
+            <li><strong>Intruso:</strong> Categorizzazione visiva e ragionamento induttivo.</li>
+            <li><strong>Calcolo rapido:</strong> Aritmetica mentale sotto pressione temporale.</li>
+            <li><strong>Lettura veloce:</strong> Comprensione rapida del testo (RSVP).</li>
+          </ul>
+          <p><a href="./guide.html">Consulta la guida completa ai giochi</a> | <a href="./privacy.html">Note legali e privacy</a></p>
+          <p>Per giocare, abilita JavaScript nel tuo browser.</p>
+        </main>
+      </noscript>
+    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

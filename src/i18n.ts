@@ -39,7 +39,7 @@ export interface Passage {
 }
 
 export interface Locale {
-  ui: Record<Key, string>;
+  ui: Partial<Record<Key, string>>;
   words: string[];
   passages: Passage[];
 }

@@ -9,6 +9,7 @@ import { playDailyCheck, playPlan } from './play';
 import { showTraining } from './training';
 import { showProgress } from './progress';
 import { showSettings } from './settings';
+import { showGuide } from './guide';
 
 function menuCard(icon: string, title: string, sub: string | HTMLElement, onClick: () => void, cls = '') {
   return h(
@@ -56,8 +57,18 @@ export function showHome() {
       h(
         'header',
         { class: 'hero' },
-        langPicker(showHome),
-        h('button', { class: 'icon-btn settings-btn', 'aria-label': t('home.settings'), onClick: showSettings }, '⚙'),
+        h(
+          'div',
+          { class: 'hero-topbar' },
+          langPicker(showHome),
+          h(
+            'div',
+            { class: 'hero-actions' },
+            h('button', { class: 'icon-btn guide-btn', 'aria-label': t('guide.title'), title: t('guide.title'), onClick: () => showGuide(showHome) }, '📖'),
+            h('button', { class: 'icon-btn settings-btn', 'aria-label': t('home.settings'), title: t('home.settings'), onClick: showSettings }, '⚙'),
+          ),
+        ),
+
         h('div', { class: 'logo' }, h('img', { src: './icon.svg', alt: '' }), h('span', {}, APP_NAME)),
         h('h1', {}, t('home.hello', { name })),
         h('p', { class: 'muted' }, t('home.how')),

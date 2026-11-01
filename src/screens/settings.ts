@@ -6,6 +6,7 @@ import { render, page, applySettings, langSelect, setLang } from '../ui';
 import { showHome } from './home';
 import { showOnboarding } from './onboarding';
 import { showPrivacy } from './privacy';
+import { showGuide } from './guide';
 
 /** A daily recurring calendar event: a reminder that works on any phone, with no server or push service. */
 function downloadReminder(time: string) {
@@ -150,7 +151,13 @@ export function showSettings() {
           t('settings.reset'),
         ),
       ),
-      h('p', { class: 'center small' }, h('button', { class: 'link-btn', onClick: () => showPrivacy(showSettings) }, t('privacy.title'))),
+      h(
+        'p',
+        { class: 'center small' },
+        h('button', { class: 'link-btn', onClick: () => showGuide(showSettings) }, `📖 ${t('guide.title')}`),
+        h('span', {}, ' · '),
+        h('button', { class: 'link-btn', onClick: () => showPrivacy(showSettings) }, t('privacy.title')),
+      ),
       h('p', { class: 'muted small center' }, `${APP_NAME} v${VERSION} · ${t('settings.about')}`),
     ),
   );
