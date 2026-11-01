@@ -1,4 +1,4 @@
-﻿import { shuffle, todayKey } from './dom';
+import { shuffle, todayKey } from './dom';
 import { store } from './storage';
 import { levelScore } from './adaptive';
 import { EXERCISES, DOMAINS, type Domain, type Exercise } from './exercises';
@@ -24,11 +24,21 @@ export function domainScore(d: Domain): number {
   return values.length ? values.reduce((a, b) => a + b, 0) / values.length : 0;
 }
 
-function domainLastPlayed(d: Domain): string {
-  return EXERCISES.filter((e) => e.domain === d)
-    .map((e) => store.lastPlayed(e.id))
-    .sort()
-    .pop()!;
+function domainRecency(d: Domain): number {
+  const ids = EXERCISES.filter((e) => e.domain === d).map((e) => e.id);
+  const runs = store.data.runs;
+  for (let i = runs.length - 1; i >= 0; i--) {
+    if (ids.includes(runs[i].ex)) return i;
+  }
+  return -1;
+}
+
+function exerciseRecency(id: string): number {
+  const runs = store.data.runs;
+  for (let i = runs.length - 1; i >= 0; i--) {
+    if (runs[i].ex === id) return i;
+  }
+  return -1;
 }
 
 const runsToday = (ids: string[]) => {
@@ -54,21 +64,25 @@ function toPlan(saved: NonNullable<typeof store.data.plan>): Plan | null {
 
 /**
  * Builds a workout: one exercise from each of the four domains trained least today, then least
- * recently, then weakest; within a domain the exercise played least today and longest ago.
- * So a second workout on the same day covers different skills and exercises.
+ * recently (chronological order across rounds and days), then weakest; within a domain the exercise
+ * played least today and longest ago.
+ * Repeated workouts on the same day guarantee full coverage across all 9 cognitive domains.
  */
 function generate(round: number): Plan {
   const domainIds = (d: string) => EXERCISES.filter((e) => e.domain === d).map((e) => e.id);
   const domains = shuffle(DOMAINS).sort(
     (a, b) =>
       runsToday(domainIds(a)) - runsToday(domainIds(b)) ||
-      domainLastPlayed(a).localeCompare(domainLastPlayed(b)) ||
+      domainRecency(a) - domainRecency(b) ||
       domainScore(a) - domainScore(b),
   );
   const exercises = domains.slice(0, PLAN_SIZE).map(
     (d) =>
       shuffle(EXERCISES.filter((e) => e.domain === d)).sort(
-        (a, b) => runsToday([a.id]) - runsToday([b.id]) || store.lastPlayed(a.id).localeCompare(store.lastPlayed(b.id)),
+        (a, b) =>
+          runsToday([a.id]) - runsToday([b.id]) ||
+          exerciseRecency(a.id) - exerciseRecency(b.id) ||
+          (store.lastPlayed(a.id) ? 1 : 0) - (store.lastPlayed(b.id) ? 1 : 0),
       )[0],
   );
   store.data.plan = { date: todayKey(), ids: exercises.map((e) => e.id), done: [], round };
