@@ -1,4 +1,4 @@
-# Synapse Gym
+# Synapse Dojo
 
 Gioco open source di allenamento cognitivo: pochi minuti al giorno, nel browser, su telefono o PC.
 *Open-source brain-training game — a few minutes a day, in any browser.*

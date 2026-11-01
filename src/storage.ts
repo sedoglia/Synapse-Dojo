@@ -75,7 +75,10 @@ function withDefaults(saved: Partial<SaveData>): SaveData {
 
 function load(): SaveData {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
+    let raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) {
+      raw = localStorage.getItem('synapse-gym/v1');
+    }
     if (raw) return withDefaults(JSON.parse(raw) as Partial<SaveData>);
   } catch {
     /* corrupted or unavailable storage: start fresh */
@@ -89,7 +92,7 @@ const numbers = (v: unknown) => isObj(v) && Object.values(v).every((n) => typeof
 
 /** Checks the shape of an exported save (or a bare SaveData) and returns it completed with defaults, or null. */
 export function parseSave(json: unknown): SaveData | null {
-  const d = isObj(json) && json.app === 'synapse-gym' ? json.data : json;
+  const d = isObj(json) && (json.app === 'synapse-dojo' || json.app === 'synapse-gym') ? json.data : json;
   if (!isObj(d)) return null;
   const ok =
     typeof d.name === 'string' &&
@@ -123,7 +126,7 @@ export const store = {
 
   /** The whole save wrapped with a marker, ready to be downloaded as a file. */
   exportJson(): string {
-    return JSON.stringify({ app: 'synapse-gym', version: 1, exported: new Date().toISOString(), data: this.data }, null, 1);
+    return JSON.stringify({ app: 'synapse-dojo', version: 1, exported: new Date().toISOString(), data: this.data }, null, 1);
   },
 
   replace(data: SaveData) {

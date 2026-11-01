@@ -56,7 +56,7 @@ export function showOnboarding() {
         h(
           'div',
           { class: 'logo' },
-          h('img', { class: 'onboard-logo-img', src: './icon.svg', alt: 'Synapse Gym Logo' }),
+          h('img', { class: 'onboard-logo-img', src: './icon.svg', alt: 'Synapse Dojo Logo' }),
           h('span', {}, APP_NAME),
         ),
         h('h1', { class: 'landing-title' }, t('landing.heroTitle')),

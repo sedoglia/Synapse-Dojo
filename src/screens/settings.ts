@@ -20,7 +20,7 @@ function downloadReminder(time: string) {
     'VERSION:2.0',
     `PRODID:-//${APP_NAME}//Reminder//EN`,
     'BEGIN:VEVENT',
-    `UID:daily-training@${location.host || 'synapse-gym'}`,
+    `UID:daily-training@${location.host || 'synapse-dojo'}`,
     `DTSTAMP:${stamp}`,
     `DTSTART:${ymd}T${hh}${mm}00`,
     'DURATION:PT15M',
@@ -36,7 +36,7 @@ function downloadReminder(time: string) {
     'END:VEVENT',
     'END:VCALENDAR',
   ].join('\r\n');
-  download(ics, 'text/calendar', 'synapse-gym-reminder.ics');
+  download(ics, 'text/calendar', 'synapse-dojo-reminder.ics');
 }
 
 function download(text: string, type: string, name: string) {
@@ -127,7 +127,7 @@ export function showSettings() {
           h(
             'div',
             { class: 'row left' },
-            h('button', { class: 'btn', onClick: () => download(store.exportJson(), 'application/json', `synapse-gym-${todayKey()}.json`) }, `⬇️ ${t('settings.export')}`),
+            h('button', { class: 'btn', onClick: () => download(store.exportJson(), 'application/json', `synapse-dojo-${todayKey()}.json`) }, `⬇️ ${t('settings.export')}`),
             h('button', { class: 'btn', onClick: () => file.click() }, `⬆️ ${t('settings.import')}`),
             file,
           ),

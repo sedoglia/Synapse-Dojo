@@ -1,6 +1,6 @@
 {
-  "name": "Synapse Gym",
-  "short_name": "Synapse",
+  "name": "Synapse Dojo",
+  "short_name": "Synapse Dojo",
   "description": "Open-source brain-training game",
   "start_url": "./",
   "scope": "./",

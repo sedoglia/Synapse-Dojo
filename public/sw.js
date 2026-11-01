@@ -1,6 +1,6 @@
 // Network-first service worker: always fresh online, still playable offline.
 // Only this site's own files are cached; requests to other origins (e.g. analytics) pass through untouched.
-const CACHE = 'synapse-gym-v2';
+const CACHE = 'synapse-dojo-v1';
 
 self.addEventListener('install', () => self.skipWaiting());
 self.addEventListener('activate', (e) =>
