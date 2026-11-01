@@ -538,14 +538,23 @@ const ui: Locale['ui'] = {
 
   // matrix
   'ex.matrix.name': 'Matrice Spaziale',
-  'ex.matrix.desc': 'Memorizza la disposizione spaziale e ricostruiscila ruotata',
-  'ex.matrix.why': 'Esercizio di rotazione mentale avanzata e mappatura delle coordinate spaziali allocentriche.',
-  'ex.matrix.example': 'Memorizza lo schema e posiziona gli elementi dopo la rotazione mentale',
-  'ex.matrix.memorize': 'Memorizza la disposizione',
-  'ex.matrix.same': 'Posiziona gli elementi nella posizione originale',
-  'ex.matrix.rot90': 'Ruota mentalmente di 90° in senso orario!',
-  'ex.matrix.rot180': 'Ruota mentalmente di 180°!',
+  'ex.matrix.desc': 'Memorizza la posizione dei blocchi blu e ricollocali dopo la rotazione mentale',
+  'ex.matrix.why': 'Allena la rotazione mentale e la trasformazione di coordinate spaziali, stimolando i circuiti parieto-frontali.',
+  'ex.matrix.example': 'Memorizza i blocchi blu e tocca dove si trovano dopo aver ruotato la griglia',
+  'ex.matrix.memorize': 'Memorizza i blocchi blu',
+  'ex.matrix.itemsToRemember': 'blocchi da memorizzare',
+  'ex.matrix.same': 'Tocca le celle che erano illuminate',
+  'ex.matrix.noRot': 'Stessa posizione (nessuna rotazione)',
+  'ex.matrix.rot90': 'Ruota di 90° in senso orario: tocca dove si trovano ora i blocchi',
+  'ex.matrix.rot90Badge': '90° orario',
+  'ex.matrix.rot180': 'Ruota di 180°: tocca dove si trovano ora i blocchi',
+  'ex.matrix.rot180Badge': '180° capovolta',
+  'ex.matrix.rot270': 'Ruota di 90° in senso antiorario: tocca dove si trovano ora i blocchi',
+  'ex.matrix.rot270Badge': '90° antiorario',
   'ex.matrix.detail': '{ok}/{n} corretti',
+  'ex.matrix.confirm': 'Conferma ({sel}/{n})',
+
+  
 
   // tapSeq
   'ex.tapSeq.name': 'Tap Bilaterale',

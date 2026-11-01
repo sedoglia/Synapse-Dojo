@@ -1,17 +1,27 @@
-import { h, rand, flash } from '../dom';
+import { h, rand, flash, shuffle } from '../dom';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';
+import { onKeys } from '../widgets';
 import type { Exercise } from './types';
 
-// Ratio of dots: closer ratio = higher difficulty
-const ratioFor = (level: number) => Math.min(0.92, 0.5 + level * 0.04);
+// Ratio of dots: gentler start, ramping smoothly with level
+const ratioFor = (level: number) => Math.min(0.88, 0.40 + (level - 1) * 0.04);
 
 function renderDotCloud(count: number): HTMLElement {
   const box = h('div', { class: 'dot-cloud' });
-  for (let i = 0; i < count; i++) {
-    const top = rand(8, 88);
-    const left = rand(8, 88);
-    const size = rand(8, 14);
+  const gridSize = 6;
+  const totalSlots = gridSize * gridSize;
+  const slotIndices = Array.from({ length: totalSlots }, (_, i) => i);
+  const chosenSlots = shuffle(slotIndices).slice(0, count);
+
+  for (const slot of chosenSlots) {
+    const row = Math.floor(slot / gridSize);
+    const col = slot % gridSize;
+    const cellW = 100 / gridSize;
+    const cellH = 100 / gridSize;
+    const top = row * cellH + rand(3, Math.max(4, cellH - 14));
+    const left = col * cellW + rand(3, Math.max(4, cellW - 14));
+    const size = rand(10, 14);
     const dot = h('div', {
       class: 'dot-item',
       style: {
@@ -49,11 +59,16 @@ export const dots: Exercise = {
     container.append(leftBox, rightBox);
 
     let onSelect: ((side: 'left' | 'right') => void) | null = null;
-    const btnLeft = h('button', { class: 'btn dots-btn', onPointerdown: () => onSelect?.('left') }, t('ex.dots.left'));
-    const btnRight = h('button', { class: 'btn dots-btn', onPointerdown: () => onSelect?.('right') }, t('ex.dots.right'));
+    const btnLeft = h('button', { class: 'btn dots-btn', onPointerdown: () => onSelect?.('left') }, `👈 ${t('ex.dots.left')}`);
+    const btnRight = h('button', { class: 'btn dots-btn', onPointerdown: () => onSelect?.('right') }, `${t('ex.dots.right')} 👉`);
     const controls = h('div', { class: 'dots-controls' }, btnLeft, btnRight);
 
     ctx.stage.append(hint, container, controls);
+
+    onKeys(ctx, {
+      ArrowLeft: () => onSelect?.('left'),
+      ArrowRight: () => onSelect?.('right'),
+    });
 
     let correct = 0;
 
@@ -63,12 +78,13 @@ export const dots: Exercise = {
       leftBox.replaceChildren();
       rightBox.replaceChildren();
       controls.classList.add('hidden');
+      hint.textContent = t('ex.dots.hint');
 
-      await ctx.wait(rand(400, 800));
+      await ctx.wait(rand(400, 700));
 
       const ratio = ratioFor(st.level);
-      const base = rand(16, 32);
-      const fewer = Math.round(base * ratio);
+      const base = rand(20, 30);
+      const fewer = Math.max(6, Math.round(base * ratio));
 
       const moreSide: 'left' | 'right' = Math.random() < 0.5 ? 'left' : 'right';
       const leftCount = moreSide === 'left' ? base : fewer;
@@ -78,10 +94,11 @@ export const dots: Exercise = {
       rightBox.append(renderDotCloud(rightCount));
       flash(container, 'pop', 150);
 
-      // Brief flash display (550ms * pace)
-      await ctx.wait(550 * ctx.pace);
+      // Comfortable display time: 1500ms at start, 2200ms in practice
+      const displayMs = (ctx.mode === 'practice' ? 2200 : Math.max(800, Math.round(1500 - (st.level - 1) * 70))) * ctx.pace;
+      await ctx.wait(displayMs);
 
-      // Mask dots
+      // Mask dots and prompt response
       leftBox.replaceChildren(h('div', { class: 'dot-mask' }, '?'));
       rightBox.replaceChildren(h('div', { class: 'dot-mask' }, '?'));
       controls.classList.remove('hidden');

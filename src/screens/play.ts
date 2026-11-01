@@ -1,4 +1,4 @@
-﻿import { h, todayKey, pick } from '../dom';
+import { h, todayKey, pick } from '../dom';
 import { Ctx, Aborted, type Mode } from '../ctx';
 import { sfx, haptic } from '../audio';
 import { store } from '../storage';
@@ -73,10 +73,11 @@ async function runExercise(ex: Exercise, mode: Mode, level: number): Promise<{ r
   const stage = h('div', { class: `stage stage-${ex.id}` });
 
   const toast = (text: string, kind: 'up' | 'down' | 'hint') => {
+    if (kind === 'hint') toasts.replaceChildren();
     const el = h('div', { class: `toast ${kind}` }, kind === 'up' ? `⬆ ${t('common.level')}` : kind === 'down' ? `⬇ ${t('common.level')}` : text);
     toasts.append(el);
     if (kind === 'up') sfx.levelUp();
-    setTimeout(() => el.remove(), kind === 'hint' ? 4500 : 1400);
+    setTimeout(() => el.remove(), kind === 'hint' ? 3200 : 1400);
   };
 
   const ctx = new Ctx(stage, mode, level, pace(), {

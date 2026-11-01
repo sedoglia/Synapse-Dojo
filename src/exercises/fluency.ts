@@ -1,9 +1,10 @@
 import { h, flash, pick } from '../dom';
 import { t, words } from '../i18n';
 import { Staircase } from '../adaptive';
+import { onKeys } from '../widgets';
 import type { Exercise } from './types';
 
-const limitFor = (level: number) => Math.max(550, Math.round(1800 * Math.pow(0.9, level - 1)));
+const limitFor = (level: number) => Math.max(650, Math.round(2200 * Math.pow(0.9, level - 1)));
 
 export const fluency: Exercise = {
   id: 'fluency',
@@ -35,17 +36,17 @@ export const fluency: Exercise = {
     const card = h('div', { class: 'fluency-card' });
 
     let onAnswer: ((matches: boolean) => void) | null = null;
-    const matchBtn = h('button', { class: 'btn big good-btn', onClick: () => onAnswer?.(true) }, `✓ ${targetLetter}...`);
-    const skipBtn = h('button', { class: 'btn big', onClick: () => onAnswer?.(false) }, `✗ ≠ ${targetLetter}`);
+    const skipBtn = h('button', { class: 'btn big fluency-btn', onClick: () => onAnswer?.(false) }, `✗ ≠ ${targetLetter}`);
+    const matchBtn = h('button', { class: 'btn big good-btn fluency-btn', onClick: () => onAnswer?.(true) }, `✓ ${targetLetter}...`);
     const controls = h('div', { class: 'fluency-controls' }, skipBtn, matchBtn);
 
     ctx.stage.append(header, card, controls);
 
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight' || e.key === ' ') onAnswer?.(true);
-      if (e.key === 'ArrowLeft') onAnswer?.(false);
-    };
-    window.addEventListener('keydown', onKey);
+    onKeys(ctx, {
+      ArrowRight: () => onAnswer?.(true),
+      ' ': () => onAnswer?.(true),
+      ArrowLeft: () => onAnswer?.(false),
+    });
 
     let correct = 0;
 
@@ -65,7 +66,7 @@ export const fluency: Exercise = {
       card.textContent = wordToTest;
       flash(card, 'pop', 150);
 
-      const limit = limitFor(st.level) * ctx.pace;
+      const limit = (ctx.mode === 'practice' ? 60_000 : limitFor(st.level)) * ctx.pace;
 
       const choice = await ctx.timed<boolean | null>(limit, null, (done) => {
         onAnswer = done;
@@ -84,10 +85,9 @@ export const fluency: Exercise = {
         await ctx.wait(300);
       }
       card.textContent = choice !== null ? '' : `⏱ ${t('common.timeout')}`;
-      await ctx.wait(ok ? 200 : 600);
+      await ctx.wait(ok ? 250 : 650);
     }
 
-    window.removeEventListener('keydown', onKey);
     ctx.progress(1);
 
     return {

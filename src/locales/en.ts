@@ -538,14 +538,23 @@ export const ui = {
 
   // matrix
   'ex.matrix.name': 'Spatial Matrix',
-  'ex.matrix.desc': 'Memorize spatial layout and place tokens after rotation',
+  'ex.matrix.desc': 'Memorize the blue blocks\' layout and place them after mental rotation',
   'ex.matrix.why': 'Demands mental rotation and spatial coordinate transformation, strengthening parieto-frontal circuits.',
   'ex.matrix.example': 'Memorize the pattern and place elements after mental rotation',
-  'ex.matrix.memorize': 'Memorize the pattern',
-  'ex.matrix.same': 'Place the tokens in their original positions',
-  'ex.matrix.rot90': 'Rotate the pattern 90° clockwise!',
-  'ex.matrix.rot180': 'Rotate the pattern 180°!',
+  'ex.matrix.memorize': 'Memorize the blue blocks',
+  'ex.matrix.itemsToRemember': 'blocks to remember',
+  'ex.matrix.same': 'Tap the cells that were illuminated',
+  'ex.matrix.noRot': 'Same position (no rotation)',
+  'ex.matrix.rot90': 'Rotate 90° clockwise: tap where the blocks are now',
+  'ex.matrix.rot90Badge': '90° clockwise',
+  'ex.matrix.rot180': 'Rotate 180°: tap where the blocks are now',
+  'ex.matrix.rot180Badge': '180° flip',
+  'ex.matrix.rot270': 'Rotate 90° counter-clockwise: tap where the blocks are now',
+  'ex.matrix.rot270Badge': '90° counter-clockwise',
   'ex.matrix.detail': '{ok}/{n} correct',
+  'ex.matrix.confirm': 'Confirm ({sel}/{n})',
+
+  
 
   // tapSeq
   'ex.tapSeq.name': 'Bilateral Tap',
