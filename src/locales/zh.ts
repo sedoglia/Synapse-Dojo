@@ -462,7 +462,7 @@ const ui: Locale['ui'] = {
   'ex.sorting.why': '灵感源自威斯康星卡片分类测验（WCST），锻炼认知灵活性、规则归纳能力及注意力转换。',
   'ex.sorting.example': '有3个红色三角形的卡片：按形状、颜色或数量进行匹配。通过试错发现规则！',
   'ex.sorting.hint': '按颜色、形状或数量匹配。隐藏规则会定期改变！',
-  'ex.sorting.detail': '{ok}/{n} 正确',
+  'ex.sorting.detail': '{ok}/{n} 正确 · 完成 {cats} 个规则',
   'ex.sorting.secretRule': '找出隐藏规则',
   'ex.sorting.dimColor': '颜色',
   'ex.sorting.dimShape': '形状',
@@ -473,6 +473,9 @@ const ui: Locale['ui'] = {
   'ex.sorting.correct': '正确！规则已确认',
   'ex.sorting.wrong': '错误！当前并非该规则',
   'ex.sorting.ruleShifted': '规则已改变！请寻找新的匹配标准',
+  'ex.sorting.lostRule': '规则中断！请保持已发现的标准',
+  'ex.sorting.perseveration': '注意：该规则之前已被排除！',
+  'ex.sorting.eliminated': '已排除：{dim}不是目标规则',
 
   
   'ex.resources.name': "资源规划",

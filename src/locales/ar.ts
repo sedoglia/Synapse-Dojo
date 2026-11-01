@@ -462,7 +462,7 @@ const ui: Locale['ui'] = {
   'ex.sorting.why': 'مستوحى من اختبار ويسكونسن لفرز البطاقات (WCST)، يدرّب المرونة الإدراكية واستنتاج القواعد والتحول الذهني.',
   'ex.sorting.example': 'بطاقة بها 3 مثلثات حمراء: طابق حسب الشكل أو اللون أو العدد. اكتشف القاعدة بالتجربة والخطأ!',
   'ex.sorting.hint': 'طابق حسب اللون أو الشكل أو العدد. تتغير القاعدة السرية دورياً!',
-  'ex.sorting.detail': '{ok}/{n} صحيح',
+  'ex.sorting.detail': '{ok}/{n} صحيح · {cats} قواعد',
   'ex.sorting.secretRule': 'اكتشف القاعدة السرية',
   'ex.sorting.dimColor': 'اللون',
   'ex.sorting.dimShape': 'الشكل',
@@ -473,6 +473,9 @@ const ui: Locale['ui'] = {
   'ex.sorting.correct': 'صحيح! تم تأكيد القاعدة',
   'ex.sorting.wrong': 'خطأ! ليست هذه هي القاعدة النشطة',
   'ex.sorting.ruleShifted': 'تغيرت القاعدة! ابحث عن المعيار الجديد',
+  'ex.sorting.lostRule': 'فقدت القاعدة! حافظ على المعيار المكتشف',
+  'ex.sorting.perseveration': 'انتبه: لقد استبعدت هذه القاعدة بالفعل!',
+  'ex.sorting.eliminated': 'مستبعد: {dim} ليست القاعدة',
 
   
   'ex.resources.name': "تخطيط الموارد",

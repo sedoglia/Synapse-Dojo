@@ -2791,7 +2791,7 @@ html.big-text {
 .sorting-dim-pill {
   font-size: 0.8rem;
   font-weight: 700;
-  padding: 3px 10px;
+  padding: 4px 12px;
   border-radius: 999px;
   background: var(--surface);
   border: 1px solid var(--border);
@@ -2799,6 +2799,20 @@ html.big-text {
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  transition: all 0.2s ease;
+}
+.sorting-dim-pill.eliminated {
+  opacity: 0.35;
+  text-decoration: line-through;
+  filter: grayscale(0.9);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+.sorting-dim-pill.active-rule {
+  border-color: var(--c-green);
+  background: rgba(16, 185, 129, 0.18);
+  color: var(--c-green);
+  font-weight: 800;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
 }
 .sorting-section-label {
   font-size: 0.75rem;

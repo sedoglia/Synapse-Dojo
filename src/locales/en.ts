@@ -477,7 +477,7 @@ export const ui = {
   'ex.sorting.why': 'Inspired by the Wisconsin Card Sorting Test (WCST), trains cognitive flexibility, rule induction, and set-shifting.',
   'ex.sorting.example': 'Card with 3 red triangles: match by shape (triangle), color (red), or count (3). Discover the rule by trial and error!',
   'ex.sorting.hint': 'Match by Color, Shape, or Count. The secret rule shifts periodically!',
-  'ex.sorting.detail': '{ok}/{n} correct',
+  'ex.sorting.detail': '{ok}/{n} correct · {cats} categories',
   'ex.sorting.secretRule': 'Find the secret rule',
   'ex.sorting.dimColor': 'Color',
   'ex.sorting.dimShape': 'Shape',
@@ -488,6 +488,9 @@ export const ui = {
   'ex.sorting.correct': 'Correct! Rule confirmed',
   'ex.sorting.wrong': 'Wrong! That is not the active rule',
   'ex.sorting.ruleShifted': 'The rule has changed! Find the new rule',
+  'ex.sorting.lostRule': 'Rule lost! Maintain the discovered criterion',
+  'ex.sorting.perseveration': 'Watch out: you had already ruled this out!',
+  'ex.sorting.eliminated': 'Ruled out: {dim} is not the rule',
 
   
 

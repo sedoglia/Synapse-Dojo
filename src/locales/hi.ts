@@ -462,7 +462,7 @@ const ui: Locale['ui'] = {
   'ex.sorting.why': 'विस्कॉन्सिन कार्ड सॉर्टिंग टेस्ट (WCST) से प्रेरित, संज्ञानात्मक लचीलेपन और नियम प्रेरण को प्रशिक्षित करता है।',
   'ex.sorting.example': '3 लाल त्रिकोण वाला कार्ड: आकार, रंग या संख्या के अनुसार मिलान करें। प्रयास और त्रुटि से नियम खोजें!',
   'ex.sorting.hint': 'रंग, आकार या संख्या के अनुसार मिलान करें। गुप्त नियम समय-समय पर बदलता है!',
-  'ex.sorting.detail': '{ok}/{n} सही',
+  'ex.sorting.detail': '{ok}/{n} सही · {cats} श्रेणियां',
   'ex.sorting.secretRule': 'गुप्त नियम खोजें',
   'ex.sorting.dimColor': 'रंग',
   'ex.sorting.dimShape': 'आकार',
@@ -473,6 +473,9 @@ const ui: Locale['ui'] = {
   'ex.sorting.correct': 'सही! नियम की पुष्टि हुई',
   'ex.sorting.wrong': 'गलत! यह सक्रिय नियम नहीं है',
   'ex.sorting.ruleShifted': 'नियम बदल गया है! नया मानदंड खोजें',
+  'ex.sorting.lostRule': 'नियम खो गया! खोजे गए मानदंड को बनाए रखें',
+  'ex.sorting.perseveration': 'सावधान: आपने यह नियम पहले ही खारिज कर दिया था!',
+  'ex.sorting.eliminated': 'खारिज: {dim} नियम नहीं है',
 
   
   'ex.resources.name': "संसाधन योजना",

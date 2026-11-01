@@ -462,7 +462,7 @@ const ui: Locale['ui'] = {
   'ex.sorting.why': 'Inspiriert vom Wisconsin Card Sorting Test (WCST), trainiert kognitive Flexibilität, Regelinduktion und Set-Shifting.',
   'ex.sorting.example': 'Karte mit 3 roten Dreiecken: nach Form (Dreieck), Farbe (rot) oder Anzahl (3) zuordnen. Finde die Regel durch Ausprobieren!',
   'ex.sorting.hint': 'Nach Farbe, Form oder Anzahl zuordnen. Die geheime Regel wechselt regelmäßig!',
-  'ex.sorting.detail': '{ok}/{n} richtig',
+  'ex.sorting.detail': '{ok}/{n} richtig · {cats} Kategorien',
   'ex.sorting.secretRule': 'Finde die geheime Regel',
   'ex.sorting.dimColor': 'Farbe',
   'ex.sorting.dimShape': 'Form',
@@ -473,6 +473,9 @@ const ui: Locale['ui'] = {
   'ex.sorting.correct': 'Richtig! Regel bestätigt',
   'ex.sorting.wrong': 'Falsch! Das ist nicht die aktive Regel',
   'ex.sorting.ruleShifted': 'Die Regel hat sich geändert! Finde das neue Kriterium',
+  'ex.sorting.lostRule': 'Regel verloren! Behalte das gefundene Kriterium bei',
+  'ex.sorting.perseveration': 'Achtung: diese Regel hattest du bereits ausgeschlossen!',
+  'ex.sorting.eliminated': 'Ausgeschlossen: {dim} ist nicht die Regel',
 
   
   'ex.resources.name': "Ressourcenplanung",

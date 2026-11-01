@@ -462,7 +462,7 @@ const ui: Locale['ui'] = {
   'ex.sorting.why': 'Terinspirasi dari Wisconsin Card Sorting Test (WCST), melatih fleksibilitas kognitif, induksi aturan, dan set-shifting.',
   'ex.sorting.example': 'Kartu dengan 3 segitiga merah: cocokkan berdasarkan bentuk, warna, atau jumlah. Temukan aturannya dengan mencoba!',
   'ex.sorting.hint': 'Cocokkan berdasarkan Warna, Bentuk, atau Jumlah. Aturan rahasia berubah secara berkala!',
-  'ex.sorting.detail': '{ok}/{n} benar',
+  'ex.sorting.detail': '{ok}/{n} benar · {cats} aturan',
   'ex.sorting.secretRule': 'Temukan aturan rahasia',
   'ex.sorting.dimColor': 'Warna',
   'ex.sorting.dimShape': 'Bentuk',
@@ -473,6 +473,9 @@ const ui: Locale['ui'] = {
   'ex.sorting.correct': 'Benar! Aturan terkonfirmasi',
   'ex.sorting.wrong': 'Salah! Itu bukan aturan yang aktif',
   'ex.sorting.ruleShifted': 'Aturan telah berubah! Temukan kriteria baru',
+  'ex.sorting.lostRule': 'Aturan hilang! Pertahankan kriteria yang ditemukan',
+  'ex.sorting.perseveration': 'Perhatian: Anda sudah mengeliminasi aturan ini!',
+  'ex.sorting.eliminated': 'Dieliminasi: {dim} bukan aturannya',
 
   
   'ex.resources.name': "Manajemen Sumber Daya",

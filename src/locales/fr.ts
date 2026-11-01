@@ -462,7 +462,7 @@ const ui: Locale['ui'] = {
   'ex.sorting.why': 'Inspiré du Wisconsin Card Sorting Test (WCST), développe la flexibilité cognitive, l\'induction de règles et l\'adaptation au changement.',
   'ex.sorting.example': 'Carte avec 3 triangles rouges : associez par forme (triangle), couleur (rouge) ou nombre (3). Trouvez la règle par essais !',
   'ex.sorting.hint': 'Associez par Couleur, Forme ou Nombre. La règle secrète change périodiquement !',
-  'ex.sorting.detail': '{ok}/{n} corrects',
+  'ex.sorting.detail': '{ok}/{n} corrects · {cats} règles',
   'ex.sorting.secretRule': 'Trouvez la règle secrète',
   'ex.sorting.dimColor': 'Couleur',
   'ex.sorting.dimShape': 'Forme',
@@ -473,6 +473,9 @@ const ui: Locale['ui'] = {
   'ex.sorting.correct': 'Correct ! Règle confirmée',
   'ex.sorting.wrong': 'Incorrect ! Ce n\'est pas la règle active',
   'ex.sorting.ruleShifted': 'La règle a changé ! Trouvez le nouveau critère',
+  'ex.sorting.lostRule': 'Règle perdue ! Maintenez le critère découvert',
+  'ex.sorting.perseveration': 'Attention : vous aviez déjà éliminé cette règle !',
+  'ex.sorting.eliminated': 'Éliminé : {dim} n\'est pas la règle',
 
   
   'ex.resources.name': "Gestion des ressources",

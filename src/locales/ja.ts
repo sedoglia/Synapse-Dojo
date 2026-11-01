@@ -462,7 +462,7 @@ const ui: Locale['ui'] = {
   'ex.sorting.why': 'ウィスコンシン・カード分類課題（WCST）に着想を得て、認知的柔軟性、推論、セットシフティングを鍛えます。',
   'ex.sorting.example': '3つの赤い三角形のカード：形、色、数のいずれかでマッチング。試行錯誤してルールを見つけましょう！',
   'ex.sorting.hint': '色、形、または数でマッチング。秘密のルールは定期的に変わります！',
-  'ex.sorting.detail': '{ok}/{n} 正解',
+  'ex.sorting.detail': '{ok}/{n} 正解 · {cats} ルール完了',
   'ex.sorting.secretRule': '秘密のルールを見つける',
   'ex.sorting.dimColor': '色',
   'ex.sorting.dimShape': '形',
@@ -473,6 +473,9 @@ const ui: Locale['ui'] = {
   'ex.sorting.correct': '正解！ルールが確認されました',
   'ex.sorting.wrong': '不正解！現在のルールではありません',
   'ex.sorting.ruleShifted': 'ルールが変わりました！新しい基準を見つけてください',
+  'ex.sorting.lostRule': 'ルール見失い！見つけた基準を維持してください',
+  'ex.sorting.perseveration': '注意：このルールはすでに除外されています！',
+  'ex.sorting.eliminated': '除外：{dim}はルールではありません',
 
   
   'ex.resources.name': "リソース配分",
