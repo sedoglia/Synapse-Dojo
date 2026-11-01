@@ -80,9 +80,9 @@ Il nome è definito in `src/config.ts`, `index.html` e `public/manifest.json`.
 
 ## Pubblicazione
 
-### Versione pubblica su Cloudflare Pages
+### Cloudflare Pages
 
-`npm run deploy:web` compila la versione pubblica e la carica su Cloudflare Pages con il *caricamento
+`npm run deploy` compila il gioco e lo carica su Cloudflare Pages con il *caricamento
 diretto* di [wrangler](https://developers.cloudflare.com/workers/wrangler/): non serve collegare GitHub,
 quindi il repository può restare privato. Il file `public/_headers` imposta header di sicurezza e cache.
 
@@ -102,7 +102,7 @@ La prima volta:
    ```
    VITE_CF_ANALYTICS_TOKEN=il-tuo-token
    ```
-   Lo script viene aggiunto solo da `npm run build:web` / `deploy:web`, mai dalla build per la VPS.
+
    In alternativa puoi attivare le statistiche direttamente dal pannello del progetto Pages (*Metrics → Web Analytics*):
    usa uno solo dei due metodi.
 5. facoltativo, dominio personalizzato: nel progetto Pages, *Custom domains → Set up a custom domain*.
@@ -110,38 +110,13 @@ La prima volta:
 Poi, per ogni aggiornamento:
 
 ```bash
-npm run deploy:web
+npm run deploy
 ```
 
 Variabile opzionale: `CF_PAGES_PROJECT` (nome del progetto, predefinito `synapse-gym`). Il contatto mostrato
 nella pagina privacy è `CONTACT` in `src/config.ts`.
 
-I salvataggi sono legati all'indirizzo del sito: per portare i progressi dalla versione sulla VPS a quella
-pubblica (o viceversa) usa *Impostazioni → Esporta progressi* e poi *Importa progressi* sull'altra.
-
-### GitHub Pages
-
-Il workflow `.github/workflows/deploy.yml` pubblica su GitHub Pages. Per ora si avvia solo a mano
-(*Actions → Deploy to GitHub Pages → Run workflow*), perché GitHub Pages richiede un repository pubblico
-sul piano gratuito. Quando il repository sarà pubblico:
-
-1. in *Settings → Pages* scegli **Source: GitHub Actions**;
-2. se vuoi il deploy automatico a ogni push, aggiungi `push: { branches: [main] }` sotto `on:` nel workflow.
-
-### Su un server privato con Tailscale
-
-`npm run deploy:vps` compila il gioco e lo copia via SSH su un server Linux del tuo tailnet, dove
-`tailscale serve` lo pubblica in HTTPS sulla porta 8443 (`https://<host>.<tailnet>.ts.net:8443`), visibile solo
-ai tuoi dispositivi. Eventuali altri siti già serviti sulla porta 443 non vengono toccati.
-Servono MagicDNS e i certificati HTTPS attivi nella console di Tailscale.
-
-```bash
-VPS_USER=<utente> npm run deploy:vps -- --setup   # la prima volta
-VPS_USER=<utente> npm run deploy:vps              # aggiornamenti
-```
-
-Variabili opzionali: `VPS_HOST` (predefinito `vps-f2a5538a`), `VPS_DIR` (cartella nella home, predefinita `synapse-gym`)
-e `VPS_PORT` (predefinita `8443`).
+I salvataggi e i progressi sono memorizzati localmente nel browser (localStorage): per farne un backup o trasferirli su un altro dispositivo usa *Impostazioni → Esporta progressi* e *Importa progressi*.
 
 ## Licenza
 

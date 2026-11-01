@@ -2,7 +2,7 @@
 // so the repository can stay private).
 //
 //   npx wrangler login       # once, opens the browser to authorise this computer
-//   npm run deploy:web
+//   npm run deploy
 //
 // Optional: CF_PAGES_PROJECT (default synapse-gym). The Cloudflare Web Analytics token is read at build time
 // from VITE_CF_ANALYTICS_TOKEN, either in the environment or in a git-ignored `.env.web.local` file.

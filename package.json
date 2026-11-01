@@ -6,10 +6,10 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build --mode web",
     "build:web": "tsc && vite build --mode web",
     "preview": "vite preview",
-    "deploy:vps": "node scripts/deploy-vps.mjs",
+    "deploy": "node scripts/deploy-web.mjs",
     "deploy:web": "node scripts/deploy-web.mjs"
   },
   "devDependencies": {

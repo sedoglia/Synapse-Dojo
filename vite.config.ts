@@ -1,8 +1,8 @@
 import { defineConfig, loadEnv } from 'vite';
 
 // Relative base so the build works on any host or sub-path.
-// Cloudflare Web Analytics is added only when a token is set: `vite build --mode web` reads it from
-// `.env.web.local` (or the environment), so the default build used for the VPS never contains it.
+// Cloudflare Web Analytics is added only when a token is set: reads it from
+// `.env.web.local` (or the environment).
 export default defineConfig(({ mode }) => {
   const token = loadEnv(mode, process.cwd(), 'VITE_').VITE_CF_ANALYTICS_TOKEN?.trim();
   if (token && !/^[\w-]+$/.test(token)) throw new Error('VITE_CF_ANALYTICS_TOKEN looks malformed.');

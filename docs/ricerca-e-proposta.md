@@ -104,8 +104,8 @@ Differenze rispetto alla proposta iniziale:
 
 ## 6. Versione pubblica e privacy (v0.5)
 
-- **Hosting**: la versione pubblica, gratuita e senza pubblicità, è su Cloudflare Pages con caricamento diretto (`npm run deploy:web`), così il repository resta privato. La copia privata sulla VPS (Tailscale) resta com'è.
-- **Nessun dato personale sul server**: niente account né cookie; i progressi restano nel `localStorage`. *Esporta / Importa progressi* nelle Impostazioni permette di spostarli tra le due versioni, che hanno salvataggi separati perché sono su indirizzi diversi.
+- **Hosting**: il gioco è ospitato su Cloudflare Pages con caricamento diretto (`npm run deploy`), gratuito e senza pubblicità, così il repository resta privato.
+- **Nessun dato personale sul server**: niente account né cookie; i progressi restano nel `localStorage`. *Esporta / Importa progressi* nelle Impostazioni permette di fare backup o trasferire i dati tra dispositivi diversi.
 - **Font ospitati sul sito**: Nunito (licenza OFL) è servito da `public/fonts/`, per non inviare l'IP dei visitatori a Google (GDPR).
 - **Statistiche**: solo nella build pubblica, Cloudflare Web Analytics, senza cookie e con soli dati aggregati.
 - **Note legali**: schermata *Privacy e note legali* (da Impostazioni e dalla schermata di benvenuto) e pagina `privacy.html`, in italiano e inglese. Ribadiscono che il gioco non è un dispositivo medico e non promette effetti su salute o demenza, coerentemente con la sezione 1.
