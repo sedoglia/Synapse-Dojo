@@ -171,17 +171,6 @@ export function showOnboarding() {
               { class: 'link-btn', type: 'button', onClick: () => showGuide(showOnboarding) },
               t('guide.title'),
             ),
-            h('span', {}, ' · '),
-            h(
-              'a',
-              {
-                class: 'link-btn',
-                href: 'https://github.com/sedoglia/Synapse-gym',
-                target: '_blank',
-                rel: 'noopener noreferrer',
-              },
-              'GitHub',
-            ),
           ),
           h('p', { class: 'muted' }, t('landing.footerTagline')),
         ),
