@@ -2906,6 +2906,20 @@ html.big-text {
   align-items: center;
   min-height: 100px;
 }
+.sorting-timer-bar {
+  width: 180px;
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 6px;
+}
+.sorting-timer-fill {
+  height: 100%;
+  background: var(--accent);
+  width: 100%;
+  border-radius: 2px;
+}
 .sorting-card {
   font-size: 1.6rem;
   font-weight: 700;

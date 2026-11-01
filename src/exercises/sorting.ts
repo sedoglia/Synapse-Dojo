@@ -1,4 +1,4 @@
-import { h, pick, flash } from '../dom';
+import { h, pick, flash, clamp, scale } from '../dom';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';
 import { onKeys } from '../widgets';
@@ -33,6 +33,8 @@ const REF_CARDS: CardDef[] = [
   { count: 3, color: 'yellow', shape: 'circle' },
   { count: 4, color: 'blue', shape: 'square' },
 ];
+
+const limitFor = (level: number) => Math.max(2400, Math.round(5500 * Math.pow(0.925, level - 1)));
 
 function renderCard(card: CardDef, isRef = false): HTMLElement {
   const symbol = SHAPE_CHARS[card.shape];
@@ -81,7 +83,7 @@ export const sorting: Exercise = {
   example: 'ex.sorting.example',
   minutes: 2.5,
   levels: { min: 1, max: 10, start: 2 },
-  levelLabel: (l) => `lvl ${l}`,
+  levelLabel: (l) => `${(limitFor(l) / 1000).toFixed(1)}s`,
 
   async run(ctx) {
     const trials = ctx.count(24, 16, 5);
@@ -130,7 +132,12 @@ export const sorting: Exercise = {
 
     const testLabel = h('div', { class: 'sorting-section-label' }, t('ex.sorting.targetLabel'));
     const testSlot = h('div', { class: 'sorting-test' });
-    const testWrapper = h('div', { class: 'sorting-test-wrapper' }, testLabel, testSlot);
+    const timerFill = h('div', { class: 'sorting-timer-fill' });
+    const timerBar = h('div', { class: 'sorting-timer-bar' }, timerFill);
+    if (ctx.mode === 'practice') {
+      timerBar.style.display = 'none';
+    }
+    const testWrapper = h('div', { class: 'sorting-test-wrapper' }, testLabel, testSlot, timerBar);
 
     ctx.stage.append(header, refsWrapper, feedback, testWrapper);
 
@@ -147,6 +154,7 @@ export const sorting: Exercise = {
     let completedCategories = 0;
     let ruleDiscovered = false;
     const eliminated = new Set<Dimension>();
+    const rts: number[] = [];
 
     const resetPills = () => {
       Object.values(dimPills).forEach((p) => {
@@ -175,10 +183,42 @@ export const sorting: Exercise = {
       testSlot.replaceChildren(renderCard(card, false));
       flash(testSlot, 'pop', 150);
 
-      const chosenRefIdx = await ctx.input<number>((done) => {
+      const limit = (ctx.mode === 'practice' ? 60_000 : limitFor(st.level)) * ctx.pace;
+
+      if (ctx.mode !== 'practice') {
+        timerFill.style.transition = 'none';
+        timerFill.style.width = '100%';
+        timerFill.style.backgroundColor = 'var(--accent)';
+        requestAnimationFrame(() => {
+          timerFill.style.transition = `width ${limit}ms linear`;
+          timerFill.style.width = '0%';
+        });
+      }
+
+      const shown = performance.now();
+      const chosenRefIdx = await ctx.timed<number | null>(limit, null, (done) => {
         onSelect = done;
         return () => (onSelect = null);
       });
+      const rt = performance.now() - shown;
+
+      if (ctx.mode !== 'practice') {
+        timerFill.style.transition = 'none';
+      }
+
+      if (chosenRefIdx === null) {
+        // Timeout
+        consecutiveCorrect = 0;
+        ctx.track(st, false);
+        timerFill.style.backgroundColor = 'var(--c-red)';
+        flash(testSlot, 'bad', 400);
+        feedback.className = 'sorting-feedback bad';
+        feedback.textContent = `⏱ ${t('common.timeout')}`;
+        await ctx.wait(800);
+        continue;
+      }
+
+      rts.push(rt);
 
       const chosenDimension: Dimension | 'none' =
         chosenRefIdx === colorIdx ? 'color' :
@@ -241,9 +281,17 @@ export const sorting: Exercise = {
     }
     ctx.progress(1);
 
+    const avgRt = rts.length ? Math.round(rts.reduce((a, b) => a + b, 0) / rts.length) : 3000;
+    const baseScore = st.score();
+    const speedScore = scale(avgRt, 900, 3500);
+    // 80% staircase mastery, 20% speed bonus
+    const score = Math.round(clamp(baseScore * 0.8 + speedScore * 0.2, 0, 100));
+    const sec = (avgRt / 1000).toFixed(1);
+    const detail = `${t('ex.sorting.detail', { ok: correct, n: trials, cats: completedCategories })} · ${sec}s`;
+
     return {
-      score: st.score(),
-      detail: t('ex.sorting.detail', { ok: correct, n: trials, cats: completedCategories }),
+      score: ctx.quick ? Math.round((correct / trials) * scale(avgRt, 800, 3200)) : score,
+      detail,
       level: st.next(),
     };
   },
