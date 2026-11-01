@@ -42,7 +42,8 @@ import { rhythm } from './rhythm';
 import { crossMove } from './crossMove';
 import { dualTask } from './dualTask';
 
-import type { Exercise } from './types';
+import { todayKey } from '../dom';
+import { DOMAINS, type Exercise } from './types';
 
 export const EXERCISES: Exercise[] = [
   // Speed
@@ -65,11 +66,29 @@ export const EXERCISES: Exercise[] = [
   tapSeq, swipePattern, rhythm, crossMove, dualTask,
 ];
 
+function hashString(str: string): number {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = (hash * 31 + str.charCodeAt(i)) >>> 0;
+  }
+  return hash;
+}
+
 /**
- * The four short, fixed-difficulty tests behind the daily Neuro Score:
- * processing speed, executive control, working memory and calculation.
+ * Returns the daily 9-exercise battery for the Neuro Score test,
+ * selecting one rotating exercise for each of the 9 cognitive domains.
  */
-export const DAILY_CHECK: Exercise[] = [glance, ruleSwitch, grid, math];
+export function dailyCheckBattery(date = todayKey()): Exercise[] {
+  const hash = hashString(date);
+  return DOMAINS.map((domain, i) => {
+    const list = EXERCISES.filter((e) => e.domain === domain);
+    const idx = (hash + i * 17) % list.length;
+    return list[idx];
+  });
+}
+
+/** Default daily battery for the current day. */
+export const DAILY_CHECK: Exercise[] = dailyCheckBattery();
 
 export const byId = (id: string) => EXERCISES.find((e) => e.id === id);
 export { DOMAINS } from './types';

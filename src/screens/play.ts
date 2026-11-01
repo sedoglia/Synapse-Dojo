@@ -4,7 +4,7 @@ import { sfx, haptic } from '../audio';
 import { store } from '../storage';
 import { t } from '../i18n';
 import { render, page, countUp, rankName, sparkline, xpBar } from '../ui';
-import { DAILY_CHECK, type Exercise, type ExerciseResult } from '../exercises';
+import { dailyCheckBattery, byId, type Exercise, type ExerciseResult } from '../exercises';
 import { nextPlan, markPlanDone } from '../stats';
 import { exampleCard } from '../examples';
 import { XP, addXp, playerLevel, checkBadges, type Badge } from '../rewards';
@@ -355,10 +355,11 @@ export async function playDailyCheck() {
   const done = store.todayCheck();
   if (done) return showCheckResult(done.score, true, null);
 
+  const battery = dailyCheckBattery();
   const parts: Record<string, number> = {};
-  for (let i = 0; i < DAILY_CHECK.length; i++) {
-    const ex = DAILY_CHECK[i];
-    const choice = await intro(ex, t('common.step', { i: i + 1, n: DAILY_CHECK.length }));
+  for (let i = 0; i < battery.length; i++) {
+    const ex = battery[i];
+    const choice = await intro(ex, t('common.step', { i: i + 1, n: battery.length }));
     if (!choice) return showHome();
     if (choice === 'practice') {
       if (!(await runExercise(ex, 'practice', ex.levels?.start ?? 1))) return showHome();
@@ -405,15 +406,19 @@ function showCheckResult(score: number, alreadyDone: boolean, reward: HTMLElemen
           ? h(
               'div',
               { class: 'parts' },
-              ...DAILY_CHECK.map((ex) =>
-                h(
+              ...Object.entries(todays.parts).map(([id, partScore]) => {
+                const ex = byId(id);
+                const icon = ex?.icon ?? '🧩';
+                const domainLabel = ex ? t(`domain.${ex.domain}`) : id;
+                const exName = ex ? t(ex.name) : id;
+                return h(
                   'div',
-                  { class: 'part' },
-                  h('span', {}, `${ex.icon} ${t(`domain.${ex.domain}`)}`),
-                  h('div', { class: 'part-bar' }, h('div', { style: { width: `${todays.parts[ex.id] ?? 0}%` } })),
-                  h('b', {}, String(todays.parts[ex.id] ?? 0)),
-                ),
-              ),
+                  { class: 'part', title: exName },
+                  h('span', { class: 'part-label' }, `${icon} ${domainLabel}`),
+                  h('div', { class: 'part-bar' }, h('div', { style: { width: `${partScore}%` } })),
+                  h('b', {}, String(partScore)),
+                );
+              }),
             )
           : null,
         reward,
