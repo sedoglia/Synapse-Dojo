@@ -585,44 +585,209 @@ const ui: Locale['ui'] = {
 };
 
 const words: string[] = [
-  'arbre', 'bateau', 'bougie', 'dauphin', 'éléphant', 'papillon', 'glace', 'île', 'lampe', 'montagne',
-  'nuage', 'parapluie', 'piano', 'cahier', 'fusée', 'chaise', 'tambour', 'œuf', 'volcan', 'sac à dos',
-  'bague', 'vélo', 'coussin', 'dragon', 'ciseaux', 'girafe', 'clé', 'citron', 'marteau', 'navire',
-  'horloge', 'pingouin', 'araignée', 'miroir', 'tasse', 'violon', 'château', 'fraise', 'mouette', 'loup',
-  'médaille', 'nid', 'casserole', 'chaussure', 'train', 'valise', 'comète', 'phare', 'gland', 'pain',
-  'brique', 'cheval', 'tente', 'éponge', 'poire', 'bouteille', 'couronne', 'cerf-volant', 'rivière', 'étoile',
+  "arbre", "bateau", "bougie", "dauphin", "éléphant", "papillon", "glace", "île", "lampe", "montagne",
+  "nuage", "parapluie", "piano", "cahier", "fusée", "chaise", "tambour", "œuf", "volcan", "sac à dos",
+  "bague", "vélo", "coussin", "dragon", "ciseaux", "girafe", "clé", "citron", "marteau", "navire",
+  "horloge", "pingouin", "araignée", "miroir", "tasse", "violon", "château", "fraise", "mouette", "loup",
+  "médaille", "nid", "casserole", "chaussure", "train", "valise", "comète", "phare", "gland", "pain",
+  "brique", "cheval", "tente", "éponge", "poire", "bouteille", "couronne", "cerf-volant", "rivière", "étoile",
+  "rose", "pont", "vent", "bois", "cour", "murs", "pied", "main", "lune", "ciel",
+  "lion", "ours", "tour", "dent", "noix", "sang", "voix", "robe", "jupe", "chat",
+  "soif", "bord", "port", "baie", "dune", "parc", "coin", "bras", "peau", "boue",
+  "plage", "forêt", "sable", "terre", "herbe", "fleur", "livre", "route", "canal", "ombre",
+  "fumée", "verre", "acier", "cuivre", "argent", "repas", "sucre", "table", "boîte", "corde",
+  "bâton", "plume", "flèche", "canot", "avion", "wagon", "métro", "trace", "champ", "vigne",
+  "ferme", "poche", "savon", "brosse", "tissu", "rideau", "valse", "chant", "geste", "bruit",
+  "soleil", "jardin", "source", "fleuve", "falaise", "caverne", "vallon", "colline", "sentier", "village",
+  "maison", "palais", "hangar", "moulin", "grenier", "clocher", "balcon", "rampes", "cuisine", "meuble",
+  "tiroir", "buffet", "nappes", "assiette", "carafe", "poêles", "panier", "canard", "faucon", "renard",
+  "blaireau", "castor", "cygnes", "pigeon", "faisan", "saumon", "truite", "flotte", "fenêtre", "musique",
+  "concert", "théâtre", "peinture", "tableau", "gravure", "journal", "carnets", "pendule", "cloches", "guitare",
+  "trompette", "clarine", "flûtes", "balance", "compas", "lunette", "jumelle", "boussole", "lanterne", "bouclier",
+  "fontaine", "pyramide", "tempête", "tonnerre", "éclairs", "tourbillon", "blizzard", "glaciers", "banquise", "brouillard",
+  "clairière", "chapelle", "forteresse", "citadelle", "bâtiment", "cathédrale", "télescope", "microscope", "navettes", "armoiriel",
 ];
 
 const passages: Passage[] = [
   {
-    text: 'Le phare de l’île de Pierreblanche fut allumé pour la première fois par une nuit de brouillard de 1891. Le gardien, un ancien pêcheur nommé Arthur, montait les cent trente marches de la tour deux fois par jour pour nettoyer la lentille et remonter le mécanisme qui faisait tourner la lumière. Les nuits de tempête, il ne dormait pas : il restait en haut à surveiller la mer, avec un thermos de café et une vieille radio. En quarante ans de service, aucun bateau ne fit naufrage près de l’île.',
-    question: 'Combien de marches avait la tour ?',
-    answers: ['Cent trente', 'Trois cents', 'Quatre-vingt-onze'],
+    text: "Le phare de l’île de Pierreblanche fut allumé pour la première fois par une nuit de brouillard de 1891. Le gardien, un ancien pêcheur nommé Arthur, montait les cent trente marches de la tour deux fois par jour pour nettoyer la lentille et remonter le mécanisme qui faisait tourner la lumière. Les nuits de tempête, il ne dormait pas : il restait en haut à surveiller la mer, avec un thermos de café et une vieille radio. En quarante ans de service, aucun bateau ne fit naufrage près de l’île.",
+    question: "Combien de marches avait la tour ?",
+    answers: [
+      "Cent trente",
+      "Trois cents",
+      "Quatre-vingt-onze",
+    ],
   },
   {
-    text: 'Les abeilles qui trouvent un bon champ de fleurs retournent à la ruche et exécutent une danse particulière. L’angle de la danse par rapport à la verticale indique la direction de la nourriture par rapport au soleil, tandis que la durée de la danse indique la distance. Les autres abeilles suivent les mouvements avec leurs antennes, puis s’envolent tout droit vers l’endroit indiqué. Ainsi, une seule éclaireuse peut guider des centaines de compagnes.',
-    question: 'Qu’indique la durée de la danse ?',
-    answers: ['La distance de la nourriture', 'Le type de fleur', 'L’heure de la journée'],
+    text: "Les abeilles qui trouvent un bon champ de fleurs retournent à la ruche et exécutent une danse particulière. L’angle de la danse par rapport à la verticale indique la direction de la nourriture par rapport au soleil, tandis que la durée de la danse indique la distance. Les autres abeilles suivent les mouvements avec leurs antennes, puis s’envolent tout droit vers l’endroit indiqué. Ainsi, une seule éclaireuse peut guider des centaines de compagnes.",
+    question: "Qu’indique la durée de la danse ?",
+    answers: [
+      "La distance de la nourriture",
+      "Le type de fleur",
+      "L’heure de la journée",
+    ],
   },
   {
-    text: 'Marthe avait décidé d’apprendre à faire du pain. Le premier sortit du four dur comme une pierre, le deuxième était cru au milieu. À la troisième tentative, elle comprit le problème : la cuisine était trop froide et la pâte ne levait pas bien. Depuis, elle laisse reposer la pâte près du radiateur, couverte d’un torchon, et chaque dimanche ses voisins frappent à la porte, attirés par l’odeur.',
-    question: 'Pourquoi le pain de Marthe ne réussissait-il pas ?',
-    answers: ['La cuisine était trop froide', 'Elle mettait trop de sel', 'Le four était cassé'],
+    text: "Marthe avait décidé d’apprendre à faire du pain. Le premier sortit du four dur comme une pierre, le deuxième était cru au milieu. À la troisième tentative, elle comprit le problème : la cuisine était trop froide et la pâte ne levait pas bien. Depuis, elle laisse reposer la pâte près du radiateur, couverte d’un torchon, et chaque dimanche ses voisins frappent à la porte, attirés par l’odeur.",
+    question: "Pourquoi le pain de Marthe ne réussissait-il pas ?",
+    answers: [
+      "La cuisine était trop froide",
+      "Elle mettait trop de sel",
+      "Le four était cassé",
+    ],
   },
   {
-    text: 'En montagne, la température baisse en moyenne d’environ six degrés et demi tous les mille mètres d’altitude. C’est pourquoi, même en plein été, on trouve de la neige sur les plus hauts sommets. Les randonneurs expérimentés emportent toujours un pull dans leur sac, même s’il fait chaud dans la vallée. Le vent aussi peut rendre le froid bien plus sensible que ce qu’indique le thermomètre.',
-    question: 'De combien baisse la température tous les mille mètres ?',
-    answers: ['D’environ six degrés et demi', 'D’environ deux degrés', 'D’environ quinze degrés'],
+    text: "En montagne, la température baisse en moyenne d’environ six degrés et demi tous les mille mètres d’altitude. C’est pourquoi, même en plein été, on trouve de la neige sur les plus hauts sommets. Les randonneurs expérimentés emportent toujours un pull dans leur sac, même s’il fait chaud dans la vallée. Le vent aussi peut rendre le froid bien plus sensible que ce qu’indique le thermomètre.",
+    question: "De combien baisse la température tous les mille mètres ?",
+    answers: [
+      "D’environ six degrés et demi",
+      "D’environ deux degrés",
+      "D’environ quinze degrés",
+    ],
   },
   {
-    text: 'Dans le petit village de Valfonde, le marché a lieu chaque jeudi sur la place. L’étal le plus fréquenté n’est ni celui des fruits ni celui des fromages, mais celui d’Élie, qui répare des horloges et des radios depuis quarante ans. Les gens lui apportent des appareils que plus personne ne sait réparer, et lui, avec une loupe et une pince, réussit presque toujours à les faire repartir.',
-    question: 'Quel est le métier d’Élie ?',
-    answers: ['Il répare des horloges et des radios', 'Il vend des fromages', 'Il cultive des fruits'],
+    text: "Dans le petit village de Valfonde, le marché a lieu chaque jeudi sur la place. L’étal le plus fréquenté n’est ni celui des fruits ni celui des fromages, mais celui d’Élie, qui répare des horloges et des radios depuis quarante ans. Les gens lui apportent des appareils que plus personne ne sait réparer, et lui, avec une loupe et une pince, réussit presque toujours à les faire repartir.",
+    question: "Quel est le métier d’Élie ?",
+    answers: [
+      "Il répare des horloges et des radios",
+      "Il vend des fromages",
+      "Il cultive des fruits",
+    ],
   },
   {
-    text: 'La pieuvre a trois cœurs et le sang bleu. Deux cœurs pompent le sang vers les branchies, le troisième le pousse dans le reste du corps. C’est aussi une reine du déguisement : grâce à des cellules spéciales de sa peau, elle peut changer de couleur en une fraction de seconde pour se camoufler ou communiquer. Certaines pieuvres transportent même des coquilles de noix de coco comme abri portable.',
-    question: 'Combien de cœurs a la pieuvre ?',
-    answers: ['Trois', 'Un', 'Huit'],
+    text: "La pieuvre a trois cœurs et le sang bleu. Deux cœurs pompent le sang vers les branchies, le troisième le pousse dans le reste du corps. C’est aussi une reine du déguisement : grâce à des cellules spéciales de sa peau, elle peut changer de couleur en une fraction de seconde pour se camoufler ou communiquer. Certaines pieuvres transportent même des coquilles de noix de coco comme abri portable.",
+    question: "Combien de cœurs a la pieuvre ?",
+    answers: [
+      "Trois",
+      "Un",
+      "Huit",
+    ],
+  },
+  {
+    text: "Les chauffeurs de taxi londoniens doivent mémoriser plus de vingt-cinq mille rues et des milliers de monuments pour réussir le redoutable examen du \"Knowledge\". Des examens d’imagerie cérébrale ont révélé que cet apprentissage spatial intensif augmente physiquement le volume de leur hippocampe postérieur, la région du cerveau dédiée à la navigation et à la mémoire des lieux.",
+    question: "Quelle zone cérébrale se développe chez les chauffeurs de taxi londoniens ?",
+    answers: [
+      "L’hippocampe postérieur",
+      "Le cortex moteur primaire",
+      "Le lobe frontal gauche",
+    ],
+  },
+  {
+    text: "Les geckos peuvent grimper le long de parois de verre verticales et courir au plafond la tête en bas. Cet exploit n’est dû ni à de la colle ni à des ventouses, mais à des millions de soies microscopiques ramifiées sur leurs doigts, appelées spatules. Ces poils interagissent avec la surface par de faibles forces électrostatiques moléculaires nommées forces de van der Waals.",
+    question: "Quelle force physique permet aux geckos d’adhérer à une vitre lisse ?",
+    answers: [
+      "Les forces microscopiques de van der Waals",
+      "Une succion par ventouses",
+      "Une colle organique sécrétée par la peau",
+    ],
+  },
+  {
+    text: "En 1901, des pêcheurs d’éponges découvrirent dans une épave antique près de l’île d’Anticythère un mécanisme en bronze corrodé. Daté du IIe siècle avant notre ère, cet appareil comptait des dizaines d’engrenages différentiels miniatures d’une extrême précision, conçus pour calculer les phases de la Lune et prédire les éclipses avec une justesse astronomique.",
+    question: "À quoi servait le mécanisme d’Anticythère découvert dans l’épave ?",
+    answers: [
+      "À calculer les cycles astronomiques et les éclipses",
+      "À sonder la profondeur de la mer",
+      "À mesurer la vitesse du vent marin",
+    ],
+  },
+  {
+    text: "Pendant la Seconde Guerre mondiale, au centre secret de Bletchley Park, des cryptanalystes menés par Alan Turing travaillèrent jour et nuit pour percer le code militaire allemand Enigma. Ils conçurent d’imposantes machines électromécaniques appelées Bombes, capables d’examiner des millions de combinaisons pour identifier la clé de chiffrement quotidienne.",
+    question: "Quel nom portaient les machines électromécaniques conçues par Turing ?",
+    answers: [
+      "Les Bombes",
+      "Les Colosses",
+      "Les Décodeurs Enigma",
+    ],
+  },
+  {
+    text: "Le télescope spatial James Webb tourne autour du Soleil à un million et demi de kilomètres de la Terre, au point d’équilibre gravitationnel Lagrange L2. Protégé par un bouclier thermique grand comme un court de tennis, ses miroirs hexagonaux en béryllium plaqué or captent la lumière infrarouge émise par les toutes premières galaxies apparues après le Big Bang.",
+    question: "À quelle distance approximative de la Terre se trouve le télescope James Webb ?",
+    answers: [
+      "Un million et demi de kilomètres",
+      "Trois cent quatre-vingt mille kilomètres",
+      "Cent mille kilomètres",
+    ],
+  },
+  {
+    text: "Dans la fosse des Mariannes, à près de huit mille mètres sous la surface de l’océan, vit le poisson-limace des Mariannes dans une obscurité totale. Son corps translucide et sans écailles est dépourvu de vessie natatoire, et ses protéines cellulaires sont protégées par une molécule stabilisatrice appelée TMAO, lui permettant de survivre à des pressions écrasantes.",
+    question: "Quelle molécule protège les cellules du poisson-limace des grandes profondeurs ?",
+    answers: [
+      "La molécule protectrice TMAO",
+      "Une couche épaisse de cire organique",
+      "Un fluide cellulaire enrichi en titane",
+    ],
+  },
+  {
+    text: "Dans les canyons escarpés des Andes, les bâtisseurs incas franchissaient des fleuves tumultueux grâce à des ponts suspendus sans pile de bois ni câble métallique. Les villages tressaient l’ichu, une herbe sauvage des hauteurs, en fines cordelettes réunies en câbles épais comme des troncs d’arbres. Chaque année, le pont était coupé et reconstruit en trois jours de fête.",
+    question: "Quel matériau végétal les Incas utilisaient-ils pour tisser leurs ponts suspendus ?",
+    answers: [
+      "De l’herbe sauvage de montagne tressée",
+      "Des lanières de cuir de lama séché",
+      "Des tiges de roseau enduites de résine",
+    ],
+  },
+  {
+    text: "En 1610, Galilée pointa sa lunette astronomique vers Jupiter et découvrit quatre points lumineux disposés en ligne droite à côté de la planète. Au fil des nuits, il constata qu’ils changeaient de position en tournant autour de Jupiter. Ces lunes galiléennes constituèrent la toute première preuve visuelle directe que tous les astres ne tournent pas autour de la Terre.",
+    question: "Combien de lunes en orbite autour de Jupiter Galilée a-t-il observées en 1610 ?",
+    answers: [
+      "Quatre",
+      "Deux",
+      "Sept",
+    ],
+  },
+  {
+    text: "Dans les forêts tropicales d’Amérique centrale, les anciens Mayas vénéraient le cacao comme une monnaie sacrée et un don des divinités. Ils écrasaient les fèves fermentées pour préparer une boisson cérémonielle amère et dense. En versant le breuvage d’un récipient à l’autre depuis une grande hauteur, ils créaient une mousse épaisse qu’ils parfumaient avec du piment moulu.",
+    question: "Quelle épice relevait traditionnellement la boisson sacrée de cacao chez les Mayas ?",
+    answers: [
+      "Du piment moulu",
+      "Du gingembre sauvage",
+      "Des clous de girofle",
+    ],
+  },
+  {
+    text: "Dans certaines baies tropicales des Caraïbes et du Pacifique, l’eau s’illumine d’un bleu électrique éclatant au moindre battement de rame ou déferlement de vague. Cet éclat féerique provient de milliards d’algues microscopiques appelées dinoflagellés. Sous l’effet d’une contrainte mécanique sur leur membrane, elles déclenchent une réaction chimique lumineuse pour effrayer les prédateurs.",
+    question: "De quelle couleur brille l’eau chargée de dinoflagellés bioluminescents ?",
+    answers: [
+      "Bleu électrique éclatant",
+      "Vert émeraude profond",
+      "Ambre étincelant",
+    ],
+  },
+  {
+    text: "Les caméléons ne changent pas de couleur en mélangeant des pigments colorés dans leur peau. Leurs cellules cutanées renferment une couche d’iridophores tapissée d’un réseau de nanocristaux de guanine. En tendant ou relâchant leur derme, ils ajustent l’espacement entre ces cristaux, ce qui réfléchit sélectivement certaines longueurs d’onde de la lumière ambiante.",
+    question: "Comment les caméléons modifient-ils la coloration de leur peau ?",
+    answers: [
+      "En modifiant l’espacement entre des nanocristaux cutanés",
+      "En pressant des poches d’encre sous leurs écailles",
+      "En faisant varier leur température cutanée",
+    ],
+  },
+  {
+    text: "Selon une légende éthiopienne séculaire, le café aurait été découvert par un jeune chevrier nommé Kaldi. Ayant remarqué que ses chèvres gambadaient avec une vigueur inhabituelle toute la nuit après avoir brouté les baies rouges d’un arbuste inconnu, il en cueillit une poignée et les apporta aux moines d’un monastère voisin pour élucider ce mystère.",
+    question: "Qui remarqua pour la première fois les vertus stimulantes du café selon la légende ?",
+    answers: [
+      "Un chevrier attentif nommé Kaldi",
+      "Un marchand d’épices de la mer Rouge",
+      "Un moine voyageur",
+    ],
+  },
+  {
+    text: "Sous l’inlandsis de l’Antarctique, les couches de neige accumulées pendant des centaines de millénaires se sont tassées en une glace bleue très dense. Dans son réseau cristallin dorment d’infimes bulles d’air scellées depuis des centaines de milliers d’années. En forant des carottes de glace de plus de trois kilomètres, les paléoclimatologues analysent directement l’atmosphère ancienne.",
+    question: "Que renferment les carottes de glace extraites des profondeurs de l’Antarctique ?",
+    answers: [
+      "Des bulles d’air ancien piégées depuis des millénaires",
+      "Des gouttes d’eau de mer fossilisées",
+      "Des grains de pollen préhistoriques intacts",
+    ],
+  },
+  {
+    text: "Dans plusieurs déserts côtiers et terrestres à travers le monde, les voyageurs peuvent entendre d’étranges dunes chantantes. Lorsque des masses de sable sec glissent le long des pentes raides, des millions de grains de quartz de taille régulière s’entrechoquent à l’unisson. Cette friction synchronisée crée un bourdonnement sourd, semblable à celui d’un violoncelle, qui résonne au loin.",
+    question: "Quelle est la cause du bourdonnement mélodieux des dunes de sable ?",
+    answers: [
+      "La friction synchronisée de grains de quartz en glissant",
+      "Le sifflement du vent dans les failles rocheuses",
+      "Des échos dans des grottes souterraines",
+    ],
   },
 ];
 

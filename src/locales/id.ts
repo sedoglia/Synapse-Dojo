@@ -585,44 +585,209 @@ const ui: Locale['ui'] = {
 };
 
 const words: string[] = [
-  'pohon', 'perahu', 'lilin', 'lumba-lumba', 'gajah', 'kupu-kupu', 'es krim', 'pulau', 'lampu', 'gunung',
-  'awan', 'payung', 'piano', 'buku tulis', 'roket', 'kursi', 'gendang', 'telur', 'gunung api', 'ransel',
-  'cincin', 'sepeda', 'bantal', 'naga', 'gunting', 'jerapah', 'kunci', 'lemon', 'palu', 'kapal',
-  'jam', 'penguin', 'laba-laba', 'cermin', 'cangkir', 'biola', 'istana', 'stroberi', 'camar', 'serigala',
-  'medali', 'sarang', 'panci', 'sepatu', 'kereta', 'koper', 'komet', 'mercusuar', 'kelapa', 'roti',
-  'batu bata', 'kuda', 'tenda', 'spons', 'pir', 'botol', 'mahkota', 'layang-layang', 'sungai', 'bintang',
+  "pohon", "perahu", "lilin", "lumba-lumba", "gajah", "kupu-kupu", "es krim", "pulau", "lampu", "gunung",
+  "awan", "payung", "piano", "buku tulis", "roket", "kursi", "gendang", "telur", "gunung api", "ransel",
+  "cincin", "sepeda", "bantal", "naga", "gunting", "jerapah", "kunci", "lemon", "palu", "kapal",
+  "jam", "penguin", "laba-laba", "cermin", "cangkir", "biola", "istana", "stroberi", "camar", "serigala",
+  "medali", "sarang", "panci", "sepatu", "kereta", "koper", "komet", "mercusuar", "kelapa", "roti",
+  "batu bata", "kuda", "tenda", "spons", "pir", "botol", "mahkota", "layang-layang", "sungai", "bintang",
+  "buku", "meja", "sapi", "rusa", "kera", "ikan", "daun", "atap", "tali", "kaca",
+  "kain", "roda", "paku", "peti", "gula", "madu", "susu", "kopi", "padi", "jahe",
+  "kayu", "emas", "besi", "baja", "asap", "kaki", "mata", "pipi", "dada", "kuas",
+  "pantai", "hutan", "danau", "rumah", "jalan", "tanah", "pasir", "batu", "bunga", "surga",
+  "senja", "fajar", "kabut", "hujan", "angin", "badai", "ombak", "perak", "panah", "busur",
+  "tombak", "sendok", "wajan", "dapur", "kamar", "pagar", "kolam", "kebun", "sawah", "ladang",
+  "bukit", "lembah", "jurang", "singa", "bebek", "lebah", "semut", "taman", "garam", "timun",
+  "burung", "harimau", "badak", "monyet", "domba", "kelinci", "lautan", "pelangi", "gerimis", "jendela",
+  "tangga", "lantai", "plafon", "lemari", "bangku", "karpet", "kalung", "gelang", "anting", "seragam",
+  "kemeja", "celana", "kasur", "dompet", "naskah", "kantor", "patung", "lukisan", "gerbang", "gudang",
+  "menara", "istora", "tameng", "dinding", "genteng", "cerek", "parang", "capung", "jembatan", "stasiun",
+  "bandara", "lapangan", "benteng", "gerobak", "samudera", "matahari", "rembulan", "mutiara", "permata", "berlian",
+  "kencana", "lonceng", "rebana", "gamelan", "padukan", "selokan", "peluit", "merpati", "banteng", "komando",
+  "antariksa", "semesta", "piramida", "pahlawan", "teropong", "teleskop", "mikroskop", "belantara", "gelombang", "kembangs",
+  "pesawat", "kelelawar", "tenggiri", "kakatua", "bunglons", "gergajis", "keretaap", "kendaraan", "pelabuhan", "kastilku",
 ];
 
 const passages: Passage[] = [
   {
-    text: 'Mercusuar di Pulau Batu Putih pertama kali dinyalakan pada suatu malam berkabut tahun 1891. Penjaganya, mantan nelayan bernama Arthur, menaiki seratus tiga puluh anak tangga menara dua kali sehari untuk membersihkan lensa dan memutar mekanisme yang membuat cahayanya berputar. Pada malam badai ia tidak tidur: ia tetap di atas mengawasi laut, ditemani termos kopi dan radio tua. Selama empat puluh tahun ia bertugas, tidak ada satu kapal pun yang karam di dekat pulau itu.',
-    question: 'Berapa anak tangga yang dimiliki menara itu?',
-    answers: ['Seratus tiga puluh', 'Tiga ratus', 'Sembilan puluh satu'],
+    text: "Mercusuar di Pulau Batu Putih pertama kali dinyalakan pada suatu malam berkabut tahun 1891. Penjaganya, mantan nelayan bernama Arthur, menaiki seratus tiga puluh anak tangga menara dua kali sehari untuk membersihkan lensa dan memutar mekanisme yang membuat cahayanya berputar. Pada malam badai ia tidak tidur: ia tetap di atas mengawasi laut, ditemani termos kopi dan radio tua. Selama empat puluh tahun ia bertugas, tidak ada satu kapal pun yang karam di dekat pulau itu.",
+    question: "Berapa anak tangga yang dimiliki menara itu?",
+    answers: [
+      "Seratus tiga puluh",
+      "Tiga ratus",
+      "Sembilan puluh satu",
+    ],
   },
   {
-    text: 'Lebah yang menemukan ladang bunga yang bagus kembali ke sarang dan melakukan tarian khusus. Sudut tarian terhadap garis tegak menunjukkan arah makanan dibandingkan dengan matahari, sedangkan lamanya tarian menunjukkan jaraknya. Lebah lain mengikuti gerakannya dengan antena, lalu terbang langsung ke tempat yang ditunjukkan. Dengan begitu satu lebah penjelajah bisa memandu ratusan temannya.',
-    question: 'Apa yang ditunjukkan oleh lamanya tarian?',
-    answers: ['Jarak makanan', 'Jenis bunga', 'Waktu dalam sehari'],
+    text: "Lebah yang menemukan ladang bunga yang bagus kembali ke sarang dan melakukan tarian khusus. Sudut tarian terhadap garis tegak menunjukkan arah makanan dibandingkan dengan matahari, sedangkan lamanya tarian menunjukkan jaraknya. Lebah lain mengikuti gerakannya dengan antena, lalu terbang langsung ke tempat yang ditunjukkan. Dengan begitu satu lebah penjelajah bisa memandu ratusan temannya.",
+    question: "Apa yang ditunjukkan oleh lamanya tarian?",
+    answers: [
+      "Jarak makanan",
+      "Jenis bunga",
+      "Waktu dalam sehari",
+    ],
   },
   {
-    text: 'Marta memutuskan untuk belajar membuat roti. Roti pertamanya keluar dari oven sekeras batu, yang kedua masih mentah di tengah. Pada percobaan ketiga ia memahami masalahnya: dapurnya terlalu dingin sehingga adonan tidak mengembang dengan baik. Sejak itu ia membiarkan adonan beristirahat di dekat pemanas, ditutup kain, dan setiap hari Minggu tetangganya mengetuk pintu karena tergoda aromanya.',
-    question: 'Mengapa roti Marta tidak berhasil?',
-    answers: ['Dapurnya terlalu dingin', 'Ia memakai terlalu banyak garam', 'Ovennya rusak'],
+    text: "Marta memutuskan untuk belajar membuat roti. Roti pertamanya keluar dari oven sekeras batu, yang kedua masih mentah di tengah. Pada percobaan ketiga ia memahami masalahnya: dapurnya terlalu dingin sehingga adonan tidak mengembang dengan baik. Sejak itu ia membiarkan adonan beristirahat di dekat pemanas, ditutup kain, dan setiap hari Minggu tetangganya mengetuk pintu karena tergoda aromanya.",
+    question: "Mengapa roti Marta tidak berhasil?",
+    answers: [
+      "Dapurnya terlalu dingin",
+      "Ia memakai terlalu banyak garam",
+      "Ovennya rusak",
+    ],
   },
   {
-    text: 'Di pegunungan, suhu rata-rata turun sekitar enam setengah derajat setiap seribu meter ketinggian. Karena itu, bahkan di puncak musim panas, ada salju di puncak-puncak tertinggi. Pendaki berpengalaman selalu membawa jaket di ransel, meskipun di lembah udaranya panas. Angin juga bisa membuat dingin terasa jauh lebih menusuk daripada yang ditunjukkan termometer.',
-    question: 'Berapa banyak suhu turun setiap seribu meter?',
-    answers: ['Sekitar enam setengah derajat', 'Sekitar dua derajat', 'Sekitar lima belas derajat'],
+    text: "Di pegunungan, suhu rata-rata turun sekitar enam setengah derajat setiap seribu meter ketinggian. Karena itu, bahkan di puncak musim panas, ada salju di puncak-puncak tertinggi. Pendaki berpengalaman selalu membawa jaket di ransel, meskipun di lembah udaranya panas. Angin juga bisa membuat dingin terasa jauh lebih menusuk daripada yang ditunjukkan termometer.",
+    question: "Berapa banyak suhu turun setiap seribu meter?",
+    answers: [
+      "Sekitar enam setengah derajat",
+      "Sekitar dua derajat",
+      "Sekitar lima belas derajat",
+    ],
   },
   {
-    text: 'Di desa kecil Lembah Sari, pasar diadakan setiap Kamis di alun-alun. Lapak yang paling ramai bukan lapak buah atau lapak keju, melainkan lapak Eli, yang sudah empat puluh tahun memperbaiki jam dan radio. Orang-orang membawa alat yang tak bisa lagi diperbaiki orang lain, dan dengan kaca pembesar serta pinset ia hampir selalu berhasil membuatnya bekerja lagi.',
-    question: 'Apa pekerjaan Eli?',
-    answers: ['Memperbaiki jam dan radio', 'Menjual keju', 'Menanam buah'],
+    text: "Di desa kecil Lembah Sari, pasar diadakan setiap Kamis di alun-alun. Lapak yang paling ramai bukan lapak buah atau lapak keju, melainkan lapak Eli, yang sudah empat puluh tahun memperbaiki jam dan radio. Orang-orang membawa alat yang tak bisa lagi diperbaiki orang lain, dan dengan kaca pembesar serta pinset ia hampir selalu berhasil membuatnya bekerja lagi.",
+    question: "Apa pekerjaan Eli?",
+    answers: [
+      "Memperbaiki jam dan radio",
+      "Menjual keju",
+      "Menanam buah",
+    ],
   },
   {
-    text: 'Gurita punya tiga jantung dan darah biru. Dua jantung memompa darah ke insang, sedangkan yang ketiga mengalirkannya ke seluruh tubuh. Gurita juga ahli menyamar: berkat sel-sel khusus di kulitnya, ia bisa berganti warna dalam sepersekian detik untuk bersembunyi atau berkomunikasi. Beberapa gurita bahkan membawa batok kelapa sebagai tempat berlindung yang bisa dibawa-bawa.',
-    question: 'Berapa jantung yang dimiliki gurita?',
-    answers: ['Tiga', 'Satu', 'Delapan'],
+    text: "Gurita punya tiga jantung dan darah biru. Dua jantung memompa darah ke insang, sedangkan yang ketiga mengalirkannya ke seluruh tubuh. Gurita juga ahli menyamar: berkat sel-sel khusus di kulitnya, ia bisa berganti warna dalam sepersekian detik untuk bersembunyi atau berkomunikasi. Beberapa gurita bahkan membawa batok kelapa sebagai tempat berlindung yang bisa dibawa-bawa.",
+    question: "Berapa jantung yang dimiliki gurita?",
+    answers: [
+      "Tiga",
+      "Satu",
+      "Delapan",
+    ],
+  },
+  {
+    text: "Para pengemudi taksi London harus menghafal lebih dari dua puluh lima ribu jalan dan ribuan lokasi penting untuk lulus ujian legendaris bernama \"The Knowledge\". Pemeriksaan pemindaian otak membuktikan bahwa tuntutan navigasi yang luar biasa ini memperbesar hipokampus posterior secara fisik, yaitu bagian otak yang mengatur ingatan spasial.",
+    question: "Bagian otak manakah yang membesar secara nyata pada pengemudi taksi di London?",
+    answers: [
+      "Hipokampus posterior",
+      "Korteks motorik utama",
+      "Lobus frontal kiri",
+    ],
+  },
+  {
+    text: "Tokek dapat memanjat dinding kaca yang sangat licin dan berlari terbalik di langit-langit menggunakan satu kaki saja. Kemampuan menakjubkan ini bukan karena lem atau mangkuk penghisap, melainkan jutaan rambut mikroskopis di jari kakinya yang disebut spatulae. Rambut halus ini menempel berkat gaya tarik molekuler bernama gaya van der Waals.",
+    question: "Gaya fisika apakah yang membuat tokek mampu menempel kuat pada kaca licin?",
+    answers: [
+      "Gaya molekuler mikroskopis van der Waals",
+      "Daya hisap mangkuk vakum mini",
+      "Cairan perekat alami dari kulit",
+    ],
+  },
+  {
+    text: "Pada tahun 1901, para penyelam spons menemukan artefak perunggu berkarat di bangkai kapal kuno dekat pulau Antikythera, Yunani. Dibuat pada abad ke-2 SM, mesin ini memiliki puluhan roda gigi presisi dan diakui sebagai komputer astronomi mekanik tertua di dunia untuk menghitung siklus bulan dan gerhana.",
+    question: "Apakah fungsi utama dari mekanisme kuno Antikythera yang ditemukan di bangkai kapal?",
+    answers: [
+      "Menghitung siklus astronomi dan meramal gerhana",
+      "Mengukur kedalaman samudra lepas",
+      "Mencatat kecepatan dan arah angin laut",
+    ],
+  },
+  {
+    text: "Selama Perang Dunia Kedua di Bletchley Park, tim pemecah kode rahasia yang dipimpin oleh Alan Turing bekerja keras menembus sandi mesin Enigma Jerman. Mereka membangun mesin elektromekanik besar bernama \"Bombes\" yang menyaring jutaan kemungkinan susunan huruf setiap hari untuk memecahkan kunci harian.",
+    question: "Apakah nama mesin elektromekanik yang dirancang tim Alan Turing untuk memecahkan kode?",
+    answers: [
+      "Bombes",
+      "Colossus",
+      "Enigma Decoders",
+    ],
+  },
+  {
+    text: "Teleskop Luar Angkasa James Webb mengorbit Matahari pada jarak satu setengah juta kilometer dari Bumi, di titik keseimbangan gravitasi Lagrange L2. Dilindungi oleh pelindung panas sebesar lapangan tenis, cermin berilium berlapis emasnya menangkap cahaya inframerah dari galaksi-galaksi purba yang pertama kali terbentuk.",
+    question: "Berapakah jarak perkiraan antara Teleskop James Webb dan planet Bumi?",
+    answers: [
+      "Satu setengah juta kilometer",
+      "Tiga ratus delapan puluh ribu kilometer",
+      "Seratus ribu kilometer",
+    ],
+  },
+  {
+    text: "Di Palung Mariana pada kedalaman hampir delapan ribu meter, ikan siput Mariana hidup bebas di tengah kegelapan abadi. Tubuhnya yang bening tidak memiliki kantung renang, dan protein sel tubuhnya distabilkan oleh molekul khusus bernama TMAO, memungkinkannya bertahan di bawah tekanan ribuan kali atmosfer daratan.",
+    question: "Zat kimia pelindung apakah yang membantu ikan laut dalam bertahan dari tekanan air dahsyat?",
+    answers: [
+      "Molekul penstabil TMAO",
+      "Lapisan lemak padat yang tebal",
+      "Struktur rangka bertulang titanium",
+    ],
+  },
+  {
+    text: "Di ngarai curam Pegunungan Andes, bangsa Inka membangun jembatan gantung melintasi sungai berarus deras tanpa kayu ataupun kabel besi. Penduduk desa mengumpulkan rumput gunung liar dan memintalnya menjadi tali tebal seukuran batang pohon. Setiap tahun, jembatan tua dipotong dan dibangun kembali dalam perayaan tiga hari.",
+    question: "Bahan alami apakah yang dipintal bangsa Inka untuk merajut jembatan gantung mereka?",
+    answers: [
+      "Anyaman rumput gunung liar",
+      "Untaian kulit hewan llama",
+      "Ranting pohon aras yang diikat rami",
+    ],
+  },
+  {
+    text: "Pada tahun 1610, Galileo Galilei mengarahkan teropong buatannya ke planet Yupiter dan melihat empat titik bercahaya berderet di dekat planet tersebut. Selama beberapa malam pengamatan, ia melihat bintang-bintang kecil itu mengitari Yupiter. Temuan ini menjadi bukti pertama bahwa tidak semua benda langit berputar mengelilingi Bumi.",
+    question: "Berapa banyakkah bulan Yupiter yang pertama kali ditemukan oleh Galileo pada tahun 1610?",
+    answers: [
+      "Empat bulan",
+      "Dua bulan",
+      "Tujuh bulan",
+    ],
+  },
+  {
+    text: "Di hutan hujan Mesoamerika, suku Maya kuno menganggap biji kakao sebagai mata uang suci dan berkah para dewa. Selain sebagai alat tukar, biji fermentasi ditumbuk untuk membuat minuman ritual yang pahit dan berbusa. Mereka menuangkannya dari ketinggian untuk membuat busa tebal dan membumbuinya dengan bubuk cabai.",
+    question: "Rempah pedas apakah yang biasa dicampurkan suku Maya ke dalam minuman kakao ritual mereka?",
+    answers: [
+      "Bubuk cabai pedas",
+      "Jahe liar",
+      "Cengkih kering",
+    ],
+  },
+  {
+    text: "Di teluk tropis Karibia dan Pasifik, air laut malam hari bersinar terang dengan warna biru elektrik saat terhempas ombak atau dayung perahu. Keajaiban ini diciptakan oleh miliaran mikroorganisme bersel tunggal bernama dinoflagellata. Saat membran selnya terguncang, reaksi kimia bercahaya menyala untuk mengusir pemangsa.",
+    question: "Warna apakah yang dipancarkan oleh mikroorganisme laut berbioluminesensi saat air terguncang?",
+    answers: [
+      "Biru elektrik cerah",
+      "Hijau zamrud pekat",
+      "Kuning keemasan",
+    ],
+  },
+  {
+    text: "Bunglon tidak mengubah warna kulitnya dengan mencampurkan pigmen cair di dalam selnya. Di balik lapisan kulit luar mereka terdapat lapisan sel iridofor yang berisi kisi kristal nano guanin. Dengan meregangkan atau mengendurkan kulitnya, bunglon mengatur jarak antar kristal sehingga memantulkan spektrum warna cahaya tertentu.",
+    question: "Bagaimanakah cara bunglon mengubah warna permukaan kulitnya?",
+    answers: [
+      "Mengatur jarak kisi kristal nano di dalam lapisan kulit",
+      "Memeras kantung tinta mikro di bawah sisik",
+      "Mengubah suhu permukaan tubuh dengan cepat",
+    ],
+  },
+  {
+    text: "Menurut legenda tua dari dataran tinggi Ethiopia, khasiat kopi pertama kali disadari oleh seorang penggembala kambing muda bernama Kaldi. Ia melihat kawanan kambingnya melompat-lompat penuh semangat sepanjang malam setelah memakan buah beri merah liar. Kaldi memetik buah tersebut dan membawanya ke biara terdekat.",
+    question: "Siapakah yang menurut legenda pertama kali menemukan efek penyegar dari buah kopi?",
+    answers: [
+      "Seorang penggembala kambing bernama Kaldi",
+      "Pedagang rempah dari Laut Merah",
+      "Seorang biksu musafir",
+    ],
+  },
+  {
+    text: "Di bawah lapisan es raksasa Antartika, salju ratusan ribu tahun memadat menjadi gletser es biru yang murni. Di dalam kisi kristalnya terperangkap miliaran gelembung udara mikroskopis dari zaman purba. Melalui pengeboran inti es sedalam lebih dari tiga kilometer, para ilmuwan dapat meneliti sampel asli atmosfer Bumi masa lalu.",
+    question: "Apakah yang diambil dan diteliti para ilmuwan dari sampel inti es Antartika?",
+    answers: [
+      "Gelembung udara purba yang terperangkap ratusan ribu tahun",
+      "Tetesan air laut prasejarah yang membeku",
+      "Fosil serbuk sari pohon purba",
+    ],
+  },
+  {
+    text: "Di gurun pasir tertentu di seluruh dunia, para pengelana dapat menyaksikan keajaiban bukit pasir yang bersenandung. Saat pasir kering longsor di lereng yang curam, miliaran butir pasir kuarsa berukuran seragam saling bergesekan pada frekuensi yang sama. Gesekan serempak ini menghasilkan dengungan rendah mirip alunan selo.",
+    question: "Apakah yang menyebabkan suara dengungan rendah pada bukit pasir yang bersenandung?",
+    answers: [
+      "Gesekan serempak butiran pasir kuarsa yang seragam saat meluncur",
+      "Angin kencang yang meniup celah tebing batu tajam",
+      "Gema dari rongga gua bawah tanah yang dalam",
+    ],
   },
 ];
 

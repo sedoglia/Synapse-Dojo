@@ -585,44 +585,209 @@ const ui: Locale['ui'] = {
 };
 
 const words: string[] = [
-  'árvore', 'barco', 'vela', 'golfinho', 'elefante', 'borboleta', 'sorvete', 'ilha', 'lâmpada', 'montanha',
-  'nuvem', 'guarda-chuva', 'piano', 'caderno', 'foguete', 'cadeira', 'tambor', 'ovo', 'vulcão', 'mochila',
-  'anel', 'bicicleta', 'travesseiro', 'dragão', 'tesoura', 'girafa', 'chave', 'limão', 'martelo', 'navio',
-  'relógio', 'pinguim', 'aranha', 'espelho', 'xícara', 'violino', 'castelo', 'morango', 'gaivota', 'lobo',
-  'medalha', 'ninho', 'panela', 'sapato', 'trem', 'mala', 'cometa', 'farol', 'bolota', 'pão',
-  'tijolo', 'cavalo', 'barraca', 'esponja', 'pera', 'garrafa', 'coroa', 'pipa', 'rio', 'estrela',
+  "árvore", "barco", "vela", "golfinho", "elefante", "borboleta", "sorvete", "ilha", "lâmpada", "montanha",
+  "nuvem", "guarda-chuva", "piano", "caderno", "foguete", "cadeira", "tambor", "ovo", "vulcão", "mochila",
+  "anel", "bicicleta", "travesseiro", "dragão", "tesoura", "girafa", "chave", "limão", "martelo", "navio",
+  "relógio", "pinguim", "aranha", "espelho", "xícara", "violino", "castelo", "morango", "gaivota", "lobo",
+  "medalha", "ninho", "panela", "sapato", "trem", "mala", "cometa", "farol", "bolota", "pão",
+  "tijolo", "cavalo", "barraca", "esponja", "pera", "garrafa", "coroa", "pipa", "rio", "estrela",
+  "cama", "casa", "pato", "gato", "sopa", "mapa", "copo", "luas", "leão", "touro",
+  "fogo", "lago", "coro", "mina", "berço", "bota", "gota", "rosa", "muro", "pala",
+  "pele", "ramo", "sapo", "foca", "mico", "poço", "taça", "seda", "sino", "laço",
+  "praia", "torre", "selva", "livro", "campo", "terra", "grama", "peixe", "tigre", "urso",
+  "queijo", "ponte", "areia", "prata", "cobre", "fruta", "carne", "grãos", "vento", "chuva",
+  "neve", "noite", "tarde", "penas", "flecha", "tábua", "cabos", "rodas", "prego", "agulha",
+  "bolsa", "disco", "rádio", "tetos", "pasta", "prato", "forno", "barra", "fitas", "morro",
+  "bosque", "pedra", "caminho", "janela", "quadro", "portos", "fontes", "teatro", "parque", "aldeia",
+  "portas", "comida", "moedas", "espada", "escudo", "camisa", "casaco", "cabeça", "corpos", "dentes",
+  "madeira", "vidros", "ferros", "bronze", "sombra", "sons", "música", "desenho", "cartas", "cozinha",
+  "jardim", "planeta", "piloto", "palácio", "caverna", "vereda", "abismo", "verões", "guitarra", "bandeira",
+  "campainha", "cascata", "pintura", "escultura", "muralha", "tormenta", "colheita", "mercado", "terraço", "lagoas",
+  "galáxia", "lanterna", "carroça", "mistério", "horizonte", "silêncio", "teclado", "palmeira", "colheres", "diadema",
+  "universo", "pirâmide", "relâmpago", "labirinto", "orquestra", "diamante", "edifício", "fortaleza", "carrossel", "biblioteca",
+  "termômetro", "telescópio", "autopista", "crocodilo", "terremoto", "manancial", "caracóis", "tempestade", "armadura", "trincheira",
 ];
 
 const passages: Passage[] = [
   {
-    text: 'O farol da ilha de Pedra Branca foi aceso pela primeira vez numa noite de neblina de 1891. O faroleiro, um ex-pescador chamado Artur, subia os cento e trinta degraus da torre duas vezes por dia para limpar a lente e dar corda ao mecanismo que fazia a luz girar. Nas noites de tempestade ele não dormia: ficava lá em cima vigiando o mar, com uma garrafa térmica de café e um rádio velho. Em quarenta anos de serviço, nenhum navio naufragou perto da ilha.',
-    question: 'Quantos degraus tinha a torre?',
-    answers: ['Cento e trinta', 'Trezentos', 'Noventa e um'],
+    text: "O farol da ilha de Pedra Branca foi aceso pela primeira vez numa noite de neblina de 1891. O faroleiro, um ex-pescador chamado Artur, subia os cento e trinta degraus da torre duas vezes por dia para limpar a lente e dar corda ao mecanismo que fazia a luz girar. Nas noites de tempestade ele não dormia: ficava lá em cima vigiando o mar, com uma garrafa térmica de café e um rádio velho. Em quarenta anos de serviço, nenhum navio naufragou perto da ilha.",
+    question: "Quantos degraus tinha a torre?",
+    answers: [
+      "Cento e trinta",
+      "Trezentos",
+      "Noventa e um",
+    ],
   },
   {
-    text: 'As abelhas que encontram um bom campo de flores voltam à colmeia e fazem uma dança especial. O ângulo da dança em relação à vertical indica a direção da comida em relação ao sol, enquanto a duração da dança indica a distância. As outras abelhas acompanham os movimentos com as antenas e depois voam direto para o lugar indicado. Assim, uma única exploradora pode guiar centenas de companheiras.',
-    question: 'O que indica a duração da dança?',
-    answers: ['A distância da comida', 'O tipo de flor', 'A hora do dia'],
+    text: "As abelhas que encontram um bom campo de flores voltam à colmeia e fazem uma dança especial. O ângulo da dança em relação à vertical indica a direção da comida em relação ao sol, enquanto a duração da dança indica a distância. As outras abelhas acompanham os movimentos com as antenas e depois voam direto para o lugar indicado. Assim, uma única exploradora pode guiar centenas de companheiras.",
+    question: "O que indica a duração da dança?",
+    answers: [
+      "A distância da comida",
+      "O tipo de flor",
+      "A hora do dia",
+    ],
   },
   {
-    text: 'Marta tinha decidido aprender a fazer pão. O primeiro saiu do forno duro como pedra, o segundo estava cru por dentro. Na terceira tentativa ela entendeu o problema: a cozinha estava fria demais e a massa não crescia direito. Desde então ela deixa a massa descansar perto do aquecedor, coberta com um pano, e todo domingo os vizinhos batem à porta, atraídos pelo cheiro.',
-    question: 'Por que o pão de Marta não dava certo?',
-    answers: ['A cozinha estava fria demais', 'Ela usava sal demais', 'O forno estava quebrado'],
+    text: "Marta tinha decidido aprender a fazer pão. O primeiro saiu do forno duro como pedra, o segundo estava cru por dentro. Na terceira tentativa ela entendeu o problema: a cozinha estava fria demais e a massa não crescia direito. Desde então ela deixa a massa descansar perto do aquecedor, coberta com um pano, e todo domingo os vizinhos batem à porta, atraídos pelo cheiro.",
+    question: "Por que o pão de Marta não dava certo?",
+    answers: [
+      "A cozinha estava fria demais",
+      "Ela usava sal demais",
+      "O forno estava quebrado",
+    ],
   },
   {
-    text: 'Na montanha, a temperatura cai em média cerca de seis graus e meio a cada mil metros de altitude. Por isso, mesmo em pleno verão, há neve nos picos mais altos. Os caminhantes experientes sempre levam um agasalho na mochila, mesmo que no vale esteja calor. O vento também pode fazer o frio parecer muito mais forte do que mostra o termômetro.',
-    question: 'Quanto a temperatura cai a cada mil metros?',
-    answers: ['Cerca de seis graus e meio', 'Cerca de dois graus', 'Cerca de quinze graus'],
+    text: "Na montanha, a temperatura cai em média cerca de seis graus e meio a cada mil metros de altitude. Por isso, mesmo em pleno verão, há neve nos picos mais altos. Os caminhantes experientes sempre levam um agasalho na mochila, mesmo que no vale esteja calor. O vento também pode fazer o frio parecer muito mais forte do que mostra o termômetro.",
+    question: "Quanto a temperatura cai a cada mil metros?",
+    answers: [
+      "Cerca de seis graus e meio",
+      "Cerca de dois graus",
+      "Cerca de quinze graus",
+    ],
   },
   {
-    text: 'Na pequena vila de Vale Fundo, a feira acontece toda quinta-feira na praça. A barraca mais procurada não é a das frutas nem a dos queijos, mas a de Elias, que conserta relógios e rádios há quarenta anos. As pessoas levam até ele aparelhos que ninguém mais sabe consertar, e ele, com uma lupa e uma pinça, quase sempre consegue fazê-los funcionar de novo.',
-    question: 'Qual é o trabalho de Elias?',
-    answers: ['Conserta relógios e rádios', 'Vende queijos', 'Cultiva frutas'],
+    text: "Na pequena vila de Vale Fundo, a feira acontece toda quinta-feira na praça. A barraca mais procurada não é a das frutas nem a dos queijos, mas a de Elias, que conserta relógios e rádios há quarenta anos. As pessoas levam até ele aparelhos que ninguém mais sabe consertar, e ele, com uma lupa e uma pinça, quase sempre consegue fazê-los funcionar de novo.",
+    question: "Qual é o trabalho de Elias?",
+    answers: [
+      "Conserta relógios e rádios",
+      "Vende queijos",
+      "Cultiva frutas",
+    ],
   },
   {
-    text: 'O polvo tem três corações e sangue azul. Dois corações bombeiam o sangue para as brânquias, e o terceiro o empurra para o resto do corpo. Ele também é um mestre do disfarce: graças a células especiais da pele, consegue mudar de cor em uma fração de segundo para se camuflar ou se comunicar. Alguns polvos chegam a carregar cascas de coco como abrigo portátil.',
-    question: 'Quantos corações tem o polvo?',
-    answers: ['Três', 'Um', 'Oito'],
+    text: "O polvo tem três corações e sangue azul. Dois corações bombeiam o sangue para as brânquias, e o terceiro o empurra para o resto do corpo. Ele também é um mestre do disfarce: graças a células especiais da pele, consegue mudar de cor em uma fração de segundo para se camuflar ou se comunicar. Alguns polvos chegam a carregar cascas de coco como abrigo portátil.",
+    question: "Quantos corações tem o polvo?",
+    answers: [
+      "Três",
+      "Um",
+      "Oito",
+    ],
+  },
+  {
+    text: "Os motoristas de táxi de Londres precisam memorizar mais de vinte e cinco mil ruas e milhares de pontos de referência para passar no rigoroso exame conhecido como \"O Conhecimento\". Estudos de neuroimagem comprovaram que essa intensa navegação mental provoca um aumento físico do hipocampo posterior, a região do cérebro responsável pela memória espacial.",
+    question: "Qual região cerebral se desenvolve consideravelmente nos taxistas de Londres?",
+    answers: [
+      "O hipocampo posterior",
+      "O córtex motor primário",
+      "O lobo frontal esquerdo",
+    ],
+  },
+  {
+    text: "As lagartixas conseguem escalar paredes lisas de vidro e correr de cabeça para baixo no teto usando apenas uma pata. Essa proeza não se deve a ventosas nem a substâncias colantes, mas a milhões de cerdas microscópicas nos dedos chamadas espátulas. Elas se ligam às superfícies por meio de fracas atrações intermoleculares chamadas forças de van der Waals.",
+    question: "Que fenômeno físico permite às lagartixas aderirem a superfícies lisas de vidro?",
+    answers: [
+      "Forças microscópicas de van der Waals",
+      "Sucção por microventosas",
+      "Um muco adesivo secretado pela pele",
+    ],
+  },
+  {
+    text: "Em 1901, mergulhadores descobriram em um naufrágio perto da ilha grega de Anticítera um mecanismo de bronze corroído. Datado do século II antes de Cristo, o artefato continha dezenas de engrenagens diferenciais precisas para calcular as fases da Lua e prever eclipses solares com surpreendente exatidão astronômica.",
+    question: "Para que servia o mecanismo antigo descoberto em Anticítera?",
+    answers: [
+      "Calcular ciclos astronômicos e eclipses",
+      "Medir a profundidade do oceano",
+      "Registrar a velocidade do vento marítimo",
+    ],
+  },
+  {
+    text: "Durante a Segunda Guerra Mundial, no centro secreto de Bletchley Park, criptoanalistas liderados por Alan Turing trabalharam para decifrar as transmissões da máquina alemã Enigma. Eles construíram imensas máquinas eletromecânicas chamadas Bombas, capazes de testar milhões de combinações até encontrar a chave diária de cifra.",
+    question: "Como eram chamadas as máquinas eletromecânicas criadas pela equipe de Turing?",
+    answers: [
+      "Bombas",
+      "Colossos",
+      "Decifradores Enigma",
+    ],
+  },
+  {
+    text: "O telescópio espacial James Webb orbita o Sol a um milhão e meio de quilômetros da Terra, no ponto de equilíbrio gravitacional chamado Lagrange L2. Protegido por um escudo térmico do tamanho de uma quadra de tênis, seus espelhos hexagonais banhados a ouro captam a luz infravermelha das primeiras galáxias formadas após o Big Bang.",
+    question: "A que distância aproximada da Terra se localiza o telescópio James Webb?",
+    answers: [
+      "Um milhão e meio de quilômetros",
+      "Trezentos e oitenta mil quilômetros",
+      "Cem mil quilômetros",
+    ],
+  },
+  {
+    text: "Na Fossa das Marianas, a quase oito mil metros de profundidade, vive o peixe-caracol-das-marianas na mais completa escuridão. Seu corpo gelatinoso e translúcido não possui bexiga natatória e suas proteínas celulares são protegidas por uma molécula especial chamada TMAO, permitindo suportar pressões hidrostáticas esmagadoras.",
+    question: "Que substância química ajuda o peixe-caracol a resistir à extrema pressão do abismo marinho?",
+    answers: [
+      "A molécula protetora TMAO",
+      "Uma espessa camada de gordura cerosa",
+      "Um esqueleto reforçado com titânio",
+    ],
+  },
+  {
+    text: "Nos profundos desfiladeiros dos Andes, os engenheiros incas ergueram pontes suspensas sobre rios caudalosos sem utilizar vigas de madeira ou cabos de ferro. Aldeias inteiras colhiam o capim das montanhas e o trançavam em cordas finas reunidas em cabos da grossura de troncos de árvores. A cada ano, a ponte era refeita em uma celebração comunitária de três dias.",
+    question: "Que matéria-prima natural os incas usavam para trançar suas pontes suspensas?",
+    answers: [
+      "Capim selvagem da montanha trançado",
+      "Tiras de couro curtido de lhama",
+      "Ramos de cedro amarrados com cânhamo",
+    ],
+  },
+  {
+    text: "Em 1610, Galileu Galilei apontou sua luneta artesanal para Júpiter e avistou quatro pontos brilhantes alinhados ao lado do planeta. Ao longo de noites consecutivas, percebeu que eles mudavam de posição enquanto orbitavam Júpiter. Essas luas galileanas forneceram a primeira prova visual de que nem todos os astros celestes giravam ao redor da Terra.",
+    question: "Quantas luas de Júpiter Galileu descobriu em 1610 com sua luneta?",
+    answers: [
+      "Quatro",
+      "Duas",
+      "Sete",
+    ],
+  },
+  {
+    text: "Nas florestas tropicais da América Central, os antigos maias reverenciavam as sementes de cacau como moeda sagrada e oferenda divina. Além de usá-las no comércio, eles as torravam e moíam para produzir uma bebida cerimonial amarga e densa. Eles derramavam o líquido de grandes alturas para formar espuma e o temperavam com pimenta moída.",
+    question: "Que condimento picante os maias adicionavam à sua bebida sagrada de cacau?",
+    answers: [
+      "Pimenta moída",
+      "Gengibre silvestre",
+      "Cravo-da-índia seco",
+    ],
+  },
+  {
+    text: "Em enseadas tropicais no Caribe e no Pacífico, a água do mar brilha com um intenso azul elétrico à noite quando agitada por ondas ou remos. Esse fenômeno é produzido por bilhões de organismos unicelulares chamados dinoflagelados. Quando suas membranas sofrem agitação mecânica, disparam um clarão químico para espantar predadores marinhos.",
+    question: "De que cor é a bioluminescência gerada pelos dinoflagelados marinhos?",
+    answers: [
+      "Azul elétrico brilhante",
+      "Verde esmeralda",
+      "Âmbar dourado",
+    ],
+  },
+  {
+    text: "Os camaleões não mudam a tonalidade de sua pele misturando pigmentos líquidos em suas células. Sob sua epiderme existe uma camada de células iridóforas repletas de nanocristais de guanina. Ao tensionar ou relaxar o tecido cutâneo, eles alteram a distância entre esses cristais, refletindo seletivamente comprimentos de onda de luz como espelhos fotônicos.",
+    question: "De que maneira os camaleões realizam a mudança de cor de sua pele?",
+    answers: [
+      "Ajustando o espaçamento entre nanocristais na pele",
+      "Espremendo bolsas de tinta sob as escamas",
+      "Modificando a temperatura corporal",
+    ],
+  },
+  {
+    text: "Segundo uma antiga lenda das terras altas da Etiópia, o café foi descoberto por um jovem pastor de cabras chamado Kaldi. Ele reparou que, após pastarem nas bagas avermelhadas de um arbusto silvestre, suas cabras saltitavam com surpreendente energia durante a noite toda. Kaldi colheu alguns frutos e os levou a monges de um mosteiro vizinho.",
+    question: "Quem descobriu, de acordo com a lenda, o efeito revigorante dos frutos do café?",
+    answers: [
+      "Um jovem pastor de cabras chamado Kaldi",
+      "Um mercador de especiarias do Mar Vermelho",
+      "Um monge eremita",
+    ],
+  },
+  {
+    text: "Sob a calota de gelo da Antártida, camadas de neve caídas ao longo de centenas de milênios se compactaram em um gelo azul cristalino. Presas no interior dessa estrutura estão minúsculas bolhas de ar aprisionadas há centenas de milhares de anos. Ao perfurar testemunhos de gelo com mais de três quilômetros de profundidade, cientistas analisam amostras da atmosfera do passado.",
+    question: "O que os cientistas examinam no interior dos blocos profundos de gelo antártico?",
+    answers: [
+      "Bolhas de ar milenares preservadas no gelo",
+      "Gotículas de água marinha fossilizadas",
+      "Pólen intacto de árvores extintas",
+    ],
+  },
+  {
+    text: "Em desertos costeiros e interiores pelo planeta, viajantes presenciam o mistério sonoro das dunas que cantam. Quando avalanches de areia seca deslizam pelas encostas íngremes, milhões de grãos de quartzo de tamanho uniforme colidem em frequências idênticas. Essa fricção sincronizada gera um zumbido grave e contínuo, semelhante às notas de um violoncelo.",
+    question: "O que produz o som característico emitido pelas dunas cantoras?",
+    answers: [
+      "A fricção sincronizada de grãos de quartzo ao deslizar",
+      "O vento soprando através de fendas de rochas",
+      "Ecos provenientes de galerias subterrâneas",
+    ],
   },
 ];
 

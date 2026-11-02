@@ -585,44 +585,209 @@ const ui: Locale['ui'] = {
 };
 
 const words: string[] = [
-  'Baum', 'Boot', 'Kerze', 'Delfin', 'Elefant', 'Schmetterling', 'Eis', 'Insel', 'Lampe', 'Berg',
-  'Wolke', 'Regenschirm', 'Klavier', 'Heft', 'Rakete', 'Stuhl', 'Trommel', 'Ei', 'Vulkan', 'Rucksack',
-  'Ring', 'Fahrrad', 'Kissen', 'Drache', 'Schere', 'Giraffe', 'Schlüssel', 'Zitrone', 'Hammer', 'Schiff',
-  'Uhr', 'Pinguin', 'Spinne', 'Spiegel', 'Tasse', 'Geige', 'Burg', 'Erdbeere', 'Möwe', 'Wolf',
-  'Medaille', 'Nest', 'Topf', 'Schuh', 'Zug', 'Koffer', 'Komet', 'Leuchtturm', 'Eichel', 'Brot',
-  'Ziegel', 'Pferd', 'Zelt', 'Schwamm', 'Birne', 'Flasche', 'Krone', 'Kastanie', 'Fluss', 'Stern',
+  "Baum", "Boot", "Kerze", "Delfin", "Elefant", "Schmetterling", "Eis", "Insel", "Lampe", "Berg",
+  "Wolke", "Regenschirm", "Klavier", "Heft", "Rakete", "Stuhl", "Trommel", "Ei", "Vulkan", "Rucksack",
+  "Ring", "Fahrrad", "Kissen", "Drache", "Schere", "Giraffe", "Schlüssel", "Zitrone", "Hammer", "Schiff",
+  "Uhr", "Pinguin", "Spinne", "Spiegel", "Tasse", "Geige", "Burg", "Erdbeere", "Möwe", "Wolf",
+  "Medaille", "Nest", "Topf", "Schuh", "Zug", "Koffer", "Komet", "Leuchtturm", "Eichel", "Brot",
+  "Ziegel", "Pferd", "Zelt", "Schwamm", "Birne", "Flasche", "Krone", "Kastanie", "Fluss", "Stern",
+  "Mond", "Wald", "Feld", "Sand", "Wind", "Gras", "Holz", "Gold", "Dorf", "Dach",
+  "Wand", "Turm", "Park", "Pfad", "Seen", "Bach", "Bild", "Lied", "Ball", "Seil",
+  "Zahn", "Kopf", "Hand", "Fuß", "Haar", "Nase", "Auge", "Hund", "Ente", "Maus",
+  "Blume", "Sonne", "Vogel", "Katze", "Tiger", "Löwen", "Bären", "Fisch", "Adler", "Falke",
+  "Kranz", "Pfeil", "Bogen", "Speer", "Schild", "Helme", "Weste", "Jacke", "Hosen", "Kleid",
+  "Küche", "Regal", "Kamin", "Öfens", "Besen", "Decke", "Kanne", "Gabel", "Löffel", "Teller",
+  "Feuer", "Rauch", "Dampf", "Regen", "Hagel", "Nacht", "Nebel", "Frost", "Hitze", "Sturm",
+  "Garten", "Quelle", "Höhlen", "Felsen", "Wiesen", "Brücke", "Gassen", "Plätze", "Kirche", "Tunnel",
+  "Schloss", "Tempel", "Palast", "Balkon", "Treppe", "Zimmer", "Fenster", "Kästen", "Truhen", "Silber",
+  "Bronze", "Kupfer", "Eisen", "Stähle", "Papier", "Briefe", "Siegel", "Münzen", "Gürtel", "Sattel",
+  "Wagens", "Kutsche", "Motore", "Segeln", "Rudern", "Ankers", "Häfens", "Strand", "Gitarre", "Trompete",
+  "Laterne", "Fackeln", "Kompass", "Klingen", "Schwert", "Rüstung", "Gewitter", "Planete", "Galaxie", "Brunnen",
+  "Eisberg", "Klippen", "Flöten", "Harfens", "Glocken", "Teppich", "Vorhang", "Schrank", "Schmuck", "Katalog",
+  "Pyramide", "Horizont", "Zauberer", "Schlucht", "Festung", "Wasserfall", "Schneeball", "Windmühle", "Gasthaus", "Rathaus",
+  "Speicher", "Werkstatt", "Bergwerk", "Bibliothek", "Teleskop", "Mikroskop", "Riesenrad", "Karussell", "Handschuh", "Regenbogen",
 ];
 
 const passages: Passage[] = [
   {
-    text: 'Der Leuchtturm auf der Insel Weißenstein wurde in einer nebligen Nacht im Jahr 1891 zum ersten Mal entzündet. Der Wärter, ein ehemaliger Fischer namens Arthur, stieg zweimal am Tag die hundertdreißig Stufen des Turms hinauf, um die Linse zu putzen und das Uhrwerk aufzuziehen, das das Licht drehen ließ. In Sturmnächten schlief er nicht: Er blieb oben und beobachtete das Meer, mit einer Thermoskanne Kaffee und einem alten Radio. In vierzig Dienstjahren erlitt kein Schiff in der Nähe der Insel Schiffbruch.',
-    question: 'Wie viele Stufen hatte der Turm?',
-    answers: ['Hundertdreißig', 'Dreihundert', 'Einundneunzig'],
+    text: "Der Leuchtturm auf der Insel Weißenstein wurde in einer nebligen Nacht im Jahr 1891 zum ersten Mal entzündet. Der Wärter, ein ehemaliger Fischer namens Arthur, stieg zweimal am Tag die hundertdreißig Stufen des Turms hinauf, um die Linse zu putzen und das Uhrwerk aufzuziehen, das das Licht drehen ließ. In Sturmnächten schlief er nicht: Er blieb oben und beobachtete das Meer, mit einer Thermoskanne Kaffee und einem alten Radio. In vierzig Dienstjahren erlitt kein Schiff in der Nähe der Insel Schiffbruch.",
+    question: "Wie viele Stufen hatte der Turm?",
+    answers: [
+      "Hundertdreißig",
+      "Dreihundert",
+      "Einundneunzig",
+    ],
   },
   {
-    text: 'Bienen, die ein gutes Blumenfeld finden, kehren zum Stock zurück und führen einen besonderen Tanz auf. Der Winkel des Tanzes zur Senkrechten zeigt die Richtung des Futters im Verhältnis zur Sonne, die Dauer des Tanzes dagegen die Entfernung. Die anderen Bienen folgen den Bewegungen mit ihren Fühlern und fliegen dann direkt zum angezeigten Ort. So kann eine einzige Kundschafterin Hunderte von Gefährtinnen führen.',
-    question: 'Was zeigt die Dauer des Tanzes an?',
-    answers: ['Die Entfernung des Futters', 'Die Art der Blume', 'Die Tageszeit'],
+    text: "Bienen, die ein gutes Blumenfeld finden, kehren zum Stock zurück und führen einen besonderen Tanz auf. Der Winkel des Tanzes zur Senkrechten zeigt die Richtung des Futters im Verhältnis zur Sonne, die Dauer des Tanzes dagegen die Entfernung. Die anderen Bienen folgen den Bewegungen mit ihren Fühlern und fliegen dann direkt zum angezeigten Ort. So kann eine einzige Kundschafterin Hunderte von Gefährtinnen führen.",
+    question: "Was zeigt die Dauer des Tanzes an?",
+    answers: [
+      "Die Entfernung des Futters",
+      "Die Art der Blume",
+      "Die Tageszeit",
+    ],
   },
   {
-    text: 'Martha hatte beschlossen, Brot backen zu lernen. Das erste kam hart wie ein Stein aus dem Ofen, das zweite war in der Mitte roh. Beim dritten Versuch verstand sie das Problem: Die Küche war zu kalt, und der Teig ging nicht richtig auf. Seitdem lässt sie den Teig mit einem Tuch bedeckt neben der Heizung ruhen, und jeden Sonntag klopfen die Nachbarn an die Tür, angelockt vom Duft.',
-    question: 'Warum gelang Marthas Brot nicht?',
-    answers: ['Die Küche war zu kalt', 'Sie nahm zu viel Salz', 'Der Ofen war kaputt'],
+    text: "Martha hatte beschlossen, Brot backen zu lernen. Das erste kam hart wie ein Stein aus dem Ofen, das zweite war in der Mitte roh. Beim dritten Versuch verstand sie das Problem: Die Küche war zu kalt, und der Teig ging nicht richtig auf. Seitdem lässt sie den Teig mit einem Tuch bedeckt neben der Heizung ruhen, und jeden Sonntag klopfen die Nachbarn an die Tür, angelockt vom Duft.",
+    question: "Warum gelang Marthas Brot nicht?",
+    answers: [
+      "Die Küche war zu kalt",
+      "Sie nahm zu viel Salz",
+      "Der Ofen war kaputt",
+    ],
   },
   {
-    text: 'In den Bergen sinkt die Temperatur im Durchschnitt um etwa sechseinhalb Grad pro tausend Meter Höhe. Deshalb liegt selbst im Hochsommer auf den höchsten Gipfeln Schnee. Erfahrene Wanderer haben immer einen Pullover im Rucksack, auch wenn es im Tal warm ist. Auch der Wind kann die Kälte viel stärker spüren lassen, als das Thermometer anzeigt.',
-    question: 'Um wie viel sinkt die Temperatur pro tausend Meter?',
-    answers: ['Um etwa sechseinhalb Grad', 'Um etwa zwei Grad', 'Um etwa fünfzehn Grad'],
+    text: "In den Bergen sinkt die Temperatur im Durchschnitt um etwa sechseinhalb Grad pro tausend Meter Höhe. Deshalb liegt selbst im Hochsommer auf den höchsten Gipfeln Schnee. Erfahrene Wanderer haben immer einen Pullover im Rucksack, auch wenn es im Tal warm ist. Auch der Wind kann die Kälte viel stärker spüren lassen, als das Thermometer anzeigt.",
+    question: "Um wie viel sinkt die Temperatur pro tausend Meter?",
+    answers: [
+      "Um etwa sechseinhalb Grad",
+      "Um etwa zwei Grad",
+      "Um etwa fünfzehn Grad",
+    ],
   },
   {
-    text: 'Im kleinen Dorf Talbrunn findet der Markt jeden Donnerstag auf dem Platz statt. Der beliebteste Stand ist weder der mit dem Obst noch der mit dem Käse, sondern der von Elias, der seit vierzig Jahren Uhren und Radios repariert. Die Leute bringen ihm Geräte, die sonst niemand mehr reparieren kann, und mit Lupe und Pinzette bringt er sie fast immer wieder zum Laufen.',
-    question: 'Was macht Elias beruflich?',
-    answers: ['Er repariert Uhren und Radios', 'Er verkauft Käse', 'Er baut Obst an'],
+    text: "Im kleinen Dorf Talbrunn findet der Markt jeden Donnerstag auf dem Platz statt. Der beliebteste Stand ist weder der mit dem Obst noch der mit dem Käse, sondern der von Elias, der seit vierzig Jahren Uhren und Radios repariert. Die Leute bringen ihm Geräte, die sonst niemand mehr reparieren kann, und mit Lupe und Pinzette bringt er sie fast immer wieder zum Laufen.",
+    question: "Was macht Elias beruflich?",
+    answers: [
+      "Er repariert Uhren und Radios",
+      "Er verkauft Käse",
+      "Er baut Obst an",
+    ],
   },
   {
-    text: 'Der Krake hat drei Herzen und blaues Blut. Zwei Herzen pumpen das Blut zu den Kiemen, das dritte durch den restlichen Körper. Außerdem ist er ein Meister der Verkleidung: Dank besonderer Zellen in seiner Haut kann er in Sekundenbruchteilen die Farbe wechseln, um sich zu tarnen oder zu verständigen. Manche Kraken tragen sogar Kokosnussschalen als tragbaren Unterschlupf mit sich.',
-    question: 'Wie viele Herzen hat der Krake?',
-    answers: ['Drei', 'Eines', 'Acht'],
+    text: "Der Krake hat drei Herzen und blaues Blut. Zwei Herzen pumpen das Blut zu den Kiemen, das dritte durch den restlichen Körper. Außerdem ist er ein Meister der Verkleidung: Dank besonderer Zellen in seiner Haut kann er in Sekundenbruchteilen die Farbe wechseln, um sich zu tarnen oder zu verständigen. Manche Kraken tragen sogar Kokosnussschalen als tragbaren Unterschlupf mit sich.",
+    question: "Wie viele Herzen hat der Krake?",
+    answers: [
+      "Drei",
+      "Eines",
+      "Acht",
+    ],
+  },
+  {
+    text: "Londoner Taxifahrer müssen über fünfundzwanzigtausend Straßen und Tausende Sehenswürdigkeiten auswendig lernen, um die berüchtigte Prüfung \"The Knowledge\" zu bestehen. MRT-Untersuchungen zeigten, dass diese enorme räumliche Gedächtnisleistung den hinteren Hippocampus vergrößert – das Hirnareal, das für Navigation und räumliche Orientierung zuständig ist.",
+    question: "Welches Hirnareal wächst bei Londoner Taxifahrern messbar an?",
+    answers: [
+      "Der hintere Hippocampus",
+      "Der primäre Motorkortex",
+      "Der linke Frontallappen",
+    ],
+  },
+  {
+    text: "Geckos können mühelos an spiegelglatten Glaswänden emporklettern und kopfüber an Decken hängen. Möglich machen dies weder klebrige Sekrete noch Saugnäpfe, sondern Millionen mikroskopisch feiner Härchen an ihren Zehen, sogenannte Spatulae. Diese treten mit Oberflächen über schwache міжmolekulare Kräfte in Wechselwirkung, die Van-der-Waals-Kräfte genannt werden.",
+    question: "Welche physikalische Kraft verleiht Geckos ihre Haftfähigkeit an Glas?",
+    answers: [
+      "Mikroskopische Van-der-Waals-Kräfte",
+      "Sogwirkung winziger Saugnäpfe",
+      "Ein körpereigener Klebstoff",
+    ],
+  },
+  {
+    text: "Im Jahr 1901 entdeckten Schwammtaucher in einem antiken Schiffswrack vor der griechischen Insel Antikythera einen verkrusteten Bronzemechanismus. Das auf das 2. Jahrhundert vor Christus datierte Artefakt besaß Dutzende präziser Zahnräder und gilt als ältester astronomischer Computer, mit dem Mondphasen und Finsternisse exakt berechnet wurden.",
+    question: "Welchem Zweck diente der Mechanismus von Antikythera?",
+    answers: [
+      "Der Berechnung astronomischer Zyklen und Finsternisse",
+      "Der Tiefenmessung im Ozean",
+      "Der Geschwindigkeitsmessung des Windes",
+    ],
+  },
+  {
+    text: "Während des Zweiten Weltkriegs entschlüsselten Kryptoanalytiker in Bletchley Park unter der Leitung von Alan Turing die Funksprüche der deutschen Chiffriermaschine Enigma. Sie konstruierten raumgroße elektromechanische Rechenmaschinen namens \"Bombes\", die täglich Millionen Buchstabenkombinationen testeten, um den jeweiligen Tagesschlüssel zu knacken.",
+    question: "Wie wurden die elektromechanischen Entschlüsselungsmaschinen von Turing genannt?",
+    answers: [
+      "Bombes",
+      "Colossus",
+      "Enigma-Brecher",
+    ],
+  },
+  {
+    text: "Das James-Webb-Weltraumteleskop kreist anderthalb Millionen Kilometer von der Erde entfernt um die Sonne, am Gravitationsgleichgewichtspunkt Lagrange L2. Geschützt von einem sonnenschirmgroßen Hitzeschild sammeln seine sechseckigen, goldbeschichteten Berylliumspiegel infrarotes Licht von den allerersten Galaxien, die kurz nach dem Urknall entstanden sind.",
+    question: "In welcher Entfernung von der Erde befindet sich das James-Webb-Teleskop?",
+    answers: [
+      "Anderthalb Millionen Kilometer",
+      "Dreihundertachtzigtausend Kilometer",
+      "Einhunderttausend Kilometer",
+    ],
+  },
+  {
+    text: "Im Marianengraben, fast achttausend Meter unter dem Meeresspiegel, lebt der Marianen-Schneckenfisch in völliger Finsternis. Sein durchscheinender Körper besitzt keine Schwimmblase, und seine Zellproteine werden durch ein spezielles Molekül namens TMAO stabilisiert, wodurch er dem gewaltigen hydrostatischen Druck standhält.",
+    question: "Welches Molekül schützt die Zellen des Tiefsee-Schneckenfischs vor dem Druck?",
+    answers: [
+      "Das Schutzmolekül TMAO",
+      "Eine dicke Fettschicht",
+      "Ein mit Titan verstärktes Zellskelett",
+    ],
+  },
+  {
+    text: "In den tiefen Schluchten der Anden bauten die Inka Hängebrücken über reißende Flüsse ganz ohne Holzbalken oder Eisenketten. Ganze Dorfgemeinschaften flochten das raue Bergras Ichu zu dicken Seilen zusammen, die zu tragenden Tauen gebündelt wurden. Jedes Jahr wurde die Brücke in einem dreitägigen Fest erneuert und neu über die Schlucht gespannt.",
+    question: "Welches Naturmaterial verwendeten die Inka für ihre Hängebrücken?",
+    answers: [
+      "Geflochtenes wildes Bergras",
+      "Lederstreifen von Lamas",
+      "Zweige gebunden mit Hanf",
+    ],
+  },
+  {
+    text: "Im Jahr 1610 richtete Galileo Galilei sein handgefertigtes Fernrohr auf Jupiter und entdeckte vier Lichtpunkte, die wie an einer Perlenschnur neben dem Planeten aufgereiht waren. In den folgenden Nächten beobachtete er, wie sie Jupiter umkreisten. Diese Monde lieferten den ersten direkten Beweis dafür, dass sich nicht alle Himmelskörper um die Erde drehen.",
+    question: "Wie viele Jupitermonde entdeckte Galileo Galilei im Jahr 1610?",
+    answers: [
+      "Vier",
+      "Zwei",
+      "Sieben",
+    ],
+  },
+  {
+    text: "Im mittelamerikanischen Regenwald verehrten die Maya Kakaobohnen als heiliges Geschenk der Götter und nutzten sie als Zahlungsmittel. Sie zermahlten die fermentierten Bohnen und brauten daraus ein bitteres, schaumiges Ritualgetränk. Durch wiederholtes Gießen aus großer Höhe erzeugten sie dichten Schaum und würzten das Gebräu mit gemahlenen Chilischoten.",
+    question: "Welches scharfe Gewürz gaben die Maya traditionell in ihr Kakaogetränk?",
+    answers: [
+      "Gemahlene Chilischoten",
+      "Wilden Ingwer",
+      "Getrocknete Nelken",
+    ],
+  },
+  {
+    text: "In tropischen Meeresbuchten erstrahlt das Wasser nachts in leuchtend elektrischem Blau, sobald es durch Wellenschlag oder Ruderbewegungen aufgewühlt wird. Verursacht wird dies durch Abermilliarden mikroskopischer Einzeller, die Dinoflagellaten. Bei mechanischer Reizung erzeugen sie einen Lichtblitz, um Fressfeinde abzuschrecken.",
+    question: "In welcher Farbe leuchten biolumineszente Dinoflagellaten im Meer?",
+    answers: [
+      "Leuchtend elektrisches Blau",
+      "Smaragdgrün",
+      "Goldgelbes Bernsteinfarben",
+    ],
+  },
+  {
+    text: "Chamäleons wechseln ihre Farbe nicht durch das Mischen von Pigmentflüssigkeiten. In ihrer Haut liegt eine Schicht aus Iridophoren-Zellen mit einem Gitter aus Guanin-Nanokristallen. Durch Anspannen oder Entspannen der Haut verändern sie den Abstand zwischen diesen Kristallen, wodurch bestimmte Wellenlängen des Lichts wie von Spiegeln reflektiert werden.",
+    question: "Wie vollziehen Chamäleons ihren Farbwechsel?",
+    answers: [
+      "Indem sie den Abstand zwischen Nanokristallen in ihrer Haut verändern",
+      "Indem sie Farbbeutel unter ihren Schuppen leeren",
+      "Durch eine Änderung ihrer Körpertemperatur",
+    ],
+  },
+  {
+    text: "Einer jahrhundertealten Legende aus dem Hochland von Äthiopien zufolge wurde der Kaffee von einem Ziegenhirten namens Kaldi entdeckt. Er bemerkte, dass seine Ziegen voller Energie herumsprangen, nachdem sie die roten Beeren eines wilden Strauches gefressen hatten. Kaldi pflückte die Früchte und brachte sie zu Mönchen eines nahen Klosters.",
+    question: "Wer entdeckte der Überlieferung nach die belebende Wirkung von Kaffeekirschen?",
+    answers: [
+      "Ein aufmerksamer Ziegenhirte namens Kaldi",
+      "Ein Gewürzhändler vom Roten Meer",
+      "Ein wandernder Mönch",
+    ],
+  },
+  {
+    text: "Unter dem antarktischen Eisschild wurde der Schnee der vergangenen Jahrtausende zu dichtem Blaueis komprimiert. Im Eiskristallgitter sind Millionen winziger Luftbläschen aus prähistorischer Zeit eingeschlossen. Durch Bohrungen von Eisbohrkernen in über drei Kilometern Tiefe analysieren Klimaforscher Originalproben der Atmosphäre vor Hunderttausenden von Jahren.",
+    question: "Was untersuchen Klimaforscher in antarktischen Eisbohrkernen?",
+    answers: [
+      "Uralte Luftbläschen, die seit Jahrtausenden im Eis eingeschlossen sind",
+      "Fossile Wassertropfen",
+      "Konservierten Blütenstaub urzeitlicher Bäume",
+    ],
+  },
+  {
+    text: "In verschiedenen Wüsten der Erde stoßen Reisende auf das akustische Phänomen der singenden Sanddünen. Wenn trockener Sand an steilen Dünenhängen lawinenartig herabgleitet, reiben Millionen gleich großer Quarzkörner mit identischer Frequenz aneinander. Durch diese koordinierte Reibung entsteht ein tiefer, bassartiger Brummton wie von einem Cello.",
+    question: "Wodurch entsteht das charakteristische Summen singender Sanddünen?",
+    answers: [
+      "Durch die koordinierte Reibung herabrutschender Quarzkörner",
+      "Durch Wind, der an scharfkantigen Felsen bricht",
+      "Durch Hohlräume im Erdboden",
+    ],
   },
 ];
 
