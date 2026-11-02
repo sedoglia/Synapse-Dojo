@@ -95,7 +95,7 @@ export const reaction: Exercise = {
 
       pad.className = `reaction-pad ${ok ? 'success' : 'slow'}`;
       text.textContent = `${Math.round(rt)} ms`;
-      subtext.textContent = ok ? '✓' : `Obiettivo: < ${Math.round(target)} ms`;
+      subtext.textContent = ok ? '✓' : t('ex.reaction.target', { ms: Math.round(target) });
       await ctx.wait(800);
     }
     ctx.progress(1);

@@ -32,13 +32,13 @@ export const crossMove: Exercise = {
     const btnLeft = h(
       'button',
       { class: 'btn cross-btn left-btn', onPointerdown: () => onTap?.('left') },
-      h('span', {}, '👈 SX'),
+      h('span', {}, `👈 ${t('ex.dots.left')}`),
       h('span', { class: 'pad-key-hint' }, '[A / ←]'),
     );
     const btnRight = h(
       'button',
       { class: 'btn cross-btn right-btn', onPointerdown: () => onTap?.('right') },
-      h('span', {}, 'DX 👉'),
+      h('span', {}, `${t('ex.dots.right')} 👉`),
       h('span', { class: 'pad-key-hint' }, '[D / →]'),
     );
     const controls = h('div', { class: 'cross-controls' }, btnLeft, btnRight);

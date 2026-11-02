@@ -15,7 +15,7 @@ export const anagrams: Exercise = {
   example: 'ex.anagrams.example',
   minutes: 2.5,
   levels: { min: 1, max: 8, start: 2 },
-  levelLabel: (l) => `${lenFor(l)} lettere`,
+  levelLabel: (l) => `${lenFor(l)} ${t('ex.anagrams.letters')}`,
 
   async run(ctx) {
     const trials = ctx.count(8, 6, 2);

@@ -440,6 +440,20 @@ export const ui = {
   'ex.stories.qPlace': 'Where was {name} located?',
   'ex.stories.qTime': 'When did the event take place?',
   'ex.stories.detail': '{ok}/{n} details correct',
+  'ex.stories.text': '{name} had {item} with them. They were {place} {time}, where they completed their task.',
+  'ex.anagrams.letters': 'letters',
+  'ex.resources.task8': 'Backup',
+  'ex.resources.task7': 'Analytics',
+  'ex.resources.task6': 'Interface',
+  'ex.resources.task5': 'Network',
+  'ex.resources.task4': 'AI Core',
+  'ex.resources.task3': 'Security',
+  'ex.resources.task2': 'Database',
+  'ex.resources.task1': 'Server',
+  'ex.resources.confirm': 'Confirm selection',
+  'ex.resources.value': '⭐ Value: {val} (Target: {target})',
+  'ex.resources.budget': '⚡ Budget: {cost}/{budget}',
+  'ex.reaction.target': 'Target: < {ms} ms',
 
   // flanker
   'ex.flanker.name': 'Flanker Test',
@@ -739,4 +753,441 @@ const passages: Passage[] = [
   },
 ];
 
-export default { ui, words, passages };
+import type { StoryScenario } from '../i18n';
+
+export const stories: StoryScenario[] = [
+  {
+    "name": "Elena",
+    "item": "a blue bag",
+    "itemDistractors": [
+      "a red backpack",
+      "a green suitcase"
+    ],
+    "place": "under the park bench",
+    "placeDistractors": [
+      "in front of the café",
+      "on the train"
+    ],
+    "time": "at 3:30 PM",
+    "timeDistractors": [
+      "at 6:00 PM",
+      "at 12:15 PM"
+    ]
+  },
+  {
+    "name": "Marco",
+    "item": "a leather notebook",
+    "itemDistractors": [
+      "an illustrated book",
+      "a black tablet"
+    ],
+    "place": "on the library table",
+    "placeDistractors": [
+      "on the terrace",
+      "in the waiting room"
+    ],
+    "time": "Thursday morning",
+    "timeDistractors": [
+      "Friday afternoon",
+      "Tuesday evening"
+    ]
+  },
+  {
+    "name": "Sara",
+    "item": "a yellow bicycle",
+    "itemDistractors": [
+      "a silver scooter",
+      "a white moped"
+    ],
+    "place": "beside the central fountain",
+    "placeDistractors": [
+      "in front of city hall",
+      "behind the newsstand"
+    ],
+    "time": "at 9:00 AM",
+    "timeDistractors": [
+      "at 11:30 AM",
+      "at 2:00 PM"
+    ]
+  },
+  {
+    "name": "David",
+    "item": "a red wool scarf",
+    "itemDistractors": [
+      "a blue beanie",
+      "a brown jacket"
+    ],
+    "place": "on the café chair",
+    "placeDistractors": [
+      "on the harbor wall",
+      "in the office hallway"
+    ],
+    "time": "Saturday evening",
+    "timeDistractors": [
+      "Sunday morning",
+      "Wednesday at 4:00 PM"
+    ]
+  },
+  {
+    "name": "Julia",
+    "item": "a white ceramic vase",
+    "itemDistractors": [
+      "a golden lamp",
+      "a wooden painting"
+    ],
+    "place": "on the kitchen windowsill",
+    "placeDistractors": [
+      "on the entrance counter",
+      "on the living room shelf"
+    ],
+    "time": "at 5:45 PM",
+    "timeDistractors": [
+      "at 8:00 PM",
+      "at 10:15 AM"
+    ]
+  },
+  {
+    "name": "Lucas",
+    "item": "a pair of sailor binoculars",
+    "itemDistractors": [
+      "a brass compass",
+      "an ancient map"
+    ],
+    "place": "on the lighthouse rock",
+    "placeDistractors": [
+      "on the boat’s bow",
+      "in the harbor cabin"
+    ],
+    "time": "at the first light of dawn",
+    "timeDistractors": [
+      "at sunset",
+      "at noon sharp"
+    ]
+  },
+  {
+    "name": "Claire",
+    "item": "a vintage camera",
+    "itemDistractors": [
+      "a lens case",
+      "an aluminum tripod"
+    ],
+    "place": "on the panoramic terrace",
+    "placeDistractors": [
+      "along the linden avenue",
+      "on the footbridge"
+    ],
+    "time": "Friday at sunset",
+    "timeDistractors": [
+      "Saturday at dawn",
+      "Thursday afternoon"
+    ]
+  },
+  {
+    "name": "Matthew",
+    "item": "a golden pocket watch",
+    "itemDistractors": [
+      "a silver bracelet",
+      "an antique ring"
+    ],
+    "place": "on the antique dealer’s desk",
+    "placeDistractors": [
+      "in the hotel safe",
+      "in the center display"
+    ],
+    "time": "Monday at 11:00 AM",
+    "timeDistractors": [
+      "Wednesday at 3:30 PM",
+      "Friday at 9:15 AM"
+    ]
+  },
+  {
+    "name": "Valerie",
+    "item": "a yellow polka-dot umbrella",
+    "itemDistractors": [
+      "a green raincoat",
+      "a silk shawl"
+    ],
+    "place": "at the tram stop",
+    "placeDistractors": [
+      "at the subway entrance",
+      "under the square arcade"
+    ],
+    "time": "Wednesday in the rain",
+    "timeDistractors": [
+      "Tuesday leaving work",
+      "Thursday evening"
+    ]
+  },
+  {
+    "name": "Simon",
+    "item": "a painted tin box",
+    "itemDistractors": [
+      "a wooden chest",
+      "a glass jar"
+    ],
+    "place": "on the theater steps",
+    "placeDistractors": [
+      "in the cinema aisle",
+      "beside the ticket office"
+    ],
+    "time": "Sunday at 2:30 PM",
+    "timeDistractors": [
+      "Saturday at 9:00 PM",
+      "Monday at 6:00 PM"
+    ]
+  },
+  {
+    "name": "Fiona",
+    "item": "a rolled star map",
+    "itemDistractors": [
+      "a desk globe",
+      "a bronze astrolabe"
+    ],
+    "place": "at the hilltop observatory",
+    "placeDistractors": [
+      "in the castle turret",
+      "on the planetarium lawn"
+    ],
+    "time": "at clear midnight",
+    "timeDistractors": [
+      "at ten in the evening",
+      "at two in the morning"
+    ]
+  },
+  {
+    "name": "Andrew",
+    "item": "an ornate iron key",
+    "itemDistractors": [
+      "a heavy padlock",
+      "an engraved medallion"
+    ],
+    "place": "in the attic chest",
+    "placeDistractors": [
+      "behind the living room painting",
+      "in the desk drawer"
+    ],
+    "time": "Tuesday at 4:15 PM",
+    "timeDistractors": [
+      "Thursday at 10:30 AM",
+      "Sunday afternoon"
+    ]
+  },
+  {
+    "name": "Sylvia",
+    "item": "an enameled cast-iron teapot",
+    "itemDistractors": [
+      "a crystal pitcher",
+      "a porcelain teacup"
+    ],
+    "place": "on the greenhouse table",
+    "placeDistractors": [
+      "in the garden gazebo",
+      "on the lab counter"
+    ],
+    "time": "Saturday at 10:00 AM",
+    "timeDistractors": [
+      "Sunday at 5:00 PM",
+      "Friday at breakfast"
+    ]
+  },
+  {
+    "name": "Lawrence",
+    "item": "a walnut wood flute",
+    "itemDistractors": [
+      "an antique mandolin",
+      "an ebony bow"
+    ],
+    "place": "on the stone arched bridge",
+    "placeDistractors": [
+      "along the creek bank",
+      "under the old oak tree"
+    ],
+    "time": "early Wednesday morning",
+    "timeDistractors": [
+      "Thursday at dusk",
+      "Saturday afternoon"
+    ]
+  },
+  {
+    "name": "Alice",
+    "item": "a box of wax crayons",
+    "itemDistractors": [
+      "a sketchpad",
+      "an oil paint palette"
+    ],
+    "place": "on the museum staircase",
+    "placeDistractors": [
+      "in the medieval cloister",
+      "at the gallery entrance"
+    ],
+    "time": "Sunday at 4:45 PM",
+    "timeDistractors": [
+      "Saturday at noon",
+      "Tuesday at 2:00 PM"
+    ]
+  },
+  {
+    "name": "Fabian",
+    "item": "a woven straw hat",
+    "itemDistractors": [
+      "a pair of sunglasses",
+      "a checkered bandana"
+    ],
+    "place": "on the fishermen’s dock",
+    "placeDistractors": [
+      "on the seashell beach",
+      "at the sailboat mooring"
+    ],
+    "time": "Friday at noon",
+    "timeDistractors": [
+      "Sunday at 11:00 AM",
+      "Wednesday at 3:00 PM"
+    ]
+  },
+  {
+    "name": "Beatrice",
+    "item": "a polished brass lantern",
+    "itemDistractors": [
+      "a three-branch candelabra",
+      "a pocket flashlight"
+    ],
+    "place": "in the ancient courtyard portico",
+    "placeDistractors": [
+      "along the frescoed corridor",
+      "before the monument gate"
+    ],
+    "time": "Thursday night at 8:30 PM",
+    "timeDistractors": [
+      "Friday at dusk",
+      "Saturday late at night"
+    ]
+  },
+  {
+    "name": "Robert",
+    "item": "a battery portable radio",
+    "itemDistractors": [
+      "a compact turntable",
+      "a pocket speaker"
+    ],
+    "place": "on the carpentry workbench",
+    "placeDistractors": [
+      "in the garden tool shed",
+      "at the mechanic workshop"
+    ],
+    "time": "Monday at 8:30 AM",
+    "timeDistractors": [
+      "Wednesday at 1:00 PM",
+      "Friday at 5:15 PM"
+    ]
+  },
+  {
+    "name": "Camilla",
+    "item": "an embroidered silk fan",
+    "itemDistractors": [
+      "a black lace shawl",
+      "a velvet bonnet"
+    ],
+    "place": "in the castle loggia",
+    "placeDistractors": [
+      "on the tower balcony",
+      "in the hall of mirrors"
+    ],
+    "time": "Tuesday at sunset",
+    "timeDistractors": [
+      "Thursday afternoon",
+      "Sunday evening"
+    ]
+  },
+  {
+    "name": "Gabriel",
+    "item": "a yellowed ship logbook",
+    "itemDistractors": [
+      "a bound nautical atlas",
+      "a sealed parchment"
+    ],
+    "place": "in the old wine press cellar",
+    "placeDistractors": [
+      "in the sailing ship hold",
+      "in the carriage shed"
+    ],
+    "time": "Saturday afternoon at 3:00 PM",
+    "timeDistractors": [
+      "Monday at 11:30 AM",
+      "Wednesday evening"
+    ]
+  },
+  {
+    "name": "Martina",
+    "item": "a box of dark chocolates",
+    "itemDistractors": [
+      "a basket of spiced cookies",
+      "an almond cake"
+    ],
+    "place": "in the pastry shop window",
+    "placeDistractors": [
+      "on the tea room table",
+      "at the grocery entrance"
+    ],
+    "time": "Thursday at 5:00 PM",
+    "timeDistractors": [
+      "Saturday at 10:30 AM",
+      "Sunday at 4:15 PM"
+    ]
+  },
+  {
+    "name": "George",
+    "item": "a round magnifying glass",
+    "itemDistractors": [
+      "a portable microscope",
+      "precision tweezers"
+    ],
+    "place": "on the study desk",
+    "placeDistractors": [
+      "in the family archive",
+      "on the drafting table"
+    ],
+    "time": "Wednesday at 7:30 PM",
+    "timeDistractors": [
+      "Tuesday at noon",
+      "Friday at 6:45 PM"
+    ]
+  },
+  {
+    "name": "Serena",
+    "item": "an eco-friendly canvas tote",
+    "itemDistractors": [
+      "a light wicker basket",
+      "a hiking backpack"
+    ],
+    "place": "at the used book stall",
+    "placeDistractors": [
+      "at the flower market",
+      "outside the organic store"
+    ],
+    "time": "Sunday morning at 10:15 AM",
+    "timeDistractors": [
+      "Saturday at 4:00 PM",
+      "Thursday at 11:45 AM"
+    ]
+  },
+  {
+    "name": "Peter",
+    "item": "a cello hard case",
+    "itemDistractors": [
+      "a sheet music bag",
+      "a classical guitar case"
+    ],
+    "place": "on the winter garden stage",
+    "placeDistractors": [
+      "in the auditorium foyer",
+      "at the concert hall entrance"
+    ],
+    "time": "Friday evening at 9:15 PM",
+    "timeDistractors": [
+      "Saturday afternoon",
+      "Sunday at 6:30 PM"
+    ]
+  }
+];
+
+export default { ui, words, passages, stories };

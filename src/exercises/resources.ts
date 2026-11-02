@@ -1,5 +1,5 @@
 import { h, rand, flash } from '../dom';
-import { t } from '../i18n';
+import { t, type I18nKey } from '../i18n';
 import { Staircase } from '../adaptive';
 import type { Exercise } from './types';
 
@@ -9,10 +9,6 @@ interface Project {
   cost: number;
   value: number;
 }
-
-const TASK_NAMES = [
-  'Server', 'Banca Dati', 'Sicurezza', 'AI Core', 'Rete', 'Interfaccia', 'Analisi', 'Backup'
-];
 
 export const resources: Exercise = {
   id: 'resources',
@@ -45,7 +41,7 @@ export const resources: Exercise = {
         const value = Math.round(cost * (0.8 + Math.random() * 0.7));
         items.push({
           id: j,
-          name: TASK_NAMES[j % TASK_NAMES.length],
+          name: t(`ex.resources.task${(j % 8) + 1}` as I18nKey),
           cost,
           value,
         });
@@ -74,7 +70,7 @@ export const resources: Exercise = {
       const header = h('div', { class: 'resources-header' });
       const budgetMeter = h('div', { class: 'resources-meter' });
       const cardList = h('div', { class: 'resources-grid' });
-      const submitBtn = h('button', { class: 'btn primary resources-submit' }, t('common.start'));
+      const submitBtn = h('button', { class: 'btn primary resources-submit' }, t('ex.resources.confirm'));
 
       ctx.stage.replaceChildren(header, budgetMeter, cardList, submitBtn);
 
@@ -89,7 +85,7 @@ export const resources: Exercise = {
         }
 
         const isOver = currentCost > budget;
-        header.innerHTML = `<div>⚡ Budget: <b>${currentCost}/${budget}</b></div><div>⭐ Valore: <b>${currentValue}</b> (Obiettivo: ${targetValue})</div>`;
+        header.innerHTML = `<div>${t('ex.resources.budget', { cost: currentCost, budget })}</div><div>${t('ex.resources.value', { val: currentValue, target: targetValue })}</div>`;
         header.classList.toggle('overbudget', isOver);
         submitBtn.disabled = isOver || selected.size === 0;
 

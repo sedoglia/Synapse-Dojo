@@ -143,11 +143,11 @@ export const swipePattern: Exercise = {
 
       leftZone.replaceChildren(
         h('span', { class: 'swipe-arrow' }, leftDir.arrow),
-        h('span', { class: 'swipe-label' }, 'SX (Left)'),
+        h('span', { class: 'swipe-label' }, t('ex.dots.left')),
       );
       rightZone.replaceChildren(
         h('span', { class: 'swipe-arrow' }, rightDir.arrow),
-        h('span', { class: 'swipe-label' }, 'DX (Right)'),
+        h('span', { class: 'swipe-label' }, t('ex.dots.right')),
       );
       flash(container, 'pop', 200);
 

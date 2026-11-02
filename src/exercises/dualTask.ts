@@ -34,7 +34,7 @@ export const dualTask: Exercise = {
       h('span', { class: 'pad-key-hint' }, '[A / Spazio / Tap]'),
     );
     const holdMeter = h('div', { class: 'dualtask-meter' }, h('div', { class: 'meter-bar' }));
-    leftPanel.append(h('b', { class: 'dualtask-side-label' }, '👈 SX (Left)'), holdBtn, holdMeter);
+    leftPanel.append(h('b', { class: 'dualtask-side-label' }, `👈 ${t('ex.dots.left')}`), holdBtn, holdMeter);
 
     // Right panel: Cognitive task (Even vs Odd)
     const rightPanel = h('div', { class: 'dualtask-panel right-panel' });
@@ -54,7 +54,7 @@ export const dualTask: Exercise = {
       h('span', { class: 'pad-key-hint' }, '[2 / K / →]'),
     );
     const cogButtons = h('div', { class: 'dualtask-buttons' }, btnEven, btnOdd);
-    rightPanel.append(h('b', { class: 'dualtask-side-label' }, 'DX (Right) 👉'), cogCard, cogButtons);
+    rightPanel.append(h('b', { class: 'dualtask-side-label' }, `${t('ex.dots.right')} 👉`), cogCard, cogButtons);
 
     container.append(leftPanel, rightPanel);
     ctx.stage.append(hint, container);

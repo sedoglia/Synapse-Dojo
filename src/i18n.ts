@@ -1,4 +1,4 @@
-﻿import { store } from './storage';
+import { store } from './storage';
 import en, { ui as enUi } from './locales/en';
 
 /**
@@ -38,10 +38,21 @@ export interface Passage {
   answers: [string, string, string]; // first one is correct
 }
 
+export interface StoryScenario {
+  name: string;
+  item: string;
+  itemDistractors: [string, string];
+  place: string;
+  placeDistractors: [string, string];
+  time: string;
+  timeDistractors: [string, string];
+}
+
 export interface Locale {
   ui: Partial<Record<Key, string>>;
   words: string[];
   passages: Passage[];
+  stories?: StoryScenario[];
 }
 
 const loaders = import.meta.glob<{ default: Locale }>(['./locales/*.ts', '!./locales/en.ts']);
@@ -71,5 +82,6 @@ export function t(key: Key, params: Record<string, string | number> = {}): strin
 
 export const words = () => locale().words;
 export const passages = () => locale().passages;
+export const stories = () => locale().stories ?? en.stories ?? [];
 
 export type { Key as I18nKey };
