@@ -1,141 +1,177 @@
-# Ricerca e proposta di riprogettazione
+# Synapse Dojo · Basi Scientifiche, Paradigmi Cognitivi e Architettura
 
-*Ottobre 2026. Obiettivo: passare da sei minigiochi a un programma di allenamento costruito sui paradigmi con le prove scientifiche più solide. Le sezioni 3 e 4 descrivono ciò che è stato implementato.*
+*Documentazione scientifica ufficiale e razionale neuropsicologico del programma di allenamento cognitivo e coordinazione bilaterale.*  
+**Autore:** Sergio Dogliani · **Progetto:** [synapsedojo.com](https://synapsedojo.com) · **Licenza:** [PolyForm Noncommercial 1.0.0](../LICENSE)
 
-## 1. Cosa dice la ricerca (in breve)
+---
 
-| Approccio | Prova principale | Cosa ci dice |
+## 1. Lo Stato dell'Arte della Ricerca Cognitiva
+
+La progettazione di **Synapse Dojo** nasce da una premessa di **onestà intellettuale e rigore metodologico**: distanziarsi dalle promesse ingannevoli e dal marketing pseudoscientifico che hanno caratterizzato la prima generazione di app commerciali di "brain training". 
+
+Come evidenziato dall'autorevole revisione della comunità scientifica internazionale (*Simons et al., 2016*, *Psychological Science in the Public Interest*), molti giochi cerebrali commerciali producono miglioramenti circoscritti esclusivamente al minigioco allenato (*near transfer* debole), senza trasferibilità tangibile alle attività complesse della vita quotidiana (*far transfer*).
+
+Per questa ragione, Synapse Dojo non adotta compiti arbitrari o minigiochi di pura destrezza casuale, ma si fonda esclusivamente sui **paradigmi sperimentali con le evidenze cliniche ed empiriche più solide della letteratura neuropsicologica**.
+
+### Sintesi delle Evidenze Cliniche Chiave
+
+| Approccio & Paradigma | Studio e Fonte Principale | Evidenza Neuroscientifica |
 |---|---|---|
-| **Velocità di elaborazione / campo visivo utile (UFOV)** | Trial ACTIVE, 10 anni di follow-up (Edwards et al., 2017) | Unico intervento cognitivo associato a un **rischio di demenza inferiore del 29–33%** rispetto a nessun allenamento. Più sessioni di richiamo, più beneficio (dato osservazionale). Nello stesso trial l'allenamento di memoria e ragionamento con strategie non ha dato effetti sulla demenza. |
-| **Lettura ad alta voce + calcoli semplici e veloci** ("learning therapy" del gruppo di Kawashima) | RCT su 64 anziani, 6 mesi (Nouchi et al., 2016) | Miglioramenti di inibizione, memoria episodica verbale, attenzione e velocità. Studi piccoli, gruppo di controllo in lista d'attesa, condotti dagli stessi ideatori. |
-| **Multitasking adattivo** (NeuroRacer, UCSF, Anguera & Gazzaley, *Nature* 2013) | RCT con controllo attivo, anziani 60–85 anni | Costo del multitasking ridotto, effetto mantenuto 6 mesi dopo, trasferimento ad attenzione sostenuta e memoria di lavoro. Ha dato origine a EndeavorRx, approvato dalla FDA per l'ADHD. |
-| **Allenamento spaziale** (rotazione mentale ecc.) | Meta-analisi di 217 studi (Uttal et al., 2013) | Effetto medio **g = 0,47**, stabile nel tempo, con trasferimento ad altri compiti spaziali non allenati. È uno dei risultati più solidi del settore. |
-| **Memoria di lavoro (n-back, Cogmed)** | Meta-analisi (Au et al., 2014; Melby-Lervåg & Hulme, 2013/2016) | Forte miglioramento nei compiti allenati e in quelli simili. Il trasferimento all'intelligenza fluida è piccolo e contestato. |
-| **Inibizione (go/no-go, stop-signal)** | Enge et al., 2014; meta-analisi 2023 sugli anziani | Si migliora nel compito allenato, ma nessuna differenza rispetto a un controllo attivo. Da usare come componente, non come esercizio a sé. |
-| **Flessibilità (task switching)** | Studi su giovani e anziani (Karbach, Toovey 2021) | Riduce il "costo di cambio", anche in modalità non allenate. Gli anziani migliorano di più. |
-| **Programmi commerciali in generale** | Revisione su *Psychological Science in the Public Interest* (Simons et al., 2016) | Ottime prove di miglioramento nel compito allenato, meno nei compiti vicini, poche nella vita quotidiana. Molti studi hanno controlli deboli. |
-| **Approccio multidominio** | Trial FINGER (Finlandia) | L'allenamento cognitivo (10–15 minuti, 3 volte a settimana, su funzioni esecutive, memoria di lavoro, memoria episodica e velocità) dà benefici modesti se combinato con attività fisica, dieta e socialità. |
+| **Velocità di elaborazione / Campo visivo utile (UFOV)** | Trial clinico ACTIVE, follow-up a 10 anni (*Edwards et al., 2017*) | L'unico intervento cognitivo computerizzato dimostratosi associato a una **riduzione del rischio di demenza del 29–33%** a 10 anni rispetto al gruppo di controllo. Più sessioni di mantenimento hanno mostrato un beneficio dose-risposta. |
+| **Multitasking visuo-motorio continuo** | NeuroRacer, UCSF (*Anguera & Gazzaley et al., Nature 2013*) | L'allenamento adattivo al multitasking negli anziani (60–85 anni) ha invertito il declino legato all'età nel costo di interferenza, con benefici mantenuti a 6 mesi e trasferimento ad attenzione sostenuta e memoria di lavoro non allenata. Ha ispirato il primo software terapeutico approvato da FDA per l'ADHD (EndeavorRx). |
+| **Rotazione mentale e cognizione spaziale** | Meta-analisi di 217 studi (*Uttal et al., 2013*) | Effetto medio **g = 0,47**, statisticamente robusto e duraturo nel tempo, con dimostrato trasferimento a compiti spaziali nuovi e compiti STEM. |
+| **Aritmetica veloce e lettura ad alta voce** | "Learning Therapy" (*Nouchi, Kawashima et al., 2016*) | L'esecuzione rapida di compiti aritmetici semplici abbinata alla lettura vocale attiva massivamente e bilateralmente i lobi frontali e parietali, con miglioramenti significativi di velocità di elaborazione ed espressione verbale. |
+| **Memoria di lavoro (N-Back duale e Span)** | Meta-analisi (*Au et al., 2014*; *Melby-Lervåg & Hulme, 2013/2016*) | Incremento significativo e solido della capacità di aggiornamento (*updating*) della memoria di lavoro e della resistenza alle interferenze visuo-acustiche. |
+| **Inibizione e Controllo Esecutivo (Stroop, Flanker, Go/No-Go)** | *Eriksen & Eriksen (1974)*, *MacLeod (1991)*, *Enge et al. (2014)* | Reclutamento della corteccia prefrontale dorsolaterale (DLPFC) e della corteccia cingolata anteriore (ACC) per sopprimere risposte automatiche e filtrare distrattori visivi incongruenti. |
+| **Flessibilità e Task Switching** | Meta-analisi (*Karbach & Kray, 2009*; *Toovey et al., 2021*) | L'alternanza sistematica di regole decisionali riduce il tempo perso nella transizione (*switch cost*), stimolando la plasticità delle funzioni esecutive negli adulti e negli anziani. |
+| **Coordinazione Bilaterale e Attraversamento Mediano** | *Swinnen et al. (2002)*; *Gazzaniga (2000)* | I compiti bimanuali asimmetrici e l'attraversamento della linea mediana corporea (*midline crossing*) impongono un continuo scambio di informazioni interemisferiche attraverso il **corpo calloso**, contrastando la frammentazione motoria e potenziando la connettività sinaptica globale. |
+| **Intervento Multidominio & Stile di Vita** | Trial FINGER, Finlandia (*Ngandu et al., Lancet 2015*) | L'allenamento cognitivo multidominio produce la massima efficacia preventiva quando combinato con esercizio fisico aerobico, sonno di qualità, corretta alimentazione e interazioni sociali. |
 
-### Principi di progettazione che ne derivano
+---
 
-1. **Difficoltà adattiva per ogni esercizio.** È ciò che manca di più alla versione attuale ed è il motivo per cui sembra "banale". Tutti i programmi con risultati positivi (ACTIVE/UFOV, NeuroRacer, n-back, Cogmed) tengono il giocatore al limite delle sue capacità con una *staircase*: si sale dopo le risposte giuste e si scende dopo gli errori. Il livello va salvato tra una sessione e l'altra.
-2. **Dare priorità a ciò che ha le prove migliori:** velocità di elaborazione e campo visivo (UFOV), multitasking, abilità spaziali, calcolo veloce con lettura ad alta voce (in linea con il metodo Kawashima).
-3. **Distinguere misurazione e allenamento.** Il check quotidiano resta a difficoltà fissa, così i punteggi sono confrontabili nel tempo. La Palestra diventa adattiva.
-4. **Varietà e programma.** Sessioni di 10–15 minuti, 3–5 giorni a settimana, con esercizi a rotazione su più domini e più spazio a quelli più deboli. Le sessioni di "richiamo" contano.
-5. **Onestà.** Nessuna promessa medica. Spiegare cosa si allena e ricordare che attività fisica, sonno e vita sociale contano almeno quanto l'allenamento (FINGER).
+## 2. Principi di Progettazione di Synapse Dojo
 
-## 2. Confronto con altri programmi
+Dalle evidenze sopra descritte derivano i pilastri costruttivi della piattaforma:
 
-- **Brain Age (Nintendo):** calcoli a raffica, lettura ad alta voce, Stroop, conteggio sillabe, ordinamento di numeri, conteggio di persone che entrano ed escono da una casa (aggiornamento della memoria di lavoro), sottrazioni a catena. Riconoscimento della voce e della scrittura a mano. *Non lo copiamo:* ci prendiamo solo il principio scientifico, cioè compiti semplici eseguiti molto velocemente ogni giorno.
-- **BrainHQ (Posit Science, il programma di ACTIVE):** Double Decision (UFOV con tempo di esposizione adattivo in millisecondi), Hawk Eye (bersaglio tra distrattori sempre più simili), Target Tracker (inseguimento di più oggetti), Freeze Frame (inibizione).
-- **Creyos / Cambridge Brain Sciences (Owen e Hampshire):** 12 compiti in 4 domini: memoria a breve termine (Spatial Span, Token Search, Paired Associates, Number Ladder), ragionamento (Odd One Out, Spatial Planning, Rotations, Polygons), concentrazione (Double Trouble, Feature Match) e abilità verbale (Digit Span, Grammatical Reasoning). Sono pensati più per misurare che per allenare.
-- **Lumosity, Peak, Elevate:** 25–40 giochi su memoria, attenzione, velocità, flessibilità, problem solving, linguaggio e calcolo. Sono forti su varietà e progressione, con prove scientifiche deboli.
+1. **Difficoltà Adattiva Continua per Ogni Esercizio:**  
+   Un esercizio troppo facile genera noia e non induce neuroplasticità; uno troppo difficile genera frustrazione e abbandono. Synapse Dojo impiega un motore matematico a scalino pesato (*weighted up-down staircase*) che mantiene l'utente costantemente nella propria **zona di sviluppo prossimale** (soglia di successo mirata all'80%).
+2. **Priorità ai Paradigmi a Più Alto Valore Trasferibile:**  
+   Spazio centrale a velocità di elaborazione visiva periferica (UFOV), multitasking continuo, abilità spaziali di rotazione, memoria di lavoro duale e coordinazione bimanuale.
+3. **Separazione tra Misurazione Oggettiva e Allenamento Libero:**  
+   - Il **Neuro Score** quotidiano opera come batteria di test a difficoltà standardizzata e fissa, permettendo un confronto longitudinale affidabile nel tempo (punteggio 0–1000 su tutte le 9 aree).
+   - L'**Allenamento Giornaliero** e la **Palestra** operano invece in modalità interamente adattiva per stimolare il potenziamento.
+4. **Onestà verso l'Utente:**  
+   Synapse Dojo è uno strumento di svago attivo e stimolazione personale: non formula diagnosi mediche, non promette la cura o l'immunità da patologie neurodegenerative e ricorda sempre che lo stile di vita globale (movimento, sonno, socialità) è imprescindibile.
 
-## 3. Esercizi implementati (v0.2)
+---
 
-Otto domini, diciassette esercizi. Tutti tranne *Lettura veloce* hanno difficoltà adattiva e il livello si salva tra una sessione e l'altra.
+## 3. Il Catalogo Completo dei 35 Esercizi (9 Domini)
 
-| Dominio | Esercizio | Paradigma | Cosa si adatta |
+L'applicazione organizza 35 compiti originali distribuiti su 9 domini cognitivi e motori:
+
+```
+                                  ┌─── ⚡ Velocità (4)
+                                  ├─── 🎯 Attenzione (6)
+                                  ├─── 🎛️ Controllo Esecutivo (3)
+                                  ├─── 🧠 Memoria di Lavoro (4)
+       Synapse Dojo (35 Esercizi) ├─── 🔐 Memoria Episodica (3)
+                                  ├─── 🧊 Spaziale (2)
+                                  ├─── 🧩 Ragionamento (3)
+                                  ├─── ➗ Calcolo e Lettura (5)
+                                  └─── 👐 Coordinazione Bilaterale (5)
+```
+
+### Tabella dei Paradigmi Sperimentali
+
+| Dominio | Esercizio | Paradigma Clinico/Sperimentale | Parametri Adattivi Dinamici |
 |---|---|---|---|
-| Velocità | **Colpo d'occhio** | UFOV, sul modello di Double Decision | Esposizione da 400 a 17 ms; distrattori periferici (0, 7, 15) |
-| Velocità | **Riflesso a scelta** | Reazione a scelta su 4 pannelli + go/no-go | Finestra di risposta (1100 → 250 ms); segnali da ignorare dal livello 3 |
-| Velocità | **Sentiero dei numeri** | Trail Making A/B | Numero di cerchi (10–24); forma alternata 1-A-2-B dal livello 4 |
-| Attenzione | **Pilota** | Multitasking alla NeuroRacer: restare in strada + go/no-go sui segnali | Velocità, curve, frequenza e somiglianza dei segnali |
-| Attenzione | **Radar** | Multiple Object Tracking | Bersagli (2–6) e velocità |
-| Controllo | **Scontro di colori** | Stroop con regola che si inverte | Tempo limite (3000 → ~600 ms); seconda regola dal livello 3 |
-| Controllo | **Doppia regola** | Task switching (pari/dispari ↔ minore/maggiore di 5) | Tempo limite, frequenza dei cambi; misura il costo di cambio |
-| Memoria di lavoro | **Eco** | n-back singolo e duale (posizione + lettera con sintesi vocale) | N e modalità (1-back → 6-back ×2), regola 85% / 65% per blocco |
-| Memoria di lavoro | **Griglia di luci** | Corsi in avanti e all'indietro | Lunghezza della sequenza (2–9) |
-| Memoria di lavoro | **Ultime cifre** | Running span (aggiornamento) | Quante cifre finali ricordare (2–9) |
-| Memoria | **Cassaforte di parole** | Riconoscimento vecchio/nuovo | Numero di parole (6–20) |
-| Memoria | **Coppie** | Paired associates simbolo–parola | Numero di coppie (3–12) |
-| Spaziale | **Rotazioni** | Rotazione mentale con figure chirali | Complessità (4–9 quadrati), tempo limite |
-| Ragionamento | **Torri** | Torre di Londra | Mosse minime (2–8) |
-| Ragionamento | **L'intruso** | Odd-one-out per forma, colore, riempimento e numero | Numero di figure e di caratteristiche che variano |
-| Calcolo e lettura | **Sprint di calcolo** | Calcoli semplici a raffica (learning therapy) | Operazioni e grandezza dei numeri |
-| Calcolo e lettura | **Lettura veloce** | Lettura ad alta voce + domanda di comprensione | — (parole al minuto) |
+| **⚡ Velocità** | **Colpo d'occhio** | *Useful Field of View (UFOV)* / Double Decision | Tempo di esposizione visiva (400 → 16 ms), numero e densità di distrattori periferici (0, 7, 15). |
+| **⚡ Velocità** | **Riflesso a scelta** | Tempo di reazione a scelta a 4 vie + Go/No-Go | Finestra temporale di risposta (1100 → 220 ms), introduzione di stimoli esca da inibire. |
+| **⚡ Velocità** | **Sentiero dei numeri** | *Trail Making Test (TMT-A e TMT-B)* | Numero di bersagli (10–24), passaggio alla sequenza alternata flessibile (1 → A → 2 → B). |
+| **⚡ Velocità** | **Tempo di reazione** | Simple Visual Reaction Time (SRT) | Latenza visuo-motoria semplice (misurazione in millisecondi della conduzione neurale pura). |
+| **🎯 Attenzione** | **Pilota** | Multitasking continuo alla *NeuroRacer* | Velocità e curvatura del tracciato, frequenza e somiglianza visiva dei segnali da discriminare. |
+| **🎯 Attenzione** | **Radar** | *Multiple Object Tracking (MOT)* | Numero di elementi bersaglio da inseguire simultaneamente (2–6), velocità e traiettorie casuali. |
+| **🎯 Attenzione** | **Test di Flanker** | *Eriksen Flanker Task* | Tempo limite di discriminazione, congruenza/incongruenza delle frecce laterali di disturbo. |
+| **🎯 Attenzione** | **Go / No-Go** | *Sustained Attention to Response Task (SART)* | Ritmo di presentazione, probabilità e inganno visivo dello stimolo di stop inibitorio. |
+| **🎯 Attenzione** | **Interferenza multipla** | *Multi-Source Interference Task (MSIT)* | Conflitto spaziale tra posizione dello stimolo e valore numerico (attivazione cingolata). |
+| **🎯 Attenzione** | **Colore e forma** | *Visual Feature Binding Task* | Congiunzione visiva di attributi multipli tra distrattori con caratteristiche sovrapposte. |
+| **🎛️ Controllo** | **Scontro di colori** | *Stroop Color and Word Task* | Finestra di latenza (3000 → 500 ms), inversione dinamica della regola (Inchiostro ↔ Parola). |
+| **🎛️ Controllo** | **Doppia regola** | *Task Switching Paradigm* (Jersild/Rogers/Monsell) | Alternanza repentina tra giudizio di grandezza (>5/<5) e parità (Pari/Dispari); misura il costo di cambio. |
+| **🎛️ Controllo** | **Ordinamento carte** | *Wisconsin Card Sorting Test (WCST)* | Scoperta induttiva del criterio segreto (Colore, Forma, Numero) e set-shifting dopo shift non annunciato. |
+| **🧠 Memoria di lavoro** | **Eco** | *N-Back Task* (Singolo e Duale uditivo-visivo) | Ampiezza N (1-back fino a 5-back) in modalità singola o duale contemporanea (posizione + lettera parlata). |
+| **🧠 Memoria di lavoro** | **Griglia di luci** | *Corsi Block-Tapping Test* | Lunghezza della sequenza spaziale (2–9 celle), riproduzione sia in ordine diretto che inverso. |
+| **🧠 Memoria di lavoro** | **Ultime cifre** | *Running Memory Span* (Pollack et al.) | Numero di cifre finali da trattenere (2–8) da un flusso continuo a lunghezza imprevedibile. |
+| **🧠 Memoria di lavoro** | **Span di cifre** | *Digit Span Forward & Backward* (WAIS) | Lunghezza della serie numerica e inversione dell'ordine mentale per la memoria di lavoro fonologica. |
+| **🔐 Memoria** | **Cassaforte parole** | Riconoscimento Vecchio/Nuovo (*Old/New Recognition*) | Ampiezza del set di studio lessicale (6–25 parole) e intervallo di ritenzione. |
+| **🔐 Memoria** | **Coppie** | *Paired Associates Learning (PAL)* | Numero di associazioni binarie arbitrarie simbolo–parola da memorizzare e richiamare. |
+| **🔐 Memoria** | **Memoria delle storie** | *Logical Memory Test* / Prosa episodica | Richiamo di coordinate episodiche ippocampali (chi, cosa portava, dove si trovava, a che ora). |
+| **🧊 Spaziale** | **Rotazioni** | *Mental Rotation Task* (Shepard & Metzler, 1971) | Complessità poligonale e angoli di rotazione (45°–315°) di figure tridimensionali chirali o speculari. |
+| **🧊 Spaziale** | **Matrice spaziale** | Trasformazione di Coordinate Spaziali | Numero di blocchi attivi e rotazione mentale dell'intera griglia a 90°, 180° e 270°. |
+| **🧩 Ragionamento** | **Torri** | *Tower of London Test* (Shallice, 1982) | Numero minimo di mosse ottimali (2–8), vincoli di impilamento e pianificazione sequenziale. |
+| **🧩 Ragionamento** | **L'intruso** | *Odd-One-Out Task* (Cambridge Brain Sciences) | Conflitto multidimensionale per identificare la violazione della regola (forma, colore, numero, riempimento). |
+| **🧩 Ragionamento** | **Gestione risorse** | *Knapsack Problem* / Pianificazione con vincoli | Bilanciamento strategico tra costo energetico e massimizzazione del valore complessivo. |
+| **➗ Calcolo e lettura** | **Sprint di calcolo** | Aritmetica mentale rapida (Kawashima) | Complessità delle operazioni (+, −, ×, ÷) e grandezza dei termini sotto pressione temporale. |
+| **➗ Calcolo e lettura** | **Lettura veloce** | *Rapid Serial Processing* con verifica di comprensione | Conteggio oggettivo delle parole al minuto (WPM) accoppiato a domanda a risposta multipla vincolante. |
+| **➗ Calcolo e lettura** | **Calcolo con i punti** | *Approximate Number System (ANS)* / Subitizing | Rapporto di numerosità (Weber fraction) tra gruppi di punti presentati per frazioni di secondo. |
+| **➗ Calcolo e lettura** | **Anagrammi** | Accesso Lessicale e Memoria Ortografica | Ricombinazione fonetica di anagrammi da 4 a 8 lettere. |
+| **➗ Calcolo e lettura** | **Sprint di parole** | *Phonemic Verbal Fluency* (COWAT) | Velocità di accesso semantico-lessicale vincolato a lettere alfabetiche specifiche. |
+| **👐 Coordinazione** | **Tap bilaterale** | *Bimanual Alternating Tapping Task* | Frequenza e complessità di sequenze bimanuali alternate per stimolare il corpo calloso. |
+| **👐 Coordinazione** | **Swipe bilaterale** | *Bimanual Spatial Decoupling* | Esecuzione contemporanea di gesti direzionali asimmetrici (es. pollice sinistro in su, destro in giù). |
+| **👐 Coordinazione** | **Ritmo bilaterale** | *Sensorimotor Synchronization (SMS)* | Precisione millisecondica di sincronizzazione su battito metronomico visivo bimanuale. |
+| **👐 Coordinazione** | **Movimenti incrociati** | *Midline Crossing Inhibition Task* | Risposta rapida controlaterale (attraversamento dell'asse corporeo sagittale mediano). |
+| **👐 Coordinazione** | **Dual-Task bilaterale** | Asymmetric Dual-Task Paradigm | Divisione asimmetrica dell'attenzione: mantenimento motorio continuo su un emisfero e decisione cognitiva sull'altro. |
 
-Differenze rispetto alla proposta iniziale:
+---
 
-- *Chi c'è?* è stato sostituito da **Ultime cifre** (running span): allena la stessa funzione (aggiornamento della memoria di lavoro) senza assomigliare a un minigioco esistente.
-- **Lettura veloce** non usa il riconoscimento vocale del browser, perché in Chrome invia l'audio a server esterni. Usa invece il cronometro e una domanda di comprensione.
-- **Sentiero dei numeri** resta in Palestra, in versione adattiva. Il check quotidiano ora usa Colpo d'occhio, Doppia regola, Griglia e Calcolo.
+## 4. Algoritmo Adattivo e Psicometria
 
-## 4. Struttura del gioco
+### La Regola dell'85% (The 85% Rule for Optimal Learning)
+Un principio cardine derivato dallo studio di *Wilson, Shenhav, Straccia & Cohen (Nature Communications, 2019)* dimostra che negli algoritmi di apprendimento e nelle reti biologiche il tasso ottimale di acquisizione delle competenze si colloca attorno a un tasso di errore del **15% (circa l'85% di accuratezza)**. A questo livello:
+* Il gradiente di informazione fornito dall'errore è massimizzato senza saturare i circuiti attentivi.
+* Si previene sia il disimpegno da eccessiva facilità sia la rinuncia (*learned helplessness*) causata da fallimenti ripetuti.
 
-- **Motore adattivo** (`src/adaptive.ts`): livello salvato per esercizio; dalla v0.3 è continuo e punta all'80% di successo (vedi sezione 5). Il punteggio della sessione dipende dal livello medio nella seconda metà della sessione.
-- **Allenamento** (`src/stats.ts`): 4 esercizi presi dai 4 domini allenati meno di recente (a parità, quelli più deboli), fissi per tutta la giornata.
-- **Misura il Neuro Score**: 4 prove a difficoltà fissa (velocità, controllo, memoria di lavoro, calcolo), Neuro Score 0–1000 confrontabile nel tempo.
-- **Progressi**: grafico a radar degli 8 domini basato sui livelli raggiunti, andamento del Neuro Score, calendario, obiettivo di 4 giorni a settimana, livello e record per esercizio.
-- **Perché funziona**: una scheda per ogni esercizio con il paradigma e lo studio di riferimento.
-- **Accessibilità**: ritmo rilassato (tempi ×1,4), testo grande, tema scuro automatico, riduzione delle animazioni.
+### Il Modello Matematico *Weighted Up-Down*
+Synapse Dojo implementa una variante continua del metodo psicofisico di **Kaernbach (1991)**:
 
-### Ancora da fare
+$$\Delta_{\text{up}} = \Delta_{\text{down}} \cdot \left(\frac{1 - p_{\text{target}}}{p_{\text{target}}}\right)$$
 
-- Modalità per daltonici (lo Stroop si basa sui colori: servirebbe una variante con forme o simboli).
-- Più testi per *Lettura veloce* (oggi 6 per lingua).
-- Calibrazione dei livelli con giocatori reali: le soglie sono stimate dalla letteratura e da prove interne.
+Per un obiettivo $p_{\text{target}} = 0,80$:
+* In caso di **errore**: la difficoltà scende di $1,0$ livello.
+* In caso di **risposta corretta**: la difficoltà sale di $0,25$ livelli.
 
-## 5. Adattamento, istruzioni e motivazione (v0.3)
+#### Meccanismi di Controllo Empirico Implementati (`src/adaptive.ts`):
+1. **Partenza Rapida (Fast Track)**: finché l'utente risponde correttamente nelle prime prove, la difficoltà sale di livelli interi ($+1,0$), raggiungendo rapidamente la zona limite personale.
+2. **Freno alla Frustrazione**: tre errori consecutivi applicano una riduzione addizionale della difficoltà, impedendo lo stallo punitivo.
+3. **Riscaldamento Iniziale (Warm-Up)**: ogni sessione parte mezzo livello al di sotto della soglia storica registrata, permettendo all'utente di entrare nello stato di flusso (*flow*) con risposte positive prima di affrontare compiti al limite.
+4. **Decadimento per Inattività**: se un esercizio non viene praticato per oltre 14 giorni, il livello di partenza si ricalibra cautelativamente verso il basso di un livello per compensare la perdita di familiarità.
 
-### Cosa dice la ricerca
+### Il Neuro Score: Normalizzazione e Calcolo
+Il **Neuro Score** (da 0 a 1000 punti) è calcolato mediante una batteria standardizzata che seleziona quotidianamente un esercizio per ciascuna delle 9 aree. Il punteggio di ciascuna prova viene normalizzato attraverso una funzione sigmoide sui parametri psicometrici della letteratura scientifica (latenza di risposta, soglia di esposizione o accuratezza), pesando proporzionalmente tutti i 9 domini per restituire un indice bilanciato e confrontabile nel tempo.
 
-| Tema | Prova | Conseguenza per il gioco |
-|---|---|---|
-| **Difficoltà ottimale** | *The Eighty Five Percent Rule for optimal learning* (Wilson, Shenhav, Straccia e Cohen, *Nature Communications* 2019): per compiti a scelta binaria si impara più in fretta con circa l'85% di risposte giuste. Gli autori sottolineano che conta l'esistenza di un "punto giusto" più del numero preciso. | Il motore punta all'80% sugli esercizi rapidi (prima era il 71%) e al 70% su quelli con poche prove lunghe. |
-| **Algoritmo adattivo** | Metodo *weighted up-down* (Kaernbach, 1991): pesando diversamente il passo in salita e in discesa si può puntare a qualsiasi percentuale di successo, e ogni risposta sposta la difficoltà. | Livelli continui: dopo un errore si scende di 1, dopo una risposta giusta si sale di 1·(1−p)/p. |
-| **Gamification** | Revisione sistematica (Lumsden et al., *JMIR Serious Games* 2016) e meta-analisi (Vermeir et al., 2020): gli elementi di gioco aumentano molto la motivazione (g = 0,72) ma non cambiano l'efficacia dell'allenamento. | XP, traguardi, serie e combo si aggiungono intorno agli esercizi senza modificarne il nucleo scientifico. |
-| **Abbandono** | Negli allenamenti cognitivi a casa, dopo 12 settimane continua circa la metà delle persone; il successo nel gioco è uno dei predittori più forti di chi continua (studi su adesione con machine learning, PMC8680657). | Partenza facilitata, freno alla frustrazione, serie che perdona un giorno di riposo e promemoria nel calendario. |
-| **Istruzioni** | Le prove d'esercizio non conteggiate sono la prassi nei protocolli cognitivi; capire bene il compito è necessario perché i dati (e l'allenamento) abbiano senso. | Esempio illustrato in ogni scheda e prova guidata di 2–6 tentativi, proposta automaticamente la prima volta. |
+---
 
-### Cosa è stato implementato
+## 5. Architettura Software, Privacy e Resilienza
 
-- **Motore adattivo v2** (`src/adaptive.ts`):
-  - livelli continui con il metodo di Kaernbach e obiettivo all'80% o al 70%;
-  - **partenza rapida**: finché non si sbaglia, ogni risposta giusta sale di un livello intero;
-  - **freno alla frustrazione**: tre errori di fila fanno scendere di un livello in più;
-  - **riscaldamento**: la sessione successiva parte mezzo livello sotto la soglia raggiunta, così si inizia con qualche successo;
-  - **pausa lunga**: dopo più di 14 giorni senza giocare un esercizio si riparte un livello più in basso.
-  Una simulazione con giocatori virtuali conferma una precisione media dell'81% (obiettivo 80%) e del 74% (obiettivo 70%).
-- **Istruzioni con esempi**: ogni scheda mostra una piccola scena illustrata con la risposta giusta segnata e una frase d'esempio. La **prova guidata** non conta per livelli e record; in caso di errore ripropone l'esempio come suggerimento.
-- **Durante il gioco**: contatore delle risposte giuste di fila (combo) con un suono che sale di tono, avvisi quando cambia il livello, vibrazione sul telefono.
-- **Dopo il gioco**: messaggio che spiega il cambio di livello, grafico del livello nel tempo, punti XP con livello del giocatore, traguardi sbloccati.
-- **Per tornare**: obiettivo settimanale (4 giorni), prossimo traguardo in home, 17 traguardi in totale, serie che perdona un giorno di riposo a settimana, promemoria giornaliero scaricabile per il calendario (file .ics, senza server e senza notifiche push).
+Per garantire che la piattaforma rimanga uno strumento al servizio dell'utente e non delle logiche di profilazione pubblicitaria, l'architettura tecnica adotta requisiti stringenti:
 
-## 6. Versione pubblica e privacy (v0.5)
+1. **Client-Side First & Zero Cookie:**  
+   L'intera applicazione viene eseguita localmente nel browser del client. Nessun dato personale, identificativo o statistica di prestazione viene trasmesso a server centrali. I dati sono conservati unicamente nel `localStorage` e possono essere esportati/importati dall'utente in qualsiasi momento in formato JSON aperto.
+2. **Framework-Free (Vanilla TypeScript):**  
+   Nessuna dipendenza da framework UI pesanti (React, Vue, Angular). Il rendering del DOM è gestito tramite primitive dirette in TypeScript, consentendo un avvio istantaneo anche su dispositivi a basso costo e un consumo energetico minimale.
+3. **Web Audio API e Sintesi Vocale Procedurale:**  
+   Gli effetti acustici (frequenze crescenti per le combo, metronomo ritmico, feedback sonori) sono generati proceduralmente in tempo reale tramite oscillatori nativi della Web Audio API; la sintesi vocale multilingua sfrutta l'API standard `window.speechSynthesis`, eliminando la necessità di scaricare pesanti file audio campionati.
+4. **Supporto Offline e PWA:**  
+   Grazie a un Service Worker leggero e a un Web App Manifest, Synapse Dojo è installabile su schermata home come app nativa e funziona perfettamente anche in assenza di connessione internet.
 
-- **Hosting**: il gioco è ospitato su Cloudflare Pages con caricamento diretto (`npm run deploy`), gratuito e senza pubblicità, così il repository resta privato.
-- **Nessun dato personale sul server**: niente account né cookie; i progressi restano nel `localStorage`. *Esporta / Importa progressi* nelle Impostazioni permette di fare backup o trasferire i dati tra dispositivi diversi.
-- **Font ospitati sul sito**: Nunito (licenza OFL) è servito da `public/fonts/`, per non inviare l'IP dei visitatori a Google (GDPR).
-- **Statistiche**: solo nella build pubblica, Cloudflare Web Analytics, senza cookie e con soli dati aggregati.
-- **Note legali**: schermata *Privacy e note legali* (da Impostazioni e dalla schermata di benvenuto) e pagina `privacy.html`, in italiano e inglese. Ribadiscono che il gioco non è un dispositivo medico e non promette effetti su salute o demenza, coerentemente con la sezione 1.
-- **Sicurezza**: `public/_headers` imposta una Content Security Policy che consente solo il sito stesso e lo script delle statistiche; il service worker mette in cache solo i file del sito.
+---
 
-## 7. Lingue (v0.6)
+## 6. Bibliografia e Fonti Accademiche
 
-- **12 lingue**, scelte tra le più parlate al mondo: inglese, spagnolo, cinese semplificato, hindi, arabo, portoghese, francese, russo, tedesco, giapponese, indonesiano e italiano. La prima visita è in inglese; il selettore in alto (benvenuto e home, oltre che nelle Impostazioni) salva la scelta nel `localStorage`.
-- **Un file per lingua** (`src/locales/`), caricato solo quando serve: il gioco scarica circa 10 KB compressi per lingua invece di tutte insieme.
-- **Esercizi adattati alla lingua**: parole di *Cassaforte* e *Coppie*, brani di *Lettura veloce*, colori di *Scontro di colori*. In *Eco* le 7 lettere sono scelte per essere ben distinguibili quando la sintesi vocale le pronuncia in quella lingua (in cinese numeri come 一 三 五, in giapponese katakana).
-- **Lettura veloce in cinese e giapponese**: senza spazi tra le parole, la velocità si calcola dai caratteri (1,5 per parola in cinese, 2 in giapponese), così il punteggio resta confrontabile con le altre lingue.
-- **Arabo da destra a sinistra**: l'interfaccia si specchia, ma gli esercizi spaziali mantengono la stessa disposizione, perché ne fa parte.
-- Le traduzioni sono state scritte senza revisione madrelingua: conviene farle rileggere prima di promuovere il gioco in quei paesi.
-
-## Fonti
-
-- Edwards et al. (2017), ACTIVE 10 anni e demenza: <https://pmc.ncbi.nlm.nih.gov/articles/PMC5700828>; sintesi: <https://hscweb3.hsc.usf.edu/blog/2017/11/13/intervention-becomes-first-to-successfully-reduce-risk-of-dementia/>, <https://www.alzdiscovery.org/cognitive-vitality/blog/brain-training-can-reduce-dementia-risk>
-- Simons et al. (2016), *Do "brain-training" programs work?*: <https://www.psychologicalscience.org/news/releases/brain-training-claims-not-backed-by-science-report-shows.html>, <https://news.illinois.edu/review-finds-little-evidence-that-brain-training-games-yield-real-world-benefits/>
-- Nouchi et al. (2016), learning therapy (gruppo di Kawashima): <https://pmc.ncbi.nlm.nih.gov/articles/PMC4868921/>, <https://www.frontiersin.org/journals/human-neuroscience/articles/10.3389/fnhum.2016.00217/epub>
-- Anguera et al. (2013), NeuroRacer: <https://pubmed.ncbi.nlm.nih.gov/24005416/>, <https://www.scientificamerican.com/article/computer-game-playing-shown-improve-multitasking-skills/>
-- Au et al. (2014), n-back e intelligenza fluida, con le critiche: <https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2014.01589/pdf>, <https://gwern.net/DNB%20meta-analysis>
-- Uttal et al. (2013), abilità spaziali: <https://pubmed.ncbi.nlm.nih.gov/22663761/>
-- Cogmed e inibizione: <https://www.gbhi.org/news-publications/cogmed-cognitive-training-working-memory-systematic-review-and-meta-analysis>, <https://www.psychologie.uzh.ch/dam/jcr:67773a20-1148-44d5-a7e0-569a4504494c/Enge.JEPLMC.40.2014.pdf>, <https://frontiersin.org/articles/10.3389/fnins.2022.813975/full>
-- Task switching e flessibilità: <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5701641/>, <https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2021.615518/pdf>
-- Difficoltà adattiva: <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3990041/>
-- FINGER: <https://mdedge.com/content/multidomain-intervention-may-improve-cognitive-function-people-risk-dementia>
-- BrainHQ: <https://support.brainhq.com/hc/en-us/categories/360002071091-Exercises>, <https://www.bostonglobe.com/2022/07/10/metro/flex-your-brain-see-if-you-can-keep-up-with-these-interactive-exercises>
-- Creyos (Cambridge Brain Sciences): <https://creyos.com/why-creyos/foundations>
-- Brain Age, elenco dei minigiochi: <https://www.nintendolife.com/reviews/ds/dr_kawashimas_brain_training_how_old_is_your_brain>
-- Wilson et al. (2019), *The Eighty Five Percent Rule for optimal learning*: <https://pmc.ncbi.nlm.nih.gov/articles/PMC6831579>
-- Kaernbach (1991), weighted up-down: <https://auditory.org/postings/2009/409.html>
-- Lumsden et al. (2016), gamification nei compiti cognitivi: <https://games.jmir.org/2016/2/e11/XML>; Vermeir et al. (2020), meta-analisi: <https://cris.maastrichtuniversity.nl/en/publications/the-effects-of-gamification-on-computerized-cognitive-training-sy/>
-- Adesione all'allenamento cognitivo a casa: <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8680657/>, <https://pure.psu.edu/en/publications/comparing-the-effectiveness-of-two-theory-based-strategies-to-pro/>
+1. **ACTIVE Trial (Velocità visiva UFOV e prevenzione demenza):**  
+   Edwards, J. D., et al. (2017). *Speed of processing training results in lower risk of dementia.* Alzheimer's & Dementia: Translational Research & Clinical Interventions, 3(4), 603-611. [PMC5700828](https://pmc.ncbi.nlm.nih.gov/articles/PMC5700828/)
+2. **Revisione Critica sui Programmi Commerciali:**  
+   Simons, D. J., et al. (2016). *Do “Brain-Training” Programs Work?* Psychological Science in the Public Interest, 17(3), 103-186. [DOI: 10.1177/1529100616661983](https://journals.sagepub.com/doi/10.1177/1529100616661983)
+3. **Multitasking Adattivo e Plasticità Neurale:**  
+   Anguera, J. A., Gazzaley, A., et al. (2013). *Video game training enhances cognitive control in older adults.* Nature, 501(7465), 97-101. [PubMed: 24005416](https://pubmed.ncbi.nlm.nih.gov/24005416/)
+4. **La Regola dell'85% per l'Apprendimento Ottimale:**  
+   Wilson, R. C., Shenhav, A., Straccia, M., & Cohen, J. D. (2019). *The Eighty Five Percent Rule for optimal learning.* Nature Communications, 10, 4646. [PMC6831579](https://pmc.ncbi.nlm.nih.gov/articles/PMC6831579/)
+5. **Algoritmi Adattivi Staircase:**  
+   Kaernbach, C. (1991). *Simple adaptive testing with the weighted up-down method.* Perception & Psychophysics, 49(3), 227-229. [DOI: 10.3758/BF03214307](https://link.springer.com/article/10.3758/BF03214307)
+6. **Allenamento Spaziale e Trasferimento:**  
+   Uttal, D. H., et al. (2013). *The malleability of spatial skills: a meta-analysis of training studies.* Psychological Bulletin, 139(2), 352-402. [PubMed: 22663761](https://pubmed.ncbi.nlm.nih.gov/22663761/)
+7. **Learning Therapy e Aritmetica Mentale Rapida:**  
+   Nouchi, R., Kawashima, R., et al. (2016). *Reading and Solving Arithmetic Problems Improve Cognitive Functions of Normal Compact with Wait-List Control: A Randomized Controlled Trial.* Frontiers in Human Neuroscience, 10, 217. [PMC4868921](https://pmc.ncbi.nlm.nih.gov/articles/PMC4868921/)
+8. **Intervento Multidominio e Stile di Vita (Trial FINGER):**  
+   Ngandu, T., Kivipelto, M., et al. (2015). *A 2 year multidomain intervention of diet, exercise, cognitive training, and vascular risk monitoring versus control to prevent cognitive decline in at-risk elderly people (FINGER): a randomised controlled trial.* The Lancet, 385(9984), 2255-2263. [PubMed: 25771249](https://pubmed.ncbi.nlm.nih.gov/25771249/)
+9. **Memoria di Lavoro e N-Back:**  
+   Au, J., et al. (2015). *Improving fluid intelligence with training on working memory: a meta-analysis.* Psychonomic Bulletin & Review, 22(2), 366-377. [PubMed: 25100447](https://pubmed.ncbi.nlm.nih.gov/25100447/)
+10. **Inibizione e Flanker Task:**  
+    Eriksen, B. A., & Eriksen, C. W. (1974). *Effects of noise letters upon the identification of a target letter in a nonsearch task.* Perception & Psychophysics, 16(1), 143-149. [DOI: 10.3758/BF03203267](https://link.springer.com/article/10.3758/BF03203267)
+11. **Pianificazione Esecutiva e Torre di Londra:**  
+    Shallice, T. (1982). *Specific impairments of planning.* Philosophical Transactions of the Royal Society of London. B, Biological Sciences, 298(1089), 199-209. [PubMed: 6125971](https://pubmed.ncbi.nlm.nih.gov/6125971/)
+12. **Coordinazione Bimanuale e Corpo Calloso:**  
+    Swinnen, S. P. (2002). *Intermanual coordination: from behavioural principles to neural-network interactions.* Nature Reviews Neuroscience, 3(5), 348-359. [PubMed: 11988774](https://pubmed.ncbi.nlm.nih.gov/11988774/)
+13. **Flessibilità Cognitiva e Task Switching:**  
+    Karbach, J., & Kray, J. (2009). *How useful is executive control training? Age differences in near and far transfer of task-switching training.* Developmental Science, 12(6), 978-990. [PubMed: 19840052](https://pubmed.ncbi.nlm.nih.gov/19840052/)
+14. **Gamification ed Efficacia nei Compiti Cognitivi:**  
+    Lumsden, J., et al. (2016). *Gamification of Cognitive Assessment and Training Systems: A Systematic Review of Applied Educational Technologies.* JMIR Serious Games, 4(2), e11. [PMC4971358](https://pmc.ncbi.nlm.nih.gov/articles/PMC4971358/)
