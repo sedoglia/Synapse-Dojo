@@ -3,6 +3,8 @@
 *Documentazione scientifica ufficiale e razionale neuropsicologico del programma di allenamento cognitivo e coordinazione bilaterale.*  
 **Autore:** Sergio Dogliani · **Progetto:** [synapsedojo.com](https://synapsedojo.com) · **Licenza:** [PolyForm Noncommercial 1.0.0](../LICENSE)
 
+> *Read this in [English](scientific-foundations.md).*
+
 ---
 
 ## 1. Lo Stato dell'Arte della Ricerca Cognitiva
