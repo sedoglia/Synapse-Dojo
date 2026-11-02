@@ -1,7 +1,7 @@
 import { h, todayKey } from '../dom';
 import { store, parseSave, type Settings } from '../storage';
 import { t } from '../i18n';
-import { APP_NAME, VERSION } from '../config';
+import { APP_NAME, VERSION, GITHUB_REPO } from '../config';
 import { render, page, applySettings, langSelect, setLang } from '../ui';
 import { showHome } from './home';
 import { showOnboarding } from './onboarding';
@@ -160,8 +160,16 @@ export function showSettings() {
         h('button', { class: 'link-btn', onClick: () => showPrivacy(showSettings) }, t('privacy.title')),
         h('span', {}, ' · '),
         h('button', { class: 'link-btn', onClick: () => showLicense(showSettings) }, t('license.title')),
+        h('span', {}, ' · '),
+        h('a', { class: 'link-btn', href: GITHUB_REPO, target: '_blank', rel: 'noopener noreferrer' }, 'GitHub'),
       ),
-      h('p', { class: 'muted small center' }, `${APP_NAME} v${VERSION} · ${t('settings.about')}`),
+      h(
+        'p',
+        { class: 'muted small center' },
+        `${APP_NAME} v${VERSION} · `,
+        h('a', { href: GITHUB_REPO, target: '_blank', rel: 'noopener noreferrer', style: 'text-decoration: underline;' }, 'GitHub (sedoglia/Synapse-Dojo)'),
+        ` · ${t('settings.about')}`,
+      ),
     ),
   );
 }

@@ -1,7 +1,7 @@
 import { h } from '../dom';
 import { store } from '../storage';
 import { t, type I18nKey } from '../i18n';
-import { APP_NAME } from '../config';
+import { APP_NAME, GITHUB_REPO } from '../config';
 import { render, langPicker } from '../ui';
 import { DOMAINS } from '../exercises';
 import { showHome } from './home';
@@ -177,6 +177,17 @@ export function showOnboarding() {
               'button',
               { class: 'link-btn', type: 'button', onClick: () => showLicense(showOnboarding) },
               t('license.title'),
+            ),
+            h('span', {}, ' · '),
+            h(
+              'a',
+              {
+                class: 'link-btn',
+                href: GITHUB_REPO,
+                target: '_blank',
+                rel: 'noopener noreferrer',
+              },
+              'GitHub',
             ),
           ),
           h('p', { class: 'muted' }, t('landing.footerTagline')),

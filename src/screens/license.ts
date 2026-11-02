@@ -1,5 +1,6 @@
 import { h } from '../dom';
 import { t } from '../i18n';
+import { GITHUB_REPO } from '../config';
 import { render, page } from '../ui';
 
 /** License and terms content, shared by the in-app screen and the static license.html page. */
@@ -52,6 +53,21 @@ export function licenseContent(): HTMLElement[] {
             style: 'text-decoration: underline;',
           },
           `↗️ ${t('license.officialLink')}`,
+        ),
+      ),
+      h(
+        'p',
+        { style: 'margin-top: 0.5rem;' },
+        h(
+          'a',
+          {
+            href: GITHUB_REPO,
+            target: '_blank',
+            rel: 'noopener noreferrer',
+            class: 'link-btn',
+            style: 'text-decoration: underline;',
+          },
+          '🐙 Repository GitHub (sedoglia/Synapse-Dojo)',
         ),
       ),
       h(
