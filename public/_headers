@@ -30,6 +30,10 @@
   Cache-Control: no-cache
 /guide.html
   Cache-Control: no-cache
+/license
+  Cache-Control: no-cache
+/license.html
+  Cache-Control: no-cache
 /sw.js
   Cache-Control: no-cache
 /manifest.json

@@ -1,179 +1,236 @@
-# Synapse Dojo · Scientific Foundations, Cognitive Paradigms & Architecture
+# Synapse Dojo · Scientific Foundations, Cognitive Paradigms and Architecture
 
-*Official scientific whitepaper and neuropsychological rationale for the cognitive training and bilateral coordination program.*  
+*Official scientific documentation and neuropsychological rationale of the cognitive training and bilateral coordination program.*  
 **Author:** Sergio Dogliani · **Project:** [synapsedojo.com](https://synapsedojo.com) · **License:** [PolyForm Noncommercial 1.0.0](../LICENSE)
 
-> *Leggi questo documento in [Italiano](basi-scientifiche.md).*
+> *Leggi in [italiano](basi-scientifiche.md).*
 
 ---
 
-## 1. The State of the Art in Cognitive Research
+## 1. State of the Art in Cognitive Research
 
-**Synapse Dojo** was designed on a foundation of **academic honesty and methodological rigor**: breaking away from the deceptive promises and pseudoscientific marketing that plagued the first wave of commercial "brain training" applications.
+**Synapse Dojo** starts from a premise of **intellectual honesty and methodological rigor**: keeping its distance from the misleading promises and pseudoscientific marketing of the first generation of commercial "brain training" apps.
 
-As highlighted by the definitive consensus review of the international scientific community (*Simons et al., 2016*, *Psychological Science in the Public Interest*), many commercial brain games only produce task-specific improvements (*near transfer*), showing minimal to no generalizable benefits to complex daily real-world activities (*far transfer*).
+As the major review by the international scientific community showed (*Simons et al., 2016*, *Psychological Science in the Public Interest*), many commercial brain games improve only the trained task or very similar ones (*near transfer*), with weak or absent evidence of transfer to complex everyday activities (*far transfer*). Meta-analyses in healthy older adults confirm a **modest but real** picture: computerized cognitive training brings small average gains in cognitive performance (*g* ≈ 0.22), varying by domain and larger when practice is regular and supervised (*Lampit et al., 2014*); the Cochrane review, limited to programs of at least 12 weeks, still rates the overall quality of evidence as low (*Gates et al., 2020*).
 
-For this reason, Synapse Dojo does not employ arbitrary minigames or superficial reflex games. Instead, it is built exclusively around **experimental paradigms with the most robust clinical and empirical evidence in neuropsychological literature**.
+For this reason Synapse Dojo does not use arbitrary tasks or pure-dexterity minigames: it draws on the **most studied experimental paradigms in the neuropsychological literature**, and states clearly what the evidence does and does not show.
 
-### Summary of Key Clinical Evidence
+### Summary of Key Evidence
 
-| Approach & Paradigm | Landmark Study & Source | Neuroscientific Finding |
+| Approach & Paradigm | Main Study and Source | What the evidence says |
 |---|---|---|
-| **Speed of Processing / Useful Field of View (UFOV)** | ACTIVE Clinical Trial, 10-year follow-up (*Edwards et al., 2017*) | The only computerized cognitive intervention demonstrated to be associated with a **29–33% lower risk of dementia** at 10 years compared to control groups. Booster training sessions showed a dose-response benefit. |
-| **Continuous Visuo-Motor Multitasking** | NeuroRacer, UCSF (*Anguera & Gazzaley et al., Nature 2013*) | Adaptive multitasking training in older adults (ages 60–85) reversed age-related interference deficits, with gains sustained 6 months later and transferring to untrained sustained attention and working memory. Laid the groundwork for FDA-cleared digital therapeutics for ADHD (EndeavorRx). |
-| **Mental Rotation & Spatial Cognition** | Meta-analysis of 217 studies (*Uttal et al., 2013*) | Demonstrates a robust, stable average effect size (**g = 0.47**), with proven transfer to novel spatial tasks and STEM performance. |
-| **Rapid Arithmetic & Vocal Reading** | "Learning Therapy" (*Nouchi, Kawashima et al., 2016*) | Rapid execution of simple arithmetic calculations combined with reading aloud massively activates frontal and parietal lobes bilaterally, yielding significant gains in processing speed and executive functioning in older adults. |
-| **Working Memory (Dual N-Back & Memory Span)** | Meta-analyses (*Au et al., 2014*; *Melby-Lervåg & Hulme, 2013/2016*) | Substantial improvements in working memory capacity, resistance to proactive interference, and executive updating. |
-| **Inhibition & Conflict Resolution (Stroop, Flanker, Go/No-Go)** | *Eriksen & Eriksen (1974)*, *MacLeod (1991)*, *Enge et al. (2014)* | Recruits the dorsolateral prefrontal cortex (DLPFC) and anterior cingulate cortex (ACC) to suppress prepotent automated responses and filter conflicting visual distractors. |
-| **Flexibility & Task Switching** | Meta-analyses (*Karbach & Kray, 2009*; *Toovey et al., 2021*) | Systematic rule alternation significantly reduces the cognitive cost of transition (*switch cost*), training executive mental flexibility across both younger and older cohorts. |
-| **Bilateral Coordination & Midline Crossing** | *Swinnen et al. (2002)*; *Gazzaniga (2000)* | Asymmetric bimanual tasks and midline crossing force rapid interhemispheric transfer through the **corpus callosum**, challenging motor decoupling and fostering broader synaptogenesis. |
-| **Multidomain Lifestyle Intervention** | FINGER Trial, Finland (*Ngandu et al., Lancet 2015*) | Computerized cognitive training achieves its highest preventative efficacy when synergistically combined with aerobic physical exercise, restorative sleep, balanced nutrition, and social engagement. |
+| **Processing speed / Useful Field of View (UFOV)** | ACTIVE trial: *Ball et al., 2002*; 10-year follow-up (*Edwards et al., 2017*); 20-year follow-up (*Coe et al., 2026*) | At 10 years, speed-of-processing training was associated with a **29% lower dementia risk** (HR 0.71; 95% CI 0.50–0.998), with a dose-response effect (about −10% per additional session). At 20 years, on Medicare claims, the benefit (about **−25%** diagnoses) appeared **only in the group that also received booster sessions**; memory and reasoning training showed no effect. This is a secondary analysis of administrative diagnoses: a promising result, not proof of prevention. |
+| **Continuous visuomotor multitasking** | NeuroRacer, UCSF (*Anguera, Gazzaley et al., Nature 2013*) | In older adults (60–85), adaptive multitasking training reduced interference costs, with benefits kept at 6 months and transfer to sustained attention and working memory. The same approach underlies EndeavorRx, the first therapeutic video game authorized by the FDA (2020), for pediatric ADHD. |
+| **Mental rotation and spatial cognition** | Meta-analysis of 217 studies (*Uttal et al., 2013*) | Average effect **g = 0.47**, robust and durable, with transfer to new spatial tasks. |
+| **Fast arithmetic and reading aloud** | "Learning Therapy" (*Nouchi, Kawashima et al., 2016*) | In an RCT with 64 healthy older adults, 6 months of reading aloud and simple calculations improved inhibition, verbal episodic memory, attention and processing speed compared with a wait-list control group. |
+| **Working memory (dual N-Back and Span)** | Meta-analyses (*Au et al., 2015*; *Melby-Lervåg & Hulme, 2013*) | Reliable gains on trained and similar working-memory tasks (*near transfer*); transfer to fluid intelligence is small and debated: Au et al. report a modest effect, Melby-Lervåg & Hulme no solid far transfer. |
+| **Inhibition and interference control (Stroop, Flanker, Go/No-Go, MSIT)** | *Stroop (1935)*, *Eriksen & Eriksen (1974)*, *MacLeod (1991)*, *Bush & Shin (2006)* | Classic paradigms measuring the ability to suppress automatic responses and filter distractors, with documented involvement of the anterior cingulate and prefrontal cortex. Evidence that *training* them improves inhibition in general is scarce (*Enge et al., 2014*, a null result in young adults): in Synapse Dojo they serve mainly as exercise and measure of selective attention. |
+| **Flexibility and Task Switching** | *Karbach & Kray (2009)*; *Toovey, Kattner & Schubert (2021)* | Rule-switching training reduces switch costs in older adults too, with transfer to untrained switching tasks; far transfer (inhibition, intelligence) remains limited. |
+| **Bimanual coordination and midline crossing** | *Swinnen (2002)* | Bimanual movements, especially asymmetric ones, require integration between hemispheres via the corpus callosum and supplementary motor areas. Synapse Dojo's bilateral exercises are a coordination and attention activity: there is no evidence that an app of this kind "strengthens" the corpus callosum or global brain connectivity. |
+| **Multidomain and lifestyle interventions** | FINGER trial (*Ngandu et al., Lancet 2015*); US POINTER (*Baker et al., JAMA 2025*); Lancet Commission (*Livingston et al., 2024*) | Interventions combining physical activity, diet, cognitive stimulation, social contact and vascular risk control improve global cognition in at-risk older adults. The Lancet Commission estimates that acting on 14 modifiable risk factors (including hearing loss, hypertension, physical inactivity, social isolation, vision loss and high LDL cholesterol) could prevent or delay up to 45% of dementia cases. Cognitive training is one piece, not a substitute. |
 
 ---
 
-## 2. Design Principles of Synapse Dojo
+## 2. Synapse Dojo Design Principles
 
-These empirical findings directly inform the structural pillars of the platform:
+The evidence above leads to the platform's building blocks:
 
 1. **Continuous Adaptive Difficulty for Every Exercise:**  
-   Tasks that are too easy induce boredom and fail to stimulate neuroplasticity; tasks that are too hard cause frustration and cognitive fatigue. Synapse Dojo utilizes a continuous weighted up-down staircase algorithm that maintains the user in their optimal **zone of proximal development** (targeting an ~80% accuracy threshold).
-2. **Prioritization of High-Yield Transfer Paradigms:**  
-   Focus is centered on peripheral useful field of view (UFOV), continuous multitasking, 2D/3D mental rotations, dual-modal working memory, and bimanual motor coordination.
-3. **Rigorous Separation Between Measurement and Training:**  
-   - The daily **Neuro Score** operates as a fixed, standardized benchmark battery, allowing reliable longitudinal performance comparisons over time (0–1000 scale covering all 9 areas).
-   - The **Daily Workout** and **Gym** operate dynamically in fully adaptive mode to drive cognitive adaptation.
-4. **Transparency and Honesty:**  
-   Synapse Dojo is designed as a wellness and mental agility tool. It makes no medical or diagnostic claims, promises no cure for neurodegenerative disease, and explicitly reminds users that holistic lifestyle factors (movement, sleep, social connection) are foundational.
+   An exercise that is too easy is boring; one that is too hard is frustrating and leads to dropping out. Synapse Dojo uses a weighted up-down staircase (Kaernbach 1991) that keeps each user near their own threshold: the accuracy target is **80%** in most exercises, 85% in Glance and 70–75% in memory and planning tasks, where each trial is longer and a mistake weighs more.
+2. **Priority to Paradigms with the Highest Transfer Value:**  
+   Central role for peripheral visual processing speed (UFOV), continuous multitasking, mental rotation and working memory.
+3. **Separating Measurement from Training:**  
+   - The daily **Neuro Score** always uses the same starting point and a short version of each exercise, to follow trends over time (0–1000 across all 9 domains).
+   - **Daily Training** and the **Gym** are fully adaptive, to drive improvement.
+4. **Accessible to Everyone, Older Adults Included** (see §5).
+5. **Honesty Toward the User:**  
+   Synapse Dojo is a tool for active leisure and personal stimulation: it makes no medical diagnoses, does not promise a cure for or immunity from neurodegenerative diseases, and always reminds users that overall lifestyle (exercise, sleep, social life, looking after hearing and sight) is essential.
 
 ---
 
-## 3. Complete Catalog of 35 Exercises (9 Domains)
+## 3. The Complete Catalog of 35 Exercises (9 Domains)
 
-The application provides 35 original exercises distributed across 9 cognitive and motor domains:
+The app organizes 35 original tasks across 9 cognitive and motor domains:
 
 ```
                                   ┌─── ⚡ Speed (4)
                                   ├─── 🎯 Attention (6)
                                   ├─── 🎛️ Executive Control (3)
                                   ├─── 🧠 Working Memory (4)
-       Synapse Dojo (35 Tasks)   ├─── 🔐 Episodic Memory (3)
-                                  ├─── 🧊 Spatial Cognition (2)
-                                  ├─── 🧩 Reasoning & Planning (3)
-                                  ├─── ➗ Math & Reading (5)
+     Synapse Dojo (35 Exercises)  ├─── 🔐 Episodic Memory (3)
+                                  ├─── 🧊 Spatial (2)
+                                  ├─── 🧩 Reasoning (3)
+                                  ├─── ➗ Calculation & Reading (5)
                                   └─── 👐 Bilateral Coordination (5)
 ```
 
+The exercises are **inspired by** the paradigms listed: they are short, game-like versions, not the standardized clinical tests, and their scores cannot be compared with clinical norms.
+
 ### Table of Experimental Paradigms
 
-| Domain | Exercise | Clinical/Experimental Paradigm | Dynamic Adaptive Parameters |
+| Domain | Exercise | Reference paradigm | Adaptive parameters |
 |---|---|---|---|
-| **⚡ Speed** | **Glance** | *Useful Field of View (UFOV)* / Double Decision | Visual presentation duration (400 → 16 ms), peripheral distractor count and visual clutter (0, 7, 15). |
-| **⚡ Speed** | **Choice Reflex** | 4-way Choice Reaction Time + Go/No-Go | Response time window (1100 → 220 ms), appearance of red stop decoys. |
-| **⚡ Speed** | **Number Path** | *Trail Making Test (TMT-A & TMT-B)* | Target count (10–24), transition to alternating mental flexibility sequence (1 → A → 2 → B). |
-| **⚡ Speed** | **Reaction Time** | Simple Visual Reaction Time (SRT) | Pure visuo-motor conduction latency in milliseconds with variable delays to eliminate anticipatory taps. |
-| **🎯 Attention** | **Pilot** | Continuous Multitasking (*NeuroRacer*) | Road curve severity, driving speed, frequency and perceptual similarity of visual decoy signs. |
-| **🎯 Attention** | **Radar** | *Multiple Object Tracking (MOT)* | Number of target objects to track simultaneously (2–6), movement velocity, and erratic trajectory paths. |
-| **🎯 Attention** | **Flanker Test** | *Eriksen Flanker Task* | Response deadline, congruent vs. incongruent flanking directional arrows. |
-| **🎯 Attention** | **Go / No-Go** | *Sustained Attention to Response Task (SART)* | Inter-stimulus interval, probability ratio of go signals vs. sudden red stop signals. |
-| **🎯 Attention** | **Multi-Source Interference** | *Multi-Source Interference Task (MSIT)* | Spatial conflict between stimulus screen position and numeric value identity (anterior cingulate activation). |
-| **🎯 Attention** | **Color and Shape** | *Visual Feature Binding Task* | Multi-feature visual conjunction searching against overlapping distractors. |
-| **🎛️ Control** | **Color Clash** | *Stroop Color and Word Task* | Response window (3000 → 500 ms), dynamic rule reversal (Ink Color ↔ Word Meaning). |
-| **🎛️ Control** | **Dual Rule** | *Task Switching Paradigm* (Jersild/Rogers/Monsell) | Alternation between size judgment (>5/<5) and parity (Even/Odd); measures executive switch cost. |
-| **🎛️ Control** | **Card Sorting** | *Wisconsin Card Sorting Test (WCST)* | Inductive discovery of secret matching rule (Color, Shape, Number) and rapid set-shifting after silent shifts. |
-| **🧠 Working Memory** | **Echo** | *N-Back Task* (Single & Dual Auditory-Visual) | Sequence offset N (1-back up to 5-back) in single or dual synchronous mode (grid position + spoken letter). |
-| **🧠 Working Memory** | **Light Grid** | *Corsi Block-Tapping Test* | Spatial sequence length (2–9 blocks), forward and reverse backward reproduction. |
-| **🧠 Working Memory** | **Last Digits** | *Running Memory Span* (Pollack et al.) | Target count of trailing digits (2–8) to recall from an unpredictable sequence length. |
-| **🧠 Working Memory** | **Digit Span** | *Digit Span Forward & Backward* (WAIS) | Number string length and backward mental inversion for phonological working memory. |
-| **🔐 Memory** | **Word Vault** | *Old/New Recognition Memory Task* | Lexical study set size (6–25 words) and retention delay interference. |
-| **🔐 Memory** | **Pairs** | *Paired Associates Learning (PAL)* | Number of arbitrary symbol–word binding pairs to encode and recall. |
-| **🔐 Memory** | **Story Memory** | *Logical Memory Test* / Episodic Narrative | Hippocampal episodic coordinate recall (who, carried item, location, time of day). |
-| **🧊 Spatial** | **Rotazioni** | *Mental Rotation Task* (Shepard & Metzler, 1971) | Polygon complexity and rotation angles (45°–315°) of 3D chiral and mirror figures. |
-| **🧊 Spatial** | **Spatial Matrix** | Spatial Coordinate Transformation | Active block density and mental rotation of the entire coordinate grid at 90°, 180°, and 270°. |
-| **🧩 Reasoning** | **Towers** | *Tower of London Test* (Shallice, 1982) | Minimum optimal moves required (2–8), peg capacity constraints, and forward path planning. |
-| **🧩 Reasoning** | **Odd One Out** | *Odd-One-Out Task* (Cambridge Brain Sciences) | Multidimensional inductive deduction to isolate the outlier across shape, color, count, and shading. |
-| **🧩 Reasoning** | **Resource Management** | *Knapsack Optimization Problem* | Prefrontal strategic optimization balancing strict energy budgets against maximal point yields. |
-| **➗ Math & Reading** | **Math Sprint** | Rapid Mental Arithmetic (Kawashima Learning Therapy) | Operation mixing (+, −, ×, ÷) and numeric scale under high-speed temporal pressure. |
-| **➗ Math & Reading** | **Speed Reading** | *Rapid Serial Processing* with Comprehension Check | Objective words-per-minute (WPM) tracking coupled with mandatory reading comprehension validation. |
-| **➗ Math & Reading** | **Dot Calculation** | *Approximate Number System (ANS)* / Subitizing | Quantity ratio (Weber fraction) between dot clusters flashed for sub-second durations. |
-| **➗ Math & Reading** | **Anagrams** | Lexical Retrieval & Orthographic Working Memory | Phonemic recombination of anagram letter tiles from 4 to 8 letters. |
-| **➗ Math & Reading** | **Word Sprint** | *Phonemic Verbal Fluency* (COWAT) | Rapid lexical retrieval from semantic memory constrained by target phonemes. |
-| **👐 Coordination** | **Bilateral Tap** | *Bimanual Alternating Tapping Task* | Alternating bimanual rhythm frequency and complexity to stimulate the corpus callosum. |
-| **👐 Coordination** | **Bilateral Swipe** | *Bimanual Spatial Decoupling* | Simultaneous asymmetric directional gestures (e.g., left thumb up, right thumb down). |
-| **👐 Coordination** | **Bilateral Rhythm** | *Sensorimotor Synchronization (SMS)* | Millisecond temporal synchronization against an alternating visual metronome. |
-| **👐 Coordination** | **Cross Moves** | *Midline Crossing Inhibition Task* | Contralateral motor execution crossing the body's sagittal midline axis. |
-| **👐 Coordination** | **Bilateral Dual-Task** | Asymmetric Dual-Task Paradigm | Asymmetric divided attention: continuous isometric motor holding in one hemisphere alongside cognitive parity judgments in the other. |
+| **⚡ Speed** | **Glance** | *Useful Field of View (UFOV)* / Double Decision (*Ball et al., 2002*) | Exposure time (700 ms → about 48 ms, followed by a mask), peripheral distractors (0, 7, 15). |
+| **⚡ Speed** | **Choice reflex** | 4-choice reaction time + Go/No-Go | Response window (1100 → about 280 ms), no-go stimuli from level 3. |
+| **⚡ Speed** | **Number trail** | *Trail Making Test (TMT-A and TMT-B)* | Number of targets (10–24), alternating 1 → A → 2 → B sequence from level 4. |
+| **⚡ Speed** | **Simple Reaction** | Simple reaction time (SRT) with a variable foreperiod and false-start detection | Threshold to beat (600 → 200 ms). |
+| **🎯 Attention** | **Pilot** | *NeuroRacer*-style continuous multitasking (*Anguera et al., 2013*) | Road speed and curvature, sign frequency and distractor similarity (from level 5). |
+| **🎯 Attention** | **Radar** | *Multiple Object Tracking* (*Pylyshyn & Storm, 1988*) | Targets to track (2–6) and speed. |
+| **🎯 Attention** | **Flanker Test** | *Eriksen Flanker Task* | Time limit (1400 → 350 ms) and share of incongruent trials (30 → 65%). |
+| **🎯 Attention** | **Go / No-Go** | Go/No-Go inspired by the *SART* (*Robertson et al., 1997*) | Time limit (850 → 260 ms); 22% "stop" trials. |
+| **🎯 Attention** | **Multi-Source Interference** | *Multi-Source Interference Task* (*Bush & Shin, 2006*) | Control ("1 0 0") and interference ("2 1 1") trials; interference share (33 → 67%) and time limit (1800 → 450 ms). |
+| **🎯 Attention** | **Color & Shape** | Conjunction visual search (*Treisman & Gelade, 1980*) | Number of items (6–16) sharing color or shape with the target. |
+| **🎛️ Control** | **Color clash** | *Stroop* (*Stroop, 1935*; *MacLeod, 1991*) | Time limit (3000 → about 750 ms), alternative "read the word" rule from level 3. |
+| **🎛️ Control** | **Rule switch** | *Task Switching* (*Monsell, 2003*) | Alternating magnitude (< 5 / > 5) and parity; switch rate (20 → 50%) and time limit; measures the switch cost. |
+| **🎛️ Control** | **Card Sorting** | Inspired by the *Wisconsin Card Sorting Test* (*Grant & Berg, 1948*) | Discovering the rule (color, shape, number); the rule changes after 4 correct answers in a row and the change is announced, so as not to discourage; time per card (5.5 → 2.4 s). |
+| **🧠 Working memory** | **Echo** | Single and dual *N-Back* (*Kirchner, 1958*; *Jaeggi et al., 2008*) | From 1-back (position only) to dual 6-back (position + spoken and written letter). |
+| **🧠 Working memory** | **Light grid** | *Corsi Block-Tapping* (*Corsi, 1972*; *Kessels et al., 2000*) | Sequence length (2–9), backward order from level 6; in the Neuro Score two attempts per length, as in the standard procedure. |
+| **🧠 Working memory** | **Last digits** | *Running Memory Span* (*Pollack et al., 1959*) | Final digits to recall (2–9) from a stream of unpredictable length. |
+| **🧠 Working memory** | **Digit Span** | Forward and backward *Digit Span* | Series length (3–9), backward order from level 7. |
+| **🔐 Memory** | **Word vault** | Old/new recognition | Words to study (6–20); the score subtracts false alarms from hits. |
+| **🔐 Memory** | **Pairs** | Symbol–word *paired associates* learning | Number of pairs (3–12). |
+| **🔐 Memory** | **Story Memory** | Inspired by logical memory for short stories | Questions on who, what, where and when (2 or 3). |
+| **🧊 Spatial** | **Rotations** | Mental rotation (*Shepard & Metzler, 1971*), two-dimensional version with chiral polyominoes | Number of squares (4–9), rotations in 30° steps, time limit (7.6 → 2.5 s). |
+| **🧊 Spatial** | **Spatial Matrix** | Spatial memory with coordinate transformation | Blocks to remember (2–5) and grid rotation (0°, 90°, 180°, 270°). |
+| **🧩 Reasoning** | **Towers** | *Tower of London* (*Shallice, 1982*) | Minimum moves (2–8). |
+| **🧩 Reasoning** | **Odd one out** | Odd-one-out with multidimensional rules | Number of figures (4–9) and irrelevant features that vary (1–3). |
+| **🧩 Reasoning** | **Resource Planning** | Knapsack problem / constrained planning | Number of activities (4–7) and budget; at least 90% of the optimal value is required. |
+| **➗ Calculation & reading** | **Math sprint** | Fast mental arithmetic (*Learning Therapy*, Kawashima) | Operations (+ − → × → ÷) and number size. |
+| **➗ Calculation & reading** | **Speed reading** | Reading aloud with a comprehension question | Words per minute and comprehension (comprehension weighs more than speed). |
+| **➗ Calculation & reading** | **Dot Estimation** | *Approximate Number System* (*Halberda et al., 2008*) | Ratio between the two quantities (40 → 88%) and exposure time (1.5 → 0.8 s). |
+| **➗ Calculation & reading** | **Word Anagrams** | Lexical access and orthographic memory | Word length (3–8 letters). |
+| **➗ Calculation & reading** | **Word Sprint** | Fast orthographic classification (does the word start with the given letter?) | Time limit (2200 → 650 ms). It is not a verbal-fluency test, which would require producing words. |
+| **👐 Coordination** | **Bilateral Tap** | Visually guided bimanual sequences | Length of the left/right sequence (4–12). |
+| **👐 Coordination** | **Bilateral Swipe** | Symmetric and asymmetric bimanual coordination (*Swinnen, 2002*) | Same, mirrored or independent directions for the two hands. |
+| **👐 Coordination** | **Bilateral Rhythm** | *Sensorimotor Synchronization* (*Repp & Su, 2013*) | Metronome tempo (67–130 BPM); each tap is judged against the nearest beat, early or late. |
+| **👐 Coordination** | **Cross Movements** | Spatial stimulus-response compatibility (ipsilateral and contralateral responses) | Time limit (1500 → 380 ms) and share of "cross" trials. |
+| **👐 Coordination** | **Bilateral Dual-Task** | Motor-cognitive dual-task paradigm | Keep holding with one hand for the whole trial while the other judges even/odd; time limit (4 → 1.6 s). |
 
 ---
 
-## 4. Adaptive Engine & Psychometrics
+## 4. Adaptive Algorithm and Psychometrics
 
-### The 85% Rule for Optimal Learning
-A foundational neurocomputational principle established by *Wilson, Shenhav, Straccia & Cohen (Nature Communications, 2019)* shows that in biological and artificial learning systems, the optimal rate of skill acquisition occurs at an error rate of **~15% (approximately 85% accuracy)**. At this threshold:
-* The informational gradient derived from errors is maximized without overwhelming attentional capacity.
-* It prevents both disengagement from under-challenge and learned helplessness from excessive failure.
+### The Eighty Five Percent Rule
+*Wilson, Shenhav, Straccia & Cohen (Nature Communications, 2019)* showed that, for many gradient-based learning algorithms, learning is fastest when the error rate is about **15.87%** (about 85% accuracy). It is a theoretical result, consistent with the psychophysical practice of keeping tasks neither too easy nor too hard. Synapse Dojo sits in this zone (70–85% depending on the exercise), favoring slightly higher accuracy in long tasks to protect motivation.
 
-### The Weighted Up-Down Mathematical Model
-Synapse Dojo implements a continuous formulation of the classic psychophysical staircase method by **Kaernbach (1991)**:
+### The *Weighted Up-Down* Mathematical Model
+Synapse Dojo implements a continuous variant of the **Kaernbach (1991)** psychophysical method:
 
 $$\Delta_{\text{up}} = \Delta_{\text{down}} \cdot \left(\frac{1 - p_{\text{target}}}{p_{\text{target}}}\right)$$
 
-For a target accuracy of $p_{\text{target}} = 0.80$:
-* On **error**: difficulty decreases by $1.0$ level.
-* On **correct response**: difficulty increases by $0.25$ levels.
+For a target $p_{\text{target}} = 0.80$:
+* After an **error**: difficulty drops by $1.0$ level.
+* After a **correct answer**: difficulty rises by $0.25$ levels.
 
-#### Empirical Control Mechanisms (`src/adaptive.ts`):
-1. **Fast-Track Acquisition**: As long as the user answers correctly on opening trials, difficulty jumps by full integer levels ($+1.0$), swiftly navigating to their personal performance boundary.
-2. **Frustration Brake**: Three consecutive errors trigger an additional step-down buffer, preventing prolonged negative spirals.
-3. **Warm-Up Calibration**: Every session initiates half a level below the user's historical milestone, facilitating an immediate flow state before reaching challenging thresholds.
-4. **Inactivity Decay**: If an exercise remains unplayed for more than 14 days, starting difficulty is conservatively adjusted downward by one level to offset natural motor and cognitive rustiness.
+#### Implemented Control Mechanisms (`src/adaptive.ts`):
+1. **Fast Track**: until the first error, each correct answer climbs a full level, so a session that starts too easy reaches the working zone within a few trials.
+2. **Frustration Brake**: three errors in a row drop one extra level.
+3. **Warm-Up**: each session starts half a level below the threshold estimated in the previous session.
+4. **Detraining**: if an exercise has not been played for more than 14 days, the starting level drops by one.
+5. **Session score**: average level reached in the second half of the session, reduced if accuracy is below target. Someone who keeps failing at the easiest level gets a low score instead of the minimum credit.
 
-### The Neuro Score: Normalization and Computation
-The **Neuro Score** (0 to 1000 scale) is calculated using a daily benchmark battery that samples one rotating exercise from each of the 9 domains. Individual task performances are normalized through continuous sigmoid functions mapped against empirical psychometric baselines (reaction latency, exposure threshold, or accuracy), equally weighting all 9 areas to provide a balanced longitudinal barometer of mental sharpness.
+### The Neuro Score: Calculation
+The **Neuro Score** (0 to 1000) is the **mean of the 0–100 scores** of 9 short exercises, one per domain, **multiplied by 10**. Each exercise always starts from the same initial level and converts performance (threshold reached, response times or accuracy) to 0–100 with fixed linear scales per exercise.
+
+The battery **rotates daily** among the exercises of each domain, for variety and to avoid training a single task. As a result two consecutive days may use different exercises: the Neuro Score should be read as a **trend over several weeks**, not an exact measure to compare day by day. It is not a clinical test and has no diagnostic value.
 
 ---
 
-## 5. Software Architecture, Privacy & Resilience
+## 5. Calibration for Older Adults and People with Difficulties
 
-To maintain an ethical tool centered on the user rather than corporate advertising economics, the technical architecture implements strict requirements:
+The program must be usable by people with slower reaction times, reduced sight or hearing, or little familiarity with touch screens. The choices made:
+
+* **Easy start and fast adaptation**: timed exercises start from the simplest level and only climb if the user answers well; after three errors in a row difficulty drops by two levels.
+* **Generous starting times**: e.g. a 600 ms threshold in Simple Reaction (an older adult's simple reaction time on a touch screen, screen latency included, is often 400–550 ms), 3 s in the Stroop, 4 s for the dual task, 7.6 s for a mental rotation, 5.5 s per card in card sorting.
+* **Relaxed pace**: the option in Settings multiplies all response windows and presentation times by 1.4, and is also taken into account in the Neuro Score.
+* **Neuro Score scales calibrated for older age**: zero corresponds to slow but plausible performance (e.g. 4 s per number in Number trail, 8 s per calculation, 3 s per answer in the Stroop), so an older adult doesn't score zero just for being slower than a young person.
+* **Untimed tasks** where speed is not the point (memory, reasoning, anagrams): answer calmly.
+* **Guided practice** the first time, with hints after each mistake and no score.
+* **Multisensory feedback**: big ✓/✗ in the center, colors, sound and vibration; color names are always written, for people who confuse red and green.
+* **Large text** option in Settings and large buttons.
+* **N-Back letters** both spoken and written, for people who are hard of hearing.
+
+People with diagnosed cognitive disorders should use the app only as an enjoyable activity and talk to their doctor; scores are no substitute for a clinical assessment.
+
+---
+
+## 6. Software Architecture, Privacy and Resilience
+
+To make sure the platform stays a tool serving the user rather than advertising profiling, the technical architecture follows strict requirements:
 
 1. **Client-Side First & Zero Cookies:**  
-   The entire application runs locally in the client's web browser. No personal metrics, scores, or identifiers are transmitted to remote servers. All data is persisted exclusively in local storage (`localStorage`) and can be exported or imported in open JSON format at any time.
+   The whole app runs locally in the browser. No personal data, identifiers or performance statistics are sent to central servers. Data is stored only in `localStorage` and can be exported/imported by the user at any time as open JSON; imported files are validated before use.
 2. **Framework-Free (Vanilla TypeScript):**  
-   Zero UI runtime dependencies (no React, Vue, or Angular). DOM rendering is handled directly via TypeScript primitives, guaranteeing instant load times on budget devices and minimal battery drain.
-3. **Web Audio API & Procedural Speech Synthesis:**  
-   Acoustic feedback (rising combo frequencies, rhythmic metronome clicks, success tones) is generated procedurally in real-time via Web Audio API oscillators; multi-language speech is powered by the browser's native `window.speechSynthesis`, avoiding bulky downloaded audio assets.
-4. **Offline Resilience & Progressive Web App (PWA):**  
-   Equipped with a lightweight Service Worker and Web App Manifest, Synapse Dojo can be installed to home screens as a native application and functions seamlessly without an active internet connection.
+   No UI framework dependencies. The DOM is built with direct TypeScript primitives (no HTML generated from strings), for instant start-up even on low-cost devices.
+3. **Web Audio API and Speech Synthesis:**  
+   Sound effects are generated in real time with Web Audio API oscillators; multilingual speech uses the standard `window.speechSynthesis` API, with no audio files to download.
+4. **Offline Support and PWA:**  
+   A lightweight Service Worker and a Web App Manifest make Synapse Dojo installable and usable offline.
+5. **Security:**  
+   A strict Content Security Policy, and no third-party scripts apart from the optional, anonymous Cloudflare Web Analytics beacon.
 
 ---
 
-## 6. Academic Bibliography & Literature Sources
+## 7. Bibliography and Academic Sources
 
-1. **ACTIVE Trial (Visual UFOV processing speed & dementia risk reduction):**  
-   Edwards, J. D., et al. (2017). *Speed of processing training results in lower risk of dementia.* Alzheimer's & Dementia: Translational Research & Clinical Interventions, 3(4), 603-611. [PMC5700828](https://pmc.ncbi.nlm.nih.gov/articles/PMC5700828/)
-2. **Comprehensive Critical Review of Commercial Brain-Training Claims:**  
-   Simons, D. J., et al. (2016). *Do “Brain-Training” Programs Work?* Psychological Science in the Public Interest, 17(3), 103-186. [DOI: 10.1177/1529100616661983](https://journals.sagepub.com/doi/10.1177/1529100616661983)
-3. **Adaptive Multitasking & Neural Plasticity:**  
-   Anguera, J. A., Gazzaley, A., et al. (2013). *Video game training enhances cognitive control in older adults.* Nature, 501(7465), 97-101. [PubMed: 24005416](https://pubmed.ncbi.nlm.nih.gov/24005416/)
-4. **The 85% Rule for Optimal Learning:**  
-   Wilson, R. C., Shenhav, A., Straccia, M., & Cohen, J. D. (2019). *The Eighty Five Percent Rule for optimal learning.* Nature Communications, 10, 4646. [PMC6831579](https://pmc.ncbi.nlm.nih.gov/articles/PMC6831579/)
-5. **Weighted Up-Down Psychophysical Staircase Algorithms:**  
-   Kaernbach, C. (1991). *Simple adaptive testing with the weighted up-down method.* Perception & Psychophysics, 49(3), 227-229. [DOI: 10.3758/BF03214307](https://link.springer.com/article/10.3758/BF03214307)
-6. **Spatial Training Malleability and Far Transfer:**  
-   Uttal, D. H., et al. (2013). *The malleability of spatial skills: a meta-analysis of training studies.* Psychological Bulletin, 139(2), 352-402. [PubMed: 22663761](https://pubmed.ncbi.nlm.nih.gov/22663761/)
-7. **Learning Therapy & Rapid Arithmetic Processing:**  
-   Nouchi, R., Kawashima, R., et al. (2016). *Reading and Solving Arithmetic Problems Improve Cognitive Functions of Normal Compact with Wait-List Control: A Randomized Controlled Trial.* Frontiers in Human Neuroscience, 10, 217. [PMC4868921](https://pmc.ncbi.nlm.nih.gov/articles/PMC4868921/)
-8. **Multidomain Lifestyle & Cognitive Intervention (FINGER Trial):**  
-   Ngandu, T., Kivipelto, M., et al. (2015). *A 2 year multidomain intervention of diet, exercise, cognitive training, and vascular risk monitoring versus control to prevent cognitive decline in at-risk elderly people (FINGER): a randomised controlled trial.* The Lancet, 385(9984), 2255-2263. [PubMed: 25771249](https://pubmed.ncbi.nlm.nih.gov/25771249/)
-9. **Working Memory Training & Fluid Intelligence:**  
-   Au, J., et al. (2015). *Improving fluid intelligence with training on working memory: a meta-analysis.* Psychonomic Bulletin & Review, 22(2), 366-377. [PubMed: 25100447](https://pubmed.ncbi.nlm.nih.gov/25100447/)
-10. **Selective Visual Attention & Flanker Inhibition:**  
-    Eriksen, B. A., & Eriksen, C. W. (1974). *Effects of noise letters upon the identification of a target letter in a nonsearch task.* Perception & Psychophysics, 16(1), 143-149. [DOI: 10.3758/BF03203267](https://link.springer.com/article/10.3758/BF03203267)
-11. **Executive Planning & Tower of London:**  
-    Shallice, T. (1982). *Specific impairments of planning.* Philosophical Transactions of the Royal Society of London. B, Biological Sciences, 298(1089), 199-209. [PubMed: 6125971](https://pubmed.ncbi.nlm.nih.gov/6125971/)
-12. **Bimanual Coordination & Corpus Callosum Function:**  
-    Swinnen, S. P. (2002). *Intermanual coordination: from behavioural principles to neural-network interactions.* Nature Reviews Neuroscience, 3(5), 348-359. [PubMed: 11988774](https://pubmed.ncbi.nlm.nih.gov/11988774/)
-13. **Executive Control & Task Switching Plasticity:**  
-    Karbach, J., & Kray, J. (2009). *How useful is executive control training? Age differences in near and far transfer of task-switching training.* Developmental Science, 12(6), 978-990. [PubMed: 19840052](https://pubmed.ncbi.nlm.nih.gov/19840052/)
-14. **Gamification Efficacy in Cognitive Systems:**  
-    Lumsden, J., et al. (2016). *Gamification of Cognitive Assessment and Training Systems: A Systematic Review of Applied Educational Technologies.* JMIR Serious Games, 4(2), e11. [PMC4971358](https://pmc.ncbi.nlm.nih.gov/articles/PMC4971358/)
+**General evidence on cognitive training**
+
+1. Simons, D. J., et al. (2016). *Do "Brain-Training" Programs Work?* Psychological Science in the Public Interest, 17(3), 103-186. [DOI: 10.1177/1529100616661983](https://journals.sagepub.com/doi/10.1177/1529100616661983)
+2. Lampit, A., Hallock, H., & Valenzuela, M. (2014). *Computerized cognitive training in cognitively healthy older adults: a systematic review and meta-analysis of effect modifiers.* PLOS Medicine, 11(11), e1001756. [DOI: 10.1371/journal.pmed.1001756](https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1001756)
+3. Gates, N. J., et al. (2020). *Computerised cognitive training for 12 or more weeks for maintaining cognitive function in cognitively healthy people in late life.* Cochrane Database of Systematic Reviews, CD012277. [PubMed: 32104914](https://pubmed.ncbi.nlm.nih.gov/32104914/)
+4. Lumsden, J., et al. (2016). *Gamification of Cognitive Assessment and Cognitive Training: A Systematic Review of Applications and Efficacy.* JMIR Serious Games, 4(2), e11. [PMC4967181](https://pmc.ncbi.nlm.nih.gov/articles/PMC4967181/)
+
+**Processing speed and the ACTIVE trial**
+
+5. Ball, K., et al. (2002). *Effects of cognitive training interventions with older adults: a randomized controlled trial.* JAMA, 288(18), 2271-2281. [PubMed: 12425704](https://pubmed.ncbi.nlm.nih.gov/12425704/)
+6. Edwards, J. D., et al. (2017). *Speed of processing training results in lower risk of dementia.* Alzheimer's & Dementia: Translational Research & Clinical Interventions, 3(4), 603-611. [PMC5700828](https://pmc.ncbi.nlm.nih.gov/articles/PMC5700828/)
+7. Coe, N. B., et al. (2026). *Impact of cognitive training on claims-based diagnosed dementia over 20 years: evidence from the ACTIVE study.* Alzheimer's & Dementia: Translational Research & Clinical Interventions, 12, e70197. [DOI: 10.1002/trc2.70197](https://doi.org/10.1002/trc2.70197)
+
+**Attention, multitasking and control**
+
+8. Anguera, J. A., et al. (2013). *Video game training enhances cognitive control in older adults.* Nature, 501(7465), 97-101. [PubMed: 24005416](https://pubmed.ncbi.nlm.nih.gov/24005416/)
+9. Pylyshyn, Z. W., & Storm, R. W. (1988). *Tracking multiple independent targets: evidence for a parallel tracking mechanism.* Spatial Vision, 3(3), 179-197. [PubMed: 3153671](https://pubmed.ncbi.nlm.nih.gov/3153671/)
+10. Eriksen, B. A., & Eriksen, C. W. (1974). *Effects of noise letters upon the identification of a target letter in a nonsearch task.* Perception & Psychophysics, 16(1), 143-149. [DOI: 10.3758/BF03203267](https://link.springer.com/article/10.3758/BF03203267)
+11. Stroop, J. R. (1935). *Studies of interference in serial verbal reactions.* Journal of Experimental Psychology, 18(6), 643-662. [DOI: 10.1037/h0054651](https://doi.org/10.1037/h0054651)
+12. MacLeod, C. M. (1991). *Half a century of research on the Stroop effect: an integrative review.* Psychological Bulletin, 109(2), 163-203. [PubMed: 2034749](https://pubmed.ncbi.nlm.nih.gov/2034749/)
+13. Bush, G., & Shin, L. M. (2006). *The Multi-Source Interference Task: an fMRI task that reliably activates the cingulo-frontal-parietal cognitive/attention network.* Nature Protocols, 1(1), 308-313. [PubMed: 17406250](https://pubmed.ncbi.nlm.nih.gov/17406250/)
+14. Robertson, I. H., et al. (1997). *'Oops!': performance correlates of everyday attentional failures in traumatic brain injured and normal subjects.* Neuropsychologia, 35(6), 747-758. [PubMed: 9204482](https://pubmed.ncbi.nlm.nih.gov/9204482/)
+15. Treisman, A. M., & Gelade, G. (1980). *A feature-integration theory of attention.* Cognitive Psychology, 12(1), 97-136. [PubMed: 7351125](https://pubmed.ncbi.nlm.nih.gov/7351125/)
+16. Enge, S., et al. (2014). *No evidence for true training and transfer effects after inhibitory control training in young healthy adults.* Journal of Experimental Psychology: Learning, Memory, and Cognition, 40(4), 987-1001. [PubMed: 24707778](https://pubmed.ncbi.nlm.nih.gov/24707778/)
+17. Monsell, S. (2003). *Task switching.* Trends in Cognitive Sciences, 7(3), 134-140. [PubMed: 12639695](https://pubmed.ncbi.nlm.nih.gov/12639695/)
+18. Karbach, J., & Kray, J. (2009). *How useful is executive control training? Age differences in near and far transfer of task-switching training.* Developmental Science, 12(6), 978-990. [PubMed: 19840052](https://pubmed.ncbi.nlm.nih.gov/19840052/)
+19. Toovey, B. R. W., Kattner, F., & Schubert, T. (2021). *Cross-modal transfer following auditory task-switching training in old adults.* Frontiers in Psychology, 12, 615518. [DOI: 10.3389/fpsyg.2021.615518](https://www.frontiersin.org/articles/10.3389/fpsyg.2021.615518/full)
+20. Grant, D. A., & Berg, E. A. (1948). *A behavioral analysis of degree of reinforcement and ease of shifting to new responses in a Weigl-type card-sorting problem.* Journal of Experimental Psychology, 38(4), 404-411. [DOI: 10.1037/h0059831](https://doi.org/10.1037/h0059831)
+
+**Memory**
+
+21. Kirchner, W. K. (1958). *Age differences in short-term retention of rapidly changing information.* Journal of Experimental Psychology, 55(4), 352-358. [PubMed: 13539317](https://pubmed.ncbi.nlm.nih.gov/13539317/)
+22. Jaeggi, S. M., et al. (2008). *Improving fluid intelligence with training on working memory.* PNAS, 105(19), 6829-6833. [PubMed: 18443283](https://pubmed.ncbi.nlm.nih.gov/18443283/)
+23. Au, J., et al. (2015). *Improving fluid intelligence with training on working memory: a meta-analysis.* Psychonomic Bulletin & Review, 22(2), 366-377. [PubMed: 25102926](https://pubmed.ncbi.nlm.nih.gov/25102926/)
+24. Melby-Lervåg, M., & Hulme, C. (2013). *Is working memory training effective? A meta-analytic review.* Developmental Psychology, 49(2), 270-291. [PubMed: 22612437](https://pubmed.ncbi.nlm.nih.gov/22612437/)
+25. Kessels, R. P. C., et al. (2000). *The Corsi Block-Tapping Task: standardization and normative data.* Applied Neuropsychology, 7(4), 252-258. [PubMed: 11296689](https://pubmed.ncbi.nlm.nih.gov/11296689/)
+26. Pollack, I., Johnson, L. B., & Knaff, P. R. (1959). *Running memory span.* Journal of Experimental Psychology, 57(3), 137-146. [PubMed: 13641585](https://pubmed.ncbi.nlm.nih.gov/13641585/)
+
+**Spatial skills, reasoning, calculation and reading**
+
+27. Shepard, R. N., & Metzler, J. (1971). *Mental rotation of three-dimensional objects.* Science, 171(3972), 701-703. [PubMed: 5540314](https://pubmed.ncbi.nlm.nih.gov/5540314/)
+28. Uttal, D. H., et al. (2013). *The malleability of spatial skills: a meta-analysis of training studies.* Psychological Bulletin, 139(2), 352-402. [PubMed: 22663761](https://pubmed.ncbi.nlm.nih.gov/22663761/)
+29. Shallice, T. (1982). *Specific impairments of planning.* Philosophical Transactions of the Royal Society of London B, 298(1089), 199-209. [PubMed: 6125971](https://pubmed.ncbi.nlm.nih.gov/6125971/)
+30. Nouchi, R., et al. (2016). *Reading Aloud and Solving Simple Arithmetic Calculation Intervention (Learning Therapy) Improves Inhibition, Verbal Episodic Memory, Focus Attention and Processing Speed in Healthy Elderly People: Evidence from a Randomized Controlled Trial.* Frontiers in Human Neuroscience, 10, 217. [PMC4868921](https://pmc.ncbi.nlm.nih.gov/articles/PMC4868921/)
+31. Halberda, J., Mazzocco, M. M. M., & Feigenson, L. (2008). *Individual differences in non-verbal number acuity correlate with maths achievement.* Nature, 455(7213), 665-668. [PubMed: 18776888](https://pubmed.ncbi.nlm.nih.gov/18776888/)
+
+**Coordination and rhythm**
+
+32. Swinnen, S. P. (2002). *Intermanual coordination: from behavioural principles to neural-network interactions.* Nature Reviews Neuroscience, 3(5), 348-359. [PubMed: 11988774](https://pubmed.ncbi.nlm.nih.gov/11988774/)
+33. Repp, B. H., & Su, Y.-H. (2013). *Sensorimotor synchronization: a review of recent research (2006–2012).* Psychonomic Bulletin & Review, 20(3), 403-452. [PubMed: 23397235](https://pubmed.ncbi.nlm.nih.gov/23397235/)
+
+**Adaptive psychometrics**
+
+34. Kaernbach, C. (1991). *Simple adaptive testing with the weighted up-down method.* Perception & Psychophysics, 49(3), 227-229. [DOI: 10.3758/BF03214307](https://link.springer.com/article/10.3758/BF03214307)
+35. Wilson, R. C., Shenhav, A., Straccia, M., & Cohen, J. D. (2019). *The Eighty Five Percent Rule for optimal learning.* Nature Communications, 10, 4646. [PMC6831579](https://pmc.ncbi.nlm.nih.gov/articles/PMC6831579/)
+
+**Lifestyle and prevention**
+
+36. Ngandu, T., et al. (2015). *A 2 year multidomain intervention of diet, exercise, cognitive training, and vascular risk monitoring versus control to prevent cognitive decline in at-risk elderly people (FINGER): a randomised controlled trial.* The Lancet, 385(9984), 2255-2263. [PubMed: 25771249](https://pubmed.ncbi.nlm.nih.gov/25771249/)
+37. Baker, L. D., et al. (2025). *Structured vs Self-Guided Multidomain Lifestyle Interventions for Global Cognitive Function: The US POINTER Randomized Clinical Trial.* JAMA. [DOI: 10.1001/jama.2025.12923](https://doi.org/10.1001/jama.2025.12923)
+38. Livingston, G., et al. (2024). *Dementia prevention, intervention, and care: 2024 report of the Lancet standing Commission.* The Lancet, 404(10452), 572-628. [DOI: 10.1016/S0140-6736(24)01296-0](https://doi.org/10.1016/S0140-6736(24)01296-0)

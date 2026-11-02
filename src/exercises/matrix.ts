@@ -10,6 +10,10 @@ function rotateCoord(r: number, c: number, size: number, angle: number): { r: nu
   return { r, c };
 }
 
+const countFor = (level: number) => (level === 1 ? 2 : level <= 3 ? 3 : level <= 6 ? 4 : 5);
+/** 0 = no rotation; levels 7+ draw a random angle each trial (-1). */
+const angleFor = (level: number) => (level <= 2 ? 0 : level <= 4 ? 90 : level <= 6 ? 180 : -1);
+
 export const matrix: Exercise = {
   id: 'matrix',
   icon: '📐',
@@ -20,7 +24,10 @@ export const matrix: Exercise = {
   example: 'ex.matrix.example',
   minutes: 2.5,
   levels: { min: 1, max: 9, start: 2 },
-  levelLabel: (l) => `${l <= 2 ? 'no rot' : l <= 4 ? 'rot 90°' : 'rot 180°'} · ${2 + Math.floor((l + 1) / 3)} tiles`,
+  levelLabel: (l) => {
+    const a = angleFor(l);
+    return `${countFor(l)} 🔷 · ${a === 0 ? '0°' : a === -1 ? '90°/180°/270°' : `${a}°`}`;
+  },
 
   async run(ctx) {
     const trials = ctx.count(8, 6, 2);
@@ -53,16 +60,8 @@ export const matrix: Exercise = {
       // Level 5: 3 tiles, 180°
       // Level 6: 4 tiles, 180°
       // Level 7+: 4-5 tiles, 90° or 180° or 270°
-      const count =
-        st.int === 1 ? 2 :
-        st.int <= 3 ? 3 :
-        st.int <= 6 ? 4 : 5;
-
-      const angle =
-        st.int <= 2 ? 0 :
-        st.int <= 4 ? 90 :
-        st.int <= 6 ? 180 :
-        pick([90, 180, 270]);
+      const count = countFor(st.int);
+      const angle = angleFor(st.int) === -1 ? pick([90, 180, 270]) : angleFor(st.int);
 
       // Pick unique cells
       const allCells = Array.from({ length: size * size }, (_, idx) => idx);

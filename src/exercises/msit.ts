@@ -1,9 +1,12 @@
 import { h, rand, flash, pick } from '../dom';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';
+import { onKeys } from '../widgets';
 import type { Exercise } from './types';
 
 const limitFor = (level: number) => Math.max(450, Math.round(1800 * Math.pow(0.88, level - 1)));
+/** Share of interference trials: a third at first, up to two thirds at the top levels. */
+const interferenceFor = (level: number) => Math.min(0.67, 0.33 + level * 0.025);
 
 export const msit: Exercise = {
   id: 'msit',
@@ -32,10 +35,7 @@ export const msit: Exercise = {
 
     ctx.stage.append(hint, display, controls);
 
-    const onKey = (e: KeyboardEvent) => {
-      if (['1', '2', '3'].includes(e.key)) onPick?.(Number(e.key));
-    };
-    window.addEventListener('keydown', onKey);
+    onKeys(ctx, { '1': () => onPick?.(1), '2': () => onPick?.(2), '3': () => onPick?.(3) });
 
     let correct = 0;
     const rts: number[] = [];
@@ -44,13 +44,13 @@ export const msit: Exercise = {
       ctx.progress(i / total, `${i + 1}/${total}`);
       await ctx.wait(rand(350, 750));
 
-      // Choose unique target digit (1, 2, or 3)
+      // As in the original MSIT (Bush & Shin, 2006): control trials show the target at the position
+      // matching its value among 0s ("1 0 0"); interference trials put it elsewhere among other digits
+      // that are valid answers ("2 1 1"), so both the flankers and the position pull the wrong way.
       const targetDigit = pick([1, 2, 3]);
-      // Distractor digit (1, 2, or 3 other than target)
-      const distractor = pick([1, 2, 3].filter((d) => d !== targetDigit));
-
-      // Level influences incongruency probability (spatial position mismatch)
-      const targetPos = rand(0, 2); // 0, 1, or 2 (which correspond to digits 1, 2, 3)
+      const interference = Math.random() < (ctx.practice ? 0.5 : interferenceFor(st.int));
+      const targetPos = interference ? pick([0, 1, 2].filter((p) => p !== targetDigit - 1)) : targetDigit - 1;
+      const distractor = interference ? pick([1, 2, 3].filter((d) => d !== targetDigit)) : 0;
 
       const triplet = [distractor, distractor, distractor];
       triplet[targetPos] = targetDigit;
@@ -85,7 +85,6 @@ export const msit: Exercise = {
       targetBtn.classList.remove('correct-hint');
     }
 
-    window.removeEventListener('keydown', onKey);
     ctx.progress(1);
 
     const avg = rts.length ? Math.round(rts.reduce((a, b) => a + b, 0) / rts.length) : 0;

@@ -3,7 +3,11 @@ import { t } from '../i18n';
 import { Staircase } from '../adaptive';
 import type { Exercise } from './types';
 
-const targetMsFor = (level: number) => Math.max(190, Math.round(400 * Math.pow(0.92, level - 1)));
+/**
+ * Target time: 600 ms at level 1 (reachable on a touch screen by most older adults, whose simple
+ * reaction time plus screen latency is often 400–550 ms), down to 200 ms at the top level.
+ */
+const targetMsFor = (level: number) => Math.max(200, Math.round(600 * Math.pow(0.9, level - 1)));
 
 export const reaction: Exercise = {
   id: 'reaction',
@@ -37,22 +41,13 @@ export const reaction: Exercise = {
       text.textContent = t('ex.reaction.wait');
       subtext.textContent = '...';
 
-      let onEarlyTap: (() => void) | null = null;
-      pad.onpointerdown = () => onEarlyTap?.();
-
-      const delay = rand(1300, 3200);
-
-      const delayPromise = ctx.wait(delay);
-      const earlyPromise = ctx.input<boolean>((done) => {
-        onEarlyTap = () => done(true);
-        return () => (onEarlyTap = null);
+      // Waits a random foreperiod; a tap before it ends is a false start.
+      const early = await ctx.timed<boolean>(rand(1300, 3200), false, (done) => {
+        pad.onpointerdown = () => done(true);
+        return () => {
+          pad.onpointerdown = null;
+        };
       });
-
-      // Race between delay passing and player tapping early
-      const early = await Promise.race([
-        delayPromise.then(() => false),
-        earlyPromise,
-      ]);
 
       if (early) {
         pad.className = 'reaction-pad false-start';

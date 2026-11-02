@@ -108,7 +108,8 @@ export const path: Exercise = {
     }
     if (ctx.quick) {
       const r = await board(ctx, labelsFor(12, false), 0, 1);
-      const score = scale(r.secs / 12, 0.6, 3) * Math.max(0, 1 - r.errors * 0.06);
+      // 0.6 s per number scores 100, 4 s scores 0 (older adults often need 1.5–2.5 s on a touch screen).
+      const score = scale(r.secs / 12 / ctx.pace, 0.6, 4) * Math.max(0, 1 - r.errors * 0.06);
       return { score, detail: t('ex.path.detail', { secs: r.secs.toFixed(1), err: r.errors }) };
     }
 

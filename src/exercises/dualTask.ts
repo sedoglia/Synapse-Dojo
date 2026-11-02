@@ -31,7 +31,7 @@ export const dualTask: Exercise = {
       'button',
       { class: 'btn dualtask-hold-btn' },
       h('span', { class: 'hold-main' }, `🔒 ${t('ex.dualTask.hold')}`),
-      h('span', { class: 'pad-key-hint' }, '[A / Spazio / Tap]'),
+      h('span', { class: 'pad-key-hint' }, '[A / ␣]'),
     );
     const holdMeter = h('div', { class: 'dualtask-meter' }, h('div', { class: 'meter-bar' }));
     leftPanel.append(h('b', { class: 'dualtask-side-label' }, `👈 ${t('ex.dots.left')}`), holdBtn, holdMeter);
@@ -62,23 +62,30 @@ export const dualTask: Exercise = {
     let isHolding = false;
     let lastHoldingTimestamp = 0;
     let activePointerId: number | null = null;
+    // The hold must last the whole trial: letting go for longer than the grace period breaks it.
+    const GRACE_MS = 450;
+    let trialActive = false;
+    let holdBroken = false;
+    let breakTimer: ReturnType<typeof setTimeout> | undefined;
 
     const setHolding = (state: boolean) => {
       if (isHolding === state) return;
       isHolding = state;
+      clearTimeout(breakTimer);
       if (!state) {
         lastHoldingTimestamp = performance.now();
+        if (trialActive) breakTimer = setTimeout(() => (holdBroken = trialActive && !isHolding), GRACE_MS);
       }
       holdBtn.classList.toggle('holding', state);
       holdMeter.classList.toggle('holding', state);
       const mainSpan = holdBtn.querySelector('.hold-main');
       if (mainSpan) {
-        mainSpan.textContent = state ? '🟢 BLOCCATO (OK)' : `🔒 ${t('ex.dualTask.hold')}`;
+        mainSpan.textContent = state ? `🟢 ${t('ex.dualTask.hold')} ✓` : `🔒 ${t('ex.dualTask.hold')}`;
       }
     };
 
     const isHoldValid = () => {
-      return isHolding || (performance.now() - lastHoldingTimestamp < 450);
+      return !holdBroken && (isHolding || performance.now() - lastHoldingTimestamp < GRACE_MS);
     };
 
     // Pointer events: pointer capture for touch prevents lost pointer on thumb rolls; toggle for mouse
@@ -124,6 +131,14 @@ export const dualTask: Exercise = {
 
     window.addEventListener('keydown', onKeyDown);
     window.addEventListener('keyup', onKeyUp);
+    // Removed when the exercise ends or the player quits.
+    void ctx
+      .input<never>(() => () => {
+        window.removeEventListener('keydown', onKeyDown);
+        window.removeEventListener('keyup', onKeyUp);
+        clearTimeout(breakTimer);
+      })
+      .catch(() => {});
 
     // Answer shortcuts for right hand
     onKeys(ctx, {
@@ -149,6 +164,7 @@ export const dualTask: Exercise = {
 
       cogCard.textContent = String(num);
       flash(cogCard, 'pop', 150);
+      trialActive = true;
 
       const limit = (ctx.mode === 'practice' ? 60_000 : limitFor(st.level)) * ctx.pace;
 
@@ -157,7 +173,9 @@ export const dualTask: Exercise = {
         return () => (onCognitiveAnswer = null);
       });
 
+      trialActive = false;
       const held = isHoldValid();
+      holdBroken = false;
       const parityOk = choice === expectedAnswer;
       const ok = parityOk && held;
 
@@ -180,8 +198,6 @@ export const dualTask: Exercise = {
       await ctx.wait(ok ? 250 : 700);
     }
 
-    window.removeEventListener('keydown', onKeyDown);
-    window.removeEventListener('keyup', onKeyUp);
     ctx.progress(1);
 
     return {

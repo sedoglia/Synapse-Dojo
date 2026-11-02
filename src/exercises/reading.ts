@@ -57,8 +57,10 @@ export const reading: Exercise = {
       if (ctx.feedback(ok, { was: p.answers[0] })) understood++;
       flash(btns[options.indexOf(said)], ok ? 'good' : 'bad');
       btns[options.indexOf(0)].classList.add('good-btn');
-      // Reading aloud clearly runs at about 150–200 words per minute.
-      scores.push(scale(wpm, 190, 60) * (ok ? 1 : 0.4));
+      // Reading aloud clearly runs at about 150–200 words per minute. Above ~400 wpm the passage can't have
+      // been read aloud, so speed earns nothing and only comprehension counts.
+      const speed = wpm > 400 ? 0 : scale(wpm, 190, 60);
+      scores.push(ok ? 40 + 0.6 * speed : 0.4 * speed);
       await ctx.wait(900);
     }
     ctx.progress(1);

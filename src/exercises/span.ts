@@ -17,7 +17,7 @@ export const span: Exercise = {
   example: 'ex.span.example',
   minutes: 2.5,
   levels: { min: MIN_SPAN, max: MAX_SPAN, start: 4 },
-  levelLabel: (l) => `span ${l}`,
+  levelLabel: (l) => `${l} 🔢`,
 
   async run(ctx) {
     const trials = ctx.count(10, 10, 3);

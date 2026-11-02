@@ -59,7 +59,7 @@ export const swipePattern: Exercise = {
   example: 'ex.swipePattern.example',
   minutes: 2,
   levels: { min: 1, max: 10, start: 2 },
-  levelLabel: (l) => `lvl ${l}`,
+  levelLabel: (l) => (l <= 3 ? '↑ ↑' : l <= 6 ? '↑ ↓' : '↑ →'),
 
   async run(ctx) {
     const trials = ctx.count(12, 8, 3);

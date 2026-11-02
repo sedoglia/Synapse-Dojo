@@ -151,7 +151,7 @@ export class Ctx {
     return this.input<void>((done) => {
       const id = setTimeout(() => done(), ms);
       return () => clearTimeout(id);
-    });
+    }, false);
   }
 
   /** Resolves after the next paint plus at least `ms`: tighter than setTimeout for brief stimuli. */
@@ -170,7 +170,7 @@ export class Ctx {
         cancelAnimationFrame(id);
         clearTimeout(fallback);
       };
-    });
+    }, false);
   }
 
   /** Waits for `setup` to call `done`, or for `ms` to pass (resolving with `onTimeout`). */
@@ -185,8 +185,12 @@ export class Ctx {
     });
   }
 
-  /** Wraps a user interaction; `setup` returns a cleanup that runs on completion or abort. */
-  input<T>(setup: (done: (value: T) => void) => void | (() => void)): Promise<T> {
+  /**
+   * Wraps a user interaction; `setup` returns a cleanup that runs on completion or abort.
+   * `measure` records how long it took as the response time (off for plain pauses, so a wait never
+   * overwrites the duration of the answer that preceded it).
+   */
+  input<T>(setup: (done: (value: T) => void) => void | (() => void), measure = true): Promise<T> {
     const start = performance.now();
     return new Promise<T>((resolve, reject) => {
       const signal = this.ctrl.signal;
@@ -203,7 +207,7 @@ export class Ctx {
       cleanup = setup((value) => {
         if (settled) return;
         settled = true;
-        this.lastInputDuration = performance.now() - start;
+        if (measure) this.lastInputDuration = performance.now() - start;
         signal.removeEventListener('abort', onAbort);
         cleanup?.();
         resolve(value);

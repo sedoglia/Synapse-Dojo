@@ -74,10 +74,12 @@ export const radar: Exercise = {
       const speed = speedFor(st.level) / ctx.pace;
 
       // Random non-overlapping start positions and directions.
+      // The spacing rule is relaxed after many failed tries, so a small canvas can never hang the loop.
       balls = [];
-      while (balls.length < total) {
+      for (let tries = 0; balls.length < total; tries++) {
         const b = { x: rand(R, size.w - R), y: rand(R, size.h - R), vx: 0, vy: 0, target: false, picked: false };
-        if (balls.every((o) => Math.hypot(o.x - b.x, o.y - b.y) > R * 3)) {
+        const gap = tries < 2000 ? R * 3 : tries < 4000 ? R * 2 : 0;
+        if (balls.every((o) => Math.hypot(o.x - b.x, o.y - b.y) > gap)) {
           const a = Math.random() * Math.PI * 2;
           b.vx = Math.cos(a) * speed;
           b.vy = Math.sin(a) * speed;

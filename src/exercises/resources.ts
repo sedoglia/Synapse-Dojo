@@ -20,7 +20,7 @@ export const resources: Exercise = {
   example: 'ex.resources.example',
   minutes: 2.5,
   levels: { min: 1, max: 8, start: 2 },
-  levelLabel: (l) => `budget lvl ${l}`,
+  levelLabel: (l) => `⚡ ${50 + l * 10}`,
 
   async run(ctx) {
     const trials = ctx.count(6, 4, 2);
@@ -85,7 +85,10 @@ export const resources: Exercise = {
         }
 
         const isOver = currentCost > budget;
-        header.innerHTML = `<div>${t('ex.resources.budget', { cost: currentCost, budget })}</div><div>${t('ex.resources.value', { val: currentValue, target: targetValue })}</div>`;
+        header.replaceChildren(
+          h('div', {}, t('ex.resources.budget', { cost: currentCost, budget })),
+          h('div', {}, t('ex.resources.value', { val: currentValue, target: targetValue })),
+        );
         header.classList.toggle('overbudget', isOver);
         submitBtn.disabled = isOver || selected.size === 0;
 
@@ -125,7 +128,7 @@ export const resources: Exercise = {
 
       const isSuccess = finalCost <= budget && finalValue >= targetValue;
       const ok = ctx.track(st, isSuccess, {
-        was: `Max: ⭐ ${maxValue}`,
+        was: `⭐ ${maxValue}`,
       });
 
       if (isSuccess) {

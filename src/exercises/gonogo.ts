@@ -1,6 +1,7 @@
 import { h, rand, flash } from '../dom';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';
+import { onKeys } from '../widgets';
 import type { Exercise } from './types';
 
 const limitFor = (level: number) => Math.max(260, Math.round(850 * Math.pow(0.9, level - 1)));
@@ -32,13 +33,7 @@ export const gonogo: Exercise = {
       onTap?.();
     };
 
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === ' ' || e.key === 'Enter') {
-        e.preventDefault();
-        onTap?.();
-      }
-    };
-    window.addEventListener('keydown', onKey);
+    onKeys(ctx, { ' ': () => onTap?.(), Enter: () => onTap?.() });
 
     ctx.stage.append(hint, arena);
 
@@ -91,7 +86,6 @@ export const gonogo: Exercise = {
       await ctx.wait(200);
     }
 
-    window.removeEventListener('keydown', onKey);
     ctx.progress(1);
 
     const avg = rts.length ? Math.round(rts.reduce((a, b) => a + b, 0) / rts.length) : 0;

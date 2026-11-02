@@ -567,7 +567,7 @@ export const ui = {
   // fluency
   'ex.fluency.name': 'Word Sprint',
   'ex.fluency.desc': 'Quickly identify words starting with the target letter',
-  'ex.fluency.why': 'Verbal fluency tests rapid lexical retrieval from semantic memory under phonetic constraints.',
+  'ex.fluency.why': 'Fast orthographic decisions: reading a word and checking its first letter under time pressure trains quick word recognition and response selection. (It is a speeded classification task, not a verbal-fluency test, where you would produce words yourself.)',
   'ex.fluency.example': 'Tap if the word starts with the target letter',
   'ex.fluency.targetLetter': 'Target Letter:',
   'ex.fluency.detail': '{ok}/{n} correct',
@@ -631,7 +631,7 @@ export const ui = {
   'ex.dualTask.why': 'Dual-task paradigms isolate divided hemispheric attention and asymmetric motor-cognitive resource sharing.',
   'ex.dualTask.example': 'Hold left button while right thumb answers Even/Odd',
   'ex.dualTask.hint': 'Keep holding left button while choosing Even / Odd',
-  'ex.dualTask.hold': 'Hold down (SX)',
+  'ex.dualTask.hold': 'Hold down (LEFT)',
   'ex.dualTask.even': 'Even',
   'ex.dualTask.odd': 'Odd',
   'ex.dualTask.notHolding': 'Left button was not held!',

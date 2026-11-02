@@ -290,7 +290,7 @@ export const sorting: Exercise = {
     const detail = `${t('ex.sorting.detail', { ok: correct, n: trials, cats: completedCategories })} · ${sec}s`;
 
     return {
-      score: ctx.quick ? Math.round((correct / trials) * scale(avgRt, 800, 3200)) : score,
+      score: ctx.quick ? Math.round((correct / trials) * scale(avgRt / ctx.pace, 800, 4000)) : score,
       detail,
       level: st.next(),
     };

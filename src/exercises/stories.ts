@@ -13,7 +13,7 @@ export const stories: Exercise = {
   example: 'ex.stories.example',
   minutes: 2.5,
   levels: { min: 1, max: 6, start: 2 },
-  levelLabel: (l) => `lvl ${l}`,
+  levelLabel: (l) => `${l >= 4 ? 3 : 2} ❓`,
 
   async run(ctx) {
     const trials = ctx.count(4, 4, 1);

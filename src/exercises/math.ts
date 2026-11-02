@@ -112,7 +112,7 @@ export const math: Exercise = {
     const secs = solving / 1000;
     const detail = t('ex.math.detail', { ok: correct, n: total, secs: secs.toFixed(1) });
     if (ctx.quick) {
-      return { score: (correct / total) * scale(secs / total, 1.5, 6.5), detail };
+      return { score: (correct / total) * scale(secs / total / ctx.pace, 1.5, 8), detail };
     }
     const { score, timeBonus } = ctx.withTimeBonus(st.score(), 3.0);
     return { score, detail, level: st.next(), timeBonus };
