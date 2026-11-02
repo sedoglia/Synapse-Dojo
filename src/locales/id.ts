@@ -1,4 +1,4 @@
-﻿import type { Locale, Passage } from '../i18n';
+import type { Locale, Passage } from '../i18n';
 
 const ui: Locale['ui'] = {
   'app.tagline': 'Beberapa menit sehari untuk pikiran yang lebih tajam',
@@ -407,6 +407,23 @@ const ui: Locale['ui'] = {
   'privacy.contactH': 'Kontak',
   'privacy.contact': 'Pertanyaan tentang permainan atau datamu: {contact}',
   'privacy.open': 'Buka permainan',
+
+  'license.title': 'Lisensi & Ketentuan',
+  'license.subtitle': 'Lisensi perangkat lunak, izin penggunaan, dan hak cipta',
+  'license.authorH': 'Penulis & Hak Kekayaan Intelektual',
+  'license.authorP': 'Synapse Dojo adalah proyek orisinal dan independen yang dibuat oleh Sergio Dogliani. Seluruh hak komersial dilindungi.',
+  'license.polyformH': 'Lisensi PolyForm Noncommercial 1.0.0',
+  'license.polyformP': 'Perangkat lunak ini dirilis di bawah Lisensi PolyForm Noncommercial 1.0.0. Anda bebas melihat kode sumber, menjalankannya, dan menggunakannya untuk pembelajaran pribadi, pendidikan, penelitian, dan tujuan non-komersial. Penggunaan komersial tanpa izin, penjualan kembali, monetisasi, atau redistribusi sangat dilarang.',
+  'license.permittedH': 'Penggunaan yang Diizinkan',
+  'license.permittedP': 'Studi pribadi, pelatihan kognitif, penelitian non-komersial, pengujian, dan hiburan pribadi tanpa maksud komersial.',
+  'license.restrictedH': 'Batasan Komersial',
+  'license.restrictedP': 'Anda tidak boleh menggunakan, memodifikasi, atau mendistribusikan perangkat lunak ini untuk keuntungan finansial, keuntungan komersial, periklanan, atau integrasi ke dalam produk komersial berbayar tanpa lisensi komersial tertulis dari penulis.',
+  'license.fontsH': 'Font dan Aset',
+  'license.fontsP': 'Font Nunito didistribusikan di bawah SIL Open Font License 1.1. Paradigma latihan kognitif berada dalam domain publik.',
+  'license.linksH': 'Tautan & Dokumentasi Resmi',
+  'license.officialLink': 'Baca teks resmi PolyForm Noncommercial 1.0.0',
+  'license.repoLink': 'Lihat file LICENSE di repositori GitHub',
+  'license.open': 'Buka permainan',
 
   'domain.coordination': "Koordinasi",
   'shape.circle': "Lingkaran",

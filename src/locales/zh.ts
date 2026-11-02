@@ -1,4 +1,4 @@
-﻿import type { Locale, Passage } from '../i18n';
+import type { Locale, Passage } from '../i18n';
 
 const ui: Locale['ui'] = {
   'app.tagline': '每天几分钟，让头脑更灵活',
@@ -407,6 +407,23 @@ const ui: Locale['ui'] = {
   'privacy.contactH': '联系方式',
   'privacy.contact': '关于游戏或你的数据的问题：{contact}',
   'privacy.open': '打开游戏',
+
+  'license.title': '许可与条款',
+  'license.subtitle': '软件许可、允许的用途及版权条款',
+  'license.authorH': '作者与知识产权',
+  'license.authorP': 'Synapse Dojo 是由 Sergio Dogliani 创建的原创独立项目。保留所有商业权利。',
+  'license.polyformH': 'PolyForm Noncommercial 1.0.0 许可证',
+  'license.polyformP': '本软件采用 PolyForm Noncommercial 1.0.0 许可证发布。您可以自由查看源代码、运行并用于个人学习、教育、研究和非商业目的。严禁任何未经授权的商业使用、转售、营利或二次分发。',
+  'license.permittedH': '允许的用途',
+  'license.permittedP': '个人学习、认知训练、非商业学术研究、测试以及无商业意图的私人娱乐。',
+  'license.restrictedH': '商业限制',
+  'license.restrictedP': '未经作者书面商业许可，不得将本软件用于获取金钱报酬、商业竞争优势、广告投放，或将其整合到收费的商业产品中。',
+  'license.fontsH': '字体与素材',
+  'license.fontsP': 'Nunito 字体遵循 SIL Open Font License 1.1 许可。心理学认知训练范式属于公有领域。',
+  'license.linksH': '官方链接与文档',
+  'license.officialLink': '阅读 PolyForm Noncommercial 1.0.0 官方文本',
+  'license.repoLink': '在 GitHub 上查看 LICENSE 文件',
+  'license.open': '打开游戏',
 
   'domain.coordination': "协调能力",
   'shape.circle': "圆形",

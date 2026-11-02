@@ -422,6 +422,7 @@ export const ui = {
   'license.restrictedP': 'You may not use, modify, or distribute this software for monetary compensation, commercial advantage, advertising, or integration into paid commercial products without a written commercial license from the author.',
   'license.fontsH': 'Fonts and Assets',
   'license.fontsP': 'The Nunito font is distributed under the SIL Open Font License 1.1. Psychological exercise paradigms are in the public domain.',
+  'license.linksH': 'Official Links & Documentation',
   'license.officialLink': 'Read official PolyForm Noncommercial 1.0.0 text',
   'license.repoLink': 'View LICENSE file on GitHub repository',
   'license.open': 'Open the game',

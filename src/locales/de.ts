@@ -1,4 +1,4 @@
-﻿import type { Locale, Passage } from '../i18n';
+import type { Locale, Passage } from '../i18n';
 
 const ui: Locale['ui'] = {
   'app.tagline': 'Ein paar Minuten am Tag für einen wacheren Geist',
@@ -407,6 +407,23 @@ const ui: Locale['ui'] = {
   'privacy.contactH': 'Kontakt',
   'privacy.contact': 'Fragen zum Spiel oder zu deinen Daten: {contact}',
   'privacy.open': 'Spiel öffnen',
+
+  'license.title': 'Lizenz & Bedingungen',
+  'license.subtitle': 'Softwarelizenz, zulässige Nutzung und Urheberrechtsbestimmungen',
+  'license.authorH': 'Autor & Geistiges Eigentum',
+  'license.authorP': 'Synapse Dojo ist ein originäres, unabhängiges Projekt von Sergio Dogliani. Alle kommerziellen Rechte vorbehalten.',
+  'license.polyformH': 'PolyForm Noncommercial License 1.0.0',
+  'license.polyformP': 'Die Software wird unter der PolyForm Noncommercial License 1.0.0 veröffentlicht. Sie können den Quellcode frei einsehen, ausführen und für persönliches Lernen, Bildung, Forschung und nicht-kommerzielle Zwecke nutzen. Jede unbefugte kommerzielle Nutzung, Weiterverkauf, Monetarisierung oder Weiterverbreitung ist strengstens untersagt.',
+  'license.permittedH': 'Zulässige Nutzung',
+  'license.permittedP': 'Persönliches Lernen, kognitives Training, nicht-kommerzielle Forschung, Tests und private Nutzung ohne kommerzielle Absicht.',
+  'license.restrictedH': 'Kommerzielle Einschränkungen',
+  'license.restrictedP': 'Es ist nicht gestattet, diese Software gegen Vergütung, für kommerzielle Vorteile, Werbung oder zur Einbindung in kostenpflichtige Produkte zu nutzen, zu verändern oder zu verbreiten, es sei denn, es liegt eine schriftliche Lizenz des Autors vor.',
+  'license.fontsH': 'Schriftarten & Ressourcen',
+  'license.fontsP': 'Die Schriftart Nunito steht unter der SIL Open Font License 1.1. Die neuropsychologischen Übungsparadigmen sind gemeinfrei.',
+  'license.linksH': 'Offizielle Links & Dokumentation',
+  'license.officialLink': 'Offiziellen Text der PolyForm Noncommercial 1.0.0 lesen',
+  'license.repoLink': 'LICENSE-Datei auf GitHub ansehen',
+  'license.open': 'Spiel öffnen',
 
   'domain.coordination': "Koordination",
   'shape.circle': "Kreis",

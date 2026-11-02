@@ -1,4 +1,4 @@
-﻿import type { Locale, Passage } from '../i18n';
+import type { Locale, Passage } from '../i18n';
 
 const ui: Locale['ui'] = {
   'app.tagline': 'Alguns minutos por dia para uma mente mais ágil',
@@ -407,6 +407,23 @@ const ui: Locale['ui'] = {
   'privacy.contactH': 'Contato',
   'privacy.contact': 'Dúvidas sobre o jogo ou seus dados: {contact}',
   'privacy.open': 'Abrir o jogo',
+
+  'license.title': 'Licença e Termos',
+  'license.subtitle': 'Licença de software, usos permitidos e direitos autorais',
+  'license.authorH': 'Autor e Propriedade Intelectual',
+  'license.authorP': 'Synapse Dojo é um projeto original e independente criado por Sergio Dogliani. Todos os direitos comerciais reservados.',
+  'license.polyformH': 'Licença PolyForm Noncommercial 1.0.0',
+  'license.polyformP': 'O software é disponibilizado sob a Licença PolyForm Noncommercial 1.0.0. Você pode visualizar o código-fonte, executá-lo e utilizá-lo livremente para estudo pessoal, educação, pesquisa e fins não comerciais. Qualquer uso comercial não autorizado, revenda, monetização ou redistribuição é estritamente proibido.',
+  'license.permittedH': 'Usos Permitidos',
+  'license.permittedP': 'Estudo pessoal, treino cognitivo, pesquisa não comercial, testes e entretenimento privado sem fins lucrativos.',
+  'license.restrictedH': 'Restrições Comerciais',
+  'license.restrictedP': 'Você não pode usar, modificar ou distribuir este software para compensação financeira, vantagem comercial, publicidade ou inclusão em produtos comerciais pagos sem uma licença por escrito do autor.',
+  'license.fontsH': 'Fontes e Recursos',
+  'license.fontsP': 'A fonte Nunito é distribuída sob a licença SIL Open Font License 1.1. Os paradigmas dos exercícios cognitivos são de domínio público.',
+  'license.linksH': 'Documentação e Links Oficiais',
+  'license.officialLink': 'Ler o texto oficial da PolyForm Noncommercial 1.0.0',
+  'license.repoLink': 'Ver o arquivo LICENSE no GitHub',
+  'license.open': 'Abrir o jogo',
 
   'domain.coordination': "Coordenação",
   'shape.circle': "Círculo",

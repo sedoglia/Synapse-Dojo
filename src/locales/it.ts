@@ -422,6 +422,7 @@ const ui: Locale['ui'] = {
   'license.restrictedP': 'Non è consentito utilizzare, modificare o redistribuire questo software per ottenere compensi monetari, vantaggi commerciali, inserire pubblicità o integrarlo in prodotti a pagamento senza una licenza commerciale concessa dall’autore.',
   'license.fontsH': 'Font e Risorse di Terze Parti',
   'license.fontsP': 'Il font Nunito è distribuito con licenza SIL Open Font License 1.1. I paradigmi degli esercizi cognitivi appartengono alla letteratura psicologica di pubblico dominio.',
+  'license.linksH': 'Documentazione e link ufficiali',
   'license.officialLink': 'Leggi il testo integrale ufficiale PolyForm Noncommercial 1.0.0',
   'license.repoLink': 'Visualizza il file LICENSE su GitHub',
   'license.open': 'Apri il gioco',

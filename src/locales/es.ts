@@ -1,4 +1,4 @@
-﻿import type { Locale, Passage } from '../i18n';
+import type { Locale, Passage } from '../i18n';
 
 const ui: Locale['ui'] = {
   'app.tagline': 'Unos minutos al día para una mente más ágil',
@@ -407,6 +407,23 @@ const ui: Locale['ui'] = {
   'privacy.contactH': 'Contacto',
   'privacy.contact': 'Preguntas sobre el juego o tus datos: {contact}',
   'privacy.open': 'Abrir el juego',
+
+  'license.title': 'Licencia y Términos',
+  'license.subtitle': 'Licencia de software, usos permitidos y derechos de autor',
+  'license.authorH': 'Autor y Propiedad Intelectual',
+  'license.authorP': 'Synapse Dojo es un proyecto original e independiente creado por Sergio Dogliani. Todos los derechos comerciales reservados.',
+  'license.polyformH': 'Licencia PolyForm Noncommercial 1.0.0',
+  'license.polyformP': 'El software se distribuye bajo la licencia PolyForm Noncommercial 1.0.0. Puede consultar el código fuente, ejecutarlo y utilizarlo libremente para estudio personal, educación, investigación y fines no comerciales. Queda estrictamente prohibido cualquier uso comercial no autorizado, reventa, monetización o redistribución.',
+  'license.permittedH': 'Usos Permitidos',
+  'license.permittedP': 'Estudio personal, entrenamiento cognitivo, investigación no comercial, pruebas y disfrute privado sin fines comerciales.',
+  'license.restrictedH': 'Restricciones Comerciales',
+  'license.restrictedP': 'No está permitido usar, modificar o distribuir este software para obtener compensación económica, ventajas comerciales, publicidad o integrarlo en productos comerciales de pago sin una licencia comercial por escrito del autor.',
+  'license.fontsH': 'Fuentes y Recursos',
+  'license.fontsP': 'La fuente Nunito se distribuye bajo la licencia SIL Open Font License 1.1. Los paradigmas de ejercicios psicológicos son de dominio público.',
+  'license.linksH': 'Documentación y Enlaces Oficiales',
+  'license.officialLink': 'Leer el texto oficial de PolyForm Noncommercial 1.0.0',
+  'license.repoLink': 'Ver el archivo LICENSE en el repositorio de GitHub',
+  'license.open': 'Abrir el juego',
 
   'domain.coordination': "Coordinación",
   'shape.circle': "Círculo",

@@ -1,4 +1,4 @@
-﻿import type { Locale, Passage } from '../i18n';
+import type { Locale, Passage } from '../i18n';
 
 const ui: Locale['ui'] = {
   'app.tagline': 'دقائق قليلة كل يوم لعقل أكثر مرونة',
@@ -407,6 +407,23 @@ const ui: Locale['ui'] = {
   'privacy.contactH': 'التواصل',
   'privacy.contact': 'أسئلة عن اللعبة أو بياناتك: {contact}',
   'privacy.open': 'افتح اللعبة',
+
+  'license.title': 'الترخيص والشروط',
+  'license.subtitle': 'ترخيص البرنامج، الاستخدامات المسموح بها، وشروط حقوق النشر',
+  'license.authorH': 'المؤلف والملكية الفكرية',
+  'license.authorP': 'Synapse Dojo هو مشروع أصلي ومستقل تم إنشاؤه بواسطة سيرجيو دولياني (Sergio Dogliani). جميع الحقوق التجارية محفوظة.',
+  'license.polyformH': 'ترخيص PolyForm Noncommercial 1.0.0',
+  'license.polyformP': 'تم إصدار هذا البرنامج بموجب ترخيص PolyForm Noncommercial 1.0.0. يحق لك الاطلاع على الكود المصدري وتشغيله واستخدامه للدراسة الشخصية والتعليم والبحث والأغراض غير التجارية. يُحظر تمامًا أي استخدام تجاري غير مصرح به أو إعادة بيع أو تحقيق دخل أو إعادة توزيع.',
+  'license.permittedH': 'الاستخدامات المسموح بها',
+  'license.permittedP': 'الدراسة الشخصية، والتدريب المعرفي، والبحث غير التجاري، والاختبار، والاستخدام الخاص دون أي غرض تجاري.',
+  'license.restrictedH': 'القيود التجارية',
+  'license.restrictedP': 'لا يجوز استخدام هذا البرنامج أو تعديله أو توزيعه للحصول على تعويض مالي أو ميزة تجارية أو إعلانات أو دمجه في منتجات تجارية مدفوعة دون ترخيص تجاري كتابي من المؤلف.',
+  'license.fontsH': 'الخطوط والموارد',
+  'license.fontsP': 'يتم توزيع خط Nunito بموجب ترخيص SIL Open Font License 1.1. نماذج التمارين المعرفية تقع في الملك العام.',
+  'license.linksH': 'الروابط والوثائق الرسمية',
+  'license.officialLink': 'قراءة النص الرسمي لترخيص PolyForm Noncommercial 1.0.0',
+  'license.repoLink': 'عرض ملف LICENSE على GitHub',
+  'license.open': 'افتح اللعبة',
 
   'domain.coordination': "التنسيق الحركي",
   'shape.circle': "دائرة",

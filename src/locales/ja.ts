@@ -1,4 +1,4 @@
-﻿import type { Locale, Passage } from '../i18n';
+import type { Locale, Passage } from '../i18n';
 
 const ui: Locale['ui'] = {
   'app.tagline': '1日数分で、もっとしなやかな頭に',
@@ -407,6 +407,23 @@ const ui: Locale['ui'] = {
   'privacy.contactH': 'お問い合わせ',
   'privacy.contact': 'ゲームやデータについての質問：{contact}',
   'privacy.open': 'ゲームを開く',
+
+  'license.title': 'ライセンスと利用規約',
+  'license.subtitle': 'ソフトウェアライセンス、許可された利用、および著作権',
+  'license.authorH': '作者と知的財産権',
+  'license.authorP': 'Synapse Dojo は Sergio Dogliani によるオリジナルの独立したプロジェクトです。すべての商業的権利は留保されています。',
+  'license.polyformH': 'PolyForm Noncommercial 1.0.0 ライセンス',
+  'license.polyformP': '本ソフトウェアは PolyForm Noncommercial 1.0.0 ライセンスの下で提供されています。ソースコードの閲覧、実行、個人学習、教育、研究、非営利目的での利用は自由です。許可のない商業利用、転売、収益化、再配布は固く禁じられています。',
+  'license.permittedH': '許可された用途',
+  'license.permittedP': '個人的な学習、認知トレーニング、非営利の研究、テスト、および営利目的のない個人利用。',
+  'license.restrictedH': '商用制限',
+  'license.restrictedP': '作者による書面の商用ライセンスなしに、金銭的報酬、商業的優位性、広告、有料商用製品への組み込みを目的として本ソフトウェアを使用、改変、または配布することはできません。',
+  'license.fontsH': 'フォントと素材',
+  'license.fontsP': 'Nunito フォントは SIL Open Font License 1.1 の下で配布されています。心理学の認知課題パラダイムはパブリックドメインです。',
+  'license.linksH': '公式リンクとドキュメント',
+  'license.officialLink': 'PolyForm Noncommercial 1.0.0 公式条文を読む',
+  'license.repoLink': 'GitHub で LICENSE ファイルを表示',
+  'license.open': 'ゲームを開く',
 
   'domain.coordination': "協調運動",
   'shape.circle': "丸",

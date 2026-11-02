@@ -38,7 +38,7 @@ export function licenseContent(): HTMLElement[] {
     h(
       'section',
       { class: 'card legal' },
-      h('h3', {}, '🔗 Documentazione & Link Ufficiali'),
+      h('h3', {}, `🔗 ${t('license.linksH')}`),
       h(
         'p',
         {},

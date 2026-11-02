@@ -1,4 +1,4 @@
-﻿import type { Locale, Passage } from '../i18n';
+import type { Locale, Passage } from '../i18n';
 
 const ui: Locale['ui'] = {
   'app.tagline': 'Quelques minutes par jour pour un esprit plus agile',
@@ -407,6 +407,23 @@ const ui: Locale['ui'] = {
   'privacy.contactH': 'Contact',
   'privacy.contact': 'Questions sur le jeu ou tes données : {contact}',
   'privacy.open': 'Ouvrir le jeu',
+
+  'license.title': 'Licence et Conditions',
+  'license.subtitle': 'Licence logicielle, utilisations autorisées et droits d\'auteur',
+  'license.authorH': 'Auteur et Propriété Intellectuelle',
+  'license.authorP': 'Synapse Dojo est un projet original et indépendant créé par Sergio Dogliani. Tous droits commerciaux réservés.',
+  'license.polyformH': 'Licence PolyForm Noncommercial 1.0.0',
+  'license.polyformP': 'Le logiciel est distribué sous la licence PolyForm Noncommercial 1.0.0. Vous êtes libre de consulter le code source, de l\'exécuter et de l\'utiliser pour l\'étude personnelle, l\'éducation, la recherche et des fins non commerciales. Toute utilisation commerciale non autorisée, revente, monétisation ou redistribution est strictement interdite.',
+  'license.permittedH': 'Utilisations Autorisées',
+  'license.permittedP': 'Étude personnelle, entraînement cognitif, recherche non commerciale, tests et usage privé sans finalité commerciale.',
+  'license.restrictedH': 'Restrictions Commerciales',
+  'license.restrictedP': 'Vous ne pouvez pas utiliser, modifier ou distribuer ce logiciel contre une rémunération, pour un avantage commercial, de la publicité ou pour l\'intégrer à des produits payants sans licence commerciale écrite de l\'auteur.',
+  'license.fontsH': 'Polices et Ressources',
+  'license.fontsP': 'La police Nunito est distribuée sous licence SIL Open Font License 1.1. Les paradigmes des exercices cognitifs sont dans le domaine public.',
+  'license.linksH': 'Documentation et Liens Officiels',
+  'license.officialLink': 'Lire le texte officiel de PolyForm Noncommercial 1.0.0',
+  'license.repoLink': 'Voir le fichier LICENSE sur GitHub',
+  'license.open': 'Ouvrir le jeu',
 
   'domain.coordination': "Coordination",
   'shape.circle': "Cercle",

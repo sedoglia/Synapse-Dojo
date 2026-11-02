@@ -1,4 +1,4 @@
-﻿import type { Locale, Passage } from '../i18n';
+import type { Locale, Passage } from '../i18n';
 
 const ui: Locale['ui'] = {
   'app.tagline': 'रोज़ कुछ मिनट, ज़्यादा फुर्तीले दिमाग के लिए',
@@ -407,6 +407,23 @@ const ui: Locale['ui'] = {
   'privacy.contactH': 'संपर्क',
   'privacy.contact': 'खेल या आपके डेटा के बारे में सवाल: {contact}',
   'privacy.open': 'खेल खोलें',
+
+  'license.title': 'लाइसेंस और शर्तें',
+  'license.subtitle': 'सॉफ्टवेयर लाइसेंस, अनुमत उपयोग और कॉपीराइट शर्तें',
+  'license.authorH': 'लेखक और बौद्धिक संपदा',
+  'license.authorP': 'Synapse Dojo सर्जियो डोग्लियानी (Sergio Dogliani) द्वारा बनाया गया एक मूल और स्वतंत्र प्रोजेक्ट है। सर्वाधिकार व्यावसायिक रूप से सुरक्षित हैं।',
+  'license.polyformH': 'पॉलीफॉर्म गैर-व्यावसायिक लाइसेंस 1.0.0 (PolyForm Noncommercial)',
+  'license.polyformP': 'यह सॉफ्टवेयर PolyForm Noncommercial License 1.0.0 के तहत जारी किया गया है। आप व्यक्तिगत अध्ययन, शिक्षा, अनुसंधान और गैर-व्यावसायिक उद्देश्यों के लिए स्रोत कोड देखने, चलाने और उपयोग करने के लिए स्वतंत्र हैं। कोई भी अनधिकृत व्यावसायिक उपयोग, पुनर्विक्रय, मुद्रीकरण या पुनर्वितरण सख्त वर्जित है।',
+  'license.permittedH': 'अनुमत उपयोग',
+  'license.permittedP': 'व्यक्तिगत अध्ययन, संज्ञानात्मक प्रशिक्षण, गैर-व्यावसायिक अनुसंधान, परीक्षण और बिना किसी व्यावसायिक उद्देश्य के निजी उपयोग।',
+  'license.restrictedH': 'व्यावसायिक प्रतिबंध',
+  'license.restrictedP': 'लेखक के लिखित व्यावसायिक लाइसेंस के बिना वित्तीय लाभ, व्यावसायिक लाभ, विज्ञापन या सशुल्क उत्पादों में एकीकरण के लिए इस सॉफ़्टवेयर का उपयोग, संशोधन या वितरण नहीं किया जा सकता है।',
+  'license.fontsH': 'फ़ॉन्ट और संसाधन',
+  'license.fontsP': 'नुनितो (Nunito) फ़ॉन्ट SIL Open Font License 1.1 के तहत वितरित है। मनोवैज्ञानिक व्यायाम मॉडल सार्वजनिक डोमेन में हैं।',
+  'license.linksH': 'आधिकारिक लिंक और दस्तावेज़',
+  'license.officialLink': 'PolyForm Noncommercial 1.0.0 का आधिकारिक पाठ पढ़ें',
+  'license.repoLink': 'GitHub पर LICENSE फ़ाइल देखें',
+  'license.open': 'खेल शुरू करें',
 
   'domain.coordination': "समन्वय (Coordination)",
   'shape.circle': "वृत्त",
