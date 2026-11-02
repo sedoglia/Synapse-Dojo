@@ -1,4 +1,4 @@
-﻿import { h, rand, scale, flash } from '../dom';
+import { h, rand, scale, flash } from '../dom';
 import { sfx } from '../audio';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';
@@ -104,21 +104,23 @@ export const grid: Exercise = {
       return { score: scale(best, MAX_SPAN, MIN_SPAN), detail: t('ex.grid.span', { n: best }) };
     }
 
-    // Gym: alternating forward/backward rounds on a 1-up/1-down staircase.
-    // Backward recall is harder, so it runs one item shorter than the forward span.
+    // Gym: forward recall for levels 2–5 to build visuo-spatial capacity.
+    // Backward recall is reserved for advanced levels (6+) as an executive challenge,
+    // running two items shorter than forward span to match cognitive load norms.
     const st = new Staircase(ctx.level, MIN_SPAN, MAX_SPAN, { target: 0.7 });
     const rounds = ctx.count(10, 10, 3);
     let bestF = 0;
     let bestB = 0;
     for (let r = 0; r < rounds; r++) {
       ctx.progress(r / rounds, `${r + 1}/${rounds}`);
-      const backward = r % 2 === 1;
-      const span = backward ? Math.max(MIN_SPAN, st.int - 1) : st.int;
+      const backward = !ctx.practice && st.int >= 6 && r % 2 === 1;
+      const span = backward ? Math.max(MIN_SPAN, st.int - 2) : st.int;
       const ok = await round(ctx, tiles, board, status, span, backward, (res) => ctx.track(st, res, { was: t('fb.gridOrder') }));
       if (ok && backward) bestB = Math.max(bestB, span);
       if (ok && !backward) bestF = Math.max(bestF, span);
     }
     ctx.progress(1);
-    return { score: st.score(), detail: t('ex.grid.detail', { f: bestF, b: bestB }), level: st.next() };
+    const detail = bestB > 0 ? t('ex.grid.detail', { f: bestF, b: bestB }) : t('ex.grid.span', { n: bestF });
+    return { score: st.score(), detail, level: st.next() };
   },
 };

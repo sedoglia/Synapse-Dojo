@@ -35,8 +35,11 @@ export const span: Exercise = {
 
     for (let i = 0; i < trials; i++) {
       ctx.progress(i / trials, `${i + 1}/${trials}`);
-      const len = st.int;
-      const backward = !ctx.practice && st.int >= 5 && i % 2 === 1;
+      // Forward recall for levels 3–6 to build phonological loop baseline.
+      // Backward recall is reserved for advanced levels (7+) as an executive challenge,
+      // running two items shorter than forward span to match working memory capacity norms.
+      const backward = !ctx.practice && st.int >= 7 && i % 2 === 1;
+      const len = backward ? Math.max(MIN_SPAN, st.int - 2) : st.int;
 
       modeTag.textContent = backward ? t('ex.span.backward') : t('ex.span.forward');
       modeTag.className = `span-mode ${backward ? 'alt' : ''}`;
