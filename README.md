@@ -1,127 +1,134 @@
 # Synapse Dojo
 
-Gioco gratuito di allenamento cognitivo (source-available per uso personale): pochi minuti al giorno, nel browser, su telefono o PC.
-*Free brain-training game (source-available for noncommercial use) — a few minutes a day, in any browser.*
+[![Live](https://img.shields.io/badge/Live-synapsedojo.com-5b5bf0)](https://synapsedojo.com/)
+[![License](https://img.shields.io/badge/License-PolyForm%20Noncommercial%201.0.0-blue.svg)](LICENSE)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue)](https://www.typescriptlang.org/)
+[![PWA Ready](https://img.shields.io/badge/PWA-Offline%20Ready-success)](https://synapsedojo.com/)
+[![Languages](https://img.shields.io/badge/Languages-12-orange)](https://synapsedojo.com/)
 
-> Solo per svago: non è uno strumento medico né diagnostico.
+Gioco gratuito di allenamento cognitivo e coordinazione bilaterale (source-available per uso personale): pochi minuti al giorno, direttamente nel browser, su smartphone o PC.  
+*Free brain-training and bilateral coordination game (source-available for noncommercial use) — a few minutes a day, in any browser.*
 
-## Cosa c'è dentro
+> **Nota:** Solo per svago e benessere personale: non è uno strumento medico né diagnostico.
 
-- **Allenamento**: circa 10–12 minuti, con 4 esercizi scelti ogni giorno tra le abilità allenate meno di recente. Finito un allenamento puoi farne subito un altro, con esercizi e abilità diverse.
-- **Misura il Neuro Score**: 4 prove rapide a difficoltà fissa (velocità, controllo, memoria di lavoro, calcolo) che producono un **Neuro Score** da 0 a 1000.
-- **Palestra**: 35 esercizi su 9 abilità cognitive e bilaterali. Ognuno ha **difficoltà adattiva**: diventa più difficile mentre migliori e il livello resta salvato.
+---
 
-| Abilità | Esercizi |
+## 🧠 Cosa c'è dentro
+
+- **🏋️ Allenamento Giornaliero**: circa 10–12 minuti con 4 esercizi selezionati ogni giorno tra le abilità meno allenate di recente. Completato un allenamento, è possibile avviarne subito un altro con abilità ed esercizi differenti.
+- **📏 Misura il Neuro Score**: test quotidiano di benchmarking che valuta tutte le **9 abilità cerebrali e bilaterali** (selezionando ogni giorno a rotazione un esercizio per area) e calcola un **Neuro Score** normalizzato da 0 a 1000 per monitorare obiettivamente la propria lucidità nel tempo.
+- **🧩 Palestra Libera**: catalogo completo di **35 esercizi** suddivisi in **9 aree cognitive e motorie**. Ciascun esercizio dispone di un **motore adattivo continuo** che calibra la difficoltà in tempo reale per mantenere la stimolazione ideale, salvando il livello raggiunto tra una sessione e l'altra.
+
+### Le 9 Aree e i 35 Esercizi
+
+| Abilità | Esercizi e Paradigmi di Riferimento |
 |---|---|
-| Velocità | 👁️ Colpo d'occhio (campo visivo utile), ⚡ Riflesso a scelta, 🔢 Sentiero dei numeri, ⏱️ Tempo di reazione |
-| Attenzione | 🏎️ Pilota (multitasking), 🎯 Radar (inseguimento di più oggetti), 🎯 Test di Flanker, 🚦 Go / No-Go, 🔠 Interferenza multipla (MSIT), 💠 Colore e forma |
-| Controllo | 🎨 Scontro di colori (Stroop), 🔀 Doppia regola (task switching), 🃏 Ordinamento di carte |
-| Memoria di lavoro | 🔁 Eco (n-back duale), 💡 Griglia di luci (Corsi), 🔟 Ultime cifre, 🔢 Span di cifre |
-| Memoria | 🔐 Cassaforte di parole, 🔗 Coppie, 📜 Memoria delle storie |
-| Spaziale | 🧊 Rotazioni, 📐 Matrice spaziale |
-| Ragionamento | 🗼 Torri (Torre di Londra), 🧩 L'intruso, ⚖️ Gestione risorse |
-| Calcolo e lettura | ➗ Sprint di calcolo, 📖 Lettura veloce, 🔴 Calcolo con i punti, 🔤 Anagrammi, 💡 Sprint di parole |
-| Coordinazione bilaterale | 👆 Tap bilaterale, 👋 Swipe bilaterale, 🎵 Ritmo bilaterale, 🔄 Movimenti incrociati, 🤹 Dual-task bilaterale |
+| **⚡ Velocità** | 👁️ **Colpo d'occhio** (campo visivo utile UFOV, trial ACTIVE), ⚡ **Riflesso a scelta** (tempo di reazione a scelta + go/no-go), 🔢 **Sentiero dei numeri** (Trail Making Test A/B), ⏱️ **Tempo di reazione** (velocità visuo-motoria semplice) |
+| **🎯 Attenzione** | 🏎️ **Pilota** (multitasking visuo-motorio, ispirato a NeuroRacer), 🎯 **Radar** (Multiple Object Tracking), 🎯 **Test di Flanker** (attenzione selettiva e inibizione distrattori laterali), 🚦 **Go / No-Go** (controllo inibitorio motorio), 🔠 **Interferenza multipla** (MSIT - conflitto cingolato anteriore), 💠 **Colore e forma** (feature binding visivo) |
+| **🎛️ Controllo** | 🎨 **Scontro di colori** (effetto Stroop), 🔀 **Doppia regola** (task switching e costo di cambio), 🃏 **Ordinamento di carte** (Wisconsin Card Sorting Test - set-shifting) |
+| **🧠 Memoria di lavoro** | 🔁 **Eco** (test N-Back visivo e duale con audio sintetizzato), 💡 **Griglia di luci** (test dei blocchi di Corsi avanti e indietro), 🔟 **Ultime cifre** (running span e aggiornamento continuo), 🔢 **Span di cifre** (digit span verbale e inverso) |
+| **🔐 Memoria** | 🔐 **Cassaforte di parole** (memoria di riconoscimento ed episodica), 🔗 **Coppie** (paired associates simbolo-parola), 📜 **Memoria delle storie** (richiamo episodico narrativo ippocampale) |
+| **🧊 Spaziale** | 🧊 **Rotazioni** (rotazione mentale di figure 2D e 3D), 📐 **Matrice spaziale** (rotazione mentale di coordinate a 90°, 180° e 270°) |
+| **🧩 Ragionamento** | 🗼 **Torri** (Torre di Londra - pianificazione strategica anticipata), 🧩 **L'intruso** (odd-one-out e ragionamento induttivo), ⚖️ **Gestione risorse** (ottimizzazione con vincoli e budget energetico) |
+| **➗ Calcolo e lettura** | ➗ **Sprint di calcolo** (aritmetica rapida - metodo Kawashima), 📖 **Lettura veloce** (lettura ad alta voce con cronometro e verifica), 🔴 **Calcolo con i punti** (stima della numerosità e subitizing), 🔤 **Anagrammi** (memoria ortografica e ricombinazione lessicale), 💡 **Sprint di parole** (fluenza verbale fonemica) |
+| **👐 Coordinazione bilaterale** | 👆 **Tap bilaterale** (stimolazione del corpo calloso con tocco alternato), 👋 **Swipe bilaterale** (disaccoppiamento motorio asimmetrico), 🎵 **Ritmo bilaterale** (sincronizzazione ritmica su metronomo visivo), 🔄 **Movimenti incrociati** (attraversamento della linea mediana), 🤹 **Dual-task bilaterale** (attenzione emisferica divisa asimmetrica) |
 
-- **Progressi**: profilo radar per abilità, grafico del Neuro Score, calendario e obiettivo settimanale.
-- **Feedback chiaro**: dopo ogni risposta un ✓ verde o ✗ rosso con bagliore sullo schermo e, se sbagli, la risposta giusta.
-- **Esempi e prova guidata**: ogni esercizio mostra un esempio illustrato e, la prima volta, propone una prova che non conta.
-- **Difficoltà su misura**: punta a circa l'80% di risposte giuste, il punto in cui si impara più in fretta secondo la ricerca.
-- **Motivazione**: combo durante il gioco, punti XP e livello del giocatore, 17 traguardi, obiettivo settimanale, serie che perdona un giorno di riposo, promemoria per il calendario.
-- Ogni esercizio ha una scheda **"Perché funziona"** con il paradigma scientifico e lo studio di riferimento. La ricerca completa è in [docs/ricerca-e-proposta.md](docs/ricerca-e-proposta.md).
-- 12 lingue (inglese, spagnolo, cinese, hindi, arabo, portoghese, francese, russo, tedesco, giapponese, indonesiano, italiano), con un selettore in alto. La prima volta il gioco è in inglese, poi ricorda la lingua scelta.
-- Tema chiaro e scuro, ritmo rilassato e testo grande, installabile come app (PWA) e giocabile offline.
-- Nessun account e nessun cookie: i dati restano nel `localStorage` del browser e si possono esportare e reimportare da Impostazioni. Font ospitati sul sito, nessuna richiesta a Google.
-- Schermata e pagina [`privacy.html`](privacy.html) con privacy e note legali in tutte le lingue. La versione pubblica conta le visite con Cloudflare Web Analytics, senza cookie.
+---
 
-## Sviluppo
+## ✨ Funzionalità e Principi Guida
 
-Requisiti: Node.js 18+.
+- **Difficoltà Adattiva Scientifica**: basata sulla *regola dell'85%* (Wilson et al., *Nature Communications* 2019) e sull'algoritmo *weighted up-down* (Kaernbach): la difficoltà si adatta costantemente mirando a circa l'80% di accuratezza, la soglia ottimale di apprendimento e neuroplasticità. Include riscaldamento e freno alla frustrazione.
+- **Trasparenza Scientifica**: ogni esercizio include la scheda **"Perché funziona"** con la spiegazione del paradigma clinico e lo studio di riferimento (la rassegna completa della letteratura è in [docs/ricerca-e-proposta.md](docs/ricerca-e-proposta.md)).
+- **Esempi e Prova Guidata**: ogni esercizio offre una spiegazione illustrata e una prova pratica (trial) preliminare per familiarizzare con i comandi senza impattare record o livelli.
+- **Privacy Radicale & Zero Cookie**: nessun account, nessuna password, nessuna richiesta di rete a tracker o servizi di terze parti. Tutti i progressi risiedono esclusivamente nel `localStorage` del browser, con opzioni di esportazione e importazione in formato JSON da *Impostazioni*.
+- **Multilingua Nativo (12 Lingue)**: localizzato in inglese, italiano, spagnolo, francese, tedesco, portoghese, russo, cinese, giapponese, arabo (con layout RTL), hindi e indonesiano. I file linguistici sono separati e caricati dinamicamente on-demand.
+- **Accessibilità & Benessere**: modalità a ritmo rilassato (tempi maggiorati del 40%), supporto per testo grande, tema chiaro, tema scuro e installabilità come **PWA offline**.
+- **Pagine Dedicate del Progetto**:
+  - [`index.html`](index.html): l'applicazione completa PWA.
+  - [`guide.html`](guide.html): guida approfondita e illustrata alle sezioni, a tutti i 35 giochi e alle FAQ.
+  - [`privacy.html`](privacy.html): informativa su privacy, zero tracciamento e assenza di cookie.
+  - [`license.html`](license.html): dettagli ufficiali della licenza PolyForm Noncommercial 1.0.0.
+
+---
+
+## 🛠️ Architettura Tecnica
+
+Il progetto è costruito con **TypeScript** e **Vite**, senza l'impiego di framework pesanti (React, Vue o Angular), garantendo un caricamento istantaneo, rendering DOM nativo ultra-performante e un bundle gzippato di appena ~30 KB.
+
+```
+synapse-dojo/
+├── public/                 manifest PWA, icone, font Nunito (OFL), robots.txt, sitemap.xml, _headers
+├── src/
+│   ├── exercises/          i 35 esercizi (uno per file) + index.ts (batteria e selezione giornaliera)
+│   ├── screens/            schermate dell'app: home, training, check, play, progress, settings, guide, privacy, license
+│   ├── locales/            moduli di traduzione per le 12 lingue (en.ts è la base di tipizzazione)
+│   ├── adaptive.ts         motore adattivo continuo (weighted up-down staircase)
+│   ├── audio.ts            effetti sonori sintetizzati via Web Audio API e sintesi vocale
+│   ├── rewards.ts          calcolo XP, livelli del giocatore e sblocco traguardi
+│   ├── examples.ts         generazione procedurale delle anteprime illustrate
+│   ├── stats.ts            analisi delle capacità per dominio e selezione allenamento
+│   ├── ctx.ts              runtime di esecuzione degli esercizi (input, timer, feedback, cancellazione)
+│   ├── widgets.ts          componenti riutilizzabili (canvas, tastierini numerici, sparkline)
+│   ├── i18n.ts             motore di internazionalizzazione asincrono con fallback a tipi sicuri
+│   ├── storage.ts          gestione del salvataggio locale, convalida schema e backup JSON
+│   ├── ui.ts               utility di layout e gestione del rendering DOM
+│   ├── main.ts             entrypoint dell'applicazione principale
+│   ├── guide.ts            entrypoint della pagina guida autonoma
+│   ├── privacy.ts          entrypoint della pagina privacy autonoma
+│   └── license.ts          entrypoint della pagina licenza autonoma
+├── index.html              pagina principale (PWA)
+├── guide.html              pagina indipendente per la guida
+├── privacy.html            pagina indipendente per la privacy
+├── license.html            pagina indipendente per la licenza
+├── vite.config.ts          configurazione build multi-pagina e script Cloudflare Web Analytics
+└── package.json
+```
+
+---
+
+## 💻 Sviluppo Locale
+
+Requisiti: **Node.js 18+** e **npm**.
 
 ```bash
+# Installa le dipendenze
 npm install
-npm run dev      # http://localhost:5173
-npm run build    # output in dist/
+
+# Avvia il server di sviluppo locale (http://localhost:5173)
+npm run dev
+
+# Esegue il type-check TypeScript e compila la build in dist/
+npm run build
 ```
 
-Stack: TypeScript + Vite, nessun framework UI. Struttura:
+### Aggiungere un nuovo esercizio
 
-```
-src/
-  exercises/   un file per esercizio + index.ts (elenco e composizione del check)
-  screens/     home, palestra, sessione di gioco, progressi, impostazioni
-  adaptive.ts  motore adattivo (weighted up-down, obiettivo 80%)
-  rewards.ts   XP, livello del giocatore e traguardi
-  examples.ts  esempi illustrati delle schede
-  stats.ts     capacità per abilità e scelta dell'allenamento di oggi
-  ctx.ts       runtime degli esercizi (attese annullabili, input, livello, ritmo)
-  widgets.ts   tastierino, canvas e altri componenti condivisi
-  i18n.ts      elenco delle lingue, caricamento dei testi e funzione t()
-  locales/     un file per lingua: testi, parole e brani di lettura (en.ts è la base)
-  storage.ts   salvataggi locali, livelli, record, serie
-```
+1. Crea `src/exercises/nuovo.ts` esportando un oggetto `Exercise` conforme all'interfaccia, specificando dominio cognitivo, livelli e funzione `run(ctx)`.
+2. Utilizza le primitive del runtime: `ctx.stage` per il disegno, `ctx.input()` / `ctx.timed()` per gestire l'input dell'utente e `ctx.wait()` per le pause (gestione automatica delle uscite anticipate).
+3. Aggiungi i testi (nome, descrizione, esempio e "perché funziona") in `src/locales/en.ts` e nei file linguistici, la scena visiva in `src/examples.ts` e registra l'esercizio in `src/exercises/index.ts`.
 
-### Aggiungere un esercizio
+---
 
-1. Crea `src/exercises/mio.ts` che esporta un oggetto `Exercise`, con dominio, `levels` e `run(ctx)`. `run` restituisce `{ score: 0–100, detail, level }`.
-2. Usa `ctx.stage` per disegnare, `ctx.input()` / `ctx.timed()` per attendere l'input e `ctx.wait()` per le pause: così l'uscita a metà partita è gestita automaticamente.
-3. Per la difficoltà parti da `ctx.level`, registra ogni prova con `ctx.track(st, ok)` (aggiorna livello, combo e avvisi) e restituisci `level: st.next()`. Usa `ctx.count(allenamento, check, prova)` per il numero di tentativi. Moltiplica i tempi limite per `ctx.pace` (modalità rilassata).
-4. Aggiungi nome, descrizione, esempio e "perché funziona" in `src/locales/en.ts` e in tutti gli altri file di `src/locales/` (il controllo dei tipi segnala le chiavi mancanti), e una scena in `src/examples.ts`, e registra l'esercizio in `src/exercises/index.ts`.
+## 🚀 Deploy in Produzione
 
-### Aggiungere una lingua
+L'applicazione è attiva in produzione all'indirizzo **[https://synapsedojo.com](https://synapsedojo.com)**, ospitata sulla rete globale edge di Cloudflare Pages.
 
-1. Copia `src/locales/en.ts` in `src/locales/<codice>.ts` e traduci testi, 60 parole concrete e 6 brani con domanda (la prima risposta è quella giusta). Tieni invariati i segnaposto come `{n}`.
-2. Aggiungi la lingua a `LANGS` in `src/i18n.ts`: nome, voce per la sintesi vocale, 7 lettere ben distinguibili a voce per *Eco*, `charsPerWord` per le scritture senza spazi e `rtl` per quelle da destra a sinistra.
-
-Ogni lingua è un file separato, scaricato solo quando viene scelta.
-
-### Rinominare il gioco
-
-Il nome è definito in `src/config.ts`, `index.html` e `public/manifest.json`.
-
-## Pubblicazione
-
-### Cloudflare Pages
-
-`npm run deploy` compila il gioco e lo carica su Cloudflare Pages con il *caricamento
-diretto* di [wrangler](https://developers.cloudflare.com/workers/wrangler/): non serve collegare GitHub,
-quindi il repository può restare privato. Il file `public/_headers` imposta header di sicurezza e cache.
-
-La prima volta:
-
-1. crea un account gratuito su [dash.cloudflare.com](https://dash.cloudflare.com/sign-up);
-2. dal tuo PC, autorizza wrangler (si apre il browser, una volta sola):
-   ```bash
-   npx wrangler login
-   ```
-3. crea il progetto Pages (il sito sarà su `https://synapse-gym.pages.dev`, o un nome simile se è già preso):
-   ```bash
-   npx wrangler pages project create synapse-gym --production-branch main
-   ```
-4. facoltativo, statistiche di visita: in *Analytics & Logs → Web Analytics* aggiungi il sito, copia il token
-   dallo snippet JavaScript e mettilo in un file `.env.web.local` (ignorato da git):
-   ```
-   VITE_CF_ANALYTICS_TOKEN=il-tuo-token
-   ```
-
-   In alternativa puoi attivare le statistiche direttamente dal pannello del progetto Pages (*Metrics → Web Analytics*):
-   usa uno solo dei due metodi.
-5. facoltativo, dominio personalizzato: nel progetto Pages, *Custom domains → Set up a custom domain*.
-
-Poi, per ogni aggiornamento:
+Per compilare e pubblicare un aggiornamento:
 
 ```bash
 npm run deploy
 ```
 
-Variabile opzionale: `CF_PAGES_PROJECT` (nome del progetto, predefinito `synapse-gym`). Il contatto mostrato
-nella pagina privacy è `CONTACT` in `src/config.ts`.
+Lo script `scripts/deploy-web.mjs` esegue automaticamente la build ottimizzata (`npm run build:web`) e carica i file compilati di `dist/` tramite [Wrangler](https://developers.cloudflare.com/workers/wrangler/). Il file `public/_headers` garantisce header di sicurezza HTTP rigidi (CSP, Permissions-Policy, HSTS) e cache immutabile sugli asset con hash.
 
-I salvataggi e i progressi sono memorizzati localmente nel browser (localStorage): per farne un backup o trasferirli su un altro dispositivo usa *Impostazioni → Esporta progressi* e *Importa progressi*.
+---
 
-## Licenza
+## ⚖️ Licenza
 
-[PolyForm Noncommercial 1.0.0](LICENSE). Progetto originale e indipendente protetto da copyright (c) 2026 Sergio Dogliani.
-Il codice è liberamente utilizzabile per uso personale, studio, didattica e ricerca senza fini di lucro; è vietato qualsiasi utilizzo, sfruttamento o redistribuzione commerciale senza autorizzazione preventiva dell'autore.
-Gli esercizi si basano su paradigmi classici della psicologia cognitiva di dominio pubblico. Non è affiliato ad alcun prodotto commerciale.
-Il font Nunito in `public/fonts/` è distribuito con la [SIL Open Font License 1.1](public/fonts/OFL.txt).
+Copyright (c) 2026 **Sergio Dogliani**.  
+Distribuito con licenza **[PolyForm Noncommercial 1.0.0](LICENSE)**.
+
+- **Uso consentito**: il codice sorgente è liberamente consultabile ed eseguibile per uso personale, didattico, studio e ricerca scientifica senza fini di lucro.
+- **Restrizioni commerciali**: è vietato qualsiasi utilizzo, redistribuzione commerciale, monetizzazione, inserimento di pubblicità o integrazione in prodotti commerciali a pagamento senza autorizzazione scritta dell'autore.
+- I paradigmi neuropsicologici utilizzati appartengono alla letteratura scientifica di pubblico dominio.
+- Il font Nunito in `public/fonts/` è distribuito con la [SIL Open Font License 1.1](public/fonts/OFL.txt).
