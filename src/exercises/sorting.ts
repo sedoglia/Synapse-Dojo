@@ -1,5 +1,5 @@
 import { h, pick, flash, clamp, scale } from '../dom';
-import { t } from '../i18n';
+import { t, num } from '../i18n';
 import { Staircase } from '../adaptive';
 import { onKeys } from '../widgets';
 import type { Exercise } from './types';
@@ -83,7 +83,7 @@ export const sorting: Exercise = {
   example: 'ex.sorting.example',
   minutes: 2.5,
   levels: { min: 1, max: 10, start: 2 },
-  levelLabel: (l) => `${(limitFor(l) / 1000).toFixed(1)}s`,
+  levelLabel: (l) => `${num(limitFor(l) / 1000)} s`,
 
   async run(ctx) {
     const trials = ctx.count(24, 16, 5);
@@ -286,8 +286,8 @@ export const sorting: Exercise = {
     const speedScore = scale(avgRt, 900, 3500);
     // 80% staircase mastery, 20% speed bonus
     const score = Math.round(clamp(baseScore * 0.8 + speedScore * 0.2, 0, 100));
-    const sec = (avgRt / 1000).toFixed(1);
-    const detail = `${t('ex.sorting.detail', { ok: correct, n: trials, cats: completedCategories })} · ${sec}s`;
+    const sec = num(avgRt / 1000);
+    const detail = `${t('ex.sorting.detail', { ok: correct, n: trials, cats: completedCategories })} · ${sec} s`;
 
     return {
       score: ctx.quick ? Math.round((correct / trials) * scale(avgRt / ctx.pace, 800, 4000)) : score,

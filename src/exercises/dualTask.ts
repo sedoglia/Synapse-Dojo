@@ -1,5 +1,5 @@
 import { h, flash } from '../dom';
-import { t } from '../i18n';
+import { t, num } from '../i18n';
 import { Staircase } from '../adaptive';
 import { onKeys } from '../widgets';
 import type { Exercise } from './types';
@@ -16,7 +16,7 @@ export const dualTask: Exercise = {
   example: 'ex.dualTask.example',
   minutes: 2,
   levels: { min: 1, max: 10, start: 1 },
-  levelLabel: (l) => `${(limitFor(l) / 1000).toFixed(1)}s`,
+  levelLabel: (l) => `${num(limitFor(l) / 1000)} s`,
 
   async run(ctx) {
     const trials = ctx.count(18, 12, 4);

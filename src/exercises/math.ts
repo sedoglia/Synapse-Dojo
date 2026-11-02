@@ -1,5 +1,5 @@
 import { h, rand, pick, scale, flash } from '../dom';
-import { t } from '../i18n';
+import { t, num } from '../i18n';
 import { Staircase } from '../adaptive';
 import { keypad, keypadKeyboard } from '../widgets';
 import type { Exercise } from './types';
@@ -110,7 +110,7 @@ export const math: Exercise = {
     ctx.progress(1);
 
     const secs = solving / 1000;
-    const detail = t('ex.math.detail', { ok: correct, n: total, secs: secs.toFixed(1) });
+    const detail = t('ex.math.detail', { ok: correct, n: total, secs: num(secs) });
     if (ctx.quick) {
       return { score: (correct / total) * scale(secs / total / ctx.pace, 1.5, 8), detail };
     }

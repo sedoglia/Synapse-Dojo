@@ -1,5 +1,5 @@
 import { h } from './dom';
-import { t, type I18nKey } from './i18n';
+import { t, words, stories, graphemes, wordNear, type I18nKey } from './i18n';
 import { chiralShape, render as renderShape } from './exercises/rotate';
 import { renderBoard } from './exercises/towers';
 import { glyph, type Item } from './exercises/odd';
@@ -22,6 +22,14 @@ function miniGrid(size: number, lit: Record<number, string>, cls = 'ex-mini'): H
     ...Array.from({ length: size }, (_, i) => h('span', { class: i in lit ? 'on' : '' }, lit[i] ?? '')),
   );
 }
+
+/** A word of the current language with about `n` letters, for the scenes that show real words. */
+const wordOf = (n: number) => words().find((w) => graphemes(w).length === n) ?? wordNear(words(), n);
+/** The letters of a word moved one step to the left: always different from the word, still readable as a puzzle. */
+const scramble = (w: string) => {
+  const c = graphemes(w.toUpperCase());
+  return [...c.slice(1), c[0]].join(' ');
+};
 
 const SCENES: Record<string, Scene> = {
   glance: () => {
@@ -119,7 +127,10 @@ const SCENES: Record<string, Scene> = {
   math: () => row(h('span', { class: 'ex-big' }, '7 + 8 ='), answer('15')),
   reading: () => row(tag('🗣️'), arrow(), tag(t('ex.reading.done')), arrow(), tag('?')),
   span: () => row(h('span', { class: 'ex-seq' }, '3 8 2 9'), arrow(), answer('3 8 2 9')),
-  stories: () => row(tag('📖 Elena · Parco'), arrow(), answer('Elena'), answer('Parco')),
+  stories: () => {
+    const s = stories()[0];
+    return row(tag(`📖 ${s.name}`), arrow(), answer(s.place));
+  },
   flanker: () =>
     row(
       h('span', { class: 'ex-seq' }, '← ← ', h('b', { style: { color: 'var(--accent)', fontSize: '1.3rem' } }, '→'), ' ← ←'),
@@ -128,19 +139,27 @@ const SCENES: Record<string, Scene> = {
     ),
   gonogo: () => row(tag('●', 'good'), arrow(), answer('👆'), tag('✕', 'bad'), arrow(), answer('✋')),
   msit: () => row(h('span', { class: 'ex-seq' }, '1 ', h('b', { style: { color: 'var(--accent)' } }, '2'), ' 1'), arrow(), answer('2')),
-  binding: () => row(h('span', { style: { color: 'var(--c-blue)', fontSize: '1.4rem' } }, '●'), arrow(), answer('● Blu')),
-  sorting: () => row(tag('🃏 2 ★'), arrow(), tag('★ Forma'), arrow(), answer('✓')),
+  binding: () => row(h('span', { style: { color: 'var(--c-blue)', fontSize: '1.4rem' } }, '●'), arrow(), answer(`● ${t('color.blue')}`)),
+  sorting: () => row(tag('🃏 2 ★'), arrow(), tag(`★ ${t('ex.sorting.dimShape')}`), arrow(), answer('✓')),
   resources: () => row(tag('⚡ 45/50'), tag('⭐ +65'), arrow(), answer('✓')),
-  reaction: () => row(tag('Attendi...', 'bad'), arrow(), tag('TOCCA!', 'good'), arrow(), answer('210 ms')),
-  dots: () => row(tag('●●●●'), tag('vs'), tag('●●●●●●●'), arrow(), answer('Destra')),
-  anagrams: () => row(h('span', { class: 'ex-seq' }, 'A N O Z I'), arrow(), answer('ZAINO')),
-  fluency: () => row(tag('Lettera: S'), arrow(), tag('SOLE'), answer('✓'), tag('LUNA'), answer('✗')),
+  reaction: () => row(tag(t('ex.reaction.wait'), 'bad'), arrow(), tag(t('ex.reaction.tapNow'), 'good'), arrow(), answer('210 ms')),
+  dots: () => row(tag('●●●●'), tag('vs'), tag('●●●●●●●'), arrow(), answer(t('ex.dots.right'))),
+  anagrams: () => {
+    const w = wordOf(5);
+    return row(h('span', { class: 'ex-seq' }, scramble(w)), arrow(), answer(w.toUpperCase()));
+  },
+  fluency: () => {
+    const yes = wordOf(4).toUpperCase();
+    const first = [...yes][0];
+    const no = (words().find((w) => !w.toUpperCase().startsWith(first)) ?? '').toUpperCase();
+    return row(tag(`${t('ex.fluency.targetLetter')} ${first}`), arrow(), tag(yes), answer('✓'), tag(no), answer('✗'));
+  },
   matrix: () => row(miniGrid(9, { 0: '🔷' }), arrow(), tag('↻ 90°'), arrow(), miniGrid(9, { 2: '🔷' })),
-  tapSeq: () => row(tag('L - R - L - R'), arrow(), answer('👈 L'), answer('R 👉')),
-  swipePattern: () => row(tag('SX: ↑'), tag('DX: ↓'), arrow(), answer('✓')),
-  rhythm: () => row(tag('🥁'), h('span', {}, '♪'), tag('🥁'), arrow(), answer('A tempo')),
-  crossMove: () => row(tag('⚡ Sinistra'), tag('Incrocia!'), arrow(), answer('DX 👉')),
-  dualTask: () => row(tag('Hold SX: 🔒'), tag('Numero: 8'), arrow(), answer('Pari ✓')),
+  tapSeq: () => row(tag('◀ ▶ ◀ ▶'), arrow(), answer('👈'), answer('👉')),
+  swipePattern: () => row(tag(`${t('ex.dots.left')}: ↑`), tag(`${t('ex.dots.right')}: ↓`), arrow(), answer('✓')),
+  rhythm: () => row(tag('🥁'), h('span', {}, '♪'), tag('🥁'), arrow(), answer('✓ ♪')),
+  crossMove: () => row(tag(`⚡ ${t('ex.dots.left')}`), tag(t('ex.crossMove.cross')), arrow(), answer(`${t('ex.dots.right')} 👉`)),
+  dualTask: () => row(tag(`🔒 ${t('ex.dualTask.hold')}`), tag('8'), arrow(), answer(`${t('ex.dualTask.even')} ✓`)),
 };
 
 /** The illustrated example for an exercise: a little scene plus its caption. */

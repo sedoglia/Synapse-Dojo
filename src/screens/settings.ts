@@ -1,6 +1,6 @@
 import { h, todayKey } from '../dom';
 import { store, parseSave, type Settings } from '../storage';
-import { t } from '../i18n';
+import { t, dateText } from '../i18n';
 import { APP_NAME, VERSION, GITHUB_REPO } from '../config';
 import { render, page, applySettings, langSelect, setLang } from '../ui';
 import { showHome } from './home';
@@ -59,7 +59,7 @@ async function importSave(file: File) {
   }
   if (!data) return alert(t('settings.importBad'));
   const last = [...data.runs.map((r) => r.date), ...data.checks.map((c) => c.date)].sort().pop() ?? data.created;
-  if (!confirm(t('settings.importConfirm', { name: data.name || '—', runs: data.runs.length, last }))) return;
+  if (!confirm(t('settings.importConfirm', { name: data.name || '—', runs: data.runs.length, last: dateText(last) }))) return;
   store.replace(data);
   await setLang(store.data.settings.lang);
   alert(t('settings.importDone'));

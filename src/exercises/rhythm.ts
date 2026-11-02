@@ -32,13 +32,13 @@ export const rhythm: Exercise = {
     const btnLeft = h(
       'button',
       { class: 'btn rhythm-pad left-pad', onPointerdown: () => onTap?.('L') },
-      h('span', {}, 'L 🥁'),
+      h('span', {}, '◀ 🥁'),
       h('span', { class: 'pad-key-hint' }, '[A / ←]'),
     );
     const btnRight = h(
       'button',
       { class: 'btn rhythm-pad right-pad', onPointerdown: () => onTap?.('R') },
-      h('span', {}, '🥁 R'),
+      h('span', {}, '🥁 ▶'),
       h('span', { class: 'pad-key-hint' }, '[D / →]'),
     );
     const pads = h('div', { class: 'rhythm-pads' }, btnLeft, btnRight);
@@ -91,7 +91,7 @@ export const rhythm: Exercise = {
       ctx.progress(i / trials, `${i + 1}/${trials}`);
       const targetSide: 'L' | 'R' = i % 2 === 0 ? 'L' : 'R';
       indicator.className = `rhythm-beat-indicator side-${targetSide}`;
-      indicator.textContent = targetSide;
+      indicator.textContent = targetSide === 'L' ? '◀' : '▶';
       await until(beat);
       pulse();
       await until(beat + interval / 2);
