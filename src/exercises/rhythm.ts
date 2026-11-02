@@ -1,5 +1,6 @@
 import { h, flash } from '../dom';
 import { t } from '../i18n';
+import { sfx } from '../audio';
 import { Staircase } from '../adaptive';
 import { onKeys } from '../widgets';
 import type { Exercise } from './types';
@@ -57,60 +58,56 @@ export const rhythm: Exercise = {
     const errors: number[] = [];
 
     const bpm = bpmFor(st.level);
-    const beatIntervalMs = (60 / bpm) * 1000;
+    const interval = (60 / bpm) * 1000;
+    // Hit window around each beat: ±250 ms at slow tempos, narrower when beats get close.
+    const tolerance = Math.min(Math.min(250, interval * 0.3) * ctx.pace, interval / 2 - 20);
 
-    // Countdown / sync beats
+    // Taps are kept with their time and judged against the nearest beat, so a tap slightly after the
+    // beat counts as well as one slightly before (people synchronising usually tap a little early).
+    const taps: { at: number; side: 'L' | 'R' }[] = [];
+    onTap = (side) => {
+      taps.push({ at: performance.now(), side });
+      flash(side === 'L' ? btnLeft : btnRight, 'pop', 100);
+    };
+    const until = (at: number) => ctx.wait(Math.max(0, at - performance.now()));
+    const pulse = () => {
+      sfx.tick();
+      flash(indicator, 'beat', 160);
+    };
+
+    // Count-in: three metronome beats, then the first beat to tap on.
+    const t0 = performance.now() + 4 * interval;
     for (let c = 3; c > 0; c--) {
+      await until(t0 - c * interval);
+      indicator.className = 'rhythm-beat-indicator';
       indicator.textContent = String(c);
-      flash(indicator, 'pop', 150);
-      await ctx.wait(beatIntervalMs);
+      pulse();
     }
-    indicator.textContent = 'GO!';
 
     for (let i = 0; i < trials; i++) {
+      const beat = t0 + i * interval;
+      // The next hand is shown half a beat ahead, then the beat itself pulses with a tick.
+      await until(beat - interval / 2);
       ctx.progress(i / trials, `${i + 1}/${trials}`);
-
-      // Alternate beats between Left and Right
       const targetSide: 'L' | 'R' = i % 2 === 0 ? 'L' : 'R';
       indicator.className = `rhythm-beat-indicator side-${targetSide}`;
       indicator.textContent = targetSide;
+      await until(beat);
+      pulse();
+      await until(beat + interval / 2);
 
-      const beatTargetTime = performance.now() + beatIntervalMs;
-
-      let tappedTime: number | null = null;
-      let tappedSide: 'L' | 'R' | null = null;
-
-      onTap = (side) => {
-        if (tappedTime === null) {
-          tappedTime = performance.now();
-          tappedSide = side;
-          flash(side === 'L' ? btnLeft : btnRight, 'pop', 100);
-        }
-      };
-
-      await ctx.wait(beatIntervalMs);
-
-      let delta = 999;
-      if (tappedTime !== null && tappedSide === targetSide) {
-        delta = Math.abs(tappedTime - beatTargetTime);
-      }
-
-      const isHit = tappedSide === targetSide && delta < 220 * ctx.pace;
-      ctx.track(st, isHit, {
-        subtle: true,
-        was: `${targetSide}`,
-      });
-
+      const tap = taps.find((x) => x.at >= beat - interval / 2 && x.at < beat + interval / 2);
+      const delta = tap ? Math.abs(tap.at - beat) : Infinity;
+      const isHit = tap?.side === targetSide && delta <= tolerance;
+      // Judged silently: a feedback sound between beats would disturb the metronome.
+      st.record(isHit);
       if (isHit) {
         correct++;
         errors.push(delta);
-        indicator.classList.add('good-flash');
-      } else {
-        indicator.classList.add('bad-flash');
       }
-
-      onTap = null;
+      indicator.classList.add(isHit ? 'good-flash' : 'bad-flash');
     }
+    onTap = null;
 
     ctx.progress(1);
 

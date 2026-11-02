@@ -68,9 +68,19 @@ function defaults(): SaveData {
   };
 }
 
+/** Keeps only settings of the right type, so a hand-edited or old save can't switch on the wrong option. */
+function cleanSettings(saved: unknown): Partial<Settings> {
+  if (typeof saved !== 'object' || saved === null) return {};
+  const s = saved as Record<string, unknown>;
+  const out: Partial<Settings> = {};
+  if (typeof s.lang === 'string') out.lang = s.lang as Lang;
+  for (const k of ['sound', 'vibration', 'relaxed', 'bigText'] as const) if (typeof s[k] === 'boolean') out[k] = s[k];
+  return out;
+}
+
 function withDefaults(saved: Partial<SaveData>): SaveData {
   const base = defaults();
-  return { ...base, ...saved, settings: { ...base.settings, ...saved.settings } };
+  return { ...base, ...saved, settings: { ...base.settings, ...cleanSettings(saved.settings) } };
 }
 
 function load(): SaveData {
@@ -105,9 +115,9 @@ export function parseSave(json: unknown): SaveData | null {
     numbers(d.levels) &&
     (d.history === undefined || (isObj(d.history) && Object.values(d.history).every((pts) => Array.isArray(pts) && pts.every((p) => isObj(p) && isDate(p.date) && typeof p.level === 'number')))) &&
     (d.practiced === undefined || (Array.isArray(d.practiced) && d.practiced.every((x) => typeof x === 'string'))) &&
-    (d.plan === undefined || d.plan === null || (isObj(d.plan) && isDate(d.plan.date) && Array.isArray(d.plan.ids))) &&
+    (d.plan === undefined || d.plan === null || (isObj(d.plan) && isDate(d.plan.date) && Array.isArray(d.plan.ids) && d.plan.ids.every((x) => typeof x === 'string'))) &&
     (d.xp === undefined || typeof d.xp === 'number') &&
-    (d.badges === undefined || isObj(d.badges)) &&
+    (d.badges === undefined || (isObj(d.badges) && Object.values(d.badges).every(isDate))) &&
     (d.counters === undefined || numbers(d.counters)) &&
     (d.settings === undefined || isObj(d.settings));
   return ok ? withDefaults(d as Partial<SaveData>) : null;

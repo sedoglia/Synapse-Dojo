@@ -27,7 +27,7 @@ export const binding: Exercise = {
   example: 'ex.binding.example',
   minutes: 2,
   levels: { min: 1, max: 10, start: 2 },
-  levelLabel: (l) => `${4 + l * 2} items`,
+  levelLabel: (l) => `${Math.min(16, 4 + l * 2)} ◆`,
 
   async run(ctx) {
     const total = ctx.count(16, 10, 3);
@@ -47,7 +47,11 @@ export const binding: Exercise = {
       const targetColor = pick(COLORS);
 
       // Target representation
-      goalBar.innerHTML = `${t('ex.binding.find')}: <span style="color: ${targetColor.css}; font-size: 1.5rem; vertical-align: middle;">${targetShape.symbol}</span> (${t(`shape.${targetShape.id}`)} ${t(`color.${targetColor.id}`)})`;
+      goalBar.replaceChildren(
+        `${t('ex.binding.find')}: `,
+        h('span', { style: { color: targetColor.css, fontSize: '1.5rem', verticalAlign: 'middle' } }, targetShape.symbol),
+        ` (${t(`shape.${targetShape.id}`)} ${t(`color.${targetColor.id}`)})`,
+      );
       flash(goalBar, 'pop', 200);
 
       // Create distractors sharing either shape or color

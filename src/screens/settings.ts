@@ -9,9 +9,12 @@ import { showPrivacy } from './privacy';
 import { showGuide } from './guide';
 import { showLicense } from './license';
 
+/** Escapes a text value for an iCalendar property (RFC 5545 §3.3.11). */
+const icsText = (s: string) => s.replace(/[\\;,]/g, (c) => `\\${c}`).replace(/\r?\n/g, '\\n');
+
 /** A daily recurring calendar event: a reminder that works on any phone, with no server or push service. */
 function downloadReminder(time: string) {
-  const [hh, mm] = time.split(':');
+  const [hh = '18', mm = '00'] = /^\d{2}:\d{2}$/.test(time) ? time.split(':') : [];
   const d = new Date();
   const ymd = `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, '0')}${String(d.getDate()).padStart(2, '0')}`;
   const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d+Z$/, 'Z');
@@ -26,13 +29,13 @@ function downloadReminder(time: string) {
     `DTSTART:${ymd}T${hh}${mm}00`,
     'DURATION:PT15M',
     'RRULE:FREQ=DAILY',
-    `SUMMARY:🧠 ${APP_NAME}`,
-    `DESCRIPTION:${t('reminder.desc')} — ${url}`,
+    `SUMMARY:🧠 ${icsText(APP_NAME)}`,
+    `DESCRIPTION:${icsText(`${t('reminder.desc')} — ${url}`)}`,
     `URL:${url}`,
     'BEGIN:VALARM',
     'TRIGGER:PT0M',
     'ACTION:DISPLAY',
-    `DESCRIPTION:${APP_NAME}`,
+    `DESCRIPTION:${icsText(APP_NAME)}`,
     'END:VALARM',
     'END:VEVENT',
     'END:VCALENDAR',

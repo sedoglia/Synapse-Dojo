@@ -549,7 +549,7 @@ const ui: Locale['ui'] = {
   // dots
   'ex.dots.name': 'Calcolo con i Punti',
   'ex.dots.desc': 'Giudica all’istante quale lato contiene più punti senza contarli',
-  'ex.dots.why': 'Allena il sistema numerico approssimato (ANS) e l’intuito quantitativo parietale (subitizing).',
+  'ex.dots.why': 'Allena il sistema numerico approssimato (ANS): stimare a colpo d’occhio quale gruppo è più numeroso, senza contare, grazie alla rappresentazione parietale delle quantità.',
   'ex.dots.example': 'Tocca rapido il riquadro con più punti',
   'ex.dots.hint': 'Quale lato ha più punti?',
   'ex.dots.left': 'Sinistra',
@@ -567,7 +567,7 @@ const ui: Locale['ui'] = {
   // fluency
   'ex.fluency.name': 'Sprint di Parole',
   'ex.fluency.desc': 'Conferma al volo le parole che iniziano con la lettera bersaglio',
-  'ex.fluency.why': 'La fluenza verbale allena il recupero lessicale rapido dalla memoria semantica sotto vincoli fonetici.',
+  'ex.fluency.why': 'Decisioni ortografiche rapide: leggere una parola e verificarne l’iniziale sotto pressione temporale allena il riconoscimento veloce delle parole e la selezione della risposta. (È un compito di classificazione veloce, non un test di fluenza verbale, in cui le parole si producono da sé.)',
   'ex.fluency.example': 'Tocca se la parola inizia con la lettera indicata',
   'ex.fluency.targetLetter': 'Lettera bersaglio:',
   'ex.fluency.detail': '{ok}/{n} corretti',

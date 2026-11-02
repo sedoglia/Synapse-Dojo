@@ -1,6 +1,7 @@
 import { h, rand, flash } from '../dom';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';
+import { onKeys } from '../widgets';
 import type { Exercise } from './types';
 
 const limitFor = (level: number) => Math.max(350, Math.round(1400 * Math.pow(0.89, level - 1)));
@@ -31,11 +32,7 @@ export const flanker: Exercise = {
 
     ctx.stage.append(hint, display, controls);
 
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') onChoose?.('left');
-      if (e.key === 'ArrowRight') onChoose?.('right');
-    };
-    window.addEventListener('keydown', onKey);
+    onKeys(ctx, { ArrowLeft: () => onChoose?.('left'), ArrowRight: () => onChoose?.('right') });
 
     let correct = 0;
     const rts: number[] = [];
@@ -53,7 +50,9 @@ export const flanker: Exercise = {
       const flankChar = arrowChar(flankDir);
       const centerChar = arrowChar(centerDir);
 
-      display.innerHTML = `<span>${flankChar}</span><span>${flankChar}</span><span class="center-arrow">${centerChar}</span><span>${flankChar}</span><span>${flankChar}</span>`;
+      display.replaceChildren(
+        ...[flankChar, flankChar, centerChar, flankChar, flankChar].map((c, k) => h('span', { class: k === 2 ? 'center-arrow' : null }, c)),
+      );
       flash(display, 'pop', 150);
 
       const shown = performance.now();
@@ -65,7 +64,7 @@ export const flanker: Exercise = {
       });
       const rt = performance.now() - shown;
 
-      display.innerHTML = choice ? '' : `⏱ ${t('common.timeout')}`;
+      display.textContent = choice ? '' : `⏱ ${t('common.timeout')}`;
 
       const ok = ctx.track(st, choice === centerDir, {
         rt,
@@ -83,7 +82,6 @@ export const flanker: Exercise = {
       await ctx.wait(ok ? 250 : 700);
     }
 
-    window.removeEventListener('keydown', onKey);
     ctx.progress(1);
 
     const avg = rts.length ? Math.round(rts.reduce((a, b) => a + b, 0) / rts.length) : 0;

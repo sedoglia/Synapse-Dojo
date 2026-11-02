@@ -267,7 +267,7 @@ export const echo: Exercise = {
     ctx.progress(1);
 
     const base = clamp(blockScores.reduce((a, b) => a + b, 0) / blockScores.length, 0, 100);
-    const { score, timeBonus } = ctx.withTimeBonus(base, 1.8);
-    return { score, detail: `${t('common.level')}: ${labelFor(level)}`, level, timeBonus };
+    // No speed bonus: the pace of the stream is fixed, so it would only reward pressing hastily.
+    return { score: base, detail: `${t('common.level')}: ${labelFor(level)}`, level };
   },
 };

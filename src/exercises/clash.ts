@@ -77,7 +77,7 @@ export const clash: Exercise = {
 
     const avg = rtSum / total;
     const detail = `${correct}/${total} · ${Math.round(avg)} ms`;
-    if (ctx.quick) return { score: (correct / total) * scale(avg, 650, 2200), detail };
+    if (ctx.quick) return { score: (correct / total) * scale(avg / ctx.pace, 650, 3000), detail };
     return { score: st.score(), detail, level: st.next() };
   },
 };

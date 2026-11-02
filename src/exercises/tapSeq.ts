@@ -16,7 +16,7 @@ export const tapSeq: Exercise = {
   example: 'ex.tapSeq.example',
   minutes: 2,
   levels: { min: 1, max: 10, start: 2 },
-  levelLabel: (l) => `${lenFor(l)} taps`,
+  levelLabel: (l) => `${lenFor(l)} 👆`,
 
   async run(ctx) {
     const trials = ctx.count(10, 8, 3);

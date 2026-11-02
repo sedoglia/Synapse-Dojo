@@ -3504,6 +3504,19 @@ html.big-text {
 .rhythm-beat-indicator.side-R {
   color: #ec4899;
 }
+/* Visual metronome: a short pulse on every beat (the only cue when sound is off). */
+.rhythm-beat-indicator.beat {
+  animation: beat-pulse 0.18s ease-out;
+  text-shadow: 0 0 14px currentColor;
+}
+@keyframes beat-pulse {
+  from {
+    transform: scale(1.45);
+  }
+  to {
+    transform: scale(1);
+  }
+}
 .rhythm-pads {
   display: flex;
   gap: 16px;

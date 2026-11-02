@@ -82,8 +82,8 @@ export const ruleSwitch: Exercise = {
     const cost = rtSwitch.length && rtRepeat.length ? Math.round(mean(rtSwitch) - mean(rtRepeat)) : 0;
     const detail = t('ex.switch.detail', { ok: correct, n: trials, cost });
     if (ctx.quick) {
-      const avg = mean([...rtSwitch, ...rtRepeat]) || 2500;
-      return { score: (correct / trials) * scale(avg, 700, 2500), detail };
+      const avg = mean([...rtSwitch, ...rtRepeat]) || 3000;
+      return { score: (correct / trials) * scale(avg / ctx.pace, 700, 3000), detail };
     }
     return { score: st.score(), detail, level: st.next() };
   },

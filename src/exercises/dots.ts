@@ -46,7 +46,7 @@ export const dots: Exercise = {
   example: 'ex.dots.example',
   minutes: 2,
   levels: { min: 1, max: 12, start: 2 },
-  levelLabel: (l) => `ratio ${(ratioFor(l) * 100).toFixed(0)}%`,
+  levelLabel: (l) => `${(ratioFor(l) * 100).toFixed(0)}%`,
 
   async run(ctx) {
     const trials = ctx.count(20, 14, 4);

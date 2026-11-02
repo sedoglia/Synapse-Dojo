@@ -15,7 +15,7 @@ export const crossMove: Exercise = {
   why: 'ex.crossMove.why',
   example: 'ex.crossMove.example',
   minutes: 2,
-  levels: { min: 1, max: 12, start: 2 },
+  levels: { min: 1, max: 12, start: 1 },
   levelLabel: (l) => `${limitFor(l)} ms`,
 
   async run(ctx) {
@@ -89,7 +89,7 @@ export const crossMove: Exercise = {
 
       const ok = ctx.track(st, choice === targetSide, {
         rt,
-        was: targetSide === 'left' ? 'SX' : 'DX',
+        was: targetSide === 'left' ? t('ex.dots.left') : t('ex.dots.right'),
       });
 
       if (ok) {

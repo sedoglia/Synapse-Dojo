@@ -1,4 +1,4 @@
-import { h, rand, scale, flash } from '../dom';
+import { h, shuffle, scale, flash } from '../dom';
 import { sfx } from '../audio';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';
@@ -22,11 +22,8 @@ async function round(
   backward: boolean,
   judge: (ok: boolean) => void,
 ) {
-  const seq: number[] = [];
-  while (seq.length < span) {
-    const n = rand(0, SIZE - 1);
-    if (n !== seq[seq.length - 1]) seq.push(n);
-  }
+  // As in the Corsi test, each block is lit at most once per sequence.
+  const seq = shuffle(Array.from({ length: SIZE }, (_, i) => i)).slice(0, span);
 
   status.textContent = t('ex.grid.watch');
   status.classList.remove('alt');
@@ -83,7 +80,7 @@ export const grid: Exercise = {
   example: 'ex.grid.example',
   minutes: 2.5,
   levels: { min: MIN_SPAN, max: MAX_SPAN, start: 3 },
-  levelLabel: (l) => `span ${l}`,
+  levelLabel: (l) => `${l} 💡`,
 
   async run(ctx) {
     const status = h('div', { class: 'grid-status' });
@@ -92,12 +89,17 @@ export const grid: Exercise = {
     ctx.stage.append(status, board);
 
     if (ctx.quick) {
-      // Daily check: forward only, growing from 3 until the first mistake.
+      // Daily check: forward only, growing from 3. As in the standard Corsi procedure each length gets
+      // two attempts, and the test stops when both fail (a single slip doesn't end it).
       let span = 3;
       let best = 0;
       while (span <= MAX_SPAN) {
         ctx.progress((span - 3) / (MAX_SPAN - 2), `${span}`);
-        if (!(await round(ctx, tiles, board, status, span, false, (ok) => ctx.feedback(ok, { was: t('fb.gridOrder') })))) break;
+        let passed = false;
+        for (let attempt = 0; attempt < 2 && !passed; attempt++) {
+          passed = await round(ctx, tiles, board, status, span, false, (ok) => ctx.feedback(ok, { was: t('fb.gridOrder') }));
+        }
+        if (!passed) break;
         best = span++;
       }
       ctx.progress(1);
