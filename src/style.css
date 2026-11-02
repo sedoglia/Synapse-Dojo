@@ -3517,6 +3517,25 @@ html.big-text {
     transform: scale(1);
   }
 }
+/* Left and right are physical places in these games (the hand to use, the arrow keys), so they keep their
+   side in right-to-left languages; the text inside still reads right to left. */
+[dir='rtl']
+  :is(
+    .bilateral-controls,
+    .rhythm-pads,
+    .cross-arena,
+    .cross-controls,
+    .swipe-container,
+    .dualtask-container,
+    .dots-container,
+    .dots-controls,
+    .flanker-controls,
+    .switch-pad,
+    .vault-actions,
+    .ex-row
+  ) {
+  direction: ltr;
+}
 .rhythm-pads {
   display: flex;
   gap: 16px;

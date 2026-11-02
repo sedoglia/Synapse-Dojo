@@ -596,7 +596,7 @@ export const ui = {
   'ex.tapSeq.name': 'Bilateral Tap',
   'ex.tapSeq.desc': 'Coordinate left and right thumbs to reproduce alternating sequences',
   'ex.tapSeq.why': 'Alternating bimanual tapping activates motor cortices across both hemispheres and stimulates the corpus callosum.',
-  'ex.tapSeq.example': 'L - R - L - R   Follow the rhythm with both thumbs',
+  'ex.tapSeq.example': '◀ ▶ ◀ ▶   Follow the rhythm with both thumbs',
   'ex.tapSeq.hint': 'Tap left and right in the exact sequence',
   'ex.tapSeq.detail': '{ok}/{n} sequences completed',
 
@@ -660,7 +660,7 @@ const words: string[] = [
   'dolphin', 'volcano', 'bicycle', 'giraffe', 'penguin', 'blanket', 'captain', 'chimney', 'compass', 'crystal',
   'cushion', 'diamond', 'glacier', 'harvest', 'horizon', 'journey', 'lantern', 'leopard', 'mailbox', 'monster',
   'morning', 'network', 'octopus', 'package', 'painter', 'panther', 'peacock', 'picture', 'pyramid', 'rainbow',
-  'rooster', 'sandbox', 'scooter', 'soldier', 'stadium', 'tractor', 'village', 'warrior', 'whistle', 'monster',
+  'rooster', 'sandbox', 'scooter', 'soldier', 'stadium', 'tractor', 'village', 'warrior', 'whistle', 'balcony',
   // 8 letters
   'elephant', 'mountain', 'notebook', 'backpack', 'sandwich', 'airplane', 'alligator', 'aquarium', 'baseball', 'building',
   'campfire', 'corridor', 'dinosaur', 'firework', 'flamingo', 'fountain', 'hedgehog', 'hospital', 'kangaroo', 'marathon',

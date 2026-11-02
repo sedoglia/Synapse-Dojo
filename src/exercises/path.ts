@@ -1,5 +1,5 @@
 ﻿import { h, rand, scale, flash, clamp } from '../dom';
-import { t } from '../i18n';
+import { t, num } from '../i18n';
 import { levelScore } from '../adaptive';
 import type { Ctx } from '../ctx';
 import type { Exercise } from './types';
@@ -110,7 +110,7 @@ export const path: Exercise = {
       const r = await board(ctx, labelsFor(12, false), 0, 1);
       // 0.6 s per number scores 100, 4 s scores 0 (older adults often need 1.5–2.5 s on a touch screen).
       const score = scale(r.secs / 12 / ctx.pace, 0.6, 4) * Math.max(0, 1 - r.errors * 0.06);
-      return { score, detail: t('ex.path.detail', { secs: r.secs.toFixed(1), err: r.errors }) };
+      return { score, detail: t('ex.path.detail', { secs: num(r.secs), err: r.errors }) };
     }
 
     // Two boards; the level moves after each one depending on speed and accuracy.
@@ -130,7 +130,7 @@ export const path: Exercise = {
     ctx.progress(1);
     return {
       score: (perf[0] + perf[1]) / 2,
-      detail: t('ex.path.detail', { secs: last.secs.toFixed(1), err: last.errors }),
+      detail: t('ex.path.detail', { secs: num(last.secs), err: last.errors }),
       level,
     };
   },

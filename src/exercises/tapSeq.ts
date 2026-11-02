@@ -5,6 +5,8 @@ import { onKeys } from '../widgets';
 import type { Exercise } from './types';
 
 const lenFor = (level: number) => Math.min(12, 3 + level);
+/** Arrows instead of letters: "L"/"R" are English, and in many languages left and right share an initial. */
+const ARROW = { L: '◀', R: '▶' } as const;
 
 export const tapSeq: Exercise = {
   id: 'tapSeq',
@@ -29,13 +31,13 @@ export const tapSeq: Exercise = {
     const btnLeft = h(
       'button',
       { class: 'btn bilateral-pad left-pad', onPointerdown: () => onTap?.('L') },
-      h('span', {}, '👈 L'),
+      h('span', {}, '👈'),
       h('span', { class: 'pad-key-hint' }, '[A / ←]'),
     );
     const btnRight = h(
       'button',
       { class: 'btn bilateral-pad right-pad', onPointerdown: () => onTap?.('R') },
-      h('span', {}, 'R 👉'),
+      h('span', {}, '👉'),
       h('span', { class: 'pad-key-hint' }, '[D / →]'),
     );
     const controls = h('div', { class: 'bilateral-controls' }, btnLeft, btnRight);
@@ -74,7 +76,7 @@ export const tapSeq: Exercise = {
             {
               class: `seq-node ${idx < currentStep ? 'done' : idx === currentStep ? 'current' : ''}`,
             },
-            step,
+            ARROW[step],
           );
           seqDisplay.append(item);
         });
@@ -100,7 +102,7 @@ export const tapSeq: Exercise = {
       });
 
       const ok = ctx.track(st, !hasError, {
-        was: `${pattern.join(' ')}`,
+        was: pattern.map((s) => ARROW[s]).join(' '),
       });
 
       if (ok) {

@@ -1,5 +1,5 @@
 import { h, shuffle, flash } from '../dom';
-import { t, words } from '../i18n';
+import { t, words, graphemes, wordNear } from '../i18n';
 import { Staircase } from '../adaptive';
 import type { Exercise } from './types';
 
@@ -36,10 +36,11 @@ export const anagrams: Exercise = {
       const targetLen = lenFor(st.level);
 
       // Find words matching desired length
-      const candidates = allWords.filter((w) => w.length === targetLen);
-      const targetWord = (candidates.length ? shuffle(candidates)[0] : shuffle(allWords)[0]).toUpperCase();
+      // Lengths are counted in letters as readers see them (see `graphemes`); languages with short words,
+      // such as Chinese, get the closest length available.
+      const targetWord = wordNear(allWords, targetLen).toUpperCase();
 
-      const letters = targetWord.split('');
+      const letters = graphemes(targetWord);
       let scrambled = shuffle([...letters]);
       while (scrambled.join('') === targetWord && scrambled.length > 2) {
         scrambled = shuffle([...letters]);
@@ -52,7 +53,7 @@ export const anagrams: Exercise = {
       const render = (onTileClick?: (idx: number) => void) => {
         // Render slots
         slotContainer.replaceChildren();
-        for (let s = 0; s < targetWord.length; s++) {
+        for (let s = 0; s < letters.length; s++) {
           const char = selectedIndices[s] !== undefined ? scrambled[selectedIndices[s]] : '';
           const slot = h('div', { class: `anagram-slot ${char ? 'filled' : ''}` }, char);
           slotContainer.append(slot);
@@ -84,7 +85,7 @@ export const anagrams: Exercise = {
         const handleTile = (idx: number) => {
           selectedIndices.push(idx);
           render(handleTile);
-          if (selectedIndices.length === targetWord.length) {
+          if (selectedIndices.length === letters.length) {
             const result = selectedIndices.map((k) => scrambled[k]).join('');
             done(result);
           }

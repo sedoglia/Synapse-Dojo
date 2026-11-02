@@ -80,6 +80,35 @@ export function t(key: Key, params: Record<string, string | number> = {}): strin
   return s.replace(/\{(\w+)\}/g, (_, p) => String(params[p] ?? `{${p}}`));
 }
 
+/** Locale for numbers and dates, always with Latin digits like every other number in the app. */
+const intl = () => `${meta().speech}-u-nu-latn`;
+/** A number with a fixed count of decimals and the language's decimal separator ("1,5" in Italian). */
+export const num = (v: number, digits = 1) => v.toLocaleString(intl(), { minimumFractionDigits: digits, maximumFractionDigits: digits });
+/** A YYYY-MM-DD date written the way the language writes dates ("3 nov 2026", "2026年11月3日"). */
+export const dateText = (iso: string) =>
+  new Date(`${iso}T12:00:00`).toLocaleDateString(intl(), { day: 'numeric', month: 'short', year: 'numeric' });
+
+/**
+ * The letters of a word as a reader sees them (grapheme clusters): in Hindi a consonant and its vowel sign
+ * are one letter, so "ति" stays together instead of splitting into "त" + "ि".
+ */
+export function graphemes(word: string): string[] {
+  if (typeof Intl !== 'undefined' && 'Segmenter' in Intl) {
+    return [...new Intl.Segmenter(meta().speech, { granularity: 'grapheme' }).segment(word)].map((s) => s.segment);
+  }
+  return Array.from(word);
+}
+
+/** The word in the list whose length (in letters) is closest to `n`, preferring an exact match; never a one-letter word if avoidable. */
+export function wordNear(list: readonly string[], n: number): string {
+  const usable = list.filter((w) => graphemes(w).length >= 2);
+  const pool = usable.length ? usable : list;
+  const dist = (w: string) => Math.abs(graphemes(w).length - n);
+  const best = Math.min(...pool.map(dist));
+  const near = pool.filter((w) => dist(w) === best);
+  return near[Math.floor(Math.random() * near.length)];
+}
+
 export const words = () => locale().words;
 export const passages = () => locale().passages;
 export const stories = () => locale().stories ?? en.stories ?? [];

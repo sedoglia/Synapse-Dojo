@@ -596,7 +596,7 @@ const ui: Locale['ui'] = {
   'ex.tapSeq.name': 'Tap Bilaterale',
   'ex.tapSeq.desc': 'Coordina entrambi i pollici per riprodurre sequenze alternate',
   'ex.tapSeq.why': 'Il tocco bimanuale alternato stimola le cortecce motorie di entrambi gli emisferi e attiva il corpo calloso.',
-  'ex.tapSeq.example': 'L - R - L - R   Segui il ritmo con entrambi i pollici',
+  'ex.tapSeq.example': '◀ ▶ ◀ ▶   Segui il ritmo con entrambi i pollici',
   'ex.tapSeq.hint': 'Tocca sinistra e destra nella sequenza indicata',
   'ex.tapSeq.detail': '{ok}/{n} sequenze completate',
 

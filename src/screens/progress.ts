@@ -1,6 +1,6 @@
 ﻿import { h, todayKey } from '../dom';
 import { store } from '../storage';
-import { t } from '../i18n';
+import { t, dateText } from '../i18n';
 import { render, page, sparkline } from '../ui';
 import { EXERCISES, DOMAINS } from '../exercises';
 import { capacity, domainScore } from '../stats';
@@ -41,7 +41,7 @@ function scoreChart(): HTMLElement {
   root.append(svg('path', { d, class: 'line' }));
   checks.forEach((c, i) => {
     const dot = svg('circle', { cx: x(i), cy: y(c.score), r: 3.5, class: 'dot' });
-    dot.append(svg('title', {}, `${c.date}: ${c.score}`));
+    dot.append(svg('title', {}, `${dateText(c.date)}: ${c.score}`));
     root.append(dot);
   });
   return wrap(root, 'chart-wrap');
@@ -78,7 +78,7 @@ function calendar(): HTMLElement {
   for (let i = 0; i < 28; i++) {
     const key = todayKey(d);
     cells.push(
-      h('div', { class: `cal-day ${active.has(key) ? 'on' : ''} ${key === todayKey() ? 'today' : ''}`, title: key }, String(d.getDate())),
+      h('div', { class: `cal-day ${active.has(key) ? 'on' : ''} ${key === todayKey() ? 'today' : ''}`, title: dateText(key) }, String(d.getDate())),
     );
     d.setDate(d.getDate() + 1);
   }
@@ -144,7 +144,7 @@ function badgesSection(): HTMLElement {
           h('span', { class: 'badge-icon' }, b.icon),
           h('b', {}, t(b.name)),
           h('small', { class: 'muted' }, t(b.desc)),
-          done ? h('small', { class: 'badge-date' }, `✓ ${store.data.badges[b.id]}`) : h('div', { class: 'goal-bar' }, h('div', { style: { width: `${pct}%` } })),
+          done ? h('small', { class: 'badge-date' }, `✓ ${dateText(store.data.badges[b.id])}`) : h('div', { class: 'goal-bar' }, h('div', { style: { width: `${pct}%` } })),
         );
       }),
     ),
