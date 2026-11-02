@@ -1,4 +1,5 @@
 import { store } from './storage';
+import { reloadForNewVersion } from './update';
 import en, { ui as enUi } from './locales/en';
 
 /**
@@ -62,13 +63,19 @@ export const isLang = (v: unknown): v is Lang => typeof v === 'string' && Object
 export const meta = (): LangMeta => LANGS[store.data.settings.lang] ?? LANGS.en;
 const locale = (): Locale => loaded[store.data.settings.lang] ?? en;
 
-/** Loads a language's texts if needed. Unknown languages, or a failed download (offline), fall back to English. */
+/**
+ * Loads a language's texts if needed. Unknown languages, or a failed download (offline), fall back to English.
+ * If the file is gone because a new version was published, the choice is saved and the page reloads into it.
+ */
 export async function loadLang(lang: unknown): Promise<Lang> {
   if (!isLang(lang)) return 'en';
   if (!loaded[lang]) {
     try {
       loaded[lang] = (await loaders[`./locales/${lang}.ts`]()).default;
     } catch {
+      store.data.settings.lang = lang;
+      store.save();
+      if (reloadForNewVersion()) await new Promise<never>(() => {}); // the page is going away
       return 'en';
     }
   }
