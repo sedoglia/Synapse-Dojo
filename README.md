@@ -121,7 +121,7 @@ I salvataggi e i progressi sono memorizzati localmente nel browser (localStorage
 
 ## Licenza
 
-[PolyForm Noncommercial 1.0.0](LICENSE). Progetto originale e indipendente protetto da copyright (c) 2026 Sergio Sedoglia.
+[PolyForm Noncommercial 1.0.0](LICENSE). Progetto originale e indipendente protetto da copyright (c) 2026 Sergio Dogliani.
 Il codice è liberamente utilizzabile per uso personale, studio, didattica e ricerca senza fini di lucro; è vietato qualsiasi utilizzo, sfruttamento o redistribuzione commerciale senza autorizzazione preventiva dell'autore.
 Gli esercizi si basano su paradigmi classici della psicologia cognitiva di dominio pubblico. Non è affiliato ad alcun prodotto commerciale.
 Il font Nunito in `public/fonts/` è distribuito con la [SIL Open Font License 1.1](public/fonts/OFL.txt).
