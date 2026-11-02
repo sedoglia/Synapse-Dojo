@@ -410,6 +410,22 @@ const ui: Locale['ui'] = {
   'privacy.contact': 'Per domande sul gioco o sui dati: {contact}',
   'privacy.open': 'Apri il gioco',
 
+  'license.title': 'Licenza e Termini',
+  'license.subtitle': 'Licenza software, usi consentiti e proprietà intellettuale',
+  'license.authorH': 'Autore e Proprietà Intellettuale',
+  'license.authorP': 'Synapse Dojo è un progetto originale e indipendente ideato e sviluppato da Sergio Dogliani. Tutti i diritti commerciali sono riservati.',
+  'license.polyformH': 'Licenza PolyForm Noncommercial 1.0.0',
+  'license.polyformP': 'Il software è distribuito con licenza PolyForm Noncommercial 1.0.0. Il codice è accessibile e utilizzabile gratuitamente per uso personale, didattico, studio e ricerca senza scopo di lucro. Qualsiasi utilizzo a fini di lucro, monetizzazione, inserimento di annunci pubblicitari o redistribuzione commerciale senza autorizzazione scritta dell’autore è severamente vietato.',
+  'license.permittedH': 'Usi Consentiti',
+  'license.permittedP': 'Allenamento personale, studio del codice, ricerca scientifica senza scopo di lucro, utilizzo didattico e svago privato senza finalità commerciali.',
+  'license.restrictedH': 'Restrizioni Commerciali',
+  'license.restrictedP': 'Non è consentito utilizzare, modificare o redistribuire questo software per ottenere compensi monetari, vantaggi commerciali, inserire pubblicità o integrarlo in prodotti a pagamento senza una licenza commerciale concessa dall’autore.',
+  'license.fontsH': 'Font e Risorse di Terze Parti',
+  'license.fontsP': 'Il font Nunito è distribuito con licenza SIL Open Font License 1.1. I paradigmi degli esercizi cognitivi appartengono alla letteratura psicologica di pubblico dominio.',
+  'license.officialLink': 'Leggi il testo integrale ufficiale PolyForm Noncommercial 1.0.0',
+  'license.repoLink': 'Visualizza il file LICENSE su GitHub',
+  'license.open': 'Apri il gioco',
+
   'domain.coordination': 'Coordinazione',
 
   'shape.circle': 'Cerchio',

@@ -8,7 +8,7 @@ export default defineConfig(({ mode }) => {
   if (token && !/^[\w-]+$/.test(token)) throw new Error('VITE_CF_ANALYTICS_TOKEN looks malformed.');
   return {
     base: './',
-    build: { rollupOptions: { input: { main: 'index.html', privacy: 'privacy.html', guide: 'guide.html' } } },
+    build: { rollupOptions: { input: { main: 'index.html', privacy: 'privacy.html', guide: 'guide.html', license: 'license.html' } } },
     plugins: [
       {
         name: 'cf-web-analytics',

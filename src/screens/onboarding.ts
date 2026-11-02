@@ -1,4 +1,4 @@
-﻿import { h } from '../dom';
+import { h } from '../dom';
 import { store } from '../storage';
 import { t, type I18nKey } from '../i18n';
 import { APP_NAME } from '../config';
@@ -7,6 +7,7 @@ import { DOMAINS } from '../exercises';
 import { showHome } from './home';
 import { showPrivacy } from './privacy';
 import { showGuide } from './guide';
+import { showLicense } from './license';
 
 export function showOnboarding() {
   const input = h('input', {
@@ -170,6 +171,12 @@ export function showOnboarding() {
               'button',
               { class: 'link-btn', type: 'button', onClick: () => showGuide(showOnboarding) },
               t('guide.title'),
+            ),
+            h('span', {}, ' · '),
+            h(
+              'button',
+              { class: 'link-btn', type: 'button', onClick: () => showLicense(showOnboarding) },
+              t('license.title'),
             ),
           ),
           h('p', { class: 'muted' }, t('landing.footerTagline')),

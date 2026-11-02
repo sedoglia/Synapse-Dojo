@@ -410,6 +410,22 @@ export const ui = {
   'privacy.contact': 'Questions about the game or your data: {contact}',
   'privacy.open': 'Open the game',
 
+  'license.title': 'License & Terms',
+  'license.subtitle': 'Software license, permitted uses, and copyright terms',
+  'license.authorH': 'Author & Intellectual Property',
+  'license.authorP': 'Synapse Dojo is an original, independent project created by Sergio Dogliani. All commercial rights reserved.',
+  'license.polyformH': 'PolyForm Noncommercial License 1.0.0',
+  'license.polyformP': 'The software is released under the PolyForm Noncommercial License 1.0.0. You are free to view the source code, run it, and use it for personal study, education, research, and noncommercial purposes. Any unauthorized commercial use, resale, monetization, or redistribution is strictly prohibited.',
+  'license.permittedH': 'Permitted Uses',
+  'license.permittedP': 'Personal study, cognitive training, noncommercial research, testing, and private enjoyment with no commercial intent.',
+  'license.restrictedH': 'Commercial Restrictions',
+  'license.restrictedP': 'You may not use, modify, or distribute this software for monetary compensation, commercial advantage, advertising, or integration into paid commercial products without a written commercial license from the author.',
+  'license.fontsH': 'Fonts and Assets',
+  'license.fontsP': 'The Nunito font is distributed under the SIL Open Font License 1.1. Psychological exercise paradigms are in the public domain.',
+  'license.officialLink': 'Read official PolyForm Noncommercial 1.0.0 text',
+  'license.repoLink': 'View LICENSE file on GitHub repository',
+  'license.open': 'Open the game',
+
   'domain.coordination': 'Coordination',
 
   'shape.circle': 'Circle',

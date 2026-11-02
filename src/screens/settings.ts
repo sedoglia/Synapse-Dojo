@@ -1,4 +1,4 @@
-﻿import { h, todayKey } from '../dom';
+import { h, todayKey } from '../dom';
 import { store, parseSave, type Settings } from '../storage';
 import { t } from '../i18n';
 import { APP_NAME, VERSION } from '../config';
@@ -7,6 +7,7 @@ import { showHome } from './home';
 import { showOnboarding } from './onboarding';
 import { showPrivacy } from './privacy';
 import { showGuide } from './guide';
+import { showLicense } from './license';
 
 /** A daily recurring calendar event: a reminder that works on any phone, with no server or push service. */
 function downloadReminder(time: string) {
@@ -157,6 +158,8 @@ export function showSettings() {
         h('button', { class: 'link-btn', onClick: () => showGuide(showSettings) }, `📖 ${t('guide.title')}`),
         h('span', {}, ' · '),
         h('button', { class: 'link-btn', onClick: () => showPrivacy(showSettings) }, t('privacy.title')),
+        h('span', {}, ' · '),
+        h('button', { class: 'link-btn', onClick: () => showLicense(showSettings) }, t('license.title')),
       ),
       h('p', { class: 'muted small center' }, `${APP_NAME} v${VERSION} · ${t('settings.about')}`),
     ),
