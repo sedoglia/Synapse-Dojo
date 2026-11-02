@@ -608,12 +608,32 @@ export const ui = {
 };
 
 const words: string[] = [
-  'tree', 'boat', 'candle', 'dolphin', 'elephant', 'butterfly', 'ice cream', 'island', 'lamp', 'mountain',
-  'cloud', 'umbrella', 'piano', 'notebook', 'rocket', 'chair', 'drum', 'egg', 'volcano', 'backpack',
-  'ring', 'bicycle', 'pillow', 'dragon', 'scissors', 'giraffe', 'key', 'lemon', 'hammer', 'ship',
-  'clock', 'penguin', 'spider', 'mirror', 'cup', 'violin', 'castle', 'strawberry', 'seagull', 'wolf',
-  'medal', 'nest', 'pot', 'shoe', 'train', 'suitcase', 'comet', 'lighthouse', 'acorn', 'bread',
-  'brick', 'horse', 'tent', 'sponge', 'pear', 'bottle', 'crown', 'kite', 'river', 'star',
+  // 4 letters
+  'boat', 'drum', 'ring', 'ship', 'wolf', 'nest', 'shoe', 'kite', 'star', 'pear',
+  'tree', 'lamp', 'moon', 'gold', 'fish', 'coin', 'leaf', 'gate', 'wind', 'bell',
+  'cave', 'wave', 'rock', 'deer', 'duck', 'frog', 'hawk', 'lion', 'seal', 'swan',
+  'bear', 'beak', 'harp', 'mask', 'sail', 'snow', 'tent', 'rose', 'corn', 'seed',
+  // 5 letters
+  'cloud', 'piano', 'chair', 'acorn', 'bread', 'brick', 'horse', 'crown', 'river', 'flute',
+  'sword', 'tiger', 'apple', 'beach', 'bench', 'brush', 'clock', 'crane', 'drain', 'flame',
+  'frost', 'glass', 'grape', 'grass', 'heart', 'house', 'knife', 'lemon', 'melon', 'mouse',
+  'onion', 'paint', 'pearl', 'plant', 'plate', 'queen', 'radio', 'scale', 'shark', 'sheep',
+  'spoon', 'stone', 'storm', 'table', 'torch', 'train', 'tower', 'whale', 'wheat', 'chest',
+  // 6 letters
+  'candle', 'island', 'rocket', 'dragon', 'hammer', 'spider', 'mirror', 'violin', 'castle', 'seagull',
+  'medal', 'comet', 'sponge', 'bottle', 'bridge', 'camera', 'carpet', 'donkey', 'falcon', 'feather',
+  'forest', 'guitar', 'helmet', 'jacket', 'jungle', 'kettle', 'lizard', 'monkey', 'needle', 'palace',
+  'parrot', 'pencil', 'pigeon', 'planet', 'rabbit', 'sailor', 'shadow', 'shield', 'shovel', 'silver',
+  'stream', 'temple', 'throat', 'ticket', 'tunnel', 'valley', 'walnut', 'willow', 'wizard', 'window',
+  // 7 letters
+  'dolphin', 'volcano', 'bicycle', 'giraffe', 'penguin', 'blanket', 'captain', 'chimney', 'compass', 'crystal',
+  'cushion', 'diamond', 'glacier', 'harvest', 'horizon', 'journey', 'lantern', 'leopard', 'mailbox', 'monster',
+  'morning', 'network', 'octopus', 'package', 'painter', 'panther', 'peacock', 'picture', 'pyramid', 'rainbow',
+  'rooster', 'sandbox', 'scooter', 'soldier', 'stadium', 'tractor', 'village', 'warrior', 'whistle', 'monster',
+  // 8 letters
+  'elephant', 'mountain', 'notebook', 'backpack', 'sandwich', 'airplane', 'alligator', 'aquarium', 'baseball', 'building',
+  'campfire', 'corridor', 'dinosaur', 'firework', 'flamingo', 'fountain', 'hedgehog', 'hospital', 'kangaroo', 'marathon',
+  'necklace', 'painting', 'password', 'platform', 'postcard', 'railroad', 'sailboat', 'skeleton', 'treasure', 'umbrella',
 ];
 
 const passages: Passage[] = [
@@ -646,6 +666,76 @@ const passages: Passage[] = [
     text: 'The octopus has three hearts and blue blood. Two hearts pump blood to the gills, while the third pushes it through the rest of the body. It is also a master of disguise: thanks to special cells in its skin, it can change color in a fraction of a second to blend in or to communicate. Some octopuses even carry coconut shells around as portable shelters.',
     question: 'How many hearts does an octopus have?',
     answers: ['Three', 'One', 'Eight'],
+  },
+  {
+    text: 'The giant sequoia trees of California are among the oldest living beings on Earth, with some individuals exceeding three thousand years of age. A vital secret of their longevity lies in their bark: up to thirty centimeters thick and completely free of flammable resin, it shields the trunk from the intense heat of periodic forest wildfires.',
+    question: 'What protects giant sequoia trees from wildfires?',
+    answers: ['Thick bark up to thirty centimeters wide', 'Deep roots burrowing into bedrock', 'Constant release of watery sap'],
+  },
+  {
+    text: 'Geckos are famous for their ability to sprint across ceilings and glass panes without slipping. They do not rely on suction cups or glue, but on millions of microscopic bristles on their footpads. These bristles interact with surface molecules through Van der Waals forces, creating powerful adhesion that instantly detaches when peeled at a slight angle.',
+    question: 'What enables geckos to climb smooth glass?',
+    answers: ['Millions of microscopic bristles', 'A sticky natural secretion', 'Tiny suction pads on their toes'],
+  },
+  {
+    text: 'Aboard traditional wooden sailing ships, crew members measured speed using a chip log. A small wooden board attached to a knotted line was cast off the stern while a sailor turned a thirty-second sandglass. Counting how many knots slipped through his hands before the sand ran out gave the ship’s speed in nautical miles per hour, giving birth to the knot.',
+    question: 'How long was the sandglass used on sailing ships to measure speed?',
+    answers: ['Thirty seconds', 'Three minutes', 'Fifteen minutes'],
+  },
+  {
+    text: 'Homing pigeons possess a remarkable dual navigation system. Besides tracking the sun’s angle across the sky and mapping wind-borne scents, their beaks contain microscopic magnetite crystals linked directly to the trigeminal nerve. These crystals act as a biological compass that detects the inclination of Earth’s magnetic field even on overcast days.',
+    question: 'What do homing pigeons carry in their beaks to sense magnetic fields?',
+    answers: ['Microscopic magnetite crystals', 'Pressure-sensitive air sacs', 'Thermal heat sensors'],
+  },
+  {
+    text: 'In September 1783, the Montgolfier brothers conducted the world’s first passenger flight in front of King Louis XVI at Versailles. To confirm that high-altitude air remained breathable, they placed a sheep named Montauciel, a duck, and a rooster into the wicker basket. After an eight-minute flight reaching five hundred meters, the animals landed safely in nearby woods.',
+    question: 'Which animals flew on the first passenger hot-air balloon?',
+    answers: ['A sheep, a duck, and a rooster', 'Two hunting dogs and a cat', 'A falcon and a white dove'],
+  },
+  {
+    text: 'Giant bamboo holds the record as the fastest-growing land plant on Earth. Under ideal tropical conditions during the monsoon season, its shoots can elongate by nearly a full meter within twenty-four hours. This astonishing rate occurs because all cells in the culm are pre-formed and simply inflate rapidly by absorbing ground moisture like sponges.',
+    question: 'How much can giant bamboo grow in a single day?',
+    answers: ['Nearly a meter', 'Ten centimeters', 'Three meters'],
+  },
+  {
+    text: 'Deep in the Andean canyons, Inca engineers constructed suspension bridges spanning raging rivers without timber piers or iron cables. Entire communities harvested wild mountain grass, twisting the fibers into slender ropes that were braided into cables as thick as tree trunks. Every year, the worn bridge was cut down and rebuilt in a three-day festival.',
+    question: 'What primary material did the Inca use for their suspension bridges?',
+    answers: ['Braided wild mountain grass', 'Llama leather strips', 'Cedar boards bound with hemp'],
+  },
+  {
+    text: 'In 1610, Galileo Galilei trained his handcrafted telescope on Jupiter and discovered four bright points of light arranged in a straight line beside the planet. Over successive nights, he observed them shifting positions as they orbited Jupiter. These Galilean moons provided humanity’s first direct visual proof that not all celestial bodies circle Earth.',
+    question: 'How many moons of Jupiter did Galileo first discover in 1610?',
+    answers: ['Four', 'Two', 'Seven'],
+  },
+  {
+    text: 'Throughout the rainforests of Central America, the ancient Maya regarded cacao seeds as sacred currency and gifts of the gods. Besides using the beans to buy food and goods, they crushed them to brew a bitter, foamy ceremonial drink. They poured the beverage back and forth between vessels to produce a thick froth and spiced it with ground chili peppers and vanilla.',
+    question: 'What pungent spice did the Maya add to their foamy cacao beverage?',
+    answers: ['Chili peppers', 'Wild ginger', 'Dried cloves'],
+  },
+  {
+    text: 'In selected tropical bays across the Caribbean and Pacific, night waters sparkle with brilliant electric blue light whenever stirred by breaking waves or swimming oars. This phenomenon is generated by billions of single-celled plankton called dinoflagellates. When mechanical stress bends their cell membranes, a chemical flash is triggered to scare away marine predators.',
+    question: 'What color is the light emitted by bioluminescent dinoflagellates?',
+    answers: ['Brilliant electric blue', 'Emerald green', 'Golden amber'],
+  },
+  {
+    text: 'Chameleons do not change their skin color by mixing liquid pigments in their cells. Beneath their outer skin lies a layer of iridophore cells containing a lattice of guanine nanocrystals. By tensing or relaxing their dermal tissue, chameleons adjust the spacing between these crystals, selectively reflecting specific wavelengths of ambient light like photonic mirrors.',
+    question: 'How do chameleons shift their skin coloration?',
+    answers: ['By altering the spacing between nanocrystals in their skin', 'By squeezing ink sacs under their scales', 'By changing their surface body temperature'],
+  },
+  {
+    text: 'According to a centuries-old legend from the Ethiopian highlands, coffee was first discovered by an observant young goat herder named Kaldi. He noticed that after his flock grazed on the bright red berries of an unfamiliar shrub, the goats skipped and danced with unusual vitality all through the night. Kaldi gathered a handful of berries and brought them to a nearby monastery.',
+    question: 'Who first discovered the energizing effect of coffee berries according to legend?',
+    answers: ['An observant goat herder named Kaldi', 'A spice trader from the Red Sea', 'A wandering monk'],
+  },
+  {
+    text: 'Beneath the vast Antarctic ice sheet, snowfall accumulated over millennia has been compressed into pristine blue ice. Trapped within the solid crystal lattice are millions of microscopic air bubbles sealed for hundreds of thousands of years. By drilling ice cores exceeding three kilometers in depth, paleoclimatologists directly extract and test ancient atmospheric samples.',
+    question: 'What do climate scientists sample from deep Antarctic ice cores?',
+    answers: ['Pristine air bubbles sealed for hundreds of thousands of years', 'Fossilized droplets of seawater', 'Preserved pollen from extinct trees'],
+  },
+  {
+    text: 'Across a dozen coastal and inland deserts worldwide, travelers encounter the acoustic wonder of singing sand dunes. When dry sand avalanches slide down steep leeward slopes, millions of uniformly sized quartz grains collide at identical frequencies. This synchronized friction generates a deep, cello-like drone that can resonate across the desert for several minutes.',
+    question: 'What creates the deep acoustic hum of singing sand dunes?',
+    answers: ['The synchronized friction of sliding quartz grains', 'High-altitude winds whistling through rock clefts', 'Echoes from subterranean caverns'],
   },
 ];
 

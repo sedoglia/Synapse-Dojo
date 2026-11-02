@@ -608,12 +608,32 @@ const ui: Locale['ui'] = {
 };
 
 const words: string[] = [
-  'albero', 'barca', 'candela', 'delfino', 'elefante', 'farfalla', 'gelato', 'isola', 'lampada', 'montagna',
-  'nuvola', 'ombrello', 'pianoforte', 'quaderno', 'razzo', 'sedia', 'tamburo', 'uovo', 'vulcano', 'zaino',
-  'anello', 'bicicletta', 'cuscino', 'drago', 'forbici', 'giraffa', 'chiave', 'limone', 'martello', 'nave',
-  'orologio', 'pinguino', 'ragno', 'specchio', 'tazza', 'violino', 'castello', 'fragola', 'gabbiano', 'lupo',
-  'medaglia', 'nido', 'pentola', 'scarpa', 'treno', 'valigia', 'cometa', 'faro', 'ghianda', 'pane',
-  'mattone', 'cavallo', 'tenda', 'spugna', 'pera', 'bottiglia', 'corona', 'aquilone', 'fiume', 'stella',
+  // 4 lettere
+  'pane', 'faro', 'molo', 'lupo', 'nido', 'pera', 'nave', 'mela', 'sole', 'luna',
+  'rosa', 'topo', 'cono', 'onda', 'vaso', 'spia', 'arco', 'dado', 'lama', 'tana',
+  'pino', 'rana', 'seta', 'tubo', 'volo', 'remo', 'duna', 'fune', 'telo', 'cura',
+  'orlo', 'lago', 'voto', 'fata', 'rete', 'capo', 'buco', 'muro', 'filo', 'uovo',
+  // 5 lettere
+  'barca', 'treno', 'tazza', 'drago', 'gatto', 'zaino', 'fiume', 'ponte', 'pesce', 'porta',
+  'cuore', 'prato', 'piuma', 'bosco', 'spada', 'ruota', 'sasso', 'corda', 'tenda', 'volpe',
+  'pasta', 'fuoco', 'perla', 'ragno', 'corvo', 'scala', 'notte', 'tasto', 'torre', 'fiore',
+  'posto', 'museo', 'sogno', 'cassa', 'banco', 'tempo', 'vetro', 'vento', 'campo', 'corno',
+  'clima', 'salto', 'legno', 'fango', 'isola', 'foglia', 'sabbia', 'tigre', 'libro', 'disco',
+  // 6 lettere
+  'albero', 'anello', 'limone', 'scarpa', 'corona', 'fabbro', 'scudo', 'quadro', 'stella', 'pietra',
+  'chiave', 'mulino', 'farina', 'motore', 'strada', 'tesoro', 'frutto', 'matita', 'catena', 'balena',
+  'piazza', 'moneta', 'cometa', 'ghianda', 'spugna', 'candela', 'valigia', 'mattone', 'cavallo', 'camera',
+  'foglio', 'parola', 'musica', 'sapone', 'scoglio', 'tavolo', 'natura', 'figura', 'favola', 'casale',
+  'grotta', 'teatro', 'pianta', 'viaggio', 'boschi', 'cerchio', 'pittore', 'falco', 'medico', 'regina',
+  // 7 lettere
+  'delfino', 'farfalla', 'lampada', 'fragola', 'aquilone', 'castello', 'martello', 'formica', 'tamburo', 'pianura',
+  'finestra', 'campana', 'sciarpa', 'giardino', 'orologio', 'pettine', 'bottiglia', 'lanterna', 'forbici', 'giraffa',
+  'pinguino', 'specchio', 'violino', 'gabbiano', 'sentiero', 'palazzo', 'foresta', 'miniera', 'disegno', 'balcone',
+  'fontana', 'profumo', 'pianeta', 'argento', 'veliero', 'tramonto', 'carrello', 'cavaliere', 'cristallo', 'chitarra',
+  // 8 lettere
+  'elefante', 'montagna', 'quaderno', 'vulcano', 'cuscino', 'cappello', 'bottone', 'carrozza', 'trombetta', 'diamante',
+  'scultore', 'tempesta', 'giostra', 'smeraldo', 'formaggio', 'pescatore', 'castagna', 'orizzonte', 'torrente', 'elicottero',
+  'labirinto', 'mappamondo', 'tartaruga', 'barattolo', 'conchiglia', 'ghiacciaio', 'lampadario', 'passerotto', 'scoiattolo', 'tamburino',
 ];
 
 const passages: Passage[] = [
@@ -638,7 +658,7 @@ const passages: Passage[] = [
     answers: ['Circa sei gradi e mezzo', 'Circa due gradi', 'Circa quindici gradi'],
   },
   {
-    text: 'Nel piccolo paese di Valfonda il mercato si tiene ogni giovedì in piazza. Il banco più frequentato non è quello della frutta né quello dei formaggi, ma quello di Elio, che ripara orologi e radio da più di quarant’anni. La gente si ferma anche solo per chiacchierare: Elio conosce la storia di ogni famiglia e ricorda il nome di tutti.',
+    text: 'Nel piccolo paese di Valfonda il mercato si narrative ogni giovedì in piazza. Il banco più frequentato non è quello della frutta né quello dei formaggi, ma quello di Elio, che ripara orologi e radio da più di quarant’anni. La gente si ferma anche solo per chiacchierare: Elio conosce la storia di ogni famiglia e ricorda il nome di tutti.',
     question: 'Che lavoro fa Elio?',
     answers: ['Ripara orologi e radio', 'Vende formaggi', 'Coltiva frutta'],
   },
@@ -646,6 +666,76 @@ const passages: Passage[] = [
     text: 'Il polpo ha tre cuori e il sangue blu. Due cuori pompano il sangue verso le branchie, il terzo lo spinge nel resto del corpo. È anche un abilissimo trasformista: grazie a cellule speciali nella pelle può cambiare colore in una frazione di secondo per mimetizzarsi o per comunicare. Alcuni polpi usano persino gusci di noce di cocco come rifugi portatili.',
     question: 'Quanti cuori ha il polpo?',
     answers: ['Tre', 'Uno', 'Otto'],
+  },
+  {
+    text: 'Le sequoie giganti della California sono tra gli alberi più longevi al mondo, potendo superare i tremila anni. Uno dei loro segreti di sopravvivenza è la corteccia: spessa fino a trenta centimetri e priva di resina infiammabile, protegge l’albero dal calore dei frequenti incendi boschivi, che al contrario bruciano i cespugli e concimano il terreno circostante.',
+    question: 'Cosa protegge le sequoie dagli incendi boschivi?',
+    answers: ['La corteccia spessa fino a trenta centimetri', 'Le radici profonde nella roccia', 'La produzione di linfa acquosa'],
+  },
+  {
+    text: 'Il geco è celebre per la capacità di correre sui soffitti e sui vetri più lisci senza scivolare. Non usa ventose né sostanze appiccicose, bensì milioni di setole microscopiche presenti sotto le dita. Queste setole interagiscono con le molecole della superficie attraverso le forze di Van der Waals, creando un’adesione fortissima che si stacca all’istante sollevando il dito con la giusta inclinazione.',
+    question: 'Cosa permette al geco di camminare sui vetri?',
+    answers: ['Milioni di setole microscopiche', 'Una secrezione adesiva naturale', 'Piccole ventose sotto i polpastrelli'],
+  },
+  {
+    text: 'A bordo delle antiche navi a vela, la velocità veniva misurata con il solcometro a barchetta. Uno zatterino di legno legato a una corda con nodi equidistanti veniva gettato a poppa, mentre un marinaio capovolgeva una clessidra da trenta secondi. Il numero di nodi che scorrevano tra le mani prima che la sabbia finisse indicava la velocità in miglia orarie, da cui nacque il termine nodo.',
+    question: 'Quanto durava la clessidra usata per misurare la velocità delle navi?',
+    answers: ['Trenta secondi', 'Tre minuti', 'Un quarto d’ora'],
+  },
+  {
+    text: 'I piccioni viaggiatori possiedono uno straordinario sistema di navigazione a lungo raggio. Oltre a orientarsi con la posizione del sole e la mappa olfattiva dei venti, hanno nel becco microscopici cristalli di magnetite collegati al sistema nervoso. Questi cristalli funzionano come una bussola biologica che permette loro di leggere l’inclinazione del campo magnetico terrestre anche in giorni nuvolosi.',
+    question: 'Cosa contengono i piccioni nel becco per orientarsi col campo magnetico?',
+    answers: ['Minuscoli cristalli di magnetite', 'Ghiandole sensibili alla pressione', 'Recettori di calore solare'],
+  },
+  {
+    text: 'Nel settembre del 1783, i fratelli Montgolfier organizzarono a Versailles la prima dimostrazione pubblica di volo con passeggeri viventi. Per verificare che l’aria in quota fosse respirabile, caricarono nel cesto di vimini una pecora di nome Montauciel, un’anatra e un gallo. Dopo un volo di otto minuti a circa cinquecento metri di altezza, gli animali atterrarono illesi in un bosco.',
+    question: 'Quali animali volarono sulla prima mongolfiera a Versailles?',
+    answers: ['Una pecora, un’anatra e un gallo', 'Due cani da caccia e un gatto', 'Un falco e una colomba'],
+  },
+  {
+    text: 'Il bambù gigante detiene il record di pianta terrestre a crescita più rapida. In condizioni climatiche favorevoli, durante la stagione delle piogge, i suoi germogli possono allungarsi di quasi un metro nell’arco di appena ventiquattro ore. Questa velocità impressionante è dovuta al fatto che tutte le cellule del fusto sono già formate all’inizio e si distendono assorbendo acqua come spugne.',
+    question: 'Di quanto può allungarsi il bambù gigante in un solo giorno?',
+    answers: ['Quasi un metro', 'Dieci centimetri', 'Tre metri'],
+  },
+  {
+    text: 'Nelle gole più profonde delle Ande, gli Inca costruivano ponti sospesi capaci di superare fiumi impetuosi senza usare piloni o metallo. Intere comunità intrecciavano erba secca delle alture in corde sottili, che poi venivano unite in fasci spessi come tronchi d’albero. Ogni anno il ponte vecchio veniva tagliato e ricostruito da capo in tre giorni di festa collettiva.',
+    question: 'Con che materiale venivano costruiti i ponti sospesi inca?',
+    answers: ['Erba secca intrecciata in grandi fasci', 'Strisce di cuoio di lama', 'Tavole di cedro legate con canapa'],
+  },
+  {
+    text: 'Nel 1610 Galileo Galilei puntò il suo cannocchiale autocostruito verso Giove e notò quattro piccoli astri disposti in fila retta vicino al pianeta. Nei giorni successivi vide che cambiavano posizione girandogli attorno: erano le quattro lune maggiori, oggi chiamate galileiane. Fu la prima prova visiva inconfutabile che non tutti i corpi celesti orbitavano attorno alla Terra.',
+    question: 'Quanti satelliti di Giove osservò Galileo per la prima volta?',
+    answers: ['Quattro', 'Due', 'Sette'],
+  },
+  {
+    text: 'Nelle foreste dell’America Centrale, i Maya consideravano i semi dell’albero del cacao un dono divino e un bene prezioso. Non solo venivano usati come moneta corrente per scambi commerciali, ma servivano a preparare una bevanda cerimoniale densa e amara, montata a lungo per produrre una spessa schiuma e aromatizzata con peperoncino e vaniglia.',
+    question: 'Con quale spezia piccante i Maya insaporivano la bevanda al cacao?',
+    answers: ['Peperoncino', 'Zenzero selvatico', 'Chiodi di garofano'],
+  },
+  {
+    text: 'In alcune lagune tropicali dell’Oceano Pacifico, l’acqua si illumina di una luce azzurra scintillante ogni volta che viene agitata dalle onde o dal passaggio di una barca. Questo fenomeno è causato da minuscole alghe unicellulari chiamate dinoflagellati: quando avvertono una pressione meccanica, attivano una reazione chimica protettiva che produce un lampo di luce bioluminescente.',
+    question: 'Di che colore è la luce emessa dal plancton bioluminescente?',
+    answers: ['Azzurra scintillante', 'Verde smeraldo', 'Giallo dorato'],
+  },
+  {
+    text: 'Il camaleonte non cambia colore della pelle mescolando pigmenti come su una tavolozza. Sotto l’epidermide possiede uno strato di cellule contenenti nanocristalli di guanina disposti a griglia. Quando il rettile si emoziona o si rilassa, modifica la distanza tra questi cristalli: avvicinandoli o allontanandoli seleziona quale lunghezza d’onda della luce viene riflessa verso l’esterno.',
+    question: 'In che modo il camaleonte cambia colore?',
+    answers: ['Modificando la distanza tra nanocristalli nella pelle', 'Rilasciando inchiostri da ghiandole interne', 'Aumentando la temperatura superficiale'],
+  },
+  {
+    text: 'Secondo un’antica leggenda diffusa sugli altopiani dell’Etiopia, la pianta del caffè fu scoperta da un giovane pastore di nome Kaldi. Un giorno Kaldi notò che il suo gregge di capre, dopo aver brucato le bacche rosse di un cespuglio sconosciuto, correva e saltava con un’energia inconsueta per tutta la notte. Incuriosito, colse le bacche e le portò ai saggi del vicino monastero.',
+    question: 'Chi fu il primo a notare l’effetto energizzante delle bacche di caffè?',
+    answers: ['Un giovane pastore di capre di nome Kaldi', 'Un mercante di spezie del Mar Rosso', 'Un medico viaggiatore'],
+  },
+  {
+    text: 'Nell’inlandsis dell’Antartide la neve accumulata nei millenni si è compressa trasformandosi in ghiaccio compatto. Intrappolate tra i cristalli di ghiaccio si trovano minuscole bollicine d’aria sigillate da centinaia di migliaia di anni. Estraendo carote di ghiaccio profonde oltre tremila metri, i paleoclimatologi possono campionare direttamente l’atmosfera del passato.',
+    question: 'Cosa trovano i ricercatori intrappolato nel ghiaccio dell’Antartide?',
+    answers: ['Bollicine d’aria sigillate da centinaia di migliaia di anni', 'Gocce d’acqua marina fossilizzata', 'Spore di piante equatoriali'],
+  },
+  {
+    text: 'In una dozzina di deserti in tutto il mondo accade il raro fenomeno delle dune cantanti. Quando grandi valanghe di sabbia asciutta scivolano spontaneamente lungo i pendii ripidi, i granelli di quarzo della stessa dimensione sfregano tra loro alla medesima frequenza, generando un rombo profondo e armonico che può durare diversi minuti e sentirsi a chilometri di distanza.',
+    question: 'Da cosa è prodotto il suono cupo delle dune cantanti?',
+    answers: ['Dallo sfregamento uniforme dei granelli di sabbia in movimento', 'Dalle correnti di vento che penetrano nelle fenditure rocciose', 'Dall’eco dei fiumi sotterranei sotto la sabbia'],
   },
 ];
 
