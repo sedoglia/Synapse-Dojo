@@ -47,7 +47,7 @@ function scoreChart(): HTMLElement {
   return wrap(root, 'chart-wrap');
 }
 
-/** Spider chart of the eight skill domains. */
+/** Spider chart of the nine skill domains. */
 function domainRadar(): HTMLElement {
   const S = 300, C = S / 2, R = 92;
   const n = DOMAINS.length;
