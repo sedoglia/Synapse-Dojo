@@ -1,4 +1,4 @@
-﻿import type { Ctx } from '../ctx';
+import type { Ctx } from '../ctx';
 import type { I18nKey } from '../i18n';
 
 export type Domain = 'speed' | 'attention' | 'executive' | 'wm' | 'memory' | 'spatial' | 'reasoning' | 'language' | 'coordination';
@@ -9,6 +9,8 @@ export interface ExerciseResult {
   score: number; // 0–100
   detail: string; // human-readable raw result
   level?: number; // starting level for the next session (adaptive exercises)
+  timeBonus?: number; // optional time bonus points added to score (0–10)
+  speedBonus?: boolean; // explicitly mark speed bonus (e.g. in real-time games)
 }
 
 export interface Exercise {

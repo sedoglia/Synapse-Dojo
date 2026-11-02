@@ -1,4 +1,4 @@
-﻿import { h, rand, pick, scale, flash } from '../dom';
+import { h, rand, pick, scale, flash } from '../dom';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';
 import { keypad, keypadKeyboard } from '../widgets';
@@ -114,6 +114,7 @@ export const math: Exercise = {
     if (ctx.quick) {
       return { score: (correct / total) * scale(secs / total, 1.5, 6.5), detail };
     }
-    return { score: st.score(), detail, level: st.next() };
+    const { score, timeBonus } = ctx.withTimeBonus(st.score(), 3.0);
+    return { score, detail, level: st.next(), timeBonus };
   },
 };

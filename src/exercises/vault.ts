@@ -1,4 +1,4 @@
-﻿import { h, shuffle, clamp, flash } from '../dom';
+import { h, shuffle, clamp, flash } from '../dom';
 import { t, words } from '../i18n';
 import type { Exercise } from './types';
 
@@ -90,6 +90,8 @@ export const vault: Exercise = {
     if (ctx.quick) return { score: perf * 100, detail };
 
     const level = perf >= 0.75 ? Math.min(MAX_LEVEL, lvl + 1) : perf < 0.45 ? Math.max(1, lvl - 1) : lvl;
-    return { score: ((lvl - 1 + perf) / MAX_LEVEL) * 100, detail, level };
+    const base = ((lvl - 1 + perf) / MAX_LEVEL) * 100;
+    const { score, timeBonus } = ctx.withTimeBonus(base, 2.0);
+    return { score, detail, level, timeBonus };
   },
 };

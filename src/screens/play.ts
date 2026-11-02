@@ -233,8 +233,14 @@ async function practiceRound(ex: Exercise, step: { i: number; n: number } | null
   store.data.bestStreak = Math.max(store.data.bestStreak, ctx.bestStreak);
   store.bump('levelUps', ctx.levelUps);
   const isBest = prevBest === null || score > prevBest;
+  const speedBonusEarned = res.speedBonus ?? (res.timeBonus !== undefined ? res.timeBonus >= 3 : ctx.isSpeedBonus);
   // Level-ups are capped so one lucky session can't outweigh steady daily practice.
-  const xp = addXp(XP.exercise + (isBest && prevBest !== null ? XP.best : 0) + Math.min(ctx.levelUps, 4) * XP.levelUp);
+  const xp = addXp(
+    XP.exercise +
+      (isBest && prevBest !== null ? XP.best : 0) +
+      Math.min(ctx.levelUps, 4) * XP.levelUp +
+      (speedBonusEarned ? XP.speed : 0),
+  );
   const badges = checkBadges();
   if (isBest || badges.length) sfx.fanfare();
 
@@ -256,8 +262,9 @@ async function practiceRound(ex: Exercise, step: { i: number; n: number } | null
           h('div', { class: 'intro-icon' }, ex.icon),
           h('h2', {}, t(ex.name)),
           num,
-          h('div', { class: 'muted' }, `/ 100 · ${res.detail}`),
+          h('div', { class: 'muted' }, `/ 100 · ${res.detail}${res.timeBonus ? ` · ⚡ +${res.timeBonus} ${t('result.timeBonusPts')}` : ''}`),
           ctx.bestStreak >= 3 ? h('div', { class: 'muted' }, `🔥 ${t('result.combo', { n: ctx.bestStreak })}`) : null,
+          speedBonusEarned ? h('div', { class: 'badge-speed' }, `⚡ ${t('result.speedBonus')}`) : null,
           isBest
             ? h('div', { class: 'badge-best' }, `🏆 ${t('common.newBest')}`)
             : h('div', { class: 'muted' }, `${t('common.best')}: ${prevBest}`),

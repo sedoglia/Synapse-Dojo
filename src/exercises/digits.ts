@@ -1,4 +1,4 @@
-﻿import { h, rand, flash } from '../dom';
+import { h, rand, flash } from '../dom';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';
 import { keypad, keypadKeyboard } from '../widgets';
@@ -81,6 +81,7 @@ export const digits: Exercise = {
       await ctx.wait(ok ? 500 : 1300);
     }
     ctx.progress(1);
-    return { score: st.score(), detail: t('ex.digits.detail', { ok: correct, n: trials, span: best }), level: st.next() };
+    const { score, timeBonus } = ctx.withTimeBonus(st.score(), 2.8);
+    return { score, detail: t('ex.digits.detail', { ok: correct, n: trials, span: best }), level: st.next(), timeBonus };
   },
 };

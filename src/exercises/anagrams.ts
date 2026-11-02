@@ -122,10 +122,12 @@ export const anagrams: Exercise = {
     }
     ctx.progress(1);
 
+    const { score, timeBonus } = ctx.withTimeBonus(st.score(), 4.0);
     return {
-      score: st.score(),
+      score,
       detail: t('ex.anagrams.detail', { ok: correct, n: trials }),
       level: st.next(),
+      timeBonus,
     };
   },
 };

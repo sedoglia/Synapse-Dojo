@@ -1,4 +1,4 @@
-﻿import { todayKey } from './dom';
+import { todayKey } from './dom';
 import { store } from './storage';
 import type { I18nKey } from './i18n';
 import { EXERCISES, DOMAINS } from './exercises';
@@ -7,7 +7,7 @@ import { EXERCISES, DOMAINS } from './exercises';
  * Rewards are for showing up and effort, not just for high scores: everyone at their own level
  * should feel progress. (Gamification raises motivation without changing what is trained.)
  */
-export const XP = { exercise: 20, practice: 5, best: 10, levelUp: 5, check: 30, plan: 50 };
+export const XP = { exercise: 20, practice: 5, best: 10, levelUp: 5, speed: 10, check: 30, plan: 50 };
 
 /** Player level n needs 50·n·(n−1) XP in total: 100 for level 2, 300 for 3, 600 for 4… */
 export function playerLevel(xp = store.data.xp): { level: number; from: number; to: number } {

@@ -163,10 +163,12 @@ export const stories: Exercise = {
     }
     ctx.progress(1);
 
+    const { score, timeBonus } = ctx.withTimeBonus(st.score(), 3.0);
     return {
-      score: st.score(),
+      score,
       detail: t('ex.stories.detail', { ok: correct, n: totalQuestions }),
       level: st.next(),
+      timeBonus,
     };
   },
 };

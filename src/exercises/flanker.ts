@@ -68,6 +68,7 @@ export const flanker: Exercise = {
       display.innerHTML = choice ? '' : `⏱ ${t('common.timeout')}`;
 
       const ok = ctx.track(st, choice === centerDir, {
+        rt,
         was: arrowChar(centerDir),
       });
 

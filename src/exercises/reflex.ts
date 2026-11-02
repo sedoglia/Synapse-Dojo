@@ -1,4 +1,4 @@
-﻿import { h, rand } from '../dom';
+import { h, rand } from '../dom';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';
 import type { Exercise } from './types';
@@ -51,6 +51,7 @@ export const reflex: Exercise = {
       pads[k].classList.remove('go', 'nogo');
 
       const ok = ctx.track(st, noGo ? tapped === null : tapped === k, {
+        rt,
         was: noGo ? t('fb.noGo') : tapped === null ? t('fb.tooSlow') : t('fb.otherPad'),
       });
       if (ok) {

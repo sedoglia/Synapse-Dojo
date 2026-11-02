@@ -338,6 +338,8 @@ const ui: Locale['ui'] = {
   'result.history': 'Il tuo livello nel tempo',
   'result.sinceFirst': '{pct} rispetto alla prima volta',
   'result.newBadge': 'Nuovo traguardo!',
+  'result.speedBonus': 'Bonus rapidità (+10 XP)',
+  'result.timeBonusPts': 'pts tempo',
   'level.player': 'Livello {n}',
   'level.up': 'Sei salito al livello {n}!',
   'home.next': 'Prossimo traguardo',

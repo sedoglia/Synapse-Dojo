@@ -109,10 +109,12 @@ export const binding: Exercise = {
     }
     ctx.progress(1);
 
+    const { score, timeBonus } = ctx.withTimeBonus(st.score(), 2.5);
     return {
-      score: st.score(),
+      score,
       detail: t('ex.binding.detail', { ok: correct, n: total }),
       level: st.next(),
+      timeBonus,
     };
   },
 };

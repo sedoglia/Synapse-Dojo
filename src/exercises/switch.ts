@@ -1,4 +1,4 @@
-﻿import { h, pick, scale, flash } from '../dom';
+import { h, pick, scale, flash } from '../dom';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';
 import { onKeys } from '../widgets';
@@ -63,7 +63,7 @@ export const ruleSwitch: Exercise = {
       const rt = performance.now() - shown;
       const want = answerFor(n, rule);
       const wantLabel = rule === 'parity' ? (want === 0 ? t('ex.switch.even') : t('ex.switch.odd')) : want === 0 ? '< 5' : '> 5';
-      const ok = ctx.track(st, side === want, { was: wantLabel });
+      const ok = ctx.track(st, side === want, { rt: side !== null ? rt : undefined, was: wantLabel });
       if (!ok) (want === 0 ? left : right).classList.add('correct-hint');
       if (ok) {
         correct++;

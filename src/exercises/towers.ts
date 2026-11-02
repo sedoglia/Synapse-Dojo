@@ -1,4 +1,4 @@
-﻿import { h, pick, flash } from '../dom';
+import { h, pick, flash } from '../dom';
 import { sfx } from '../audio';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';
@@ -137,6 +137,7 @@ export const towers: Exercise = {
       await ctx.wait(ok ? 600 : 1200);
     }
     ctx.progress(1);
-    return { score: st.score(), detail: t('ex.towers.detail', { ok: perfect, n: puzzles }), level: st.next() };
+    const { score, timeBonus } = ctx.withTimeBonus(st.score(), 5.0);
+    return { score, detail: t('ex.towers.detail', { ok: perfect, n: puzzles }), level: st.next(), timeBonus };
   },
 };

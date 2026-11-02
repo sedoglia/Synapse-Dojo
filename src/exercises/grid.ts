@@ -121,6 +121,7 @@ export const grid: Exercise = {
     }
     ctx.progress(1);
     const detail = bestB > 0 ? t('ex.grid.detail', { f: bestF, b: bestB }) : t('ex.grid.span', { n: bestF });
-    return { score: st.score(), detail, level: st.next() };
+    const { score, timeBonus } = ctx.withTimeBonus(st.score(), 2.8);
+    return { score, detail, level: st.next(), timeBonus };
   },
 };

@@ -88,6 +88,7 @@ export const crossMove: Exercise = {
       const rt = performance.now() - shown;
 
       const ok = ctx.track(st, choice === targetSide, {
+        rt,
         was: targetSide === 'left' ? 'SX' : 'DX',
       });
 

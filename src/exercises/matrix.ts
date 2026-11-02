@@ -210,10 +210,12 @@ export const matrix: Exercise = {
 
     ctx.progress(1);
 
+    const { score, timeBonus } = ctx.withTimeBonus(st.score(), 3.5);
     return {
-      score: st.score(),
+      score,
       detail: t('ex.matrix.detail', { ok: correct, n: trials }),
       level: st.next(),
+      timeBonus,
     };
   },
 };

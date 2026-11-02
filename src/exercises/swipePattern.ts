@@ -207,10 +207,12 @@ export const swipePattern: Exercise = {
 
     ctx.progress(1);
 
+    const { score, timeBonus } = ctx.withTimeBonus(st.score(), 2.2);
     return {
-      score: st.score(),
+      score,
       detail: t('ex.swipePattern.detail', { ok: correct, n: trials }),
       level: st.next(),
+      timeBonus,
     };
   },
 };

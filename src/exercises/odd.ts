@@ -1,4 +1,4 @@
-﻿import { h, rand, shuffle } from '../dom';
+import { h, rand, shuffle } from '../dom';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';
 import type { Exercise } from './types';
@@ -117,6 +117,7 @@ export const odd: Exercise = {
       await ctx.wait(ok ? 400 : 1100);
     }
     ctx.progress(1);
-    return { score: st.score(), detail: t('common.correct', { ok: correct, n: trials }), level: st.next() };
+    const { score, timeBonus } = ctx.withTimeBonus(st.score(), 2.5);
+    return { score, detail: t('common.correct', { ok: correct, n: trials }), level: st.next(), timeBonus };
   },
 };

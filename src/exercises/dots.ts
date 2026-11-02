@@ -125,10 +125,12 @@ export const dots: Exercise = {
     }
     ctx.progress(1);
 
+    const { score, timeBonus } = ctx.withTimeBonus(st.score(), 1.8);
     return {
-      score: st.score(),
+      score,
       detail: t('ex.dots.detail', { ok: correct, n: trials }),
       level: st.next(),
+      timeBonus,
     };
   },
 };

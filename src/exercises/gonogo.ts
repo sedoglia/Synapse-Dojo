@@ -74,6 +74,7 @@ export const gonogo: Exercise = {
       }
 
       ctx.track(st, ok, {
+        rt: !isNoGo && tapped ? rt : undefined,
         was: isNoGo ? t('fb.noGo') : t('fb.tooSlow'),
       });
 

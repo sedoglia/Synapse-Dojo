@@ -521,6 +521,11 @@ h3 {
   color: #b45309;
   animation: pop 0.5s;
 }
+.badge-speed {
+  font-weight: 800;
+  color: #d97706;
+  animation: pop 0.5s;
+}
 .parts {
   width: 100%;
   display: flex;

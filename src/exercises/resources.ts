@@ -142,10 +142,12 @@ export const resources: Exercise = {
     }
     ctx.progress(1);
 
+    const { score, timeBonus } = ctx.withTimeBonus(st.score(), 5.0);
     return {
-      score: st.score(),
+      score,
       detail: t('ex.resources.detail', { ok: correct, n: trials }),
       level: st.next(),
+      timeBonus,
     };
   },
 };

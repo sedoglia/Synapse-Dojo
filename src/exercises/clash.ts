@@ -1,4 +1,4 @@
-﻿import { h, pick, scale, flash } from '../dom';
+import { h, pick, scale, flash } from '../dom';
 import { t } from '../i18n';
 import { Staircase } from '../adaptive';
 import type { Exercise } from './types';
@@ -63,7 +63,8 @@ export const clash: Exercise = {
       rtSum += performance.now() - shown;
 
       const targetBtn = buttons[COLORS.findIndex((c) => c.id === target)];
-      const ok = ctx.track(st, choice === target, { was: label(target) });
+      const rt = choice !== null ? performance.now() - shown : undefined;
+      const ok = ctx.track(st, choice === target, { rt, was: label(target) });
       if (ok) correct++;
       else targetBtn.classList.add('correct-hint');
       if (choice) flash(buttons[COLORS.findIndex((c) => c.id === choice)], ok ? 'good' : 'bad');

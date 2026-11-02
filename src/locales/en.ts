@@ -338,6 +338,8 @@ export const ui = {
   'result.history': 'Your level over time',
   'result.sinceFirst': '{pct} since your first time',
   'result.newBadge': 'New achievement!',
+  'result.speedBonus': 'Speed bonus (+10 XP)',
+  'result.timeBonusPts': 'time pts',
   'level.player': 'Level {n}',
   'level.up': 'You reached level {n}!',
   'home.next': 'Next achievement',

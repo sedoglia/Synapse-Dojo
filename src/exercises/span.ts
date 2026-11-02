@@ -102,10 +102,12 @@ export const span: Exercise = {
     }
     ctx.progress(1);
 
+    const { score, timeBonus } = ctx.withTimeBonus(st.score(), 3.0);
     return {
-      score: st.score(),
+      score,
       detail: t('ex.span.detail', { ok: correct, n: trials, span: best }),
       level: st.next(),
+      timeBonus,
     };
   },
 };

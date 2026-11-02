@@ -1,4 +1,4 @@
-﻿import { h, shuffle, flash } from '../dom';
+import { h, shuffle, flash } from '../dom';
 import { t, words as allWords } from '../i18n';
 import type { Ctx } from '../ctx';
 import type { Exercise } from './types';
@@ -101,6 +101,8 @@ export const pairs: Exercise = {
       else if (res.acc < 0.5) level = Math.max(1, level - 1);
     }
     ctx.progress(1);
-    return { score: scores.reduce((a, b) => a + b, 0) / scores.length, detail: t('ex.pairs.detail', last), level };
+    const base = scores.reduce((a, b) => a + b, 0) / scores.length;
+    const { score, timeBonus } = ctx.withTimeBonus(base, 2.2);
+    return { score, detail: t('ex.pairs.detail', last), level, timeBonus };
   },
 };

@@ -1,4 +1,4 @@
-﻿import { h, rand, flash, clamp } from '../dom';
+import { h, rand, flash, clamp } from '../dom';
 import { sfx } from '../audio';
 import { store } from '../storage';
 import { t, meta } from '../i18n';
@@ -266,7 +266,8 @@ export const echo: Exercise = {
     }
     ctx.progress(1);
 
-    const score = clamp(blockScores.reduce((a, b) => a + b, 0) / blockScores.length, 0, 100);
-    return { score, detail: `${t('common.level')}: ${labelFor(level)}`, level };
+    const base = clamp(blockScores.reduce((a, b) => a + b, 0) / blockScores.length, 0, 100);
+    const { score, timeBonus } = ctx.withTimeBonus(base, 1.8);
+    return { score, detail: `${t('common.level')}: ${labelFor(level)}`, level, timeBonus };
   },
 };

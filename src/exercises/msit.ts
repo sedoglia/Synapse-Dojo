@@ -69,7 +69,7 @@ export const msit: Exercise = {
 
       display.textContent = choice !== null ? '' : `⏱ ${t('common.timeout')}`;
 
-      const ok = ctx.track(st, choice === targetDigit, { was: String(targetDigit) });
+      const ok = ctx.track(st, choice === targetDigit, { rt, was: String(targetDigit) });
       const targetBtn = buttons[targetDigit - 1];
 
       if (ok) {
