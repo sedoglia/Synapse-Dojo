@@ -367,7 +367,7 @@ const ui: Locale['ui'] = {
   'badge.explorer.name': '探索者',
   'badge.explorer.desc': '尝试全部 35 个练习',
   'badge.balanced.name': '全面发展',
-  'badge.balanced.desc': '7 天内训练全部 8 项能力',
+  'badge.balanced.desc': '7 天内训练全部 9 项能力',
   'badge.levelups25.name': '步步高升',
   'badge.levelups25.desc': '升级 25 次',
   'badge.plans10.name': '坚持不懈',

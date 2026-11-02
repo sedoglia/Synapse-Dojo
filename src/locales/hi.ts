@@ -367,7 +367,7 @@ const ui: Locale['ui'] = {
   'badge.explorer.name': 'खोजी',
   'badge.explorer.desc': 'सभी 35 अभ्यास आज़माएँ',
   'badge.balanced.name': 'संपूर्ण दिमाग',
-  'badge.balanced.desc': '7 दिनों में सभी 8 क्षमताओं का अभ्यास करें',
+  'badge.balanced.desc': '7 दिनों में सभी 9 क्षमताओं का अभ्यास करें',
   'badge.levelups25.name': 'चढ़ाई',
   'badge.levelups25.desc': '25 बार लेवल बढ़ाएँ',
   'badge.plans10.name': 'निरंतरता',

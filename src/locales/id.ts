@@ -367,7 +367,7 @@ const ui: Locale['ui'] = {
   'badge.explorer.name': 'Penjelajah',
   'badge.explorer.desc': 'Coba ke-35 latihan',
   'badge.balanced.name': 'Pikiran utuh',
-  'badge.balanced.desc': 'Latih ke-8 kemampuan dalam 7 hari',
+  'badge.balanced.desc': 'Latih ke-9 kemampuan dalam 7 hari',
   'badge.levelups25.name': 'Mendaki',
   'badge.levelups25.desc': 'Naik level 25 kali',
   'badge.plans10.name': 'Konsisten',
