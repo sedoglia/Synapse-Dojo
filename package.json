@@ -4,6 +4,9 @@
   "version": "0.6.0",
   "type": "module",
   "license": "PolyForm-Noncommercial-1.0.0",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build --mode web",
@@ -13,8 +16,8 @@
     "deploy:web": "node scripts/deploy-web.mjs"
   },
   "devDependencies": {
-    "typescript": "5.6.3",
-    "vite": "5.4.21",
+    "typescript": "7.0.2",
+    "vite": "8.3.5",
     "wrangler": "4.156.2"
   }
 }

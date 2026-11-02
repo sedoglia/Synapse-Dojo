@@ -2,7 +2,7 @@
 
 [![Live](https://img.shields.io/badge/Live-synapsedojo.com-5b5bf0)](https://synapsedojo.com/)
 [![License](https://img.shields.io/badge/License-PolyForm%20Noncommercial%201.0.0-blue.svg)](LICENSE)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.6-blue)](https://www.typescriptlang.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-7.0-blue)](https://www.typescriptlang.org/)
 [![PWA Ready](https://img.shields.io/badge/PWA-Offline%20Ready-success)](https://synapsedojo.com/)
 [![Languages](https://img.shields.io/badge/Languages-12-orange)](https://synapsedojo.com/)
 
@@ -90,7 +90,7 @@ synapse-dojo/
 
 ## 💻 Sviluppo Locale
 
-Requisiti: **Node.js 18+** e **npm**.
+Requisiti: **Node.js 22.12+** e **npm** (richiesti da Vite 8 e Wrangler 4).
 
 ```bash
 # Installa le dipendenze
