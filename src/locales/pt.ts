@@ -626,4 +626,441 @@ const passages: Passage[] = [
   },
 ];
 
-export default { ui, words, passages };
+import type { StoryScenario } from '../i18n';
+
+export const stories: StoryScenario[] = [
+  {
+    "name": "Elena",
+    "item": "uma bolsa azul",
+    "itemDistractors": [
+      "uma mochila vermelha",
+      "uma mala verde"
+    ],
+    "place": "embaixo do banco do parque",
+    "placeDistractors": [
+      "na frente do café",
+      "no vagão do trem"
+    ],
+    "time": "às 15:30",
+    "timeDistractors": [
+      "às 18:00",
+      "às 12:15"
+    ]
+  },
+  {
+    "name": "Marcos",
+    "item": "um caderno de couro",
+    "itemDistractors": [
+      "um livro ilustrado",
+      "um tablet preto"
+    ],
+    "place": "na mesa da biblioteca",
+    "placeDistractors": [
+      "no terraço",
+      "na sala de espera"
+    ],
+    "time": "na manhã de quinta-feira",
+    "timeDistractors": [
+      "na tarde de sexta-feira",
+      "na noite de terça-feira"
+    ]
+  },
+  {
+    "name": "Sara",
+    "item": "uma bicicleta amarela",
+    "itemDistractors": [
+      "um patinete prateado",
+      "uma moto branca"
+    ],
+    "place": "ao lado da fonte central",
+    "placeDistractors": [
+      "na frente da prefeitura",
+      "atrás da banca"
+    ],
+    "time": "às 9:00",
+    "timeDistractors": [
+      "às 11:30",
+      "às 14:00"
+    ]
+  },
+  {
+    "name": "Davi",
+    "item": "um cachecol de lã vermelha",
+    "itemDistractors": [
+      "um gorro azul",
+      "uma jaqueta marrom"
+    ],
+    "place": "na cadeira da cafeteria",
+    "placeDistractors": [
+      "na mureta do porto",
+      "no corredor do escritório"
+    ],
+    "time": "no sábado à noite",
+    "timeDistractors": [
+      "no domingo de manhã",
+      "na quarta às 16:00"
+    ]
+  },
+  {
+    "name": "Júlia",
+    "item": "um vaso de cerâmica branca",
+    "itemDistractors": [
+      "uma luminária dourada",
+      "um quadro de madeira"
+    ],
+    "place": "no parapeito da cozinha",
+    "placeDistractors": [
+      "no balcão da entrada",
+      "na estante da sala"
+    ],
+    "time": "às 17:45",
+    "timeDistractors": [
+      "às 20:00",
+      "às 10:15"
+    ]
+  },
+  {
+    "name": "Lucas",
+    "item": "um binóculo marítimo",
+    "itemDistractors": [
+      "uma bússola de latão",
+      "um mapa náutico antigo"
+    ],
+    "place": "sobre a rocha do farol",
+    "placeDistractors": [
+      "na proa do barco",
+      "no chalé do cais"
+    ],
+    "time": "às primeiras luzes da aurora",
+    "timeDistractors": [
+      "ao pôr do sol",
+      "ao meio-dia em ponto"
+    ]
+  },
+  {
+    "name": "Clara",
+    "item": "uma câmera fotográfica vintage",
+    "itemDistractors": [
+      "um estojo de lentes",
+      "um tripé de alumínio"
+    ],
+    "place": "no mirante panorâmico",
+    "placeDistractors": [
+      "pela alameda das tílias",
+      "na passarela de pedestres"
+    ],
+    "time": "na sexta-feira ao entardecer",
+    "timeDistractors": [
+      "no sábado ao amanhecer",
+      "na quinta-feira à tarde"
+    ]
+  },
+  {
+    "name": "Mateus",
+    "item": "um relógio de bolso dourado",
+    "itemDistractors": [
+      "uma pulseira de prata",
+      "um anel antigo"
+    ],
+    "place": "na mesa do antiquário",
+    "placeDistractors": [
+      "no cofre do hotel",
+      "na vitrine central"
+    ],
+    "time": "na segunda-feira às 11:00",
+    "timeDistractors": [
+      "na quarta-feira às 15:30",
+      "na sexta-feira às 9:15"
+    ]
+  },
+  {
+    "name": "Valéria",
+    "item": "um guarda-chuva amarelo de bolinhas",
+    "itemDistractors": [
+      "uma capa de chuva verde",
+      "um xale de seda"
+    ],
+    "place": "no ponto do bonde",
+    "placeDistractors": [
+      "na entrada do metrô",
+      "sob os arcos da praça"
+    ],
+    "time": "na quarta-feira de chuva",
+    "timeDistractors": [
+      "na terça ao sair do trabalho",
+      "na quinta-feira à noite"
+    ]
+  },
+  {
+    "name": "Simão",
+    "item": "uma lata de metal decorada",
+    "itemDistractors": [
+      "uma caixa de madeira",
+      "um pote de vidro"
+    ],
+    "place": "nos degraus do teatro",
+    "placeDistractors": [
+      "no corredor do cinema",
+      "junto à bilheteria"
+    ],
+    "time": "no domingo às 14:30",
+    "timeDistractors": [
+      "no sábado às 21:00",
+      "na segunda-feira às 18:00"
+    ]
+  },
+  {
+    "name": "Fernanda",
+    "item": "um mapa celeste enrolado",
+    "itemDistractors": [
+      "um globo terrestre",
+      "um astrolábio de bronze"
+    ],
+    "place": "no observatório da colina",
+    "placeDistractors": [
+      "na torre do castelo",
+      "no gramado do planetário"
+    ],
+    "time": "à meia-noite estrelada",
+    "timeDistractors": [
+      "às dez da noite",
+      "às duas da madrugada"
+    ]
+  },
+  {
+    "name": "André",
+    "item": "uma chave de ferro entalhada",
+    "itemDistractors": [
+      "um cadeado pesado",
+      "um medalhão gravado"
+    ],
+    "place": "no baú do sótão",
+    "placeDistractors": [
+      "atrás do quadro da sala",
+      "na gaveta da escrivaninha"
+    ],
+    "time": "na terça-feira às 16:15",
+    "timeDistractors": [
+      "na quinta-feira às 10:30",
+      "no domingo à tarde"
+    ]
+  },
+  {
+    "name": "Sílvia",
+    "item": "um bule de ferro fundido esmaltado",
+    "itemDistractors": [
+      "uma jarra de cristal",
+      "uma xícara de porcelana"
+    ],
+    "place": "na mesinha da estufa",
+    "placeDistractors": [
+      "no quiosque do jardim",
+      "na bancada do laboratório"
+    ],
+    "time": "no sábado às 10:00",
+    "timeDistractors": [
+      "no domingo às 17:00",
+      "na sexta-feira no café da manhã"
+    ]
+  },
+  {
+    "name": "Lourenço",
+    "item": "uma flauta de madeira de nogueira",
+    "itemDistractors": [
+      "um bandolim antigo",
+      "um arco de ébano"
+    ],
+    "place": "na ponte de pedra arqueada",
+    "placeDistractors": [
+      "na margem do riacho",
+      "sob o carvalho secular"
+    ],
+    "time": "na quarta-feira bem cedo",
+    "timeDistractors": [
+      "na quinta ao anoitecer",
+      "no sábado à tarde"
+    ]
+  },
+  {
+    "name": "Alice",
+    "item": "uma caixa de giz de cera",
+    "itemDistractors": [
+      "um caderno de esboços",
+      "uma paleta de tinta a óleo"
+    ],
+    "place": "na escadaria do museu",
+    "placeDistractors": [
+      "no claustro medieval",
+      "na entrada da galeria de arte"
+    ],
+    "time": "no domingo às 16:45",
+    "timeDistractors": [
+      "no sábado ao meio-dia",
+      "na terça-feira às 14:00"
+    ]
+  },
+  {
+    "name": "Fábio",
+    "item": "um chapéu de palha trançada",
+    "itemDistractors": [
+      "óculos escuros",
+      "uma bandana xadrez"
+    ],
+    "place": "no cais dos pescadores",
+    "placeDistractors": [
+      "na praia das conchas",
+      "na ancoragem dos veleiros"
+    ],
+    "time": "na sexta-feira ao meio-dia",
+    "timeDistractors": [
+      "no domingo às 11:00",
+      "na quarta-feira às 15:00"
+    ]
+  },
+  {
+    "name": "Beatriz",
+    "item": "uma lanterna de latão brilhante",
+    "itemDistractors": [
+      "um candelabro de três velas",
+      "uma lanterna de bolso"
+    ],
+    "place": "nos pórticos do pátio antigo",
+    "placeDistractors": [
+      "pelo corredor dos afrescos",
+      "em frente ao portal monumental"
+    ],
+    "time": "na quinta-feira às 20:30",
+    "timeDistractors": [
+      "na sexta-feira ao crepúsculo",
+      "no sábado de madrugada"
+    ]
+  },
+  {
+    "name": "Roberto",
+    "item": "um rádio portátil a pilhas",
+    "itemDistractors": [
+      "um toca-discos compacto",
+      "uma caixinha de som portátil"
+    ],
+    "place": "na bancada da marcenaria",
+    "placeDistractors": [
+      "no abrigo de ferramentas",
+      "na oficina mecânica"
+    ],
+    "time": "na segunda-feira às 8:30",
+    "timeDistractors": [
+      "na quarta-feira às 13:00",
+      "na sexta-feira às 17:15"
+    ]
+  },
+  {
+    "name": "Camila",
+    "item": "um leque de seda bordada",
+    "itemDistractors": [
+      "um xale de renda preta",
+      "um gorro de veludo"
+    ],
+    "place": "na varanda coberta do castelo",
+    "placeDistractors": [
+      "na sacada da torre",
+      "na galeria dos espelhos"
+    ],
+    "time": "na terça-feira ao pôr do sol",
+    "timeDistractors": [
+      "na quinta-feira à tarde",
+      "no domingo ao anoitecer"
+    ]
+  },
+  {
+    "name": "Gabriel",
+    "item": "um diário de bordo amarelado",
+    "itemDistractors": [
+      "um atlas de navegação encadernado",
+      "um pergaminho selado"
+    ],
+    "place": "na adega do velho lagar",
+    "placeDistractors": [
+      "no porão do navio a vela",
+      "no galpão de carruagens"
+    ],
+    "time": "no sábado à tarde às 15:00",
+    "timeDistractors": [
+      "na segunda-feira às 11:30",
+      "na quarta-feira à noite"
+    ]
+  },
+  {
+    "name": "Martina",
+    "item": "uma caixa de bombons de chocolate amargo",
+    "itemDistractors": [
+      "uma cesta de biscoitos de especiarias",
+      "uma torta de amêndoas"
+    ],
+    "place": "na vitrine da confeitaria",
+    "placeDistractors": [
+      "na mesinha da casa de chá",
+      "na entrada da mercearia"
+    ],
+    "time": "na quinta-feira às 17:00",
+    "timeDistractors": [
+      "no sábado às 10:30",
+      "no domingo às 16:15"
+    ]
+  },
+  {
+    "name": "Jorge",
+    "item": "uma lupa redonda",
+    "itemDistractors": [
+      "um microscópio portátil",
+      "uma pinça de precisão"
+    ],
+    "place": "na escrivaninha do escritório",
+    "placeDistractors": [
+      "no arquivo histórico de família",
+      "na prancheta de desenho técnico"
+    ],
+    "time": "na quarta-feira às 19:30",
+    "timeDistractors": [
+      "na terça-feira ao meio-dia",
+      "na sexta-feira às 18:45"
+    ]
+  },
+  {
+    "name": "Serena",
+    "item": "uma sacola de lona ecológica",
+    "itemDistractors": [
+      "uma cesta de vime clara",
+      "uma mochila de trilha"
+    ],
+    "place": "na banca de livros usados",
+    "placeDistractors": [
+      "no mercado de flores",
+      "em frente ao empório orgânico"
+    ],
+    "time": "no domingo de manhã às 10:15",
+    "timeDistractors": [
+      "no sábado às 16:00",
+      "na quinta-feira às 11:45"
+    ]
+  },
+  {
+    "name": "Pedro",
+    "item": "um estojo reforçado para violoncelo",
+    "itemDistractors": [
+      "uma pasta de partituras",
+      "uma capa de violão clássico"
+    ],
+    "place": "no palco do jardim de inverno",
+    "placeDistractors": [
+      "no saguão do auditório",
+      "na entrada da sala de concerto"
+    ],
+    "time": "na sexta-feira à noite às 21:15",
+    "timeDistractors": [
+      "no sábado à tarde",
+      "no domingo às 18:30"
+    ]
+  }
+];
+
+export default { ui, words, passages, stories };

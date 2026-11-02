@@ -626,4 +626,441 @@ const passages: Passage[] = [
   },
 ];
 
-export default { ui, words, passages };
+import type { StoryScenario } from '../i18n';
+
+export const stories: StoryScenario[] = [
+  {
+    "name": "埃莱娜",
+    "item": "一个蓝色手提包",
+    "itemDistractors": [
+      "一个红色双肩包",
+      "一个绿色行李箱"
+    ],
+    "place": "在公园长椅下方",
+    "placeDistractors": [
+      "在咖啡厅门前",
+      "在列车车厢内"
+    ],
+    "time": "在下午15:30",
+    "timeDistractors": [
+      "在下午18:00",
+      "在中午12:15"
+    ]
+  },
+  {
+    "name": "马可",
+    "item": "一本皮革手账本",
+    "itemDistractors": [
+      "一本插画书",
+      "一台黑色平板电脑"
+    ],
+    "place": "在图书馆的阅览桌上",
+    "placeDistractors": [
+      "在露台休息区",
+      "在候车室"
+    ],
+    "time": "在周四上午",
+    "timeDistractors": [
+      "在周五下午",
+      "在周二傍晚"
+    ]
+  },
+  {
+    "name": "莎拉",
+    "item": "一辆黄色自行车",
+    "itemDistractors": [
+      "一辆银色滑板车",
+      "一辆白色摩托车"
+    ],
+    "place": "在中央喷泉旁",
+    "placeDistractors": [
+      "在市政厅门前",
+      "在报刊亭后面"
+    ],
+    "time": "在上午9:00",
+    "timeDistractors": [
+      "在上午11:30",
+      "在下午14:00"
+    ]
+  },
+  {
+    "name": "戴维",
+    "item": "一条红色羊毛围巾",
+    "itemDistractors": [
+      "一顶蓝色毛线帽",
+      "一件棕色夹克外套"
+    ],
+    "place": "在咖啡店的木椅上",
+    "placeDistractors": [
+      "在港口的石堤上",
+      "在办公楼的走廊里"
+    ],
+    "time": "在周六晚上",
+    "timeDistractors": [
+      "在周日上午",
+      "在周三下午16:00"
+    ]
+  },
+  {
+    "name": "茱莉亚",
+    "item": "一个白陶瓷花瓶",
+    "itemDistractors": [
+      "一盏金色台灯",
+      "一幅木框油画"
+    ],
+    "place": "在厨房的窗台上",
+    "placeDistractors": [
+      "在玄关的柜台上",
+      "在客厅的书架上"
+    ],
+    "time": "在傍晚17:45",
+    "timeDistractors": [
+      "在晚上20:00",
+      "在上午10:15"
+    ]
+  },
+  {
+    "name": "卢卡斯",
+    "item": "一副水手望远镜",
+    "itemDistractors": [
+      "一个黄铜指南针",
+      "一张古老航海图"
+    ],
+    "place": "在灯塔的岩石上",
+    "placeDistractors": [
+      "在船头甲板上",
+      "在码头的小木屋里"
+    ],
+    "time": "在黎明破晓时分",
+    "timeDistractors": [
+      "在夕阳日落时",
+      "在正午十二点整"
+    ]
+  },
+  {
+    "name": "克莱尔",
+    "item": "一台复古胶片相机",
+    "itemDistractors": [
+      "一个镜头收纳盒",
+      "一个铝制三脚架"
+    ],
+    "place": "在全景景观露台上",
+    "placeDistractors": [
+      "在椴树林荫道旁",
+      "在步行天桥上"
+    ],
+    "time": "在周五日落时分",
+    "timeDistractors": [
+      "在周六清晨",
+      "在周四下午"
+    ]
+  },
+  {
+    "name": "马修",
+    "item": "一块金色怀表",
+    "itemDistractors": [
+      "一条银质手链",
+      "一枚古董戒指"
+    ],
+    "place": "在古董商人的书桌上",
+    "placeDistractors": [
+      "在酒店的保险箱里",
+      "在中央玻璃展柜内"
+    ],
+    "time": "在周一上午11:00",
+    "timeDistractors": [
+      "在周三下午15:30",
+      "在周五上午9:15"
+    ]
+  },
+  {
+    "name": "瓦伦蒂娜",
+    "item": "一把黄色波点雨伞",
+    "itemDistractors": [
+      "一件绿色雨衣",
+      "一条真丝披肩"
+    ],
+    "place": "在有轨电车站台",
+    "placeDistractors": [
+      "在地跌进站口",
+      "在广场的骑楼长廊下"
+    ],
+    "time": "在周三雨中",
+    "timeDistractors": [
+      "在周二下班时",
+      "在周四晚间"
+    ]
+  },
+  {
+    "name": "西蒙",
+    "item": "一个彩色印花铁盒",
+    "itemDistractors": [
+      "一个精致木盒",
+      "一个透明玻璃罐"
+    ],
+    "place": "在剧院的石阶上",
+    "placeDistractors": [
+      "在电影院的通道内",
+      "在售票处旁边"
+    ],
+    "time": "在周日下午14:30",
+    "timeDistractors": [
+      "在周六晚上21:00",
+      "在周一傍晚18:00"
+    ]
+  },
+  {
+    "name": "菲奥娜",
+    "item": "一卷星空星象图",
+    "itemDistractors": [
+      "一个桌面地球仪",
+      "一个青铜星盘"
+    ],
+    "place": "在山顶的天文台",
+    "placeDistractors": [
+      "在城堡的角楼里",
+      "在天文馆前坪草地上"
+    ],
+    "time": "在晴朗的午夜时分",
+    "timeDistractors": [
+      "在晚上十点",
+      "在凌晨两点"
+    ]
+  },
+  {
+    "name": "安德鲁",
+    "item": "一把雕花铁钥匙",
+    "itemDistractors": [
+      "一把沉重的大挂锁",
+      "一枚刻花纪念吊坠"
+    ],
+    "place": "在阁楼的大樟木箱里",
+    "placeDistractors": [
+      "在客厅挂画后面",
+      "在书桌抽屉深处"
+    ],
+    "time": "在周二下午16:15",
+    "timeDistractors": [
+      "在周四上午10:30",
+      "在周日下午"
+    ]
+  },
+  {
+    "name": "西尔维娅",
+    "item": "一把珐琅铸铁茶壶",
+    "itemDistractors": [
+      "一个水晶玻璃水壶",
+      "一只细瓷茶杯"
+    ],
+    "place": "在温室花房的桌上",
+    "placeDistractors": [
+      "在花园凉亭里",
+      "在工作室的操作台上"
+    ],
+    "time": "在周六上午10:00",
+    "timeDistractors": [
+      "在周日下午17:00",
+      "在周五早餐时"
+    ]
+  },
+  {
+    "name": "劳伦斯",
+    "item": "一支胡桃木长笛",
+    "itemDistractors": [
+      "一把古董曼陀铃",
+      "一根乌木琴弓"
+    ],
+    "place": "在石拱桥正中央",
+    "placeDistractors": [
+      "在小溪流水边",
+      "在古老橡树的树荫下"
+    ],
+    "time": "在周三清晨一早",
+    "timeDistractors": [
+      "在周四黄昏暮色时",
+      "在周六下午"
+    ]
+  },
+  {
+    "name": "爱丽丝",
+    "item": "一盒彩色蜡笔",
+    "itemDistractors": [
+      "一本写生素描本",
+      "一块油画调色板"
+    ],
+    "place": "在博物馆的宽阔台阶上",
+    "placeDistractors": [
+      "在中世纪回廊里",
+      "在艺术画廊的大门前"
+    ],
+    "time": "在周日下午16:45",
+    "timeDistractors": [
+      "在周六正午",
+      "在周二下午14:00"
+    ]
+  },
+  {
+    "name": "费边",
+    "item": "一顶编织草帽",
+    "itemDistractors": [
+      "一副深色太阳镜",
+      "一条格子方巾"
+    ],
+    "place": "在渔民的小码头上",
+    "placeDistractors": [
+      "在海贝沙滩边",
+      "在帆船停靠锚地"
+    ],
+    "time": "在周五中午",
+    "timeDistractors": [
+      "在周日上午11:00",
+      "在周三下午15:00"
+    ]
+  },
+  {
+    "name": "碧翠丝",
+    "item": "一盏光亮的黄铜马灯",
+    "itemDistractors": [
+      "一个三叉烛台",
+      "一只口袋手电筒"
+    ],
+    "place": "在古宅中庭的门廊下",
+    "placeDistractors": [
+      "在壁画长廊里",
+      "在宏伟的大门前"
+    ],
+    "time": "在周四晚上20:30",
+    "timeDistractors": [
+      "在周五薄暮时分",
+      "在周六深夜"
+    ]
+  },
+  {
+    "name": "罗伯特",
+    "item": "一台便携式电池收音机",
+    "itemDistractors": [
+      "一台小型黑胶唱机",
+      "一个小巧蓝牙音箱"
+    ],
+    "place": "在木工坊的工匠台桌上",
+    "placeDistractors": [
+      "在花园工具房里",
+      "在机械维修站内"
+    ],
+    "time": "在周一清晨8:30",
+    "timeDistractors": [
+      "在周三下午13:00",
+      "在周五傍晚17:15"
+    ]
+  },
+  {
+    "name": "卡米拉",
+    "item": "一把真丝刺绣折扇",
+    "itemDistractors": [
+      "一条黑色蕾丝披巾",
+      "一顶天鹅绒小帽"
+    ],
+    "place": "在城堡的观景敞廊里",
+    "placeDistractors": [
+      "在塔楼阳台上",
+      "在镜厅中央"
+    ],
+    "time": "在周二日落时分",
+    "timeDistractors": [
+      "在周四下午",
+      "在周日薄暮时"
+    ]
+  },
+  {
+    "name": "加百列",
+    "item": "一本泛黄的航海日志",
+    "itemDistractors": [
+      "一本精装航海图集",
+      "一份火漆封印羊皮纸"
+    ],
+    "place": "在古老榨汁坊的地窖里",
+    "placeDistractors": [
+      "在帆船的底层货舱",
+      "在马车棚库房里"
+    ],
+    "time": "在周六下午15:00",
+    "timeDistractors": [
+      "在周一上午11:30",
+      "在周三晚间"
+    ]
+  },
+  {
+    "name": "玛蒂娜",
+    "item": "一盒手工黑巧克力",
+    "itemDistractors": [
+      "一篮香料烘焙饼干",
+      "一个香浓杏仁蛋糕"
+    ],
+    "place": "在糕点店的展示橱窗里",
+    "placeDistractors": [
+      "在茶室的圆桌上",
+      "在杂货店的入口处"
+    ],
+    "time": "在周四傍晚17:00",
+    "timeDistractors": [
+      "在周六上午10:30",
+      "在周日下午16:15"
+    ]
+  },
+  {
+    "name": "乔治",
+    "item": "一个圆形手持放大镜",
+    "itemDistractors": [
+      "一台便携显微镜",
+      "一把高精度镊子"
+    ],
+    "place": "在书房的工作台案上",
+    "placeDistractors": [
+      "在家族历史档案馆里",
+      "在工程制图桌上"
+    ],
+    "time": "在周三晚上19:30",
+    "timeDistractors": [
+      "在周二中午",
+      "在周五傍晚18:45"
+    ]
+  },
+  {
+    "name": "塞蕾娜",
+    "item": "一个环保帆布托特包",
+    "itemDistractors": [
+      "一个浅色柳条编织篮",
+      "一个专业登山双肩包"
+    ],
+    "place": "在旧书摊的书架前",
+    "placeDistractors": [
+      "在鲜花集市街口",
+      "在有机食品店门前"
+    ],
+    "time": "在周日上午10:15",
+    "timeDistractors": [
+      "在周六下午16:00",
+      "在周四上午11:45"
+    ]
+  },
+  {
+    "name": "彼得",
+    "item": "一个硬壳大提琴琴盒",
+    "itemDistractors": [
+      "一个乐谱收纳手提包",
+      "一个古典吉他软包"
+    ],
+    "place": "在玻璃温室花园的舞台上",
+    "placeDistractors": [
+      "在大礼堂的休息厅前",
+      "在音乐厅的主入口处"
+    ],
+    "time": "在周五晚上21:15",
+    "timeDistractors": [
+      "在周六下午",
+      "在周日傍晚18:30"
+    ]
+  }
+];
+
+export default { ui, words, passages, stories };

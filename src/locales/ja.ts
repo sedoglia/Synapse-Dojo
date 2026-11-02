@@ -626,4 +626,441 @@ const passages: Passage[] = [
   },
 ];
 
-export default { ui, words, passages };
+import type { StoryScenario } from '../i18n';
+
+export const stories: StoryScenario[] = [
+  {
+    "name": "エレーナ",
+    "item": "青いバッグ",
+    "itemDistractors": [
+      "赤いリュック",
+      "緑のスーツケース"
+    ],
+    "place": "公園のベンチの下",
+    "placeDistractors": [
+      "カフェの正面",
+      "電車の座席"
+    ],
+    "time": "午後3時30分",
+    "timeDistractors": [
+      "午後6時",
+      "午後12時15分"
+    ]
+  },
+  {
+    "name": "マルコ",
+    "item": "革の手帳",
+    "itemDistractors": [
+      "絵本",
+      "黒いタブレット"
+    ],
+    "place": "図書館の机の上",
+    "placeDistractors": [
+      "テラス席",
+      "待合室"
+    ],
+    "time": "木曜日の午前中",
+    "timeDistractors": [
+      "金曜日の午後",
+      "火曜日の夜"
+    ]
+  },
+  {
+    "name": "サラ",
+    "item": "黄色い自転車",
+    "itemDistractors": [
+      "銀色のキックボード",
+      "白いバイク"
+    ],
+    "place": "中央噴水の横",
+    "placeDistractors": [
+      "市役所の前",
+      "売店の裏"
+    ],
+    "time": "午前9時",
+    "timeDistractors": [
+      "午前11時30分",
+      "午後2時"
+    ]
+  },
+  {
+    "name": "ダビデ",
+    "item": "赤いウールのマフラー",
+    "itemDistractors": [
+      "青いニット帽",
+      "茶色のジャケット"
+    ],
+    "place": "喫茶店の椅子の上",
+    "placeDistractors": [
+      "港の防波堤",
+      "オフィスの廊下"
+    ],
+    "time": "土曜日の夜",
+    "timeDistractors": [
+      "日曜日の朝",
+      "水曜日の午後4時"
+    ]
+  },
+  {
+    "name": "ユリア",
+    "item": "白い陶器の花瓶",
+    "itemDistractors": [
+      "金色のランプ",
+      "木製フレームの絵画"
+    ],
+    "place": "キッチンの窓辺",
+    "placeDistractors": [
+      "玄関のカウンター",
+      "リビングの棚"
+    ],
+    "time": "午後5時45分",
+    "timeDistractors": [
+      "午後8時",
+      "午前10時15分"
+    ]
+  },
+  {
+    "name": "ルーカス",
+    "item": "航海用の双眼鏡",
+    "itemDistractors": [
+      "真鍮の羅針盤",
+      "古い海図"
+    ],
+    "place": "灯台の岩場の上",
+    "placeDistractors": [
+      "船首デッキ",
+      "桟橋の小屋"
+    ],
+    "time": "夜明けの朝露の時刻",
+    "timeDistractors": [
+      "夕暮れ時",
+      "正午ちょうど"
+    ]
+  },
+  {
+    "name": "クララ",
+    "item": "レトロなカメラ",
+    "itemDistractors": [
+      "レンズケース",
+      "アルミ製三脚"
+    ],
+    "place": "展望テラス",
+    "placeDistractors": [
+      "菩提樹の並木道",
+      "歩道橋の上"
+    ],
+    "time": "金曜日の日没時",
+    "timeDistractors": [
+      "土曜日の夜明け",
+      "木曜日の午後"
+    ]
+  },
+  {
+    "name": "マッテオ",
+    "item": "金色の懐中時計",
+    "itemDistractors": [
+      "銀のブレスレット",
+      "アンティーク指輪"
+    ],
+    "place": "骨董店の作業机",
+    "placeDistractors": [
+      "ホテルの金庫",
+      "中央ショーケース"
+    ],
+    "time": "月曜日の午前11時",
+    "timeDistractors": [
+      "水曜日の午後3時30分",
+      "金曜日の午前9時15分"
+    ]
+  },
+  {
+    "name": "ヴァレンティーナ",
+    "item": "黄色の水玉模様の傘",
+    "itemDistractors": [
+      "緑のレインコート",
+      "絹のショール"
+    ],
+    "place": "路面電車の停留所",
+    "placeDistractors": [
+      "地下鉄の改札口",
+      "広場のアーケード下"
+    ],
+    "time": "水曜日の雨の中",
+    "timeDistractors": [
+      "火曜日の退勤時",
+      "木曜日の夜"
+    ]
+  },
+  {
+    "name": "シモーネ",
+    "item": "絵付けされた缶の小箱",
+    "itemDistractors": [
+      "木製の小箱",
+      "ガラス瓶"
+    ],
+    "place": "劇場の階段の上",
+    "placeDistractors": [
+      "映画館の通路",
+      "チケット売り場の横"
+    ],
+    "time": "日曜日の午後2時30分",
+    "timeDistractors": [
+      "土曜日の夜9時",
+      "月曜日の夕方6時"
+    ]
+  },
+  {
+    "name": "フィオナ",
+    "item": "巻かれた天体星図",
+    "itemDistractors": [
+      "卓上地球儀",
+      "青銅のアストロラーベ"
+    ],
+    "place": "丘の上の天文台",
+    "placeDistractors": [
+      "城の小塔",
+      "プラネタリウムの前庭"
+    ],
+    "time": "晴れ渡った真夜中",
+    "timeDistractors": [
+      "夜10時",
+      "午前2時"
+    ]
+  },
+  {
+    "name": "アンドレア",
+    "item": "彫刻が施された鉄の鍵",
+    "itemDistractors": [
+      "頑丈な南京錠",
+      "刻印メダル"
+    ],
+    "place": "屋根裏部屋のトランクの中",
+    "placeDistractors": [
+      "リビングの絵画の裏",
+      "書斎机の引き出し"
+    ],
+    "time": "火曜日の午後4時15分",
+    "timeDistractors": [
+      "木曜日の午前10時30分",
+      "日曜日の午後"
+    ]
+  },
+  {
+    "name": "シルヴィア",
+    "item": "ホーロー鋳鉄のティーポット",
+    "itemDistractors": [
+      "クリスタル水差し",
+      "白磁のティーカップ"
+    ],
+    "place": "温室の小机の上",
+    "placeDistractors": [
+      "庭のあずまや",
+      "実験室の作業台"
+    ],
+    "time": "土曜日の午前10時",
+    "timeDistractors": [
+      "日曜日の午後5時",
+      "金曜日の朝食時"
+    ]
+  },
+  {
+    "name": "ロレンツォ",
+    "item": "クルミ材の木製フルート",
+    "itemDistractors": [
+      "アンティークマンドリン",
+      "黒檀のバイオリン弓"
+    ],
+    "place": "石造りのアーチ橋の上",
+    "placeDistractors": [
+      "小川の土手沿い",
+      "樹齢数百年のオークの木陰"
+    ],
+    "time": "水曜日の早朝",
+    "timeDistractors": [
+      "木曜日の薄暮時",
+      "土曜日の午後"
+    ]
+  },
+  {
+    "name": "アリス",
+    "item": "クレヨンの一式箱",
+    "itemDistractors": [
+      "スケッチブック",
+      "油絵具のパレット"
+    ],
+    "place": "美術館の大階段",
+    "placeDistractors": [
+      "中世の回廊",
+      "アートギャラリーの玄関"
+    ],
+    "time": "日曜日の午後4時45分",
+    "timeDistractors": [
+      "土曜日の正午",
+      "火曜日の午後2時"
+    ]
+  },
+  {
+    "name": "ファビアン",
+    "item": "編み込みの麦わら帽子",
+    "itemDistractors": [
+      "サングラス",
+      "チェック柄のバンダナ"
+    ],
+    "place": "漁師の船着き場",
+    "placeDistractors": [
+      "貝殻の砂浜",
+      "ヨットの係留所"
+    ],
+    "time": "金曜日の正午",
+    "timeDistractors": [
+      "日曜日の午前11時",
+      "水曜日の午後3時"
+    ]
+  },
+  {
+    "name": "ベアトリーチェ",
+    "item": "真鍮磨きのランタン",
+    "itemDistractors": [
+      "3本枝の燭台",
+      "携帯型懐中電灯"
+    ],
+    "place": "古風な中庭の回廊",
+    "placeDistractors": [
+      "フレスコ画の廊下",
+      "記念碑的な大門の前"
+    ],
+    "time": "木曜日の夜8時30分",
+    "timeDistractors": [
+      "金曜日の夕暮れ",
+      "土曜日の深夜"
+    ]
+  },
+  {
+    "name": "ロベルト",
+    "item": "携帯用電池式ラジオ",
+    "itemDistractors": [
+      "小型レコードプレーヤー",
+      "ポケットスピーカー"
+    ],
+    "place": "木工房の作業台",
+    "placeDistractors": [
+      "庭の道具小屋",
+      "整備工場"
+    ],
+    "time": "月曜日の朝8時30分",
+    "timeDistractors": [
+      "水曜日の午後1時",
+      "金曜日の午後5時15分"
+    ]
+  },
+  {
+    "name": "カミラ",
+    "item": "刺繍入りの絹の扇子",
+    "itemDistractors": [
+      "黒レースのショール",
+      "ベルベットのフード帽"
+    ],
+    "place": "城の吹き抜けバルコニー",
+    "placeDistractors": [
+      "塔の見晴台",
+      "鏡の間"
+    ],
+    "time": "火曜日の夕暮れ時",
+    "timeDistractors": [
+      "木曜日の午後",
+      "日曜日の夕暮れ"
+    ]
+  },
+  {
+    "name": "ガブリエル",
+    "item": "黄ばんだ航海日誌",
+    "itemDistractors": [
+      "製本された航海地図帳",
+      "封印された羊皮紙"
+    ],
+    "place": "古い圧搾所のワイン地下室",
+    "placeDistractors": [
+      "帆船の船倉",
+      "馬車置き場"
+    ],
+    "time": "土曜日の午後3時",
+    "timeDistractors": [
+      "月曜日の午前11時30分",
+      "水曜日の夜"
+    ]
+  },
+  {
+    "name": "マルティナ",
+    "item": "ダークチョコレートの詰め合わせ箱",
+    "itemDistractors": [
+      "スパイスクッキーの籠",
+      "アーモンドタルト"
+    ],
+    "place": "菓子屋のショーウィンドウ",
+    "placeDistractors": [
+      "ティールームの丸テーブル",
+      "食料品店の入口"
+    ],
+    "time": "木曜日の夕方5時",
+    "timeDistractors": [
+      "土曜日の午前10時30分",
+      "日曜日の午後4時15分"
+    ]
+  },
+  {
+    "name": "ジョルジョ",
+    "item": "丸型の拡大鏡",
+    "itemDistractors": [
+      "携帯用小型顕微鏡",
+      "精密ピンセット"
+    ],
+    "place": "書斎の書き物机の上",
+    "placeDistractors": [
+      "家系文書の保管庫",
+      "製図台の上"
+    ],
+    "time": "水曜日の夜7時30分",
+    "timeDistractors": [
+      "火曜日の正午",
+      "金曜日の午後6時45分"
+    ]
+  },
+  {
+    "name": "セレーナ",
+    "item": "オーガニックコットンのトートバッグ",
+    "itemDistractors": [
+      "薄色の柳編み籠",
+      "トレッキングリュック"
+    ],
+    "place": "古本屋の路上ワゴン",
+    "placeDistractors": [
+      "花市場の通り",
+      "自然食品店の店先"
+    ],
+    "time": "日曜日の午前10時15分",
+    "timeDistractors": [
+      "土曜日の午後4時",
+      "木曜日の午前11時45分"
+    ]
+  },
+  {
+    "name": "ピエトロ",
+    "item": "チェロ用のハードケース",
+    "itemDistractors": [
+      "楽譜バッグ",
+      "クラシックギターのケース"
+    ],
+    "place": "温室庭園のステージの上",
+    "placeDistractors": [
+      "公会堂のロビー",
+      "コンサートホールの入口"
+    ],
+    "time": "金曜日の夜9時15分",
+    "timeDistractors": [
+      "土曜日の午後",
+      "日曜日の夕方6時30分"
+    ]
+  }
+];
+
+export default { ui, words, passages, stories };

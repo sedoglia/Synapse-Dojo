@@ -626,4 +626,441 @@ const passages: Passage[] = [
   },
 ];
 
-export default { ui, words, passages };
+import type { StoryScenario } from '../i18n';
+
+export const stories: StoryScenario[] = [
+  {
+    "name": "Elena",
+    "item": "sebuah tas biru",
+    "itemDistractors": [
+      "ransel merah",
+      "koper hijau"
+    ],
+    "place": "di bawah bangku taman",
+    "placeDistractors": [
+      "di depan kafe",
+      "di dalam kereta"
+    ],
+    "time": "pukul 15:30",
+    "timeDistractors": [
+      "pukul 18:00",
+      "pukul 12:15"
+    ]
+  },
+  {
+    "name": "Marco",
+    "item": "sebuah buku catatan kulit",
+    "itemDistractors": [
+      "buku bergambar",
+      "tablet hitam"
+    ],
+    "place": "di atas meja perpustakaan",
+    "placeDistractors": [
+      "di teras",
+      "di ruang tunggu"
+    ],
+    "time": "Kamis pagi",
+    "timeDistractors": [
+      "Jumat sore",
+      "Selasa malam"
+    ]
+  },
+  {
+    "name": "Sara",
+    "item": "sebuah sepeda kuning",
+    "itemDistractors": [
+      "skuter perak",
+      "motor moped putih"
+    ],
+    "place": "di sebelah air mancur pusat",
+    "placeDistractors": [
+      "di depan balai kota",
+      "di belakang kios koran"
+    ],
+    "time": "pukul 09:00",
+    "timeDistractors": [
+      "pukul 11:30",
+      "pukul 14:00"
+    ]
+  },
+  {
+    "name": "David",
+    "item": "sebuah syal wol merah",
+    "itemDistractors": [
+      "kupluk biru",
+      "jaket cokelat"
+    ],
+    "place": "di kursi kedai kopi",
+    "placeDistractors": [
+      "di dinding dermaga",
+      "di lorong kantor"
+    ],
+    "time": "Sabtu malam",
+    "timeDistractors": [
+      "Minggu pagi",
+      "Rabu pukul 16:00"
+    ]
+  },
+  {
+    "name": "Julia",
+    "item": "sebuah vas keramik putih",
+    "itemDistractors": [
+      "lampu emas",
+      "lukisan kayu"
+    ],
+    "place": "di ambang jendela dapur",
+    "placeDistractors": [
+      "di meja resepsionis",
+      "di rak ruang tamu"
+    ],
+    "time": "pukul 17:45",
+    "timeDistractors": [
+      "pukul 20:00",
+      "pukul 10:15"
+    ]
+  },
+  {
+    "name": "Lucas",
+    "item": "sebuah teropong pelaut",
+    "itemDistractors": [
+      "kompas kuningan",
+      "peta laut kuno"
+    ],
+    "place": "di atas batu karang mercusuar",
+    "placeDistractors": [
+      "di haluan kapal",
+      "di gubuk dermaga"
+    ],
+    "time": "saat fajar menyingsing",
+    "timeDistractors": [
+      "saat matahari terbenam",
+      "tepat tengah hari"
+    ]
+  },
+  {
+    "name": "Claire",
+    "item": "sebuah kamera antik",
+    "itemDistractors": [
+      "tas lensa",
+      "tripod aluminium"
+    ],
+    "place": "di teras dengan pemandangan luas",
+    "placeDistractors": [
+      "di sepanjang jalan pohon rindang",
+      "di atas jembatan penyeberangan"
+    ],
+    "time": "Jumat saat senja",
+    "timeDistractors": [
+      "Sabtu saat fajar",
+      "Kamis sore"
+    ]
+  },
+  {
+    "name": "Matthew",
+    "item": "sebuah jam saku emas",
+    "itemDistractors": [
+      "gelang perak",
+      "cincin antik"
+    ],
+    "place": "di meja pedagang barang antik",
+    "placeDistractors": [
+      "di brankas hotel",
+      "di etalase kaca tengah"
+    ],
+    "time": "Senin pukul 11:00",
+    "timeDistractors": [
+      "Rabu pukul 15:30",
+      "Jumat pukul 09:15"
+    ]
+  },
+  {
+    "name": "Valerie",
+    "item": "sebuah payung kuning bermotif polkadot",
+    "itemDistractors": [
+      "jas hujan hijau",
+      "selendang sutra"
+    ],
+    "place": "di halte trem",
+    "placeDistractors": [
+      "di pintu masuk stasiun kereta",
+      "di bawah deretan pilar alun-alun"
+    ],
+    "time": "Rabu saat hujan turun",
+    "timeDistractors": [
+      "Selasa sepulang kerja",
+      "Kamis malam"
+    ]
+  },
+  {
+    "name": "Simon",
+    "item": "sebuah kotak kaleng bergambar",
+    "itemDistractors": [
+      "kotak kayu kecil",
+      "stoples kaca"
+    ],
+    "place": "di anak tangga gedung teater",
+    "placeDistractors": [
+      "di lorong bioskop",
+      "di dekat loket karcis"
+    ],
+    "time": "Minggu pukul 14:30",
+    "timeDistractors": [
+      "Sabtu pukul 21:00",
+      "Senin pukul 18:00"
+    ]
+  },
+  {
+    "name": "Fiona",
+    "item": "sebuah gulungan peta rasi bintang",
+    "itemDistractors": [
+      "globe meja",
+      "astrolab perunggu"
+    ],
+    "place": "di observatorium puncak bukit",
+    "placeDistractors": [
+      "di menara benteng",
+      "di halaman rumput planetarium"
+    ],
+    "time": "tengah malam yang cerah",
+    "timeDistractors": [
+      "pukul sepuluh malam",
+      "pukul dua dini hari"
+    ]
+  },
+  {
+    "name": "Andrew",
+    "item": "sebuah kunci besi berukir",
+    "itemDistractors": [
+      "gembok berat",
+      "liontin berukir"
+    ],
+    "place": "di peti loteng",
+    "placeDistractors": [
+      "di balik lukisan ruang tamu",
+      "di laci meja tulis"
+    ],
+    "time": "Selasa pukul 16:15",
+    "timeDistractors": [
+      "Kamis pukul 10:30",
+      "Minggu sore"
+    ]
+  },
+  {
+    "name": "Sylvia",
+    "item": "sebuah teko besi cor berlapis email",
+    "itemDistractors": [
+      "teko kristal",
+      "cangkir porselen"
+    ],
+    "place": "di meja rumah kaca",
+    "placeDistractors": [
+      "di gazebo taman",
+      "di meja kerja laboratorium"
+    ],
+    "time": "Sabtu pukul 10:00",
+    "timeDistractors": [
+      "Minggu pukul 17:00",
+      "Jumat saat sarapan"
+    ]
+  },
+  {
+    "name": "Lawrence",
+    "item": "sebuah seruling kayu kenari",
+    "itemDistractors": [
+      "mandolin antik",
+      "busur biola eboni"
+    ],
+    "place": "di atas jembatan lengkung batu",
+    "placeDistractors": [
+      "di tepi aliran sungai kecil",
+      "di bawah pohon ek tua yang teduh"
+    ],
+    "time": "Rabu pagi-pagi sekali",
+    "timeDistractors": [
+      "Kamis menjelang malam",
+      "Sabtu sore"
+    ]
+  },
+  {
+    "name": "Alice",
+    "item": "sekotak krayon lilin aneka warna",
+    "itemDistractors": [
+      "buku sketsa",
+      "palet cat minyak"
+    ],
+    "place": "di tangga megah museum",
+    "placeDistractors": [
+      "di serambi biara abad pertengahan",
+      "di depan pintu galeri seni"
+    ],
+    "time": "Minggu pukul 16:45",
+    "timeDistractors": [
+      "Sabtu tengah hari",
+      "Selasa pukul 14:00"
+    ]
+  },
+  {
+    "name": "Fabian",
+    "item": "sebuah topi anyaman jerami",
+    "itemDistractors": [
+      "kacamata hitam",
+      "bandana motif kotak"
+    ],
+    "place": "di dermaga kayu nelayan",
+    "placeDistractors": [
+      "di pantai penuh kerang",
+      "di tempat tambatan perahu layar"
+    ],
+    "time": "Jumat tengah hari",
+    "timeDistractors": [
+      "Minggu pukul 11:00",
+      "Rabu pukul 15:00"
+    ]
+  },
+  {
+    "name": "Beatrice",
+    "item": "sebuah lentera kuningan yang mengilap",
+    "itemDistractors": [
+      "tempat lilin bercabang tiga",
+      "senter saku"
+    ],
+    "place": "di beranda halaman dalam kuno",
+    "placeDistractors": [
+      "di sepanjang lorong lukisan dinding",
+      "di depan gerbang monumen besar"
+    ],
+    "time": "Kamis malam pukul 20:30",
+    "timeDistractors": [
+      "Jumat saat temaram senja",
+      "Sabtu larut malam"
+    ]
+  },
+  {
+    "name": "Robert",
+    "item": "sebuah radio jinjing bertenaga baterai",
+    "itemDistractors": [
+      "pemutar piringan hitam mini",
+      "pelantang suara saku"
+    ],
+    "place": "di meja kerja bengkel kayu",
+    "placeDistractors": [
+      "di gudang perkakas kebun",
+      "di bengkel montir mesin"
+    ],
+    "time": "Senin pukul 08:30 pagi",
+    "timeDistractors": [
+      "Rabu pukul 13:00",
+      "Jumat pukul 17:15"
+    ]
+  },
+  {
+    "name": "Camilla",
+    "item": "sebuah kipas sutra bersulam",
+    "itemDistractors": [
+      "selendang renda hitam",
+      "penutup kepala beludru"
+    ],
+    "place": "di balkon beratap istana",
+    "placeDistractors": [
+      "di serambi menara tinggi",
+      "di aula cermin megah"
+    ],
+    "time": "Selasa saat matahari terbenam",
+    "timeDistractors": [
+      "Kamis sore",
+      "Minggu malam hari"
+    ]
+  },
+  {
+    "name": "Gabriel",
+    "item": "sebuah buku log kapal yang menguning",
+    "itemDistractors": [
+      "atlas navigasi laut berjilid",
+      "gulungan perkamen bersegel lilin"
+    ],
+    "place": "di gudang bawah tanah pemerasan anggur",
+    "placeDistractors": [
+      "di ruang kargo palka kapal layar",
+      "di bangsal kereta kuda"
+    ],
+    "time": "Sabtu sore pukul 15:00",
+    "timeDistractors": [
+      "Senin pukul 11:30",
+      "Rabu malam"
+    ]
+  },
+  {
+    "name": "Martina",
+    "item": "sekotak cokelat hitam istimewa",
+    "itemDistractors": [
+      "sekeranjang kue kering berempah",
+      "kue tar almon lezat"
+    ],
+    "place": "di etalase kaca toko kue",
+    "placeDistractors": [
+      "di meja bundar kedai teh",
+      "di pintu masuk toko bahan makanan"
+    ],
+    "time": "Kamis pukul 17:00 sore",
+    "timeDistractors": [
+      "Sabtu pukul 10:30 pagi",
+      "Minggu pukul 16:15"
+    ]
+  },
+  {
+    "name": "George",
+    "item": "sebuah kaca pembesar bundar",
+    "itemDistractors": [
+      "mikroskop jinjing mini",
+      "pinset berujung runcing"
+    ],
+    "place": "di meja kerja ruang belajar",
+    "placeDistractors": [
+      "di ruang arsip bersejarah keluarga",
+      "di atas meja gambar arsitek"
+    ],
+    "time": "Rabu malam pukul 19:30",
+    "timeDistractors": [
+      "Selasa tengah hari",
+      "Jumat pukul 18:45"
+    ]
+  },
+  {
+    "name": "Serena",
+    "item": "sebuah tas jinjing kanvas ramah lingkungan",
+    "itemDistractors": [
+      "keranjang anyaman rotan terang",
+      "ransel mendaki gunung"
+    ],
+    "place": "di lapak penjualan buku bekas",
+    "placeDistractors": [
+      "di tengah pasar bunga segar",
+      "di depan toko bahan organik"
+    ],
+    "time": "Minggu pagi pukul 10:15",
+    "timeDistractors": [
+      "Sabtu sore pukul 16:00",
+      "Kamis pukul 11:45"
+    ]
+  },
+  {
+    "name": "Peter",
+    "item": "sebuah kotak pelindung keras untuk selo",
+    "itemDistractors": [
+      "tas jinjing lembaran partitur musik",
+      "sarung pelindung gitar klasik"
+    ],
+    "place": "di panggung taman musim dingin",
+    "placeDistractors": [
+      "di lobi megah auditorium",
+      "di depan pintu utama gedung konser"
+    ],
+    "time": "Jumat malam pukul 21:15",
+    "timeDistractors": [
+      "Sabtu sore",
+      "Minggu pukul 18:30"
+    ]
+  }
+];
+
+export default { ui, words, passages, stories };
