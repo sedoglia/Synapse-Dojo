@@ -1,7 +1,7 @@
 # Synapse Dojo
 
-Gioco open source di allenamento cognitivo: pochi minuti al giorno, nel browser, su telefono o PC.
-*Open-source brain-training game — a few minutes a day, in any browser.*
+Gioco gratuito di allenamento cognitivo (source-available per uso personale): pochi minuti al giorno, nel browser, su telefono o PC.
+*Free brain-training game (source-available for noncommercial use) — a few minutes a day, in any browser.*
 
 > Solo per svago: non è uno strumento medico né diagnostico.
 
@@ -121,6 +121,7 @@ I salvataggi e i progressi sono memorizzati localmente nel browser (localStorage
 
 ## Licenza
 
-[MIT](LICENSE). Progetto originale e indipendente; gli esercizi si basano su paradigmi classici
-della psicologia cognitiva di dominio pubblico. Non è affiliato ad alcun prodotto commerciale.
+[PolyForm Noncommercial 1.0.0](LICENSE). Progetto originale e indipendente protetto da copyright (c) 2026 Sergio Sedoglia.
+Il codice è liberamente utilizzabile per uso personale, studio, didattica e ricerca senza fini di lucro; è vietato qualsiasi utilizzo, sfruttamento o redistribuzione commerciale senza autorizzazione preventiva dell'autore.
+Gli esercizi si basano su paradigmi classici della psicologia cognitiva di dominio pubblico. Non è affiliato ad alcun prodotto commerciale.
 Il font Nunito in `public/fonts/` è distribuito con la [SIL Open Font License 1.1](public/fonts/OFL.txt).
