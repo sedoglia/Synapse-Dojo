@@ -3798,4 +3798,33 @@ html.big-text {
 .board-error:empty,
 .turnstile-box:empty {
   display: none;
+}.board-value {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.2;
+}
+.board-value small {
+  color: var(--muted);
+  font-weight: 600;
+}
+.board-filters .btn {
+  padding: 10px 14px;
+  white-space: nowrap;
+}
+.board-prompt {
+  border-color: var(--accent);
+}
+.group-form {
+  display: flex;
+  gap: 8px;
+}
+.group-form .input {
+  flex: 1;
+  min-width: 0;
+}
+.group-code {
+  font-family: ui-monospace, monospace;
+  letter-spacing: 0.08em;
+  user-select: all;
 }

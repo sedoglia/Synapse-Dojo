@@ -8,8 +8,10 @@ import { showOnboarding } from './onboarding';
 import { showPrivacy } from './privacy';
 import { showGuide } from './guide';
 import { showLicense } from './license';
-import { AGE_BANDS, boardAvailable, boardErrorText, joinBoard, leaveBoard, nickname, updateBoardProfile, type AgeBand } from '../board';
+import { boardAvailable, boardErrorText, leaveBoard, nickname, updateBoardProfile } from '../board';
 import { showBoard } from './board';
+import { ageSelect, joinCard } from './boardJoin';
+import { showGroups } from './groups';
 
 /** Escapes a text value for an iCalendar property (RFC 5545 §3.3.11). */
 const icsText = (s: string) => s.replace(/[\\;,]/g, (c) => `\\${c}`).replace(/\r?\n/g, '\\n');
@@ -82,20 +84,11 @@ function toggle(key: 'sound' | 'vibration' | 'relaxed' | 'bigText', label: strin
   return h('label', { class: 'inline' }, box, label);
 }
 
-function ageSelect(value: string | null, onChange: (band: AgeBand | null) => void): HTMLSelectElement {
-  const select = h(
-    'select',
-    { class: 'input', onChange: () => onChange((select.value || null) as AgeBand | null) },
-    h('option', { value: '', selected: value === null }, t('settings.boardNoAge')),
-    ...AGE_BANDS.map((b) => h('option', { value: b, selected: b === value }, t(`board.band.${b}`))),
-  );
-  return select;
-}
-
-/** Opt-in leaderboard: a clear explanation and a join button, or the player's nickname and how to leave. */
+/** Opt-in leaderboard: a clear explanation and a join button, or the player's nickname, groups and how to leave. */
 function boardSection(): HTMLElement | null {
   if (!boardAvailable()) return null;
   const acc = store.data.board;
+  if (!acc) return joinCard(showSettings);
   const error = h('p', { class: 'small board-error', role: 'alert' });
   /** Runs a server action with the buttons disabled; shows the error if it fails. */
   const act = async (buttons: HTMLButtonElement[], work: () => Promise<void>) => {
@@ -110,27 +103,8 @@ function boardSection(): HTMLElement | null {
     }
   };
 
-  if (!acc) {
-    let band: AgeBand | null = null;
-    const check = h('div', { class: 'turnstile-box' });
-    const join = h('button', { class: 'btn primary' }, `🏆 ${t('settings.boardJoin')}`);
-    join.addEventListener('click', () => {
-      join.textContent = t('settings.boardJoining');
-      void act([join], () => joinBoard(band, check)).finally(() => (join.textContent = `🏆 ${t('settings.boardJoin')}`));
-    });
-    return h(
-      'section',
-      { class: 'card form' },
-      h('h3', {}, `🏆 ${t('settings.board')}`),
-      h('p', { class: 'muted small' }, t('settings.boardHint')),
-      h('label', {}, t('settings.boardAge'), ageSelect(null, (b) => (band = b))),
-      h('div', { class: 'row left' }, join),
-      check,
-      error,
-    );
-  }
-
   const open = h('button', { class: 'btn primary', onClick: () => showBoard(showSettings) }, `🏆 ${t('settings.boardOpen')}`);
+  const groups = h('button', { class: 'btn', onClick: () => showGroups(showSettings) }, `👥 ${t('settings.boardGroups')}`);
   const rename = h('button', { class: 'btn' }, `🎲 ${t('settings.boardRename')}`);
   rename.addEventListener('click', () => void act([rename], () => updateBoardProfile({ rename: true })));
   const leave = h('button', { class: 'btn ghost' }, t('settings.boardLeave'));
@@ -143,8 +117,8 @@ function boardSection(): HTMLElement | null {
     h('h3', {}, `🏆 ${t('settings.board')}`),
     h('p', {}, t('settings.boardMember', { name: nickname(acc.nameCode) })),
     h('label', {}, t('settings.boardAge'), ageSelect(acc.ageBand, (ageBand) => void act([], () => updateBoardProfile({ ageBand })))),
-    h('div', { class: 'row left' }, open, rename),
-    h('div', { class: 'row left' }, leave),
+    h('div', { class: 'row left' }, open, groups),
+    h('div', { class: 'row left' }, rename, leave),
     error,
   );
 }

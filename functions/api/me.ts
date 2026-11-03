@@ -1,4 +1,4 @@
-import { AGE_BANDS, authenticate, fail, json, randomNameCode, readBody, type Handler } from '../../server/board';
+import { AGE_BANDS, authenticate, deletePlayer, fail, json, randomNameCode, readBody, type Handler } from '../../server/board';
 
 export const onRequestGet: Handler = async ({ request, env }) => {
   const player = await authenticate(request, env);
@@ -25,13 +25,10 @@ export const onRequestPatch: Handler = async ({ request, env }) => {
   return json({ nameCode, ageBand });
 };
 
-/** Leaves the board: everything about the player is deleted at once. */
+/** Leaves the board: everything about the player (results, groups) is deleted at once. */
 export const onRequestDelete: Handler = async ({ request, env }) => {
   const player = await authenticate(request, env);
   if (!player) return fail(401, 'unauthorized');
-  await env.DB.batch([
-    env.DB.prepare('DELETE FROM entries WHERE player_id = ?').bind(player.id),
-    env.DB.prepare('DELETE FROM players WHERE id = ?').bind(player.id),
-  ]);
+  await env.DB.batch(deletePlayer(env.DB, player.id));
   return json({ deleted: true });
 };

@@ -6,7 +6,8 @@ import { t, nicknames } from './i18n';
 
 /**
  * Opt-in weekly leaderboard (API in functions/api/). It ranks showing up and getting better, not raw ability:
- * training days, change of level since the start of the week, and the week's best level per exercise.
+ * consistency (training days and how much was trained on each), change of level since the start of the week,
+ * and the week's best level per exercise; for everyone or within private groups of friends.
  * Only this week's summary is ever sent; the training history stays on the device.
  */
 
@@ -22,6 +23,9 @@ export interface BoardRow {
   nameCode: number;
   ageBand: AgeBand | null;
   value: number;
+  /** Consistency only: training days and point-earning activities behind the points. */
+  days?: number;
+  activities?: number;
   me?: true;
 }
 
@@ -39,11 +43,15 @@ export interface BoardQuery {
   /** Exercise id; omitted for the overall board. Required for `best`. */
   ex?: string;
   band?: AgeBand;
+  /** Group id: only its members. */
+  group?: string;
 }
 
-/** `offline`: no connection; `human_check`: Turnstile failed; `server`: anything else. */
+type ErrorCode = 'offline' | 'human_check' | 'server' | 'not_member' | 'not_found' | 'limit' | 'full' | 'bad_name';
+
+/** `offline`: no connection; `human_check`: Turnstile failed; group errors; `server`: anything else. */
 export class BoardError extends Error {
-  constructor(readonly code: 'offline' | 'human_check' | 'server') {
+  constructor(readonly code: ErrorCode) {
     super(code);
   }
 }
@@ -57,7 +65,11 @@ export function nickname(code: number): string {
 }
 
 /** A message for a failed leaderboard action. */
-export const boardErrorText = (e: unknown) => t(`board.err.${e instanceof BoardError ? e.code : 'server'}`);
+export function boardErrorText(e: unknown): string {
+  const code = e instanceof BoardError ? e.code : 'server';
+  if (code === 'offline' || code === 'human_check' || code === 'server') return t(`board.err.${code}`);
+  return t(`groups.err.${code}`);
+}
 
 const API = 'api/';
 /** The server accepts one upload every 30 s per player. */
@@ -92,6 +104,12 @@ function forget(acc: BoardAccount) {
 const round1 = (v: number) => Math.round(clamp(v, -100, 100) * 10) / 10;
 const mean = (xs: number[]) => xs.reduce((a, b) => a + b, 0) / xs.length;
 
+const median = (xs: number[]) => {
+  const s = [...xs].sort((a, b) => a - b);
+  const m = s.length >> 1;
+  return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+};
+
 /** Monday of the current week, as a local date key. */
 function weekStart(d = new Date()): string {
   const monday = new Date(d);
@@ -99,38 +117,63 @@ function weekStart(d = new Date()): string {
   return todayKey(monday);
 }
 
+/** ISO week of the local date ("2026-W45"): the board shown is the week the player is living in, not the server's. */
+export function localWeek(d = new Date()): string {
+  const t = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+  t.setUTCDate(t.getUTCDate() + 3 - ((t.getUTCDay() + 6) % 7)); // Thursday of the same week
+  const week = Math.ceil(((t.getTime() - Date.UTC(t.getUTCFullYear(), 0, 1)) / 86_400_000 + 1) / 7);
+  return `${t.getUTCFullYear()}-W${String(week).padStart(2, '0')}`;
+}
+
+interface ExerciseSummary {
+  ex: string;
+  improvement: number;
+  best: number;
+  /** False when the exercise is new this week, so there is no earlier level to improve on. */
+  baseline: boolean;
+}
+
 /**
- * Improvement is measured from the level before this week (or from the first session this week for a
- * new exercise), on the 0–100 scale used everywhere else; exercises without levels use their scores.
+ * Improvement on the 0–100 scale used everywhere else. Exercises with levels: from the level reached before this
+ * week, or from the starting level for an exercise first played this week (so the first session counts too).
+ * The one exercise without levels: median of the last three scores this week against the three before it, which
+ * a single lucky or unlucky game can't swing.
  */
-function exerciseSummary(ex: Exercise, from: string): { ex: string; improvement: number; best: number } | null {
+function exerciseSummary(ex: Exercise, from: string): ExerciseSummary | null {
   const runs = store.data.runs.filter((r) => r.ex === ex.id);
   const week = runs.filter((r) => r.date >= from);
   if (!week.length) return null;
   const points = store.data.history[ex.id] ?? [];
   const thisWeek = points.filter((p) => p.date >= from);
   if (ex.levels && thisWeek.length) {
-    const { min, max } = ex.levels;
+    const { min, max, start } = ex.levels;
     const score = (level: number) => levelScore(level, min, max);
     const before = points.filter((p) => p.date < from);
-    const base = (before[before.length - 1] ?? thisWeek[0]).level;
+    const base = before.length ? before[before.length - 1].level : start;
     const now = thisWeek[thisWeek.length - 1].level;
-    return { ex: ex.id, improvement: round1(score(now) - score(base)), best: Math.round(score(Math.max(...thisWeek.map((p) => p.level)))) };
+    const best = Math.max(...thisWeek.map((p) => p.level));
+    return { ex: ex.id, improvement: round1(score(now) - score(base)), best: Math.round(score(best)), baseline: before.length > 0 };
   }
   const scores = week.map((r) => clamp(r.score, 0, 100));
   const prior = runs.filter((r) => r.date < from).slice(-3).map((r) => clamp(r.score, 0, 100));
-  const base = prior.length ? mean(prior) : scores[0];
-  return { ex: ex.id, improvement: round1(mean(scores) - base), best: Math.round(Math.max(...scores)) };
+  const base = prior.length ? median(prior) : scores[0];
+  return { ex: ex.id, improvement: round1(median(scores.slice(-3)) - base), best: Math.round(Math.max(...scores)), baseline: prior.length > 0 };
 }
 
 export function snapshot() {
   const from = weekStart();
-  const exercises = EXERCISES.map((e) => exerciseSummary(e, from)).filter((e) => e !== null);
+  const today = todayKey();
+  const summaries = EXERCISES.map((e) => exerciseSummary(e, from)).filter((e) => e !== null);
+  // The overall improvement only averages exercises with an earlier level: trying a new exercise (as the daily plan
+  // keeps suggesting) must neither pull the average down nor push it up with its first calibration.
+  const known = summaries.filter((e) => e.baseline);
   return {
-    today: todayKey(),
+    today,
+    // Exercises and Neuro checks finished today: consistency rewards training more, not only more days.
+    todayCount: store.data.runs.filter((r) => r.date === today).length + store.data.checks.filter((c) => c.date === today).length,
     relaxed: store.data.settings.relaxed,
-    improvement: exercises.length ? round1(mean(exercises.map((e) => e.improvement))) : 0,
-    exercises,
+    improvement: known.length ? round1(mean(known.map((e) => e.improvement))) : 0,
+    exercises: summaries.map(({ ex, improvement, best }) => ({ ex, improvement, best })),
   };
 }
 
@@ -270,18 +313,96 @@ export async function updateBoardProfile(change: { ageBand?: AgeBand | null; ren
   store.save();
 }
 
-/** Reads a board. Relaxed-pace players see, and are ranked in, the relaxed `best` boards. */
+/** Reads a board for the player's local week. Relaxed-pace players see, and are ranked in, the relaxed `best` boards. */
 export async function fetchBoard(q: BoardQuery): Promise<BoardResult> {
-  const params = new URLSearchParams({ metric: q.metric });
+  const params = new URLSearchParams({ metric: q.metric, week: localWeek() });
   if (q.ex) params.set('ex', q.ex);
   if (q.band) params.set('band', q.band);
+  if (q.group) params.set('group', q.group);
   if (q.metric === 'best' && store.data.settings.relaxed) params.set('pace', 'relaxed');
   const acc = store.data.board;
   const res = await call('GET', `board?${params}`);
   if (res.status === 401 && acc) {
     forget(acc);
-    return fetchBoard(q);
+    return fetchBoard({ ...q, group: undefined });
   }
+  if (res.status === 403) throw new BoardError('not_member');
   if (!res.ok) throw new BoardError('server');
   return (await res.json()) as BoardResult;
+}
+
+// ---- Groups of friends ----
+
+export interface Group {
+  id: string;
+  name: string;
+  code: string;
+  members: number;
+  /** Created by this player. */
+  mine: boolean;
+}
+
+/** Turns a failed group request into its error code. */
+async function groupFailure(res: Response): Promise<BoardError> {
+  const acc = store.data.board;
+  if (res.status === 401 && acc) forget(acc);
+  const code = ((await res.json().catch(() => ({}))) as { error?: string }).error;
+  return new BoardError(code === 'not_found' || code === 'limit' || code === 'full' || code === 'bad_name' ? code : 'server');
+}
+
+export async function listGroups(): Promise<Group[]> {
+  if (!store.data.board) return [];
+  const res = await call('GET', 'groups');
+  if (!res.ok) throw await groupFailure(res);
+  return ((await res.json()) as { groups: Group[] }).groups;
+}
+
+export async function createGroup(name: string): Promise<Group> {
+  const res = await call('POST', 'groups', { name });
+  if (!res.ok) throw await groupFailure(res);
+  return ((await res.json()) as { group: Group }).group;
+}
+
+export async function joinGroup(code: string): Promise<Group> {
+  const res = await call('POST', 'groups/join', { code });
+  if (!res.ok) throw await groupFailure(res);
+  return ((await res.json()) as { group: Group }).group;
+}
+
+export async function leaveGroup(id: string): Promise<void> {
+  const res = await call('DELETE', `groups/${encodeURIComponent(id)}`);
+  if (!res.ok) throw await groupFailure(res);
+}
+
+/** Name and size of the group behind an invite code, shown before deciding whether to join. */
+export async function previewGroup(code: string): Promise<{ name: string; members: number }> {
+  const res = await fetch(`${API}groups/preview?code=${encodeURIComponent(code)}`).catch(() => {
+    throw new BoardError('offline');
+  });
+  if (!res.ok) throw await groupFailure(res);
+  return (await res.json()) as { name: string; members: number };
+}
+
+/** The link that opens the game with an invitation to the group. */
+export const inviteLink = (code: string) => `${location.origin}${location.pathname.replace(/[^/]*$/, '')}?group=${code}`;
+
+/**
+ * An invite link (?group=CODE) is remembered until the player joins or declines it, even across a reload,
+ * and removed from the address bar so it isn't shared again by accident.
+ */
+export function takeInviteFromUrl() {
+  const url = new URL(location.href);
+  const code = url.searchParams.get('group')?.toUpperCase().replace(/[^A-Z0-9]/g, '');
+  if (!code) return;
+  url.searchParams.delete('group');
+  history.replaceState(null, '', url.toString());
+  if (code.length !== 10) return;
+  store.data.boardInvite = code;
+  store.save();
+}
+
+export function clearInvite() {
+  if (store.data.boardInvite === null) return;
+  store.data.boardInvite = null;
+  store.save();
 }

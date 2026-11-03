@@ -5,9 +5,10 @@ import { loadLang } from './i18n';
 import { applySettings } from './ui';
 import { showHome } from './screens/home';
 import { showOnboarding } from './screens/onboarding';
-import { resumeBoardSync } from './board';
+import { resumeBoardSync, takeInviteFromUrl } from './board';
 
 document.title = APP_NAME;
+takeInviteFromUrl();
 // The saved language (English on a first visit) is loaded before the first screen is drawn.
 loadLang(store.data.settings.lang).then((lang) => {
   store.data.settings.lang = lang;

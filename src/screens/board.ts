@@ -3,7 +3,19 @@ import { store } from '../storage';
 import { t, num } from '../i18n';
 import { render, page } from '../ui';
 import { EXERCISES } from '../exercises';
-import { AGE_BANDS, boardErrorText, fetchBoard, nickname, type AgeBand, type BoardResult, type BoardRow, type Metric } from '../board';
+import {
+  AGE_BANDS,
+  boardErrorText,
+  fetchBoard,
+  listGroups,
+  nickname,
+  type AgeBand,
+  type BoardResult,
+  type BoardRow,
+  type Group,
+  type Metric,
+} from '../board';
+import { showGroups } from './groups';
 
 const METRICS: Metric[] = ['days', 'improvement', 'best'];
 const MEDALS = ['🥇', '🥈', '🥉'];
@@ -12,12 +24,15 @@ const MEDALS = ['🥇', '🥈', '🥉'];
 let metric: Metric = 'days';
 let ex = '';
 let band: AgeBand | '' = '';
+let group = '';
+/** The player's groups, kept between visits so the selector appears at once. */
+let groups: Group[] = [];
 
 /** Default exercise for "best level": the one played most recently. */
 const lastExercise = () => store.data.runs[store.data.runs.length - 1]?.ex ?? EXERCISES[0].id;
 
 function valueText(m: Metric, v: number): string {
-  if (m === 'days') return t('board.value.days', { n: v });
+  if (m === 'days') return t('board.value.points', { n: v });
   if (m === 'improvement') return t('board.value.improvement', { v: `${v > 0 ? '+' : ''}${num(v)}` });
   return String(Math.round(v));
 }
@@ -28,7 +43,12 @@ function row(r: BoardRow): HTMLElement {
     { class: `board-row${r.me ? ' me' : ''}` },
     h('span', { class: 'board-rank' }, MEDALS[r.rank - 1] ?? `#${r.rank}`),
     h('span', { class: 'board-name' }, nickname(r.nameCode), r.me ? h('small', { class: 'board-you' }, t('board.you')) : null),
-    h('b', { class: 'board-value' }, valueText(metric, r.value)),
+    h(
+      'span',
+      { class: 'board-value' },
+      h('b', {}, valueText(metric, r.value)),
+      metric === 'days' && r.days !== undefined ? h('small', {}, t('board.detail.days', { days: r.days, n: r.activities ?? 0 })) : null,
+    ),
   );
 }
 
@@ -43,11 +63,13 @@ function list(res: BoardResult): HTMLElement {
     {},
     h('ol', { class: 'board-list' }, ...rows.map(row), gap ? h('li', { class: 'board-gap', 'aria-hidden': 'true' }, '⋯') : null, ...near.map(row)),
     !res.me && store.data.board ? h('p', { class: 'muted small center' }, t('board.notYet')) : null,
-    h('p', { class: 'muted small center' }, t('board.players', { n: res.total })),
+    h('p', { class: 'muted small center' }, res.total === 1 ? t('board.players1') : t('board.players', { n: res.total })),
   );
 }
 
-export function showBoard(onBack: () => void) {
+/** The leaderboard; `groupId` opens it on that group (from the groups screen). */
+export function showBoard(onBack: () => void, groupId?: string) {
+  if (groupId !== undefined) group = groupId;
   if (metric === 'best' && !ex) ex = lastExercise();
   const box = h('div', { class: 'card', 'aria-live': 'polite' });
   let request = 0;
@@ -56,12 +78,42 @@ export function showBoard(onBack: () => void) {
     const mine = ++request;
     box.replaceChildren(h('p', { class: 'muted center' }, t('board.loading')));
     try {
-      const res = await fetchBoard({ metric, ex: metric === 'days' ? undefined : ex || undefined, band: band || undefined });
+      const res = await fetchBoard({
+        metric,
+        ex: metric === 'days' ? undefined : ex || undefined,
+        band: band || undefined,
+        group: group || undefined,
+      });
       if (mine === request) box.replaceChildren(list(res));
     } catch (e) {
-      if (mine === request) box.replaceChildren(h('p', { class: 'muted center' }, boardErrorText(e)));
+      if (mine !== request) return;
+      // Removed from a group meanwhile (or it no longer exists): fall back to everyone.
+      if (group && e instanceof Error && e.message === 'not_member') {
+        group = '';
+        return showBoard(onBack);
+      }
+      box.replaceChildren(h('p', { class: 'muted center' }, boardErrorText(e)));
     }
   };
+
+  const scopeSelect = h(
+    'select',
+    { class: 'input', 'aria-label': t('board.scope'), onChange: () => ((group = scopeSelect.value), void load()) },
+    h('option', { value: '' }, `🌍 ${t('board.scope.all')}`),
+  );
+  const fillScopes = () => {
+    scopeSelect.replaceChildren(
+      h('option', { value: '', selected: !group }, `🌍 ${t('board.scope.all')}`),
+      ...groups.map((g) => h('option', { value: g.id, selected: g.id === group }, `👥 ${g.name}`)),
+    );
+  };
+  fillScopes();
+  const scopeRow = h(
+    'div',
+    { class: 'board-filters' },
+    scopeSelect,
+    h('button', { class: 'btn', onClick: () => showGroups(() => showBoard(onBack)) }, `👥 ${t('board.groups')}`),
+  );
 
   const exSelect = h(
     'select',
@@ -101,10 +153,24 @@ export function showBoard(onBack: () => void) {
         ),
       ),
       h('p', { class: 'muted small' }, t(`board.explain.${metric}`), metric === 'best' && store.data.settings.relaxed ? ` ${t('board.explain.relaxed')}` : ''),
+      store.data.board ? scopeRow : null,
       h('div', { class: 'board-filters' }, metric === 'days' ? null : exSelect, bandSelect),
       box,
       h('p', { class: 'muted small center' }, `🔄 ${t('board.reset')}`),
     ),
   );
   void load();
+  // Refresh the group list in the background; a group left elsewhere disappears from the selector.
+  listGroups()
+    .then((fresh) => {
+      groups = fresh;
+      if (group && !groups.some((g) => g.id === group)) {
+        group = '';
+        void load();
+      }
+      fillScopes();
+    })
+    .catch(() => {
+      /* offline: keep the last known list */
+    });
 }

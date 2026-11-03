@@ -1,4 +1,4 @@
-﻿import { h } from '../dom';
+﻿import { h, todayKey } from '../dom';
 import { store } from '../storage';
 import { t } from '../i18n';
 import { APP_NAME } from '../config';
@@ -11,7 +11,94 @@ import { showProgress } from './progress';
 import { showSettings } from './settings';
 import { showGuide } from './guide';
 import { showBoard } from './board';
-import { fetchBoard } from '../board';
+import { showBoardJoin } from './boardJoin';
+import { boardAvailable, boardErrorText, BoardError, clearInvite, fetchBoard, joinGroup, previewGroup } from '../board';
+
+/** The suggestion to join waits until the game is familiar (a few exercises) and comes back a week after "Not now". */
+const PROMPT_AFTER_RUNS = 3;
+const PROMPT_SNOOZE_DAYS = 7;
+
+function snoozeDate(): string {
+  const d = new Date();
+  d.setDate(d.getDate() + PROMPT_SNOOZE_DAYS);
+  return todayKey(d);
+}
+
+/**
+ * A gentle, dismissible reminder that the leaderboard exists, for players who never joined: it says plainly that
+ * it is optional, and "Don't ask again" really means never.
+ */
+function promptCard(): HTMLElement | null {
+  const p = store.data.boardPrompt;
+  if (store.data.board || store.data.boardInvite || !boardAvailable() || p.never) return null;
+  if ((p.snoozed && p.snoozed > todayKey()) || store.data.runs.length < PROMPT_AFTER_RUNS) return null;
+  const hide = (prompt: typeof p) => {
+    store.data.boardPrompt = prompt;
+    store.save();
+    showHome();
+  };
+  return h(
+    'section',
+    { class: 'card board-prompt' },
+    h('h3', {}, `🏆 ${t('prompt.title')}`),
+    h('p', { class: 'small' }, t('prompt.text')),
+    h(
+      'div',
+      { class: 'row left' },
+      h('button', { class: 'btn primary', onClick: () => showBoardJoin(showHome, () => showBoard(showHome)) }, t('prompt.join')),
+      h('button', { class: 'btn', onClick: () => hide({ snoozed: snoozeDate() }) }, t('prompt.later')),
+      h('button', { class: 'btn ghost', onClick: () => hide({ never: true }) }, t('prompt.never')),
+    ),
+  );
+}
+
+/** A group invite link was opened: say which group it is and offer to join (through the opt-in if needed). */
+function inviteCard(): HTMLElement | null {
+  const code = store.data.boardInvite;
+  if (!code || !boardAvailable()) return null;
+  const title = h('h3', {}, `👥 ${t('invite.title', { name: '…' })}`);
+  const text = h('p', { class: 'small' }, store.data.board ? t('invite.textMember') : t('invite.text'));
+  const error = h('p', { class: 'small board-error', role: 'alert' });
+  const join = h('button', { class: 'btn primary', disabled: true }, t('invite.join'));
+  const card = h(
+    'section',
+    { class: 'card board-prompt' },
+    title,
+    text,
+    h('div', { class: 'row left' }, join, h('button', { class: 'btn ghost', onClick: () => (clearInvite(), showHome()) }, t('invite.dismiss'))),
+    error,
+  );
+  const enter = async () => {
+    const g = await joinGroup(code);
+    clearInvite();
+    showBoard(showHome, g.id);
+  };
+  previewGroup(code)
+    .then(({ name, members }) => {
+      title.textContent = `👥 ${t('invite.title', { name })}`;
+      const size = members === 1 ? t('groups.members1') : t('groups.members', { n: members });
+      if (!store.data.board) text.textContent = `${size} · ${t('invite.text')}`;
+      join.disabled = false;
+      join.addEventListener('click', async () => {
+        if (!store.data.board) return showBoardJoin(showHome, enter, h('h3', {}, title.textContent));
+        join.disabled = true;
+        try {
+          await enter();
+        } catch (e) {
+          error.textContent = boardErrorText(e);
+          join.disabled = false;
+        }
+      });
+    })
+    .catch((e: unknown) => {
+      // A code that no longer exists is simply forgotten; offline, the invite waits for the next visit.
+      if (e instanceof BoardError && e.code === 'not_found') {
+        clearInvite();
+        card.remove();
+      } else error.textContent = boardErrorText(e);
+    });
+  return card;
+}
 
 /** Leaderboard shortcut, only for players who joined; the rank fills in when the server answers. */
 function boardCard(): HTMLElement | null {
@@ -99,6 +186,7 @@ export function showHome() {
       h(
         'main',
         { class: 'content menu' },
+        inviteCard(),
         menuCard(
           plan.complete ? '✅' : '🏋️',
           plan.complete ? `${planTitle} ✓ · ${t('plan.again')}` : planTitle,
@@ -115,7 +203,7 @@ export function showHome() {
         ),
         menuCard('🧩', t('home.training'), t('home.trainingSub'), showTraining),
         menuCard('📈', t('home.progress'), t('home.progressSub'), showProgress),
-        boardCard(),
+        boardCard() ?? promptCard(),
         goal
           ? h(
               'button',

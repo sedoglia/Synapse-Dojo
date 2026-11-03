@@ -60,6 +60,10 @@ export interface SaveData {
   settings: Settings;
   /** Null unless the player joined the leaderboard. */
   board: BoardAccount | null;
+  /** Invite code from a group link, kept until the player joins the group or declines. */
+  boardInvite: string | null;
+  /** The home-screen suggestion to join the leaderboard: hidden until `snoozed` (a date), or for good. */
+  boardPrompt: { snoozed?: string; never?: boolean };
 }
 
 function defaults(): SaveData {
@@ -79,6 +83,17 @@ function defaults(): SaveData {
     counters: {},
     settings: { lang, sound: true, vibration: true, relaxed: false, bigText: false },
     board: null,
+    boardInvite: null,
+    boardPrompt: {},
+  };
+}
+
+function cleanPrompt(saved: unknown): SaveData['boardPrompt'] {
+  if (typeof saved !== 'object' || saved === null) return {};
+  const p = saved as Record<string, unknown>;
+  return {
+    ...(typeof p.snoozed === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(p.snoozed) ? { snoozed: p.snoozed } : {}),
+    ...(p.never === true ? { never: true } : {}),
   };
 }
 
@@ -106,7 +121,14 @@ function cleanSettings(saved: unknown): Partial<Settings> {
 
 function withDefaults(saved: Partial<SaveData>): SaveData {
   const base = defaults();
-  return { ...base, ...saved, settings: { ...base.settings, ...cleanSettings(saved.settings) }, board: cleanBoard(saved.board) };
+  return {
+    ...base,
+    ...saved,
+    settings: { ...base.settings, ...cleanSettings(saved.settings) },
+    board: cleanBoard(saved.board),
+    boardInvite: typeof saved.boardInvite === 'string' && /^[A-Z0-9]{10}$/.test(saved.boardInvite) ? saved.boardInvite : null,
+    boardPrompt: cleanPrompt(saved.boardPrompt),
+  };
 }
 
 function load(): SaveData {
@@ -167,9 +189,9 @@ export const store = {
     return JSON.stringify({ app: 'synapse-dojo', version: 1, exported: new Date().toISOString(), data }, null, 1);
   },
 
-  /** Loads an imported save; this device stays on the leaderboard (or off it) as before. */
+  /** Loads an imported save; this device stays on the leaderboard (or off it), with its pending invite, as before. */
   replace(data: SaveData) {
-    this.data = { ...data, board: this.data.board };
+    this.data = { ...data, board: this.data.board, boardInvite: this.data.boardInvite };
     this.save();
   },
 

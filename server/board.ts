@@ -101,15 +101,35 @@ export function isoWeek(date: Date): string {
 /**
  * The player's local date, accepted only if it is within a day of the server's (time zones run from
  * UTC−12 to UTC+14), so training days can only be added on the day they happen.
- * Returns its ISO week and weekday bit, or null.
+ * Returns its ISO week and weekday (0 = Monday), or null.
  */
-export function localDay(value: unknown, now = new Date()): { week: string; bit: number } | null {
+export function localDay(value: unknown, now = new Date()): { week: string; day: number } | null {
   if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return null;
   const d = new Date(`${value}T00:00:00Z`);
   if (Number.isNaN(d.getTime()) || dayKey(d) !== value) return null;
   const today = new Date(`${dayKey(now)}T00:00:00Z`);
   if (Math.abs(d.getTime() - today.getTime()) > DAY) return null;
-  return { week: isoWeek(d), bit: 1 << ((d.getUTCDay() + 6) % 7) };
+  return { week: isoWeek(d), day: (d.getUTCDay() + 6) % 7 };
+}
+
+/**
+ * Consistency points: 10 for each training day plus 1 for each activity (exercise or Neuro check), counting up to
+ * 12 a day (three workouts). Training more helps, but spreading it over the week helps more: seven light days
+ * beat three heavy ones, as spaced practice beats massed practice.
+ */
+export const DAY_POINTS = 10;
+export const DAY_CAP = 12;
+export const consistencyPoints = (counts: number[]) => counts.reduce((sum, c) => sum + (c > 0 ? DAY_POINTS + Math.min(c, DAY_CAP) : 0), 0);
+
+/** The seven per-day activity counts stored for a week (Monday first). */
+export function parseCounts(value: unknown): number[] {
+  try {
+    const v: unknown = JSON.parse(String(value));
+    if (Array.isArray(v) && v.length === 7 && v.every((n) => Number.isInteger(n) && n >= 0)) return v as number[];
+  } catch {
+    /* fall through */
+  }
+  return [0, 0, 0, 0, 0, 0, 0];
 }
 
 /** Weeks the board can be read for: the current one (with a day of slack either side) and the previous. */
@@ -120,20 +140,52 @@ export function readableWeek(value: unknown, now = new Date()): string | null {
   return ok.includes(value) ? value : null;
 }
 
-export const popcount = (n: number) => {
-  let c = 0;
-  for (; n; n &= n - 1) c++;
-  return c;
-};
+/** Groups left without members are deleted together with their name. */
+export const DROP_EMPTY_GROUPS = 'DELETE FROM friend_groups WHERE id NOT IN (SELECT group_id FROM group_members)';
+
+/** Everything the server keeps about a player: results, group memberships, the player itself. */
+export const deletePlayer = (db: D1Database, id: string) => [
+  db.prepare('DELETE FROM entries WHERE player_id = ?').bind(id),
+  db.prepare('DELETE FROM group_members WHERE player_id = ?').bind(id),
+  db.prepare('DELETE FROM players WHERE id = ?').bind(id),
+  db.prepare(DROP_EMPTY_GROUPS),
+];
 
 /** Now and then, drop old weeks and players who stopped using the board (no cron on Pages). */
 export async function maybeCleanUp(env: Env, now = new Date()): Promise<void> {
   if (crypto.getRandomValues(new Uint8Array(1))[0] >= 5) return; // about 1 call in 50
   const oldWeek = isoWeek(new Date(now.getTime() - KEEP_WEEKS * 7 * DAY));
   const idle = now.getTime() - KEEP_PLAYERS_DAYS * DAY;
+  const idlePlayers = 'SELECT id FROM players WHERE last_seen < ?';
   await env.DB.batch([
     env.DB.prepare('DELETE FROM entries WHERE week < ?').bind(oldWeek),
-    env.DB.prepare('DELETE FROM entries WHERE player_id IN (SELECT id FROM players WHERE last_seen < ?)').bind(idle),
+    env.DB.prepare(`DELETE FROM entries WHERE player_id IN (${idlePlayers})`).bind(idle),
+    env.DB.prepare(`DELETE FROM group_members WHERE player_id IN (${idlePlayers})`).bind(idle),
     env.DB.prepare('DELETE FROM players WHERE last_seen < ?').bind(idle),
+    env.DB.prepare(DROP_EMPTY_GROUPS),
   ]);
 }
+
+// ---- Groups ----
+
+/** Invite codes: 10 characters without look-alikes (0/O, 1/I/L), about 50 bits, so they can't be guessed. */
+const CODE_CHARS = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
+export const MAX_GROUPS = 10;
+export const MAX_MEMBERS = 100;
+export const newCode = () => [...crypto.getRandomValues(new Uint8Array(10))].map((b) => CODE_CHARS[b % CODE_CHARS.length]).join('');
+/** Accepts codes typed with spaces, dashes or lowercase letters. */
+export const normalizeCode = (v: unknown) => (typeof v === 'string' ? v.toUpperCase().replace(/[^A-Z0-9]/g, '') : '');
+export const isCode = (v: string) => v.length === 10 && [...v].every((c) => CODE_CHARS.includes(c));
+
+/** A group name: 1–30 characters, single spaces, no control characters. Only members ever see it. */
+export function cleanGroupName(v: unknown): string | null {
+  if (typeof v !== 'string') return null;
+  const name = v.replace(/[\p{Cc}\p{Cf}]/gu, '').replace(/\s+/g, ' ').trim();
+  return [...name].length >= 1 && [...name].length <= 30 ? name : null;
+}
+
+export const groupCount = async (db: D1Database, playerId: string) =>
+  (await db.prepare('SELECT COUNT(*) AS n FROM group_members WHERE player_id = ?').bind(playerId).first<{ n: number }>())?.n ?? 0;
+
+export const isMember = async (db: D1Database, groupId: string, playerId: string) =>
+  !!(await db.prepare('SELECT 1 AS ok FROM group_members WHERE group_id = ? AND player_id = ?').bind(groupId, playerId).first());
