@@ -4,9 +4,12 @@
 //   npx wrangler login       # once, opens the browser to authorise this computer
 //   npm run deploy
 //
-// Optional: CF_PAGES_PROJECT (default synapse-gym). The Cloudflare Web Analytics token is read at build time
-// from VITE_CF_ANALYTICS_TOKEN, either in the environment or in a git-ignored `.env.web.local` file.
+// Optional: CF_PAGES_PROJECT (default synapse-gym). The Cloudflare Web Analytics token and the Turnstile site key
+// for the leaderboard are read at build time from VITE_CF_ANALYTICS_TOKEN and VITE_TURNSTILE_SITE_KEY, either in
+// the environment or in a git-ignored `.env.web.local` file. Pending leaderboard database migrations are applied
+// before each deploy.
 import { spawnSync } from 'node:child_process';
+import { existsSync, readFileSync } from 'node:fs';
 
 const project = process.env.CF_PAGES_PROJECT || 'synapse-gym';
 
@@ -24,7 +27,14 @@ const run = (cmd) => {
   check(spawnSync(cmd, { stdio: 'inherit', shell: true }));
 };
 
+// Without a site key nobody can join the leaderboard (the server rejects joins without a Turnstile token).
+const envFile = existsSync('.env.web.local') ? readFileSync('.env.web.local', 'utf8') : '';
+if (!process.env.VITE_TURNSTILE_SITE_KEY?.trim() && !/^\s*VITE_TURNSTILE_SITE_KEY\s*=\s*\S/m.test(envFile)) {
+  console.warn('Warning: VITE_TURNSTILE_SITE_KEY is not set, so joining the leaderboard will fail on the public site.');
+}
+
 run('npm run build:web');
+run('npx wrangler d1 migrations apply synapse-board --remote');
 // --branch main makes it a production deployment; --commit-dirty silences the warning about uncommitted files.
 run(`npx wrangler pages deploy dist --project-name ${project} --branch main --commit-dirty=true`);
 console.log('Deployed.');

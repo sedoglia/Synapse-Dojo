@@ -4,10 +4,9 @@ name = "synapse-gym"
 pages_build_output_dir = "dist"
 compatibility_date = "2026-06-01"
 
-# Leaderboard database. Create it once with `npx wrangler d1 create synapse-board` and paste the id below;
-# the placeholder works for local development (`npm run dev:api`) but not for a deploy.
+# Leaderboard database (created with `npx wrangler d1 create synapse-board`); `npm run dev:api` uses a local copy.
 [[d1_databases]]
 binding = "DB"
 database_name = "synapse-board"
-database_id = "00000000-0000-0000-0000-000000000000"
+database_id = "19f20144-0d17-484c-b0ee-85e34c702f30"
 migrations_dir = "migrations"
