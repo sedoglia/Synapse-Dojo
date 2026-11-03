@@ -20,6 +20,7 @@ Gioco gratuito di allenamento cognitivo e coordinazione bilaterale (source-avail
 - **🏋️ Allenamento Giornaliero**: circa 10–12 minuti con 4 esercizi selezionati ogni giorno tra le abilità meno allenate di recente. Completato un allenamento, è possibile avviarne subito un altro con abilità ed esercizi differenti.
 - **📏 Misura il Neuro Score**: test quotidiano di benchmarking che valuta tutte le **9 abilità cerebrali e bilaterali** (selezionando ogni giorno a rotazione un esercizio per area) e calcola un **Neuro Score** normalizzato da 0 a 1000 per monitorare obiettivamente la propria lucidità nel tempo.
 - **🧩 Palestra Libera**: catalogo completo di **35 esercizi** suddivisi in **9 aree cognitive e motorie**. Ciascun esercizio dispone di un **motore adattivo continuo** che calibra la difficoltà in tempo reale per mantenere la stimolazione ideale, salvando il livello raggiunto tra una sessione e l'altra.
+- **🏆 Classifica Settimanale e Gruppi di Amici** (facoltativa, disattivata di default): ogni settimana confronta la **costanza** (10 punti per giorno di allenamento più 1 per esercizio, fino a 12 al giorno), il **miglioramento** rispetto al proprio punto di partenza e il **livello migliore** per esercizio, con fasce d'età facoltative e una classifica separata per chi usa il ritmo rilassato. Si azzera ogni lunedì, mostra la top 3 e i giocatori vicini a te, e si può giocare tra tutti o in **gruppi privati** a cui si entra con un link o un codice. Si usa con un nickname casuale e si esce in qualsiasi momento cancellando tutti i dati.
 
 ### Le 9 Aree e i 35 Esercizi
 
@@ -42,7 +43,8 @@ Gioco gratuito di allenamento cognitivo e coordinazione bilaterale (source-avail
 - **Difficoltà Adattiva Scientifica**: basata sulla *regola dell'85%* (Wilson et al., *Nature Communications* 2019) e sull'algoritmo *weighted up-down* (Kaernbach): la difficoltà si adatta costantemente mirando a circa l'80% di accuratezza, la soglia ottimale di apprendimento e neuroplasticità. Include riscaldamento e freno alla frustrazione.
 - **Trasparenza Scientifica**: ogni esercizio include la scheda **"Perché funziona"** con la spiegazione del paradigma clinico e lo studio di riferimento (la documentazione scientifica ufficiale con bibliografia completa è consultabile in [docs/basi-scientifiche.md](docs/basi-scientifiche.md) — English: [docs/scientific-foundations.md](docs/scientific-foundations.md)).
 - **Esempi e Prova Guidata**: ogni esercizio offre una spiegazione illustrata e una prova pratica (trial) preliminare per familiarizzare con i comandi senza impattare record o livelli.
-- **Privacy Radicale & Zero Cookie**: nessun account, nessuna password, nessuna richiesta di rete a tracker o servizi di terze parti. Tutti i progressi risiedono esclusivamente nel `localStorage` del browser, con opzioni di esportazione e importazione in formato JSON da *Impostazioni*. Unica eccezione la **classifica settimanale facoltativa**, che premia costanza e miglioramento (non l'abilità assoluta) con un nickname casuale, tra tutti o in gruppi privati di amici, e invia solo un riepilogo della settimana.
+- **Privacy Radicale & Zero Cookie**: nessun account, nessuna password, nessun cookie e nessun tracker. Tutti i progressi risiedono nel `localStorage` del browser, con opzioni di esportazione e importazione in formato JSON da *Impostazioni*. Unica eccezione la **classifica settimanale facoltativa**: chi aderisce invia solo un riepilogo della settimana con un nickname casuale, e solo in quel momento viene caricato il controllo anti-robot Cloudflare Turnstile. Il conteggio delle visite usa Cloudflare Web Analytics, senza cookie.
+- **Classifica Progettata per Non Scoraggiare**: premia impegno e miglioramento invece del talento, mostra a chi è nella metà bassa quanti punti mancano per salire invece della posizione, non penalizza chi torna dopo una pausa e non compare mai durante gli esercizi (razionale scientifico in [docs/basi-scientifiche.md](docs/basi-scientifiche.md), §2.6).
 - **Multilingua Nativo (12 Lingue)**: localizzato in inglese, italiano, spagnolo, francese, tedesco, portoghese, russo, cinese, giapponese, arabo (con layout RTL), hindi e indonesiano. I file linguistici sono separati e caricati dinamicamente on-demand.
 - **Accessibilità & Benessere**: modalità a ritmo rilassato (tempi maggiorati del 40%), supporto per testo grande, tema chiaro, tema scuro e installabilità come **PWA offline**.
 - **Pagine Dedicate del Progetto**:
@@ -59,11 +61,16 @@ Il progetto è costruito con **TypeScript** e **Vite**, senza l'impiego di frame
 
 ```
 synapse-dojo/
-├── public/                 manifest PWA, icone, font Nunito (OFL), robots.txt, sitemap.xml, _headers
+├── public/                 manifest PWA, icone, font Nunito (OFL), robots.txt, sitemap.xml, _headers, service worker
+├── functions/api/          API della classifica (Cloudflare Pages Functions): join, submit, board, me, groups/
+├── server/board.ts         codice condiviso dalle API: autenticazione, validazione, settimane ISO, punti, gruppi
+├── migrations/             schema del database D1 della classifica (applicato in automatico dal deploy)
+├── scripts/deploy-web.mjs  build, migrazioni e pubblicazione su Cloudflare Pages
 ├── src/
 │   ├── exercises/          i 35 esercizi (uno per file) + index.ts (batteria e selezione giornaliera)
-│   ├── screens/            schermate dell'app: home, training, check, play, progress, settings, guide, privacy, license
+│   ├── screens/            schermate dell'app: home, onboarding, training, play, progress, settings, board, boardJoin, groups, guide, privacy, license
 │   ├── locales/            moduli di traduzione per le 12 lingue (en.ts è la base di tipizzazione)
+│   ├── board.ts            classifica lato app: riepilogo settimanale, invio in background, gruppi e inviti
 │   ├── adaptive.ts         motore adattivo continuo (weighted up-down staircase)
 │   ├── audio.ts            effetti sonori sintetizzati via Web Audio API e sintesi vocale
 │   ├── rewards.ts          calcolo XP, livelli del giocatore e sblocco traguardi
@@ -82,7 +89,9 @@ synapse-dojo/
 ├── guide.html              pagina indipendente per la guida
 ├── privacy.html            pagina indipendente per la privacy
 ├── license.html            pagina indipendente per la licenza
-├── vite.config.ts          configurazione build multi-pagina e script Cloudflare Web Analytics
+├── vite.config.ts          configurazione build multi-pagina, proxy /api in sviluppo e Cloudflare Web Analytics
+├── wrangler.toml           progetto Cloudflare Pages e collegamento al database D1
+├── tsconfig.api.json       type-check del codice server (functions/ e server/)
 └── package.json
 ```
 
@@ -99,9 +108,11 @@ npm install
 # Avvia il server di sviluppo locale (http://localhost:5173)
 npm run dev
 
-# Esegue il type-check TypeScript e compila la build in dist/
+# Esegue il type-check TypeScript (app e API) e compila la build in dist/
 npm run build
 ```
+
+Per provare la classifica in locale servono due terminali: `npm run dev:api` avvia le API e un database D1 locale su `http://127.0.0.1:8788` (usa la build in `dist/`, quindi va lanciato dopo `npm run build`), mentre `npm run dev` le raggiunge tramite il proxy `/api`. In locale il controllo anti-robot viene saltato. `npm run check:api` esegue solo il type-check del codice server.
 
 ### Aggiungere un nuovo esercizio
 
@@ -121,7 +132,16 @@ Per compilare e pubblicare un aggiornamento:
 npm run deploy
 ```
 
-Lo script `scripts/deploy-web.mjs` esegue automaticamente la build ottimizzata (`npm run build:web`) e carica i file compilati di `dist/` tramite [Wrangler](https://developers.cloudflare.com/workers/wrangler/). Il file `public/_headers` garantisce header di sicurezza HTTP rigidi (CSP, Permissions-Policy, HSTS) e cache immutabile sugli asset con hash.
+Lo script `scripts/deploy-web.mjs` esegue la build ottimizzata (`npm run build:web`), applica le migrazioni in sospeso al database D1 remoto e carica `dist/` e le API di `functions/` tramite [Wrangler](https://developers.cloudflare.com/workers/wrangler/). Il file `public/_headers` garantisce header di sicurezza HTTP rigidi (CSP, Permissions-Policy, HSTS) e cache immutabile sugli asset con hash.
+
+Configurazione da fare una sola volta per la classifica:
+
+1. `npx wrangler d1 create synapse-board` e copia l'id ottenuto in `wrangler.toml`.
+2. Crea un widget **Turnstile** (modalità Managed) dalla dashboard Cloudflare per i domini del sito.
+3. Aggiungi la chiave pubblica in `.env.web.local` (ignorato da git) come `VITE_TURNSTILE_SITE_KEY=…`.
+4. Imposta la chiave segreta con `npx wrangler pages secret put TURNSTILE_SECRET --project-name synapse-gym`.
+
+Tutto rientra nel piano gratuito di Cloudflare (Pages, Functions, D1 e Turnstile).
 
 ---
 

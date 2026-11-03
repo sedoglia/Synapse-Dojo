@@ -19,6 +19,7 @@ Free cognitive training and bilateral coordination web application (source-avail
 - **🏋️ Daily Workout**: ~10–12 minutes with 4 daily exercises selected across your least recently trained skills. Once finished, you can immediately start another workout with different exercises and domains.
 - **📏 Measure Neuro Score**: Daily benchmarking battery assessing all **9 cognitive and motor abilities** (selecting one rotating exercise per domain daily) to calculate a normalized **Neuro Score** from 0 to 1000, objectively tracking your mental acuity over time.
 - **🧩 Free Gym**: Full catalog of **35 exercises** categorized into **9 cognitive and bilateral coordination domains**. Each exercise features a **continuous adaptive difficulty engine** that calibrates in real-time to keep you in the optimal learning zone, saving your progress across sessions.
+- **🏆 Weekly Leaderboard & Friend Groups** (optional, off by default): each week compare **consistency** (10 points per training day plus 1 per exercise, up to 12 a day), **improvement** against your own starting point and **best level** per exercise, with optional age groups and a separate board for relaxed-pace players. It resets every Monday, shows the top 3 and the players near you, and works for everyone or in **private groups** joined with a link or a code. It uses a random nickname, and leaving at any time deletes all data.
 
 ### The 9 Domains and 35 Exercises
 
@@ -41,9 +42,10 @@ Free cognitive training and bilateral coordination web application (source-avail
 - **Evidence-Based Adaptive Engine**: Guided by *The Eighty Five Percent Rule for optimal learning* (Wilson et al., *Nature Communications* 2019) and the *weighted up-down* staircase method (Kaernbach, 1991): difficulty continuously adapts targeting ~80% accuracy—the sweet spot for neural plasticity. Includes warm-up buffers and frustration brakes.
 - **Scientific Transparency**: Every exercise includes a **"Why It Works"** card explaining the underlying clinical paradigm and study citations. The complete literature review is documented in [docs/scientific-foundations.md](docs/scientific-foundations.md) (Italian: [docs/basi-scientifiche.md](docs/basi-scientifiche.md)).
 - **Guided Trials & Illustrated Examples**: Every exercise provides visual step-by-step examples and a preliminary practice trial that does not affect your score or level.
-- **Radical Privacy & Zero Cookies**: No accounts, no passwords, no email sign-ups, and zero tracking requests to third parties. All progress stays in your browser's local storage (`localStorage`), with one-click JSON backup export/import in Settings. The only exception is the **opt-in weekly leaderboard**, which ranks consistency and improvement (not raw ability) under a random nickname, for everyone or within private groups of friends, and sends only a weekly summary.
+- **Radical Privacy & Zero Cookies**: No accounts, no passwords, no email sign-ups, no cookies and no trackers. All progress stays in your browser's local storage (`localStorage`), with one-click JSON backup export/import in Settings. The only exception is the **opt-in weekly leaderboard**: players who join send only a weekly summary under a random nickname, and only then is the Cloudflare Turnstile anti-bot check loaded. Visits are counted with cookie-free Cloudflare Web Analytics.
+- **A Leaderboard Designed Not to Discourage**: it rewards effort and improvement rather than talent, shows players in the lower half how many points move them up instead of their rank, never penalises coming back after a break, and never appears during exercises (scientific rationale in [docs/scientific-foundations.md](docs/scientific-foundations.md), §2.6).
 - **Native Localization (12 Languages)**: English, Spanish, Chinese (Simplified), Hindi, Arabic (with native RTL mirroring), Portuguese, French, Russian, German, Japanese, Indonesian, and Italian. Language files are split and loaded asynchronously on-demand.
-- **Accessibility & Wellbeing**: Relaxed pace mode (adds 40% more time), high contrast/large text option, dark mode, and offline **Progressive Web App (PWA)** installation.
+- **Accessibility & Wellbeing**: Relaxed pace mode (adds 40% more time), large text option, automatic light and dark theme, and offline **Progressive Web App (PWA)** installation.
 - **Standalone Static Pages**:
   - [`index.html`](index.html): The complete interactive PWA game.
   - [`guide.html`](guide.html): Comprehensive illustrated guide to all 35 games, paradigms, and FAQs.
@@ -58,11 +60,16 @@ Built purely with **TypeScript** and **Vite**, with **zero UI framework dependen
 
 ```
 synapse-dojo/
-├── public/                 PWA manifest, SVG icons, Nunito font (OFL), robots.txt, sitemap.xml, _headers
+├── public/                 PWA manifest, SVG icons, Nunito font (OFL), robots.txt, sitemap.xml, _headers, service worker
+├── functions/api/          Leaderboard API (Cloudflare Pages Functions): join, submit, board, me, groups/
+├── server/board.ts         Code shared by the API: authentication, validation, ISO weeks, points, groups
+├── migrations/             Leaderboard D1 database schema (applied automatically on deploy)
+├── scripts/deploy-web.mjs  Build, migrations and publishing to Cloudflare Pages
 ├── src/
 │   ├── exercises/          35 exercise implementations (1 file each) + index.ts (daily rotation & battery)
-│   ├── screens/            App views: home, training, check, play, progress, settings, guide, privacy, license
+│   ├── screens/            App views: home, onboarding, training, play, progress, settings, board, boardJoin, groups, guide, privacy, license
 │   ├── locales/            12 standalone locale bundles (en.ts is the type-safe blueprint)
+│   ├── board.ts            Leaderboard client: weekly summary, background upload, groups and invites
 │   ├── adaptive.ts         Continuous adaptive difficulty staircase engine (weighted up-down)
 │   ├── audio.ts            Procedural Web Audio API sound synthesis & native SpeechSynthesis
 │   ├── rewards.ts          XP calculation, player levels, and streak/achievement badges
@@ -81,7 +88,9 @@ synapse-dojo/
 ├── guide.html              Standalone guide view
 ├── privacy.html            Standalone privacy view
 ├── license.html            Standalone license view
-├── vite.config.ts          Multi-page build configuration & Cloudflare Web Analytics hook
+├── vite.config.ts          Multi-page build configuration, /api proxy in development & Cloudflare Web Analytics hook
+├── wrangler.toml           Cloudflare Pages project and D1 database binding
+├── tsconfig.api.json       Type-check of the server code (functions/ and server/)
 └── package.json
 ```
 
@@ -98,9 +107,11 @@ npm install
 # Start local development server (http://localhost:5173)
 npm run dev
 
-# TypeScript type-check and production build into dist/
+# TypeScript type-check (app and API) and production build into dist/
 npm run build
 ```
+
+To try the leaderboard locally, use two terminals: `npm run dev:api` starts the API with a local D1 database on `http://127.0.0.1:8788` (it serves the build in `dist/`, so run it after `npm run build`), and `npm run dev` reaches it through the `/api` proxy. The anti-bot check is skipped locally. `npm run check:api` only type-checks the server code.
 
 ### Adding a new exercise
 
@@ -120,7 +131,16 @@ To build and deploy updates to production:
 npm run deploy
 ```
 
-The script `scripts/deploy-web.mjs` executes an optimized production build (`npm run build:web`) and directly deploys the `dist/` directory via [Wrangler](https://developers.cloudflare.com/workers/wrangler/). The `public/_headers` file enforces strict HTTP security headers (CSP, Permissions-Policy, HSTS) and immutable caching on hashed static assets.
+The script `scripts/deploy-web.mjs` executes an optimized production build (`npm run build:web`), applies pending migrations to the remote D1 database and deploys `dist/` together with the `functions/` API via [Wrangler](https://developers.cloudflare.com/workers/wrangler/). The `public/_headers` file enforces strict HTTP security headers (CSP, Permissions-Policy, HSTS) and immutable caching on hashed static assets.
+
+One-time setup for the leaderboard:
+
+1. `npx wrangler d1 create synapse-board`, then copy the id it prints into `wrangler.toml`.
+2. Create a **Turnstile** widget (Managed mode) for the site's domains in the Cloudflare dashboard.
+3. Add the site key to `.env.web.local` (git-ignored) as `VITE_TURNSTILE_SITE_KEY=…`.
+4. Set the secret key with `npx wrangler pages secret put TURNSTILE_SECRET --project-name synapse-gym`.
+
+Everything fits in Cloudflare's free plan (Pages, Functions, D1 and Turnstile).
 
 ---
 

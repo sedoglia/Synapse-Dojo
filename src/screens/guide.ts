@@ -58,6 +58,12 @@ export function guideContent(): HTMLElement[] {
         h(
           'div',
           { class: 'card guide-card' },
+          h('h3', {}, t('guide.boardH')),
+          h('p', {}, t('guide.boardP')),
+        ),
+        h(
+          'div',
+          { class: 'card guide-card' },
           h('h3', {}, t('guide.settingsH')),
           h('p', {}, t('guide.settingsP')),
         ),
