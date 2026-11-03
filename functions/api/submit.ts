@@ -7,7 +7,6 @@ import {
   isExId,
   json,
   localDay,
-  maybeCleanUp,
   parseCounts,
   readBody,
   type Handler,
@@ -28,7 +27,7 @@ const isBest = (v: unknown): v is number => Number.isInteger(v) && (v as number)
  * The week's best per exercise only goes up; improvement is replaced (it can fall back).
  * Each value has its own "reached at" time, used to break ties in favour of whoever got there first.
  */
-export const onRequestPost: Handler = async ({ request, env, waitUntil }) => {
+export const onRequestPost: Handler = async ({ request, env }) => {
   const player = await authenticate(request, env);
   if (!player) return fail(401, 'unauthorized');
   const now = Date.now();
@@ -89,6 +88,5 @@ export const onRequestPost: Handler = async ({ request, env, waitUntil }) => {
     ...[...exercises].map(([ex, e]) => perExercise.bind(player.id, day.week, ex, e.improvement, e.best, relaxed, now)),
     db.prepare('UPDATE players SET last_seen = ?, last_submit = ? WHERE id = ?').bind(now, now, player.id),
   ]);
-  waitUntil(maybeCleanUp(env));
   return json({ week: day.week, days, points, todayCount: counts[day.day] });
 };

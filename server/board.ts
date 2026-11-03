@@ -157,20 +157,23 @@ export const deletePlayer = (db: D1Database, id: string) => [
   db.prepare(DROP_EMPTY_GROUPS),
 ];
 
-/** Now and then, drop old weeks and players who stopped using the board (no cron on Pages). */
-export async function maybeCleanUp(env: Env, now = new Date()): Promise<void> {
-  if (crypto.getRandomValues(new Uint8Array(1))[0] >= 5) return; // about 1 call in 50
+/**
+ * Drops old weeks and players who stopped using the board, as the privacy notice promises.
+ * Run every night by the cron Worker in cleanup/ (Pages has no cron). Returns the rows deleted, for its log.
+ */
+export async function cleanUp(db: D1Database, now = new Date()) {
   const oldWeek = isoWeek(new Date(now.getTime() - KEEP_WEEKS * 7 * DAY));
   const idle = now.getTime() - KEEP_PLAYERS_DAYS * DAY;
   const idlePlayers = 'SELECT id FROM players WHERE last_seen < ?';
-  await env.DB.batch([
-    env.DB.prepare('DELETE FROM entries WHERE week < ?').bind(oldWeek),
-    env.DB.prepare(`DELETE FROM entries WHERE player_id IN (${idlePlayers})`).bind(idle),
-    env.DB.prepare(`DELETE FROM group_members WHERE player_id IN (${idlePlayers})`).bind(idle),
-    env.DB.prepare('DELETE FROM players WHERE last_seen < ?').bind(idle),
-    env.DB.prepare(REASSIGN_OWNERS),
-    env.DB.prepare(DROP_EMPTY_GROUPS),
+  const [weeks, idleEntries, , players, , groups] = await db.batch([
+    db.prepare('DELETE FROM entries WHERE week < ?').bind(oldWeek),
+    db.prepare(`DELETE FROM entries WHERE player_id IN (${idlePlayers})`).bind(idle),
+    db.prepare(`DELETE FROM group_members WHERE player_id IN (${idlePlayers})`).bind(idle),
+    db.prepare('DELETE FROM players WHERE last_seen < ?').bind(idle),
+    db.prepare(REASSIGN_OWNERS),
+    db.prepare(DROP_EMPTY_GROUPS),
   ]);
+  return { entries: weeks.meta.changes + idleEntries.meta.changes, players: players.meta.changes, groups: groups.meta.changes };
 }
 
 // ---- Groups ----

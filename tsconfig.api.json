@@ -12,5 +12,5 @@
     "noUnusedParameters": true,
     "isolatedModules": true
   },
-  "include": ["functions", "server"]
+  "include": ["functions", "server", "cleanup"]
 }

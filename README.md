@@ -64,6 +64,7 @@ synapse-dojo/
 ├── functions/api/          Leaderboard API (Cloudflare Pages Functions): join, submit, board, me, groups/
 ├── server/board.ts         Code shared by the API: authentication, validation, ISO weeks, points, groups
 ├── migrations/             Leaderboard D1 database schema (applied automatically on deploy)
+├── cleanup/                Cron Worker that applies the leaderboard retention rules every night
 ├── scripts/deploy-web.mjs  Build, migrations and publishing to Cloudflare Pages
 ├── src/
 │   ├── exercises/          35 exercise implementations (1 file each) + index.ts (daily rotation & battery)
@@ -131,7 +132,7 @@ To build and deploy updates to production:
 npm run deploy
 ```
 
-The script `scripts/deploy-web.mjs` executes an optimized production build (`npm run build:web`), applies pending migrations to the remote D1 database and deploys `dist/` together with the `functions/` API via [Wrangler](https://developers.cloudflare.com/workers/wrangler/). The `public/_headers` file enforces strict HTTP security headers (CSP, Permissions-Policy, HSTS) and immutable caching on hashed static assets.
+The script `scripts/deploy-web.mjs` executes an optimized production build (`npm run build:web`), applies pending migrations to the remote D1 database and deploys `dist/` together with the `functions/` API and the `cleanup/` cron Worker via [Wrangler](https://developers.cloudflare.com/workers/wrangler/). The `public/_headers` file enforces strict HTTP security headers (CSP, Permissions-Policy, HSTS) and immutable caching on hashed static assets.
 
 One-time setup for the leaderboard:
 
@@ -140,7 +141,7 @@ One-time setup for the leaderboard:
 3. Add the site key to `.env.web.local` (git-ignored) as `VITE_TURNSTILE_SITE_KEY=…`.
 4. Set the secret key with `npx wrangler pages secret put TURNSTILE_SECRET --project-name synapse-gym`.
 
-Everything fits in Cloudflare's free plan (Pages, Functions, D1 and Turnstile).
+Everything fits in Cloudflare's free plan (Pages, Functions, Workers cron, D1 and Turnstile).
 
 ---
 

@@ -37,4 +37,6 @@ run('npm run build:web');
 run('npx wrangler d1 migrations apply synapse-board --remote');
 // --branch main makes it a production deployment; --commit-dirty silences the warning about uncommitted files.
 run(`npx wrangler pages deploy dist --project-name ${project} --branch main --commit-dirty=true`);
+// The nightly cleanup is a separate Worker sharing server/board.ts, so it ships with the site.
+run('npx wrangler deploy --config cleanup/wrangler.toml');
 console.log('Deployed.');

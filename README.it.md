@@ -65,6 +65,7 @@ synapse-dojo/
 ├── functions/api/          API della classifica (Cloudflare Pages Functions): join, submit, board, me, groups/
 ├── server/board.ts         codice condiviso dalle API: autenticazione, validazione, settimane ISO, punti, gruppi
 ├── migrations/             schema del database D1 della classifica (applicato in automatico dal deploy)
+├── cleanup/                Worker con cron che applica ogni notte le regole di conservazione della classifica
 ├── scripts/deploy-web.mjs  build, migrazioni e pubblicazione su Cloudflare Pages
 ├── src/
 │   ├── exercises/          i 35 esercizi (uno per file) + index.ts (batteria e selezione giornaliera)
@@ -132,7 +133,7 @@ Per compilare e pubblicare un aggiornamento:
 npm run deploy
 ```
 
-Lo script `scripts/deploy-web.mjs` esegue la build ottimizzata (`npm run build:web`), applica le migrazioni in sospeso al database D1 remoto e carica `dist/` e le API di `functions/` tramite [Wrangler](https://developers.cloudflare.com/workers/wrangler/). Il file `public/_headers` garantisce header di sicurezza HTTP rigidi (CSP, Permissions-Policy, HSTS) e cache immutabile sugli asset con hash.
+Lo script `scripts/deploy-web.mjs` esegue la build ottimizzata (`npm run build:web`), applica le migrazioni in sospeso al database D1 remoto e carica `dist/`, le API di `functions/` e il Worker con cron di `cleanup/` tramite [Wrangler](https://developers.cloudflare.com/workers/wrangler/). Il file `public/_headers` garantisce header di sicurezza HTTP rigidi (CSP, Permissions-Policy, HSTS) e cache immutabile sugli asset con hash.
 
 Configurazione da fare una sola volta per la classifica:
 
@@ -141,7 +142,7 @@ Configurazione da fare una sola volta per la classifica:
 3. Aggiungi la chiave pubblica in `.env.web.local` (ignorato da git) come `VITE_TURNSTILE_SITE_KEY=…`.
 4. Imposta la chiave segreta con `npx wrangler pages secret put TURNSTILE_SECRET --project-name synapse-gym`.
 
-Tutto rientra nel piano gratuito di Cloudflare (Pages, Functions, D1 e Turnstile).
+Tutto rientra nel piano gratuito di Cloudflare (Pages, Functions, cron dei Workers, D1 e Turnstile).
 
 ---
 

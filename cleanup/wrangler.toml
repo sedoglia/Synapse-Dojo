@@ -1,0 +1,18 @@
+# Nightly leaderboard cleanup. A Worker of its own because Cloudflare Pages has no cron triggers.
+name = "synapse-cleanup"
+main = "index.ts"
+compatibility_date = "2026-06-01"
+# Runs on the cron only: it has no public address.
+workers_dev = false
+
+[triggers]
+crons = ["0 3 * * *"] # 03:00 UTC, every day
+
+[observability]
+enabled = true
+
+# The same database as the site (see ../wrangler.toml).
+[[d1_databases]]
+binding = "DB"
+database_name = "synapse-board"
+database_id = "19f20144-0d17-484c-b0ee-85e34c702f30"
