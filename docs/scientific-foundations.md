@@ -94,9 +94,9 @@ The exercises are **inspired by** the paradigms listed: they are short, game-lik
 | **🔐 Memory** | **Story Memory** | Inspired by logical memory for short stories | Questions on who, what, where and when (2 or 3). |
 | **🧊 Spatial** | **Rotations** | Mental rotation (*Shepard & Metzler, 1971*), two-dimensional version with chiral polyominoes | Number of squares (4–9), rotations in 30° steps, time limit (7.6 → 2.5 s). |
 | **🧊 Spatial** | **Spatial Matrix** | Spatial memory with coordinate transformation | Blocks to remember (2–5) and grid rotation (0°, 90°, 180°, 270°). |
-| **🧩 Reasoning** | **Towers** | *Tower of London* (*Shallice, 1982*) | Minimum moves (2–8). |
+| **🧩 Reasoning** | **Towers** | *Tower of London* (*Shallice, 1982*) | Moves of the shortest solution (2–8), which are also the maximum allowed. |
 | **🧩 Reasoning** | **Odd one out** | Odd-one-out with multidimensional rules | Number of figures (4–9) and irrelevant features that vary (1–3). |
-| **🧩 Reasoning** | **Resource Planning** | Knapsack problem / constrained planning | Number of activities (4–7) and budget; at least 90% of the optimal value is required. |
+| **🧩 Reasoning** | **Market Stall** | Knapsack problem (Murawski & Bossaerts, 2016) in an everyday setting of costs and earnings | Number of products (4–7) and budget; at least 90% of the best possible earnings is required. |
 | **➗ Calculation & reading** | **Math sprint** | Fast mental arithmetic (*Learning Therapy*, Kawashima) | Operations (+ − → × → ÷) and number size. |
 | **➗ Calculation & reading** | **Speed reading** | Reading aloud with a comprehension question | Words per minute and comprehension (comprehension weighs more than speed). |
 | **➗ Calculation & reading** | **Dot Estimation** | *Approximate Number System* (*Halberda et al., 2008*) | Ratio between the two quantities (40 → 88%) and exposure time (1.5 → 0.8 s). |
@@ -246,3 +246,4 @@ To make sure the platform stays a tool serving the user rather than advertising 
 41. Hamari, J., Koivisto, J., & Sarsa, H. (2014). *Does gamification work? A literature review of empirical studies on gamification.* 47th Hawaii International Conference on System Sciences, 3025-3034. [DOI: 10.1109/HICSS.2014.377](https://doi.org/10.1109/HICSS.2014.377)
 42. Cepeda, N. J., Pashler, H., Vul, E., Wixted, J. T., & Rohrer, D. (2006). *Distributed practice in verbal recall tasks: A review and quantitative synthesis.* Psychological Bulletin, 132(3), 354-380. [DOI: 10.1037/0033-2909.132.3.354](https://doi.org/10.1037/0033-2909.132.3.354)
 43. Eysenck, M. W., Derakshan, N., Santos, R., & Calvo, M. G. (2007). *Anxiety and cognitive performance: Attentional control theory.* Emotion, 7(2), 336-353. [DOI: 10.1037/1528-3542.7.2.336](https://doi.org/10.1037/1528-3542.7.2.336)
+44. Murawski, C., & Bossaerts, P. (2016). *How humans solve complex problems: The case of the knapsack problem.* Scientific Reports, 6, 34851. [DOI: 10.1038/srep34851](https://doi.org/10.1038/srep34851)

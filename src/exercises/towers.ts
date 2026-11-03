@@ -94,7 +94,6 @@ export const towers: Exercise = {
       let state = start;
       let moves = 0;
       let selected = -1;
-      const limit = min * 2 + 2;
 
       const goalBox = h('div', { class: 'tower-goal' }, h('span', { class: 'muted' }, t('ex.towers.goal')), renderBoard(goal, true));
       const counter = h('div', { class: 'grid-status' });
@@ -125,14 +124,14 @@ export const towers: Exercise = {
           }
           redraw();
           if (state === goal) done(true);
-          else if (moves >= limit) done(false);
+          else if (moves >= min) done(false); // `min` is the shortest solution, so it is also the most moves allowed
         };
         redraw();
       });
 
-      const ok = ctx.track(st, solved && moves === min, { was: t('fb.minMoves', { n: min }) });
+      const ok = ctx.track(st, solved, { was: t('fb.minMoves', { n: min }) });
       if (ok) perfect++;
-      counter.textContent = solved ? (ok ? '✓' : t('ex.towers.moves', { m: moves, min })) : t('ex.towers.too');
+      counter.textContent = ok ? '✓' : t('ex.towers.too');
       flash(playArea, ok ? 'good' : 'bad', 500);
       await ctx.wait(ok ? 600 : 1200);
     }

@@ -2989,7 +2989,7 @@ html.big-text {
 }
 .resource-card.selected {
   border-color: var(--accent);
-  background: #f0fdfa;
+  background: var(--accent-soft);
   box-shadow: 0 0 0 2px var(--accent);
 }
 .resource-card .cost {
@@ -3002,6 +3002,34 @@ html.big-text {
 }
 .resources-submit {
   width: 100%;
+}
+.resources-header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.resources-bar {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--border);
+  overflow: hidden;
+}
+.resources-bar > div {
+  height: 100%;
+  border-radius: inherit;
+  transition: width 0.2s;
+}
+.resources-bar.spent > div {
+  background: #d97706;
+}
+.resources-bar.gained > div {
+  background: #10b981;
+}
+.overbudget .resources-bar.spent > div {
+  background: var(--c-red);
+}
+.resource-card b {
+  font-size: 1.05rem;
 }
 
 /* reaction */

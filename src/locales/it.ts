@@ -26,6 +26,8 @@ const ui: Locale['ui'] = {
   'landing.pillar2Desc': 'Un test rapido di 3 minuti sulle 4 aree chiave per misurare oggettivamente i tuoi progressi nel tempo.',
   'landing.pillar3Title': 'Palestra Libera (35 Giochi)',
   'landing.pillar3Desc': 'Tutti i giochi disponibili liberamente per allenare le 9 aree cognitive e bilaterali quando vuoi.',
+  'landing.pillar4Title': 'Classifica settimanale (facoltativa)',
+  'landing.pillar4Desc': 'Se ti va, confronta costanza e miglioramento con altri giocatori o con gli amici, con un nickname casuale. È disattivata finché non aderisci e puoi uscire quando vuoi.',
   'landing.domainsTitle': 'Le 9 Aree Allenate',
   'landing.guideCtaTitle': 'Vuoi scoprire tutti i dettagli dei 35 giochi?',
   'landing.guideCtaDesc': 'Leggi la nostra guida dettagliata con la spiegazione scientifica, i benefici e le regole di tutti gli esercizi.',
@@ -214,12 +216,12 @@ const ui: Locale['ui'] = {
   'ex.rotate.mirror': 'Speculare',
 
   'ex.towers.name': 'Torri',
-  'ex.towers.desc': 'Sposta le palline per ottenere la disposizione dell’obiettivo, con il minor numero di mosse. Tocca un paletto per prendere la pallina in cima, poi tocca dove metterla. Pensa prima di muovere!',
+  'ex.towers.desc': 'Sposta le palline per ottenere la disposizione dell’obiettivo senza superare il numero massimo di mosse. Tocca un paletto per prendere la pallina in cima, poi tocca dove metterla. Pensa prima di muovere!',
   'ex.towers.why': 'Torre di Londra: pianificare una sequenza di mosse prima di agire. È un test classico delle funzioni esecutive di pianificazione.',
   'ex.towers.goal': 'Obiettivo',
-  'ex.towers.moves': 'Mosse: {m} · minimo: {min}',
-  'ex.towers.too': 'Troppe mosse',
-  'ex.towers.detail': 'Risolte col minimo: {ok}/{n}',
+  'ex.towers.moves': 'Mosse: {m} · massimo: {min}',
+  'ex.towers.too': 'Mosse finite',
+  'ex.towers.detail': 'Risolte entro il massimo: {ok}/{n}',
 
   'ex.odd.name': 'L’intruso',
   'ex.odd.desc': 'Tutte le figure tranne una condividono una caratteristica (forma, colore, riempimento o numero). Trova quella diversa.',
@@ -463,17 +465,15 @@ const ui: Locale['ui'] = {
   'ex.stories.detail': '{ok}/{n} dettagli corretti',
   'ex.stories.text': '{name} aveva con sé {item}. Si trovava {place} {time}, dove ha concluso la sua commissione.',
   'ex.anagrams.letters': 'lettere',
-  'ex.resources.task8': 'Backup',
-  'ex.resources.task7': 'Analisi',
-  'ex.resources.task6': 'Interfaccia',
-  'ex.resources.task5': 'Rete',
-  'ex.resources.task4': 'AI Core',
-  'ex.resources.task3': 'Sicurezza',
-  'ex.resources.task2': 'Banca Dati',
-  'ex.resources.task1': 'Server',
-  'ex.resources.confirm': 'Conferma selezione',
-  'ex.resources.value': '⭐ Valore: {val} (Obiettivo: {target})',
-  'ex.resources.budget': '⚡ Budget: {cost}/{budget}',
+  'ex.resources.task8': 'Girasoli',
+  'ex.resources.task7': 'Pesce',
+  'ex.resources.task6': 'Uova',
+  'ex.resources.task5': 'Pomodori',
+  'ex.resources.task4': 'Pane',
+  'ex.resources.task3': 'Miele',
+  'ex.resources.task2': 'Formaggio',
+  'ex.resources.task1': 'Mele',
+  'ex.resources.confirm': 'Compra',
   'ex.reaction.target': 'Obiettivo: < {ms} ms',
 
   // flanker
@@ -532,10 +532,10 @@ const ui: Locale['ui'] = {
   
 
   // resources
-  'ex.resources.name': 'Gestione Risorse',
-  'ex.resources.desc': 'Distribuisci il budget energetico per massimizzare il valore',
-  'ex.resources.why': 'La pianificazione con vincoli allena l’ottimizzazione prefrontale, il bilanciamento costi-benefici e la visione strategica.',
-  'ex.resources.example': 'Scegli i progetti per raggiungere il valore massimo senza superare l’energia',
+  'ex.resources.name': 'Banco del mercato',
+  'ex.resources.desc': 'Compra la merce da rivendere: non spendere più di quello che hai e guadagna il più possibile',
+  'ex.resources.why': 'È il «problema dello zaino», studiato nelle scienze cognitive (Murawski & Bossaerts, 2016): trovare la combinazione migliore entro un limite richiede pianificazione, memoria di lavoro e confronto tra costi e benefici.',
+  'ex.resources.example': 'Esempio: hai 50 monete. Le mele costano 20 e fanno guadagnare 25, il pane costa 30 e fa guadagnare 30, il miele costa 40 e fa guadagnare 35 → mele e pane fanno guadagnare 55 con 50 monete: meglio del solo miele.',
   'ex.resources.detail': '{ok}/{n} completati',
 
   // reaction
@@ -728,6 +728,13 @@ const ui: Locale['ui'] = {
   'board.bandHint': 'Indica la tua fascia d’età nelle Impostazioni per confrontarti con chi ha la tua età.',
   'home.boardGap': 'Ti mancano {n} punti per salire di una posizione',
   'home.boardGap1': 'Ti manca 1 punto per salire di una posizione',
+
+  'ex.resources.money': '🪙 Spesi {cost} su {budget} · ne restano {left}',
+  'ex.resources.over': '🪙 Spesi {cost} su {budget}: troppo, togli qualcosa',
+  'ex.resources.total': '📈 Guadagno: {val} · obiettivo: almeno {target}',
+  'ex.resources.cost': 'Costa {n} 🪙',
+  'ex.resources.gain': 'Guadagni {n} 🪙',
+  'ex.resources.was': 'si potevano guadagnare {n}',
 };
 
 const words: string[] = [

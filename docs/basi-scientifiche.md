@@ -94,9 +94,9 @@ Gli esercizi sono **ispirati** ai paradigmi indicati: si tratta di versioni brev
 | **🔐 Memoria** | **Memoria delle storie** | Ispirato alla memoria logica di brevi racconti | Domande su chi, cosa, dove e quando (2 o 3). |
 | **🧊 Spaziale** | **Rotazioni** | Rotazione mentale (*Shepard & Metzler, 1971*), versione bidimensionale con polimini chirali | Numero di quadrati (4–9), rotazioni a passi di 30°, tempo limite (7,6 → 2,5 s). |
 | **🧊 Spaziale** | **Matrice spaziale** | Memoria spaziale con trasformazione di coordinate | Blocchi da ricordare (2–5) e rotazione della griglia (0°, 90°, 180°, 270°). |
-| **🧩 Ragionamento** | **Torri** | *Tower of London* (*Shallice, 1982*) | Mosse minime (2–8). |
+| **🧩 Ragionamento** | **Torri** | *Tower of London* (*Shallice, 1982*) | Mosse della soluzione più breve (2–8), che sono anche il massimo consentito. |
 | **🧩 Ragionamento** | **L'intruso** | Odd-one-out per regole multidimensionali | Numero di figure (4–9) e caratteristiche irrilevanti che variano (1–3). |
-| **🧩 Ragionamento** | **Gestione risorse** | Problema dello zaino (*knapsack*) / pianificazione con vincoli | Numero di attività (4–7) e budget; serve almeno il 90% del valore ottimo. |
+| **🧩 Ragionamento** | **Banco del mercato** | Problema dello zaino (*knapsack*; Murawski & Bossaerts, 2016) in un contesto quotidiano di costi e guadagni | Numero di prodotti (4–7) e budget; serve almeno il 90% del guadagno ottimo. |
 | **➗ Calcolo e lettura** | **Sprint di calcolo** | Aritmetica mentale rapida (*Learning Therapy*, Kawashima) | Operazioni (+ − → × → ÷) e grandezza dei numeri. |
 | **➗ Calcolo e lettura** | **Lettura veloce** | Lettura ad alta voce con domanda di comprensione | Parole al minuto e comprensione (la comprensione pesa più della velocità). |
 | **➗ Calcolo e lettura** | **Calcolo con i punti** | *Approximate Number System* (*Halberda et al., 2008*) | Rapporto tra le due quantità (40 → 88%) e tempo di esposizione (1,5 → 0,8 s). |
@@ -246,3 +246,4 @@ Per garantire che la piattaforma rimanga uno strumento al servizio dell'utente e
 41. Hamari, J., Koivisto, J., & Sarsa, H. (2014). *Does gamification work? A literature review of empirical studies on gamification.* 47th Hawaii International Conference on System Sciences, 3025-3034. [DOI: 10.1109/HICSS.2014.377](https://doi.org/10.1109/HICSS.2014.377)
 42. Cepeda, N. J., Pashler, H., Vul, E., Wixted, J. T., & Rohrer, D. (2006). *Distributed practice in verbal recall tasks: A review and quantitative synthesis.* Psychological Bulletin, 132(3), 354-380. [DOI: 10.1037/0033-2909.132.3.354](https://doi.org/10.1037/0033-2909.132.3.354)
 43. Eysenck, M. W., Derakshan, N., Santos, R., & Calvo, M. G. (2007). *Anxiety and cognitive performance: Attentional control theory.* Emotion, 7(2), 336-353. [DOI: 10.1037/1528-3542.7.2.336](https://doi.org/10.1037/1528-3542.7.2.336)
+44. Murawski, C., & Bossaerts, P. (2016). *How humans solve complex problems: The case of the knapsack problem.* Scientific Reports, 6, 34851. [DOI: 10.1038/srep34851](https://doi.org/10.1038/srep34851)

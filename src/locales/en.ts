@@ -26,6 +26,8 @@ export const ui = {
   'landing.pillar2Desc': 'A standardized 3-minute benchmark across 4 core areas to objectively measure your progress over time.',
   'landing.pillar3Title': 'Free Gym (35 Games)',
   'landing.pillar3Desc': 'Practice freely across all 9 cognitive and bilateral domains whenever you want to beat your personal bests.',
+  'landing.pillar4Title': 'Weekly Leaderboard (optional)',
+  'landing.pillar4Desc': 'If you like, compare your consistency and improvement with other players or friends, under a random nickname. It is off unless you join, and you can leave at any time.',
   'landing.domainsTitle': 'The 9 Trained Skill Domains',
   'landing.guideCtaTitle': 'Want to learn how every exercise works?',
   'landing.guideCtaDesc': 'Explore our detailed guide with scientific references, cognitive mechanisms, and rules for all 35 games.',
@@ -214,12 +216,12 @@ export const ui = {
   'ex.rotate.mirror': 'Mirror',
 
   'ex.towers.name': 'Towers',
-  'ex.towers.desc': 'Move the balls to match the goal in as few moves as possible. Tap a peg to pick up its top ball, then tap where to put it. Think before you move!',
+  'ex.towers.desc': 'Move the balls to match the goal without going over the maximum number of moves. Tap a peg to pick up its top ball, then tap where to put it. Think before you move!',
   'ex.towers.why': 'The Tower of London: planning a sequence of moves before acting. It’s a classic test of planning, an executive function.',
   'ex.towers.goal': 'Goal',
-  'ex.towers.moves': 'Moves: {m} · minimum: {min}',
-  'ex.towers.too': 'Too many moves',
-  'ex.towers.detail': 'Solved in minimum moves: {ok}/{n}',
+  'ex.towers.moves': 'Moves: {m} · maximum: {min}',
+  'ex.towers.too': 'Out of moves',
+  'ex.towers.detail': 'Solved within the maximum: {ok}/{n}',
 
   'ex.odd.name': 'Odd one out',
   'ex.odd.desc': 'All shapes but one share a feature (shape, color, fill or count). Find the one that doesn’t.',
@@ -463,17 +465,15 @@ export const ui = {
   'ex.stories.detail': '{ok}/{n} details correct',
   'ex.stories.text': '{name} had {item} with them. They were {place} {time}, where they completed their task.',
   'ex.anagrams.letters': 'letters',
-  'ex.resources.task8': 'Backup',
-  'ex.resources.task7': 'Analytics',
-  'ex.resources.task6': 'Interface',
-  'ex.resources.task5': 'Network',
-  'ex.resources.task4': 'AI Core',
-  'ex.resources.task3': 'Security',
-  'ex.resources.task2': 'Database',
-  'ex.resources.task1': 'Server',
-  'ex.resources.confirm': 'Confirm selection',
-  'ex.resources.value': '⭐ Value: {val} (Target: {target})',
-  'ex.resources.budget': '⚡ Budget: {cost}/{budget}',
+  'ex.resources.task8': 'Sunflowers',
+  'ex.resources.task7': 'Fish',
+  'ex.resources.task6': 'Eggs',
+  'ex.resources.task5': 'Tomatoes',
+  'ex.resources.task4': 'Bread',
+  'ex.resources.task3': 'Honey',
+  'ex.resources.task2': 'Cheese',
+  'ex.resources.task1': 'Apples',
+  'ex.resources.confirm': 'Buy',
   'ex.reaction.target': 'Target: < {ms} ms',
 
   // flanker
@@ -532,10 +532,10 @@ export const ui = {
   
 
   // resources
-  'ex.resources.name': 'Resource Planning',
-  'ex.resources.desc': 'Allocate energy budget to maximize total project score',
-  'ex.resources.why': 'Knapsack-style planning stimulates prefrontal optimization, trade-off evaluation, and strategic foresight.',
-  'ex.resources.example': 'Select projects to maximize score without exceeding energy budget',
+  'ex.resources.name': 'Market Stall',
+  'ex.resources.desc': 'Buy goods to resell: spend no more than you have and earn as much as you can',
+  'ex.resources.why': 'This is the “knapsack problem”, studied in cognitive science (Murawski & Bossaerts, 2016): finding the best combination within a limit calls on planning, working memory and weighing costs against benefits.',
+  'ex.resources.example': 'Example: you have 50 coins. Apples cost 20 and earn 25, bread costs 30 and earns 30, honey costs 40 and earns 35 → apples and bread earn 55 for 50 coins: better than honey alone.',
   'ex.resources.detail': '{ok}/{n} completed',
 
   // reaction
@@ -730,6 +730,13 @@ export const ui = {
   'board.bandHint': 'Set your age group in Settings to compare yourself with people your age.',
   'home.boardGap': '{n} points to move up a place',
   'home.boardGap1': '1 point to move up a place',
+
+  'ex.resources.money': '🪙 Spent {cost} of {budget} · {left} left',
+  'ex.resources.over': '🪙 Spent {cost} of {budget}: too much, remove something',
+  'ex.resources.total': '📈 Earnings: {val} · goal: at least {target}',
+  'ex.resources.cost': 'Costs {n} 🪙',
+  'ex.resources.gain': 'Earns {n} 🪙',
+  'ex.resources.was': 'you could earn {n}',
 };
 
 const nicknames = {

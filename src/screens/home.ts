@@ -14,8 +14,7 @@ import { showBoard } from './board';
 import { showBoardJoin } from './boardJoin';
 import { boardAvailable, boardErrorText, BoardError, clearInvite, fetchBoard, joinGroup, previewGroup } from '../board';
 
-/** The suggestion to join waits until the game is familiar (a few exercises) and comes back a week after "Not now". */
-const PROMPT_AFTER_RUNS = 3;
+/** The suggestion to join appears from the very first visit and comes back a week after "Not now". */
 const PROMPT_SNOOZE_DAYS = 7;
 
 function snoozeDate(): string {
@@ -31,7 +30,7 @@ function snoozeDate(): string {
 function promptCard(): HTMLElement | null {
   const p = store.data.boardPrompt;
   if (store.data.board || store.data.boardInvite || !boardAvailable() || p.never) return null;
-  if ((p.snoozed && p.snoozed > todayKey()) || store.data.runs.length < PROMPT_AFTER_RUNS) return null;
+  if (p.snoozed && p.snoozed > todayKey()) return null;
   const hide = (prompt: typeof p) => {
     store.data.boardPrompt = prompt;
     store.save();
@@ -201,6 +200,7 @@ export function showHome() {
         'main',
         { class: 'content menu' },
         inviteCard(),
+        promptCard(),
         menuCard(
           plan.complete ? '✅' : '🏋️',
           plan.complete ? `${planTitle} ✓ · ${t('plan.again')}` : planTitle,
@@ -217,7 +217,7 @@ export function showHome() {
         ),
         menuCard('🧩', t('home.training'), t('home.trainingSub'), showTraining),
         menuCard('📈', t('home.progress'), t('home.progressSub'), showProgress),
-        boardCard() ?? promptCard(),
+        boardCard(),
         goal
           ? h(
               'button',

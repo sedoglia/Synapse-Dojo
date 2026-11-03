@@ -1,18 +1,57 @@
-import { h, rand, flash } from '../dom';
+import { h, rand, flash, shuffle } from '../dom';
 import { t, type I18nKey } from '../i18n';
 import { Staircase } from '../adaptive';
 import type { Exercise } from './types';
 
-interface Project {
-  id: number;
+interface Product {
+  icon: string;
   name: string;
   cost: number;
-  value: number;
+  gain: number;
 }
 
+const ICONS = ['🍎', '🧀', '🍯', '🥖', '🍅', '🥚', '🐟', '🌻'];
+const productCount = (level: number) => Math.min(7, 4 + Math.floor(level / 2));
+
+/** A selection of products on sale; never one where everything fits in the budget, which would need no choice. */
+function stock(count: number, budget: number): Product[] {
+  for (;;) {
+    const picked = shuffle(ICONS.map((icon, i) => ({ icon, i }))).slice(0, count);
+    const products = picked.map(({ icon, i }) => {
+      const cost = rand(15, 35);
+      return { icon, name: t(`ex.resources.task${i + 1}` as I18nKey), cost, gain: Math.round(cost * (0.8 + Math.random() * 0.7)) };
+    });
+    if (products.reduce((sum, p) => sum + p.cost, 0) > budget) return products;
+  }
+}
+
+/** The highest total gain within the budget, trying every combination. */
+function bestGain(products: Product[], budget: number): number {
+  let best = 0;
+  for (let mask = 0; mask < 1 << products.length; mask++) {
+    let cost = 0;
+    let gain = 0;
+    products.forEach((p, i) => {
+      if (mask & (1 << i)) {
+        cost += p.cost;
+        gain += p.gain;
+      }
+    });
+    if (cost <= budget && gain > best) best = gain;
+  }
+  return best;
+}
+
+const bar = (fraction: number, cls: string) =>
+  h('div', { class: `resources-bar ${cls}` }, h('div', { style: { width: `${Math.min(100, Math.round(fraction * 100))}%` } }));
+
+/**
+ * The knapsack problem (Murawski & Bossaerts, 2016) set at a market stall: money to spend, money to earn.
+ * Costs and gains are spelled out in words and in coins, so the task is clear from the first look, in any country.
+ */
 export const resources: Exercise = {
   id: 'resources',
-  icon: '⚖️',
+  icon: '🧺',
   domain: 'reasoning',
   name: 'ex.resources.name',
   desc: 'ex.resources.desc',
@@ -20,7 +59,7 @@ export const resources: Exercise = {
   example: 'ex.resources.example',
   minutes: 2.5,
   levels: { min: 1, max: 8, start: 2 },
-  levelLabel: (l) => `⚡ ${50 + l * 10}`,
+  levelLabel: (l) => `${productCount(l)} 🧺`,
 
   async run(ctx) {
     const trials = ctx.count(6, 4, 2);
@@ -31,86 +70,52 @@ export const resources: Exercise = {
     for (let trial = 0; trial < trials; trial++) {
       ctx.progress(trial / trials, `${trial + 1}/${trials}`);
 
-      const itemCount = Math.min(7, 4 + Math.floor(st.int / 2));
       const budget = 50 + st.int * 10;
-
-      // Generate items
-      const items: Project[] = [];
-      for (let j = 0; j < itemCount; j++) {
-        const cost = rand(15, 35);
-        const value = Math.round(cost * (0.8 + Math.random() * 0.7));
-        items.push({
-          id: j,
-          name: t(`ex.resources.task${(j % 8) + 1}` as I18nKey),
-          cost,
-          value,
-        });
-      }
-
-      // Compute optimal maximum value within budget
-      let maxValue = 0;
-      const totalCombos = 1 << itemCount;
-      for (let mask = 0; mask < totalCombos; mask++) {
-        let currentCost = 0;
-        let currentValue = 0;
-        for (let bit = 0; bit < itemCount; bit++) {
-          if ((mask & (1 << bit)) !== 0) {
-            currentCost += items[bit].cost;
-            currentValue += items[bit].value;
-          }
-        }
-        if (currentCost <= budget && currentValue > maxValue) {
-          maxValue = currentValue;
-        }
-      }
-
-      // Required target is at least 90% of theoretical maximum
-      const targetValue = Math.floor(maxValue * 0.9);
+      const products = stock(productCount(st.int), budget);
+      const maxGain = bestGain(products, budget);
+      // Good enough is 90% of the best possible: a close second choice still counts.
+      const target = Math.floor(maxGain * 0.9);
 
       const header = h('div', { class: 'resources-header' });
-      const budgetMeter = h('div', { class: 'resources-meter' });
       const cardList = h('div', { class: 'resources-grid' });
       const submitBtn = h('button', { class: 'btn primary resources-submit' }, t('ex.resources.confirm'));
-
-      ctx.stage.replaceChildren(header, budgetMeter, cardList, submitBtn);
+      ctx.stage.replaceChildren(header, cardList, submitBtn);
 
       const selected = new Set<number>();
+      const total = (key: 'cost' | 'gain') => [...selected].reduce((sum, i) => sum + products[i][key], 0);
 
       const updateUI = () => {
-        let currentCost = 0;
-        let currentValue = 0;
-        for (const idx of selected) {
-          currentCost += items[idx].cost;
-          currentValue += items[idx].value;
-        }
-
-        const isOver = currentCost > budget;
+        const spent = total('cost');
+        const gained = total('gain');
+        const over = spent > budget;
         header.replaceChildren(
-          h('div', {}, t('ex.resources.budget', { cost: currentCost, budget })),
-          h('div', {}, t('ex.resources.value', { val: currentValue, target: targetValue })),
+          h('div', {}, over ? t('ex.resources.over', { cost: spent, budget }) : t('ex.resources.money', { cost: spent, budget, left: budget - spent })),
+          bar(spent / budget, 'spent'),
+          h('div', {}, t('ex.resources.total', { val: gained, target })),
+          bar(gained / target, 'gained'),
         );
-        header.classList.toggle('overbudget', isOver);
-        submitBtn.disabled = isOver || selected.size === 0;
+        header.classList.toggle('overbudget', over);
+        submitBtn.disabled = over || selected.size === 0;
 
-        cardList.replaceChildren();
-        items.forEach((p, idx) => {
-          const isSel = selected.has(idx);
-          const card = h(
-            'button',
-            {
-              class: `resource-card ${isSel ? 'selected' : ''}`,
-              onClick: () => {
-                if (selected.has(idx)) selected.delete(idx);
-                else selected.add(idx);
-                updateUI();
+        cardList.replaceChildren(
+          ...products.map((p, i) =>
+            h(
+              'button',
+              {
+                class: `resource-card ${selected.has(i) ? 'selected' : ''}`,
+                'aria-pressed': String(selected.has(i)),
+                onClick: () => {
+                  if (selected.has(i)) selected.delete(i);
+                  else selected.add(i);
+                  updateUI();
+                },
               },
-            },
-            h('b', {}, p.name),
-            h('span', { class: 'cost' }, `⚡ ${p.cost}`),
-            h('span', { class: 'value' }, `⭐ ${p.value}`),
-          );
-          cardList.append(card);
-        });
+              h('b', {}, `${p.icon} ${p.name}`),
+              h('span', { class: 'cost' }, t('ex.resources.cost', { n: p.cost })),
+              h('span', { class: 'value' }, t('ex.resources.gain', { n: p.gain })),
+            ),
+          ),
+        );
       };
 
       updateUI();
@@ -119,17 +124,8 @@ export const resources: Exercise = {
         submitBtn.onclick = () => done();
       });
 
-      let finalCost = 0;
-      let finalValue = 0;
-      for (const idx of selected) {
-        finalCost += items[idx].cost;
-        finalValue += items[idx].value;
-      }
-
-      const isSuccess = finalCost <= budget && finalValue >= targetValue;
-      const ok = ctx.track(st, isSuccess, {
-        was: `⭐ ${maxValue}`,
-      });
+      const isSuccess = total('cost') <= budget && total('gain') >= target;
+      const ok = ctx.track(st, isSuccess, { was: t('ex.resources.was', { n: maxGain }) });
 
       if (isSuccess) {
         correct++;
