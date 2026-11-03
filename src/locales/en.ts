@@ -724,6 +724,10 @@ export const ui = {
   'settings.boardGroups': 'Groups with friends',
 
   'board.players1': '1 player this week',
+
+  'board.bandHint': 'Set your age group in Settings to compare yourself with people your age.',
+  'home.boardGap': '{n} points to move up a place',
+  'home.boardGap1': '1 point to move up a place',
 };
 
 const nicknames = {

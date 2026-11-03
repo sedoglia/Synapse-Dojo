@@ -685,6 +685,10 @@ const ui: Locale['ui'] = {
   'prompt.later': 'あとで',
   'prompt.never': '今後は表示しない',
   'settings.boardGroups': '友だちグループ',
+
+  'board.bandHint': '同年代の人と比べるには、設定で年齢層を選んでください。',
+  'home.boardGap': 'あと{n}点で順位がひとつ上がります',
+  'home.boardGap1': 'あと1点で順位がひとつ上がります',
 };
 
 const words: string[] = [

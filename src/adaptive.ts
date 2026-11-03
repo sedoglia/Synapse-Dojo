@@ -1,5 +1,8 @@
 ﻿import { clamp } from './dom';
 
+/** After this many days without practice an exercise restarts one level lower (skills fade without practice). */
+export const DETRAIN_DAYS = 14;
+
 /** Maps a level to 0–100 within its range; the lowest level still earns a little credit. */
 export const levelScore = (level: number, min: number, max: number) =>
   clamp((level - min + 1) / (max - min + 1), 0, 1) * 100;

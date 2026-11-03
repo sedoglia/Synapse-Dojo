@@ -685,6 +685,10 @@ const ui: Locale['ui'] = {
   'prompt.later': '以后再说',
   'prompt.never': '不再询问',
   'settings.boardGroups': '好友小组',
+
+  'board.bandHint': '在设置中选择你的年龄段，就能和同龄人比较。',
+  'home.boardGap': '再得 {n} 分就能上升一名',
+  'home.boardGap1': '再得 1 分就能上升一名',
 };
 
 const words: string[] = [

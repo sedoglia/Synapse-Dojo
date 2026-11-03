@@ -24,9 +24,16 @@ const MEDALS = ['🥇', '🥈', '🥉'];
 let metric: Metric = 'days';
 let ex = '';
 let band: AgeBand | '' = '';
+/**
+ * "Best level" ranks ability, which depends on age (above all in speed tasks): it opens on the player's own age
+ * group so nobody is measured against people decades younger, until they pick another filter themselves.
+ */
+let bestBand: AgeBand | '' | null = null;
 let group = '';
 /** The player's groups, kept between visits so the selector appears at once. */
 let groups: Group[] = [];
+
+const currentBand = (): AgeBand | '' => (metric === 'best' ? (bestBand ?? ((store.data.board?.ageBand ?? '') as AgeBand | '')) : band);
 
 /** Default exercise for "best level": the one played most recently. */
 const lastExercise = () => store.data.runs[store.data.runs.length - 1]?.ex ?? EXERCISES[0].id;
@@ -81,7 +88,7 @@ export function showBoard(onBack: () => void, groupId?: string) {
       const res = await fetchBoard({
         metric,
         ex: metric === 'days' ? undefined : ex || undefined,
-        band: band || undefined,
+        band: currentBand() || undefined,
         group: group || undefined,
       });
       if (mine === request) box.replaceChildren(list(res));
@@ -123,10 +130,21 @@ export function showBoard(onBack: () => void, groupId?: string) {
   );
   const bandSelect = h(
     'select',
-    { class: 'input', 'aria-label': t('board.ageBand'), onChange: () => ((band = bandSelect.value as AgeBand | ''), void load()) },
-    h('option', { value: '', selected: !band }, t('board.band.all')),
-    ...AGE_BANDS.map((b) => h('option', { value: b, selected: b === band }, t(`board.band.${b}`))),
+    {
+      class: 'input',
+      'aria-label': t('board.ageBand'),
+      onChange: () => {
+        const value = bandSelect.value as AgeBand | '';
+        if (metric === 'best') bestBand = value;
+        else band = value;
+        void load();
+      },
+    },
+    h('option', { value: '', selected: !currentBand() }, t('board.band.all')),
+    ...AGE_BANDS.map((b) => h('option', { value: b, selected: b === currentBand() }, t(`board.band.${b}`))),
   );
+  // Without an age group, "best level" compares everyone: say how to compare with people of the same age.
+  const bandHint = metric === 'best' && store.data.board && !store.data.board.ageBand ? h('p', { class: 'muted small' }, `ℹ️ ${t('board.bandHint')}`) : null;
 
   render(
     page(
@@ -155,6 +173,7 @@ export function showBoard(onBack: () => void, groupId?: string) {
       h('p', { class: 'muted small' }, t(`board.explain.${metric}`), metric === 'best' && store.data.settings.relaxed ? ` ${t('board.explain.relaxed')}` : ''),
       store.data.board ? scopeRow : null,
       h('div', { class: 'board-filters' }, metric === 'days' ? null : exSelect, bandSelect),
+      bandHint,
       box,
       h('p', { class: 'muted small center' }, `🔄 ${t('board.reset')}`),
     ),

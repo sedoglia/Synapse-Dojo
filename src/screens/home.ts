@@ -100,13 +100,27 @@ function inviteCard(): HTMLElement | null {
   return card;
 }
 
-/** Leaderboard shortcut, only for players who joined; the rank fills in when the server answers. */
+/**
+ * Leaderboard shortcut, only for players who joined; the line fills in when the server answers.
+ * It is seen at every visit, so it must inform rather than judge: the rank is shown in the top half,
+ * otherwise how many points would move the player up (a reachable next step, never "18th of 18").
+ */
 function boardCard(): HTMLElement | null {
   if (!store.data.board) return null;
   const sub = h('small', {}, t('home.boardSub'));
   fetchBoard({ metric: 'days' })
     .then((res) => {
-      if (res.me) sub.textContent = t('home.boardRank', { rank: res.me.rank, n: res.total });
+      const me = res.me;
+      if (!me) return;
+      if (me.rank <= Math.ceil(res.total / 2)) {
+        sub.textContent = t('home.boardRank', { rank: me.rank, n: res.total });
+        return;
+      }
+      // The nearest player with more points: reaching their score means sharing their (higher) rank.
+      const ahead = [...res.above].reverse().find((r) => r.value > me.value);
+      if (!ahead) return;
+      const gap = Math.round(ahead.value - me.value);
+      sub.textContent = gap === 1 ? t('home.boardGap1') : t('home.boardGap', { n: gap });
     })
     .catch(() => {
       /* offline: keep the generic line */

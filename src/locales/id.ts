@@ -685,6 +685,10 @@ const ui: Locale['ui'] = {
   'prompt.later': 'Nanti saja',
   'prompt.never': 'Jangan tanya lagi',
   'settings.boardGroups': 'Grup teman',
+
+  'board.bandHint': 'Atur kelompok usiamu di Pengaturan untuk membandingkan diri dengan orang seusiamu.',
+  'home.boardGap': 'Kurang {n} poin untuk naik satu peringkat',
+  'home.boardGap1': 'Kurang 1 poin untuk naik satu peringkat',
 };
 
 const words: string[] = [

@@ -685,6 +685,10 @@ const ui: Locale['ui'] = {
   'prompt.later': 'Ahora no',
   'prompt.never': 'No volver a preguntar',
   'settings.boardGroups': 'Grupos de amigos',
+
+  'board.bandHint': 'Indica tu franja de edad en Ajustes para compararte con gente de tu edad.',
+  'home.boardGap': 'Te faltan {n} puntos para subir un puesto',
+  'home.boardGap1': 'Te falta 1 punto para subir un puesto',
 };
 
 const words: string[] = [

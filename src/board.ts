@@ -1,6 +1,6 @@
 import { h, todayKey, clamp } from './dom';
 import { store, type BoardAccount } from './storage';
-import { levelScore } from './adaptive';
+import { levelScore, DETRAIN_DAYS } from './adaptive';
 import { EXERCISES, type Exercise } from './exercises';
 import { t, nicknames } from './i18n';
 
@@ -110,6 +110,9 @@ const median = (xs: number[]) => {
   return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
 };
 
+/** Whole days from one date key to another (the game measures breaks the same way). */
+const daysBetween = (a: string, b: string) => (new Date(b).getTime() - new Date(a).getTime()) / 86_400_000;
+
 /** Monday of the current week, as a local date key. */
 function weekStart(d = new Date()): string {
   const monday = new Date(d);
@@ -136,6 +139,8 @@ interface ExerciseSummary {
 /**
  * Improvement on the 0–100 scale used everywhere else. Exercises with levels: from the level reached before this
  * week, or from the starting level for an exercise first played this week (so the first session counts too).
+ * After a break of more than DETRAIN_DAYS the game restarts one level lower, and so does the baseline: coming back
+ * must never start with a loss.
  * The one exercise without levels: median of the last three scores this week against the three before it, which
  * a single lucky or unlucky game can't swing.
  */
@@ -149,7 +154,11 @@ function exerciseSummary(ex: Exercise, from: string): ExerciseSummary | null {
     const { min, max, start } = ex.levels;
     const score = (level: number) => levelScore(level, min, max);
     const before = points.filter((p) => p.date < from);
-    const base = before.length ? before[before.length - 1].level : start;
+    let base = before.length ? before[before.length - 1].level : start;
+    const lastBefore = runs.filter((r) => r.date < from).pop()?.date;
+    // The game compares the time of the session with the start of the last day played, so a gap of exactly
+    // DETRAIN_DAYS calendar days already counts as a break (only a session just after midnight wouldn't).
+    if (lastBefore && daysBetween(lastBefore, week[0].date) >= DETRAIN_DAYS) base = Math.max(min, base - 1);
     const now = thisWeek[thisWeek.length - 1].level;
     const best = Math.max(...thisWeek.map((p) => p.level));
     return { ex: ex.id, improvement: round1(score(now) - score(base)), best: Math.round(score(best)), baseline: before.length > 0 };

@@ -9,12 +9,12 @@ import { nextPlan, markPlanDone } from '../stats';
 import { exampleCard } from '../examples';
 import { XP, addXp, playerLevel, checkBadges, type Badge } from '../rewards';
 import { syncBoard } from '../board';
+import { DETRAIN_DAYS } from '../adaptive';
 import { showHome } from './home';
 import { showTraining } from './training';
 
 const pace = () => (store.data.settings.relaxed ? 1.4 : 1);
 export const levelText = (ex: Exercise, level: number) => ex.levelLabel?.(Math.round(level)) ?? String(Math.round(level));
-const DETRAIN_DAYS = 14;
 
 export function whyBox(ex: Exercise): HTMLElement {
   return h('details', { class: 'why' }, h('summary', {}, `🔬 ${t('common.why')}`), h('p', {}, t(ex.why)));
