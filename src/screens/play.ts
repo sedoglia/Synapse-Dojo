@@ -8,6 +8,7 @@ import { dailyCheckBattery, byId, type Exercise, type ExerciseResult } from '../
 import { nextPlan, markPlanDone } from '../stats';
 import { exampleCard } from '../examples';
 import { XP, addXp, playerLevel, checkBadges, type Badge } from '../rewards';
+import { syncBoard } from '../board';
 import { showHome } from './home';
 import { showTraining } from './training';
 
@@ -230,6 +231,7 @@ async function practiceRound(ex: Exercise, step: { i: number; n: number } | null
   const score = Math.round(res.score);
   store.addRun({ ex: ex.id, date: todayKey(), score, detail: res.detail });
   if (res.level !== undefined) store.setLevel(ex.id, res.level);
+  syncBoard();
   store.data.bestStreak = Math.max(store.data.bestStreak, ctx.bestStreak);
   store.bump('levelUps', ctx.levelUps);
   const isBest = prevBest === null || score > prevBest;
@@ -380,6 +382,7 @@ export async function playDailyCheck() {
   const values = Object.values(parts);
   const score = Math.round((values.reduce((a, b) => a + b, 0) / values.length) * 10);
   store.addCheck({ date: todayKey(), score, parts });
+  syncBoard();
   const xp = addXp(XP.check);
   sfx.fanfare();
   showCheckResult(score, false, xpLine(xp.gained, xp.levelUp), badgeList(checkBadges()));

@@ -54,7 +54,7 @@ export const ui = {
   'guide.faq1Q': 'How often should I train?',
   'guide.faq1A': 'Consistency is key. 10 to 15 minutes a day (your daily workout plus the Neuro Score check) yields far better results than one long session per week. Aim for at least 4 to 5 days a week.',
   'guide.faq2Q': 'Where are my data and scores stored?',
-  'guide.faq2A': 'Everything remains 100% on your device. Synapse Dojo does not use servers, accounts, passwords, or tracking cookies. Your scores and progress are saved in your browser localStorage.',
+  'guide.faq2A': 'Everything stays on your device. Synapse Dojo needs no account or password and uses no tracking cookies: your scores and progress are saved in your browser (localStorage). Only if you join the optional weekly leaderboard is a weekly summary sent, under a random nickname.',
   'guide.faq3Q': 'Are there practice tutorials in each game?',
   'guide.faq3A': 'Yes! Each game includes concise instructions and a guided interactive trial before the timed test starts, so you can practice the mechanics without any stress.',
 
@@ -395,15 +395,17 @@ export const ui = {
   'settings.importConfirm': 'Replace the current data with the file’s ({name}, {runs} exercises played, last on {last})? Your current progress will be lost.',
   'settings.importDone': 'Progress imported.',
   'privacy.title': 'Privacy and legal notes',
-  'privacy.updated': 'Last updated: 31 October 2026',
+  'privacy.updated': 'Last updated: 3 November 2026',
   'privacy.dataH': 'Your data stays on your device',
-  'privacy.data': 'Your name, progress and settings are saved only in this device’s browser (localStorage). They are never sent to a server and nobody, including whoever runs the game, can see them. They are gone if you clear your browser data or use “Delete all data”: you can keep a copy with “Export progress” in Settings.',
+  'privacy.data': 'Your name, progress and settings are saved only in this device’s browser (localStorage). They are never sent to a server (apart from the weekly summary of the optional leaderboard, if you join it: see below) and nobody, including whoever runs the game, can see them. They are gone if you clear your browser data or use “Delete all data”: you can keep a copy with “Export progress” in Settings.',
   'privacy.cookiesH': 'No accounts, no cookies',
   'privacy.cookies': 'There is nothing to sign up for, and the game uses no cookies, ads or profiling tools. Fonts and game files are served by the same site, with no third-party services.',
   'privacy.hostingH': 'Hosting',
   'privacy.hosting': 'The public version is hosted by Cloudflare (Cloudflare Pages). Like any web server, to deliver the pages and protect them from attacks Cloudflare processes technical data such as your IP address and browser type, under its own privacy policy.',
   'privacy.statsH': 'Visit statistics',
   'privacy.stats': 'Only in the public version, visits are counted with Cloudflare Web Analytics, which uses no cookies, stores nothing in your browser and does not follow people across sites: it only shows aggregate data such as page views, country and device type. Names and exercise results are never sent.',
+  'privacy.boardH': 'Optional weekly leaderboard',
+  'privacy.board': 'Only if you join it in Settings, after each session the game sends its server (Cloudflare Workers with a D1 database) a summary of the current week: days trained, change of level and best level per exercise, whether you use the relaxed pace and, if you chose one, your age group. It is linked to a random identifier and a generated nickname, never to your name, email or other progress. When you join, Cloudflare Turnstile checks that you are not a robot, under Cloudflare’s privacy policy. Weekly results are deleted after 8 weeks and everything after 90 days without use; “Leave and delete my data” or “Delete all data” deletes it at once. The legal basis is your consent, which you can withdraw at any time by leaving.',
   'privacy.medicalH': 'Not a medical device',
   'privacy.medical': 'Synapse Dojo is a game for fun. It is not a medical device, does not diagnose anything and makes no promise to prevent, slow down or treat dementia, cognitive decline or any other health condition. Scores only tell you how you do in the exercises. For health concerns, talk to a doctor.',
   'privacy.contactH': 'Contact',
@@ -636,6 +638,66 @@ export const ui = {
   'ex.dualTask.odd': 'Odd',
   'ex.dualTask.notHolding': 'Left button was not held!',
   'ex.dualTask.detail': '{ok}/{n} correct',
+
+  'board.title': 'Weekly leaderboard',
+  'board.nick': '{adj} {animal} {n}',
+  'board.tab.days': 'Consistency',
+  'board.tab.improvement': 'Improvement',
+  'board.tab.best': 'Best level',
+  'board.explain.days': 'Days you trained this week. Showing up is what counts.',
+  'board.explain.improvement': 'How much your level rose since last week: everyone competes against their own starting point.',
+  'board.explain.best': 'Your best level this week in one exercise.',
+  'board.explain.relaxed': 'You play at a relaxed pace, so you are ranked with other relaxed-pace players.',
+  'board.value.days': '{n} d',
+  'board.value.improvement': '{v} pts',
+  'board.allExercises': 'All exercises',
+  'board.exercise': 'Exercise',
+  'board.ageBand': 'Age group',
+  'board.band.all': 'All ages',
+  'board.band.u30': 'Under 30',
+  'board.band.30-49': '30–49',
+  'board.band.50-64': '50–64',
+  'board.band.65-74': '65–74',
+  'board.band.75+': '75 and over',
+  'board.you': 'you',
+  'board.players': '{n} players this week',
+  'board.reset': 'A new week starts on Monday: everyone starts again from zero.',
+  'board.empty': 'Nobody here yet this week. Train and be the first!',
+  'board.notYet': 'You are not on this board yet: train this week to appear.',
+  'board.loading': 'Loading…',
+  'board.err.offline': 'No connection. Try again when you are online.',
+  'board.err.human_check': 'The anti-robot check didn’t work. Please try again.',
+  'board.err.server': 'Something went wrong. Please try again later.',
+  'home.board': 'Weekly leaderboard',
+  'home.boardSub': 'Consistency and improvement, week by week',
+  'home.boardRank': 'Consistency: #{rank} of {n} this week',
+  'settings.board': 'Weekly leaderboard',
+  'settings.boardHint':
+    'Optional. Each week, compare how often you train and how much you improve with other players. Only a weekly summary is sent (days trained, change of level, best level per exercise) under a random nickname: no name, email or account. You can leave at any time and it is all deleted.',
+  'settings.boardAge': 'Age group (optional, to compare with people your age)',
+  'settings.boardNoAge': 'Prefer not to say',
+  'settings.boardJoin': 'Join the leaderboard',
+  'settings.boardJoining': 'Joining…',
+  'settings.boardMember': 'You are on the leaderboard as {name}.',
+  'settings.boardOpen': 'Open leaderboard',
+  'settings.boardRename': 'New nickname',
+  'settings.boardLeave': 'Leave and delete my data',
+  'settings.boardLeaveConfirm': 'Leave the leaderboard? Your results will be deleted from the server.',
+};
+
+const nicknames = {
+  adjectives: [
+    'Swift', 'Bright', 'Calm', 'Brave', 'Clever', 'Gentle', 'Happy', 'Bold',
+    'Quiet', 'Lucky', 'Sunny', 'Wise', 'Steady', 'Curious', 'Cheerful', 'Nimble',
+    'Patient', 'Keen', 'Kind', 'Lively', 'Proud', 'Merry', 'Quick', 'Noble',
+    'Sharp', 'Tireless', 'Witty', 'Daring', 'Golden', 'Silver', 'Blue', 'Green',
+  ],
+  animals: [
+    'Otter', 'Fox', 'Owl', 'Dolphin', 'Panda', 'Tiger', 'Eagle', 'Koala',
+    'Lynx', 'Heron', 'Badger', 'Falcon', 'Turtle', 'Whale', 'Rabbit', 'Squirrel',
+    'Hedgehog', 'Penguin', 'Zebra', 'Giraffe', 'Beaver', 'Swan', 'Wolf', 'Deer',
+    'Robin', 'Seal', 'Elephant', 'Lion', 'Bear', 'Crane', 'Gecko', 'Parrot',
+  ],
 };
 
 const words: string[] = [
@@ -1207,4 +1269,4 @@ export const stories: StoryScenario[] = [
   }
 ];
 
-export default { ui, words, passages, stories };
+export default { ui, words, passages, stories, nicknames };

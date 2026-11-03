@@ -8,6 +8,8 @@ export default defineConfig(({ mode }) => {
   if (token && !/^[\w-]+$/.test(token)) throw new Error('VITE_CF_ANALYTICS_TOKEN looks malformed.');
   return {
     base: './',
+    // Leaderboard API during `npm run dev`: run `npm run dev:api` (wrangler on port 8788) alongside.
+    server: { proxy: { '/api': 'http://127.0.0.1:8788' } },
     build: { rolldownOptions: { input: { main: 'index.html', privacy: 'privacy.html', guide: 'guide.html', license: 'license.html' } } },
     plugins: [
       {

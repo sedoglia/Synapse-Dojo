@@ -3714,3 +3714,88 @@ html.big-text {
   font-weight: 700;
 }
 
+
+/* ---------- weekly leaderboard ---------- */
+.seg {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border-radius: 14px;
+  background: var(--surface-2);
+}
+.seg button {
+  flex: 1;
+  border: none;
+  background: transparent;
+  border-radius: 10px;
+  padding: 10px 6px;
+  font-weight: 700;
+  color: var(--muted);
+}
+.seg button.on {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow);
+}
+.board-filters {
+  display: flex;
+  gap: 8px;
+}
+.board-filters .input {
+  flex: 1;
+  min-width: 0;
+}
+.board-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.board-row {
+  display: grid;
+  grid-template-columns: 3rem 1fr auto;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: var(--surface-2);
+}
+.board-row.me {
+  background: var(--accent-soft);
+  outline: 2px solid var(--accent);
+}
+.board-rank {
+  font-weight: 800;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+.board-name {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.board-you {
+  margin-inline-start: 6px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 800;
+}
+.board-value {
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.board-gap {
+  text-align: center;
+  color: var(--muted);
+  line-height: 1;
+}
+.board-error {
+  color: var(--bad);
+}
+.board-error:empty,
+.turnstile-box:empty {
+  display: none;
+}

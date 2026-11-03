@@ -45,6 +45,8 @@ The evidence above leads to the platform's building blocks:
 4. **Accessible to Everyone, Older Adults Included** (see §5).
 5. **Honesty Toward the User:**  
    Synapse Dojo is a tool for active leisure and personal stimulation: it makes no medical diagnoses, does not promise a cure for or immunity from neurodegenerative diseases, and always reminds users that overall lifestyle (exercise, sleep, social life, looking after hearing and sight) is essential.
+6. **Social Comparison That Doesn't Discourage (optional weekly leaderboard):**
+   Comparing ourselves with others is a strong motivator (Festinger 1954), and leaderboards raise engagement in the short term (Hamari et al. 2014), but mostly for people near the top: for everyone else a ranking of raw ability undermines the sense of competence that keeps intrinsic motivation alive (Ryan & Deci 2000), and anxiety itself lowers working-memory performance. It would also undo the adaptive design, which keeps each person at *their own* threshold. So the leaderboard is **off by default** and ranks **effort and improvement, not talent**: training days in the week, change of level against one's own starting point, and the week's best level per exercise, with optional self-declared age groups and relaxed-pace players ranked apart. It **resets every Monday**, ties share a place, and each player sees the top 3 and the 5 people just above and below them, a race close enough to win, never a list of 100 names.
 
 ---
 
@@ -159,7 +161,7 @@ People with diagnosed cognitive disorders should use the app only as an enjoyabl
 To make sure the platform stays a tool serving the user rather than advertising profiling, the technical architecture follows strict requirements:
 
 1. **Client-Side First & Zero Cookies:**  
-   The whole app runs locally in the browser. No personal data, identifiers or performance statistics are sent to central servers. Data is stored only in `localStorage` and can be exported/imported by the user at any time as open JSON; imported files are validated before use.
+   The whole app runs locally in the browser. No personal data, identifiers or performance statistics are sent to central servers. Data is stored only in `localStorage` and can be exported/imported by the user at any time as open JSON; imported files are validated before use. The only exception is the opt-in weekly leaderboard (point 6).
 2. **Framework-Free (Vanilla TypeScript):**  
    No UI framework dependencies. The DOM is built with direct TypeScript primitives (no HTML generated from strings), for instant start-up even on low-cost devices.
 3. **Web Audio API and Speech Synthesis:**  
@@ -167,7 +169,9 @@ To make sure the platform stays a tool serving the user rather than advertising 
 4. **Offline Support and PWA:**  
    A lightweight Service Worker and a Web App Manifest make Synapse Dojo installable and usable offline.
 5. **Security:**  
-   A strict Content Security Policy, and no third-party scripts apart from the optional, anonymous Cloudflare Web Analytics beacon.
+   A strict Content Security Policy, and no third-party scripts apart from the optional, anonymous Cloudflare Web Analytics beacon and Cloudflare Turnstile, which is loaded only when someone joins the leaderboard.
+6. **Opt-in Leaderboard (Cloudflare Pages Functions + D1):**
+   Players who join get a random identifier and secret (only its SHA-256 hash is stored) and a generated nickname; no name, email or account. After each session the app sends only the current week's summary. The server counts training days itself from the date results arrive, so days can't be backdated, checks every value for plausibility and limits uploads to one every 30 seconds. Weeks older than 8 and players idle for 90 days are deleted; leaving deletes everything at once. The service worker never caches the API.
 
 ---
 
@@ -234,3 +238,9 @@ To make sure the platform stays a tool serving the user rather than advertising 
 36. Ngandu, T., et al. (2015). *A 2 year multidomain intervention of diet, exercise, cognitive training, and vascular risk monitoring versus control to prevent cognitive decline in at-risk elderly people (FINGER): a randomised controlled trial.* The Lancet, 385(9984), 2255-2263. [PubMed: 25771249](https://pubmed.ncbi.nlm.nih.gov/25771249/)
 37. Baker, L. D., et al. (2025). *Structured vs Self-Guided Multidomain Lifestyle Interventions for Global Cognitive Function: The US POINTER Randomized Clinical Trial.* JAMA. [DOI: 10.1001/jama.2025.12923](https://doi.org/10.1001/jama.2025.12923)
 38. Livingston, G., et al. (2024). *Dementia prevention, intervention, and care: 2024 report of the Lancet standing Commission.* The Lancet, 404(10452), 572-628. [DOI: 10.1016/S0140-6736(24)01296-0](https://doi.org/10.1016/S0140-6736(24)01296-0)
+
+**Motivation and social comparison**
+
+39. Festinger, L. (1954). *A theory of social comparison processes.* Human Relations, 7(2), 117-140. [DOI: 10.1177/001872675400700202](https://doi.org/10.1177/001872675400700202)
+40. Ryan, R. M., & Deci, E. L. (2000). *Self-determination theory and the facilitation of intrinsic motivation, social development, and well-being.* American Psychologist, 55(1), 68-78. [DOI: 10.1037/0003-066X.55.1.68](https://doi.org/10.1037/0003-066X.55.1.68)
+41. Hamari, J., Koivisto, J., & Sarsa, H. (2014). *Does gamification work? A literature review of empirical studies on gamification.* 47th Hawaii International Conference on System Sciences, 3025-3034. [DOI: 10.1109/HICSS.2014.377](https://doi.org/10.1109/HICSS.2014.377)

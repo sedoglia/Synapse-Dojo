@@ -47,7 +47,7 @@ export function render(view: HTMLElement) {
 }
 
 /** Standard page: a top bar with a back button and a title, then content. */
-export function page(title: string, onBack: (() => void) | null, ...content: HTMLElement[]): HTMLElement {
+export function page(title: string, onBack: (() => void) | null, ...content: (HTMLElement | null)[]): HTMLElement {
   return h(
     'div',
     { class: 'page' },

@@ -54,6 +54,11 @@ export interface Locale {
   words: string[];
   passages: Passage[];
   stories?: StoryScenario[];
+  /**
+   * Leaderboard nicknames ("Swift Otter 42"), combined by `board.nick`. Keep both lists 32 long in every language.
+   * In languages where adjectives agree in gender, all animals share one gender so every pair is grammatical.
+   */
+  nicknames?: { adjectives: string[]; animals: string[] };
 }
 
 const loaders = import.meta.glob<{ default: Locale }>(['./locales/*.ts', '!./locales/en.ts']);
@@ -119,5 +124,6 @@ export function wordNear(list: readonly string[], n: number): string {
 export const words = () => locale().words;
 export const passages = () => locale().passages;
 export const stories = () => locale().stories ?? en.stories ?? [];
+export const nicknames = () => locale().nicknames ?? en.nicknames;
 
 export type { Key as I18nKey };

@@ -45,6 +45,8 @@ Dalle evidenze sopra descritte derivano i pilastri costruttivi della piattaforma
 4. **Accessibile a Tutti, Anziani Compresi** (vedi §5).
 5. **Onestà verso l'Utente:**  
    Synapse Dojo è uno strumento di svago attivo e stimolazione personale: non formula diagnosi mediche, non promette la cura o l'immunità da patologie neurodegenerative e ricorda sempre che lo stile di vita globale (movimento, sonno, socialità, udito e vista curati) è imprescindibile.
+6. **Confronto Sociale che Non Scoraggia (classifica settimanale facoltativa):**
+   Confrontarsi con gli altri è un motore potente (Festinger 1954) e le classifiche aumentano il coinvolgimento nel breve periodo (Hamari et al. 2014), ma soprattutto per chi è in cima: per tutti gli altri una classifica di abilità assoluta mina il senso di competenza che tiene viva la motivazione intrinseca (Ryan & Deci 2000), e l'ansia stessa peggiora la memoria di lavoro. Annullerebbe inoltre il design adattivo, che tiene ognuno alla *propria* soglia. Per questo la classifica è **disattivata di default** e premia **impegno e miglioramento, non il talento**: giorni di allenamento nella settimana, variazione di livello rispetto al proprio punto di partenza e livello migliore della settimana per esercizio, con fasce d'età facoltative e autodichiarate e una classifica separata per chi usa il ritmo rilassato. **Si azzera ogni lunedì**, i pari merito condividono la posizione e ognuno vede la top 3 e le 5 persone subito sopra e sotto di sé: una gara abbastanza vicina da poterla vincere, mai un elenco di 100 nomi.
 
 ---
 
@@ -159,7 +161,7 @@ Chi ha disturbi cognitivi diagnosticati dovrebbe usare l'app solo come attività
 Per garantire che la piattaforma rimanga uno strumento al servizio dell'utente e non delle logiche di profilazione pubblicitaria, l'architettura tecnica adotta requisiti stringenti:
 
 1. **Client-Side First & Zero Cookie:**  
-   L'intera applicazione viene eseguita localmente nel browser. Nessun dato personale, identificativo o statistica di prestazione viene trasmesso a server centrali. I dati sono conservati unicamente nel `localStorage` e possono essere esportati/importati dall'utente in qualsiasi momento in formato JSON aperto; i file importati vengono validati prima dell'uso.
+   L'intera applicazione viene eseguita localmente nel browser. Nessun dato personale, identificativo o statistica di prestazione viene trasmesso a server centrali. I dati sono conservati unicamente nel `localStorage` e possono essere esportati/importati dall'utente in qualsiasi momento in formato JSON aperto; i file importati vengono validati prima dell'uso. L'unica eccezione è la classifica settimanale facoltativa (punto 6).
 2. **Framework-Free (Vanilla TypeScript):**  
    Nessuna dipendenza da framework UI. Il DOM è costruito tramite primitive dirette in TypeScript (nessun HTML generato da stringhe), con avvio istantaneo anche su dispositivi economici.
 3. **Web Audio API e Sintesi Vocale:**  
@@ -167,7 +169,9 @@ Per garantire che la piattaforma rimanga uno strumento al servizio dell'utente e
 4. **Supporto Offline e PWA:**  
    Un Service Worker leggero e un Web App Manifest rendono Synapse Dojo installabile e utilizzabile anche senza connessione.
 5. **Sicurezza:**  
-   Content Security Policy restrittiva, nessuno script di terze parti a parte il beacon opzionale e anonimo di Cloudflare Web Analytics.
+   Content Security Policy restrittiva, nessuno script di terze parti a parte il beacon opzionale e anonimo di Cloudflare Web Analytics e Cloudflare Turnstile, caricato solo quando qualcuno aderisce alla classifica.
+6. **Classifica Facoltativa (Cloudflare Pages Functions + D1):**
+   Chi aderisce riceve un identificativo casuale e un segreto (sul server se ne conserva solo l'hash SHA-256) e un nickname generato; nessun nome, email o account. Dopo ogni sessione l'app invia solo il riepilogo della settimana in corso. Il server conta da sé i giorni di allenamento in base alla data di arrivo dei risultati, così non si possono aggiungere giorni passati, verifica la plausibilità di ogni valore e accetta un invio ogni 30 secondi. Le settimane più vecchie di 8 e i giocatori inattivi da 90 giorni vengono cancellati; uscire cancella tutto subito. Il Service Worker non mette mai in cache l'API.
 
 ---
 
@@ -234,3 +238,9 @@ Per garantire che la piattaforma rimanga uno strumento al servizio dell'utente e
 36. Ngandu, T., et al. (2015). *A 2 year multidomain intervention of diet, exercise, cognitive training, and vascular risk monitoring versus control to prevent cognitive decline in at-risk elderly people (FINGER): a randomised controlled trial.* The Lancet, 385(9984), 2255-2263. [PubMed: 25771249](https://pubmed.ncbi.nlm.nih.gov/25771249/)
 37. Baker, L. D., et al. (2025). *Structured vs Self-Guided Multidomain Lifestyle Interventions for Global Cognitive Function: The US POINTER Randomized Clinical Trial.* JAMA. [DOI: 10.1001/jama.2025.12923](https://doi.org/10.1001/jama.2025.12923)
 38. Livingston, G., et al. (2024). *Dementia prevention, intervention, and care: 2024 report of the Lancet standing Commission.* The Lancet, 404(10452), 572-628. [DOI: 10.1016/S0140-6736(24)01296-0](https://doi.org/10.1016/S0140-6736(24)01296-0)
+
+**Motivazione e confronto sociale**
+
+39. Festinger, L. (1954). *A theory of social comparison processes.* Human Relations, 7(2), 117-140. [DOI: 10.1177/001872675400700202](https://doi.org/10.1177/001872675400700202)
+40. Ryan, R. M., & Deci, E. L. (2000). *Self-determination theory and the facilitation of intrinsic motivation, social development, and well-being.* American Psychologist, 55(1), 68-78. [DOI: 10.1037/0003-066X.55.1.68](https://doi.org/10.1037/0003-066X.55.1.68)
+41. Hamari, J., Koivisto, J., & Sarsa, H. (2014). *Does gamification work? A literature review of empirical studies on gamification.* 47th Hawaii International Conference on System Sciences, 3025-3034. [DOI: 10.1109/HICSS.2014.377](https://doi.org/10.1109/HICSS.2014.377)

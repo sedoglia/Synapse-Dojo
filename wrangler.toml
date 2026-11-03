@@ -1,0 +1,13 @@
+# Cloudflare Pages configuration: static site in dist/ plus the opt-in leaderboard API in functions/.
+# Once this file exists it is the source of truth for the project's bindings (the dashboard settings are ignored).
+name = "synapse-gym"
+pages_build_output_dir = "dist"
+compatibility_date = "2026-06-01"
+
+# Leaderboard database. Create it once with `npx wrangler d1 create synapse-board` and paste the id below;
+# the placeholder works for local development (`npm run dev:api`) but not for a deploy.
+[[d1_databases]]
+binding = "DB"
+database_name = "synapse-board"
+database_id = "00000000-0000-0000-0000-000000000000"
+migrations_dir = "migrations"

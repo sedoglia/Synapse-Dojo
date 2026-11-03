@@ -1,7 +1,9 @@
 // Network-first service worker: always fresh online, still playable offline.
 // Only this site's own files are cached; requests to other origins (e.g. analytics) pass through untouched.
+// Leaderboard API calls (api/…) are never cached: they must always be live.
 // v2: drops copies of the home page that older versions could store under the name of a missing file.
 const CACHE = 'synapse-dojo-v2';
+const API = new URL('api/', self.registration.scope).href;
 
 self.addEventListener('install', () => self.skipWaiting());
 self.addEventListener('activate', (e) =>
@@ -14,7 +16,7 @@ self.addEventListener('activate', (e) =>
 );
 
 self.addEventListener('fetch', (e) => {
-  if (e.request.method !== 'GET' || new URL(e.request.url).origin !== self.location.origin) return;
+  if (e.request.method !== 'GET' || new URL(e.request.url).origin !== self.location.origin || e.request.url.startsWith(API)) return;
   e.respondWith(
     (async () => {
       const cache = await caches.open(CACHE);

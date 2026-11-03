@@ -10,6 +10,22 @@ import { showTraining } from './training';
 import { showProgress } from './progress';
 import { showSettings } from './settings';
 import { showGuide } from './guide';
+import { showBoard } from './board';
+import { fetchBoard } from '../board';
+
+/** Leaderboard shortcut, only for players who joined; the rank fills in when the server answers. */
+function boardCard(): HTMLElement | null {
+  if (!store.data.board) return null;
+  const sub = h('small', {}, t('home.boardSub'));
+  fetchBoard({ metric: 'days' })
+    .then((res) => {
+      if (res.me) sub.textContent = t('home.boardRank', { rank: res.me.rank, n: res.total });
+    })
+    .catch(() => {
+      /* offline: keep the generic line */
+    });
+  return menuCard('🏆', t('home.board'), sub, () => showBoard(showHome));
+}
 
 function menuCard(icon: string, title: string, sub: string | HTMLElement, onClick: () => void, cls = '') {
   return h(
@@ -99,6 +115,7 @@ export function showHome() {
         ),
         menuCard('🧩', t('home.training'), t('home.trainingSub'), showTraining),
         menuCard('📈', t('home.progress'), t('home.progressSub'), showProgress),
+        boardCard(),
         goal
           ? h(
               'button',

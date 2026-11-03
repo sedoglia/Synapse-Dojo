@@ -28,6 +28,17 @@ export interface LevelPoint {
   level: number;
 }
 
+/** Opt-in leaderboard membership: an anonymous id and the secret that proves it (never exported). */
+export interface BoardAccount {
+  id: string;
+  secret: string;
+  /** Turned into a generated nickname in each language. */
+  nameCode: number;
+  ageBand: string | null;
+  /** Results not yet sent (offline, or sent too soon after the previous ones). */
+  pending: boolean;
+}
+
 export interface SaveData {
   name: string;
   created: string;
@@ -47,6 +58,8 @@ export interface SaveData {
   /** Lifetime counters for badges (completed plans, level-ups, …). */
   counters: Record<string, number>;
   settings: Settings;
+  /** Null unless the player joined the leaderboard. */
+  board: BoardAccount | null;
 }
 
 function defaults(): SaveData {
@@ -65,7 +78,20 @@ function defaults(): SaveData {
     bestStreak: 0,
     counters: {},
     settings: { lang, sound: true, vibration: true, relaxed: false, bigText: false },
+    board: null,
   };
+}
+
+function cleanBoard(saved: unknown): BoardAccount | null {
+  if (typeof saved !== 'object' || saved === null) return null;
+  const b = saved as Record<string, unknown>;
+  const ok =
+    typeof b.id === 'string' &&
+    /^[0-9a-f-]{36}$/.test(b.id) &&
+    typeof b.secret === 'string' &&
+    typeof b.nameCode === 'number' &&
+    (b.ageBand === null || typeof b.ageBand === 'string');
+  return ok ? { id: b.id as string, secret: b.secret as string, nameCode: b.nameCode as number, ageBand: b.ageBand as string | null, pending: b.pending === true } : null;
 }
 
 /** Keeps only settings of the right type, so a hand-edited or old save can't switch on the wrong option. */
@@ -80,7 +106,7 @@ function cleanSettings(saved: unknown): Partial<Settings> {
 
 function withDefaults(saved: Partial<SaveData>): SaveData {
   const base = defaults();
-  return { ...base, ...saved, settings: { ...base.settings, ...cleanSettings(saved.settings) } };
+  return { ...base, ...saved, settings: { ...base.settings, ...cleanSettings(saved.settings) }, board: cleanBoard(saved.board) };
 }
 
 function load(): SaveData {
@@ -120,7 +146,8 @@ export function parseSave(json: unknown): SaveData | null {
     (d.badges === undefined || (isObj(d.badges) && Object.values(d.badges).every(isDate))) &&
     (d.counters === undefined || numbers(d.counters)) &&
     (d.settings === undefined || isObj(d.settings));
-  return ok ? withDefaults(d as Partial<SaveData>) : null;
+  // Leaderboard membership belongs to the device, never to a file.
+  return ok ? withDefaults({ ...(d as Partial<SaveData>), board: null }) : null;
 }
 
 export const store = {
@@ -134,13 +161,15 @@ export const store = {
     }
   },
 
-  /** The whole save wrapped with a marker, ready to be downloaded as a file. */
+  /** The whole save wrapped with a marker, ready to be downloaded as a file (without the leaderboard secret). */
   exportJson(): string {
-    return JSON.stringify({ app: 'synapse-dojo', version: 1, exported: new Date().toISOString(), data: this.data }, null, 1);
+    const data = { ...this.data, board: null };
+    return JSON.stringify({ app: 'synapse-dojo', version: 1, exported: new Date().toISOString(), data }, null, 1);
   },
 
+  /** Loads an imported save; this device stays on the leaderboard (or off it) as before. */
   replace(data: SaveData) {
-    this.data = data;
+    this.data = { ...data, board: this.data.board };
     this.save();
   },
 
