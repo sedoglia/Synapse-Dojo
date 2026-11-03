@@ -23,7 +23,7 @@ const ui: Locale['ui'] = {
   'landing.pillar1Title': '毎日のトレーニング',
   'landing.pillar1Desc': 'あなたのレベルに合わせて難易度が自動調整される4種目を毎日厳選。所要時間は約10分。',
   'landing.pillar2Title': '毎日のNeuro Score',
-  'landing.pillar2Desc': '4つの重要領域を約3分間で客観的に測定し、脳のパフォーマンスの変化を記録。',
+  'landing.pillar2Desc': '全9領域を約4分間で客観的に測定し、脳のパフォーマンスの変化を記録。',
   'landing.pillar3Title': '自由練習ジム（全35種目）',
   'landing.pillar3Desc': '9つの認知領域のトレーニングをいつでも自由にプレイ可能。自己ベスト更新を目指そう。',
   'landing.pillar4Title': '週間ランキング（任意）',

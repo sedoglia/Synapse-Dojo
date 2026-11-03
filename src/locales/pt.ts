@@ -23,7 +23,7 @@ const ui: Locale['ui'] = {
   'landing.pillar1Title': 'Treino diário',
   'landing.pillar1Desc': '4 exercícios selecionados diariamente que se adaptam ao seu nível. Cerca de 10 minutos.',
   'landing.pillar2Title': 'Neuro Score diário',
-  'landing.pillar2Desc': 'Um teste rápido de 3 minutos em 4 áreas fundamentais para medir objetivamente sua evolução.',
+  'landing.pillar2Desc': 'Um teste rápido de cerca de 4 minutos nas 9 áreas para medir objetivamente sua evolução.',
   'landing.pillar3Title': 'Academia livre (35 jogos)',
   'landing.pillar3Desc': 'Pratique livremente nas 9 áreas cognitivas quando quiser para bater seus recordes pessoais.',
   'landing.pillar4Title': 'Ranking semanal (opcional)',

@@ -23,7 +23,7 @@ const ui: Locale['ui'] = {
   'landing.pillar1Title': '每日训练计划',
   'landing.pillar1Desc': '每天精选 4 个练习，根据你的表现自适应调整难度。约需 10 分钟。',
   'landing.pillar2Title': '每日 Neuro Score 测试',
-  'landing.pillar2Desc': '通过 4 项核心测试进行 3 分钟标准化评估，客观追踪大脑表现趋势。',
+  'landing.pillar2Desc': '覆盖全部 9 个领域、约 4 分钟的标准化评估，客观追踪大脑表现趋势。',
   'landing.pillar3Title': '自由训练馆（35 项练习）',
   'landing.pillar3Desc': '随时随地自由探索 9 大认知领域的所有练习，不断突破个人最佳纪录。',
   'landing.pillar4Title': '每周排行榜（可选）',

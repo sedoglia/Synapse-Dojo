@@ -23,7 +23,7 @@ export const ui = {
   'landing.pillar1Title': 'Daily Workout',
   'landing.pillar1Desc': '4 personalized exercises picked daily that adapt in real time to your performance. Takes ~10 minutes.',
   'landing.pillar2Title': 'Daily Neuro Score',
-  'landing.pillar2Desc': 'A standardized 3-minute benchmark across 4 core areas to objectively measure your progress over time.',
+  'landing.pillar2Desc': 'A standardized benchmark of about 4 minutes across all 9 areas to objectively measure your progress over time.',
   'landing.pillar3Title': 'Free Gym (35 Games)',
   'landing.pillar3Desc': 'Practice freely across all 9 cognitive and bilateral domains whenever you want to beat your personal bests.',
   'landing.pillar4Title': 'Weekly Leaderboard (optional)',

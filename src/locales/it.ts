@@ -23,7 +23,7 @@ const ui: Locale['ui'] = {
   'landing.pillar1Title': 'Allenamento Giornaliero',
   'landing.pillar1Desc': '4 esercizi selezionati ogni giorno che si adattano al tuo livello. Bastano circa 10 minuti.',
   'landing.pillar2Title': 'Neuro Score Quotidiano',
-  'landing.pillar2Desc': 'Un test rapido di 3 minuti sulle 4 aree chiave per misurare oggettivamente i tuoi progressi nel tempo.',
+  'landing.pillar2Desc': 'Un test rapido di circa 4 minuti su tutte le 9 aree per misurare oggettivamente i tuoi progressi nel tempo.',
   'landing.pillar3Title': 'Palestra Libera (35 Giochi)',
   'landing.pillar3Desc': 'Tutti i giochi disponibili liberamente per allenare le 9 aree cognitive e bilaterali quando vuoi.',
   'landing.pillar4Title': 'Classifica settimanale (facoltativa)',

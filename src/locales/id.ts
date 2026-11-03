@@ -23,7 +23,7 @@ const ui: Locale['ui'] = {
   'landing.pillar1Title': 'Latihan Harian',
   'landing.pillar1Desc': '4 latihan pilihan setiap hari yang beradaptasi dengan tingkat keahlianmu. Sekitar 10 menit.',
   'landing.pillar2Title': 'Neuro Score Harian',
-  'landing.pillar2Desc': 'Uji cepat 3 menit pada 4 kemampuan inti untuk mengukur kemajuan kognitif secara objektif.',
+  'landing.pillar2Desc': 'Uji cepat sekitar 4 menit pada 9 area untuk mengukur kemajuan kognitifmu secara objektif.',
   'landing.pillar3Title': 'Gym Bebas (35 Game)',
   'landing.pillar3Desc': 'Berlatih bebas di seluruh 9 domain kognitif kapan saja untuk memecahkan rekor terbaikmu.',
   'landing.pillar4Title': 'Peringkat mingguan (opsional)',

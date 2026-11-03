@@ -23,7 +23,7 @@ const ui: Locale['ui'] = {
   'landing.pillar1Title': 'Tägliches Training',
   'landing.pillar1Desc': '4 täglich ausgewählte Übungen, die sich an dein Niveau anpassen. Dauer: ca. 10 Minuten.',
   'landing.pillar2Title': 'Täglicher Neuro Score',
-  'landing.pillar2Desc': 'Ein schneller 3-Minuten-Test in 4 Kernbereichen, um deine Fortschritte objektiv zu messen.',
+  'landing.pillar2Desc': 'Ein schneller Test von etwa 4 Minuten in allen 9 Bereichen, um deine Fortschritte objektiv zu messen.',
   'landing.pillar3Title': 'Freies Training (35 Spiele)',
   'landing.pillar3Desc': 'Trainiere jederzeit frei in allen 9 kognitiven Bereichen, um deine Bestleistungen zu schlagen.',
   'landing.pillar4Title': 'Wochenrangliste (freiwillig)',
