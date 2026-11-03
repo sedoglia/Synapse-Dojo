@@ -2,7 +2,19 @@ import { h } from '../dom';
 import { store } from '../storage';
 import { t } from '../i18n';
 import { render, page } from '../ui';
-import { boardErrorText, createGroup, inviteLink, joinGroup, leaveGroup, listGroups, type Group } from '../board';
+import {
+  boardErrorText,
+  createGroup,
+  inviteLink,
+  joinGroup,
+  leaveGroup,
+  listGroups,
+  listMembers,
+  nickname,
+  removeMember,
+  type Group,
+  type GroupMember,
+} from '../board';
 import { showBoard } from './board';
 
 const membersText = (n: number) => (n === 1 ? t('groups.members1') : t('groups.members', { n }));
@@ -21,6 +33,61 @@ async function shareInvite(g: Group, status: HTMLElement) {
   } catch {
     // Sharing cancelled or clipboard blocked: the code stays visible on the card to read out or copy by hand.
   }
+}
+
+/** One line per member: nickname, this week's consistency and, for the group's creator, how to remove them. */
+function memberRow(g: Group, m: GroupMember, canRemove: boolean, onChange: () => void, error: HTMLElement): HTMLElement {
+  const name = nickname(m.nameCode);
+  const remove = h('button', { class: 'icon-btn member-remove', 'aria-label': t('groups.remove'), title: t('groups.remove') }, '✕');
+  remove.addEventListener('click', async () => {
+    if (!confirm(t('groups.removeConfirm', { name, group: g.name }))) return;
+    remove.disabled = true;
+    error.textContent = '';
+    try {
+      await removeMember(g.id, m.key);
+      onChange();
+    } catch (e) {
+      error.textContent = boardErrorText(e);
+      remove.disabled = false;
+    }
+  });
+  return h(
+    'li',
+    { class: `member-row${m.me ? ' me' : ''}` },
+    h(
+      'span',
+      { class: 'board-name' },
+      name,
+      m.me ? h('small', { class: 'board-you' }, t('board.you')) : null,
+      m.owner ? h('small', { class: 'member-owner' }, `👑 ${t('groups.creator')}`) : null,
+    ),
+    h(
+      'span',
+      { class: 'board-value' },
+      m.days ? h('b', {}, t('board.value.points', { n: m.points })) : null,
+      h('small', {}, m.days ? t('board.detail.days', { days: m.days, n: m.activities }) : t('groups.idle')),
+    ),
+    canRemove && !m.me ? remove : null,
+  );
+}
+
+/** The group's members, open from the start: seeing who is in a group is the point of it. */
+function memberList(g: Group): HTMLElement {
+  const summary = h('summary', {}, `👥 ${membersText(g.members)}`);
+  const list = h('ol', { class: 'member-list' });
+  const error = h('p', { class: 'small board-error', role: 'alert' });
+  const load = () =>
+    listMembers(g.id)
+      .then((members) => {
+        summary.textContent = `👥 ${membersText(members.length)}`;
+        const canRemove = members.some((m) => m.me && m.owner);
+        list.replaceChildren(...members.map((m) => memberRow(g, m, canRemove, load, error)));
+      })
+      .catch((e: unknown) => {
+        error.textContent = boardErrorText(e);
+      });
+  void load();
+  return h('details', { class: 'group-members', open: true }, summary, list, error);
 }
 
 function groupCard(g: Group, onBack: () => void): HTMLElement {
@@ -42,7 +109,8 @@ function groupCard(g: Group, onBack: () => void): HTMLElement {
     'section',
     { class: 'card group-card' },
     h('h3', {}, `👥 ${g.name}`),
-    h('p', { class: 'muted small' }, `${membersText(g.members)} · `, h('span', { class: 'group-code' }, t('groups.code', { code: g.code }))),
+    h('p', { class: 'muted small' }, h('span', { class: 'group-code' }, t('groups.code', { code: g.code }))),
+    memberList(g),
     h(
       'div',
       { class: 'row left' },

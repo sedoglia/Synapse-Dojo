@@ -143,11 +143,17 @@ export function readableWeek(value: unknown, now = new Date()): string | null {
 /** Groups left without members are deleted together with their name. */
 export const DROP_EMPTY_GROUPS = 'DELETE FROM friend_groups WHERE id NOT IN (SELECT group_id FROM group_members)';
 
+/** A group whose creator is gone passes to its oldest member, so someone can always manage it. */
+export const REASSIGN_OWNERS = `UPDATE friend_groups SET owner = COALESCE(
+    (SELECT m.player_id FROM group_members m WHERE m.group_id = friend_groups.id ORDER BY m.joined, m.player_id LIMIT 1), owner)
+  WHERE NOT EXISTS (SELECT 1 FROM group_members o WHERE o.group_id = friend_groups.id AND o.player_id = friend_groups.owner)`;
+
 /** Everything the server keeps about a player: results, group memberships, the player itself. */
 export const deletePlayer = (db: D1Database, id: string) => [
   db.prepare('DELETE FROM entries WHERE player_id = ?').bind(id),
   db.prepare('DELETE FROM group_members WHERE player_id = ?').bind(id),
   db.prepare('DELETE FROM players WHERE id = ?').bind(id),
+  db.prepare(REASSIGN_OWNERS),
   db.prepare(DROP_EMPTY_GROUPS),
 ];
 
@@ -162,6 +168,7 @@ export async function maybeCleanUp(env: Env, now = new Date()): Promise<void> {
     env.DB.prepare(`DELETE FROM entries WHERE player_id IN (${idlePlayers})`).bind(idle),
     env.DB.prepare(`DELETE FROM group_members WHERE player_id IN (${idlePlayers})`).bind(idle),
     env.DB.prepare('DELETE FROM players WHERE last_seen < ?').bind(idle),
+    env.DB.prepare(REASSIGN_OWNERS),
     env.DB.prepare(DROP_EMPTY_GROUPS),
   ]);
 }
@@ -183,6 +190,9 @@ export function cleanGroupName(v: unknown): string | null {
   const name = v.replace(/[\p{Cc}\p{Cf}]/gu, '').replace(/\s+/g, ' ').trim();
   return [...name].length >= 1 && [...name].length <= 30 ? name : null;
 }
+
+/** A member's handle inside one group: it can't be traced to their id or matched across groups. */
+export const memberKey = async (groupId: string, playerId: string) => (await sha256(`member:${groupId}:${playerId}`)).slice(0, 32);
 
 export const groupCount = async (db: D1Database, playerId: string) =>
   (await db.prepare('SELECT COUNT(*) AS n FROM group_members WHERE player_id = ?').bind(playerId).first<{ n: number }>())?.n ?? 0;

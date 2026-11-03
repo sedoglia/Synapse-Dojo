@@ -698,6 +698,11 @@ const ui: Locale['ui'] = {
   'ex.resources.cost': 'Kostet {n} 🪙',
   'ex.resources.gain': 'Bringt {n} 🪙',
   'ex.resources.was': 'möglich waren {n}',
+
+  'groups.creator': 'Gründer',
+  'groups.idle': 'Diese Woche noch kein Training',
+  'groups.remove': 'Aus der Gruppe entfernen',
+  'groups.removeConfirm': '{name} aus „{group}“ entfernen? Mit dem Einladungscode ist eine Rückkehr möglich.',
 };
 
 const words: string[] = [

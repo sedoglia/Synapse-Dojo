@@ -698,6 +698,11 @@ const ui: Locale['ui'] = {
   'ex.resources.cost': '价格 {n} 🪙',
   'ex.resources.gain': '赚 {n} 🪙',
   'ex.resources.was': '本可以赚 {n}',
+
+  'groups.creator': '创建者',
+  'groups.idle': '本周还没有训练',
+  'groups.remove': '移出小组',
+  'groups.removeConfirm': '将 {name} 移出“{group}”？之后可以用邀请码重新加入。',
 };
 
 const words: string[] = [

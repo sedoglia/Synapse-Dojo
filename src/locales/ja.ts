@@ -698,6 +698,11 @@ const ui: Locale['ui'] = {
   'ex.resources.cost': '値段 {n} 🪙',
   'ex.resources.gain': '儲け {n} 🪙',
   'ex.resources.was': '{n}まで稼げました',
+
+  'groups.creator': '作成者',
+  'groups.idle': '今週はまだトレーニングなし',
+  'groups.remove': 'グループから外す',
+  'groups.removeConfirm': '{name}を「{group}」から外しますか？ 招待コードで戻ることができます。',
 };
 
 const words: string[] = [

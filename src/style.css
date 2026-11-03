@@ -3856,3 +3856,56 @@ html.big-text {
   letter-spacing: 0.08em;
   user-select: all;
 }
+.group-members {
+  margin-bottom: 14px;
+}
+.group-members summary {
+  font-weight: 700;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+.member-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.member-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  background: var(--surface-2);
+}
+.member-row .board-name {
+  flex: 1 1 55%;
+}
+.member-row .board-value {
+  flex: 0 1 45%;
+  min-width: 0;
+  white-space: normal;
+  text-align: end;
+}
+.member-row .board-you,
+.member-row .member-owner {
+  display: inline-block;
+  white-space: nowrap;
+}
+.member-row.me {
+  background: var(--accent-soft);
+}
+.member-owner {
+  margin-inline-start: 6px;
+  color: var(--muted);
+  font-weight: 700;
+  white-space: nowrap;
+}
+.icon-btn.member-remove {
+  width: 32px;
+  height: 32px;
+  flex: none;
+  font-size: 0.85rem;
+  color: var(--bad);
+}

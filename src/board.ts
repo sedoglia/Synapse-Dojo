@@ -383,6 +383,31 @@ export async function leaveGroup(id: string): Promise<void> {
   if (!res.ok) throw await groupFailure(res);
 }
 
+export interface GroupMember {
+  /** Handle valid only inside this group, used to remove the member. */
+  key: string;
+  nameCode: number;
+  points: number;
+  days: number;
+  activities: number;
+  owner?: true;
+  me?: true;
+}
+
+/** Everyone in a group with this week's consistency, including those who haven't trained yet. */
+export async function listMembers(id: string): Promise<GroupMember[]> {
+  const res = await call('GET', `groups/${encodeURIComponent(id)}/members?week=${localWeek()}`);
+  if (res.status === 403) throw new BoardError('not_member');
+  if (!res.ok) throw await groupFailure(res);
+  return ((await res.json()) as { members: GroupMember[] }).members;
+}
+
+/** The group's creator removes a member. */
+export async function removeMember(id: string, key: string): Promise<void> {
+  const res = await call('DELETE', `groups/${encodeURIComponent(id)}/members/${encodeURIComponent(key)}`);
+  if (!res.ok) throw await groupFailure(res);
+}
+
 /** Name and size of the group behind an invite code, shown before deciding whether to join. */
 export async function previewGroup(code: string): Promise<{ name: string; members: number }> {
   const res = await fetch(`${API}groups/preview?code=${encodeURIComponent(code)}`).catch(() => {

@@ -737,6 +737,11 @@ export const ui = {
   'ex.resources.cost': 'Costs {n} 🪙',
   'ex.resources.gain': 'Earns {n} 🪙',
   'ex.resources.was': 'you could earn {n}',
+
+  'groups.creator': 'creator',
+  'groups.idle': 'No training yet this week',
+  'groups.remove': 'Remove from group',
+  'groups.removeConfirm': 'Remove {name} from “{group}”? They can come back with the invite code.',
 };
 
 const nicknames = {

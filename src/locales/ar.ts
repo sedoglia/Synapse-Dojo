@@ -698,6 +698,11 @@ const ui: Locale['ui'] = {
   'ex.resources.cost': 'يكلف {n} 🪙',
   'ex.resources.gain': 'يربح {n} 🪙',
   'ex.resources.was': 'كان يمكن ربح {n}',
+
+  'groups.creator': 'المنشئ',
+  'groups.idle': 'لا تدريب بعد هذا الأسبوع',
+  'groups.remove': 'إزالة من المجموعة',
+  'groups.removeConfirm': 'إزالة {name} من «{group}»؟ يمكن العودة برمز الدعوة.',
 };
 
 const words: string[] = [

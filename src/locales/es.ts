@@ -698,6 +698,11 @@ const ui: Locale['ui'] = {
   'ex.resources.cost': 'Cuesta {n} 🪙',
   'ex.resources.gain': 'Ganas {n} 🪙',
   'ex.resources.was': 'se podían ganar {n}',
+
+  'groups.creator': 'creador',
+  'groups.idle': 'Sin entrenar aún esta semana',
+  'groups.remove': 'Quitar del grupo',
+  'groups.removeConfirm': '¿Quitar a {name} de «{group}»? Podrá volver con el código de invitación.',
 };
 
 const words: string[] = [
