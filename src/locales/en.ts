@@ -464,7 +464,7 @@ export const ui = {
   'ex.stories.qPlace': 'Where was {name} located?',
   'ex.stories.qTime': 'When did the event take place?',
   'ex.stories.qTimeOf': 'When was {name} there?',
-  'ex.stories.filler': 'Even or odd? (keeps your mind busy)',
+  'ex.stories.filler': 'Pause: even or odd? Take your time, this doesn’t count towards your score.',
   'ex.stories.detail': '{ok}/{n} details correct',
   'ex.stories.text': '{name} had {item} with them. They were {place} {time}, where they completed their task.',
   'ex.anagrams.letters': 'letters',

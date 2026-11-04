@@ -91,7 +91,7 @@ The exercises are **inspired by** the paradigms listed: they are short, game-lik
 | **🧠 Working memory** | **Digit Span** | Forward and backward *Digit Span* | Series length (3–9), backward order (two digits fewer) from level 7. |
 | **🔐 Memory** | **Word vault** | Old/new recognition | Words to study (6–20); the score subtracts false alarms from hits. |
 | **🔐 Memory** | **Pairs** | Symbol–word *paired associates* learning | Number of pairs (3–12). In the Neuro Score a fixed list of 8 pairs, with the score corrected for chance answers. |
-| **🔐 Memory** | **Story Memory** | Inspired by logical memory for short stories | Scenes to keep apart (1–3), questions on what, where and when (2 or 3), a pause filled by a distracting task (3–15 s); from two scenes up the wrong answers include details from another scene. |
+| **🔐 Memory** | **Story Memory** | Inspired by logical memory for short stories | Scenes to keep apart (1–3), questions on what, where and when (2 or 3), a pause filled by an unscored distracting task at the player's own pace (3–15 s); from two scenes up the wrong answers include details from another scene. |
 | **🧊 Spatial** | **Rotations** | Mental rotation (*Shepard & Metzler, 1971*), two-dimensional version with chiral polyominoes | Number of squares (4–9), rotations in 30° steps, time limit (7.5 → 1.8 s). |
 | **🧊 Spatial** | **Spatial Matrix** | Spatial memory with coordinate transformation | Blocks to remember (2–6), a 3×3 and then a 4×4 grid at the top levels, rotation (0°, 90°, 180°, then random), study time (4.8 → 3.2 s). |
 | **🧩 Reasoning** | **Towers** | *Tower of London* (*Shallice, 1982*) | Moves of the shortest solution (2–8), which are also the maximum allowed. |

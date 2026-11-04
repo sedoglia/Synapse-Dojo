@@ -457,7 +457,7 @@ const ui: Locale['ui'] = {
   'ex.stories.qPlace': "Où se trouvait {name} ?",
   'ex.stories.qTime': "Quand la scène s’est-elle déroulée ?",
   'ex.stories.qTimeOf': 'À quel moment {name} se trouvait là ?',
-  'ex.stories.filler': 'Pair ou impair ? (occupe l’esprit)',
+  'ex.stories.filler': 'Pause : pair ou impair ? Prends ton temps, cela ne compte pas dans le score.',
   'ex.stories.detail': "{ok}/{n} détails corrects",
   'ex.stories.text': '{name} portait {item}. Cette personne se trouvait {place} {time}, où elle a terminé sa mission.',
   'ex.anagrams.letters': 'lettres',

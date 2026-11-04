@@ -457,7 +457,7 @@ const ui: Locale['ui'] = {
   'ex.stories.qPlace': "Wo befand sich {name}?",
   'ex.stories.qTime': "Wann fand die Szene statt?",
   'ex.stories.qTimeOf': 'Wann war {name} dort?',
-  'ex.stories.filler': 'Gerade oder ungerade? (hält den Kopf beschäftigt)',
+  'ex.stories.filler': 'Pause: gerade oder ungerade? Lass dir Zeit, das zählt nicht für die Punktzahl.',
   'ex.stories.detail': "{ok}/{n} Details richtig",
   'ex.stories.text': '{name} hatte {item} dabei. Die Person befand sich {place} {time}, wo sie die Erledigung abschloss.',
   'ex.anagrams.letters': 'Buchstaben',

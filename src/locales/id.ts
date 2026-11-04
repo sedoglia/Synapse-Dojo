@@ -457,7 +457,7 @@ const ui: Locale['ui'] = {
   'ex.stories.qPlace': "Di mana lokasi {name}?",
   'ex.stories.qTime': "Kapan adegan tersebut terjadi?",
   'ex.stories.qTimeOf': 'Kapan {name} ada di sana?',
-  'ex.stories.filler': 'Genap atau ganjil? (membuat pikiran tetap sibuk)',
+  'ex.stories.filler': 'Jeda: genap atau ganjil? Jawab dengan tenang, ini tidak dihitung dalam skor.',
   'ex.stories.detail': "{ok}/{n} detail benar",
   'ex.stories.text': '{name} membawa {item}. Mereka berada {place} {time}, di mana tugas diselesaikan.',
   'ex.anagrams.letters': 'huruf',

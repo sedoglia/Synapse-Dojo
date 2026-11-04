@@ -457,7 +457,7 @@ const ui: Locale['ui'] = {
   'ex.stories.qPlace': "{name} कहाँ था?",
   'ex.stories.qTime': "यह घटना किस समय हुई थी?",
   'ex.stories.qTimeOf': '{name} वहाँ किस समय मौजूद थे?',
-  'ex.stories.filler': 'सम या विषम? (मन को व्यस्त रखता है)',
+  'ex.stories.filler': 'विराम: सम या विषम? आराम से उत्तर दें, इसका स्कोर पर कोई असर नहीं पड़ता।',
   'ex.stories.detail': "{ok}/{n} विवरण सही",
   'ex.stories.text': '{name} के पास {item} था। वे {time} {place} थे, जहाँ उन्होंने अपना काम पूरा किया।',
   'ex.anagrams.letters': 'अक्षर',

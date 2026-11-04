@@ -457,7 +457,7 @@ const ui: Locale['ui'] = {
   'ex.stories.qPlace': "Где находился персонаж {name}?",
   'ex.stories.qTime': "В какое время происходило действие?",
   'ex.stories.qTimeOf': '{name}: когда это было?',
-  'ex.stories.filler': 'Чётное или нечётное? (занимает внимание)',
+  'ex.stories.filler': 'Пауза: чётное или нечётное? Отвечайте спокойно, на результат это не влияет.',
   'ex.stories.detail': "{ok}/{n} деталей верно",
   'ex.stories.text': '{name} имел(а) при себе {item}. Находился(лась) {place} {time}, где завершил(а) дела.',
   'ex.anagrams.letters': 'букв',

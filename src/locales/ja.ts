@@ -457,7 +457,7 @@ const ui: Locale['ui'] = {
   'ex.stories.qPlace': "{name} はどこにいましたか？",
   'ex.stories.qTime': "いつの出来事でしたか？",
   'ex.stories.qTimeOf': '{name}がそこにいたのはいつですか？',
-  'ex.stories.filler': '偶数か奇数か？（頭を別のことに使います）',
+  'ex.stories.filler': '休憩：偶数か奇数か？ ゆっくり答えてください。スコアには影響しません。',
   'ex.stories.detail': "正解 {ok}/{n} 問",
   'ex.stories.text': '{name} は {item} を持っていました。{time} に {place} にいて、用事を済ませました。',
   'ex.anagrams.letters': '文字',

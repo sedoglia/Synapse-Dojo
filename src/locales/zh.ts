@@ -457,7 +457,7 @@ const ui: Locale['ui'] = {
   'ex.stories.qPlace': "{name} 在什么地点？",
   'ex.stories.qTime': "事件发生在什么时间？",
   'ex.stories.qTimeOf': '{name}是什么时候在那里的？',
-  'ex.stories.filler': '偶数还是奇数？（让大脑保持忙碌）',
+  'ex.stories.filler': '暂停：偶数还是奇数？慢慢回答，这不计入分数。',
   'ex.stories.detail': "细节正确 {ok}/{n}",
   'ex.stories.text': '{name} 随身携带着 {item}。当时位于 {place} {time}，并在那里完成了事项。',
   'ex.anagrams.letters': '字母',

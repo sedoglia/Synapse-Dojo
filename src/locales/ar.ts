@@ -457,7 +457,7 @@ const ui: Locale['ui'] = {
   'ex.stories.qPlace': "أين كان يوجد {name}؟",
   'ex.stories.qTime': "متى حدث هذا الموقف؟",
   'ex.stories.qTimeOf': '{name}: متى حدث ذلك؟',
-  'ex.stories.filler': 'زوجي أم فردي؟ (يبقي الذهن مشغولًا)',
+  'ex.stories.filler': 'استراحة: زوجي أم فردي؟ أجب بهدوء، فهذا لا يُحتسب في النتيجة.',
   'ex.stories.detail': "{ok}/{n} تفاصيل صحيحة",
   'ex.stories.text': 'كان {name} يحمل {item}. وكان موجوداً {place} {time}، حيث أنهى مهمته.',
   'ex.anagrams.letters': 'حروف',

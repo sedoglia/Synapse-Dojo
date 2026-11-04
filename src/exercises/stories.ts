@@ -17,27 +17,61 @@ const LEVELS = [
   { scenes: 3, questions: 3, delay: 15 },
 ];
 const configFor = (level: number) => LEVELS[Math.round(level) - 1];
+const MIN_NUMBER_MS = 1000; // a number of the pause never appears with less time than this left
 
-/** Fills the pause with even/odd judgements, so the scenes can't simply be repeated in the mind. Not scored. */
-async function busyPause(ctx: Ctx, seconds: number) {
+/**
+ * Fills the pause with even/odd judgements, so the scenes can't simply be repeated in the mind. Not scored, and at the
+ * player's own pace: a number stays until it's answered, and a bar shows how much of the pause is left.
+ */
+function busyPause(ctx: Ctx, seconds: number): Promise<void> {
+  const ms = seconds * 1000 * ctx.pace;
+  const end = performance.now() + ms;
   const number = h('div', { class: 'digits-display' });
-  let answer: (() => void) | null = null;
-  const button = (key: 'ex.dualTask.even' | 'ex.dualTask.odd') => h('button', { class: 'btn big', onPointerdown: () => answer?.() }, t(key));
+  const fill = h('div');
+  let value = 0;
+  let locked = false;
+  let nextId: ReturnType<typeof setTimeout> | undefined;
+  const show = () => {
+    let n = rand(1, 9);
+    while (n === value) n = rand(1, 9);
+    value = n;
+    number.textContent = String(n);
+    locked = false;
+  };
+  const answer = (even: boolean, btn: HTMLElement) => {
+    if (locked) return;
+    locked = true;
+    flash(btn, even === (value % 2 === 0) ? 'good' : 'bad', 250);
+    number.textContent = '';
+    // Near the end of the pause no new number: it would only flash by, with no time to answer.
+    nextId = setTimeout(() => {
+      if (end - performance.now() > MIN_NUMBER_MS) show();
+    }, 250);
+  };
+  const evenBtn: HTMLElement = h('button', { class: 'btn big', onPointerdown: () => answer(true, evenBtn) }, t('ex.dualTask.even'));
+  const oddBtn: HTMLElement = h('button', { class: 'btn big', onPointerdown: () => answer(false, oddBtn) }, t('ex.dualTask.odd'));
   ctx.stage.replaceChildren(
     h('div', { class: 'grid-status' }, t('ex.stories.filler')),
+    h('div', { class: 'rotate-timer' }, fill),
     number,
-    h('div', { class: 'vault-actions' }, button('ex.dualTask.even'), button('ex.dualTask.odd')),
+    h('div', { class: 'vault-actions' }, evenBtn, oddBtn),
   );
-  const end = performance.now() + seconds * 1000;
-  while (performance.now() < end) {
-    number.textContent = String(rand(1, 9));
-    await ctx.timed<void>(Math.min(1200, Math.max(50, end - performance.now())), undefined, (done) => {
-      answer = done;
-      return () => (answer = null);
-    });
-    number.textContent = '';
-    await ctx.wait(100);
-  }
+  fill.style.width = '100%';
+  void fill.offsetWidth;
+  fill.style.transition = `width ${ms}ms linear`;
+  fill.style.width = '0%';
+  show();
+  return ctx.timed<void>(ms, undefined, () => {
+    const keys = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') answer(true, evenBtn);
+      else if (e.key === 'ArrowRight') answer(false, oddBtn);
+    };
+    window.addEventListener('keydown', keys);
+    return () => {
+      window.removeEventListener('keydown', keys);
+      clearTimeout(nextId);
+    };
+  });
 }
 
 export const stories: Exercise = {
