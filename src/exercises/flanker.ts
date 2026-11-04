@@ -1,10 +1,9 @@
 import { h, rand, flash } from '../dom';
 import { t } from '../i18n';
-import { Staircase } from '../adaptive';
 import { onKeys } from '../widgets';
 import type { Exercise } from './types';
 
-const limitFor = (level: number) => Math.max(350, Math.round(1400 * Math.pow(0.89, level - 1)));
+const limitFor = (level: number) => Math.max(480, Math.round(1400 * Math.pow(0.92, level - 1)));
 
 export const flanker: Exercise = {
   id: 'flanker',
@@ -20,7 +19,7 @@ export const flanker: Exercise = {
 
   async run(ctx) {
     const total = ctx.count(32, 16, 6);
-    const st = new Staircase(ctx.level, 1, 14);
+    const st = ctx.stair(total, 1, 14);
 
     const hint = h('div', { class: 'flanker-hint' }, t('ex.flanker.instruction'));
     const display = h('div', { class: 'flanker-display' });
@@ -42,8 +41,9 @@ export const flanker: Exercise = {
       await ctx.wait(rand(400, 900));
 
       const centerDir: 'left' | 'right' = Math.random() < 0.5 ? 'left' : 'right';
-      // Congruency: incongruent trials test cognitive conflict / selective attention
-      const incongruent = Math.random() < (ctx.practice ? 0.35 : Math.min(0.65, 0.3 + st.int * 0.03));
+      // Half the trials conflict at every level: more incongruent trials would shrink the conflict effect itself,
+      // because people adapt to frequent conflict (proportion congruency effect; Bugg & Crump, 2012).
+      const incongruent = Math.random() < (ctx.practice ? 0.35 : 0.5);
       const flankDir = incongruent ? (centerDir === 'left' ? 'right' : 'left') : centerDir;
 
       const arrowChar = (dir: 'left' | 'right') => (dir === 'left' ? '←' : '→');

@@ -1,11 +1,18 @@
 import { h, flash } from '../dom';
 import { t } from '../i18n';
 import { sfx } from '../audio';
-import { Staircase } from '../adaptive';
 import { onKeys } from '../widgets';
 import type { Exercise } from './types';
 
 const bpmFor = (level: number) => 60 + level * 7;
+/**
+ * How close to the beat a tap must fall: the real difficulty of synchronising. Tempos from 67 to 130 BPM are well inside
+ * the limits of synchronisation (about 100–1800 ms between beats; Repp, 2006), so what grows with level is precision,
+ * from ±220 ms down to ±50 ms.
+ */
+const toleranceFor = (level: number) => Math.round(220 * Math.pow(0.848, level - 1));
+/** First beats, not judged: they let the player settle and measure their usual offset from the beat. */
+const SETTLING_BEATS = 3;
 
 export const rhythm: Exercise = {
   id: 'rhythm',
@@ -17,11 +24,11 @@ export const rhythm: Exercise = {
   example: 'ex.rhythm.example',
   minutes: 2,
   levels: { min: 1, max: 10, start: 2 },
-  levelLabel: (l) => `${bpmFor(l)} BPM`,
+  levelLabel: (l) => `±${toleranceFor(l)} ms · ${bpmFor(l)} BPM`,
 
   async run(ctx) {
     const trials = ctx.count(24, 16, 6);
-    const st = new Staircase(ctx.level, 1, 10);
+    const st = ctx.stair(trials, 1, 10);
 
     const hint = h('div', { class: 'bilateral-hint' }, t('ex.rhythm.hint'));
     const track = h('div', { class: 'rhythm-track' });
@@ -57,10 +64,14 @@ export const rhythm: Exercise = {
     let correct = 0;
     const errors: number[] = [];
 
+    // The tempo stays the same for the whole session, as synchronising needs; the staircase moves the tolerance.
     const bpm = bpmFor(st.level);
     const interval = (60 / bpm) * 1000;
-    // Hit window around each beat: ±250 ms at slow tempos, narrower when beats get close.
-    const tolerance = Math.min(Math.min(250, interval * 0.3) * ctx.pace, interval / 2 - 20);
+    const toleranceNow = () => Math.min(toleranceFor(st.level) * ctx.pace, interval / 2 - 20);
+    // People tap slightly ahead of the beat and screens answer a little late. Both are constant, so each tap is
+    // judged around the player's own recent average: what counts is steadiness, not the device.
+    const recent: number[] = [];
+    const usualOffset = () => (recent.length ? recent.reduce((a, b) => a + b, 0) / recent.length : 0);
 
     // Taps are kept with their time and judged against the nearest beat, so a tap slightly after the
     // beat counts as well as one slightly before (people synchronising usually tap a little early).
@@ -84,11 +95,12 @@ export const rhythm: Exercise = {
       pulse();
     }
 
-    for (let i = 0; i < trials; i++) {
+    const beats = trials + SETTLING_BEATS;
+    for (let i = 0; i < beats; i++) {
       const beat = t0 + i * interval;
       // The next hand is shown half a beat ahead, then the beat itself pulses with a tick.
       await until(beat - interval / 2);
-      ctx.progress(i / trials, `${i + 1}/${trials}`);
+      ctx.progress(i / beats, `${i + 1}/${beats}`);
       const targetSide: 'L' | 'R' = i % 2 === 0 ? 'L' : 'R';
       indicator.className = `rhythm-beat-indicator side-${targetSide}`;
       indicator.textContent = targetSide === 'L' ? '◀' : '▶';
@@ -97,8 +109,14 @@ export const rhythm: Exercise = {
       await until(beat + interval / 2);
 
       const tap = taps.find((x) => x.at >= beat - interval / 2 && x.at < beat + interval / 2);
-      const delta = tap ? Math.abs(tap.at - beat) : Infinity;
-      const isHit = tap?.side === targetSide && delta <= tolerance;
+      const asynchrony = tap && tap.side === targetSide ? tap.at - beat : null;
+      const delta = asynchrony === null ? Infinity : Math.abs(asynchrony - usualOffset());
+      const isHit = delta <= toleranceNow();
+      if (asynchrony !== null) {
+        recent.push(asynchrony);
+        if (recent.length > 8) recent.shift();
+      }
+      if (i < SETTLING_BEATS) continue;
       // Judged silently: a feedback sound between beats would disturb the metronome.
       st.record(isHit);
       if (isHit) {

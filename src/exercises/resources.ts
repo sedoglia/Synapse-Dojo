@@ -1,6 +1,5 @@
 import { h, rand, flash, shuffle } from '../dom';
 import { t, type I18nKey } from '../i18n';
-import { Staircase } from '../adaptive';
 import type { Exercise } from './types';
 
 interface Product {
@@ -11,17 +10,41 @@ interface Product {
 }
 
 const ICONS = ['🍎', '🧀', '🍯', '🥖', '🍅', '🥚', '🐟', '🌻'];
-const productCount = (level: number) => Math.min(7, 4 + Math.floor(level / 2));
+const productCount = (level: number) => Math.min(8, 4 + Math.floor(level / 2));
+/** Share of the best possible earnings that is good enough: from a close second choice up to the exact optimum. */
+const toleranceFor = (level: number) => (level <= 2 ? 0.9 : level <= 4 ? 0.95 : 1);
 
-/** A selection of products on sale; never one where everything fits in the budget, which would need no choice. */
-function stock(count: number, budget: number): Product[] {
-  for (;;) {
-    const picked = shuffle(ICONS.map((icon, i) => ({ icon, i }))).slice(0, count);
-    const products = picked.map(({ icon, i }) => {
-      const cost = rand(15, 35);
-      return { icon, name: t(`ex.resources.task${i + 1}` as I18nKey), cost, gain: Math.round(cost * (0.8 + Math.random() * 0.7)) };
-    });
-    if (products.reduce((sum, p) => sum + p.cost, 0) > budget) return products;
+function randomStock(count: number): Product[] {
+  return shuffle(ICONS.map((icon, i) => ({ icon, i }))).slice(0, count).map(({ icon, i }) => {
+    const cost = rand(15, 35);
+    return { icon, name: t(`ex.resources.task${i + 1}` as I18nKey), cost, gain: Math.round(cost * (0.8 + Math.random() * 0.7)) };
+  });
+}
+
+/** What the obvious shortcut earns: buying the best earnings per coin first. */
+function greedyGain(products: Product[], budget: number): number {
+  let spent = 0;
+  let gain = 0;
+  for (const p of [...products].sort((a, b) => b.gain / b.cost - a.gain / a.cost)) {
+    if (spent + p.cost <= budget) {
+      spent += p.cost;
+      gain += p.gain;
+    }
+  }
+  return gain;
+}
+
+/**
+ * The budget is about half of what everything costs, where knapsack instances are hardest (Yadav et al.; Franco et al.,
+ * 2021). From level 3 the shortcut must fall short, otherwise more products would only make the task easier.
+ */
+function stock(level: number): { products: Product[]; budget: number; maxGain: number; target: number } {
+  for (let tries = 0; ; tries++) {
+    const products = randomStock(productCount(level));
+    const budget = Math.round(products.reduce((sum, p) => sum + p.cost, 0) * 0.5);
+    const maxGain = bestGain(products, budget);
+    const target = Math.floor(maxGain * toleranceFor(level));
+    if (level < 3 || tries > 300 || greedyGain(products, budget) < target) return { products, budget, maxGain, target };
   }
 }
 
@@ -48,6 +71,7 @@ const bar = (fraction: number, cls: string) =>
 /**
  * The knapsack problem (Murawski & Bossaerts, 2016) set at a market stall: money to spend, money to earn.
  * Costs and gains are spelled out in words and in coins, so the task is clear from the first look, in any country.
+ * The goal isn't shown: knowing the best total while choosing would turn planning into trial and error.
  */
 export const resources: Exercise = {
   id: 'resources',
@@ -59,22 +83,18 @@ export const resources: Exercise = {
   example: 'ex.resources.example',
   minutes: 2.5,
   levels: { min: 1, max: 8, start: 2 },
-  levelLabel: (l) => `${productCount(l)} 🧺`,
+  levelLabel: (l) => `${productCount(l)} 🧺 · ${Math.round(toleranceFor(l) * 100)}%`,
 
   async run(ctx) {
-    const trials = ctx.count(6, 4, 2);
-    const st = new Staircase(ctx.level, 1, 8, { target: 0.75 });
+    const trials = ctx.count(8, 6, 2);
+    const st = ctx.stair(trials, 1, 8, { target: 0.75 });
 
     let correct = 0;
 
     for (let trial = 0; trial < trials; trial++) {
       ctx.progress(trial / trials, `${trial + 1}/${trials}`);
 
-      const budget = 50 + st.int * 10;
-      const products = stock(productCount(st.int), budget);
-      const maxGain = bestGain(products, budget);
-      // Good enough is 90% of the best possible: a close second choice still counts.
-      const target = Math.floor(maxGain * 0.9);
+      const { products, budget, maxGain, target } = stock(st.int);
 
       const header = h('div', { class: 'resources-header' });
       const cardList = h('div', { class: 'resources-grid' });
@@ -91,8 +111,7 @@ export const resources: Exercise = {
         header.replaceChildren(
           h('div', {}, over ? t('ex.resources.over', { cost: spent, budget }) : t('ex.resources.money', { cost: spent, budget, left: budget - spent })),
           bar(spent / budget, 'spent'),
-          h('div', {}, t('ex.resources.total', { val: gained, target })),
-          bar(gained / target, 'gained'),
+          h('div', {}, t('ex.resources.earned', { val: gained })),
         );
         header.classList.toggle('overbudget', over);
         submitBtn.disabled = over || selected.size === 0;

@@ -35,12 +35,12 @@ For this reason Synapse Dojo does not use arbitrary tasks or pure-dexterity mini
 
 The evidence above leads to the platform's building blocks:
 
-1. **Continuous Adaptive Difficulty for Every Exercise:**  
+1. **Continuous Adaptive Difficulty (every exercise except Speed reading):**  
    An exercise that is too easy is boring; one that is too hard is frustrating and leads to dropping out. Synapse Dojo uses a weighted up-down staircase (Kaernbach 1991) that keeps each user near their own threshold: the accuracy target is **80%** in most exercises, 85% in Glance and 70–75% in memory and planning tasks, where each trial is longer and a mistake weighs more.
 2. **Priority to Paradigms with the Highest Transfer Value:**  
    Central role for peripheral visual processing speed (UFOV), continuous multitasking, mental rotation and working memory.
 3. **Separating Measurement from Training:**  
-   - The daily **Neuro Score** always uses the same starting point and a short version of each exercise, to follow trends over time (0–1000 across all 9 domains).
+   - The daily **Neuro Score** always uses the same starting point and its own version of each exercise, often shorter, to follow trends over time (0–1000 across all 9 domains).
    - **Daily Training** and the **Gym** are fully adaptive, to drive improvement.
 4. **Accessible to Everyone, Older Adults Included** (see §5).
 5. **Honesty Toward the User:**  
@@ -72,41 +72,41 @@ The exercises are **inspired by** the paradigms listed: they are short, game-lik
 
 | Domain | Exercise | Reference paradigm | Adaptive parameters |
 |---|---|---|---|
-| **⚡ Speed** | **Glance** | *Useful Field of View (UFOV)* / Double Decision (*Ball et al., 2002*) | Exposure time (700 ms → about 48 ms, followed by a mask), peripheral distractors (0, 7, 15). |
-| **⚡ Speed** | **Choice reflex** | 4-choice reaction time + Go/No-Go | Response window (1100 → about 280 ms), no-go stimuli from level 3. |
-| **⚡ Speed** | **Number trail** | *Trail Making Test (TMT-A and TMT-B)* | Number of targets (10–24), alternating 1 → A → 2 → B sequence from level 4. |
-| **⚡ Speed** | **Simple Reaction** | Simple reaction time (SRT) with a variable foreperiod and false-start detection | Threshold to beat (600 → 200 ms). |
-| **🎯 Attention** | **Pilot** | *NeuroRacer*-style continuous multitasking (*Anguera et al., 2013*) | Road speed and curvature, sign frequency and distractor similarity (from level 5). |
-| **🎯 Attention** | **Radar** | *Multiple Object Tracking* (*Pylyshyn & Storm, 1988*) | Targets to track (2–6) and speed. |
-| **🎯 Attention** | **Flanker Test** | *Eriksen Flanker Task* | Time limit (1400 → 350 ms) and share of incongruent trials (30 → 65%). |
-| **🎯 Attention** | **Go / No-Go** | Go/No-Go inspired by the *SART* (*Robertson et al., 1997*) | Time limit (850 → 260 ms); 22% "stop" trials. |
-| **🎯 Attention** | **Multi-Source Interference** | *Multi-Source Interference Task* (*Bush & Shin, 2006*) | Control ("1 0 0") and interference ("2 1 1") trials; interference share (33 → 67%) and time limit (1800 → 450 ms). |
-| **🎯 Attention** | **Color & Shape** | Conjunction visual search (*Treisman & Gelade, 1980*) | Number of items (6–16) sharing color or shape with the target. |
-| **🎛️ Control** | **Color clash** | *Stroop* (*Stroop, 1935*; *MacLeod, 1991*) | Time limit (3000 → about 750 ms), alternative "read the word" rule from level 3. |
+| **⚡ Speed** | **Glance** | *Useful Field of View (UFOV)* / Double Decision (*Ball et al., 2002*) | Exposure time (700 ms → about 48 ms, followed by a mask), peripheral distractors arriving gradually (0, then 3 to 15). |
+| **⚡ Speed** | **Choice reflex** | 4-choice reaction time + Go/No-Go | Response window (1100 → 420 ms), no-go stimuli from level 3. |
+| **⚡ Speed** | **Number trail** | *Trail Making Test (TMT-A and TMT-B)* | Number of targets (10–24), alternating 1 → A → 2 → B sequence from level 4, with about twice the time per item of numbers alone, as between TMT-B and TMT-A. |
+| **⚡ Speed** | **Simple Reaction** | Simple reaction time (SRT) with a variable foreperiod and false-start detection | Threshold to beat (600 → 280 ms). |
+| **🎯 Attention** | **Pilot** | *NeuroRacer*-style continuous multitasking (*Anguera et al., 2013*) | Two independent levels, as in NeuroRacer. Driving: road speed and curvature, which bends beyond the lane even at level 1. Signs: frequency, time to answer (1.6 → 0.6 s) and similar distractors from level 5. Only hits, misses and false alarms count. |
+| **🎯 Attention** | **Radar** | *Multiple Object Tracking* (*Pylyshyn & Storm, 1988*) | Speed and targets to track (2–6): most high levels stay at 4 targets, the usual capacity, and raise speed. |
+| **🎯 Attention** | **Flanker Test** | *Eriksen Flanker Task* | Time limit (1400 → 480 ms); half the trials are always incongruent, because more of them shrink the conflict effect (*Bugg & Crump, 2012*). |
+| **🎯 Attention** | **Go / No-Go** | Go/No-Go inspired by the *SART* (*Robertson et al., 1997*) | Time limit (850 → 330 ms); 20% "stop" trials at a quick pace, the conditions that really build up the urge to respond (*Wessel, 2018*). |
+| **🎯 Attention** | **Multi-Source Interference** | *Multi-Source Interference Task* (*Bush & Shin, 2006*) | Control ("1 0 0") and interference ("2 1 1") trials in equal parts; time limit (1800 → 560 ms). |
+| **🎯 Attention** | **Color & Shape** | Conjunction visual search (*Treisman & Gelade, 1980*) | Number of items (6–16) sharing color or shape with the target, and time to find it (6 → 1.2 s). |
+| **🎛️ Control** | **Color clash** | *Stroop* (*Stroop, 1935*; *MacLeod, 1991*) | Time limit (3000 → about 760 ms), alternative "read the word" rule growing gradually from level 3. |
 | **🎛️ Control** | **Rule switch** | *Task Switching* (*Monsell, 2003*) | Alternating magnitude (< 5 / > 5) and parity; switch rate (20 → 50%) and time limit; measures the switch cost. |
-| **🎛️ Control** | **Card Sorting** | Inspired by the *Wisconsin Card Sorting Test* (*Grant & Berg, 1948*) | Discovering the rule (color, shape, number); the rule changes after 4 correct answers in a row and the change is announced, so as not to discourage; time per card (5.5 → 2.4 s). |
+| **🎛️ Control** | **Card Sorting** | Inspired by the *Wisconsin Card Sorting Test* (*Grant & Berg, 1948*) | Discovering the rule (color, shape, number); the rule changes after 4 correct answers in a row and isn't highlighted on screen; the change is announced up to level 5, then must be noticed unaided, as in the original test; time per card (5.5 → 1.6 s). |
 | **🧠 Working memory** | **Echo** | Single and dual *N-Back* (*Kirchner, 1958*; *Jaeggi et al., 2008*) | From 1-back (position only) to dual 6-back (position + spoken and written letter). |
-| **🧠 Working memory** | **Light grid** | *Corsi Block-Tapping* (*Corsi, 1972*; *Kessels et al., 2000*) | Sequence length (2–9), backward order from level 6; in the Neuro Score two attempts per length, as in the standard procedure. |
+| **🧠 Working memory** | **Light grid** | *Corsi Block-Tapping* (*Corsi, 1972*; *Kessels et al., 2000*) | Sequence length (2–9); from level 6 backward order alternates, at the same length, because in the Corsi it is no harder than forward (*Kessels et al., 2008*); in the Neuro Score two attempts per length, as in the standard procedure. |
 | **🧠 Working memory** | **Last digits** | *Running Memory Span* (*Pollack et al., 1959*) | Final digits to recall (2–9) from a stream of unpredictable length. |
-| **🧠 Working memory** | **Digit Span** | Forward and backward *Digit Span* | Series length (3–9), backward order from level 7. |
+| **🧠 Working memory** | **Digit Span** | Forward and backward *Digit Span* | Series length (3–9), backward order (two digits fewer) from level 7. |
 | **🔐 Memory** | **Word vault** | Old/new recognition | Words to study (6–20); the score subtracts false alarms from hits. |
-| **🔐 Memory** | **Pairs** | Symbol–word *paired associates* learning | Number of pairs (3–12). |
-| **🔐 Memory** | **Story Memory** | Inspired by logical memory for short stories | Questions on who, what, where and when (2 or 3). |
-| **🧊 Spatial** | **Rotations** | Mental rotation (*Shepard & Metzler, 1971*), two-dimensional version with chiral polyominoes | Number of squares (4–9), rotations in 30° steps, time limit (7.6 → 2.5 s). |
-| **🧊 Spatial** | **Spatial Matrix** | Spatial memory with coordinate transformation | Blocks to remember (2–5) and grid rotation (0°, 90°, 180°, 270°). |
+| **🔐 Memory** | **Pairs** | Symbol–word *paired associates* learning | Number of pairs (3–12). In the Neuro Score a fixed list of 8 pairs, with the score corrected for chance answers. |
+| **🔐 Memory** | **Story Memory** | Inspired by logical memory for short stories | Scenes to keep apart (1–3), questions on what, where and when (2 or 3), a pause filled by a distracting task (3–15 s); from two scenes up the wrong answers include details from another scene. |
+| **🧊 Spatial** | **Rotations** | Mental rotation (*Shepard & Metzler, 1971*), two-dimensional version with chiral polyominoes | Number of squares (4–9), rotations in 30° steps, time limit (7.5 → 1.8 s). |
+| **🧊 Spatial** | **Spatial Matrix** | Spatial memory with coordinate transformation | Blocks to remember (2–6), a 3×3 and then a 4×4 grid at the top levels, rotation (0°, 90°, 180°, then random), study time (4.8 → 3.2 s). |
 | **🧩 Reasoning** | **Towers** | *Tower of London* (*Shallice, 1982*) | Moves of the shortest solution (2–8), which are also the maximum allowed. |
 | **🧩 Reasoning** | **Odd one out** | Odd-one-out with multidimensional rules | Number of figures (4–9) and irrelevant features that vary (1–3). |
-| **🧩 Reasoning** | **Market Stall** | Knapsack problem (Murawski & Bossaerts, 2016) in an everyday setting of costs and earnings | Number of products (4–7) and budget; at least 90% of the best possible earnings is required. |
-| **➗ Calculation & reading** | **Math sprint** | Fast mental arithmetic (*Learning Therapy*, Kawashima) | Operations (+ − → × → ÷) and number size. |
-| **➗ Calculation & reading** | **Speed reading** | Reading aloud with a comprehension question | Words per minute and comprehension (comprehension weighs more than speed). |
+| **🧩 Reasoning** | **Market Stall** | Knapsack problem (Murawski & Bossaerts, 2016) in an everyday setting of costs and earnings | Number of products (4–8) with a budget of about half the total cost; share of the best earnings required (90% → 100%); from level 3 the shortcut of buying by best earnings per coin isn't enough. The goal isn't shown while choosing. |
+| **➗ Calculation & reading** | **Math sprint** | Fast mental arithmetic (*Learning Therapy*, Kawashima) | Operations (+ − → × → ÷) and number size, multiplication tables included. |
+| **➗ Calculation & reading** | **Speed reading** | Reading aloud with a comprehension question | Not adaptive: words per minute and comprehension (comprehension weighs more than speed). In *Learning Therapy* the point is reading regularly, not tackling ever harder texts. |
 | **➗ Calculation & reading** | **Dot Estimation** | *Approximate Number System* (*Halberda et al., 2008*) | Ratio between the two quantities (40 → 88%) and exposure time (1.5 → 0.8 s). |
-| **➗ Calculation & reading** | **Word Anagrams** | Lexical access and orthographic memory | Word length (3–8 letters). |
-| **➗ Calculation & reading** | **Word Sprint** | Fast orthographic classification (does the word start with the given letter?) | Time limit (2200 → 650 ms). It is not a verbal-fluency test, which would require producing words. |
-| **👐 Coordination** | **Bilateral Tap** | Visually guided bimanual sequences | Length of the left/right sequence (4–12). |
-| **👐 Coordination** | **Bilateral Swipe** | Symmetric and asymmetric bimanual coordination (*Swinnen, 2002*) | Same, mirrored or independent directions for the two hands. |
-| **👐 Coordination** | **Bilateral Rhythm** | *Sensorimotor Synchronization* (*Repp & Su, 2013*) | Metronome tempo (67–130 BPM); each tap is judged against the nearest beat, early or late. |
-| **👐 Coordination** | **Cross Movements** | Spatial stimulus-response compatibility (ipsilateral and contralateral responses) | Time limit (1500 → 380 ms) and share of "cross" trials. |
-| **👐 Coordination** | **Bilateral Dual-Task** | Motor-cognitive dual-task paradigm | Keep holding with one hand for the whole trial while the other judges even/odd; time limit (4 → 1.6 s). |
+| **➗ Calculation & reading** | **Word Anagrams** | Lexical access and orthographic memory | Word length: 3 to 8 letters where the language has them; each language spreads its own range over the levels (Chinese from 2 to 4 characters). |
+| **➗ Calculation & reading** | **Word Sprint** | Fast orthographic classification (does the word start with the given letter?) | Time limit (2200 → 800 ms); only initials with enough words, so they don't repeat. It is not a verbal-fluency test, which would require producing words. |
+| **👐 Coordination** | **Bilateral Tap** | Visually guided bimanual sequences | Length of the left/right sequence (4–13) and time per tap (1 → 0.39 s). |
+| **👐 Coordination** | **Bilateral Swipe** | Symmetric and asymmetric bimanual coordination (*Swinnen, 2002*) | Mirror, then parallel, then independent movements on different axes, from most to least stable; the two gestures must happen together (largest gap 700 → 180 ms) within a time limit (3 → 1.2 s). |
+| **👐 Coordination** | **Bilateral Rhythm** | *Sensorimotor Synchronization* (*Repp & Su, 2013*) | Precision required (±220 → ±50 ms) around the player's own recent average, so steadiness counts rather than device latency. The tempo (67–130 BPM) stays fixed within a session. |
+| **👐 Coordination** | **Cross Movements** | Spatial stimulus-response compatibility (ipsilateral and contralateral responses) | Time limit (1500 → 520 ms); "cross" and "same side" trials in equal parts. |
+| **👐 Coordination** | **Bilateral Dual-Task** | Motor-cognitive dual-task paradigm | Keep holding with one hand for the whole trial while the other judges even/odd; time limit (4 → 0.8 s). |
 
 ---
 
@@ -125,16 +125,18 @@ For a target $p_{\text{target}} = 0.80$:
 * After a **correct answer**: difficulty rises by $0.25$ levels.
 
 #### Implemented Control Mechanisms (`src/adaptive.ts`):
-1. **Fast Track**: until the first error, each correct answer climbs a full level, so a session that starts too easy reaches the working zone within a few trials.
+1. **Fast Track**: only in an exercise's first session and in the Neuro Score. Until the first error, each correct answer climbs quickly; the first error goes back to the last level passed. Repeating it every session would overshoot the threshold and keep accuracy below target.
 2. **Frustration Brake**: three errors in a row drop one extra level.
-3. **Warm-Up**: each session starts half a level below the threshold estimated in the previous session.
+3. **Warm-Up**: each session starts a quarter of a level below the threshold estimated in the previous session.
 4. **Detraining**: if an exercise has not been played for more than 14 days, the starting level drops by one.
 5. **Session score**: average level reached in the second half of the session, reduced if accuracy is below target. Someone who keeps failing at the easiest level gets a low score instead of the minimum credit.
 
 ### The Neuro Score: Calculation
-The **Neuro Score** (0 to 1000) is the **mean of the 0–100 scores** of 9 short exercises, one per domain, **multiplied by 10**. Each exercise always starts from the same initial level and converts performance (threshold reached, response times or accuracy) to 0–100 with fixed linear scales per exercise.
+The **Neuro Score** (0 to 1000) is the **mean of the 0–100 scores** of 9 short exercises, one per domain, **multiplied by 10**. Each exercise always starts from the same initial level and converts performance (threshold reached, response times or accuracy) to 0–100 with fixed linear scales per exercise. In every exercise a perfect performance is worth 100, whatever the day: the fast climb is sized to cover the whole range in the trials available, and the speed bonus doesn't apply. Echo measures 1-back to 3-back in two series, Pairs uses a fixed list.
 
-The battery **rotates daily** among the exercises of each domain, for variety and to avoid training a single task. As a result two consecutive days may use different exercises: the Neuro Score should be read as a **trend over several weeks**, not an exact measure to compare day by day. It is not a clinical test and has no diagnostic value.
+The battery **rotates daily** among the exercises of each domain, for variety and to avoid training a single task. As a result two consecutive days may use different exercises. Each test is short: in simulation the correlation between two tests of the same exercise ranges from about 0.2 to 0.85, so the Neuro Score should be read as a **trend over several weeks**, not an exact measure to compare day by day. It has not yet been validated on real players, is not a clinical test and has no diagnostic value.
+
+The scale was recalibrated in version 0.10: earlier results stay saved but are not compared with new ones.
 
 ---
 
@@ -144,9 +146,9 @@ The program must be usable by people with slower reaction times, reduced sight o
 
 * **Easy start and fast adaptation**: timed exercises start from the simplest level and only climb if the user answers well; after three errors in a row difficulty drops by two levels.
 * **Generous starting times**: e.g. a 600 ms threshold in Simple Reaction (an older adult's simple reaction time on a touch screen, screen latency included, is often 400–550 ms), 3 s in the Stroop, 4 s for the dual task, 7.6 s for a mental rotation, 5.5 s per card in card sorting.
-* **Relaxed pace**: the option in Settings multiplies all response windows and presentation times by 1.4, and is also taken into account in the Neuro Score.
+* **Relaxed pace**: the option in Settings multiplies response windows and presentation times by 1.4, and is also taken into account in the Neuro Score. The exception is Glance's exposure time, which is what it measures.
 * **Neuro Score scales calibrated for older age**: zero corresponds to slow but plausible performance (e.g. 4 s per number in Number trail, 8 s per calculation, 3 s per answer in the Stroop), so an older adult doesn't score zero just for being slower than a young person.
-* **Untimed tasks** where speed is not the point (memory, reasoning, anagrams): answer calmly.
+* **Untimed tasks** where speed is not the point (memory, reasoning, anagrams): answer calmly. The Neuro Score also removes the time limit from the Stroop, Rule switch and Card Sorting, and measures response speed instead.
 * **Guided practice** the first time, with hints after each mistake and no score.
 * **Multisensory feedback**: big ✓/✗ in the center, colors, sound and vibration; color names are always written, for people who confuse red and green.
 * **Large text** option in Settings and large buttons.
@@ -247,3 +249,12 @@ To make sure the platform stays a tool serving the user rather than advertising 
 42. Cepeda, N. J., Pashler, H., Vul, E., Wixted, J. T., & Rohrer, D. (2006). *Distributed practice in verbal recall tasks: A review and quantitative synthesis.* Psychological Bulletin, 132(3), 354-380. [DOI: 10.1037/0033-2909.132.3.354](https://doi.org/10.1037/0033-2909.132.3.354)
 43. Eysenck, M. W., Derakshan, N., Santos, R., & Calvo, M. G. (2007). *Anxiety and cognitive performance: Attentional control theory.* Emotion, 7(2), 336-353. [DOI: 10.1037/1528-3542.7.2.336](https://doi.org/10.1037/1528-3542.7.2.336)
 44. Murawski, C., & Bossaerts, P. (2016). *How humans solve complex problems: The case of the knapsack problem.* Scientific Reports, 6, 34851. [DOI: 10.1038/srep34851](https://doi.org/10.1038/srep34851)
+
+**Difficulty calibration**
+
+45. Kessels, R. P. C., van den Berg, E., Ruis, C., & Brands, A. M. A. (2008). *The backward span of the Corsi Block-Tapping Task and its association with the WAIS-III Digit Span.* Assessment, 15(4), 426-434. [DOI: 10.1177/1073191108315611](https://doi.org/10.1177/1073191108315611)
+46. Wessel, J. R. (2018). *Prepotent motor activity and inhibitory control demands in different variants of the go/no-go paradigm.* Psychophysiology, 55(3), e12871. [DOI: 10.1111/psyp.12871](https://doi.org/10.1111/psyp.12871)
+47. Bugg, J. M., & Crump, M. J. C. (2012). *In support of a distinction between voluntary and stimulus-driven control: a review of the literature on proportion congruent effects.* Frontiers in Psychology, 3, 367. [DOI: 10.3389/fpsyg.2012.00367](https://doi.org/10.3389/fpsyg.2012.00367)
+48. Trick, L. M., Perl, T., & Sethi, N. (2005). *Age-related differences in multiple-object tracking.* The Journals of Gerontology: Series B, 60(2), P102-P105. [Abstract](https://psychsoc.gerontologyjournals.org/cgi/content/abstract/60/2/P102)
+49. Franco, J. P., Yadav, N., Bossaerts, P., & Murawski, C. (2021). *Generic properties of a computational task predict human effort and performance.* Journal of Mathematical Psychology, 104, 102592. [DOI: 10.1016/j.jmp.2021.102592](https://doi.org/10.1016/j.jmp.2021.102592)
+50. Repp, B. H. (2006). *Rate limits of sensorimotor synchronization.* Advances in Cognitive Psychology, 2(2-3). [DOAJ](https://doaj.org/article/dc3f29b3977e4adf8dfe9aa998eb40de)

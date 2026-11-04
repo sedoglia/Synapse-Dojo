@@ -14,6 +14,11 @@ export interface StairOptions {
   step?: number;
   /** Climb a full step per correct answer until the first error (default true). */
   fastStart?: boolean;
+  /**
+   * Fast start that reaches the top level within this many correct answers. The daily check uses it, so a short
+   * test from a fixed start can still measure the whole range instead of capping everyone below the top.
+   */
+  reachIn?: number;
 }
 
 /**
@@ -21,8 +26,8 @@ export interface StairOptions {
  *
  * - Every answer moves the level: down by `step` after an error, up by step·(1−p)/p after a correct one,
  *   so it converges where the player is right a fraction `p` of the time.
- * - Fast start: until the first error each correct answer climbs a full step, so a session that
- *   starts too easy catches up within a few trials.
+ * - Fast start (first session and daily check only): until the first error each correct answer climbs a full
+ *   step, to find the player's level. Restarting it every session would overshoot and keep accuracy below target.
  * - Frustration guard: three errors in a row drop an extra step.
  */
 export class Staircase {
@@ -30,6 +35,7 @@ export class Staircase {
   readonly target: number;
   private readonly down: number;
   private readonly up: number;
+  private readonly fastStep: number;
   private fast: boolean;
   private trace: number[] = [];
   private results: boolean[] = [];
@@ -45,6 +51,7 @@ export class Staircase {
     this.up = (this.down * (1 - this.target)) / this.target;
     this.fast = opts.fastStart ?? true;
     this.level = clamp(start, min, max);
+    this.fastStep = opts.reachIn ? Math.max(this.down, (max - this.level) / opts.reachIn) : this.down;
   }
 
   /** Level rounded for difficulty settings that need whole numbers. */
@@ -56,10 +63,11 @@ export class Staircase {
     this.trace.push(this.level);
     this.results.push(ok);
     if (ok) {
-      this.level += this.fast ? this.down : this.up;
+      this.level += this.fast ? this.fastStep : this.up;
     } else {
+      // The first error ends a fast climb: back to the last level passed, however long the stride was.
+      this.level -= this.fast ? this.fastStep : this.down;
       this.fast = false;
-      this.level -= this.down;
       const last3 = this.results.slice(-3);
       if (last3.length === 3 && last3.every((r) => !r)) this.level -= this.down;
     }
@@ -78,9 +86,9 @@ export class Staircase {
     return tail.reduce((a, b) => a + b, 0) / tail.length;
   }
 
-  /** Next session starts half a step below the threshold: an easy warm-up, then the fast start catches up. */
+  /** Next session starts a quarter of a step below the threshold: a warm-up small enough not to lower the level over time. */
   next(): number {
-    return Math.round(clamp(this.threshold() - this.down / 2, this.min, this.max) * 10) / 10;
+    return Math.round(clamp(this.threshold() - this.down / 4, this.min, this.max) * 10) / 10;
   }
 
   /**

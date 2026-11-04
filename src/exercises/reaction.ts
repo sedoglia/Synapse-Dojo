@@ -1,13 +1,13 @@
 import { h, rand, flash } from '../dom';
 import { t } from '../i18n';
-import { Staircase } from '../adaptive';
 import type { Exercise } from './types';
 
 /**
  * Target time: 600 ms at level 1 (reachable on a touch screen by most older adults, whose simple
- * reaction time plus screen latency is often 400–550 ms), down to 200 ms at the top level.
+ * reaction time plus screen latency is often 400–550 ms), down to 280 ms at the top level: a fast young adult's
+ * simple reaction time (about 230–300 ms) plus the screen's own latency, so the top is hard but humanly possible.
  */
-const targetMsFor = (level: number) => Math.max(200, Math.round(600 * Math.pow(0.9, level - 1)));
+const targetMsFor = (level: number) => Math.max(280, Math.round(600 * Math.pow(0.933, level - 1)));
 
 export const reaction: Exercise = {
   id: 'reaction',
@@ -22,8 +22,8 @@ export const reaction: Exercise = {
   levelLabel: (l) => `< ${targetMsFor(l)} ms`,
 
   async run(ctx) {
-    const trials = ctx.count(12, 10, 3);
-    const st = new Staircase(ctx.level, 1, 12);
+    const trials = ctx.count(16, 10, 3);
+    const st = ctx.stair(trials, 1, 12);
 
     const pad = h('div', { class: 'reaction-pad waiting' });
     const text = h('div', { class: 'reaction-text' }, t('ex.reaction.ready'));

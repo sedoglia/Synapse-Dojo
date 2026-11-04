@@ -1,11 +1,10 @@
 import { h, rand, flash, shuffle } from '../dom';
 import { t } from '../i18n';
-import { Staircase } from '../adaptive';
 import { onKeys } from '../widgets';
 import type { Exercise } from './types';
 
 // Ratio of dots: gentler start, ramping smoothly with level
-const ratioFor = (level: number) => Math.min(0.88, 0.40 + (level - 1) * 0.04);
+const ratioFor = (level: number) => Math.min(0.88, 0.40 + (level - 1) * 0.044);
 
 function renderDotCloud(count: number): HTMLElement {
   const box = h('div', { class: 'dot-cloud' });
@@ -50,7 +49,7 @@ export const dots: Exercise = {
 
   async run(ctx) {
     const trials = ctx.count(20, 14, 4);
-    const st = new Staircase(ctx.level, 1, 12);
+    const st = ctx.stair(trials, 1, 12);
 
     const hint = h('div', { class: 'dots-hint' }, t('ex.dots.hint'));
     const container = h('div', { class: 'dots-container' });

@@ -1,6 +1,5 @@
 import { h, pick, scale, flash } from '../dom';
 import { t } from '../i18n';
-import { Staircase } from '../adaptive';
 import { onKeys } from '../widgets';
 import type { Exercise } from './types';
 
@@ -26,7 +25,7 @@ export const ruleSwitch: Exercise = {
 
   async run(ctx) {
     const trials = ctx.count(32, 20, 6);
-    const st = new Staircase(ctx.level, 1, 14);
+    const st = ctx.stair(trials, 1, 14);
     const cue = h('div', { class: 'switch-cue' });
     const num = h('div', { class: 'switch-num' });
     let onAnswer: ((side: number) => void) | null = null;

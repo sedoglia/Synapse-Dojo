@@ -1,13 +1,13 @@
 ﻿import { h, rand, shuffle } from '../dom';
 import { sfx } from '../audio';
 import { t } from '../i18n';
-import { Staircase } from '../adaptive';
 import { fitCanvas, cssVar } from '../widgets';
 import type { Exercise } from './types';
 
 const MAX_LEVEL = 12;
 const R = 17; // ball radius in px
-const targetsFor = (level: number) => Math.min(6, 2 + Math.floor((level - 1) / 2));
+/** About 4 targets is the usual tracking capacity (3 in older adults), so most levels work there and raise speed instead. */
+const targetsFor = (level: number) => (level <= 2 ? 2 : level <= 4 ? 3 : level <= 9 ? 4 : level <= 11 ? 5 : 6);
 const speedFor = (level: number) => 70 + level * 12; // px/s
 
 interface Ball {
@@ -33,7 +33,7 @@ export const radar: Exercise = {
 
   async run(ctx) {
     const trials = ctx.count(10, 10, 2);
-    const st = new Staircase(ctx.level, 1, MAX_LEVEL, { target: 0.7 });
+    const st = ctx.stair(trials, 1, MAX_LEVEL, { target: 0.7 });
     const status = h('div', { class: 'grid-status' });
     const canvas = h('canvas', { class: 'radar-canvas' });
     ctx.stage.append(status, canvas);

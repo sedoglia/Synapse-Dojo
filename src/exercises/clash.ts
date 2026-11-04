@@ -1,6 +1,5 @@
 import { h, pick, scale, flash } from '../dom';
 import { t } from '../i18n';
-import { Staircase } from '../adaptive';
 import type { Exercise } from './types';
 
 const COLORS = [
@@ -12,7 +11,7 @@ const COLORS = [
 
 type ColorId = (typeof COLORS)[number]['id'];
 const label = (id: ColorId) => t(`color.${id}`);
-const limitFor = (level: number) => Math.round(3000 * Math.pow(0.88, level - 1));
+const limitFor = (level: number) => Math.round(3000 * Math.pow(0.9, level - 1));
 
 export const clash: Exercise = {
   id: 'clash',
@@ -28,7 +27,7 @@ export const clash: Exercise = {
 
   async run(ctx) {
     const total = ctx.count(30, 14, 4);
-    const st = new Staircase(ctx.level, 1, 14);
+    const st = ctx.stair(total, 1, 14);
     const rule = h('div', { class: 'clash-rule' });
     const word = h('div', { class: 'clash-word' });
     let onPick: ((id: ColorId) => void) | null = null;
@@ -41,8 +40,8 @@ export const clash: Exercise = {
     let rtSum = 0;
     for (let i = 0; i < total; i++) {
       ctx.progress(i / total, `${i + 1}/${total}`);
-      // From level 3 a second rule appears that flips which feature counts.
-      const byWord = !ctx.quick && st.int >= 3 && Math.random() < 0.35;
+      // From level 3 a second rule flips which feature counts; it grows gradually so it isn't a wall.
+      const byWord = !ctx.quick && st.level >= 3 && Math.random() < Math.min(0.35, (st.level - 2) * 0.07);
       const meaning = pick(COLORS);
       const congruent = Math.random() < 0.25;
       const ink = congruent ? meaning : pick(COLORS.filter((c) => c.id !== meaning.id));

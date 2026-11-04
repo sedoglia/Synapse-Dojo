@@ -1,7 +1,6 @@
 import { h, pick, flash } from '../dom';
 import { sfx } from '../audio';
 import { t } from '../i18n';
-import { Staircase } from '../adaptive';
 import type { Exercise } from './types';
 
 const CAPS = [3, 2, 1];
@@ -84,8 +83,8 @@ export const towers: Exercise = {
   levelLabel: (l) => `${movesFor(l)} ↔`,
 
   async run(ctx) {
-    const puzzles = ctx.count(6, 6, 2);
-    const st = new Staircase(ctx.level, 1, MAX_LEVEL, { target: 0.7 });
+    const puzzles = ctx.count(8, 6, 2);
+    const st = ctx.stair(puzzles, 1, MAX_LEVEL, { target: 0.7 });
     let perfect = 0;
 
     for (let p = 0; p < puzzles; p++) {
@@ -136,7 +135,7 @@ export const towers: Exercise = {
       await ctx.wait(ok ? 600 : 1200);
     }
     ctx.progress(1);
-    const { score, timeBonus } = ctx.withTimeBonus(st.score(), 5.0);
+    const { score, timeBonus } = ctx.withTimeBonus(st.score(), 2 + 1.5 * movesFor(st.threshold()));
     return { score, detail: t('ex.towers.detail', { ok: perfect, n: puzzles }), level: st.next(), timeBonus };
   },
 };

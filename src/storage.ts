@@ -13,7 +13,14 @@ export interface CheckRecord {
   date: string;
   score: number; // 0–1000
   parts: Record<string, number>;
+  /** Version of the scoring scale; missing on results from before the recalibration. */
+  v?: number;
 }
+
+/** Current Neuro Score scale. Older checks stay saved, but are not compared with new ones. */
+export const NEURO_SCALE = 2;
+/** Current meaning of the exercise levels; a save with a lower number is converted when loaded. */
+const BALANCE = 2;
 
 export interface Settings {
   lang: Lang;
@@ -64,6 +71,10 @@ export interface SaveData {
   boardInvite: string | null;
   /** The home-screen suggestion to join the leaderboard: hidden until `snoozed` (a date), or for good. */
   boardPrompt: { snoozed?: string; never?: boolean };
+  /** Version of the level scales this save uses. */
+  balance: number;
+  /** Exercises that were redesigned: scores from before this date don't count as personal bests. */
+  bestFrom: Record<string, string>;
 }
 
 function defaults(): SaveData {
@@ -85,7 +96,52 @@ function defaults(): SaveData {
     board: null,
     boardInvite: null,
     boardPrompt: {},
+    balance: BALANCE,
+    bestFrom: {},
   };
+}
+
+/** Timed exercises: [start ms, old ratio per level, new ratio per level, old floor, new floor]. */
+const TIME_SCALES: Record<string, [number, number, number, number, number]> = {
+  reflex: [1100, 0.9, 0.928, 250, 420],
+  reaction: [600, 0.9, 0.933, 200, 280],
+  flanker: [1400, 0.89, 0.92, 350, 480],
+  gonogo: [850, 0.9, 0.93, 260, 330],
+  msit: [1800, 0.88, 0.914, 450, 560],
+  clash: [3000, 0.88, 0.9, 0, 0],
+  crossMove: [1500, 0.89, 0.908, 380, 520],
+  fluency: [2200, 0.9, 0.912, 650, 800],
+  dualTask: [4000, 0.91, 0.835, 1600, 800],
+};
+/** Redesigned exercises: what a level meant is gone, so the first session finds the level again. */
+const REDESIGNED = ['pilot', 'rhythm', 'stories', 'resources', 'binding', 'tapSeq', 'swipePattern', 'sorting'];
+
+/** The level of the new scale asking for what the old level asked for (the same time limit, ratio or word length). */
+function convertLevel(id: string, level: number): number {
+  const time = TIME_SCALES[id];
+  if (time) {
+    const [start, oldRatio, newRatio, oldFloor, newFloor] = time;
+    const ms = Math.max(oldFloor, newFloor, start * Math.pow(oldRatio, level - 1));
+    return Math.round((1 + Math.log(ms / start) / Math.log(newRatio)) * 10) / 10;
+  }
+  if (id === 'dots') return Math.round((1 + ((level - 1) * 0.04) / 0.044) * 10) / 10;
+  if (id === 'anagrams') return Math.max(1, Math.min(8, 3 + Math.floor(level * 0.6)) - 2);
+  return level;
+}
+
+/** Brings a save from before the recalibration onto the new level scales. */
+function migrate(saved: Partial<SaveData>): Partial<SaveData> {
+  if ((saved.balance ?? 1) >= BALANCE) return saved;
+  const levels: Record<string, number> = {};
+  for (const [id, level] of Object.entries(saved.levels ?? {})) {
+    if (!REDESIGNED.includes(id)) levels[id] = convertLevel(id, level);
+  }
+  const history: Record<string, LevelPoint[]> = {};
+  for (const [id, points] of Object.entries(saved.history ?? {})) {
+    if (!REDESIGNED.includes(id)) history[id] = points.map((p) => ({ ...p, level: convertLevel(id, p.level) }));
+  }
+  const today = todayKey();
+  return { ...saved, levels, history, balance: BALANCE, bestFrom: Object.fromEntries(REDESIGNED.map((id) => [id, today])) };
 }
 
 function cleanPrompt(saved: unknown): SaveData['boardPrompt'] {
@@ -119,8 +175,9 @@ function cleanSettings(saved: unknown): Partial<Settings> {
   return out;
 }
 
-function withDefaults(saved: Partial<SaveData>): SaveData {
+function withDefaults(old: Partial<SaveData>): SaveData {
   const base = defaults();
+  const saved = migrate(old);
   return {
     ...base,
     ...saved,
@@ -234,7 +291,8 @@ export const store = {
   },
 
   best(ex: string): number | null {
-    const scores = this.data.runs.filter((r) => r.ex === ex).map((r) => r.score);
+    const from = this.data.bestFrom[ex] ?? '';
+    const scores = this.data.runs.filter((r) => r.ex === ex && r.date >= from).map((r) => r.score);
     return scores.length ? Math.max(...scores) : null;
   },
 

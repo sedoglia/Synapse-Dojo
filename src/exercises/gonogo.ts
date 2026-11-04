@@ -1,10 +1,9 @@
 import { h, rand, flash } from '../dom';
 import { t } from '../i18n';
-import { Staircase } from '../adaptive';
 import { onKeys } from '../widgets';
 import type { Exercise } from './types';
 
-const limitFor = (level: number) => Math.max(260, Math.round(850 * Math.pow(0.9, level - 1)));
+const limitFor = (level: number) => Math.max(330, Math.round(850 * Math.pow(0.93, level - 1)));
 
 export const gonogo: Exercise = {
   id: 'gonogo',
@@ -20,7 +19,7 @@ export const gonogo: Exercise = {
 
   async run(ctx) {
     const total = ctx.count(35, 18, 6);
-    const st = new Staircase(ctx.level, 1, 14);
+    const st = ctx.stair(total, 1, 14);
 
     const hint = h('div', { class: 'gonogo-hint' }, t('ex.gonogo.hint'));
     const arena = h('div', { class: 'gonogo-arena' });
@@ -44,9 +43,10 @@ export const gonogo: Exercise = {
       ctx.progress(i / total, `${i + 1}/${total}`);
       target.className = 'gonogo-target empty';
       target.textContent = '+';
-      await ctx.wait(rand(600, 1400));
+      // Rare no-go trials at a quick pace: what actually builds up the urge to respond (Wessel, 2018).
+      await ctx.wait(rand(300, 900));
 
-      const isNoGo = Math.random() < 0.22;
+      const isNoGo = Math.random() < 0.2;
       target.className = `gonogo-target ${isNoGo ? 'nogo' : 'go'}`;
       target.textContent = isNoGo ? '✕' : '●';
       flash(target, 'pop', 150);
@@ -80,10 +80,10 @@ export const gonogo: Exercise = {
         target.classList.add('bad-flash');
       }
 
-      await ctx.wait(250);
+      await ctx.wait(180);
       target.className = 'gonogo-target empty';
       target.textContent = '';
-      await ctx.wait(200);
+      await ctx.wait(100);
     }
 
     ctx.progress(1);

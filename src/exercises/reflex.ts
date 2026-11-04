@@ -1,9 +1,8 @@
 import { h, rand } from '../dom';
 import { t } from '../i18n';
-import { Staircase } from '../adaptive';
 import type { Exercise } from './types';
 
-const windowFor = (level: number) => Math.max(250, Math.round(1100 * Math.pow(0.9, level - 1)));
+const windowFor = (level: number) => Math.max(420, Math.round(1100 * Math.pow(0.928, level - 1)));
 const noGoFor = (level: number) => (level >= 3 ? 0.25 : 0);
 
 export const reflex: Exercise = {
@@ -20,7 +19,7 @@ export const reflex: Exercise = {
 
   async run(ctx) {
     const trials = ctx.count(30, 30, 6);
-    const st = new Staircase(ctx.level, 1, 14);
+    const st = ctx.stair(trials, 1, 14);
     let onTap: ((i: number) => void) | null = null;
     const pads = Array.from({ length: 4 }, (_, i) =>
       h('button', {

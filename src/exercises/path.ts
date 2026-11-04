@@ -121,7 +121,8 @@ export const path: Exercise = {
       const n = countFor(level);
       last = await board(ctx, labelsFor(n, alternating(level)), b, 2);
       const per = last.secs / n / ctx.pace;
-      const target = alternating(level) ? 1.3 : 0.9;
+      // Alternating numbers and letters takes about twice as long per item as numbers alone (TMT-B against TMT-A).
+      const target = alternating(level) ? 1.9 : 0.9;
       perf.push(levelScore(level, 1, MAX_LEVEL) * clamp(target / per, 0.5, 1));
       if (per <= target && last.errors <= 1) level = Math.min(MAX_LEVEL, level + 1);
       else if (per > target * 2 || last.errors > 3) level = Math.max(1, level - 1);

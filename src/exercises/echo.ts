@@ -101,9 +101,11 @@ export const echo: Exercise = {
     };
 
     // Practice runs at the player's own level, so the dual version can be practised with the memory strip too.
-    let level = Math.round(ctx.practice ? store.level('echo', 1) : ctx.level);
+    // The daily check starts at 2-back and uses single streams only, so it can measure 1-back to 3-back in two series.
+    let level = ctx.quick ? 3 : Math.round(ctx.practice ? store.level('echo', 1) : ctx.level);
     const blocks = ctx.practice ? 1 : BLOCKS;
     const blockScores: number[] = [];
+    let checkScore = 0;
     for (let b = 0; b < blocks; b++) {
       const n = nFor(level);
       const dual = dualFor(level);
@@ -251,9 +253,11 @@ export const echo: Exercise = {
       const sens = (m: typeof tally.pos) => (m.targets ? m.hit / m.targets : 1) - (m.other ? m.fa / m.other : 0);
       const acc = clamp(dual ? (sens(tally.pos) + sens(tally.let)) / 2 : sens(tally.pos), 0, 1);
       blockScores.push(((level - 1 + acc) / MAX_LEVEL) * 100);
+      checkScore = ((n - 1 + acc) / 3) * 100;
       const before = level;
       // ≥ 0.8 (e.g. 90% hits with 10% false alarms) moves up, < 0.5 moves down.
-      if (acc >= 0.8) level = Math.min(MAX_LEVEL, level + 1);
+      if (ctx.quick) level = acc >= 0.8 ? 5 : acc < 0.5 ? 1 : 3;
+      else if (acc >= 0.8) level = Math.min(MAX_LEVEL, level + 1);
       else if (acc < 0.5) level = Math.max(1, level - 1);
       if (acc >= 0.8) sfx.fanfare();
 
@@ -268,6 +272,6 @@ export const echo: Exercise = {
 
     const base = clamp(blockScores.reduce((a, b) => a + b, 0) / blockScores.length, 0, 100);
     // No speed bonus: the pace of the stream is fixed, so it would only reward pressing hastily.
-    return { score: base, detail: `${t('common.level')}: ${labelFor(level)}`, level };
+    return { score: ctx.quick ? checkScore : base, detail: `${t('common.level')}: ${labelFor(level)}`, level };
   },
 };

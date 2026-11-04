@@ -1,10 +1,10 @@
 import { h, flash, pick } from '../dom';
 import { t, words } from '../i18n';
-import { Staircase } from '../adaptive';
 import { onKeys } from '../widgets';
 import type { Exercise } from './types';
 
-const limitFor = (level: number) => Math.max(650, Math.round(2200 * Math.pow(0.9, level - 1)));
+const MIN_WORDS = 6;
+const limitFor = (level: number) => Math.max(800, Math.round(2200 * Math.pow(0.912, level - 1)));
 
 export const fluency: Exercise = {
   id: 'fluency',
@@ -20,12 +20,15 @@ export const fluency: Exercise = {
 
   async run(ctx) {
     const total = ctx.count(25, 15, 5);
-    const st = new Staircase(ctx.level, 1, 12);
+    const st = ctx.stair(total, 1, 12);
 
     const allWords = words().map((w) => w.toUpperCase());
-    // Pick target initial letters present in word list
-    const availableLetters = Array.from(new Set(allWords.map((w) => w[0]))).filter(Boolean);
-    const targetLetter = pick(availableLetters);
+    // Only initials with enough words, or the same one or two words would keep coming back and be learnt by heart.
+    const counts = new Map<string, number>();
+    for (const w of allWords) if (w[0]) counts.set(w[0], (counts.get(w[0]) ?? 0) + 1);
+    const byCount = [...counts].sort((a, b) => b[1] - a[1]);
+    const rich = byCount.filter(([, n]) => n >= MIN_WORDS).map(([c]) => c);
+    const targetLetter = pick(rich.length ? rich : byCount.slice(0, 5).map(([c]) => c));
 
     const header = h(
       'div',
@@ -36,8 +39,8 @@ export const fluency: Exercise = {
     const card = h('div', { class: 'fluency-card' });
 
     let onAnswer: ((matches: boolean) => void) | null = null;
-    const skipBtn = h('button', { class: 'btn big fluency-btn', onClick: () => onAnswer?.(false) }, `✗ ≠ ${targetLetter}`);
-    const matchBtn = h('button', { class: 'btn big good-btn fluency-btn', onClick: () => onAnswer?.(true) }, `✓ ${targetLetter}...`);
+    const skipBtn = h('button', { class: 'btn big fluency-btn', onPointerdown: () => onAnswer?.(false) }, `✗ ≠ ${targetLetter}`);
+    const matchBtn = h('button', { class: 'btn big good-btn fluency-btn', onPointerdown: () => onAnswer?.(true) }, `✓ ${targetLetter}...`);
     const controls = h('div', { class: 'fluency-controls' }, skipBtn, matchBtn);
 
     ctx.stage.append(header, card, controls);
@@ -49,6 +52,7 @@ export const fluency: Exercise = {
     });
 
     let correct = 0;
+    let lastWord = '';
 
     for (let i = 0; i < total; i++) {
       ctx.progress(i / total, `${i + 1}/${total}`);
@@ -57,9 +61,13 @@ export const fluency: Exercise = {
       const matchingPool = allWords.filter((w) => w.startsWith(targetLetter));
       const nonMatchingPool = allWords.filter((w) => !w.startsWith(targetLetter));
 
-      const wordToTest = shouldMatch
+      let wordToTest = shouldMatch
         ? (matchingPool.length ? pick(matchingPool) : pick(allWords))
         : (nonMatchingPool.length ? pick(nonMatchingPool) : pick(allWords));
+
+      // Never the same word twice in a row.
+      for (let tries = 0; wordToTest === lastWord && tries < 5; tries++) wordToTest = pick(shouldMatch && matchingPool.length ? matchingPool : nonMatchingPool.length ? nonMatchingPool : allWords);
+      lastWord = wordToTest;
 
       const isActualMatch = wordToTest.startsWith(targetLetter);
 

@@ -1,5 +1,5 @@
 ﻿import { h, todayKey } from '../dom';
-import { store } from '../storage';
+import { store, NEURO_SCALE } from '../storage';
 import { t, dateText } from '../i18n';
 import { render, page, sparkline } from '../ui';
 import { EXERCISES, DOMAINS } from '../exercises';
@@ -24,7 +24,7 @@ function wrap(el: SVGElement, cls: string): HTMLElement {
 }
 
 function scoreChart(): HTMLElement {
-  const checks = store.data.checks.slice(-30);
+  const checks = store.data.checks.filter((c) => c.v === NEURO_SCALE).slice(-30);
   if (!checks.length) return h('p', { class: 'muted' }, t('progress.empty'));
 
   const W = 320, H = 160, P = 24;

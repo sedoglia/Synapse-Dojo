@@ -1,13 +1,12 @@
 ﻿import { h, rand, pick } from '../dom';
 import { t, num } from '../i18n';
-import { Staircase } from '../adaptive';
 import { onKeys } from '../widgets';
 import type { Exercise } from './types';
 
 type Cell = [number, number];
 const MAX_LEVEL = 12;
 const cellsFor = (level: number) => Math.min(9, 4 + Math.floor((level - 1) / 2));
-const limitFor = (level: number) => Math.max(2500, 8000 - level * 450);
+const limitFor = (level: number) => Math.max(1800, 8000 - level * 520);
 
 const key = (cells: Cell[]) => {
   const minX = Math.min(...cells.map((c) => c[0]));
@@ -77,7 +76,7 @@ export const rotate: Exercise = {
 
   async run(ctx) {
     const trials = ctx.count(20, 20, 4);
-    const st = new Staircase(ctx.level, 1, MAX_LEVEL);
+    const st = ctx.stair(trials, 1, MAX_LEVEL);
     const pair = h('div', { class: 'rotate-pair' });
     const timer = h('div', { class: 'rotate-timer' }, h('div'));
     let onAnswer: ((mirrored: boolean) => void) | null = null;

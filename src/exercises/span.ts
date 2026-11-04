@@ -1,6 +1,5 @@
 import { h, rand, flash } from '../dom';
 import { t } from '../i18n';
-import { Staircase } from '../adaptive';
 import { keypad, keypadKeyboard } from '../widgets';
 import type { Exercise } from './types';
 
@@ -21,7 +20,7 @@ export const span: Exercise = {
 
   async run(ctx) {
     const trials = ctx.count(10, 10, 3);
-    const st = new Staircase(ctx.level, MIN_SPAN, MAX_SPAN, { target: 0.75 });
+    const st = ctx.stair(trials, MIN_SPAN, MAX_SPAN, { target: 0.75 });
     const status = h('div', { class: 'grid-status' });
     const modeTag = h('div', { class: 'span-mode' });
     const display = h('div', { class: 'digits-display' });
@@ -102,7 +101,7 @@ export const span: Exercise = {
     }
     ctx.progress(1);
 
-    const { score, timeBonus } = ctx.withTimeBonus(st.score(), 3.0);
+    const { score, timeBonus } = ctx.withTimeBonus(st.score(), 0.8 + 0.6 * st.threshold());
     return {
       score,
       detail: t('ex.span.detail', { ok: correct, n: trials, span: best }),

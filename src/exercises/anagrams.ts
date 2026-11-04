@@ -1,10 +1,21 @@
 import { h, shuffle, flash } from '../dom';
 import { t, words, anagramWords, graphemes, wordNear } from '../i18n';
-import { Staircase } from '../adaptive';
 import { canon, isPlayable, scramble, solutionsOf } from './anagramRules';
 import type { Exercise } from './types';
 
-const lenFor = (level: number) => Math.min(8, 3 + Math.floor(level * 0.6));
+const MAX_LEVEL = 6;
+
+/**
+ * Word length for a level: 3 to 8 letters where the language has them. Each language spreads its own range over the
+ * levels (Chinese words have 2–4 characters, Hindi 2–5 letters), so level 1 is its shortest words and the top its longest.
+ */
+function lenFor(level: number): number {
+  const lengths = [...new Set(words().map((w) => graphemes(w).length))].filter((n) => n >= 2 && n <= 8).sort((a, b) => a - b);
+  const counted = lengths.filter((n) => words().filter((w) => graphemes(w).length === n).length >= 5);
+  const usable = counted.length ? counted : lengths;
+  const i = Math.round(((Math.round(level) - 1) / (MAX_LEVEL - 1)) * (usable.length - 1));
+  return usable[i];
+}
 
 export const anagrams: Exercise = {
   id: 'anagrams',
@@ -15,12 +26,12 @@ export const anagrams: Exercise = {
   why: 'ex.anagrams.why',
   example: 'ex.anagrams.example',
   minutes: 2.5,
-  levels: { min: 1, max: 8, start: 2 },
+  levels: { min: 1, max: MAX_LEVEL, start: 2 },
   levelLabel: (l) => `${lenFor(l)} ${t('ex.anagrams.letters')}`,
 
   async run(ctx) {
-    const trials = ctx.count(8, 6, 2);
-    const st = new Staircase(ctx.level, 1, 8);
+    const trials = ctx.count(10, 6, 2);
+    const st = ctx.stair(trials, 1, MAX_LEVEL);
 
     const status = h('div', { class: 'anagram-status' });
     const slotContainer = h('div', { class: 'anagram-slots' });
@@ -121,7 +132,7 @@ export const anagrams: Exercise = {
     }
     ctx.progress(1);
 
-    const { score, timeBonus } = ctx.withTimeBonus(st.score(), 4.0);
+    const { score, timeBonus } = ctx.withTimeBonus(st.score(), 1 + lenFor(st.threshold()));
     return {
       score,
       detail: t('ex.anagrams.detail', { ok: correct, n: trials }),

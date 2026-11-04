@@ -18,7 +18,7 @@ Free cognitive training and bilateral coordination web application (source-avail
 
 - **🏋️ Daily Workout**: ~10–12 minutes with 4 daily exercises selected across your least recently trained skills. Once finished, you can immediately start another workout with different exercises and domains.
 - **📏 Measure Neuro Score**: Daily benchmarking battery assessing all **9 cognitive and motor abilities** (selecting one rotating exercise per domain daily) to calculate a normalized **Neuro Score** from 0 to 1000, objectively tracking your mental acuity over time.
-- **🧩 Free Gym**: Full catalog of **35 exercises** categorized into **9 cognitive and bilateral coordination domains**. Each exercise features a **continuous adaptive difficulty engine** that calibrates in real-time to keep you in the optimal learning zone, saving your progress across sessions.
+- **🧩 Free Gym**: Full catalog of **35 exercises** categorized into **9 cognitive and bilateral coordination domains**. Each exercise (except Speed reading, which is not adaptive) features a **continuous adaptive difficulty engine** that calibrates in real-time to keep you in the optimal learning zone, saving your progress across sessions.
 - **🏆 Weekly Leaderboard & Friend Groups** (optional, off by default): each week compare **consistency** (10 points per training day plus 1 per exercise, up to 12 a day), **improvement** against your own starting point and **best level** per exercise, with optional age groups and a separate board for relaxed-pace players. It resets every Monday, shows the top 3 and the players near you, and works for everyone or in **private groups** joined with a link or a code. It uses a random nickname, and leaving at any time deletes all data.
 
 ### The 9 Domains and 35 Exercises

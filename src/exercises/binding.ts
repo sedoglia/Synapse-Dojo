@@ -1,6 +1,5 @@
 import { h, pick, shuffle, flash } from '../dom';
 import { t } from '../i18n';
-import { Staircase } from '../adaptive';
 import type { Exercise } from './types';
 
 const SHAPES = [
@@ -17,6 +16,10 @@ const COLORS = [
   { id: 'yellow', css: 'var(--c-yellow)' },
 ] as const;
 
+const itemsFor = (level: number) => Math.min(16, 4 + level * 2);
+/** Accuracy alone can't limit a search with no time limit, so the time allowed shrinks with level. */
+const limitFor = (level: number) => Math.max(1200, Math.round(6000 * Math.pow(0.84, level - 1)));
+
 export const binding: Exercise = {
   id: 'binding',
   icon: '💠',
@@ -27,11 +30,11 @@ export const binding: Exercise = {
   example: 'ex.binding.example',
   minutes: 2,
   levels: { min: 1, max: 10, start: 2 },
-  levelLabel: (l) => `${Math.min(16, 4 + l * 2)} ◆`,
+  levelLabel: (l) => `${itemsFor(l)} ◆ · ${(limitFor(l) / 1000).toFixed(1)} s`,
 
   async run(ctx) {
     const total = ctx.count(16, 10, 3);
-    const st = new Staircase(ctx.level, 1, 10);
+    const st = ctx.stair(total, 1, 10);
 
     const goalBar = h('div', { class: 'binding-goal' });
     const grid = h('div', { class: 'binding-grid' });
@@ -41,7 +44,7 @@ export const binding: Exercise = {
 
     for (let i = 0; i < total; i++) {
       ctx.progress(i / total, `${i + 1}/${total}`);
-      const itemCount = Math.min(16, 4 + st.int * 2);
+      const itemCount = itemsFor(st.int);
 
       const targetShape = pick(SHAPES);
       const targetColor = pick(COLORS);
@@ -90,20 +93,21 @@ export const binding: Exercise = {
       });
       grid.append(...elements);
 
-      const chosen = await ctx.input<{ isTarget: boolean; el: HTMLElement }>((done) => {
+      const limit = (ctx.practice ? 60_000 : limitFor(st.level)) * ctx.pace;
+      const chosen = await ctx.timed<{ isTarget: boolean; el: HTMLElement } | null>(limit, null, (done) => {
         onSelect = (isTarget, el) => done({ isTarget, el });
         return () => (onSelect = null);
       });
 
-      const ok = ctx.track(st, chosen.isTarget, {
+      const ok = ctx.track(st, chosen?.isTarget === true, {
         was: `${targetShape.symbol} ${t(`color.${targetColor.id}`)}`,
       });
 
       if (ok) {
         correct++;
-        flash(chosen.el, 'good', 300);
+        if (chosen) flash(chosen.el, 'good', 300);
       } else {
-        flash(chosen.el, 'bad', 400);
+        if (chosen) flash(chosen.el, 'bad', 400);
         // Highlight correct element
         const targetEl = elements[shuffled.findIndex((it) => it.isTarget)];
         if (targetEl) targetEl.classList.add('correct-hint');
@@ -113,12 +117,10 @@ export const binding: Exercise = {
     }
     ctx.progress(1);
 
-    const { score, timeBonus } = ctx.withTimeBonus(st.score(), 2.5);
     return {
-      score,
+      score: st.score(),
       detail: t('ex.binding.detail', { ok: correct, n: total }),
       level: st.next(),
-      timeBonus,
     };
   },
 };

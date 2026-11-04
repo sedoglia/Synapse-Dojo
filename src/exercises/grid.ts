@@ -1,7 +1,6 @@
 import { h, shuffle, scale, flash } from '../dom';
 import { sfx } from '../audio';
 import { t } from '../i18n';
-import { Staircase } from '../adaptive';
 import type { Ctx } from '../ctx';
 import type { Exercise } from './types';
 
@@ -106,24 +105,23 @@ export const grid: Exercise = {
       return { score: scale(best, MAX_SPAN, MIN_SPAN), detail: t('ex.grid.span', { n: best }) };
     }
 
-    // Gym: forward recall for levels 2–5 to build visuo-spatial capacity.
-    // Backward recall is reserved for advanced levels (6+) as an executive challenge,
-    // running two items shorter than forward span to match cognitive load norms.
-    const st = new Staircase(ctx.level, MIN_SPAN, MAX_SPAN, { target: 0.7 });
+    // Gym: forward recall for levels 2–5 to build visuo-spatial capacity, then backward rounds as well.
+    // Unlike digit span, backward Corsi is no harder than forward (Kessels et al., 2008), so its length stays the same.
     const rounds = ctx.count(10, 10, 3);
+    const st = ctx.stair(rounds, MIN_SPAN, MAX_SPAN, { target: 0.7 });
     let bestF = 0;
     let bestB = 0;
     for (let r = 0; r < rounds; r++) {
       ctx.progress(r / rounds, `${r + 1}/${rounds}`);
       const backward = !ctx.practice && st.int >= 6 && r % 2 === 1;
-      const span = backward ? Math.max(MIN_SPAN, st.int - 2) : st.int;
+      const span = st.int;
       const ok = await round(ctx, tiles, board, status, span, backward, (res) => ctx.track(st, res, { was: t('fb.gridOrder') }));
       if (ok && backward) bestB = Math.max(bestB, span);
       if (ok && !backward) bestF = Math.max(bestF, span);
     }
     ctx.progress(1);
     const detail = bestB > 0 ? t('ex.grid.detail', { f: bestF, b: bestB }) : t('ex.grid.span', { n: bestF });
-    const { score, timeBonus } = ctx.withTimeBonus(st.score(), 2.8);
+    const { score, timeBonus } = ctx.withTimeBonus(st.score(), 0.8 + 0.6 * st.threshold());
     return { score, detail, level: st.next(), timeBonus };
   },
 };

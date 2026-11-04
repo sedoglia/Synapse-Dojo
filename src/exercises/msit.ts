@@ -1,12 +1,9 @@
 import { h, rand, flash, pick } from '../dom';
 import { t } from '../i18n';
-import { Staircase } from '../adaptive';
 import { onKeys } from '../widgets';
 import type { Exercise } from './types';
 
-const limitFor = (level: number) => Math.max(450, Math.round(1800 * Math.pow(0.88, level - 1)));
-/** Share of interference trials: a third at first, up to two thirds at the top levels. */
-const interferenceFor = (level: number) => Math.min(0.67, 0.33 + level * 0.025);
+const limitFor = (level: number) => Math.max(560, Math.round(1800 * Math.pow(0.914, level - 1)));
 
 export const msit: Exercise = {
   id: 'msit',
@@ -22,7 +19,7 @@ export const msit: Exercise = {
 
   async run(ctx) {
     const total = ctx.count(28, 14, 4);
-    const st = new Staircase(ctx.level, 1, 14);
+    const st = ctx.stair(total, 1, 14);
 
     const hint = h('div', { class: 'msit-hint' }, t('ex.msit.hint'));
     const display = h('div', { class: 'msit-display' });
@@ -48,7 +45,7 @@ export const msit: Exercise = {
       // matching its value among 0s ("1 0 0"); interference trials put it elsewhere among other digits
       // that are valid answers ("2 1 1"), so both the flankers and the position pull the wrong way.
       const targetDigit = pick([1, 2, 3]);
-      const interference = Math.random() < (ctx.practice ? 0.5 : interferenceFor(st.int));
+      const interference = Math.random() < 0.5;
       const targetPos = interference ? pick([0, 1, 2].filter((p) => p !== targetDigit - 1)) : targetDigit - 1;
       const distractor = interference ? pick([1, 2, 3].filter((d) => d !== targetDigit)) : 0;
 

@@ -1,7 +1,7 @@
 import { h, todayKey, pick } from '../dom';
 import { Ctx, Aborted, type Mode } from '../ctx';
 import { sfx, haptic } from '../audio';
-import { store } from '../storage';
+import { store, NEURO_SCALE } from '../storage';
 import { t } from '../i18n';
 import { render, page, countUp, rankName, sparkline, xpBar } from '../ui';
 import { dailyCheckBattery, byId, type Exercise, type ExerciseResult } from '../exercises';
@@ -122,6 +122,7 @@ async function runExercise(ex: Exercise, mode: Mode, level: number): Promise<{ r
       playView.classList.add(ok ? 'glow-ok' : 'glow-bad');
     },
   });
+  ctx.fresh = mode === 'train' && !store.hasLevel(ex.id);
   const verdict = h('div', { class: 'verdict' });
   let hideVerdict: ReturnType<typeof setTimeout> | undefined;
 
@@ -381,7 +382,7 @@ export async function playDailyCheck() {
 
   const values = Object.values(parts);
   const score = Math.round((values.reduce((a, b) => a + b, 0) / values.length) * 10);
-  store.addCheck({ date: todayKey(), score, parts });
+  store.addCheck({ date: todayKey(), score, parts, v: NEURO_SCALE });
   syncBoard();
   const xp = addXp(XP.check);
   sfx.fanfare();
@@ -389,14 +390,16 @@ export async function playDailyCheck() {
 }
 
 function showCheckResult(score: number, alreadyDone: boolean, reward: HTMLElement | null, badges: HTMLElement | null = null) {
-  const checks = store.data.checks;
+  // Results from before the scale was recalibrated can't be compared with today's.
+  const checks = store.data.checks.filter((c) => c.v === NEURO_SCALE);
   const prev = checks.length >= 2 ? checks[checks.length - 2] : null;
+  const rescaled = checks.length < store.data.checks.length;
   const todays = store.todayCheck();
   const num = h('div', { class: 'big-score neuro' }, '0');
 
   let note: string;
   if (alreadyDone) note = t('check.doneToday');
-  else if (!prev) note = t('check.first');
+  else if (!prev) note = rescaled ? t('check.rescaled') : t('check.first');
   else {
     const d = score - prev.score;
     note = t('check.delta', { d: d >= 0 ? `+${d}` : `${d}` });

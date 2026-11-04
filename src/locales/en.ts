@@ -267,6 +267,7 @@ export const ui = {
   'check.title': 'Your Neuro Score',
   'check.delta': '{d} since last time',
   'check.first': 'First check recorded. Come back tomorrow!',
+  'check.rescaled': 'The score was recalibrated: this is your new starting point. Earlier results stay saved but are not compared.',
   'check.doneToday': 'You already did today’s check. Come back tomorrow to measure again!',
 
   'rank.0': 'Spark',
@@ -462,6 +463,8 @@ export const ui = {
   'ex.stories.qItem': 'What was {name} carrying?',
   'ex.stories.qPlace': 'Where was {name} located?',
   'ex.stories.qTime': 'When did the event take place?',
+  'ex.stories.qTimeOf': 'When was {name} there?',
+  'ex.stories.filler': 'Even or odd? (keeps your mind busy)',
   'ex.stories.detail': '{ok}/{n} details correct',
   'ex.stories.text': '{name} had {item} with them. They were {place} {time}, where they completed their task.',
   'ex.anagrams.letters': 'letters',
@@ -610,6 +613,7 @@ export const ui = {
   'ex.swipePattern.why': 'Bimanual directional gestures challenge spatial decoupling and symmetric/asymmetric motor coordination.',
   'ex.swipePattern.example': 'Swipe left thumb ↑ and right thumb ↓',
   'ex.swipePattern.hint': 'Perform both directional gestures simultaneously',
+  'ex.swipePattern.together': 'Both hands together!',
   'ex.swipePattern.detail': '{ok}/{n} patterns correct',
 
   // rhythm
@@ -734,6 +738,7 @@ export const ui = {
   'ex.resources.money': '🪙 Spent {cost} of {budget} · {left} left',
   'ex.resources.over': '🪙 Spent {cost} of {budget}: too much, remove something',
   'ex.resources.total': '📈 Earnings: {val} · goal: at least {target}',
+  'ex.resources.earned': '📈 Earnings: {val}',
   'ex.resources.cost': 'Costs {n} 🪙',
   'ex.resources.gain': 'Earns {n} 🪙',
   'ex.resources.was': 'you could earn {n}',

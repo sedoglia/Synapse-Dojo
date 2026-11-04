@@ -5,7 +5,7 @@ import { canon, isPlayable, scramble, solutionsOf } from '../src/exercises/anagr
 
 const LOCALES = new URL('../src/locales/', import.meta.url);
 const SCRAMBLES_PER_WORD = 200;
-const LEVEL_LENGTHS = [3, 4, 5, 6, 7, 8]; // what `lenFor` in anagrams.ts asks for, levels 1 to 8
+const LEVEL_LENGTHS = [3, 4, 5, 6, 7, 8]; // what `lenFor` in anagrams.ts asks for, levels 1 to 6 where the language has them
 
 const shuffle = (items) => {
   for (let i = items.length - 1; i > 0; i--) {

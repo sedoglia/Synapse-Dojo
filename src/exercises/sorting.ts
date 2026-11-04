@@ -1,6 +1,5 @@
 import { h, pick, flash, clamp, scale } from '../dom';
 import { t, num } from '../i18n';
-import { Staircase } from '../adaptive';
 import { onKeys } from '../widgets';
 import type { Exercise } from './types';
 
@@ -34,7 +33,7 @@ const REF_CARDS: CardDef[] = [
   { count: 4, color: 'blue', shape: 'square' },
 ];
 
-const limitFor = (level: number) => Math.max(2400, Math.round(5500 * Math.pow(0.925, level - 1)));
+const limitFor = (level: number) => Math.max(1500, Math.round(5500 * Math.pow(0.87, level - 1)));
 
 function renderCard(card: CardDef, isRef = false): HTMLElement {
   const symbol = SHAPE_CHARS[card.shape];
@@ -87,7 +86,7 @@ export const sorting: Exercise = {
 
   async run(ctx) {
     const trials = ctx.count(24, 16, 5);
-    const st = new Staircase(ctx.level, 1, 10);
+    const st = ctx.stair(trials, 1, 10);
 
     const title = h('div', { class: 'sorting-title' }, t('ex.sorting.secretRule'));
     const pillColor = h('span', { class: 'sorting-dim-pill' }, `🎨 ${t('ex.sorting.dimColor')}`);
@@ -134,7 +133,7 @@ export const sorting: Exercise = {
     const testSlot = h('div', { class: 'sorting-test' });
     const timerFill = h('div', { class: 'sorting-timer-fill' });
     const timerBar = h('div', { class: 'sorting-timer-bar' }, timerFill);
-    if (ctx.mode === 'practice') {
+    if (ctx.mode !== 'train') {
       timerBar.style.display = 'none';
     }
     const testWrapper = h('div', { class: 'sorting-test-wrapper' }, testLabel, testSlot, timerBar);
@@ -174,8 +173,11 @@ export const sorting: Exercise = {
         ruleDiscovered = false;
         eliminated.clear();
         resetPills();
-        feedback.className = 'sorting-feedback switch';
-        feedback.textContent = `⚡ ${t('ex.sorting.ruleShifted')}`;
+        // Announced at first, so as not to discourage; from level 6 the player has to notice it, as in the WCST.
+        if (st.int < 6 || ctx.mode !== 'train') {
+          feedback.className = 'sorting-feedback switch';
+          feedback.textContent = `⚡ ${t('ex.sorting.ruleShifted')}`;
+        }
       }
 
       const { card, colorIdx, shapeIdx, countIdx } = generateStimulus();
@@ -183,9 +185,9 @@ export const sorting: Exercise = {
       testSlot.replaceChildren(renderCard(card, false));
       flash(testSlot, 'pop', 150);
 
-      const limit = (ctx.mode === 'practice' ? 60_000 : limitFor(st.level)) * ctx.pace;
+      const limit = (ctx.mode !== 'train' ? 60_000 : limitFor(st.level)) * ctx.pace;
 
-      if (ctx.mode !== 'practice') {
+      if (ctx.mode === 'train') {
         timerFill.style.transition = 'none';
         timerFill.style.width = '100%';
         timerFill.style.backgroundColor = 'var(--accent)';
@@ -202,7 +204,7 @@ export const sorting: Exercise = {
       });
       const rt = performance.now() - shown;
 
-      if (ctx.mode !== 'practice') {
+      if (ctx.mode === 'train') {
         timerFill.style.transition = 'none';
       }
 
@@ -232,8 +234,8 @@ export const sorting: Exercise = {
         correct++;
         consecutiveCorrect++;
         ruleDiscovered = true;
+        // The rule stays in the player's head: it isn't highlighted on screen.
         resetPills();
-        dimPills[activeRule].classList.add('active-rule');
         flash(refButtons[chosenRefIdx], 'good', 300);
         feedback.className = 'sorting-feedback good';
         feedback.textContent = `✓ ${t('ex.sorting.correct')} (${consecutiveCorrect}/4)`;
@@ -283,7 +285,7 @@ export const sorting: Exercise = {
 
     const avgRt = rts.length ? Math.round(rts.reduce((a, b) => a + b, 0) / rts.length) : 3000;
     const baseScore = st.score();
-    const speedScore = scale(avgRt, 900, 3500);
+    const speedScore = scale(avgRt / ctx.pace, 900, 3500);
     // 80% staircase mastery, 20% speed bonus
     const score = Math.round(clamp(baseScore * 0.8 + speedScore * 0.2, 0, 100));
     const sec = num(avgRt / 1000);

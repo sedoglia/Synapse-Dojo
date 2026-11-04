@@ -1,16 +1,25 @@
 ﻿import { h, pick, flash } from '../dom';
 import { t } from '../i18n';
-import { Staircase } from '../adaptive';
+import { store } from '../storage';
+import { DETRAIN_DAYS } from '../adaptive';
 import { fitCanvas, cssVar } from '../widgets';
 import type { Exercise } from './types';
 
 const DURATION = 75; // seconds
 const SIGN_REACH = 20; // px above the top edge at which a sign is already partly visible (radius 15 + outline)
-const PASS_MARGIN = 40; // px below the car after which a sign is judged
+const PASS_MARGIN = 40; // px below the car after which a sign leaves the game
 const MAX_LEVEL = 12;
+const ROAD_WINDOW = 2; // seconds of driving judged at a time
+const ROAD_OK = 0.8; // share of a window to spend on the road
+const ROAD_KEY = 'pilot:road'; // the driving level, saved next to the exercise's own (signs) level
+
+// As in NeuroRacer (Anguera et al., 2013) each task has its own level, so a player can be better at one than the other.
+/** Driving: road speed and bends. Even at level 1 the road bends beyond the lane, so it can't be followed standing still. */
 const speedFor = (l: number) => 150 + l * 18; // px/s of road scrolling
-const curveFor = (l: number) => 0.15 + l * 0.025; // bend amplitude, fraction of half-width
+const curveFor = (l: number) => Math.min(1, 0.55 + l * 0.04); // bend amplitude, fraction of half-width
+/** Signs: how often they come, how long there is to answer, and from level 5 distractors that look like the target. */
 const gapFor = (l: number) => Math.max(1.3, 2.6 - l * 0.1); // seconds between signs
+const answerFor = (l: number) => Math.max(600, Math.round(1600 * Math.pow(0.915, l - 1))); // ms to answer a sign
 
 type Shape = 'circle' | 'square' | 'triangle' | 'diamond';
 interface Kind {
@@ -37,6 +46,8 @@ interface Sign {
   kind: Kind;
   target: boolean;
   pressed: boolean;
+  judged: boolean;
+  born: number; // elapsed seconds when it appeared
 }
 
 function drawShape(g: CanvasRenderingContext2D, k: Kind, x: number, y: number, s: number) {
@@ -61,6 +72,14 @@ function drawShape(g: CanvasRenderingContext2D, k: Kind, x: number, y: number, s
   g.stroke();
 }
 
+/** The saved driving level, one step lower after a long break, like every other level. */
+function roadStart(fallback: number): number {
+  const saved = store.level(ROAD_KEY, fallback);
+  const last = store.lastPlayed('pilot');
+  const days = last ? (Date.now() - new Date(last).getTime()) / 86_400_000 : 0;
+  return days > DETRAIN_DAYS ? Math.max(1, saved - 1) : saved;
+}
+
 export const pilot: Exercise = {
   id: 'pilot',
   icon: '🏎️',
@@ -71,12 +90,15 @@ export const pilot: Exercise = {
   example: 'ex.pilot.example',
   minutes: 1.5,
   levels: { min: 1, max: MAX_LEVEL, start: 1 },
-  levelLabel: (l) => `${speedFor(l)} px/s${l >= 5 ? ' · ≈' : ''}`,
+  levelLabel: (l) => `${(answerFor(l) / 1000).toFixed(1)} s${l >= 5 ? ' · ≈' : ''}`,
 
   async run(ctx) {
-    const st = new Staircase(ctx.level, 1, MAX_LEVEL);
+    // Only informative events move the signs level: hits, misses and false alarms. Correctly ignoring a distractor
+    // doesn't, otherwise a player who never presses anything would already be right about 6 times out of 10.
+    const st = ctx.stair(12, 1, MAX_LEVEL);
+    const road = ctx.stair(36, 1, MAX_LEVEL, { start: ctx.mode === 'train' ? roadStart(ctx.level) : ctx.level });
     const duration = ctx.practice ? 25 : DURATION;
-    const status = h('div', { class: 'pilot-status' }, ' ');
+    const status = h('div', { class: 'pilot-status' }, ' ');
     const canvas = h('canvas', { class: 'pilot-canvas' });
     let press: (() => void) | null = null;
     const btn = h(
@@ -96,7 +118,7 @@ export const pilot: Exercise = {
     const accent = cssVar('--accent') || '#5b5bf0';
 
     let dist = 0;
-    let amp = curveFor(st.level);
+    let amp = curveFor(road.level);
     let carX = size.w / 2;
     let targetX = carX;
     let keyDir = 0;
@@ -108,9 +130,10 @@ export const pilot: Exercise = {
     let totalTime = 0;
     let evaluated = 0;
     let right = 0;
+    let elapsed = 0;
 
     const carY = () => size.h * 0.78;
-    const laneHalf = () => Math.max(46, size.w * 0.16);
+    const laneHalf = () => Math.max(38, size.w * 0.12);
     const centerAt = (wy: number) =>
       size.w / 2 + amp * (size.w / 2 - laneHalf()) * (0.6 * Math.sin(wy / 300) + 0.4 * Math.sin(wy / 137 + 1.3));
     const toScreen = (wy: number) => carY() - (wy - dist);
@@ -120,35 +143,29 @@ export const pilot: Exercise = {
       status.className = `pilot-status ${ok ? 'ok' : 'ko'}`;
     };
 
-    // Responses are judged when you press (right/wrong sign) and when a sign passes the car
-    // (missed green circle, or leaving the road while it was coming).
+    // A sign is judged when its time to answer runs out or it passes the car, whichever comes first.
     const evaluate = (s: Sign) => {
-      const roadOk = windowTime === 0 || onRoadTime / windowTime >= 0.75;
-      onRoadTime = windowTime = 0;
+      if (s.judged) return;
+      s.judged = true;
       evaluated++;
-      const responseOk = s.pressed === s.target;
-      const ok = responseOk && roadOk;
-      if (ok) right++;
-      if (!roadOk) {
-        ctx.track(st, false, { was: t('fb.pilotRoad') });
-        showStatus(false, '🛣️');
-      } else if (s.target && !s.pressed) {
+      if (s.pressed === s.target) right++;
+      if (s.target && !s.pressed) {
         ctx.track(st, false, { was: t('fb.pilotMissed') });
         showStatus(false);
       } else if (s.pressed) {
-        st.record(ok); // the press already got its ✓/✗
-      } else {
-        st.record(true); // correctly ignored: no fanfare for doing nothing
+        st.record(s.target); // the press already got its ✓/✗
       }
     };
 
     press = () => {
       // A press goes to the green circle on screen if there is one, otherwise to the nearest sign.
       // Anything drawn on screen counts, including a sign just peeking in at the top edge.
-      const active = signs.filter((s) => !s.pressed && toScreen(s.wy) > -SIGN_REACH && toScreen(s.wy) < carY() + PASS_MARGIN);
-      const byDistance = active.sort((a, b) => a.wy - b.wy);
-      const s = byDistance.find((x) => x.target) ?? byDistance[0];
+      const visible = signs.filter((s) => toScreen(s.wy) > -SIGN_REACH && toScreen(s.wy) < carY() + PASS_MARGIN);
+      const active = visible.filter((s) => !s.judged && !s.pressed).sort((a, b) => a.wy - b.wy);
+      const s = active.find((x) => x.target) ?? active[0];
       if (!s) {
+        // Too late for a sign already reported as missed: that error has been counted once.
+        if (visible.some((x) => x.judged || x.pressed)) return;
         // Pressing with no sign in view is its own mistake; it doesn't spoil the next sign.
         flash(btn, 'bad');
         ctx.track(st, false, { was: t('fb.pilotStray') });
@@ -216,15 +233,13 @@ export const pilot: Exercise = {
     try {
       await ctx.input<void>((done) => {
         let last = 0;
-        let elapsed = 0;
         let id = 0;
         const step = (now: number) => {
           const dt = last ? Math.min(0.05, (now - last) / 1000) : 0;
           last = now;
           elapsed += dt;
-          const level = st.level;
-          dist += (speedFor(level) / ctx.pace) * dt;
-          amp += (curveFor(level) - amp) * Math.min(1, dt); // ease into new curviness
+          dist += (speedFor(road.level) / ctx.pace) * dt;
+          amp += (curveFor(road.level) - amp) * Math.min(1, dt); // ease into new curviness
 
           if (keyDir) targetX = carX + keyDir * 60;
           const maxMove = 700 * dt;
@@ -238,19 +253,32 @@ export const pilot: Exercise = {
             onRoadTime += dt;
             totalOnRoad += dt;
           }
+          if (windowTime >= ROAD_WINDOW) {
+            if (onRoadTime / windowTime >= ROAD_OK) road.record(true);
+            else {
+              ctx.track(road, false, { was: t('fb.pilotRoad') });
+              showStatus(false, '🛣️');
+            }
+            onRoadTime = windowTime = 0;
+          }
 
           nextSign -= dt;
           if (nextSign <= 0 && elapsed < duration - 3) {
-            const target = Math.random() < 0.35;
-            const pool = level >= 5 ? [...EASY, ...SIMILAR] : EASY;
+            const target = Math.random() < 0.4;
+            const pool = st.level >= 5 ? [...EASY, ...SIMILAR] : EASY;
             signs.push({
               wy: dist + carY() + 40,
               side: Math.random() < 0.5 ? -1 : 1,
               kind: target ? TARGET : pick(pool),
               target,
               pressed: false,
+              judged: false,
+              born: elapsed,
             });
-            nextSign = gapFor(level) * ctx.pace * (0.8 + Math.random() * 0.4);
+            nextSign = gapFor(st.level) * ctx.pace * (0.8 + Math.random() * 0.4);
+          }
+          for (const s of signs) {
+            if (!s.judged && elapsed - s.born >= (answerFor(st.level) * ctx.pace) / 1000) evaluate(s);
           }
           while (signs.length && toScreen(signs[0].wy) > carY() + PASS_MARGIN) evaluate(signs.shift()!);
 
@@ -271,7 +299,12 @@ export const pilot: Exercise = {
       press = null;
     }
 
-    const road = totalTime ? Math.round((totalOnRoad / totalTime) * 100) : 0;
-    return { score: st.score(), detail: t('ex.pilot.detail', { ok: right, n: evaluated, road }), level: st.next() };
+    if (ctx.mode === 'train') store.setLevel(ROAD_KEY, road.next());
+    const onRoadPct = totalTime ? Math.round((totalOnRoad / totalTime) * 100) : 0;
+    return {
+      score: (st.score() + road.score()) / 2,
+      detail: t('ex.pilot.detail', { ok: right, n: evaluated, road: onRoadPct }),
+      level: st.next(),
+    };
   },
 };

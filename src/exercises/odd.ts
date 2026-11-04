@@ -1,6 +1,5 @@
 import { h, rand, shuffle } from '../dom';
 import { t } from '../i18n';
-import { Staircase } from '../adaptive';
 import type { Exercise } from './types';
 
 type Feature = 'shape' | 'color' | 'fill' | 'count';
@@ -89,7 +88,7 @@ export const odd: Exercise = {
 
   async run(ctx) {
     const trials = ctx.count(14, 14, 3);
-    const st = new Staircase(ctx.level, 1, MAX_LEVEL);
+    const st = ctx.stair(trials, 1, MAX_LEVEL);
     const grid = h('div', { class: 'odd-grid' });
     ctx.stage.append(h('div', { class: 'grid-status' }, t('ex.odd.ask')), grid);
 

@@ -1,6 +1,5 @@
 import { h, rand, pick, scale, flash } from '../dom';
 import { t, num } from '../i18n';
-import { Staircase } from '../adaptive';
 import { keypad, keypadKeyboard } from '../widgets';
 import type { Exercise } from './types';
 
@@ -10,17 +9,20 @@ interface Config {
   big: number; // largest operand for + and −
   ops: Op[];
   mulMax: number;
+  mulA: number; // largest first factor and divisor
 }
 
 // The daily check keeps the original fixed mix so scores stay comparable over time.
-const QUICK: Config = { big: 20, ops: ['+', '−', '×', '÷'], mulMax: 9 };
+const QUICK: Config = { big: 20, ops: ['+', '−', '×', '÷'], mulMax: 9, mulA: 9 };
 const BIG = [10, 15, 20, 30, 40, 50, 60, 75, 90, 99];
 
 function configFor(level: number): Config {
   return {
     big: BIG[level - 1],
     ops: level < 3 ? ['+', '−'] : level < 5 ? ['+', '−', '×'] : ['+', '−', '×', '÷'],
-    mulMax: level < 6 ? 9 : 12,
+    // Times and divisions grow too, or half of the hardest levels would still be easy tables.
+    mulMax: level < 6 ? 9 : level < 8 ? 12 : 15,
+    mulA: level < 8 ? 9 : 12,
   };
 }
 
@@ -35,11 +37,11 @@ function makeProblem(c: Config): { text: string; answer: number } {
       return { text: `${a} − ${b}`, answer: a - b };
     }
     case '×': {
-      const a = rand(2, 9), b = rand(2, c.mulMax);
+      const a = rand(2, c.mulA), b = rand(2, c.mulMax);
       return { text: `${a} × ${b}`, answer: a * b };
     }
     case '÷': {
-      const b = rand(2, 9), q = rand(2, c.mulMax);
+      const b = rand(2, c.mulA), q = rand(2, c.mulMax);
       return { text: `${b * q} ÷ ${b}`, answer: q };
     }
   }
@@ -59,7 +61,7 @@ export const math: Exercise = {
 
   async run(ctx) {
     const total = ctx.count(20, 12, 4);
-    const st = new Staircase(ctx.level, 1, 10);
+    const st = ctx.stair(total, 1, 10);
     const fastEnough = 4000 * ctx.pace;
     const question = h('div', { class: 'math-q' });
     const answer = h('div', { class: 'math-a' });

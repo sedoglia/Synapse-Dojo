@@ -1,10 +1,9 @@
 import { h, rand, flash } from '../dom';
 import { t } from '../i18n';
-import { Staircase } from '../adaptive';
 import { onKeys } from '../widgets';
 import type { Exercise } from './types';
 
-const limitFor = (level: number) => Math.max(380, Math.round(1500 * Math.pow(0.89, level - 1)));
+const limitFor = (level: number) => Math.max(520, Math.round(1500 * Math.pow(0.908, level - 1)));
 
 export const crossMove: Exercise = {
   id: 'crossMove',
@@ -20,7 +19,7 @@ export const crossMove: Exercise = {
 
   async run(ctx) {
     const trials = ctx.count(26, 16, 5);
-    const st = new Staircase(ctx.level, 1, 12);
+    const st = ctx.stair(trials, 1, 12);
 
     const ruleLabel = h('div', { class: 'cross-rule' });
     const arena = h('div', { class: 'cross-arena' });
@@ -64,7 +63,7 @@ export const crossMove: Exercise = {
       rightHalf.replaceChildren();
       await ctx.wait(rand(400, 900));
 
-      const isCross = Math.random() < (ctx.practice ? 0.35 : Math.min(0.65, 0.25 + st.int * 0.04));
+      const isCross = Math.random() < (ctx.practice ? 0.35 : 0.5);
       ruleLabel.textContent = isCross ? t('ex.crossMove.cross') : t('ex.crossMove.same');
       ruleLabel.className = `cross-rule ${isCross ? 'cross-mode' : 'same-mode'}`;
 

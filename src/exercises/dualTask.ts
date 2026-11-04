@@ -1,10 +1,9 @@
 import { h, flash } from '../dom';
 import { t, num } from '../i18n';
-import { Staircase } from '../adaptive';
 import { onKeys } from '../widgets';
 import type { Exercise } from './types';
 
-const limitFor = (level: number) => Math.max(1600, Math.round(4000 * Math.pow(0.91, level - 1)));
+const limitFor = (level: number) => Math.max(800, Math.round(4000 * Math.pow(0.835, level - 1)));
 
 export const dualTask: Exercise = {
   id: 'dualTask',
@@ -20,7 +19,7 @@ export const dualTask: Exercise = {
 
   async run(ctx) {
     const trials = ctx.count(18, 12, 4);
-    const st = new Staircase(ctx.level, 1, 10);
+    const st = ctx.stair(trials, 1, 10);
 
     const hint = h('div', { class: 'bilateral-hint' }, t('ex.dualTask.hint'));
     const container = h('div', { class: 'dualtask-container' });

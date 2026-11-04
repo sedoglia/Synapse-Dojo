@@ -1,6 +1,5 @@
 import { h, pick, flash } from '../dom';
 import { t } from '../i18n';
-import { Staircase } from '../adaptive';
 import { onKeys } from '../widgets';
 import type { Exercise } from './types';
 
@@ -49,6 +48,24 @@ function setupSwipe(
   };
 }
 
+const AXIS: Record<Direction, Direction[]> = { up: ['left', 'right'], down: ['left', 'right'], left: ['up', 'down'], right: ['up', 'down'] };
+const OPPOSITE: Record<Direction, Direction> = { up: 'down', down: 'up', left: 'right', right: 'left' };
+const HORIZONTAL = (d: Direction) => d === 'left' || d === 'right';
+
+/**
+ * Coordination pattern by level, easiest first (Swinnen, 2002): mirror-symmetric movements, which use the same muscles
+ * on both sides and are the most stable; then parallel ones; then independent directions on different axes.
+ */
+function patternFor(level: number, left: Direction): Direction {
+  if (level <= 3) return HORIZONTAL(left) ? OPPOSITE[left] : left; // mirror: ← →, ↑ ↑
+  if (level <= 6) return HORIZONTAL(left) ? left : OPPOSITE[left]; // parallel: → →, ↑ ↓
+  return pick(AXIS[left]); // independent: ↑ →
+}
+
+/** Time allowed for both gestures, and how far apart they may be: they must really happen together. */
+const limitFor = (level: number) => Math.round(3000 * Math.pow(0.9, level - 1));
+const gapFor = (level: number) => Math.max(150, Math.round(700 * Math.pow(0.86, level - 1)));
+
 export const swipePattern: Exercise = {
   id: 'swipePattern',
   icon: '👋',
@@ -59,11 +76,11 @@ export const swipePattern: Exercise = {
   example: 'ex.swipePattern.example',
   minutes: 2,
   levels: { min: 1, max: 10, start: 2 },
-  levelLabel: (l) => (l <= 3 ? '↑ ↑' : l <= 6 ? '↑ ↓' : '↑ →'),
+  levelLabel: (l) => `${l <= 3 ? '← →' : l <= 6 ? '→ →' : '↑ →'} · ${gapFor(l)} ms`,
 
   async run(ctx) {
     const trials = ctx.count(12, 8, 3);
-    const st = new Staircase(ctx.level, 1, 10);
+    const st = ctx.stair(trials, 1, 10);
 
     const hint = h('div', { class: 'bilateral-hint' }, t('ex.swipePattern.hint'));
     const container = h('div', { class: 'swipe-container' });
@@ -127,19 +144,9 @@ export const swipePattern: Exercise = {
     for (let i = 0; i < trials; i++) {
       ctx.progress(i / trials, `${i + 1}/${trials}`);
 
-      let leftDir = pick(DIRS);
-      let rightDir = pick(DIRS);
-
-      if (st.int <= 3) {
-        // Congruent
-        rightDir = leftDir;
-      } else if (st.int <= 6) {
-        // Opposite / mirror
-        if (leftDir.id === 'up') rightDir = DIRS.find((d) => d.id === 'down')!;
-        else if (leftDir.id === 'down') rightDir = DIRS.find((d) => d.id === 'up')!;
-        else if (leftDir.id === 'left') rightDir = DIRS.find((d) => d.id === 'right')!;
-        else rightDir = DIRS.find((d) => d.id === 'left')!;
-      }
+      const leftDir = pick(DIRS);
+      const rightId = patternFor(st.int, leftDir.id);
+      const rightDir = DIRS.find((d) => d.id === rightId)!;
 
       leftZone.replaceChildren(
         h('span', { class: 'swipe-arrow' }, leftDir.arrow),
@@ -153,8 +160,11 @@ export const swipePattern: Exercise = {
 
       let leftSwiped: Direction | null = null;
       let rightSwiped: Direction | null = null;
+      let leftAt = 0;
+      let rightAt = 0;
 
-      await ctx.input<void>((done) => {
+      const limit = ctx.practice ? 60_000 : limitFor(st.level) * ctx.pace;
+      await ctx.timed<void>(limit, undefined, (done) => {
         const checkBoth = () => {
           if (leftSwiped !== null && rightSwiped !== null) {
             done();
@@ -164,6 +174,7 @@ export const swipePattern: Exercise = {
         const handleLeft = (dir: Direction) => {
           if (leftSwiped === null) {
             leftSwiped = dir;
+            leftAt = performance.now();
             flash(leftZone, dir === leftDir.id ? 'good' : 'bad', 200);
             checkBoth();
           }
@@ -172,6 +183,7 @@ export const swipePattern: Exercise = {
         const handleRight = (dir: Direction) => {
           if (rightSwiped === null) {
             rightSwiped = dir;
+            rightAt = performance.now();
             flash(rightZone, dir === rightDir.id ? 'good' : 'bad', 200);
             checkBoth();
           }
@@ -191,9 +203,11 @@ export const swipePattern: Exercise = {
         };
       });
 
-      const isMatch = leftSwiped === leftDir.id && rightSwiped === rightDir.id;
+      const rightMoves = leftSwiped === leftDir.id && rightSwiped === rightDir.id;
+      const together = ctx.practice || Math.abs(leftAt - rightAt) <= gapFor(st.level) * ctx.pace;
+      const isMatch = rightMoves && together;
       const ok = ctx.track(st, isMatch, {
-        was: `${leftDir.arrow} | ${rightDir.arrow}`,
+        was: rightMoves ? t('ex.swipePattern.together') : `${leftDir.arrow} | ${rightDir.arrow}`,
       });
 
       if (isMatch) {
@@ -207,12 +221,10 @@ export const swipePattern: Exercise = {
 
     ctx.progress(1);
 
-    const { score, timeBonus } = ctx.withTimeBonus(st.score(), 2.2);
     return {
-      score,
+      score: st.score(),
       detail: t('ex.swipePattern.detail', { ok: correct, n: trials }),
       level: st.next(),
-      timeBonus,
     };
   },
 };

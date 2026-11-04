@@ -1,4 +1,7 @@
-import type { Staircase } from './adaptive';
+import { Staircase, type StairOptions } from './adaptive';
+
+/** Below this accuracy no speed bonus is given. Under the lowest staircase target (70%), so a converged player can earn it. */
+const BONUS_MIN_ACCURACY = 0.65;
 
 /** Thrown into a running exercise when the player quits. */
 export class Aborted extends Error {}
@@ -33,6 +36,8 @@ export class Ctx {
   correctRts: number[] = [];
   totalAnswers = 0;
   correctAnswers = 0;
+  /** First session of this exercise: no saved level yet, so the staircase may climb fast to find it. */
+  fresh = false;
 
   constructor(
     public stage: HTMLElement,
@@ -51,6 +56,15 @@ export class Ctx {
 
   get practice() {
     return this.mode === 'practice';
+  }
+
+  /** The session's staircase: fast start only to find a level (first session) or to span the range (daily check). */
+  stair(trials: number, min: number, max: number, opts: StairOptions & { start?: number } = {}): Staircase {
+    return new Staircase(opts.start ?? this.level, min, max, {
+      fastStart: this.quick || this.fresh,
+      reachIn: this.quick ? Math.floor(trials / 2) : undefined,
+      ...opts,
+    });
   }
 
   /** Picks the number of trials for the current mode. */
@@ -95,10 +109,11 @@ export class Ctx {
 
   /**
    * Calculates an additive speed efficiency bonus (0 to 10 points) on score for correct, swift responses.
-   * Prerequisite: accuracy >= 75% and at least 2 correct trials (avoids rewarding impulsive guessing).
+   * Prerequisite: enough accuracy and at least 2 correct trials (avoids rewarding impulsive guessing).
+   * Never in the daily check, whose scores must stay comparable between exercises.
    */
   timeBonus(benchmarkSecs = 2.5): number {
-    if (this.accuracy < 0.75 || this.correctRts.length < 2) return 0;
+    if (this.quick || this.accuracy < BONUS_MIN_ACCURACY || this.correctRts.length < 2) return 0;
     const avgSecs = (this.avgCorrectRt / 1000) / this.pace;
     const maxSecs = benchmarkSecs * 2;
     if (avgSecs >= maxSecs) return 0;
@@ -119,7 +134,7 @@ export class Ctx {
 
   /** Whether the session qualified for the XP speed bonus (+10 XP). */
   get isSpeedBonus(): boolean {
-    if (this.correctRts.length >= 2 && this.accuracy >= 0.75) {
+    if (this.correctRts.length >= 2 && this.accuracy >= BONUS_MIN_ACCURACY) {
       return this.timeBonus(3.0) >= 3;
     }
     return false;

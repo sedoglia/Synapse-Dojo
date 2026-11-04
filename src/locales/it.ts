@@ -267,6 +267,7 @@ const ui: Locale['ui'] = {
   'check.title': 'Il tuo Neuro Score',
   'check.delta': '{d} rispetto all’ultima volta',
   'check.first': 'Primo check registrato. Torna domani!',
+  'check.rescaled': 'Il punteggio è stato ricalibrato: questo è il tuo nuovo punto di partenza. I risultati precedenti restano salvati ma non vengono confrontati.',
   'check.doneToday': 'Hai già fatto il check oggi. Torna domani per misurarti di nuovo!',
 
   'rank.0': 'Scintilla',
@@ -462,6 +463,8 @@ const ui: Locale['ui'] = {
   'ex.stories.qItem': 'Cosa portava con sé {name}?',
   'ex.stories.qPlace': 'Dove si trovava {name}?',
   'ex.stories.qTime': 'In quale momento si è svolta la scena?',
+  'ex.stories.qTimeOf': 'Quando si trovava lì {name}?',
+  'ex.stories.filler': 'Pari o dispari? (tiene occupata la mente)',
   'ex.stories.detail': '{ok}/{n} dettagli corretti',
   'ex.stories.text': '{name} aveva con sé {item}. Si trovava {place} {time}, dove ha concluso la sua commissione.',
   'ex.anagrams.letters': 'lettere',
@@ -610,6 +613,7 @@ const ui: Locale['ui'] = {
   'ex.swipePattern.why': 'I gesti bimanuali simultanei sfidano il disaccoppiamento spaziale e la coordinazione motoria asimmetrica.',
   'ex.swipePattern.example': 'Scorri col pollice sinistro in su ↑ e col destro in giù ↓',
   'ex.swipePattern.hint': 'Esegui entrambi i gesti direzionali contemporaneamente',
+  'ex.swipePattern.together': 'Entrambe le mani insieme!',
   'ex.swipePattern.detail': '{ok}/{n} schemi corretti',
 
   // rhythm
@@ -732,6 +736,7 @@ const ui: Locale['ui'] = {
   'ex.resources.money': '🪙 Spesi {cost} su {budget} · ne restano {left}',
   'ex.resources.over': '🪙 Spesi {cost} su {budget}: troppo, togli qualcosa',
   'ex.resources.total': '📈 Guadagno: {val} · obiettivo: almeno {target}',
+  'ex.resources.earned': '📈 Guadagno: {val}',
   'ex.resources.cost': 'Costa {n} 🪙',
   'ex.resources.gain': 'Guadagni {n} 🪙',
   'ex.resources.was': 'si potevano guadagnare {n}',

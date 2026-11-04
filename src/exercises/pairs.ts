@@ -1,4 +1,4 @@
-import { h, shuffle, flash } from '../dom';
+import { h, shuffle, flash, clamp } from '../dom';
 import { t, words as allWords } from '../i18n';
 import type { Ctx } from '../ctx';
 import type { Exercise } from './types';
@@ -88,6 +88,12 @@ export const pairs: Exercise = {
   levelLabel: (l) => `${pairsFor(l)} 🔗`,
 
   async run(ctx) {
+    if (ctx.quick) {
+      // Daily check: one fixed list. With four options a quarter is right by chance, so that much earns nothing.
+      const res = await round(ctx, 8, 0, 1);
+      ctx.progress(1);
+      return { score: clamp((res.acc - 0.25) / 0.75, 0, 1) * 100, detail: t('ex.pairs.detail', { ok: res.ok, n: 8 }) };
+    }
     let level = Math.round(ctx.level);
     const scores: number[] = [];
     let last = { ok: 0, n: 0 };

@@ -1,6 +1,5 @@
 import { h, shuffle, flash, pick } from '../dom';
 import { t } from '../i18n';
-import { Staircase } from '../adaptive';
 import type { Exercise } from './types';
 
 function rotateCoord(r: number, c: number, size: number, angle: number): { r: number; c: number } {
@@ -10,9 +9,11 @@ function rotateCoord(r: number, c: number, size: number, angle: number): { r: nu
   return { r, c };
 }
 
-const countFor = (level: number) => (level === 1 ? 2 : level <= 3 ? 3 : level <= 6 ? 4 : 5);
-/** 0 = no rotation; levels 7+ draw a random angle each trial (-1). */
-const angleFor = (level: number) => (level <= 2 ? 0 : level <= 4 ? 90 : level <= 6 ? 180 : -1);
+const countFor = (level: number) => (level === 1 ? 2 : level <= 3 ? 3 : level <= 6 ? 4 : level <= 8 ? 5 : 6);
+/** 0 = no rotation; levels 6+ draw a random angle each trial (-1). */
+const angleFor = (level: number) => (level <= 2 ? 0 : level <= 4 ? 90 : level === 5 ? 180 : -1);
+/** A bigger grid at the top, where 5 blocks out of 9 could be remembered as the 4 empty cells. */
+const sizeFor = (level: number) => (level >= 8 ? 4 : 3);
 
 export const matrix: Exercise = {
   id: 'matrix',
@@ -26,12 +27,12 @@ export const matrix: Exercise = {
   levels: { min: 1, max: 9, start: 2 },
   levelLabel: (l) => {
     const a = angleFor(l);
-    return `${countFor(l)} 🔷 · ${a === 0 ? '0°' : a === -1 ? '90°/180°/270°' : `${a}°`}`;
+    return `${countFor(l)} 🔷 · ${sizeFor(l)}×${sizeFor(l)} · ${a === 0 ? '0°' : a === -1 ? '90°/180°/270°' : `${a}°`}`;
   },
 
   async run(ctx) {
-    const trials = ctx.count(8, 6, 2);
-    const st = new Staircase(ctx.level, 1, 9, { target: 0.75 });
+    const trials = ctx.count(10, 6, 2);
+    const st = ctx.stair(trials, 1, 9, { target: 0.75 });
 
     const statusTitle = h('div', { class: 'matrix-status' });
     const badge = h('div', { class: 'matrix-badge' });
@@ -51,15 +52,17 @@ export const matrix: Exercise = {
       confirmBtn.classList.add('hidden');
       confirmBtn.disabled = true;
 
-      const size = 3;
+      const size = sizeFor(st.int);
       // Progressive difficulty:
       // Level 1: 2 tiles, 0° (pure spatial memory, no rotation)
       // Level 2: 3 tiles, 0°
       // Level 3: 3 tiles, 90°
       // Level 4: 4 tiles, 90°
-      // Level 5: 3 tiles, 180°
-      // Level 6: 4 tiles, 180°
-      // Level 7+: 4-5 tiles, 90° or 180° or 270°
+      // Level 5: 4 tiles, 180°
+      // Level 6: 4 tiles, random angle
+      // Level 7: 5 tiles, random angle
+      // Level 8: 5 tiles, random angle, 4×4 grid
+      // Level 9: 6 tiles, random angle, 4×4 grid
       const count = countFor(st.int);
       const angle = angleFor(st.int) === -1 ? pick([90, 180, 270]) : angleFor(st.int);
 
@@ -76,7 +79,7 @@ export const matrix: Exercise = {
       timerFill.style.transition = 'none';
       timerFill.style.width = '100%';
 
-      gridEl.className = 'matrix-grid size-3';
+      gridEl.className = `matrix-grid size-${size}`;
       gridEl.replaceChildren();
       for (let idx = 0; idx < size * size; idx++) {
         const isFilled = studySet.has(idx);

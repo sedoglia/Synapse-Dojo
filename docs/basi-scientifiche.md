@@ -35,12 +35,12 @@ Per questa ragione, Synapse Dojo non adotta compiti arbitrari o minigiochi di pu
 
 Dalle evidenze sopra descritte derivano i pilastri costruttivi della piattaforma:
 
-1. **Difficoltà Adattiva Continua per Ogni Esercizio:**  
+1. **Difficoltà Adattiva Continua (tutti gli esercizi tranne Lettura veloce):**  
    Un esercizio troppo facile genera noia; uno troppo difficile genera frustrazione e abbandono. Synapse Dojo impiega uno *staircase* pesato (*weighted up-down*, Kaernbach 1991) che mantiene ogni utente vicino alla propria soglia: l'obiettivo di accuratezza è **80%** nella maggior parte degli esercizi, 85% in Colpo d'occhio e 70–75% nei compiti di memoria e pianificazione, dove ogni prova è più lunga e un errore pesa di più.
 2. **Priorità ai Paradigmi a Più Alto Valore Trasferibile:**  
    Spazio centrale a velocità di elaborazione visiva periferica (UFOV), multitasking continuo, abilità spaziali di rotazione e memoria di lavoro.
 3. **Separazione tra Misurazione e Allenamento:**  
-   - Il **Neuro Score** quotidiano usa sempre lo stesso punto di partenza e una versione breve degli esercizi, per seguire l'andamento nel tempo (punteggio 0–1000 su tutte le 9 aree).
+   - Il **Neuro Score** quotidiano usa sempre lo stesso punto di partenza e una versione propria degli esercizi, spesso più breve, per seguire l'andamento nel tempo (punteggio 0–1000 su tutte le 9 aree).
    - L'**Allenamento Giornaliero** e la **Palestra** operano invece in modalità interamente adattiva per stimolare il potenziamento.
 4. **Accessibile a Tutti, Anziani Compresi** (vedi §5).
 5. **Onestà verso l'Utente:**  
@@ -72,41 +72,41 @@ Gli esercizi sono **ispirati** ai paradigmi indicati: si tratta di versioni brev
 
 | Dominio | Esercizio | Paradigma di riferimento | Parametri adattivi |
 |---|---|---|---|
-| **⚡ Velocità** | **Colpo d'occhio** | *Useful Field of View (UFOV)* / Double Decision (*Ball et al., 2002*) | Tempo di esposizione (700 ms → circa 48 ms, seguito da maschera), distrattori periferici (0, 7, 15). |
-| **⚡ Velocità** | **Riflesso a scelta** | Tempo di reazione a scelta a 4 alternative + Go/No-Go | Finestra di risposta (1100 → circa 280 ms), stimoli da non toccare dal livello 3. |
-| **⚡ Velocità** | **Sentiero dei numeri** | *Trail Making Test (TMT-A e TMT-B)* | Numero di bersagli (10–24), sequenza alternata 1 → A → 2 → B dal livello 4. |
-| **⚡ Velocità** | **Tempo di reazione** | Tempo di reazione semplice (SRT) con intervallo d'attesa variabile e rilevazione delle partenze anticipate | Soglia da battere (600 → 200 ms). |
-| **🎯 Attenzione** | **Pilota** | Multitasking continuo alla *NeuroRacer* (*Anguera et al., 2013*) | Velocità e curvatura del tracciato, frequenza dei segnali e somiglianza dei distrattori (dal livello 5). |
-| **🎯 Attenzione** | **Radar** | *Multiple Object Tracking* (*Pylyshyn & Storm, 1988*) | Bersagli da seguire (2–6) e velocità. |
-| **🎯 Attenzione** | **Test di Flanker** | *Eriksen Flanker Task* | Tempo limite (1400 → 350 ms) e quota di prove incongruenti (30 → 65%). |
-| **🎯 Attenzione** | **Go / No-Go** | Go/No-Go ispirato al *SART* (*Robertson et al., 1997*) | Tempo limite (850 → 260 ms); 22% di prove "stop". |
-| **🎯 Attenzione** | **Interferenza multipla** | *Multi-Source Interference Task* (*Bush & Shin, 2006*) | Prove di controllo ("1 0 0") e di interferenza ("2 1 1"); quota di interferenza (33 → 67%) e tempo limite (1800 → 450 ms). |
-| **🎯 Attenzione** | **Colore e forma** | Ricerca visiva per congiunzione (*Treisman & Gelade, 1980*) | Numero di elementi (6–16) che condividono colore o forma col bersaglio. |
-| **🎛️ Controllo** | **Scontro di colori** | *Stroop* (*Stroop, 1935*; *MacLeod, 1991*) | Tempo limite (3000 → circa 750 ms), regola alternativa "leggi la parola" dal livello 3. |
+| **⚡ Velocità** | **Colpo d'occhio** | *Useful Field of View (UFOV)* / Double Decision (*Ball et al., 2002*) | Tempo di esposizione (700 ms → circa 48 ms, seguito da maschera), distrattori periferici che arrivano gradualmente (0, poi da 3 a 15). |
+| **⚡ Velocità** | **Riflesso a scelta** | Tempo di reazione a scelta a 4 alternative + Go/No-Go | Finestra di risposta (1100 → 420 ms), stimoli da non toccare dal livello 3. |
+| **⚡ Velocità** | **Sentiero dei numeri** | *Trail Making Test (TMT-A e TMT-B)* | Numero di bersagli (10–24), sequenza alternata 1 → A → 2 → B dal livello 4, con un tempo richiesto per elemento circa doppio rispetto ai soli numeri, come tra TMT-B e TMT-A. |
+| **⚡ Velocità** | **Tempo di reazione** | Tempo di reazione semplice (SRT) con intervallo d'attesa variabile e rilevazione delle partenze anticipate | Soglia da battere (600 → 280 ms). |
+| **🎯 Attenzione** | **Pilota** | Multitasking continuo alla *NeuroRacer* (*Anguera et al., 2013*) | Due livelli indipendenti, come in NeuroRacer. Guida: velocità e curvatura della strada, che anche al livello 1 piega oltre la corsia. Segnali: frequenza, tempo per rispondere (1,6 → 0,6 s) e distrattori simili dal livello 5. Contano solo centri, omissioni e falsi allarmi. |
+| **🎯 Attenzione** | **Radar** | *Multiple Object Tracking* (*Pylyshyn & Storm, 1988*) | Velocità e bersagli da seguire (2–6): quasi tutti i livelli alti restano a 4 bersagli, la capacità tipica, e alzano la velocità. |
+| **🎯 Attenzione** | **Test di Flanker** | *Eriksen Flanker Task* | Tempo limite (1400 → 480 ms); metà delle prove sempre incongruenti, perché aumentarle riduce l'effetto di conflitto (*Bugg & Crump, 2012*). |
+| **🎯 Attenzione** | **Go / No-Go** | Go/No-Go ispirato al *SART* (*Robertson et al., 1997*) | Tempo limite (850 → 330 ms); 20% di prove "stop" a ritmo veloce, le condizioni che attivano davvero l'impulso a rispondere (*Wessel, 2018*). |
+| **🎯 Attenzione** | **Interferenza multipla** | *Multi-Source Interference Task* (*Bush & Shin, 2006*) | Prove di controllo ("1 0 0") e di interferenza ("2 1 1") in parti uguali; tempo limite (1800 → 560 ms). |
+| **🎯 Attenzione** | **Colore e forma** | Ricerca visiva per congiunzione (*Treisman & Gelade, 1980*) | Numero di elementi (6–16) che condividono colore o forma col bersaglio e tempo per trovarlo (6 → 1,2 s). |
+| **🎛️ Controllo** | **Scontro di colori** | *Stroop* (*Stroop, 1935*; *MacLeod, 1991*) | Tempo limite (3000 → circa 760 ms), regola alternativa "leggi la parola" che cresce gradualmente dal livello 3. |
 | **🎛️ Controllo** | **Doppia regola** | *Task Switching* (*Monsell, 2003*) | Alternanza tra grandezza (< 5 / > 5) e parità; frequenza dei cambi (20 → 50%) e tempo limite; misura il costo di cambio. |
-| **🎛️ Controllo** | **Ordinamento carte** | Ispirato al *Wisconsin Card Sorting Test* (*Grant & Berg, 1948*) | Scoperta del criterio (colore, forma, numero); il criterio cambia dopo 4 risposte corrette consecutive e il cambio viene segnalato, per non scoraggiare; tempo per carta (5,5 → 2,4 s). |
+| **🎛️ Controllo** | **Ordinamento carte** | Ispirato al *Wisconsin Card Sorting Test* (*Grant & Berg, 1948*) | Scoperta del criterio (colore, forma, numero); il criterio cambia dopo 4 risposte corrette consecutive e non resta evidenziato a schermo; il cambio è segnalato fino al livello 5, poi va notato da soli, come nel test originale; tempo per carta (5,5 → 1,6 s). |
 | **🧠 Memoria di lavoro** | **Eco** | *N-Back* singolo e duale (*Kirchner, 1958*; *Jaeggi et al., 2008*) | Da 1-back (sola posizione) a 6-back duale (posizione + lettera parlata e scritta). |
-| **🧠 Memoria di lavoro** | **Griglia di luci** | *Corsi Block-Tapping* (*Corsi, 1972*; *Kessels et al., 2000*) | Lunghezza della sequenza (2–9), ordine inverso dal livello 6; nel Neuro Score due tentativi per lunghezza, come nella procedura standard. |
+| **🧠 Memoria di lavoro** | **Griglia di luci** | *Corsi Block-Tapping* (*Corsi, 1972*; *Kessels et al., 2000*) | Lunghezza della sequenza (2–9); dal livello 6 si alterna l'ordine inverso, alla stessa lunghezza, perché nel Corsi non è più difficile del diretto (*Kessels et al., 2008*); nel Neuro Score due tentativi per lunghezza, come nella procedura standard. |
 | **🧠 Memoria di lavoro** | **Ultime cifre** | *Running Memory Span* (*Pollack et al., 1959*) | Cifre finali da ricordare (2–9) da un flusso di lunghezza imprevedibile. |
-| **🧠 Memoria di lavoro** | **Span di cifre** | *Digit Span* diretto e inverso | Lunghezza della serie (3–9), ordine inverso dal livello 7. |
+| **🧠 Memoria di lavoro** | **Span di cifre** | *Digit Span* diretto e inverso | Lunghezza della serie (3–9), ordine inverso (due cifre in meno) dal livello 7. |
 | **🔐 Memoria** | **Cassaforte parole** | Riconoscimento vecchio/nuovo | Parole da studiare (6–20); il punteggio sottrae i falsi allarmi dalle risposte corrette. |
-| **🔐 Memoria** | **Coppie** | Apprendimento di coppie associate (*paired associates*) simbolo–parola | Numero di coppie (3–12). |
-| **🔐 Memoria** | **Memoria delle storie** | Ispirato alla memoria logica di brevi racconti | Domande su chi, cosa, dove e quando (2 o 3). |
-| **🧊 Spaziale** | **Rotazioni** | Rotazione mentale (*Shepard & Metzler, 1971*), versione bidimensionale con polimini chirali | Numero di quadrati (4–9), rotazioni a passi di 30°, tempo limite (7,6 → 2,5 s). |
-| **🧊 Spaziale** | **Matrice spaziale** | Memoria spaziale con trasformazione di coordinate | Blocchi da ricordare (2–5) e rotazione della griglia (0°, 90°, 180°, 270°). |
+| **🔐 Memoria** | **Coppie** | Apprendimento di coppie associate (*paired associates*) simbolo–parola | Numero di coppie (3–12). Nel Neuro Score una lista fissa di 8 coppie, con punteggio corretto per le risposte date a caso. |
+| **🔐 Memoria** | **Memoria delle storie** | Ispirato alla memoria logica di brevi racconti | Scene da tenere distinte (1–3), domande su cosa, dove e quando (2 o 3), pausa riempita da un compito distraente (3–15 s); da due scene in su le risposte sbagliate includono dettagli di un'altra scena. |
+| **🧊 Spaziale** | **Rotazioni** | Rotazione mentale (*Shepard & Metzler, 1971*), versione bidimensionale con polimini chirali | Numero di quadrati (4–9), rotazioni a passi di 30°, tempo limite (7,5 → 1,8 s). |
+| **🧊 Spaziale** | **Matrice spaziale** | Memoria spaziale con trasformazione di coordinate | Blocchi da ricordare (2–6), griglia 3×3 e poi 4×4 agli ultimi livelli, rotazione (0°, 90°, 180°, poi casuale), tempo di studio (4,8 → 3,2 s). |
 | **🧩 Ragionamento** | **Torri** | *Tower of London* (*Shallice, 1982*) | Mosse della soluzione più breve (2–8), che sono anche il massimo consentito. |
 | **🧩 Ragionamento** | **L'intruso** | Odd-one-out per regole multidimensionali | Numero di figure (4–9) e caratteristiche irrilevanti che variano (1–3). |
-| **🧩 Ragionamento** | **Banco del mercato** | Problema dello zaino (*knapsack*; Murawski & Bossaerts, 2016) in un contesto quotidiano di costi e guadagni | Numero di prodotti (4–7) e budget; serve almeno il 90% del guadagno ottimo. |
-| **➗ Calcolo e lettura** | **Sprint di calcolo** | Aritmetica mentale rapida (*Learning Therapy*, Kawashima) | Operazioni (+ − → × → ÷) e grandezza dei numeri. |
-| **➗ Calcolo e lettura** | **Lettura veloce** | Lettura ad alta voce con domanda di comprensione | Parole al minuto e comprensione (la comprensione pesa più della velocità). |
+| **🧩 Ragionamento** | **Banco del mercato** | Problema dello zaino (*knapsack*; Murawski & Bossaerts, 2016) in un contesto quotidiano di costi e guadagni | Numero di prodotti (4–8) con budget pari a circa metà del costo totale; quota del guadagno ottimo richiesta (90% → 100%); dal livello 3 la scorciatoia di comprare per miglior guadagno a moneta non basta. L'obiettivo non è mostrato durante la scelta. |
+| **➗ Calcolo e lettura** | **Sprint di calcolo** | Aritmetica mentale rapida (*Learning Therapy*, Kawashima) | Operazioni (+ − → × → ÷) e grandezza dei numeri, tabelline comprese. |
+| **➗ Calcolo e lettura** | **Lettura veloce** | Lettura ad alta voce con domanda di comprensione | Non adattivo: parole al minuto e comprensione (la comprensione pesa più della velocità). Nel *Learning Therapy* lo scopo è leggere con regolarità, non affrontare testi sempre più difficili. |
 | **➗ Calcolo e lettura** | **Calcolo con i punti** | *Approximate Number System* (*Halberda et al., 2008*) | Rapporto tra le due quantità (40 → 88%) e tempo di esposizione (1,5 → 0,8 s). |
-| **➗ Calcolo e lettura** | **Anagrammi** | Accesso lessicale e memoria ortografica | Lunghezza della parola (3–8 lettere). |
-| **➗ Calcolo e lettura** | **Sprint di parole** | Classificazione ortografica rapida (la parola inizia con la lettera indicata?) | Tempo limite (2200 → 650 ms). Non è un test di fluenza verbale, che richiederebbe di produrre parole. |
-| **👐 Coordinazione** | **Tap bilaterale** | Sequenze bimanuali guidate visivamente | Lunghezza della sequenza sinistra/destra (4–12). |
-| **👐 Coordinazione** | **Swipe bilaterale** | Coordinazione bimanuale simmetrica e asimmetrica (*Swinnen, 2002*) | Direzioni uguali, speculari o indipendenti per le due mani. |
-| **👐 Coordinazione** | **Ritmo bilaterale** | *Sensorimotor Synchronization* (*Repp & Su, 2013*) | Tempo del metronomo (67–130 BPM); il tocco è valutato rispetto al battito più vicino, prima o dopo. |
-| **👐 Coordinazione** | **Movimenti incrociati** | Compatibilità stimolo-risposta spaziale (risposte ipsilaterali e controlaterali) | Tempo limite (1500 → 380 ms) e quota di prove "incrocia". |
-| **👐 Coordinazione** | **Dual-Task bilaterale** | Paradigma di doppio compito motorio-cognitivo | Tenere premuto con una mano per tutta la prova mentre l'altra giudica pari/dispari; tempo limite (4 → 1,6 s). |
+| **➗ Calcolo e lettura** | **Anagrammi** | Accesso lessicale e memoria ortografica | Lunghezza della parola: da 3 a 8 lettere dove la lingua le ha; ogni lingua distribuisce sui livelli la propria gamma (il cinese da 2 a 4 caratteri). |
+| **➗ Calcolo e lettura** | **Sprint di parole** | Classificazione ortografica rapida (la parola inizia con la lettera indicata?) | Tempo limite (2200 → 800 ms); solo iniziali con abbastanza parole, perché non si ripetano. Non è un test di fluenza verbale, che richiederebbe di produrre parole. |
+| **👐 Coordinazione** | **Tap bilaterale** | Sequenze bimanuali guidate visivamente | Lunghezza della sequenza sinistra/destra (4–13) e tempo per tocco (1 → 0,39 s). |
+| **👐 Coordinazione** | **Swipe bilaterale** | Coordinazione bimanuale simmetrica e asimmetrica (*Swinnen, 2002*) | Movimenti speculari, poi paralleli, poi indipendenti su assi diversi, dal più stabile al meno stabile; i due gesti devono avvenire insieme (scarto massimo 700 → 180 ms) entro un tempo limite (3 → 1,2 s). |
+| **👐 Coordinazione** | **Ritmo bilaterale** | *Sensorimotor Synchronization* (*Repp & Su, 2013*) | Precisione richiesta (±220 → ±50 ms) rispetto alla media personale degli ultimi tocchi, così contano la regolarità e non la latenza del dispositivo. Il tempo (67–130 BPM) resta fisso nella sessione. |
+| **👐 Coordinazione** | **Movimenti incrociati** | Compatibilità stimolo-risposta spaziale (risposte ipsilaterali e controlaterali) | Tempo limite (1500 → 520 ms); prove "incrocia" e "stesso lato" in parti uguali. |
+| **👐 Coordinazione** | **Dual-Task bilaterale** | Paradigma di doppio compito motorio-cognitivo | Tenere premuto con una mano per tutta la prova mentre l'altra giudica pari/dispari; tempo limite (4 → 0,8 s). |
 
 ---
 
@@ -125,16 +125,18 @@ Per un obiettivo $p_{\text{target}} = 0,80$:
 * In caso di **risposta corretta**: la difficoltà sale di $0,25$ livelli.
 
 #### Meccanismi di Controllo Implementati (`src/adaptive.ts`):
-1. **Partenza Rapida (Fast Track)**: finché l'utente non sbaglia, ogni risposta corretta fa salire di un livello intero, così una sessione iniziata troppo facile raggiunge in poche prove la zona di lavoro.
+1. **Partenza Rapida (Fast Track)**: solo nella prima sessione di un esercizio e nel Neuro Score. Finché l'utente non sbaglia, ogni risposta corretta fa salire rapidamente; al primo errore si torna all'ultimo livello superato. Ripeterla a ogni sessione farebbe superare la soglia e terrebbe l'accuratezza sotto l'obiettivo.
 2. **Freno alla Frustrazione**: tre errori consecutivi applicano una riduzione addizionale di un livello.
-3. **Riscaldamento Iniziale (Warm-Up)**: ogni sessione parte mezzo livello sotto la soglia stimata nella sessione precedente.
+3. **Riscaldamento Iniziale (Warm-Up)**: ogni sessione parte un quarto di livello sotto la soglia stimata nella sessione precedente.
 4. **Decadimento per Inattività**: se un esercizio non viene praticato per oltre 14 giorni, il livello di partenza scende di uno.
 5. **Punteggio di sessione**: livello medio raggiunto nella seconda metà della sessione, ridotto se l'accuratezza è sotto l'obiettivo. Chi sbaglia molto al livello più facile ottiene un punteggio basso invece del credito minimo.
 
 ### Il Neuro Score: Calcolo
-Il **Neuro Score** (da 0 a 1000) è la **media dei punteggi 0–100** di 9 esercizi brevi, uno per area, **moltiplicata per 10**. Ogni esercizio parte sempre dallo stesso livello iniziale e converte la prestazione (soglia raggiunta, tempi di risposta o accuratezza) in 0–100 con scale lineari fissate per esercizio.
+Il **Neuro Score** (da 0 a 1000) è la **media dei punteggi 0–100** di 9 esercizi brevi, uno per area, **moltiplicata per 10**. Ogni esercizio parte sempre dallo stesso livello iniziale e converte la prestazione (soglia raggiunta, tempi di risposta o accuratezza) in 0–100 con scale lineari fissate per esercizio. In ogni esercizio una prestazione perfetta vale 100, qualunque sia il giorno: la salita rapida è dimensionata per coprire tutta la gamma nelle prove disponibili, e il bonus di velocità non si applica. Eco misura da 1-back a 3-back in due serie, Coppie usa una lista fissa.
 
-La batteria **ruota ogni giorno** tra gli esercizi di ciascuna area, per varietà e per non allenare un unico compito. Di conseguenza due giorni consecutivi possono usare esercizi diversi: il Neuro Score va letto come **tendenza su più settimane**, non come misura esatta da confrontare giorno per giorno. Non è un test clinico e non ha valore diagnostico.
+La batteria **ruota ogni giorno** tra gli esercizi di ciascuna area, per varietà e per non allenare un unico compito. Di conseguenza due giorni consecutivi possono usare esercizi diversi. Le singole prove sono brevi: in simulazione la correlazione tra due prove dello stesso esercizio va da circa 0,2 a 0,85, quindi il Neuro Score va letto come **tendenza su più settimane**, non come misura esatta da confrontare giorno per giorno. Non è stato ancora validato su giocatori reali, non è un test clinico e non ha valore diagnostico.
+
+La scala è stata ricalibrata nella versione 0.10: i risultati precedenti restano salvati, ma non vengono confrontati con quelli nuovi.
 
 ---
 
@@ -144,9 +146,9 @@ Il programma deve essere fruibile anche da chi ha tempi di reazione più lenti, 
 
 * **Partenza facile e adattamento rapido**: gli esercizi a tempo partono dal livello più semplice e salgono solo se l'utente risponde bene; dopo tre errori di fila la difficoltà scende di due livelli.
 * **Tempi di partenza generosi**: per esempio 600 ms di soglia nel Tempo di reazione (il tempo di reazione semplice di un anziano su touch screen, latenza dello schermo inclusa, è spesso 400–550 ms), 3 s nello Stroop, 4 s per il doppio compito, 7,6 s per una rotazione mentale, 5,5 s per carta nell'ordinamento.
-* **Ritmo rilassato**: l'opzione nelle Impostazioni moltiplica per 1,4 tutte le finestre di risposta e i tempi di presentazione, ed è considerata anche nel calcolo del Neuro Score.
+* **Ritmo rilassato**: l'opzione nelle Impostazioni moltiplica per 1,4 le finestre di risposta e i tempi di presentazione, ed è considerata anche nel calcolo del Neuro Score. Fa eccezione l'esposizione di Colpo d'occhio, che è la grandezza misurata.
 * **Scale del Neuro Score tarate sull'età avanzata**: il punteggio zero corrisponde a prestazioni lente ma plausibili (per esempio 4 s per numero nel Sentiero dei numeri, 8 s per calcolo, 3 s per risposta nello Stroop), così un anziano non ottiene zero solo perché è più lento di un giovane.
-* **Compiti senza tempo** dove la velocità non è lo scopo (memoria, ragionamento, anagrammi): si risponde con calma.
+* **Compiti senza tempo** dove la velocità non è lo scopo (memoria, ragionamento, anagrammi): si risponde con calma. Il Neuro Score toglie anche il limite di tempo da Stroop, Doppia regola e Ordinamento carte, e misura la velocità di risposta.
 * **Prova guidata** obbligatoria la prima volta, con suggerimenti dopo ogni errore e senza punteggio.
 * **Feedback multisensoriale**: ✓/✗ grandi al centro, colori, suono e vibrazione; il nome dei colori è sempre scritto, per chi distingue male rosso e verde.
 * **Testo grande** attivabile nelle Impostazioni e pulsanti ampi.
@@ -247,3 +249,12 @@ Per garantire che la piattaforma rimanga uno strumento al servizio dell'utente e
 42. Cepeda, N. J., Pashler, H., Vul, E., Wixted, J. T., & Rohrer, D. (2006). *Distributed practice in verbal recall tasks: A review and quantitative synthesis.* Psychological Bulletin, 132(3), 354-380. [DOI: 10.1037/0033-2909.132.3.354](https://doi.org/10.1037/0033-2909.132.3.354)
 43. Eysenck, M. W., Derakshan, N., Santos, R., & Calvo, M. G. (2007). *Anxiety and cognitive performance: Attentional control theory.* Emotion, 7(2), 336-353. [DOI: 10.1037/1528-3542.7.2.336](https://doi.org/10.1037/1528-3542.7.2.336)
 44. Murawski, C., & Bossaerts, P. (2016). *How humans solve complex problems: The case of the knapsack problem.* Scientific Reports, 6, 34851. [DOI: 10.1038/srep34851](https://doi.org/10.1038/srep34851)
+
+**Taratura della difficoltà**
+
+45. Kessels, R. P. C., van den Berg, E., Ruis, C., & Brands, A. M. A. (2008). *The backward span of the Corsi Block-Tapping Task and its association with the WAIS-III Digit Span.* Assessment, 15(4), 426-434. [DOI: 10.1177/1073191108315611](https://doi.org/10.1177/1073191108315611)
+46. Wessel, J. R. (2018). *Prepotent motor activity and inhibitory control demands in different variants of the go/no-go paradigm.* Psychophysiology, 55(3), e12871. [DOI: 10.1111/psyp.12871](https://doi.org/10.1111/psyp.12871)
+47. Bugg, J. M., & Crump, M. J. C. (2012). *In support of a distinction between voluntary and stimulus-driven control: a review of the literature on proportion congruent effects.* Frontiers in Psychology, 3, 367. [DOI: 10.3389/fpsyg.2012.00367](https://doi.org/10.3389/fpsyg.2012.00367)
+48. Trick, L. M., Perl, T., & Sethi, N. (2005). *Age-related differences in multiple-object tracking.* The Journals of Gerontology: Series B, 60(2), P102-P105. [Abstract](https://psychsoc.gerontologyjournals.org/cgi/content/abstract/60/2/P102)
+49. Franco, J. P., Yadav, N., Bossaerts, P., & Murawski, C. (2021). *Generic properties of a computational task predict human effort and performance.* Journal of Mathematical Psychology, 104, 102592. [DOI: 10.1016/j.jmp.2021.102592](https://doi.org/10.1016/j.jmp.2021.102592)
+50. Repp, B. H. (2006). *Rate limits of sensorimotor synchronization.* Advances in Cognitive Psychology, 2(2-3). [DOAJ](https://doaj.org/article/dc3f29b3977e4adf8dfe9aa998eb40de)

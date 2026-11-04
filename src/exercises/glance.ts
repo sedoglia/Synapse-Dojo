@@ -1,7 +1,5 @@
 ﻿import { h, rand, pick, shuffle } from '../dom';
 import { t } from '../i18n';
-import { store } from '../storage';
-import { Staircase } from '../adaptive';
 import type { Exercise } from './types';
 
 const CENTER = ['🚗', '🚚'] as const;
@@ -10,8 +8,8 @@ const RINGS = 8; // slots per ring
 
 /** Exposure in ms: 700 at level 1, about 11% shorter per level (≈ 48 ms at the top level). */
 const msFor = (level: number) => Math.max(30, Math.round(700 * Math.pow(0.89, level - 1)));
-/** Peripheral clutter grows in steps; together with exposure it forms one difficulty axis. */
-const distractorsFor = (level: number) => (level >= 16 ? 15 : level >= 8 ? 7 : 0);
+/** Peripheral clutter arrives gradually (3 → 15) instead of in big jumps; with exposure it forms one difficulty axis. */
+const distractorsFor = (level: number) => (level < 8 ? 0 : Math.min(15, 3 + Math.floor(level - 8)));
 
 /** Slot position in % of the field: ring 0 = inner, ring 1 = outer (targets only appear there). */
 function slotPos(ring: number, k: number) {
@@ -38,8 +36,8 @@ export const glance: Exercise = {
     // A gentle staircase with an 85% target: exposure shrinks ~2% per correct answer instead of racing
     // ahead. Only the very first session uses the fast start, to find the player's level.
     const st = ctx.quick
-      ? new Staircase(4, 1, MAX_LEVEL, { target: 0.5 })
-      : new Staircase(ctx.level, 1, MAX_LEVEL, { target: 0.85, fastStart: !store.hasLevel('glance') });
+      ? ctx.stair(trials, 1, MAX_LEVEL, { start: 4, target: 0.5 })
+      : ctx.stair(trials, 1, MAX_LEVEL, { target: 0.85 });
 
     const center = h('div', { class: 'glance-center' });
     let onSlot: ((k: number) => void) | null = null;
