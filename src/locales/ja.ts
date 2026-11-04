@@ -1366,4 +1366,12 @@ const nicknames = {
   ],
 };
 
-export default { ui, words, passages, stories, nicknames };
+/** Valid words made of the same letters as a word in `words`, which Anagrams also accepts as answers. */
+const anagramWords: string[] = [
+  'まし', 'プラン', 'すい', 'いたこ', 'けいと', 'つく', 'まう', 'わか', 'すみか', 'わから',
+  'さなか', 'みな', 'わな', 'つま', 'つまり', 'ゆたか', 'りき', 'ぬき', 'かし', 'おし',
+  'くずし', 'おしり', 'いとし', 'いかす', 'さあ', 'わあ', 'ぬい', 'しい', 'かい', 'とい',
+  'わい',
+];
+
+export default { ui, words, anagramWords, passages, stories, nicknames };

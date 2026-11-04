@@ -1328,4 +1328,22 @@ const nicknames = {
   ],
 };
 
-export default { ui, words, passages, stories, nicknames };
+/** Valid words made of the same letters as a word in `words`, which Anagrams also accepts as answers. */
+const anagramWords: string[] = [
+  'PENA', 'FORA', 'OLMO', 'NODI', 'DONI', 'PARE', 'APRE', 'RAPE', 'ARPE', 'VENA',
+  'VANE', 'MALE', 'LAME', 'ALME', 'LESO', 'LOSE', 'RASO', 'ORSA', 'ARSO', 'ULNA',
+  'DONA', 'CARO', 'ROCA', 'OCRA', 'ORCA', 'ALMA', 'MALA', 'NATA', 'ANTA', 'PONI',
+  'TESA', 'ASTE', 'ORME', 'MERO', 'MORE', 'NUDA', 'LETO', 'LORO', 'GOLA', 'GOAL',
+  'ERTE', 'POCA', 'COPA', 'CUBO', 'ENTRO', 'TERNO', 'TONER', 'GRADO', 'DROGA', 'GOTTA',
+  'PENTO', 'PARTO', 'CARDO', 'GRANO', 'RANGO', 'ROGNA', 'ARGON', 'NETTO', 'TENTO', 'STATO',
+  'TOSTA', 'TOAST', 'RETRO', 'FIERO', 'RONCO', 'CALMI', 'STOLA', 'FOGNA', 'ASILO', 'SOLAI',
+  'ALLENO', 'MONILE', 'MELONI', 'CANORO', 'STALLE', 'REMOTO', 'ROSETO', 'ESORTO', 'TATAMI', 'BANALE',
+  'PAZZIA', 'METANO', 'MENATO', 'AMENTO', 'METTANO', 'MONTATE', 'PESANO', 'PENOSA', 'VOLATO', 'ATTORE',
+  'ORETTA', 'ETTARO', 'PATINA', 'TAPINA', 'APERTI', 'PARETI', 'APRITE', 'RAPITE', 'RIPETA', 'PATIRE',
+  'PATRIE', 'PIRATE', 'PERITA', 'ORECCHI', 'POTERTI', 'DECIMO', 'ARGINE', 'GERANI', 'IGNARE', 'DIRIGANO',
+  'GRAFFIA', 'ORTENSIE', 'TORINESE', 'INTESERO', 'MANIERI', 'REGNATO', 'ROGANTE', 'CROLLARE', 'COLEOTTERI', 'LUMINO',
+  'FARNIA', 'LASCA', 'AFTA', 'GRETI', 'TERGI', 'ALBORE', 'MACERA', 'SALACE', 'SCIOLGO', 'GRATTO',
+  'SCOLLATE', 'COSTELLA', 'SFRENATI', 'RAPISCA', 'PENTITE', 'DESIGNO', 'VOLIERE', 'VOLEREI', 'MANDIATE', 'RIBALTONI',
+];
+
+export default { ui, words, anagramWords, passages, stories, nicknames };

@@ -1,6 +1,7 @@
 import { h, shuffle, flash } from '../dom';
-import { t, words, graphemes, wordNear } from '../i18n';
+import { t, words, anagramWords, graphemes, wordNear } from '../i18n';
 import { Staircase } from '../adaptive';
+import { canon, isPlayable, scramble, solutionsOf } from './anagramRules';
 import type { Exercise } from './types';
 
 const lenFor = (level: number) => Math.min(8, 3 + Math.floor(level * 0.6));
@@ -28,7 +29,8 @@ export const anagrams: Exercise = {
 
     ctx.stage.append(status, slotContainer, tileContainer, actions);
 
-    const allWords = words();
+    const solutions = solutionsOf(words(), anagramWords());
+    const puzzles = words().filter((w) => isPlayable(w, solutions, graphemes));
     let correct = 0;
 
     for (let i = 0; i < trials; i++) {
@@ -38,13 +40,10 @@ export const anagrams: Exercise = {
       // Find words matching desired length
       // Lengths are counted in letters as readers see them (see `graphemes`); languages with short words,
       // such as Chinese, get the closest length available.
-      const targetWord = wordNear(allWords, targetLen).toUpperCase();
+      const targetWord = wordNear(puzzles, targetLen).toUpperCase();
 
       const letters = graphemes(targetWord);
-      let scrambled = shuffle([...letters]);
-      while (scrambled.join('') === targetWord && scrambled.length > 2) {
-        scrambled = shuffle([...letters]);
-      }
+      const scrambled = scramble(targetWord, solutions, graphemes, shuffle);
 
       status.textContent = t('ex.anagrams.hint');
 
@@ -109,8 +108,7 @@ export const anagrams: Exercise = {
         };
       });
 
-      const isMatch = typedWord === targetWord || allWords.map((w) => w.toUpperCase()).includes(typedWord);
-      const ok = ctx.track(st, isMatch, { was: targetWord });
+      const ok = ctx.track(st, solutions.has(canon(typedWord)), { was: targetWord });
 
       if (ok) {
         correct++;

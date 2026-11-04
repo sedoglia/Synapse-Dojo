@@ -1366,4 +1366,23 @@ const nicknames = {
   ],
 };
 
-export default { ui, words, passages, stories, nicknames };
+/** Valid words made of the same letters as a word in `words`, which Anagrams also accepts as answers. */
+const anagramWords: string[] = [
+  'SALVE', 'VELAS', 'VALES', 'LEVAS',
+  'COBRA', 'BROCA', 'BRACO', 'VALE', 'LEVA', 'LAVE', 'VETORES', 'OPINA', 'TROMBA', 'BROTAM',
+  'TOMBAR', 'VOO', 'NELA', 'AUTORES', 'ESTOURA', 'AUSTERO', 'GRAFIA', 'TOLERAM', 'NOIVA', 'INOVA',
+  'OVINA', 'ESCOLTA', 'COSTELA', 'LACTOSE', 'COLETAS', 'CALOTES', 'BOLO', 'APOSTA', 'ALMA', 'LAMA',
+  'FLORA', 'FORAL', 'ABARCAR', 'PARE', 'ROI', 'ESTELAR', 'ALTERES', 'MACA', 'SACA', 'APTO',
+  'TOPA', 'OPTA', 'TOGA', 'POSA', 'POCO', 'LUSA', 'OUTRO', 'ALGO', 'GALO', 'GOLA',
+  'BATO', 'TOBA', 'RASO', 'ORAS', 'AROS', 'SOAR', 'RUMO', 'LAPA', 'AMOR', 'MORA',
+  'COMI', 'CIMO', 'PARIA', 'MAGRA', 'GRITE', 'MARGA', 'GAMAR', 'SUOR', 'PARTA', 'TAPAR',
+  'RAPTA', 'TRUFA', 'FURTA', 'TURFA', 'NOTEI', 'PENSA', 'BOCAS', 'BASCO', 'BOLAS', 'LOBAS',
+  'ÁRIDO', 'PATAS', 'TAPAS', 'APTAS', 'PORTA', 'PARTO', 'TROPA', 'OPTAR', 'RAPTO', 'TOPAR',
+  'TRAPO', 'PERDA', 'PADRE', 'MOCINHA', 'MINHOCA', 'TROPAS', 'PASTOR', 'POSTAR', 'PRATOS', 'PARTOS',
+  'RAPTOS', 'TRAPOS', 'MEADOS', 'PESADA', 'PORCOS', 'TENDES', 'SOFRER', 'SOBRAM', 'BIOMAS', 'ACORDEM',
+  'CREMADO', 'COMADRE', 'DECORAM', 'CORDAME', 'ESCOLHER', 'MEDIADA', 'ARRUMADA', 'ALCOVA', 'COLAVA', 'COLHIAM',
+  'LADEIA', 'LAMPREIA', 'ADIAREM', 'ENCRAVA', 'JOQUEI', 'ATENDIAM', 'DEVERA', 'CAMPANHIA', 'DOSAR', 'SARDO',
+  'POTROS', 'TROPOS', 'CASTRA', 'DECATLO', 'DARTE', 'TESTO', 'TOSTE', 'MACIAS', 'SORVETERIAS',
+];
+
+export default { ui, words, anagramWords, passages, stories, nicknames };

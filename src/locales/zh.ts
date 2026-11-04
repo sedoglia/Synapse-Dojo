@@ -1366,4 +1366,9 @@ const nicknames = {
   ],
 };
 
-export default { ui, words, passages, stories, nicknames };
+/** Valid words made of the same letters as a word in `words`, which Anagrams also accepts as answers. */
+const anagramWords: string[] = [
+  '山火', '灯台', '蛋鸡', '头枕', '滴水', '暴风', '辰星', '扇风', '空天', '冠王',
+];
+
+export default { ui, words, anagramWords, passages, stories, nicknames };

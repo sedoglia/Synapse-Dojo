@@ -1366,4 +1366,9 @@ const nicknames = {
   ],
 };
 
-export default { ui, words, passages, stories, nicknames };
+/** Valid words made of the same letters as a word in `words`, which Anagrams also accepts as answers. */
+const anagramWords: string[] = [
+  'दीन', 'पकड़ा', 'बट', 'लाता', 'वाद', 'सब', 'लामा', 'मनका', 'बसे',
+];
+
+export default { ui, words, anagramWords, passages, stories, nicknames };

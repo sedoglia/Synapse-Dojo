@@ -1366,4 +1366,16 @@ const nicknames = {
   ],
 };
 
-export default { ui, words, passages, stories, nicknames };
+/** Valid words made of the same letters as a word in `words`, which Anagrams also accepts as answers. */
+const anagramWords: string[] = [
+  'SIE', 'SEI', 'LINSE', 'SENIL', 'AMPEL', 'PALME', 'GRIN', 'RUH', 'GRUB', 'HUSCH',
+  'LEICHE', 'ERBIN', 'FALSCHE', 'SCHLAFE', 'FLACHES', 'ERNST', 'SARG', 'LEID', 'LIES', 'TEEN',
+  'SAUM', 'GIERT', 'LAGER', 'BELAG', 'FREUE', 'LEBEN', 'ELBEN', 'GERNE', 'ENGER', 'GENRE',
+  'FORST', 'ZIEHT', 'HEIZT', 'ZEIHT', 'TURMS', 'TRAGEN', 'ANREGT', 'RAGTEN', 'GRATEN', 'WEISEN',
+  'WEINES', 'BLANKO', 'RUHTEN', 'SEINE', 'EINES', 'SEIEN', 'NIESE', 'FIEBER', 'BERIEF', 'GEISEL',
+  'GEILES', 'GLEISE', 'SELIGE', 'LASTET', 'ENGELS', 'RUNDER', 'FAHRENS', 'HAUSRAT', 'EPISCHER', 'ALTEREN',
+  'KICHER', 'KRIECH', 'LUNTEN', 'FERNSTE', 'SUHLT', 'TROMMLE', 'ARTIGER', 'BESCHALLEN', 'RADREISEN', 'GEBORGENEN',
+  'SPIEGLE', 'KNÄSTE', 'KRANES',
+];
+
+export default { ui, words, anagramWords, passages, stories, nicknames };

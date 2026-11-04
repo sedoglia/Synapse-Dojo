@@ -1330,4 +1330,18 @@ export const stories: StoryScenario[] = [
   }
 ];
 
-export default { ui, words, passages, stories, nicknames };
+/** Valid words made of the same letters as a word in `words`, which Anagrams also accepts as answers. */
+const anagramWords: string[] = [
+  'GRIN', 'HIPS', 'FLOW', 'FOWL', 'SENT', 'TENS', 'NETS', 'HOSE', 'HOES', 'ARTS',
+  'RATS', 'TSAR', 'TARS', 'REAP', 'PARE', 'RAPE', 'APER', 'PALM', 'MONO', 'ICON',
+  'FLEA', 'CORK', 'REED', 'LOIN', 'SALE', 'ALES', 'LEAS', 'SAWN', 'WANS', 'BARE',
+  'BRAE', 'BAKE', 'AILS', 'OWNS', 'SOWN', 'NOWS', 'SORE', 'ORES', 'EROS', 'ROES',
+  'DEES', 'COULD', 'BEARD', 'BARED', 'DEBAR', 'SHORE', 'HOSER', 'WORDS', 'SHRUB', 'NACRE',
+  'NADIR', 'DINAR', 'FORTS', 'PAGER', 'EARTH', 'HATER', 'RATHE', 'PALER', 'LEAPT', 'PETAL',
+  'PLEAT', 'LACES', 'SNOOP', 'NOTES', 'TONES', 'ONSET', 'WROTE', 'TECHS', 'LANCED', 'PRIDES',
+  'SPIRED', 'CLEATS', 'FOSTER', 'SOFTER', 'RAPTOR', 'SLIVER', 'LIVERS', 'MASTER', 'TAMERS', 'MATERS',
+  'PAROLED', 'PRELOAD', 'MENTORS', 'PERTAIN', 'REPAINT', 'SOLIDER', 'GETA', 'NETT', 'TIKE', 'SLAGS',
+  'HARKS', 'BLEAT', 'WHEAL', 'INAPT', 'PINTA', 'HOVELS', 'GRACILE', 'PERIANAL',
+];
+
+export default { ui, words, anagramWords, passages, stories, nicknames };

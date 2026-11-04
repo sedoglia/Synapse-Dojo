@@ -1366,4 +1366,19 @@ const nicknames = {
   ],
 };
 
-export default { ui, words, passages, stories, nicknames };
+/** Valid words made of the same letters as a word in `words`, which Anagrams also accepts as answers. */
+const anagramWords: string[] = [
+  'BARRE', 'PALME', 'AMPLE', 'CHAIRE', 'CHARIE', 'VOLÉ', 'LOVÉ', 'COUSINS', 'CUISSON', 'COSINUS',
+  'GARDON', 'GRONDA', 'AMATEUR', 'AVENIR', 'RAVINE', 'STASE', 'FERAIS', 'REFAIS', 'FERIAS', 'DIN',
+  'RIANT', 'SALIVE', 'LEVAIS', 'HARPE', 'NETTE', 'PROIE', 'OSER', 'ORES', 'BIOS', 'MINA',
+  'LICE', 'LOIN', 'LINO', 'TROU', 'ROUT', 'TEND', 'INOX', 'ORBE', 'BORE', 'FOIS',
+  'TROP', 'NUDE', 'BARS', 'OUTRE', 'TROUE', 'ROUET', 'BROME', 'CRAIE', 'CARIE', 'GRENAT',
+  'GARENT', 'RAGENT', 'SAPER', 'PARES', 'SUCER', 'CRUES', 'CURES', 'CREDO', 'CODER', 'CANTO',
+  'CONTA', 'CARTE', 'CARET', 'CHOPE', 'AVONS', 'NOVAS', 'BOSSER', 'SOBRES', 'SLAVE', 'SALVE',
+  'LAVES', 'VALES', 'TRIBU', 'COURSE', 'COEURS', 'ENTIERS', 'RETIENS', 'INERTES', 'TERNIES', 'AIMONS',
+  'CADRAN', 'CARDAN', 'RENDRA', 'POIGNE', 'CONCRET', 'GRAVEUR', 'BANCALE', 'RAPINE', 'REIGNER', 'ARGUTIE',
+  'GRACILES', 'ENCARTS', 'NECTARS', 'SACRENT', 'LANCIER', 'BAUGE', 'ÉTIOLE', 'BLASE', 'HARANG', 'OPINA',
+  'TENET',
+];
+
+export default { ui, words, anagramWords, passages, stories, nicknames };

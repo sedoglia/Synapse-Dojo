@@ -1366,4 +1366,19 @@ const nicknames = {
   ],
 };
 
-export default { ui, words, passages, stories, nicknames };
+/** Valid words made of the same letters as a word in `words`, which Anagrams also accepts as answers. */
+const anagramWords: string[] = [
+  'NUNGGU', 'UNGGUN', 'WANA', 'KUSIR', 'GANDENG', 'PULA', 'LUPA', 'LAPAK', 'KALAP', 'SANTAI',
+  'DILEMA', 'DELIMA', 'SANGAR', 'POKER', 'KEPALA', 'TRIO', 'DUKA', 'ADUK', 'DAKU', 'BANTING',
+  'KUBU', 'SIAP', 'ISAP', 'PASI', 'ARUS', 'RUAS', 'SUAR', 'REKA', 'KARE', 'NAIK',
+  'KIAN', 'TAPA', 'LIAT', 'ACAK', 'TIPE', 'TEPI', 'LAGU', 'GAUL', 'UGAL', 'MUDA',
+  'USUS', 'ASEM', 'SEMA', 'SAPA', 'AKIK', 'AMAT', 'SUKA', 'SAKU', 'KAUS', 'TAHUN',
+  'TUHAN', 'HANTU', 'ADUAN', 'MURAH', 'HARUM', 'UMRAH', 'TAHAN', 'ARSIP', 'BUAT', 'BUTA',
+  'TABU', 'BAUT', 'TUBA', 'BUANG', 'GUSAR', 'BATUK', 'INANG', 'ABADI', 'KERAP', 'REKAP',
+  'SUBUR', 'PUDAR', 'KARMA', 'MARAK', 'KARAM', 'GARAP', 'DALANG', 'BUKTI', 'BUTIK', 'SIANG',
+  'ASING', 'SAING', 'BELAH', 'TANAM', 'RAGAM', 'MARGA', 'RUSAK', 'SUKAR', 'RAKUS', 'KONTRA',
+  'KRATON', 'KARTON', 'GADUNG', 'MERANA', 'ROTASI', 'MAGNET', 'CEKER', 'CUPANG', 'MENJABAT', 'PERTAMA',
+  'MERAPAT', 'MERATAP', 'KUDAPAN', 'OLESKAN', 'BENTANG', 'PUAK', 'PAUK', 'DIPA', 'MELON',
+];
+
+export default { ui, words, anagramWords, passages, stories, nicknames };

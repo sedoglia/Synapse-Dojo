@@ -1366,4 +1366,22 @@ const nicknames = {
   ],
 };
 
-export default { ui, words, passages, stories, nicknames };
+/** Valid words made of the same letters as a word in `words`, which Anagrams also accepts as answers. */
+const anagramWords: string[] = [
+  'RETRO',
+  'COBRA', 'BROCA', 'CABRO', 'VALE', 'LAVE', 'LEVA', 'BUEN', 'OPINA', 'TROMBA', 'LLEVA',
+  'VALLE', 'VENA', 'VEAN', 'VANE', 'COSTILLA', 'COTILLAS', 'FRASE', 'BOLO', 'CAMOTE', 'EDITAN',
+  'TENIDA', 'PARE', 'RAPE', 'OÍR', 'ROÍ', 'TALLERES', 'MACA', 'SACA', 'APTO', 'OPTA',
+  'TOPA', 'TAPO', 'TOGA', 'PASO', 'POSA', 'NULA', 'OTRO', 'ORTO', 'ROTO', 'ALGO',
+  'GALO', 'ORCO', 'NUCA', 'BATO', 'TOBA', 'AROS', 'RASO', 'ORAS', 'LAPA', 'ARMA',
+  'AMAR', 'POCA', 'CAPO', 'PACO', 'PATA', 'APTA', 'VELAS', 'SALVE', 'VALES', 'LEVAS',
+  'LAVES', 'COMPA', 'GRITE', 'PALTA', 'TRUFA', 'CREAN', 'NACER', 'CENAR', 'CERNA', 'RANGO',
+  'VIENE', 'ENVIE', 'DARTE', 'TRAED', 'CALVO', 'VOCAL', 'BOLAS', 'LOBAS', 'ODIAR', 'PATAS',
+  'TAPAS', 'APTAS', 'HONOR', 'HONRO', 'CITAN', 'TINCA', 'CORRE', 'PIERDA', 'CURADO', 'PUTERO',
+  'REPUTA', 'CADMIO', 'MEANDO', 'PESADA', 'PUERCO', 'TIENDE', 'EDITEN', 'COBREN', 'BROMAS', 'RECTAL',
+  'PLANTEA', 'ENREDOS', 'ORDENES', 'RENOVA', 'AVERNO', 'COMADRE', 'ALGUNAS', 'ANGULAS', 'CARTERA', 'ACERTAR',
+  'TENDERO', 'IMPEDIRÁ', 'REMADA', 'MAULLAR', 'ACAMPAN', 'EMPALAR', 'PLEAMAR', 'LAMPREA', 'CACHEOS', 'MONTARTE',
+  'OMITIRSE', 'MADURARA', 'GUASA', 'TIRAJES', 'LUCRARSE', 'MELLADA', 'TAMALE', 'EDUCARON',
+];
+
+export default { ui, words, anagramWords, passages, stories, nicknames };

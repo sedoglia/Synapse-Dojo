@@ -52,6 +52,8 @@ export interface StoryScenario {
 export interface Locale {
   ui: Partial<Record<Key, string>>;
   words: string[];
+  /** Other valid words that use the same letters as a word in `words`: right answers in Anagrams, never asked. */
+  anagramWords?: string[];
   passages: Passage[];
   stories?: StoryScenario[];
   /**
@@ -122,6 +124,7 @@ export function wordNear(list: readonly string[], n: number): string {
 }
 
 export const words = () => locale().words;
+export const anagramWords = () => locale().anagramWords ?? [];
 export const passages = () => locale().passages;
 export const stories = () => locale().stories ?? en.stories ?? [];
 export const nicknames = () => locale().nicknames ?? en.nicknames;
