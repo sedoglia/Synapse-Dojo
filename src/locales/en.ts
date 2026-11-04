@@ -609,10 +609,10 @@ export const ui = {
 
   // swipePattern
   'ex.swipePattern.name': 'Bilateral Swipe',
-  'ex.swipePattern.desc': 'Execute directional swipes simultaneously with both hands',
+  'ex.swipePattern.desc': 'Do both gestures together, before the bar runs out: two thumbs on a phone; on a computer W A S D for the left and the arrows for the right (with a mouse, one after the other).',
   'ex.swipePattern.why': 'Bimanual directional gestures challenge spatial decoupling and symmetric/asymmetric motor coordination.',
   'ex.swipePattern.example': 'Swipe left thumb ↑ and right thumb ↓',
-  'ex.swipePattern.hint': 'Perform both directional gestures simultaneously',
+  'ex.swipePattern.hint': 'Do both gestures together, before the bar runs out: two thumbs on a phone; on a computer W A S D for the left and the arrows for the right (with a mouse, one after the other).',
   'ex.swipePattern.together': 'Both hands together!',
   'ex.swipePattern.detail': '{ok}/{n} patterns correct',
 
@@ -621,7 +621,7 @@ export const ui = {
   'ex.rhythm.desc': 'Synchronize left and right taps to an alternating beat',
   'ex.rhythm.why': 'Rhythmic bilateral coordination engages the cerebellum and supplementary motor area for precise temporal synchronization.',
   'ex.rhythm.example': 'Tap left and right alternately in time with the beat',
-  'ex.rhythm.hint': 'Tap on the beat with the indicated hand',
+  'ex.rhythm.hint': 'Tap on the beat with the indicated hand. The first 3 beats are to find the rhythm; after that the dot must land in the green zone.',
   'ex.rhythm.detail': '{ok}/{n} hits · avg error {ms} ms',
 
   // crossMove
@@ -638,7 +638,7 @@ export const ui = {
   'ex.dualTask.desc': 'Hold stabilizer with left hand while answering with right hand',
   'ex.dualTask.why': 'Dual-task paradigms isolate divided hemispheric attention and asymmetric motor-cognitive resource sharing.',
   'ex.dualTask.example': 'Hold left button while right thumb answers Even/Odd',
-  'ex.dualTask.hint': 'Keep holding left button while choosing Even / Odd',
+  'ex.dualTask.hint': 'Keep holding left button while choosing Even / Odd before the bar runs out',
   'ex.dualTask.hold': 'Hold down (LEFT)',
   'ex.dualTask.even': 'Even',
   'ex.dualTask.odd': 'Odd',

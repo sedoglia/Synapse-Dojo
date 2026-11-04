@@ -1,5 +1,6 @@
 import { h, pick, shuffle, flash } from '../dom';
 import { t, num } from '../i18n';
+import { timeBar } from '../widgets';
 import type { Exercise } from './types';
 
 const SHAPES = [
@@ -38,7 +39,9 @@ export const binding: Exercise = {
 
     const goalBar = h('div', { class: 'binding-goal' });
     const grid = h('div', { class: 'binding-grid' });
-    ctx.stage.append(goalBar, grid);
+    const bar = timeBar();
+    bar.el.classList.toggle('off', ctx.practice);
+    ctx.stage.append(goalBar, bar.el, grid);
 
     let correct = 0;
 
@@ -94,13 +97,15 @@ export const binding: Exercise = {
       grid.append(...elements);
 
       const limit = (ctx.practice ? 60_000 : limitFor(st.level)) * ctx.pace;
+      bar.start(limit);
       const chosen = await ctx.timed<{ isTarget: boolean; el: HTMLElement } | null>(limit, null, (done) => {
         onSelect = (isTarget, el) => done({ isTarget, el });
         return () => (onSelect = null);
       });
 
+      bar.stop();
       const ok = ctx.track(st, chosen?.isTarget === true, {
-        was: `${targetShape.symbol} ${t(`color.${targetColor.id}`)}`,
+        was: chosen ? `${targetShape.symbol} ${t(`color.${targetColor.id}`)}` : t('common.timeout'),
       });
 
       if (ok) {

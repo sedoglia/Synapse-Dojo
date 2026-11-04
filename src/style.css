@@ -1190,6 +1190,61 @@ h3 {
   background: var(--accent-2);
 }
 
+.time-bar {
+  flex: none;
+  max-width: 320px;
+  margin: 6px auto;
+}
+.time-bar.off {
+  visibility: hidden;
+}
+
+/* rhythm: where the last tap fell */
+.rhythm-meter {
+  direction: ltr;
+  position: relative;
+  flex: none;
+  width: min(100%, 320px);
+  height: 16px;
+  margin: 10px auto;
+  border-radius: 99px;
+  background: var(--surface-2);
+  overflow: hidden;
+}
+.rhythm-zone {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: rgba(22, 163, 74, 0.55);
+  transform: translateX(-50%);
+  left: 50%;
+}
+.rhythm-center {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  background: #fff;
+  opacity: 0.6;
+}
+.rhythm-dot {
+  position: absolute;
+  top: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--muted);
+  transform: translateX(-50%);
+  transition: left 0.1s;
+}
+.rhythm-dot.hit {
+  background: #fff;
+}
+.rhythm-dot.miss {
+  background: var(--bad);
+}
+
 /* radar & pilot */
 .radar-canvas,
 .pilot-canvas {

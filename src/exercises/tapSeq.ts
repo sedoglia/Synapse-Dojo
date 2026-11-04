@@ -1,6 +1,6 @@
 import { h, flash } from '../dom';
 import { t, num } from '../i18n';
-import { onKeys } from '../widgets';
+import { onKeys, timeBar } from '../widgets';
 import type { Exercise } from './types';
 
 const lenFor = (level: number) => 3 + level;
@@ -43,7 +43,9 @@ export const tapSeq: Exercise = {
     );
     const controls = h('div', { class: 'bilateral-controls' }, btnLeft, btnRight);
 
-    ctx.stage.append(hint, seqDisplay, controls);
+    const bar = timeBar();
+    bar.el.classList.toggle('off', ctx.practice);
+    ctx.stage.append(hint, seqDisplay, bar.el, controls);
 
     onKeys(ctx, {
       ArrowLeft: () => onTap?.('L'),
@@ -86,6 +88,7 @@ export const tapSeq: Exercise = {
       renderSeq();
 
       const limit = ctx.practice ? 60_000 : (len * perTapFor(st.level) + 400) * ctx.pace;
+      bar.start(limit);
       const finished = await ctx.timed<boolean>(limit, false, (done) => {
         onTap = (side) => {
           if (side === pattern[currentStep]) {
@@ -94,8 +97,10 @@ export const tapSeq: Exercise = {
             renderSeq();
             if (currentStep >= len) done(true);
           } else {
+            // The sequence is already lost: no point in making the player finish it.
             hasError = true;
             flash(side === 'L' ? btnLeft : btnRight, 'bad', 250);
+            done(true);
           }
         };
         return () => {
@@ -103,8 +108,9 @@ export const tapSeq: Exercise = {
         };
       });
 
+      bar.stop();
       const ok = ctx.track(st, finished && !hasError, {
-        was: pattern.map((s) => ARROW[s]).join(' '),
+        was: finished ? pattern.map((s) => ARROW[s]).join(' ') : t('common.timeout'),
       });
 
       if (ok) {

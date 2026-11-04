@@ -50,7 +50,13 @@ function stock(level: number): { products: Product[]; budget: number; maxGain: n
 
 /** The highest total gain within the budget, trying every combination. */
 function bestGain(products: Product[], budget: number): number {
+  return bestChoice(products, budget).gain;
+}
+
+/** The best combination within the budget, as a bit per product. */
+function bestChoice(products: Product[], budget: number): { gain: number; mask: number } {
   let best = 0;
+  let bestMask = 0;
   for (let mask = 0; mask < 1 << products.length; mask++) {
     let cost = 0;
     let gain = 0;
@@ -60,9 +66,12 @@ function bestGain(products: Product[], budget: number): number {
         gain += p.gain;
       }
     });
-    if (cost <= budget && gain > best) best = gain;
+    if (cost <= budget && gain > best) {
+      best = gain;
+      bestMask = mask;
+    }
   }
-  return best;
+  return { gain: best, mask: bestMask };
 }
 
 const bar = (fraction: number, cls: string) =>
@@ -151,8 +160,11 @@ export const resources: Exercise = {
         flash(header, 'good', 400);
       } else {
         flash(header, 'bad', 500);
+        // Shows the best purchase, so a mistake teaches something.
+        const { mask } = bestChoice(products, budget);
+        [...cardList.children].forEach((card, i) => card.classList.toggle('correct-hint', ((mask >> i) & 1) === 1));
       }
-      await ctx.wait(ok ? 500 : 1200);
+      await ctx.wait(ok ? 500 : 2600);
     }
     ctx.progress(1);
 

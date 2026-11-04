@@ -1,6 +1,6 @@
 import { h, flash } from '../dom';
 import { t, num } from '../i18n';
-import { onKeys } from '../widgets';
+import { onKeys, timeBar } from '../widgets';
 import type { Exercise } from './types';
 
 const limitFor = (level: number) => Math.max(800, Math.round(4000 * Math.pow(0.835, level - 1)));
@@ -56,7 +56,9 @@ export const dualTask: Exercise = {
     rightPanel.append(h('b', { class: 'dualtask-side-label' }, `${t('ex.dots.right')} 👉`), cogCard, cogButtons);
 
     container.append(leftPanel, rightPanel);
-    ctx.stage.append(hint, container);
+    const bar = timeBar();
+    bar.el.classList.toggle('off', ctx.practice);
+    ctx.stage.append(hint, bar.el, container);
 
     let isHolding = false;
     let lastHoldingTimestamp = 0;
@@ -167,11 +169,13 @@ export const dualTask: Exercise = {
 
       const limit = (ctx.mode === 'practice' ? 60_000 : limitFor(st.level)) * ctx.pace;
 
+      bar.start(limit);
       const choice = await ctx.timed<'even' | 'odd' | null>(limit, null, (done) => {
         onCognitiveAnswer = done;
         return () => (onCognitiveAnswer = null);
       });
 
+      bar.stop();
       trialActive = false;
       const held = isHoldValid();
       holdBroken = false;
@@ -179,7 +183,7 @@ export const dualTask: Exercise = {
       const ok = parityOk && held;
 
       ctx.track(st, ok, {
-        was: !held ? t('ex.dualTask.notHolding') : isEven ? t('ex.dualTask.even') : t('ex.dualTask.odd'),
+        was: !held ? t('ex.dualTask.notHolding') : choice === null ? t('common.timeout') : isEven ? t('ex.dualTask.even') : t('ex.dualTask.odd'),
       });
 
       if (ok) {

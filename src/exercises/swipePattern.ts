@@ -1,6 +1,6 @@
 import { h, pick, flash } from '../dom';
 import { t } from '../i18n';
-import { onKeys } from '../widgets';
+import { onKeys, timeBar } from '../widgets';
 import type { Exercise } from './types';
 
 type Direction = 'up' | 'down' | 'left' | 'right';
@@ -120,7 +120,18 @@ export const swipePattern: Exercise = {
     const rightCol = h('div', { class: 'swipe-col right-col' }, rightZone, rightDpad);
 
     container.append(leftCol, rightCol);
-    ctx.stage.append(hint, container);
+    const bar = timeBar();
+    bar.el.classList.toggle('off', ctx.practice);
+    ctx.stage.append(hint, bar.el, container);
+    // A mouse can only do one gesture at a time, so with a mouse only the time limit counts.
+    let usedMouse = false;
+    container.addEventListener(
+      'pointerdown',
+      (e) => {
+        if (e.pointerType === 'mouse') usedMouse = true;
+      },
+      true,
+    );
 
     // Keyboard support for PC
     onKeys(ctx, {
@@ -162,8 +173,10 @@ export const swipePattern: Exercise = {
       let rightSwiped: Direction | null = null;
       let leftAt = 0;
       let rightAt = 0;
+      usedMouse = false;
 
       const limit = ctx.practice ? 60_000 : limitFor(st.level) * ctx.pace;
+      bar.start(limit);
       await ctx.timed<void>(limit, undefined, (done) => {
         const checkBoth = () => {
           if (leftSwiped !== null && rightSwiped !== null) {
@@ -204,10 +217,12 @@ export const swipePattern: Exercise = {
       });
 
       const rightMoves = leftSwiped === leftDir.id && rightSwiped === rightDir.id;
-      const together = ctx.practice || Math.abs(leftAt - rightAt) <= gapFor(st.level) * ctx.pace;
+      bar.stop();
+      const together = ctx.practice || usedMouse || Math.abs(leftAt - rightAt) <= gapFor(st.level) * ctx.pace;
+      const finished = leftSwiped !== null && rightSwiped !== null;
       const isMatch = rightMoves && together;
       const ok = ctx.track(st, isMatch, {
-        was: rightMoves ? t('ex.swipePattern.together') : `${leftDir.arrow} | ${rightDir.arrow}`,
+        was: !finished ? t('common.timeout') : rightMoves ? t('ex.swipePattern.together') : `${leftDir.arrow} | ${rightDir.arrow}`,
       });
 
       if (isMatch) {

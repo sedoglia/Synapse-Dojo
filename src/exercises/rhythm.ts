@@ -50,7 +50,11 @@ export const rhythm: Exercise = {
     );
     const pads = h('div', { class: 'rhythm-pads' }, btnLeft, btnRight);
 
-    ctx.stage.append(hint, track, pads);
+    // Shows where each tap fell: the white line is the player's usual moment, the green zone what counts as on time.
+    const zone = h('div', { class: 'rhythm-zone' });
+    const dot = h('div', { class: 'rhythm-dot' });
+    const meter = h('div', { class: 'rhythm-meter' }, zone, h('div', { class: 'rhythm-center' }), dot);
+    ctx.stage.append(hint, track, meter, pads);
 
     onKeys(ctx, {
       ArrowLeft: () => onTap?.('L'),
@@ -95,6 +99,13 @@ export const rhythm: Exercise = {
       pulse();
     }
 
+    const showTap = (error: number | null, hit: boolean) => {
+      zone.style.width = `${Math.min(100, ((2 * toleranceNow()) / interval) * 100)}%`;
+      if (error !== null) dot.style.left = `${Math.max(3, Math.min(97, 50 + (error / interval) * 100))}%`;
+      dot.className = `rhythm-dot ${error === null ? 'miss' : hit ? 'hit' : 'miss'}`;
+    };
+    dot.style.left = '50%';
+    zone.style.width = `${Math.min(100, ((2 * toleranceNow()) / interval) * 100)}%`;
     const beats = trials + SETTLING_BEATS;
     for (let i = 0; i < beats; i++) {
       const beat = t0 + i * interval;
@@ -110,15 +121,20 @@ export const rhythm: Exercise = {
 
       const tap = taps.find((x) => x.at >= beat - interval / 2 && x.at < beat + interval / 2);
       const asynchrony = tap && tap.side === targetSide ? tap.at - beat : null;
-      const delta = asynchrony === null ? Infinity : Math.abs(asynchrony - usualOffset());
+      const error = asynchrony === null ? null : asynchrony - usualOffset();
+      const delta = error === null ? Infinity : Math.abs(error);
       const isHit = delta <= toleranceNow();
       if (asynchrony !== null) {
         recent.push(asynchrony);
         if (recent.length > 8) recent.shift();
       }
-      if (i < SETTLING_BEATS) continue;
+      if (i < SETTLING_BEATS) {
+        showTap(error, error !== null);
+        continue;
+      }
       // Judged silently: a feedback sound between beats would disturb the metronome.
       st.record(isHit);
+      showTap(error, isHit);
       if (isHit) {
         correct++;
         errors.push(delta);

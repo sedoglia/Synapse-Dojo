@@ -46,6 +46,26 @@ export function onKeys(ctx: Ctx, map: Record<string, () => void>) {
   void ctx.input<never>(() => () => window.removeEventListener('keydown', kb)).catch(() => {});
 }
 
+/** A bar that empties over a time limit, so the player can see how long they have. */
+export function timeBar() {
+  const fill = h('div');
+  const el = h('div', { class: 'rotate-timer time-bar' }, fill);
+  return {
+    el,
+    start(ms: number) {
+      fill.style.transition = 'none';
+      fill.style.width = '100%';
+      void fill.offsetWidth;
+      fill.style.transition = `width ${ms}ms linear`;
+      fill.style.width = '0%';
+    },
+    stop() {
+      fill.style.width = getComputedStyle(fill).width;
+      fill.style.transition = 'none';
+    },
+  };
+}
+
 /** A canvas that fills its parent at device resolution. Returns a resize function. */
 export function fitCanvas(canvas: HTMLCanvasElement): { ctx2d: CanvasRenderingContext2D; resize: () => { w: number; h: number } } {
   const ctx2d = canvas.getContext('2d')!;

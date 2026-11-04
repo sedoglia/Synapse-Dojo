@@ -609,10 +609,10 @@ const ui: Locale['ui'] = {
 
   // swipePattern
   'ex.swipePattern.name': 'Swipe Bilaterale',
-  'ex.swipePattern.desc': 'Esegui swipe direzionali contemporanei con entrambe le mani',
+  'ex.swipePattern.desc': 'Fai i due gesti insieme, prima che la barra finisca: due pollici sul telefono; al computer W A S D per la sinistra e le frecce per la destra (col mouse, uno dopo l’altro).',
   'ex.swipePattern.why': 'I gesti bimanuali simultanei sfidano il disaccoppiamento spaziale e la coordinazione motoria asimmetrica.',
   'ex.swipePattern.example': 'Scorri col pollice sinistro in su ↑ e col destro in giù ↓',
-  'ex.swipePattern.hint': 'Esegui entrambi i gesti direzionali contemporaneamente',
+  'ex.swipePattern.hint': 'Fai i due gesti insieme, prima che la barra finisca: due pollici sul telefono; al computer W A S D per la sinistra e le frecce per la destra (col mouse, uno dopo l’altro).',
   'ex.swipePattern.together': 'Entrambe le mani insieme!',
   'ex.swipePattern.detail': '{ok}/{n} schemi corretti',
 
@@ -621,7 +621,7 @@ const ui: Locale['ui'] = {
   'ex.rhythm.desc': 'Sincronizza i tocchi sinistro e destro sul tempo del metronomo',
   'ex.rhythm.why': 'La sincronizzazione ritmica bilaterale coinvolge il cervelletto e l’area motoria supplementare per la precisione temporale.',
   'ex.rhythm.example': 'Tocca sinistra e destra a tempo con il battito visivo',
-  'ex.rhythm.hint': 'Tocca a tempo sul battito con la mano indicata',
+  'ex.rhythm.hint': 'Tocca a tempo con la mano indicata. I primi 3 battiti servono a prendere il ritmo, poi il punto deve cadere nella zona verde.',
   'ex.rhythm.detail': '{ok}/{n} a tempo · errore medio {ms} ms',
 
   // crossMove
@@ -638,7 +638,7 @@ const ui: Locale['ui'] = {
   'ex.dualTask.desc': 'Tieni premuto a sinistra mentre rispondi con la mano destra',
   'ex.dualTask.why': 'Il paradigma a doppio compito allena l’attenzione emisferica divisa e la gestione di risorse motorio-cognitive asimmetriche.',
   'ex.dualTask.example': 'Tieni premuto a sinistra mentre col pollice destro decidi Pari / Dispari',
-  'ex.dualTask.hint': 'Mantieni premuto il pulsante sinistro mentre scegli Pari / Dispari',
+  'ex.dualTask.hint': 'Mantieni premuto il pulsante sinistro mentre scegli Pari / Dispari prima che finisca la barra',
   'ex.dualTask.hold': 'Tieni premuto (SX)',
   'ex.dualTask.even': 'Pari',
   'ex.dualTask.odd': 'Dispari',
