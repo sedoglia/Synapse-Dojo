@@ -538,7 +538,7 @@ export const ui = {
 
   // resources
   'ex.resources.name': 'Market Stall',
-  'ex.resources.desc': 'Buy goods to resell: spend no more than you have and earn as much as you can',
+  'ex.resources.desc': 'Buy goods to resell: without spending more than you have, reach the earnings shown before the bar runs out',
   'ex.resources.why': 'This is the “knapsack problem”, studied in cognitive science (Murawski & Bossaerts, 2016): finding the best combination within a limit calls on planning, working memory and weighing costs against benefits.',
   'ex.resources.example': 'Example: you have 50 coins. Apples cost 20 and earn 25, bread costs 30 and earns 30, honey costs 40 and earns 35 → apples and bread earn 55 for 50 coins: better than honey alone.',
   'ex.resources.detail': '{ok}/{n} completed',
@@ -739,7 +739,7 @@ export const ui = {
 
   'ex.resources.money': '🪙 Spent {cost} of {budget} · {left} left',
   'ex.resources.over': '🪙 Spent {cost} of {budget}: too much, remove something',
-  'ex.resources.earned': '📈 Earnings: {val}',
+  'ex.resources.total': '📈 Earnings: {val} · goal: at least {target}',
   'ex.resources.cost': 'Costs {n} 🪙',
   'ex.resources.gain': 'Earns {n} 🪙',
   'ex.resources.was': 'you could earn {n}',

@@ -521,7 +521,7 @@ const ui: Locale['ui'] = {
 
   
   'ex.resources.name': 'Banca do mercado',
-  'ex.resources.desc': 'Compre mercadorias para revender: não gaste mais do que tem e ganhe o máximo possível',
+  'ex.resources.desc': 'Compre mercadorias para revender: sem gastar mais do que tem, alcance o ganho indicado antes que a barra acabe',
   'ex.resources.why': 'É o “problema da mochila”, estudado nas ciências cognitivas (Murawski e Bossaerts, 2016): encontrar a melhor combinação dentro de um limite exige planejamento, memória de trabalho e comparação entre custos e benefícios.',
   'ex.resources.example': 'Exemplo: você tem 50 moedas. As maçãs custam 20 e rendem 25, o pão custa 30 e rende 30, o mel custa 40 e rende 35 → maçãs e pão rendem 55 com 50 moedas: melhor do que só o mel.',
   'ex.resources.detail': "{ok}/{n} concluídos",
@@ -700,7 +700,7 @@ const ui: Locale['ui'] = {
 
   'ex.resources.money': '🪙 Gastou {cost} de {budget} · restam {left}',
   'ex.resources.over': '🪙 Gastou {cost} de {budget}: demais, tire algo',
-  'ex.resources.earned': '📈 Ganho: {val}',
+  'ex.resources.total': '📈 Ganho: {val} · objetivo: pelo menos {target}',
   'ex.resources.cost': 'Custa {n} 🪙',
   'ex.resources.gain': 'Você ganha {n} 🪙',
   'ex.resources.was': 'dava para ganhar {n}',

@@ -521,7 +521,7 @@ const ui: Locale['ui'] = {
 
   
   'ex.resources.name': 'كشك السوق',
-  'ex.resources.desc': 'اشترِ بضائع لإعادة بيعها: لا تنفق أكثر مما لديك واربح قدر ما تستطيع',
+  'ex.resources.desc': 'اشترِ بضائع لإعادة بيعها: دون إنفاق أكثر مما لديك، حقق الربح المحدد قبل انتهاء الشريط',
   'ex.resources.why': 'هذه «مسألة حقيبة الظهر» التي تدرسها العلوم المعرفية (Murawski وBossaerts، 2016): إيجاد أفضل تركيبة ضمن حدّ معيّن يتطلب التخطيط والذاكرة العاملة والموازنة بين التكلفة والفائدة.',
   'ex.resources.example': 'مثال: لديك 50 قطعة نقدية. التفاح يكلف 20 ويربح 25، والخبز يكلف 30 ويربح 30، والعسل يكلف 40 ويربح 35 ← التفاح والخبز يربحان 55 مقابل 50 قطعة: أفضل من العسل وحده.',
   'ex.resources.detail': "{ok}/{n} مكتمل",
@@ -700,7 +700,7 @@ const ui: Locale['ui'] = {
 
   'ex.resources.money': '🪙 أنفقت {cost} من {budget} · يتبقى {left}',
   'ex.resources.over': '🪙 أنفقت {cost} من {budget}: أكثر من اللازم، أزل شيئًا',
-  'ex.resources.earned': '📈 الربح: {val}',
+  'ex.resources.total': '📈 الربح: {val} · الهدف: {target} على الأقل',
   'ex.resources.cost': 'يكلف {n} 🪙',
   'ex.resources.gain': 'يربح {n} 🪙',
   'ex.resources.was': 'كان يمكن ربح {n}',

@@ -521,7 +521,7 @@ const ui: Locale['ui'] = {
 
   
   'ex.resources.name': 'Marktstand',
-  'ex.resources.desc': 'Kaufe Waren zum Weiterverkauf: Gib nicht mehr aus, als du hast, und verdiene so viel wie möglich',
+  'ex.resources.desc': 'Kaufe Waren zum Weiterverkauf: Gib nicht mehr aus, als du hast, und erreiche den angegebenen Gewinn, bevor der Balken leer ist',
   'ex.resources.why': 'Das ist das „Rucksackproblem“, das die Kognitionswissenschaft untersucht (Murawski & Bossaerts, 2016): Die beste Kombination innerhalb einer Grenze zu finden, erfordert Planung, Arbeitsgedächtnis und das Abwägen von Kosten und Nutzen.',
   'ex.resources.example': 'Beispiel: Du hast 50 Münzen. Äpfel kosten 20 und bringen 25, Brot kostet 30 und bringt 30, Honig kostet 40 und bringt 35 → Äpfel und Brot bringen 55 für 50 Münzen: besser als nur Honig.',
   'ex.resources.detail': "{ok}/{n} abgeschlossen",
@@ -700,7 +700,7 @@ const ui: Locale['ui'] = {
 
   'ex.resources.money': '🪙 {cost} von {budget} ausgegeben · {left} übrig',
   'ex.resources.over': '🪙 {cost} von {budget} ausgegeben: zu viel, nimm etwas weg',
-  'ex.resources.earned': '📈 Gewinn: {val}',
+  'ex.resources.total': '📈 Gewinn: {val} · Ziel: mindestens {target}',
   'ex.resources.cost': 'Kostet {n} 🪙',
   'ex.resources.gain': 'Bringt {n} 🪙',
   'ex.resources.was': 'möglich waren {n}',

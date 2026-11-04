@@ -521,7 +521,7 @@ const ui: Locale['ui'] = {
 
   
   'ex.resources.name': '市場のお店',
-  'ex.resources.desc': '転売する商品を仕入れよう：持っているお金を超えないように、できるだけ多く稼ぎます',
+  'ex.resources.desc': '転売する商品を買いましょう。持っているお金を超えないように、バーがなくなる前に示された儲けに届かせます',
   'ex.resources.why': 'これは認知科学で研究されている「ナップサック問題」です（Murawski & Bossaerts, 2016）。限られた範囲で最良の組み合わせを探すには、計画、ワーキングメモリ、費用と利益の比較が必要です。',
   'ex.resources.example': '例：コインは50枚。りんごは20で買えて25の儲け、パンは30で買えて30の儲け、はちみつは40で買えて35の儲け → りんごとパンなら50枚で55の儲け：はちみつだけより良い。',
   'ex.resources.detail': "完了 {ok}/{n}",
@@ -700,7 +700,7 @@ const ui: Locale['ui'] = {
 
   'ex.resources.money': '🪙 {budget}のうち{cost}を使用 · 残り{left}',
   'ex.resources.over': '🪙 {budget}のうち{cost}を使用：多すぎます。何か外してください',
-  'ex.resources.earned': '📈 儲け：{val}',
+  'ex.resources.total': '📈 儲け：{val} · 目標：{target}以上',
   'ex.resources.cost': '値段 {n} 🪙',
   'ex.resources.gain': '儲け {n} 🪙',
   'ex.resources.was': '{n}まで稼げました',

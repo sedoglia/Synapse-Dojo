@@ -521,7 +521,7 @@ const ui: Locale['ui'] = {
 
   
   'ex.resources.name': 'Étal du marché',
-  'ex.resources.desc': 'Achète des produits à revendre : ne dépense pas plus que ce que tu as et gagne le plus possible',
+  'ex.resources.desc': 'Achète des marchandises à revendre : sans dépenser plus que ce que tu as, atteins le gain indiqué avant la fin de la barre',
   'ex.resources.why': 'C’est le « problème du sac à dos », étudié en sciences cognitives (Murawski et Bossaerts, 2016) : trouver la meilleure combinaison dans une limite demande de la planification, de la mémoire de travail et de comparer coûts et bénéfices.',
   'ex.resources.example': 'Exemple : tu as 50 pièces. Les pommes coûtent 20 et rapportent 25, le pain coûte 30 et rapporte 30, le miel coûte 40 et rapporte 35 → pommes et pain rapportent 55 pour 50 pièces : mieux que le miel seul.',
   'ex.resources.detail': "{ok}/{n} terminés",
@@ -700,7 +700,7 @@ const ui: Locale['ui'] = {
 
   'ex.resources.money': '🪙 Dépensé {cost} sur {budget} · il reste {left}',
   'ex.resources.over': '🪙 Dépensé {cost} sur {budget} : trop, retire quelque chose',
-  'ex.resources.earned': '📈 Gain : {val}',
+  'ex.resources.total': '📈 Gain : {val} · objectif : au moins {target}',
   'ex.resources.cost': 'Coûte {n} 🪙',
   'ex.resources.gain': 'Rapporte {n} 🪙',
   'ex.resources.was': 'on pouvait gagner {n}',

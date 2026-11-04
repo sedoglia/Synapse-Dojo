@@ -538,7 +538,7 @@ const ui: Locale['ui'] = {
 
   // resources
   'ex.resources.name': 'Banco del mercato',
-  'ex.resources.desc': 'Compra la merce da rivendere: non spendere più di quello che hai e guadagna il più possibile',
+  'ex.resources.desc': 'Compra la merce da rivendere: senza spendere più di quello che hai, raggiungi il guadagno indicato prima che finisca la barra',
   'ex.resources.why': 'È il «problema dello zaino», studiato nelle scienze cognitive (Murawski & Bossaerts, 2016): trovare la combinazione migliore entro un limite richiede pianificazione, memoria di lavoro e confronto tra costi e benefici.',
   'ex.resources.example': 'Esempio: hai 50 monete. Le mele costano 20 e fanno guadagnare 25, il pane costa 30 e fa guadagnare 30, il miele costa 40 e fa guadagnare 35 → mele e pane fanno guadagnare 55 con 50 monete: meglio del solo miele.',
   'ex.resources.detail': '{ok}/{n} completati',
@@ -737,7 +737,7 @@ const ui: Locale['ui'] = {
 
   'ex.resources.money': '🪙 Spesi {cost} su {budget} · ne restano {left}',
   'ex.resources.over': '🪙 Spesi {cost} su {budget}: troppo, togli qualcosa',
-  'ex.resources.earned': '📈 Guadagno: {val}',
+  'ex.resources.total': '📈 Guadagno: {val} · obiettivo: almeno {target}',
   'ex.resources.cost': 'Costa {n} 🪙',
   'ex.resources.gain': 'Guadagni {n} 🪙',
   'ex.resources.was': 'si potevano guadagnare {n}',

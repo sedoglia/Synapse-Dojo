@@ -521,7 +521,7 @@ const ui: Locale['ui'] = {
 
   
   'ex.resources.name': '集市摊位',
-  'ex.resources.desc': '进货再转卖：花的钱不能超过你拥有的，尽量多赚',
+  'ex.resources.desc': '购买货物再转售：花费不超过你的钱，在进度条结束前达到显示的赚得目标',
   'ex.resources.why': '这是认知科学研究过的“背包问题”（Murawski 和 Bossaerts，2016）：在限制之内找到最佳组合，需要计划、工作记忆和权衡成本与收益。',
   'ex.resources.example': '例如：你有 50 枚硬币。苹果进价 20，赚 25；面包进价 30，赚 30；蜂蜜进价 40，赚 35 → 苹果加面包花 50 枚赚 55，比只买蜂蜜更好。',
   'ex.resources.detail': "完成 {ok}/{n}",
@@ -700,7 +700,7 @@ const ui: Locale['ui'] = {
 
   'ex.resources.money': '🪙 已花 {cost} / {budget} · 还剩 {left}',
   'ex.resources.over': '🪙 已花 {cost} / {budget}：太多了，去掉一些',
-  'ex.resources.earned': '📈 赚得：{val}',
+  'ex.resources.total': '📈 赚得：{val} · 目标：至少 {target}',
   'ex.resources.cost': '价格 {n} 🪙',
   'ex.resources.gain': '赚 {n} 🪙',
   'ex.resources.was': '本可以赚 {n}',

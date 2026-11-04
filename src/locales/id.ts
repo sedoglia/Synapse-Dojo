@@ -521,7 +521,7 @@ const ui: Locale['ui'] = {
 
   
   'ex.resources.name': 'Kios Pasar',
-  'ex.resources.desc': 'Beli barang untuk dijual kembali: jangan belanja melebihi uangmu dan raih untung sebanyak mungkin',
+  'ex.resources.desc': 'Beli barang untuk dijual kembali: tanpa membelanjakan lebih dari yang kamu punya, capai untung yang ditunjukkan sebelum bilah habis',
   'ex.resources.why': 'Ini adalah “masalah ransel” yang dipelajari dalam ilmu kognitif (Murawski & Bossaerts, 2016): mencari kombinasi terbaik dalam suatu batas membutuhkan perencanaan, memori kerja, dan menimbang biaya serta manfaat.',
   'ex.resources.example': 'Contoh: kamu punya 50 koin. Apel seharga 20 memberi untung 25, roti seharga 30 memberi untung 30, madu seharga 40 memberi untung 35 → apel dan roti memberi untung 55 dengan 50 koin: lebih baik daripada madu saja.',
   'ex.resources.detail': "{ok}/{n} selesai",
@@ -700,7 +700,7 @@ const ui: Locale['ui'] = {
 
   'ex.resources.money': '🪙 Terpakai {cost} dari {budget} · sisa {left}',
   'ex.resources.over': '🪙 Terpakai {cost} dari {budget}: terlalu banyak, kurangi sesuatu',
-  'ex.resources.earned': '📈 Untung: {val}',
+  'ex.resources.total': '📈 Untung: {val} · target: minimal {target}',
   'ex.resources.cost': 'Harga {n} 🪙',
   'ex.resources.gain': 'Untung {n} 🪙',
   'ex.resources.was': 'bisa untung {n}',
