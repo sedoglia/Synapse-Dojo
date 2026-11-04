@@ -1067,9 +1067,15 @@ h3 {
   aspect-ratio: 1;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
   gap: 8px;
 }
 .echo-cell {
+  /* Fixed tracks and no minimum size: the letter must never make its row grow. */
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  line-height: 1;
   border-radius: 12px;
   background: var(--surface-2);
   display: grid;
