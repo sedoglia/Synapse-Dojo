@@ -130,7 +130,7 @@ const ui: Locale['ui'] = {
   'ex.path.detail': '{secs} s · {err} Fehler',
 
   'ex.pilot.name': 'Pilot',
-  'ex.pilot.desc': 'Lenke durch Ziehen (oder mit den Pfeiltasten), um auf der Straße zu bleiben. Drücke dabei SIGNAL nur, wenn ein grüner Kreis vorbeikommt.',
+  'ex.pilot.desc': 'Bleib auf der Straße: Zieh mit dem Finger oder nutze am Computer die Tasten ← →. Erscheint ein grüner Kreis, drück SIGNAL (Schaltfläche, Klick oder Leertaste): Das geht, sobald er erscheint, bis der Ring um das Schild leer ist. Ignoriere alle anderen Schilder.',
   'ex.pilot.why': 'Inspiriert von NeuroRacer (University of California, San Francisco): In einer in Nature veröffentlichten Studie senkte adaptives Multitasking-Training die Kosten, zwei Dinge gleichzeitig zu tun, und der Effekt hielt 6 Monate an.',
   'ex.pilot.press': 'SIGNAL!',
   'ex.pilot.detail': 'Richtige Signale: {ok}/{n} · auf der Straße {road} %',
@@ -301,7 +301,7 @@ const ui: Locale['ui'] = {
   'ex.glance.example': 'Beispiel: 🚗 in der Mitte und der Stern oben rechts → antworte 🚗 und tippe dann das Feld oben rechts an.',
   'ex.reflex.example': 'Beispiel: Ein grünes Feld leuchtet auf → tippe sofort darauf. Ist es rot → nichts berühren und warten.',
   'ex.path.example': 'Beispiel: Tippe 1, dann 2, dann 3… In der Wechselversion: 1 → A → 2 → B → 3 → C.',
-  'ex.pilot.example': 'Beispiel: Ziehe, um der Straße zu folgen. Ein grüner Kreis kommt vorbei → drücke SIGNAL. Ein Dreieck oder Quadrat → ignorieren.',
+  'ex.pilot.example': 'Beispiel: Ein grüner Kreis mit vollem Ring erscheint → drück SIGNAL, bevor der Ring leer ist. Ein Dreieck oder Quadrat → nicht drücken.',
   'ex.radar.example': 'Beispiel: 2 Kugeln leuchten auf → folge ihnen mit den Augen, während sie sich unter die anderen mischen, und tippe dann genau diese 2 an.',
   'ex.clash.example': 'Beispiel: Das Wort ROT in blauer Farbe → bei der Regel 🎨 antworte BLAU, bei der Regel 📖 antworte ROT.',
   'ex.switch.example': 'Beispiel: 7 in einem blauen Rahmen → UNGERADE. Dieselbe 7 in einem orangen Rahmen → GRÖSSER als 5.',

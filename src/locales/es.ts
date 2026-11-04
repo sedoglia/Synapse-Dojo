@@ -130,7 +130,7 @@ const ui: Locale['ui'] = {
   'ex.path.detail': '{secs} s · {err} errores',
 
   'ex.pilot.name': 'Piloto',
-  'ex.pilot.desc': 'Conduce arrastrando (o con las flechas) para no salirte de la carretera. Mientras tanto, pulsa SEÑAL solo cuando pase un círculo verde.',
+  'ex.pilot.desc': 'Mantente en la carretera: arrastra con el dedo o, en el ordenador, usa las teclas ← →. Cuando aparezca un círculo verde, pulsa SEÑAL (botón en pantalla, clic o barra espaciadora): puedes hacerlo desde que aparece hasta que se vacíe el anillo que rodea la señal. Ignora las demás señales.',
   'ex.pilot.why': 'Inspirado en NeuroRacer (Universidad de California, San Francisco): en un estudio publicado en Nature, el entrenamiento adaptativo en multitarea redujo el coste de hacer dos cosas a la vez, y el efecto duró 6 meses.',
   'ex.pilot.press': '¡SEÑAL!',
   'ex.pilot.detail': 'Señales correctas: {ok}/{n} · en la carretera {road}%',
@@ -301,7 +301,7 @@ const ui: Locale['ui'] = {
   'ex.glance.example': 'Ejemplo: 🚗 en el centro y la estrella arriba a la derecha → responde 🚗 y luego toca la casilla de arriba a la derecha.',
   'ex.reflex.example': 'Ejemplo: se enciende un panel verde → tócalo enseguida. Si es rojo → no toques nada y espera.',
   'ex.path.example': 'Ejemplo: toca 1, luego 2, luego 3… En la versión alterna: 1 → A → 2 → B → 3 → C.',
-  'ex.pilot.example': 'Ejemplo: arrastra para seguir la carretera. Pasa un círculo verde → pulsa SEÑAL. Un triángulo o un cuadrado → ignóralo.',
+  'ex.pilot.example': 'Ejemplo: aparece un círculo verde con el anillo lleno → pulsa SEÑAL antes de que se vacíe. Un triángulo o un cuadrado → no pulses.',
   'ex.radar.example': 'Ejemplo: se encienden 2 bolas → síguelas con la mirada mientras se mezclan con las demás y luego toca justo esas 2.',
   'ex.clash.example': 'Ejemplo: la palabra ROJO escrita en azul → con la regla 🎨 responde AZUL, con la regla 📖 responde ROJO.',
   'ex.switch.example': 'Ejemplo: 7 en un marco azul → IMPAR. El mismo 7 en un marco naranja → MAYOR que 5.',

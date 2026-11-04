@@ -130,7 +130,7 @@ const ui: Locale['ui'] = {
   'ex.path.detail': '{secs} s · {err} errori',
 
   'ex.pilot.name': 'Pilota',
-  'ex.pilot.desc': 'Guida trascinando il dito (o con le frecce) per restare sulla strada. Intanto premi SEGNALE solo quando passa un cerchio verde.',
+  'ex.pilot.desc': 'Resta sulla strada: trascina col dito oppure, al computer, usa i tasti ← →. Quando appare un cerchio verde premi SEGNALE (pulsante sullo schermo, clic o barra spaziatrice): puoi farlo da quando compare finché l’anello attorno al cartello non si svuota. Ignora tutti gli altri cartelli.',
   'ex.pilot.why': 'Ispirato a NeuroRacer (Università della California, San Francisco): in uno studio su Nature l’allenamento adattivo al multitasking ha ridotto il costo del fare due cose insieme, con effetti ancora presenti dopo 6 mesi.',
   'ex.pilot.press': 'SEGNALE!',
   'ex.pilot.detail': 'Segnali corretti: {ok}/{n} · in strada {road}%',
@@ -301,7 +301,7 @@ const ui: Locale['ui'] = {
   'ex.glance.example': 'Esempio: al centro c’è 🚗 e la stella è in alto a destra → rispondi 🚗, poi tocca la casella in alto a destra.',
   'ex.reflex.example': 'Esempio: si accende un pannello verde → toccalo subito. Se è rosso → non toccare niente e aspetta.',
   'ex.path.example': 'Esempio: tocca 1, poi 2, poi 3… Nella versione alternata: 1 → A → 2 → B → 3 → C.',
-  'ex.pilot.example': 'Esempio: trascina per seguire la strada. Passa un cerchio verde → premi SEGNALE. Passa un triangolo o un quadrato → ignoralo.',
+  'ex.pilot.example': 'Esempio: compare un cerchio verde con l’anello pieno → premi SEGNALE prima che l’anello si svuoti. Un triangolo o un quadrato → non premere.',
   'ex.radar.example': 'Esempio: si illuminano 2 palline → seguile con lo sguardo mentre si mescolano alle altre, poi tocca proprio quelle 2.',
   'ex.clash.example': 'Esempio: la parola ROSSO scritta in blu → con la regola 🎨 rispondi BLU, con la regola 📖 rispondi ROSSO.',
   'ex.switch.example': 'Esempio: 7 in cornice blu → DISPARI. Lo stesso 7 in cornice arancione → MAGGIORE di 5.',

@@ -130,7 +130,7 @@ const ui: Locale['ui'] = {
   'ex.path.detail': '{secs} s · {err} erros',
 
   'ex.pilot.name': 'Piloto',
-  'ex.pilot.desc': 'Dirija arrastando (ou com as setas) para ficar na estrada. Enquanto isso, aperte SINAL só quando passar um círculo verde.',
+  'ex.pilot.desc': 'Mantenha-se na estrada: arraste com o dedo ou, no computador, use as teclas ← →. Quando aparecer um círculo verde, pressione SINAL (botão na tela, clique ou barra de espaço): você pode fazer isso desde que ele aparece até o anel em volta da placa se esvaziar. Ignore as outras placas.',
   'ex.pilot.why': 'Inspirado no NeuroRacer (Universidade da Califórnia, São Francisco): num estudo publicado na Nature, o treino adaptativo de multitarefa reduziu o custo de fazer duas coisas ao mesmo tempo, e o efeito durou 6 meses.',
   'ex.pilot.press': 'SINAL!',
   'ex.pilot.detail': 'Sinais certos: {ok}/{n} · na estrada {road}%',
@@ -301,7 +301,7 @@ const ui: Locale['ui'] = {
   'ex.glance.example': 'Exemplo: 🚗 no centro e a estrela no alto à direita → responda 🚗 e depois toque na casa do alto à direita.',
   'ex.reflex.example': 'Exemplo: um painel verde se acende → toque nele na hora. Se for vermelho → não toque em nada e espere.',
   'ex.path.example': 'Exemplo: toque 1, depois 2, depois 3… Na versão alternada: 1 → A → 2 → B → 3 → C.',
-  'ex.pilot.example': 'Exemplo: arraste para seguir a estrada. Passa um círculo verde → aperte SINAL. Um triângulo ou um quadrado → ignore.',
+  'ex.pilot.example': 'Exemplo: aparece um círculo verde com o anel cheio → pressione SINAL antes que o anel se esvazie. Um triângulo ou um quadrado → não pressione.',
   'ex.radar.example': 'Exemplo: 2 bolas se acendem → siga-as com os olhos enquanto se misturam com as outras e depois toque exatamente nessas 2.',
   'ex.clash.example': 'Exemplo: a palavra VERMELHO escrita em azul → com a regra 🎨 responda AZUL, com a regra 📖 responda VERMELHO.',
   'ex.switch.example': 'Exemplo: 7 numa moldura azul → ÍMPAR. O mesmo 7 numa moldura laranja → MAIOR que 5.',

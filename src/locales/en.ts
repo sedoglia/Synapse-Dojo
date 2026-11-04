@@ -130,7 +130,7 @@ export const ui = {
   'ex.path.detail': '{secs} s · {err} errors',
 
   'ex.pilot.name': 'Pilot',
-  'ex.pilot.desc': 'Steer by dragging (or with the arrow keys) to stay on the road. Meanwhile, press SIGNAL only when a green circle goes by.',
+  'ex.pilot.desc': 'Stay on the road: drag with your finger or, on a computer, use the ← → keys. When a green circle appears, press SIGNAL (the on-screen button, a click or the space bar): you can do it from when it appears until the ring around the sign runs out. Ignore all other signs.',
   'ex.pilot.why': 'Inspired by NeuroRacer (University of California, San Francisco): in a study published in Nature, adaptive multitasking training reduced the cost of doing two things at once, and the effect lasted 6 months.',
   'ex.pilot.press': 'SIGNAL!',
   'ex.pilot.detail': 'Correct signals: {ok}/{n} · on road {road}%',
@@ -301,7 +301,7 @@ export const ui = {
   'ex.glance.example': 'Example: 🚗 in the center and the star at top right → answer 🚗, then tap the top-right slot.',
   'ex.reflex.example': 'Example: a green panel lights up → tap it right away. If it’s red → don’t touch anything and wait.',
   'ex.path.example': 'Example: tap 1, then 2, then 3… In the alternating version: 1 → A → 2 → B → 3 → C.',
-  'ex.pilot.example': 'Example: drag to follow the road. A green circle goes by → press SIGNAL. A triangle or square → ignore it.',
+  'ex.pilot.example': 'Example: a green circle appears with a full ring → press SIGNAL before the ring runs out. A triangle or square → don’t press.',
   'ex.radar.example': 'Example: 2 balls light up → follow them with your eyes as they mix with the others, then tap exactly those 2.',
   'ex.clash.example': 'Example: the word RED written in blue → with the 🎨 rule answer BLUE, with the 📖 rule answer RED.',
   'ex.switch.example': 'Example: 7 in a blue frame → ODD. The same 7 in an orange frame → HIGHER than 5.',

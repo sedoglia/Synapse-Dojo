@@ -130,7 +130,7 @@ const ui: Locale['ui'] = {
   'ex.path.detail': '{secs} s · {err} erreurs',
 
   'ex.pilot.name': 'Pilote',
-  'ex.pilot.desc': 'Dirige en faisant glisser (ou avec les flèches) pour rester sur la route. En même temps, appuie sur SIGNAL seulement quand passe un cercle vert.',
+  'ex.pilot.desc': 'Reste sur la route : fais glisser ton doigt ou, sur ordinateur, utilise les touches ← →. Quand un cercle vert apparaît, appuie sur SIGNAL (bouton à l’écran, clic ou barre d’espace) : tu peux le faire dès qu’il apparaît et jusqu’à ce que l’anneau autour du panneau soit vide. Ignore les autres panneaux.',
   'ex.pilot.why': 'Inspiré de NeuroRacer (Université de Californie, San Francisco) : dans une étude publiée dans Nature, un entraînement adaptatif au multitâche a réduit le coût de faire deux choses à la fois, et l’effet a duré 6 mois.',
   'ex.pilot.press': 'SIGNAL !',
   'ex.pilot.detail': 'Signaux justes : {ok}/{n} · sur la route {road} %',
@@ -301,7 +301,7 @@ const ui: Locale['ui'] = {
   'ex.glance.example': 'Exemple : 🚗 au centre et l’étoile en haut à droite → réponds 🚗, puis touche la case en haut à droite.',
   'ex.reflex.example': 'Exemple : un panneau vert s’allume → touche-le tout de suite. S’il est rouge → ne touche à rien et attends.',
   'ex.path.example': 'Exemple : touche 1, puis 2, puis 3… Dans la version alternée : 1 → A → 2 → B → 3 → C.',
-  'ex.pilot.example': 'Exemple : fais glisser pour suivre la route. Un cercle vert passe → appuie sur SIGNAL. Un triangle ou un carré → ignore-le.',
+  'ex.pilot.example': 'Exemple : un cercle vert apparaît avec l’anneau plein → appuie sur SIGNAL avant que l’anneau soit vide. Un triangle ou un carré → n’appuie pas.',
   'ex.radar.example': 'Exemple : 2 boules s’allument → suis-les des yeux pendant qu’elles se mêlent aux autres, puis touche exactement ces 2.',
   'ex.clash.example': 'Exemple : le mot ROUGE écrit en bleu → avec la règle 🎨 réponds BLEU, avec la règle 📖 réponds ROUGE.',
   'ex.switch.example': 'Exemple : 7 dans un cadre bleu → IMPAIR. Le même 7 dans un cadre orange → PLUS GRAND que 5.',

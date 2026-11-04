@@ -130,7 +130,7 @@ const ui: Locale['ui'] = {
   'ex.path.detail': '{secs} dtk · {err} kesalahan',
 
   'ex.pilot.name': 'Pilot',
-  'ex.pilot.desc': 'Kemudikan dengan menggeser (atau dengan tombol panah) agar tetap di jalan. Sementara itu, tekan SINYAL hanya saat lingkaran hijau lewat.',
+  'ex.pilot.desc': 'Tetap di jalan: geser dengan jari atau, di komputer, gunakan tombol ← →. Saat lingkaran hijau muncul, tekan SINYAL (tombol di layar, klik, atau spasi): bisa dilakukan sejak muncul sampai cincin di sekeliling rambu habis. Abaikan rambu lainnya.',
   'ex.pilot.why': 'Terinspirasi oleh NeuroRacer (University of California, San Francisco): dalam studi yang terbit di Nature, latihan multitasking adaptif mengurangi beban melakukan dua hal sekaligus, dan efeknya bertahan 6 bulan.',
   'ex.pilot.press': 'SINYAL!',
   'ex.pilot.detail': 'Sinyal benar: {ok}/{n} · di jalan {road}%',
@@ -301,7 +301,7 @@ const ui: Locale['ui'] = {
   'ex.glance.example': 'Contoh: 🚗 di tengah dan bintang di kanan atas → jawab 🚗, lalu ketuk kotak kanan atas.',
   'ex.reflex.example': 'Contoh: panel hijau menyala → segera ketuk. Jika merah → jangan sentuh apa pun dan tunggu.',
   'ex.path.example': 'Contoh: ketuk 1, lalu 2, lalu 3… Dalam versi bergantian: 1 → A → 2 → B → 3 → C.',
-  'ex.pilot.example': 'Contoh: geser untuk mengikuti jalan. Lingkaran hijau lewat → tekan SINYAL. Segitiga atau persegi → abaikan.',
+  'ex.pilot.example': 'Contoh: lingkaran hijau muncul dengan cincin penuh → tekan SINYAL sebelum cincin habis. Segitiga atau persegi → jangan tekan.',
   'ex.radar.example': 'Contoh: 2 bola menyala → ikuti dengan matamu saat bercampur dengan yang lain, lalu ketuk tepat 2 bola itu.',
   'ex.clash.example': 'Contoh: kata MERAH ditulis dengan warna biru → dengan aturan 🎨 jawab BIRU, dengan aturan 📖 jawab MERAH.',
   'ex.switch.example': 'Contoh: 7 dalam bingkai biru → GANJIL. Angka 7 yang sama dalam bingkai oranye → LEBIH BESAR dari 5.',
