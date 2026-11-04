@@ -742,7 +742,7 @@ export const ui = {
   'ex.resources.total': '📈 Earnings: {val} · goal: at least {target}',
   'ex.resources.cost': 'Costs {n} 🪙',
   'ex.resources.gain': 'Earns {n} 🪙',
-  'ex.resources.was': 'you could earn {n}',
+  'ex.resources.below': 'You earned {val}: below the minimum of {target} (the most possible was {n})',
 
   'groups.creator': 'creator',
   'groups.idle': 'No training yet this week',

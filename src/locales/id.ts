@@ -703,7 +703,7 @@ const ui: Locale['ui'] = {
   'ex.resources.total': '📈 Untung: {val} · target: minimal {target}',
   'ex.resources.cost': 'Harga {n} 🪙',
   'ex.resources.gain': 'Untung {n} 🪙',
-  'ex.resources.was': 'bisa untung {n}',
+  'ex.resources.below': 'Kamu mendapat {val}: di bawah minimum {target} (maksimum yang mungkin {n})',
 
   'groups.creator': 'pembuat',
   'groups.idle': 'Belum ada latihan minggu ini',

@@ -740,7 +740,7 @@ const ui: Locale['ui'] = {
   'ex.resources.total': '📈 Guadagno: {val} · obiettivo: almeno {target}',
   'ex.resources.cost': 'Costa {n} 🪙',
   'ex.resources.gain': 'Guadagni {n} 🪙',
-  'ex.resources.was': 'si potevano guadagnare {n}',
+  'ex.resources.below': 'Hai guadagnato {val}: sotto il minimo di {target} (il massimo possibile era {n})',
 
   'groups.creator': 'creatore',
   'groups.idle': 'Nessun allenamento questa settimana',

@@ -703,7 +703,7 @@ const ui: Locale['ui'] = {
   'ex.resources.total': '📈 儲け：{val} · 目標：{target}以上',
   'ex.resources.cost': '値段 {n} 🪙',
   'ex.resources.gain': '儲け {n} 🪙',
-  'ex.resources.was': '{n}まで稼げました',
+  'ex.resources.below': '儲けは{val}：最低{target}に届きませんでした（最大は{n}）',
 
   'groups.creator': '作成者',
   'groups.idle': '今週はまだトレーニングなし',

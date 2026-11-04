@@ -160,13 +160,17 @@ export const resources: Exercise = {
       // When time runs out the basket is judged as it stands.
       const limit = (ctx.practice ? 600 : secondsFor(st.int)) * 1000 * ctx.pace;
       clock.start(limit);
-      await ctx.timed<void>(limit, undefined, (done) => {
-        submitBtn.onclick = () => done();
+      const inTime = await ctx.timed<boolean>(limit, false, (done) => {
+        submitBtn.onclick = () => done(true);
       });
       clock.stop();
 
       const isSuccess = total('cost') <= budget && total('gain') >= target;
-      const ok = ctx.track(st, isSuccess, { was: t('ex.resources.was', { n: maxGain }) });
+      // The real reason, with its numbers: reaching the goal always wins, so a mistake is never about "could do better".
+      const spent = total('cost');
+      const reason = spent > budget ? t('ex.resources.over', { cost: spent, budget }) : t('ex.resources.below', { val: total('gain'), target, n: maxGain });
+      const why = inTime ? reason : `${t('common.timeout')}. ${reason}`;
+      const ok = ctx.track(st, isSuccess, { was: why });
 
       if (isSuccess) {
         correct++;
@@ -179,7 +183,7 @@ export const resources: Exercise = {
           card.classList.toggle('correct-hint', ((mask >> i) & 1) === 1);
           (card as HTMLButtonElement).disabled = true;
         });
-        header.append(h('b', {}, t('ex.resources.was', { n: maxGain })));
+        header.append(h('b', {}, why));
         submitBtn.disabled = false;
         submitBtn.textContent = t('common.continue');
         await ctx.input<void>((done) => {

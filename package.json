@@ -1,7 +1,7 @@
 {
   "name": "synapse-dojo",
   "private": true,
-  "version": "0.10.8",
+  "version": "0.10.9",
   "type": "module",
   "license": "PolyForm-Noncommercial-1.0.0",
   "engines": {

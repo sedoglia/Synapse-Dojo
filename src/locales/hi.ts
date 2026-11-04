@@ -703,7 +703,7 @@ const ui: Locale['ui'] = {
   'ex.resources.total': '📈 कमाई: {val} · लक्ष्य: कम से कम {target}',
   'ex.resources.cost': 'क़ीमत {n} 🪙',
   'ex.resources.gain': 'कमाई {n} 🪙',
-  'ex.resources.was': '{n} कमाए जा सकते थे',
+  'ex.resources.below': 'आपने {val} कमाए: न्यूनतम {target} से कम (अधिकतम संभव {n} था)',
 
   'groups.creator': 'निर्माता',
   'groups.idle': 'इस हफ़्ते अभी अभ्यास नहीं',

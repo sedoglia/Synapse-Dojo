@@ -703,7 +703,7 @@ const ui: Locale['ui'] = {
   'ex.resources.total': '📈 赚得：{val} · 目标：至少 {target}',
   'ex.resources.cost': '价格 {n} 🪙',
   'ex.resources.gain': '赚 {n} 🪙',
-  'ex.resources.was': '本可以赚 {n}',
+  'ex.resources.below': '你赚了 {val}：低于最低目标 {target}（最多可赚 {n}）',
 
   'groups.creator': '创建者',
   'groups.idle': '本周还没有训练',
