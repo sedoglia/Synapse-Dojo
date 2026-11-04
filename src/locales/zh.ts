@@ -227,6 +227,8 @@ const ui: Locale['ui'] = {
   'ex.odd.desc': '除了一个，其他图形都有一个共同点（形状、颜色、填充或数量）。找出那个不一样的。',
   'ex.odd.why': '归纳推理：在无关的差异中找出隐藏的共同规律。剑桥脑科学（Cambridge Brain Sciences）的测试组合中也有类似任务。',
   'ex.odd.ask': '哪个不一样？',
+  'ex.odd.because': '区别：{dim}',
+  'ex.odd.dimFill': '填充',
 
   'ex.math.name': '计算冲刺',
   'ex.math.desc': '尽快解题。输入完所有数位后答案会自动提交。',

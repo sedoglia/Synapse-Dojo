@@ -1,11 +1,17 @@
 import { h, rand, shuffle } from '../dom';
-import { t } from '../i18n';
+import { t, type I18nKey } from '../i18n';
 import type { Exercise } from './types';
 
 type Feature = 'shape' | 'color' | 'fill' | 'count';
 export type Item = Record<Feature, number>;
 const FEATURES: Feature[] = ['shape', 'color', 'fill', 'count'];
 const VALUES: Record<Feature, number> = { shape: 4, color: 4, fill: 2, count: 3 };
+const FEATURE_NAME: Record<Feature, I18nKey> = {
+  shape: 'ex.sorting.dimShape',
+  color: 'ex.sorting.dimColor',
+  fill: 'ex.odd.dimFill',
+  count: 'ex.sorting.dimCount',
+};
 const COLORS = ['var(--c-red)', 'var(--c-blue)', 'var(--c-green)', 'var(--c-yellow)'];
 const MAX_LEVEL = 10;
 
@@ -13,8 +19,11 @@ const itemsFor = (level: number) => Math.min(9, 4 + Math.floor(level / 2));
 /** How many irrelevant features vary between items, hiding the common rule. */
 const variedFor = (level: number) => Math.min(3, 1 + Math.floor((level - 1) / 3));
 
-/** All items share the `key` feature except one; other features never single out a different item. */
-function puzzle(level: number): { items: Item[]; odd: number } {
+/**
+ * All items share the `key` feature except one. Every value of the other features appears on at least two items, so
+ * no other item stands out in any way: the right answer is the only figure that can be called the odd one out.
+ */
+export function puzzle(level: number): { items: Item[]; odd: number; key: Feature } {
   const n = itemsFor(level);
   for (;;) {
     const [key, ...rest] = shuffle(FEATURES);
@@ -32,12 +41,11 @@ function puzzle(level: number): { items: Item[]; odd: number } {
 
     const ambiguous = vary.some((f) => {
       for (let v = 0; v < VALUES[f]; v++) {
-        const others = items.map((it, i) => (it[f] !== v ? i : -1)).filter((i) => i >= 0);
-        if (others.length === 1 && others[0] !== odd) return true;
+        if (items.filter((it) => it[f] === v).length === 1) return true;
       }
       return false;
     });
-    if (!ambiguous) return { items, odd };
+    if (!ambiguous) return { items, odd, key };
   }
 }
 
@@ -95,7 +103,7 @@ export const odd: Exercise = {
     let correct = 0;
     for (let i = 0; i < trials; i++) {
       ctx.progress(i / trials, `${i + 1}/${trials}`);
-      const { items, odd: answer } = puzzle(st.int);
+      const { items, odd: answer, key } = puzzle(st.int);
       let onPick: ((k: number) => void) | null = null;
       const cells = items.map((it, k) => {
         const b = h('button', { class: 'odd-item', onPointerdown: () => onPick?.(k) });
@@ -109,7 +117,8 @@ export const odd: Exercise = {
         onPick = done;
         return () => (onPick = null);
       });
-      const ok = ctx.track(st, said === answer, { was: t('fb.oddHere') });
+      // A mistake says what set the right figure apart, not only which one it was.
+      const ok = ctx.track(st, said === answer, { was: `${t('fb.oddHere')} · ${t('ex.odd.because', { dim: t(FEATURE_NAME[key]) })}` });
       cells[answer].classList.add('right');
       if (ok) correct++;
       else cells[said].classList.add('wrong');

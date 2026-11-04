@@ -227,6 +227,8 @@ const ui: Locale['ui'] = {
   'ex.odd.desc': '1つを除くすべての図形に共通点（形、色、塗り、数）があります。共通点をもたないものを見つけてください。',
   'ex.odd.why': '帰納的推論：関係のない違いの中に隠れた共通ルールを見つけます。似た課題はCambridge Brain Sciencesのテストにもあります。',
   'ex.odd.ask': '仲間はずれはどれ？',
+  'ex.odd.because': '違い：{dim}',
+  'ex.odd.dimFill': '塗りつぶし',
 
   'ex.math.name': '計算スプリント',
   'ex.math.desc': 'できるだけ速く計算問題を解いてください。すべての桁を入力すると答えが送られます。',

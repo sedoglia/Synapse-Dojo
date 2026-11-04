@@ -227,6 +227,8 @@ const ui: Locale['ui'] = {
   'ex.odd.desc': 'Todas las figuras menos una comparten un rasgo (forma, color, relleno o número). Encuentra la que no lo tiene.',
   'ex.odd.why': 'Razonamiento inductivo: descubrir la regla común oculta entre diferencias irrelevantes. Tareas parecidas aparecen en las baterías de Cambridge Brain Sciences.',
   'ex.odd.ask': '¿Cuál es el intruso?',
+  'ex.odd.because': 'la diferencia es: {dim}',
+  'ex.odd.dimFill': 'Relleno',
 
   'ex.math.name': 'Sprint de cálculo',
   'ex.math.desc': 'Resuelve las operaciones lo más rápido que puedas. La respuesta se envía en cuanto escribes todas sus cifras.',

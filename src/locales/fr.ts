@@ -227,6 +227,8 @@ const ui: Locale['ui'] = {
   'ex.odd.desc': 'Toutes les formes sauf une ont un point commun (forme, couleur, remplissage ou nombre). Trouve celle qui ne l’a pas.',
   'ex.odd.why': 'Raisonnement inductif : trouver la règle commune cachée parmi des différences sans importance. Des tâches semblables figurent dans les batteries de Cambridge Brain Sciences.',
   'ex.odd.ask': 'Quel est l’intrus ?',
+  'ex.odd.because': 'la différence : {dim}',
+  'ex.odd.dimFill': 'Remplissage',
 
   'ex.math.name': 'Sprint de calcul',
   'ex.math.desc': 'Résous les calculs le plus vite possible. La réponse est envoyée dès que tu as tapé tous ses chiffres.',

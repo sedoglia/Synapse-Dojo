@@ -227,6 +227,8 @@ const ui: Locale['ui'] = {
   'ex.odd.desc': 'Alle Formen außer einer haben ein Merkmal gemeinsam (Form, Farbe, Füllung oder Anzahl). Finde die, die es nicht hat.',
   'ex.odd.why': 'Induktives Denken: die verborgene gemeinsame Regel zwischen unwichtigen Unterschieden finden. Ähnliche Aufgaben gibt es in den Testbatterien von Cambridge Brain Sciences.',
   'ex.odd.ask': 'Welche passt nicht dazu?',
+  'ex.odd.because': 'der Unterschied: {dim}',
+  'ex.odd.dimFill': 'Füllung',
 
   'ex.math.name': 'Rechensprint',
   'ex.math.desc': 'Löse die Aufgaben so schnell du kannst. Die Antwort wird gesendet, sobald du alle Ziffern getippt hast.',

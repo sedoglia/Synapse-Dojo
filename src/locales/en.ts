@@ -227,6 +227,8 @@ export const ui = {
   'ex.odd.desc': 'All shapes but one share a feature (shape, color, fill or count). Find the one that doesn’t.',
   'ex.odd.why': 'Inductive reasoning: finding the hidden common rule among irrelevant differences. Similar tasks appear in the Cambridge Brain Sciences batteries.',
   'ex.odd.ask': 'Which one is the odd one out?',
+  'ex.odd.because': 'the difference is: {dim}',
+  'ex.odd.dimFill': 'Fill',
 
   'ex.math.name': 'Math sprint',
   'ex.math.desc': 'Solve the problems as fast as you can. Your answer is submitted as soon as you type all its digits.',

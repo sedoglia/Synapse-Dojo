@@ -227,6 +227,8 @@ const ui: Locale['ui'] = {
   'ex.odd.desc': 'Semua bentuk kecuali satu punya satu ciri yang sama (bentuk, warna, isian, atau jumlah). Temukan yang tidak.',
   'ex.odd.why': 'Penalaran induktif: menemukan aturan bersama yang tersembunyi di antara perbedaan yang tidak penting. Tugas serupa ada dalam rangkaian tes Cambridge Brain Sciences.',
   'ex.odd.ask': 'Mana yang berbeda?',
+  'ex.odd.because': 'bedanya: {dim}',
+  'ex.odd.dimFill': 'Isian',
 
   'ex.math.name': 'Sprint hitung',
   'ex.math.desc': 'Selesaikan soal secepat mungkin. Jawabanmu terkirim begitu semua angkanya diketik.',
