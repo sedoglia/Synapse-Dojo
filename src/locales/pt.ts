@@ -315,7 +315,7 @@ const ui: Locale['ui'] = {
   'ex.odd.example': 'Exemplo: três círculos vermelhos cheios e um círculo azul cheio → o intruso é o azul (a única cor diferente).',
   'ex.math.example': 'Exemplo: 7 + 8 = → digite 15. A resposta é enviada assim que todos os dígitos são digitados.',
   'ex.reading.example': 'Exemplo: leia o texto em voz alta, aperte “Terminei” e responda à pergunta sobre ele.',
-  'fb.pilotRoad': 'fique na estrada enquanto o sinal chega',
+  'fb.pilotRoad': 'mantenha-se na estrada',
   'fb.pilotMissed': 'era o círculo verde: aperte SINAL',
   'fb.pilotNotTarget': 'aperte só para o círculo verde',
   'fb.pilotStray': 'nenhum sinal à vista: espere o círculo verde',

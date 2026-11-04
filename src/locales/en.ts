@@ -315,7 +315,7 @@ export const ui = {
   'ex.odd.example': 'Example: three solid red circles and one solid blue circle → the odd one out is the blue one (the only different color).',
   'ex.math.example': 'Example: 7 + 8 = → type 15. The answer is submitted as soon as all its digits are typed.',
   'ex.reading.example': 'Example: read the passage aloud, press “I’m done” and answer the question about it.',
-  'fb.pilotRoad': 'stay on the road while the sign is coming',
+  'fb.pilotRoad': 'stay on the road',
   'fb.pilotMissed': 'it was the green circle: press SIGNAL',
   'fb.pilotNotTarget': 'press only for the green circle',
   'fb.pilotStray': 'no sign in view: wait for the green circle',

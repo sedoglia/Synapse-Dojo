@@ -315,7 +315,7 @@ const ui: Locale['ui'] = {
   'ex.odd.example': '例：塗りつぶした赤い円が3つと青い円が1つ → 仲間はずれは青（色が違うのはそれだけ）。',
   'ex.math.example': '例：7 + 8 = → 15と入力。すべての桁を入力すると答えが送られます。',
   'ex.reading.example': '例：文章を声に出して読み、「読み終えた」を押して、内容についての質問に答える。',
-  'fb.pilotRoad': '標識が近づく間も道からはみ出さないで',
+  'fb.pilotRoad': '道路から外れないで',
   'fb.pilotMissed': '緑の円でした：「合図」を押そう',
   'fb.pilotNotTarget': '押すのは緑の円のときだけ',
   'fb.pilotStray': '標識は見えていません：緑の円を待とう',

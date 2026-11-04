@@ -1,4 +1,4 @@
-﻿import { h, pick, flash } from '../dom';
+﻿import { h, pick, flash, clamp } from '../dom';
 import { t, num } from '../i18n';
 import { store } from '../storage';
 import { DETRAIN_DAYS } from '../adaptive';
@@ -19,7 +19,11 @@ const speedFor = (l: number) => 150 + l * 18; // px/s of road scrolling
 const curveFor = (l: number) => Math.min(1, 0.55 + l * 0.04); // bend amplitude, fraction of half-width
 /** Signs: how often they come, how long there is to answer, and from level 5 distractors that look like the target. */
 const gapFor = (l: number) => Math.max(1.3, 2.6 - l * 0.1); // seconds between signs
-const answerFor = (l: number) => Math.max(600, Math.round(1600 * Math.pow(0.915, l - 1))); // ms to answer a sign
+/** ms to answer a sign, from when it comes into view. At the first levels it lasts until the sign reaches the car. */
+const answerFor = (l: number) => Math.max(700, Math.round(2600 * Math.pow(0.89, l - 1)));
+const SIGN_MARGIN = 19; // px a sign keeps from the canvas edge: radius 15 + outline
+const LATE_PRESS = 0.5; // seconds after a sign leaves in which a press is just late, not a press at nothing
+const STATUS_SECONDS = 1.2; // how long ✓/✗ stays up, so an old mark isn't read as a verdict on what's on screen now
 
 type Shape = 'circle' | 'square' | 'triangle' | 'diamond';
 interface Kind {
@@ -131,6 +135,8 @@ export const pilot: Exercise = {
     let evaluated = 0;
     let right = 0;
     let elapsed = 0;
+    let statusUntil = 0;
+    let lastGone = -LATE_PRESS;
 
     const carY = () => size.h * 0.78;
     const laneHalf = () => Math.max(38, size.w * 0.12);
@@ -141,6 +147,14 @@ export const pilot: Exercise = {
     const showStatus = (ok: boolean, text = '') => {
       status.textContent = ok ? '✓' : `✗ ${text}`;
       status.className = `pilot-status ${ok ? 'ok' : 'ko'}`;
+      statusUntil = elapsed + STATUS_SECONDS;
+    };
+
+    /** The side of the road where a sign fits: with sharp bends the road runs close to one edge of the screen. */
+    const sideFor = (wy: number) => {
+      const side = Math.random() < 0.5 ? -1 : 1;
+      const x = centerAt(wy) + side * (laneHalf() + 28);
+      return x < SIGN_MARGIN || x > size.w - SIGN_MARGIN ? -side : side;
     };
 
     // A sign is judged when its time to answer runs out or it passes the car, whichever comes first.
@@ -164,8 +178,8 @@ export const pilot: Exercise = {
       const active = visible.filter((s) => !s.judged && !s.pressed).sort((a, b) => a.wy - b.wy);
       const s = active.find((x) => x.target) ?? active[0];
       if (!s) {
-        // Too late for a sign already reported as missed: that error has been counted once.
-        if (visible.some((x) => x.judged || x.pressed)) return;
+        // Too late for a sign already reported as missed, or one just gone by: not a press at nothing.
+        if (visible.some((x) => x.judged || x.pressed) || elapsed - lastGone < LATE_PRESS) return;
         // Pressing with no sign in view is its own mistake; it doesn't spoil the next sign.
         flash(btn, 'bad');
         ctx.track(st, false, { was: t('fb.pilotStray') });
@@ -210,10 +224,13 @@ export const pilot: Exercise = {
       }
       for (const s of signs) {
         const sy = toScreen(s.wy);
-        const sx = centerAt(s.wy) + s.side * (lh + 28);
+        const sx = clamp(centerAt(s.wy) + s.side * (lh + 28), SIGN_MARGIN, size.w - SIGN_MARGIN);
+        // A sign whose time is up fades, so it's clear it no longer needs an answer.
+        g.globalAlpha = s.judged && !s.pressed ? 0.35 : 1;
         g.fillStyle = '#e5e7eb';
         g.fillRect(sx - 2, sy, 4, 26);
         drawShape(g, s.kind, sx, sy, 15);
+        g.globalAlpha = 1;
       }
       const onRoad = Math.abs(carX - centerAt(dist)) < lh - 12;
       g.fillStyle = onRoad ? accent : '#e5484d';
@@ -256,8 +273,9 @@ export const pilot: Exercise = {
           if (windowTime >= ROAD_WINDOW) {
             if (onRoadTime / windowTime >= ROAD_OK) road.record(true);
             else {
-              ctx.track(road, false, { was: t('fb.pilotRoad') });
-              showStatus(false, '🛣️');
+              // Driving is judged all the time, with or without a sign: a small note, not the big ✗ used for signs.
+              ctx.track(road, false, { subtle: true });
+              showStatus(false, `🛣️ ${t('fb.pilotRoad')}`);
             }
             onRoadTime = windowTime = 0;
           }
@@ -266,21 +284,30 @@ export const pilot: Exercise = {
           if (nextSign <= 0 && elapsed < duration - 3) {
             const target = Math.random() < 0.4;
             const pool = st.level >= 5 ? [...EASY, ...SIMILAR] : EASY;
+            const wy = dist + carY() + 40;
             signs.push({
-              wy: dist + carY() + 40,
-              side: Math.random() < 0.5 ? -1 : 1,
+              wy,
+              side: sideFor(wy),
               kind: target ? TARGET : pick(pool),
               target,
               pressed: false,
               judged: false,
-              born: elapsed,
+              born: elapsed + 20 / (speedFor(road.level) / ctx.pace), // starts above the screen: the clock starts when it shows
             });
             nextSign = gapFor(st.level) * ctx.pace * (0.8 + Math.random() * 0.4);
           }
           for (const s of signs) {
             if (!s.judged && elapsed - s.born >= (answerFor(st.level) * ctx.pace) / 1000) evaluate(s);
           }
-          while (signs.length && toScreen(signs[0].wy) > carY() + PASS_MARGIN) evaluate(signs.shift()!);
+          while (signs.length && toScreen(signs[0].wy) > carY() + PASS_MARGIN) {
+            evaluate(signs.shift()!);
+            lastGone = elapsed;
+          }
+          if (statusUntil && elapsed >= statusUntil) {
+            statusUntil = 0;
+            status.textContent = ' ';
+            status.className = 'pilot-status';
+          }
 
           draw();
           ctx.progress(elapsed / duration, `${Math.ceil(duration - elapsed)}s`);

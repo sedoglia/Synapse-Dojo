@@ -315,7 +315,7 @@ const ui: Locale['ui'] = {
   'ex.odd.example': 'Beispiel: drei volle rote Kreise und ein voller blauer Kreis → der Außenseiter ist der blaue (die einzige andere Farbe).',
   'ex.math.example': 'Beispiel: 7 + 8 = → tippe 15. Die Antwort wird gesendet, sobald alle Ziffern getippt sind.',
   'ex.reading.example': 'Beispiel: Lies den Text laut vor, drücke „Fertig“ und beantworte die Frage dazu.',
-  'fb.pilotRoad': 'bleib auf der Straße, während das Zeichen kommt',
+  'fb.pilotRoad': 'bleib auf der Straße',
   'fb.pilotMissed': 'das war der grüne Kreis: drücke SIGNAL',
   'fb.pilotNotTarget': 'drücke nur beim grünen Kreis',
   'fb.pilotStray': 'kein Zeichen in Sicht: warte auf den grünen Kreis',

@@ -315,7 +315,7 @@ const ui: Locale['ui'] = {
   'ex.odd.example': 'Esempio: tre cerchi rossi pieni e un cerchio blu pieno → l’intruso è il cerchio blu (è l’unico di un altro colore).',
   'ex.math.example': 'Esempio: 7 + 8 = → scrivi 15. La risposta parte da sola appena hai scritto tutte le cifre.',
   'ex.reading.example': 'Esempio: leggi il brano a voce alta, premi «Ho finito» e rispondi alla domanda sul testo.',
-  'fb.pilotRoad': 'resta sulla strada mentre arriva il segnale',
+  'fb.pilotRoad': 'resta sulla strada',
   'fb.pilotMissed': 'era il cerchio verde: premi SEGNALE',
   'fb.pilotNotTarget': 'premi solo per il cerchio verde',
   'fb.pilotStray': 'nessun segnale in vista: aspetta il cerchio verde',

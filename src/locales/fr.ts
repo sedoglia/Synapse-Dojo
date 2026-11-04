@@ -315,7 +315,7 @@ const ui: Locale['ui'] = {
   'ex.odd.example': 'Exemple : trois cercles rouges pleins et un cercle bleu plein → l’intrus est le bleu (la seule couleur différente).',
   'ex.math.example': 'Exemple : 7 + 8 = → tape 15. La réponse est envoyée dès que tous ses chiffres sont tapés.',
   'ex.reading.example': 'Exemple : lis le texte à voix haute, appuie sur « J’ai fini » et réponds à la question.',
-  'fb.pilotRoad': 'reste sur la route pendant que le signal arrive',
+  'fb.pilotRoad': 'reste sur la route',
   'fb.pilotMissed': 'c’était le cercle vert : appuie sur SIGNAL',
   'fb.pilotNotTarget': 'appuie seulement pour le cercle vert',
   'fb.pilotStray': 'aucun signal en vue : attends le cercle vert',

@@ -315,7 +315,7 @@ const ui: Locale['ui'] = {
   'ex.odd.example': '例子：三个实心红圆和一个实心蓝圆 → 不一样的是蓝色那个（唯一不同的颜色）。',
   'ex.math.example': '例子：7 + 8 = → 输入 15。输入完所有数位后答案会自动提交。',
   'ex.reading.example': '例子：大声读出文章，按“读完了”，然后回答相关问题。',
-  'fb.pilotRoad': '标志快到时要保持在路上',
+  'fb.pilotRoad': '请留在道路上',
   'fb.pilotMissed': '那是绿色圆圈：按“信号”',
   'fb.pilotNotTarget': '只在绿色圆圈出现时按',
   'fb.pilotStray': '现在没有标志：等绿色圆圈出现',

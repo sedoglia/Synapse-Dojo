@@ -315,7 +315,7 @@ const ui: Locale['ui'] = {
   'ex.odd.example': 'Contoh: tiga lingkaran merah penuh dan satu lingkaran biru penuh → yang berbeda adalah yang biru (satu-satunya warna lain).',
   'ex.math.example': 'Contoh: 7 + 8 = → ketik 15. Jawaban terkirim begitu semua angkanya diketik.',
   'ex.reading.example': 'Contoh: baca teksnya keras-keras, tekan “Selesai”, lalu jawab pertanyaan tentangnya.',
-  'fb.pilotRoad': 'tetap di jalan saat tanda mendekat',
+  'fb.pilotRoad': 'tetap di jalan',
   'fb.pilotMissed': 'itu lingkaran hijau: tekan SINYAL',
   'fb.pilotNotTarget': 'tekan hanya untuk lingkaran hijau',
   'fb.pilotStray': 'tidak ada tanda terlihat: tunggu lingkaran hijau',
