@@ -703,6 +703,8 @@ const ui: Locale['ui'] = {
   'groups.idle': 'इस हफ़्ते अभी अभ्यास नहीं',
   'groups.remove': 'समूह से हटाएँ',
   'groups.removeConfirm': '{name} को “{group}” से हटाएँ? आमंत्रण कोड से वापसी हो सकती है।',
+
+  'settings.saved': 'सहेजा गया',
 };
 
 const words: string[] = [

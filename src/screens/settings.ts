@@ -96,12 +96,32 @@ function boardSection(): HTMLElement | null {
     error.textContent = '';
     try {
       await work();
+      // Redrawing goes back to the top: stay at this section instead.
+      const y = window.scrollY;
       showSettings();
+      window.scrollTo(0, y);
     } catch (e) {
       error.textContent = boardErrorText(e);
       buttons.forEach((b) => (b.disabled = false));
     }
   };
+
+  // The age group saves on its own, without a button, so it says when it is saved and goes back if it couldn't be.
+  const saved = h('small', { class: 'board-saved', role: 'status' });
+  const age = ageSelect(acc.ageBand, async (ageBand) => {
+    age.disabled = true;
+    error.textContent = '';
+    saved.textContent = '';
+    try {
+      await updateBoardProfile({ ageBand });
+      if (!store.data.board) return showSettings(); // the server no longer knows this player
+      saved.textContent = `✓ ${t('settings.saved')}`;
+    } catch (e) {
+      age.value = acc.ageBand ?? '';
+      error.textContent = boardErrorText(e);
+    }
+    age.disabled = false;
+  });
 
   const open = h('button', { class: 'btn primary', onClick: () => showBoard(showSettings) }, `🏆 ${t('settings.boardOpen')}`);
   const groups = h('button', { class: 'btn', onClick: () => showGroups(showSettings) }, `👥 ${t('settings.boardGroups')}`);
@@ -116,7 +136,8 @@ function boardSection(): HTMLElement | null {
     { class: 'card form' },
     h('h3', {}, `🏆 ${t('settings.board')}`),
     h('p', {}, t('settings.boardMember', { name: nickname(acc.nameCode) })),
-    h('label', {}, t('settings.boardAge'), ageSelect(acc.ageBand, (ageBand) => void act([], () => updateBoardProfile({ ageBand })))),
+    h('label', {}, t('settings.boardAge'), age),
+    saved,
     h('div', { class: 'row left' }, open, groups),
     h('div', { class: 'row left' }, rename, leave),
     error,

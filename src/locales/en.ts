@@ -742,6 +742,8 @@ export const ui = {
   'groups.idle': 'No training yet this week',
   'groups.remove': 'Remove from group',
   'groups.removeConfirm': 'Remove {name} from “{group}”? They can come back with the invite code.',
+
+  'settings.saved': 'Saved',
 };
 
 const nicknames = {

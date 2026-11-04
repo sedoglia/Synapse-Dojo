@@ -703,6 +703,8 @@ const ui: Locale['ui'] = {
   'groups.idle': 'Ainda sem treino nesta semana',
   'groups.remove': 'Remover do grupo',
   'groups.removeConfirm': 'Remover {name} de “{group}”? Poderá voltar com o código de convite.',
+
+  'settings.saved': 'Salvo',
 };
 
 const words: string[] = [

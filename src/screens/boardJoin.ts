@@ -3,7 +3,7 @@ import { t } from '../i18n';
 import { render, page } from '../ui';
 import { AGE_BANDS, boardErrorText, joinBoard, type AgeBand } from '../board';
 
-export function ageSelect(value: string | null, onChange: (band: AgeBand | null) => void): HTMLSelectElement {
+export function ageSelect(value: string | null, onChange: (band: AgeBand | null) => unknown): HTMLSelectElement {
   const select = h(
     'select',
     { class: 'input', onChange: () => onChange((select.value || null) as AgeBand | null) },

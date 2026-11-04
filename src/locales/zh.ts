@@ -703,6 +703,8 @@ const ui: Locale['ui'] = {
   'groups.idle': '本周还没有训练',
   'groups.remove': '移出小组',
   'groups.removeConfirm': '将 {name} 移出“{group}”？之后可以用邀请码重新加入。',
+
+  'settings.saved': '已保存',
 };
 
 const words: string[] = [

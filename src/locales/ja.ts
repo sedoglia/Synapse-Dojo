@@ -703,6 +703,8 @@ const ui: Locale['ui'] = {
   'groups.idle': '今週はまだトレーニングなし',
   'groups.remove': 'グループから外す',
   'groups.removeConfirm': '{name}を「{group}」から外しますか？ 招待コードで戻ることができます。',
+
+  'settings.saved': '保存しました',
 };
 
 const words: string[] = [

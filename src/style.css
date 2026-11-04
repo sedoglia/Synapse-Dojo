@@ -3823,6 +3823,11 @@ html.big-text {
 .board-error {
   color: var(--bad);
 }
+.board-saved {
+  color: var(--good);
+  font-weight: 700;
+}
+.board-saved:empty,
 .board-error:empty,
 .turnstile-box:empty {
   display: none;

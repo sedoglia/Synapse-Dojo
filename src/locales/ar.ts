@@ -703,6 +703,8 @@ const ui: Locale['ui'] = {
   'groups.idle': 'لا تدريب بعد هذا الأسبوع',
   'groups.remove': 'إزالة من المجموعة',
   'groups.removeConfirm': 'إزالة {name} من «{group}»؟ يمكن العودة برمز الدعوة.',
+
+  'settings.saved': 'تم الحفظ',
 };
 
 const words: string[] = [

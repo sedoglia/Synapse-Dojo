@@ -703,6 +703,8 @@ const ui: Locale['ui'] = {
   'groups.idle': 'Belum ada latihan minggu ini',
   'groups.remove': 'Keluarkan dari grup',
   'groups.removeConfirm': 'Keluarkan {name} dari “{group}”? Bisa kembali dengan kode undangan.',
+
+  'settings.saved': 'Tersimpan',
 };
 
 const words: string[] = [
