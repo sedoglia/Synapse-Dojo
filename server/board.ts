@@ -148,10 +148,11 @@ export const REASSIGN_OWNERS = `UPDATE friend_groups SET owner = COALESCE(
     (SELECT m.player_id FROM group_members m WHERE m.group_id = friend_groups.id ORDER BY m.joined, m.player_id LIMIT 1), owner)
   WHERE NOT EXISTS (SELECT 1 FROM group_members o WHERE o.group_id = friend_groups.id AND o.player_id = friend_groups.owner)`;
 
-/** Everything the server keeps about a player: results, group memberships, the player itself. */
+/** Everything the server keeps about a player: results, group memberships and bans, the player itself. */
 export const deletePlayer = (db: D1Database, id: string) => [
   db.prepare('DELETE FROM entries WHERE player_id = ?').bind(id),
   db.prepare('DELETE FROM group_members WHERE player_id = ?').bind(id),
+  db.prepare('DELETE FROM group_bans WHERE player_id = ?').bind(id),
   db.prepare('DELETE FROM players WHERE id = ?').bind(id),
   db.prepare(REASSIGN_OWNERS),
   db.prepare(DROP_EMPTY_GROUPS),
@@ -165,10 +166,11 @@ export async function cleanUp(db: D1Database, now = new Date()) {
   const oldWeek = isoWeek(new Date(now.getTime() - KEEP_WEEKS * 7 * DAY));
   const idle = now.getTime() - KEEP_PLAYERS_DAYS * DAY;
   const idlePlayers = 'SELECT id FROM players WHERE last_seen < ?';
-  const [weeks, idleEntries, , players, , groups] = await db.batch([
+  const [weeks, idleEntries, , , players, , groups] = await db.batch([
     db.prepare('DELETE FROM entries WHERE week < ?').bind(oldWeek),
     db.prepare(`DELETE FROM entries WHERE player_id IN (${idlePlayers})`).bind(idle),
     db.prepare(`DELETE FROM group_members WHERE player_id IN (${idlePlayers})`).bind(idle),
+    db.prepare(`DELETE FROM group_bans WHERE player_id IN (${idlePlayers})`).bind(idle),
     db.prepare('DELETE FROM players WHERE last_seen < ?').bind(idle),
     db.prepare(REASSIGN_OWNERS),
     db.prepare(DROP_EMPTY_GROUPS),

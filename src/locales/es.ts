@@ -397,7 +397,7 @@ const ui: Locale['ui'] = {
   'settings.importConfirm': '¿Sustituir los datos actuales por los del archivo ({name}, {runs} ejercicios jugados, el último el {last})? Se perderá tu progreso actual.',
   'settings.importDone': 'Progreso importado.',
   'privacy.title': 'Privacidad y aviso legal',
-  'privacy.updated': 'Última actualización: 3 de noviembre de 2026',
+  'privacy.updated': 'Última actualización: 4 de noviembre de 2026',
   'privacy.dataH': 'Tus datos se quedan en tu dispositivo',
   'privacy.data': 'Tu nombre, tus progresos y tus ajustes se guardan solo en el navegador de este dispositivo (localStorage). Nunca se envían a un servidor (salvo el resumen semanal de la clasificación opcional, si te unes: ver abajo) y nadie, ni siquiera quien gestiona el juego, puede verlos. Desaparecen si borras los datos del navegador o usas «Borrar todos los datos»: puedes guardar una copia con «Exportar progreso» en Ajustes.',
   'privacy.cookiesH': 'Sin cuentas ni cookies',
@@ -407,7 +407,7 @@ const ui: Locale['ui'] = {
   'privacy.statsH': 'Estadísticas de visitas',
   'privacy.stats': 'Solo en la versión pública, las visitas se cuentan con Cloudflare Web Analytics, que no usa cookies, no guarda nada en tu navegador y no sigue a las personas entre sitios: solo muestra datos agregados como páginas vistas, país y tipo de dispositivo. Los nombres y los resultados de los ejercicios nunca se envían.',
   'privacy.boardH': 'Clasificación semanal opcional',
-  'privacy.board': 'Solo si te unes desde Ajustes, después de cada sesión el juego envía a su servidor (Cloudflare Workers con una base de datos D1) un resumen de la semana en curso: días de entrenamiento y actividades de cada día, cambio de nivel y mejor nivel por ejercicio, si usas el ritmo relajado y, si la indicaste, tu franja de edad. Está vinculado a un identificador aleatorio y a un apodo generado, nunca a tu nombre, tu correo ni al resto de tus progresos. Si creas un grupo de amigos o te unes a uno, el servidor guarda también el nombre del grupo y quién forma parte de él, visibles solo para sus miembros. Al unirte, Cloudflare Turnstile comprueba que no eres un robot, según la política de privacidad de Cloudflare. Los resultados semanales se borran a las 8 semanas y todo lo demás tras 90 días sin uso; «Salir y borrar mis datos» o «Borrar todos los datos» lo borran al instante, y un grupo que se queda sin miembros se elimina. La base jurídica es tu consentimiento, que puedes retirar en cualquier momento saliendo de la clasificación.',
+  'privacy.board': 'Solo si te unes desde Ajustes, después de cada sesión el juego envía a su servidor (Cloudflare Workers con una base de datos D1) un resumen de la semana en curso: días de entrenamiento y actividades de cada día, cambio de nivel y mejor nivel por ejercicio, si usas el ritmo relajado y, si la indicaste, tu franja de edad. Está vinculado a un identificador aleatorio y a un apodo generado, nunca a tu nombre, tu correo ni al resto de tus progresos. Si creas un grupo de amigos o te unes a uno, el servidor guarda también el nombre del grupo, quién forma parte de él (visibles solo para sus miembros) y a quién ha vetado su creador. Al unirte, Cloudflare Turnstile comprueba que no eres un robot, según la política de privacidad de Cloudflare. Los resultados semanales se borran a las 8 semanas y todo lo demás tras 90 días sin uso; «Salir y borrar mis datos» o «Borrar todos los datos» lo borran al instante, y un grupo que se queda sin miembros se elimina. La base jurídica es tu consentimiento, que puedes retirar en cualquier momento saliendo de la clasificación.',
   'privacy.medicalH': 'No es un dispositivo médico',
   'privacy.medical': 'Synapse Dojo es un juego para divertirse. No es un dispositivo médico, no diagnostica nada y no promete prevenir, frenar ni tratar la demencia, el deterioro cognitivo ni ningún otro problema de salud. Las puntuaciones solo indican cómo te va en los ejercicios. Si te preocupa tu salud, consulta a un médico.',
   'privacy.contactH': 'Contacto',
@@ -705,6 +705,20 @@ const ui: Locale['ui'] = {
   'groups.removeConfirm': '¿Quitar a {name} de «{group}»? Podrá volver con el código de invitación.',
 
   'settings.saved': 'Guardado',
+
+  'groups.copyCode': 'Copiar código',
+  'groups.codeCopied': 'Código copiado',
+  'groups.copyFailed': 'No se pudo copiar: selecciona el código y cópialo a mano',
+  'groups.ban': 'Vetar del grupo',
+  'groups.banConfirm': '¿Vetar a {name} de «{group}»? Saldrá del grupo y no podrá volver, ni siquiera con el código de invitación.',
+  'groups.actionsHint': '✕ quita del grupo (puede volver con el código) · 🚫 veta (no puede volver)',
+  'groups.bannedTitle': 'Vetados ({n})',
+  'groups.unban': 'Readmitir',
+  'groups.err.banned': 'No puedes unirte a este grupo: su creador te ha vetado.',
+
+  'groups.newCode': 'Nuevo código',
+  'groups.newCodeConfirm': '¿Sustituir el código de «{group}»? El código anterior y los enlaces de invitación dejarán de funcionar. Quien ya está en el grupo sigue dentro.',
+  'groups.newCodeDone': 'Nuevo código creado: el anterior ya no funciona',
 };
 
 const words: string[] = [

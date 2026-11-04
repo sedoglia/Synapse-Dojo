@@ -397,7 +397,7 @@ const ui: Locale['ui'] = {
   'settings.importConfirm': 'Remplacer les données actuelles par celles du fichier ({name}, {runs} exercices joués, le dernier le {last}) ? Tes progrès actuels seront perdus.',
   'settings.importDone': 'Progrès importés.',
   'privacy.title': 'Confidentialité et mentions légales',
-  'privacy.updated': 'Dernière mise à jour : 3 novembre 2026',
+  'privacy.updated': 'Dernière mise à jour : 4 novembre 2026',
   'privacy.dataH': 'Tes données restent sur ton appareil',
   'privacy.data': 'Ton nom, tes progrès et tes réglages sont enregistrés uniquement dans le navigateur de cet appareil (localStorage). Ils ne sont jamais envoyés à un serveur (sauf le résumé hebdomadaire du classement facultatif, si tu le rejoins : voir plus bas) et personne, pas même la personne qui gère le jeu, ne peut les voir. Ils disparaissent si tu effaces les données du navigateur ou utilises « Effacer toutes les données » : tu peux en garder une copie avec « Exporter les progrès » dans les Réglages.',
   'privacy.cookiesH': 'Ni compte ni cookies',
@@ -407,7 +407,7 @@ const ui: Locale['ui'] = {
   'privacy.statsH': 'Statistiques de visite',
   'privacy.stats': 'Uniquement dans la version publique, les visites sont comptées avec Cloudflare Web Analytics, qui n’utilise pas de cookies, n’enregistre rien dans ton navigateur et ne suit pas les personnes d’un site à l’autre : il ne montre que des données agrégées comme les pages vues, le pays et le type d’appareil. Les prénoms et les résultats des exercices ne sont jamais envoyés.',
   'privacy.boardH': 'Classement hebdomadaire facultatif',
-  'privacy.board': 'Uniquement si tu le rejoins depuis les Réglages, après chaque séance le jeu envoie à son serveur (Cloudflare Workers avec une base de données D1) un résumé de la semaine en cours : jours d’entraînement et activités de chaque jour, évolution du niveau et meilleur niveau par exercice, utilisation du rythme détendu et, si tu l’as indiquée, ta tranche d’âge. Il est lié à un identifiant aléatoire et à un pseudo généré, jamais à ton nom, à ton e-mail ni au reste de tes progrès. Si tu crées un groupe d’amis ou en rejoins un, le serveur conserve aussi le nom du groupe et ses membres, visibles uniquement par eux. Lors de l’inscription, Cloudflare Turnstile vérifie que tu n’es pas un robot, selon la politique de confidentialité de Cloudflare. Les résultats hebdomadaires sont effacés après 8 semaines et tout le reste après 90 jours sans utilisation ; « Quitter et effacer mes données » ou « Effacer toutes les données » les effacent immédiatement, et un groupe sans membres est supprimé. La base légale est ton consentement, que tu peux retirer à tout moment en quittant le classement.',
+  'privacy.board': 'Uniquement si tu le rejoins depuis les Réglages, après chaque séance le jeu envoie à son serveur (Cloudflare Workers avec une base de données D1) un résumé de la semaine en cours : jours d’entraînement et activités de chaque jour, évolution du niveau et meilleur niveau par exercice, utilisation du rythme détendu et, si tu l’as indiquée, ta tranche d’âge. Il est lié à un identifiant aléatoire et à un pseudo généré, jamais à ton nom, à ton e-mail ni au reste de tes progrès. Si tu crées un groupe d’amis ou en rejoins un, le serveur conserve aussi le nom du groupe, ses membres (visibles uniquement par eux) et les personnes bannies par son créateur. Lors de l’inscription, Cloudflare Turnstile vérifie que tu n’es pas un robot, selon la politique de confidentialité de Cloudflare. Les résultats hebdomadaires sont effacés après 8 semaines et tout le reste après 90 jours sans utilisation ; « Quitter et effacer mes données » ou « Effacer toutes les données » les effacent immédiatement, et un groupe sans membres est supprimé. La base légale est ton consentement, que tu peux retirer à tout moment en quittant le classement.',
   'privacy.medicalH': 'Pas un dispositif médical',
   'privacy.medical': 'Synapse Dojo est un jeu pour le plaisir. Ce n’est pas un dispositif médical, il ne pose aucun diagnostic et ne promet pas de prévenir, ralentir ou soigner la démence, le déclin cognitif ou tout autre problème de santé. Les scores indiquent seulement comment tu te débrouilles dans les exercices. Pour toute question de santé, parle à un médecin.',
   'privacy.contactH': 'Contact',
@@ -705,6 +705,20 @@ const ui: Locale['ui'] = {
   'groups.removeConfirm': 'Retirer {name} de « {group} » ? Le code d’invitation permettra de revenir.',
 
   'settings.saved': 'Enregistré',
+
+  'groups.copyCode': 'Copier le code',
+  'groups.codeCopied': 'Code copié',
+  'groups.copyFailed': 'Copie impossible : sélectionne le code et copie-le à la main',
+  'groups.ban': 'Bannir du groupe',
+  'groups.banConfirm': 'Bannir {name} de « {group} » ? Cette personne sera retirée du groupe et ne pourra plus revenir, même avec le code d’invitation.',
+  'groups.actionsHint': '✕ retire du groupe (retour possible avec le code) · 🚫 bannit (retour impossible)',
+  'groups.bannedTitle': 'Bannis ({n})',
+  'groups.unban': 'Réadmettre',
+  'groups.err.banned': 'Tu ne peux pas rejoindre ce groupe : son créateur t’a banni.',
+
+  'groups.newCode': 'Nouveau code',
+  'groups.newCodeConfirm': 'Remplacer le code de « {group} » ? L’ancien code et les liens d’invitation ne fonctionneront plus. Les membres restent dans le groupe.',
+  'groups.newCodeDone': 'Nouveau code créé : l’ancien ne fonctionne plus',
 };
 
 const words: string[] = [

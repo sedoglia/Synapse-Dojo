@@ -397,7 +397,7 @@ const ui: Locale['ui'] = {
   'settings.importConfirm': 'Die aktuellen Daten durch die aus der Datei ersetzen ({name}, {runs} gespielte Übungen, zuletzt am {last})? Dein aktueller Fortschritt geht verloren.',
   'settings.importDone': 'Fortschritt importiert.',
   'privacy.title': 'Datenschutz und Rechtliches',
-  'privacy.updated': 'Zuletzt aktualisiert: 3. November 2026',
+  'privacy.updated': 'Zuletzt aktualisiert: 4. November 2026',
   'privacy.dataH': 'Deine Daten bleiben auf deinem Gerät',
   'privacy.data': 'Dein Name, deine Fortschritte und Einstellungen werden nur im Browser dieses Geräts gespeichert (localStorage). Sie werden nie an einen Server gesendet (außer der Wochenzusammenfassung der freiwilligen Rangliste, wenn du ihr beitrittst: siehe unten), und niemand, auch nicht der Betreiber des Spiels, kann sie sehen. Sie verschwinden, wenn du die Browserdaten löschst oder „Alle Daten löschen“ verwendest: Mit „Fortschritt exportieren“ in den Einstellungen kannst du eine Kopie behalten.',
   'privacy.cookiesH': 'Keine Konten, keine Cookies',
@@ -407,7 +407,7 @@ const ui: Locale['ui'] = {
   'privacy.statsH': 'Besuchsstatistik',
   'privacy.stats': 'Nur in der öffentlichen Version werden Besuche mit Cloudflare Web Analytics gezählt. Es verwendet keine Cookies, speichert nichts in deinem Browser und verfolgt niemanden über Websites hinweg: Es zeigt nur zusammengefasste Daten wie Seitenaufrufe, Land und Gerätetyp. Namen und Übungsergebnisse werden nie gesendet.',
   'privacy.boardH': 'Freiwillige Wochenrangliste',
-  'privacy.board': 'Nur wenn du in den Einstellungen beitrittst, sendet das Spiel nach jeder Sitzung eine Zusammenfassung der laufenden Woche an seinen Server (Cloudflare Workers mit einer D1-Datenbank): Trainingstage und Aktivitäten pro Tag, Veränderung des Levels und bestes Level pro Übung, ob du das entspannte Tempo nutzt und, falls angegeben, deine Altersgruppe. Sie ist mit einer zufälligen Kennung und einem erzeugten Spitznamen verknüpft, nie mit deinem Namen, deiner E-Mail oder deinen übrigen Fortschritten. Wenn du eine Freundesgruppe gründest oder einer beitrittst, speichert der Server auch den Namen der Gruppe und ihre Mitglieder, sichtbar nur für sie. Beim Beitritt prüft Cloudflare Turnstile, dass du kein Roboter bist, gemäß der Datenschutzerklärung von Cloudflare. Wochenergebnisse werden nach 8 Wochen gelöscht, alles andere nach 90 Tagen ohne Nutzung; „Austreten und meine Daten löschen“ oder „Alle Daten löschen“ löscht sie sofort, und eine Gruppe ohne Mitglieder wird gelöscht. Rechtsgrundlage ist deine Einwilligung, die du jederzeit durch Austreten widerrufen kannst.',
+  'privacy.board': 'Nur wenn du in den Einstellungen beitrittst, sendet das Spiel nach jeder Sitzung eine Zusammenfassung der laufenden Woche an seinen Server (Cloudflare Workers mit einer D1-Datenbank): Trainingstage und Aktivitäten pro Tag, Veränderung des Levels und bestes Level pro Übung, ob du das entspannte Tempo nutzt und, falls angegeben, deine Altersgruppe. Sie ist mit einer zufälligen Kennung und einem erzeugten Spitznamen verknüpft, nie mit deinem Namen, deiner E-Mail oder deinen übrigen Fortschritten. Wenn du eine Freundesgruppe gründest oder einer beitrittst, speichert der Server auch den Namen der Gruppe, ihre Mitglieder (sichtbar nur für sie) und wen der Gründer gesperrt hat. Beim Beitritt prüft Cloudflare Turnstile, dass du kein Roboter bist, gemäß der Datenschutzerklärung von Cloudflare. Wochenergebnisse werden nach 8 Wochen gelöscht, alles andere nach 90 Tagen ohne Nutzung; „Austreten und meine Daten löschen“ oder „Alle Daten löschen“ löscht sie sofort, und eine Gruppe ohne Mitglieder wird gelöscht. Rechtsgrundlage ist deine Einwilligung, die du jederzeit durch Austreten widerrufen kannst.',
   'privacy.medicalH': 'Kein Medizinprodukt',
   'privacy.medical': 'Synapse Dojo ist ein Spiel zum Spaß. Es ist kein Medizinprodukt, stellt keine Diagnosen und verspricht nicht, Demenz, kognitiven Abbau oder andere Gesundheitsprobleme zu verhindern, zu verlangsamen oder zu behandeln. Die Punktzahlen zeigen nur, wie du in den Übungen abschneidest. Bei gesundheitlichen Fragen wende dich an eine Ärztin oder einen Arzt.',
   'privacy.contactH': 'Kontakt',
@@ -705,6 +705,20 @@ const ui: Locale['ui'] = {
   'groups.removeConfirm': '{name} aus „{group}“ entfernen? Mit dem Einladungscode ist eine Rückkehr möglich.',
 
   'settings.saved': 'Gespeichert',
+
+  'groups.copyCode': 'Code kopieren',
+  'groups.codeCopied': 'Code kopiert',
+  'groups.copyFailed': 'Kopieren nicht möglich: Markiere den Code und kopiere ihn von Hand',
+  'groups.ban': 'Aus der Gruppe sperren',
+  'groups.banConfirm': '{name} aus „{group}“ sperren? Die Person wird entfernt und kann nicht zurückkehren, auch nicht mit dem Einladungscode.',
+  'groups.actionsHint': '✕ entfernt aus der Gruppe (Rückkehr mit dem Code möglich) · 🚫 sperrt (keine Rückkehr)',
+  'groups.bannedTitle': 'Gesperrt ({n})',
+  'groups.unban': 'Wieder zulassen',
+  'groups.err.banned': 'Du kannst dieser Gruppe nicht beitreten: Der Gründer hat dich gesperrt.',
+
+  'groups.newCode': 'Neuer Code',
+  'groups.newCodeConfirm': 'Den Code von „{group}“ ersetzen? Der alte Code und die Einladungslinks funktionieren dann nicht mehr. Mitglieder bleiben in der Gruppe.',
+  'groups.newCodeDone': 'Neuer Code erstellt: Der alte funktioniert nicht mehr',
 };
 
 const words: string[] = [

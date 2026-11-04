@@ -397,7 +397,7 @@ const ui: Locale['ui'] = {
   'settings.importConfirm': '用文件中的数据替换当前数据吗？（{name}，已完成 {runs} 次练习，最近一次是 {last}）当前进度将会丢失。',
   'settings.importDone': '进度已导入。',
   'privacy.title': '隐私与法律声明',
-  'privacy.updated': '最后更新：2026 年 11 月 3 日',
+  'privacy.updated': '最后更新：2026 年 11 月 4 日',
   'privacy.dataH': '你的数据留在你的设备上',
   'privacy.data': '你的名字、进度和设置只保存在这台设备的浏览器里（localStorage）。它们从不发送到任何服务器（如果你加入可选的排行榜，则发送每周概要，见下文），任何人，包括游戏的运营者，都看不到。清除浏览器数据或使用“删除所有数据”后它们就会消失：你可以在设置中用“导出进度”保留一份副本。',
   'privacy.cookiesH': '没有账号，没有 Cookie',
@@ -407,7 +407,7 @@ const ui: Locale['ui'] = {
   'privacy.statsH': '访问统计',
   'privacy.stats': '仅在公开版本中，我们使用 Cloudflare Web Analytics 统计访问量。它不使用 Cookie，不在你的浏览器中保存任何内容，也不跨网站追踪用户：只显示页面浏览量、国家和设备类型等汇总数据。名字和练习结果从不发送。',
   'privacy.boardH': '可选的每周排行榜',
-  'privacy.board': '只有当你在设置中加入后，游戏才会在每次训练后向自己的服务器（使用 D1 数据库的 Cloudflare Workers）发送本周概要：训练的天数和每天的训练次数、每个练习的等级变化和最高等级、是否使用放松节奏，以及你选择填写的年龄段。概要与一个随机标识符和一个自动生成的昵称关联，绝不会与你的名字、邮箱或其他进度关联。如果你创建或加入好友小组，服务器还会保存小组名称和成员名单，只有成员能看到。加入时，Cloudflare Turnstile 会按照 Cloudflare 的隐私政策确认你不是机器人。每周结果在 8 周后删除，其余数据在 90 天未使用后删除；“退出并删除我的数据”或“删除所有数据”会立即删除，没有成员的小组也会被删除。法律依据是你的同意，你可以随时退出排行榜来撤回。',
+  'privacy.board': '只有当你在设置中加入后，游戏才会在每次训练后向自己的服务器（使用 D1 数据库的 Cloudflare Workers）发送本周概要：训练的天数和每天的训练次数、每个练习的等级变化和最高等级、是否使用放松节奏，以及你选择填写的年龄段。概要与一个随机标识符和一个自动生成的昵称关联，绝不会与你的名字、邮箱或其他进度关联。如果你创建或加入好友小组，服务器还会保存小组名称和成员名单（只有成员能看到），以及被创建者封禁的玩家。加入时，Cloudflare Turnstile 会按照 Cloudflare 的隐私政策确认你不是机器人。每周结果在 8 周后删除，其余数据在 90 天未使用后删除；“退出并删除我的数据”或“删除所有数据”会立即删除，没有成员的小组也会被删除。法律依据是你的同意，你可以随时退出排行榜来撤回。',
   'privacy.medicalH': '不是医疗器械',
   'privacy.medical': 'Synapse Dojo 是一款娱乐游戏。它不是医疗器械，不做任何诊断，也不承诺预防、延缓或治疗痴呆、认知衰退或任何其他健康问题。分数只反映你在练习中的表现。如有健康方面的疑问，请咨询医生。',
   'privacy.contactH': '联系方式',
@@ -705,6 +705,20 @@ const ui: Locale['ui'] = {
   'groups.removeConfirm': '将 {name} 移出“{group}”？之后可以用邀请码重新加入。',
 
   'settings.saved': '已保存',
+
+  'groups.copyCode': '复制邀请码',
+  'groups.codeCopied': '邀请码已复制',
+  'groups.copyFailed': '无法复制：请选中邀请码并手动复制',
+  'groups.ban': '从小组封禁',
+  'groups.banConfirm': '将 {name} 从“{group}”封禁？对方会被移出小组，即使有邀请码也无法再加入。',
+  'groups.actionsHint': '✕ 移出小组（可用邀请码重新加入） · 🚫 封禁（无法再加入）',
+  'groups.bannedTitle': '已封禁（{n}）',
+  'groups.unban': '重新允许',
+  'groups.err.banned': '你无法加入这个小组：创建者已将你封禁。',
+
+  'groups.newCode': '新邀请码',
+  'groups.newCodeConfirm': '更换“{group}”的邀请码？旧邀请码和邀请链接将失效，成员仍留在小组中。',
+  'groups.newCodeDone': '新邀请码已生成，旧邀请码已失效',
 };
 
 const words: string[] = [

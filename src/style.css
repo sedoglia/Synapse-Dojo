@@ -3914,3 +3914,35 @@ html.big-text {
   font-size: 0.85rem;
   color: var(--bad);
 }
+.member-actions {
+  display: flex;
+  flex: none;
+  gap: 4px;
+}
+.member-hint {
+  margin-top: 8px;
+}
+.member-hint:empty {
+  display: none;
+}
+.group-banned-title {
+  margin: 12px 0 6px;
+  font-weight: 700;
+}
+.group-code-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  margin-bottom: 14px;
+}
+.btn.small-btn {
+  padding: 6px 12px;
+  font-size: 0.85rem;
+}
+.board-saved.failed {
+  color: var(--bad);
+}
+.group-code-row .board-saved {
+  flex-basis: 100%;
+}

@@ -16,6 +16,8 @@ export const onRequestPost: Handler = async ({ request, env }) => {
 
   let members = group.members;
   if (!(await isMember(db, group.id, player.id))) {
+    const banned = await db.prepare('SELECT 1 AS yes FROM group_bans WHERE group_id = ? AND player_id = ?').bind(group.id, player.id).first();
+    if (banned) return fail(403, 'banned');
     if (members >= MAX_MEMBERS) return fail(409, 'full');
     if ((await groupCount(db, player.id)) >= MAX_GROUPS) return fail(409, 'limit');
     await db.prepare('INSERT INTO group_members (group_id, player_id, joined) VALUES (?, ?, ?)').bind(group.id, player.id, Date.now()).run();

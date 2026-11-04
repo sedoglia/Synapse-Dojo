@@ -47,7 +47,7 @@ export interface BoardQuery {
   group?: string;
 }
 
-type ErrorCode = 'offline' | 'human_check' | 'server' | 'not_member' | 'not_found' | 'limit' | 'full' | 'bad_name';
+type ErrorCode = 'offline' | 'human_check' | 'server' | 'not_member' | 'not_found' | 'limit' | 'full' | 'bad_name' | 'banned';
 
 /** `offline`: no connection; `human_check`: Turnstile failed; group errors; `server`: anything else. */
 export class BoardError extends Error {
@@ -356,7 +356,7 @@ async function groupFailure(res: Response): Promise<BoardError> {
   const acc = store.data.board;
   if (res.status === 401 && acc) forget(acc);
   const code = ((await res.json().catch(() => ({}))) as { error?: string }).error;
-  return new BoardError(code === 'not_found' || code === 'limit' || code === 'full' || code === 'bad_name' ? code : 'server');
+  return new BoardError(code === 'not_found' || code === 'limit' || code === 'full' || code === 'bad_name' || code === 'banned' ? code : 'server');
 }
 
 export async function listGroups(): Promise<Group[]> {
@@ -394,18 +394,39 @@ export interface GroupMember {
   me?: true;
 }
 
-/** Everyone in a group with this week's consistency, including those who haven't trained yet. */
-export async function listMembers(id: string): Promise<GroupMember[]> {
+export interface BannedPlayer {
+  key: string;
+  nameCode: number;
+}
+
+/**
+ * Everyone in a group with this week's consistency, including those who haven't trained yet.
+ * `banned` is filled only for the group's creator.
+ */
+export async function listMembers(id: string): Promise<{ members: GroupMember[]; banned: BannedPlayer[] }> {
   const res = await call('GET', `groups/${encodeURIComponent(id)}/members?week=${localWeek()}`);
   if (res.status === 403) throw new BoardError('not_member');
   if (!res.ok) throw await groupFailure(res);
-  return ((await res.json()) as { members: GroupMember[] }).members;
+  return (await res.json()) as { members: GroupMember[]; banned: BannedPlayer[] };
 }
 
-/** The group's creator removes a member. */
-export async function removeMember(id: string, key: string): Promise<void> {
-  const res = await call('DELETE', `groups/${encodeURIComponent(id)}/members/${encodeURIComponent(key)}`);
+/** The group's creator removes a member and, with `ban`, stops them coming back with the code. */
+export async function removeMember(id: string, key: string, ban = false): Promise<void> {
+  const res = await call('DELETE', `groups/${encodeURIComponent(id)}/members/${encodeURIComponent(key)}${ban ? '?ban=1' : ''}`);
   if (!res.ok) throw await groupFailure(res);
+}
+
+/** The group's creator lets a banned player back: they can join again with the code. */
+export async function unbanMember(id: string, key: string): Promise<void> {
+  const res = await call('DELETE', `groups/${encodeURIComponent(id)}/bans/${encodeURIComponent(key)}`);
+  if (!res.ok) throw await groupFailure(res);
+}
+
+/** The group's creator replaces the invite code; the old code and links stop working. Returns the new code. */
+export async function renewGroupCode(id: string): Promise<string> {
+  const res = await call('POST', `groups/${encodeURIComponent(id)}/code`);
+  if (!res.ok) throw await groupFailure(res);
+  return ((await res.json()) as { code: string }).code;
 }
 
 /** Name and size of the group behind an invite code, shown before deciding whether to join. */

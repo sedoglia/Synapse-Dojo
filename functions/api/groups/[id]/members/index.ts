@@ -43,5 +43,14 @@ export const onRequestGet: Handler = async ({ request, env, params }) => {
       ...(m.player_id === player.id ? { me: true } : {}),
     })),
   );
-  return json({ members });
+  if (owner?.owner !== player.id) return json({ members, banned: [] });
+
+  // Only the creator sees who is banned, to be able to let them back in.
+  const bans = await env.DB.prepare(
+    `SELECT b.player_id, p.name_code FROM group_bans b JOIN players p ON p.id = b.player_id WHERE b.group_id = ? ORDER BY b.banned_at`,
+  )
+    .bind(id)
+    .all<{ player_id: string; name_code: number }>();
+  const banned = await Promise.all(bans.results.map(async (b) => ({ key: await memberKey(id, b.player_id), nameCode: b.name_code })));
+  return json({ members, banned });
 };

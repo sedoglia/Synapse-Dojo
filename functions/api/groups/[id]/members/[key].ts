@@ -1,6 +1,9 @@
 import { authenticate, fail, json, memberKey, type Handler } from '../../../../../server/board';
 
-/** DELETE /api/groups/<id>/members/<key>: the group's creator removes a member (who can come back with the code). */
+/**
+ * DELETE /api/groups/<id>/members/<key>[?ban=1]: the group's creator removes a member, who can come back with the
+ * code, or with ban=1 also bans them, so that the code no longer lets them in.
+ */
 export const onRequestDelete: Handler = async ({ request, env, params }) => {
   const player = await authenticate(request, env);
   if (!player) return fail(401, 'unauthorized');
@@ -15,6 +18,10 @@ export const onRequestDelete: Handler = async ({ request, env, params }) => {
   const target = results[keys.indexOf(String(params.key))]?.player_id;
   if (!target) return fail(404, 'not_found');
   if (target === player.id) return fail(400, 'use_leave');
-  await env.DB.prepare('DELETE FROM group_members WHERE group_id = ? AND player_id = ?').bind(id, target).run();
-  return json({ removed: true });
+  const ban = new URL(request.url).searchParams.get('ban') === '1';
+  await env.DB.batch([
+    env.DB.prepare('DELETE FROM group_members WHERE group_id = ? AND player_id = ?').bind(id, target),
+    ...(ban ? [env.DB.prepare('INSERT OR REPLACE INTO group_bans (group_id, player_id, banned_at) VALUES (?, ?, ?)').bind(id, target, Date.now())] : []),
+  ]);
+  return json({ removed: true, banned: ban });
 };

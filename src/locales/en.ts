@@ -399,7 +399,7 @@ export const ui = {
   'settings.importConfirm': 'Replace the current data with the file’s ({name}, {runs} exercises played, last on {last})? Your current progress will be lost.',
   'settings.importDone': 'Progress imported.',
   'privacy.title': 'Privacy and legal notes',
-  'privacy.updated': 'Last updated: 3 November 2026',
+  'privacy.updated': 'Last updated: 4 November 2026',
   'privacy.dataH': 'Your data stays on your device',
   'privacy.data': 'Your name, progress and settings are saved only in this device’s browser (localStorage). They are never sent to a server (apart from the weekly summary of the optional leaderboard, if you join it: see below) and nobody, including whoever runs the game, can see them. They are gone if you clear your browser data or use “Delete all data”: you can keep a copy with “Export progress” in Settings.',
   'privacy.cookiesH': 'No accounts, no cookies',
@@ -409,7 +409,7 @@ export const ui = {
   'privacy.statsH': 'Visit statistics',
   'privacy.stats': 'Only in the public version, visits are counted with Cloudflare Web Analytics, which uses no cookies, stores nothing in your browser and does not follow people across sites: it only shows aggregate data such as page views, country and device type. Names and exercise results are never sent.',
   'privacy.boardH': 'Optional weekly leaderboard',
-  'privacy.board': 'Only if you join it in Settings, after each session the game sends its server (Cloudflare Workers with a D1 database) a summary of the current week: days trained and activities per day, change of level and best level per exercise, whether you use the relaxed pace and, if you chose one, your age group. It is linked to a random identifier and a generated nickname, never to your name, email or other progress. If you create or join a group of friends, the server also keeps the group’s name and its members, visible only to them. When you join, Cloudflare Turnstile checks that you are not a robot, under Cloudflare’s privacy policy. Weekly results are deleted after 8 weeks and everything after 90 days without use; “Leave and delete my data” or “Delete all data” deletes it at once, and a group with no members left is deleted. The legal basis is your consent, which you can withdraw at any time by leaving.',
+  'privacy.board': 'Only if you join it in Settings, after each session the game sends its server (Cloudflare Workers with a D1 database) a summary of the current week: days trained and activities per day, change of level and best level per exercise, whether you use the relaxed pace and, if you chose one, your age group. It is linked to a random identifier and a generated nickname, never to your name, email or other progress. If you create or join a group of friends, the server also keeps the group’s name, its members (visible only to them) and anyone its creator has banned. When you join, Cloudflare Turnstile checks that you are not a robot, under Cloudflare’s privacy policy. Weekly results are deleted after 8 weeks and everything after 90 days without use; “Leave and delete my data” or “Delete all data” deletes it at once, and a group with no members left is deleted. The legal basis is your consent, which you can withdraw at any time by leaving.',
   'privacy.medicalH': 'Not a medical device',
   'privacy.medical': 'Synapse Dojo is a game for fun. It is not a medical device, does not diagnose anything and makes no promise to prevent, slow down or treat dementia, cognitive decline or any other health condition. Scores only tell you how you do in the exercises. For health concerns, talk to a doctor.',
   'privacy.contactH': 'Contact',
@@ -744,6 +744,20 @@ export const ui = {
   'groups.removeConfirm': 'Remove {name} from “{group}”? They can come back with the invite code.',
 
   'settings.saved': 'Saved',
+
+  'groups.copyCode': 'Copy code',
+  'groups.codeCopied': 'Code copied',
+  'groups.copyFailed': 'Couldn’t copy: select the code and copy it by hand',
+  'groups.ban': 'Ban from group',
+  'groups.banConfirm': 'Ban {name} from “{group}”? They will be removed and won’t be able to come back, even with the invite code.',
+  'groups.actionsHint': '✕ removes from the group (can come back with the code) · 🚫 bans (can’t come back)',
+  'groups.bannedTitle': 'Banned ({n})',
+  'groups.unban': 'Let back in',
+  'groups.err.banned': 'You can’t join this group: its creator has banned you.',
+
+  'groups.newCode': 'New code',
+  'groups.newCodeConfirm': 'Replace the code of “{group}”? The old code and invite links will stop working. Members stay in the group.',
+  'groups.newCodeDone': 'New code created: the old one no longer works',
 };
 
 const nicknames = {
