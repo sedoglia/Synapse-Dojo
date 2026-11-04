@@ -12,6 +12,7 @@ import { showSettings } from './settings';
 import { showGuide } from './guide';
 import { showBoard } from './board';
 import { showBoardJoin } from './boardJoin';
+import { homeShown } from '../update';
 import { boardAvailable, boardErrorText, BoardError, clearInvite, fetchBoard, joinGroup, previewGroup } from '../board';
 
 /** The suggestion to join appears from the very first visit and comes back a week after "Not now". */
@@ -236,4 +237,5 @@ export function showHome() {
       ),
     ),
   );
+  homeShown();
 }

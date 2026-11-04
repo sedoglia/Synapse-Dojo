@@ -6,6 +6,7 @@ import { applySettings } from './ui';
 import { showHome } from './screens/home';
 import { showOnboarding } from './screens/onboarding';
 import { resumeBoardSync, takeInviteFromUrl } from './board';
+import { watchForUpdates } from './update';
 
 document.title = APP_NAME;
 takeInviteFromUrl();
@@ -23,3 +24,4 @@ if (import.meta.env.PROD && 'serviceWorker' in navigator) {
     /* offline support is optional */
   });
 }
+if (import.meta.env.PROD) watchForUpdates();
