@@ -42,7 +42,7 @@ export const ui = {
   'guide.planH': '🏋️ Daily Workout (Plan)',
   'guide.planP': 'Every day, Synapse Dojo composes a balanced 4-exercise routine across different cognitive domains (e.g., speed, memory, attention, and executive control). The games adapt automatically: succeed and the difficulty increases; make mistakes and it scales down to keep you in the optimal zone of mental stimulation. Finishing your daily workout builds your streak and awards XP towards leveling up.',
   'guide.checkH': '📏 Measure your Neuro Score (Daily Check)',
-  'guide.checkP': 'The Neuro Score is a standardized daily cognitive benchmark taking ~4–5 minutes that tests all 9 cognitive domains of the brain (Processing Speed, Attention, Executive Function, Working Memory, Long-Term Memory, Spatial Skills, Reasoning, Language & Calculation, and Bilateral Coordination), selecting a daily rotating exercise for each domain. Because it comprehensively evaluates the entire cerebral spectrum, your daily score (0–1000) provides an objective barometer of your cognitive sharpness over time.',
+  'guide.checkP': 'The Neuro Score is a standardized daily cognitive benchmark taking ~15–20 minutes that tests all 9 cognitive domains of the brain (Processing Speed, Attention, Executive Function, Working Memory, Long-Term Memory, Spatial Skills, Reasoning, Language & Calculation, and Bilateral Coordination), selecting a daily rotating exercise for each domain. Because it comprehensively evaluates the entire cerebral spectrum, your daily score (0–1000) provides an objective barometer of your cognitive sharpness over time.',
   'guide.trainingH': '🧩 Free Gym (35 Exercises)',
   'guide.trainingP': 'In the Gym section, you have unlimited access to all 35 exercises, categorized by domain. Use it to focus on specific skills you want to strengthen, explore different exercise mechanics, or challenge your personal high scores.',
   'guide.progressH': '📈 Progress & Statistics',
@@ -56,7 +56,7 @@ export const ui = {
   'guide.gameHow': 'How to play:',
   'guide.faqH': 'Tips & Frequently Asked Questions',
   'guide.faq1Q': 'How often should I train?',
-  'guide.faq1A': 'Consistency matters more than intensity. 10–15 minutes a day are enough (the daily workout, plus the Neuro Score if you like). Training 4 or 5 days a week works much better than one long, occasional session, and that is also why in the leaderboard an extra day counts more than an extra workout on the same day.',
+  'guide.faq1A': 'Consistency matters more than intensity. 10–15 minutes a day are enough (the daily workout; the Neuro Score takes another 15–20 minutes, if you like). Training 4 or 5 days a week works much better than one long, occasional session, and that is also why in the leaderboard an extra day counts more than an extra workout on the same day.',
   'guide.faq2Q': 'Where are my data and scores stored?',
   'guide.faq2A': 'Everything stays on your device. Synapse Dojo needs no account or password and uses no tracking cookies: your scores and progress are saved in your browser (localStorage). Only if you join the optional weekly leaderboard is a weekly summary sent, under a random nickname.',
   'guide.faq3Q': 'Are there practice tutorials in each game?',
@@ -455,7 +455,7 @@ export const ui = {
 
   // stories
   'ex.stories.name': 'Story Memory',
-  'ex.stories.desc': 'Read a scenario and recall episodic details',
+  'ex.stories.desc': 'Read one or more short scenes and, after a pause with a small task, recall the details of each',
   'ex.stories.why': 'Episodic memory binds characters, actions, and locations together, exercising hippocampus-mediated narrative recall.',
   'ex.stories.example': 'Read the brief story carefully, then answer specific detail questions',
   'ex.stories.title': 'Scenario {n}',
@@ -505,7 +505,7 @@ export const ui = {
 
   // binding
   'ex.binding.name': 'Color & Shape',
-  'ex.binding.desc': 'Find the exact target binding both color and shape',
+  'ex.binding.desc': 'Find the exact target binding both color and shape before time runs out',
   'ex.binding.why': 'Feature binding forces visual cortex networks to integrate separate color and shape streams into a single object.',
   'ex.binding.example': 'Find the Blue Circle among Blue Squares and Red Circles',
   'ex.binding.find': 'Find',
@@ -604,7 +604,7 @@ export const ui = {
   'ex.tapSeq.desc': 'Coordinate left and right thumbs to reproduce alternating sequences',
   'ex.tapSeq.why': 'Alternating bimanual tapping activates motor cortices across both hemispheres and stimulates the corpus callosum.',
   'ex.tapSeq.example': '◀ ▶ ◀ ▶   Follow the rhythm with both thumbs',
-  'ex.tapSeq.hint': 'Tap left and right in the exact sequence',
+  'ex.tapSeq.hint': 'Tap left and right in the exact sequence before time runs out',
   'ex.tapSeq.detail': '{ok}/{n} sequences completed',
 
   // swipePattern
@@ -737,7 +737,6 @@ export const ui = {
 
   'ex.resources.money': '🪙 Spent {cost} of {budget} · {left} left',
   'ex.resources.over': '🪙 Spent {cost} of {budget}: too much, remove something',
-  'ex.resources.total': '📈 Earnings: {val} · goal: at least {target}',
   'ex.resources.earned': '📈 Earnings: {val}',
   'ex.resources.cost': 'Costs {n} 🪙',
   'ex.resources.gain': 'Earns {n} 🪙',

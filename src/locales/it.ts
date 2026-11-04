@@ -42,7 +42,7 @@ const ui: Locale['ui'] = {
   'guide.planH': '🏋️ Allenamento Giornaliero (Daily Plan)',
   'guide.planP': 'Ogni giorno Synapse Dojo compone per te una sequenza di 4 esercizi su domini diversi (ad esempio velocità, memoria, controllo esecutivo e ragionamento). Gli esercizi sono adattivi: se rispondi correttamente la difficoltà sale, se commetti errori si calibra per mantenerti nella zona di stimolazione ideale. Completando l’allenamento aumenti la tua serie quotidiana (streak) e guadagni punti XP per salire di livello.',
   'guide.checkH': '📏 Misura il Neuro Score (Daily Check)',
-  'guide.checkP': 'Il Neuro Score è una valutazione standardizzata di circa 4-5 minuti che testa tutte le 9 aree cognitive della mente (Velocità, Attenzione, Funzioni Esecutive, Memoria di Lavoro, Memoria a Lungo Termine, Abilità Spaziali, Logica, Linguaggio e Coordinazione Bilaterale), selezionando ogni giorno a rotazione un esercizio per ciascuna area. Poiché il test copre l’intero spettro cerebrale in condizioni calibrate, il punteggio complessivo ottenuto (da 0 a 1000) rappresenta un barometro oggettivo ed ecologico delle tue prestazioni per monitorare i miglioramenti nel tempo.',
+  'guide.checkP': 'Il Neuro Score è una valutazione standardizzata di circa 15-20 minuti che testa tutte le 9 aree cognitive della mente (Velocità, Attenzione, Funzioni Esecutive, Memoria di Lavoro, Memoria a Lungo Termine, Abilità Spaziali, Logica, Linguaggio e Coordinazione Bilaterale), selezionando ogni giorno a rotazione un esercizio per ciascuna area. Poiché il test copre l’intero spettro cerebrale in condizioni calibrate, il punteggio complessivo ottenuto (da 0 a 1000) rappresenta un barometro oggettivo ed ecologico delle tue prestazioni per monitorare i miglioramenti nel tempo.',
   'guide.trainingH': '🧩 Palestra Libera (35 Esercizi)',
   'guide.trainingP': 'Nella sezione Palestra trovi l’intero catalogo dei 35 esercizi, suddivisi nelle 9 abilità cerebrali e di coordinazione bilaterale. Puoi allenarti liberamente su qualunque esercizio senza limiti di tempo, approfondire compiti specifici o superare i tuoi record personali.',
   'guide.progressH': '📈 Progressi e Statistiche',
@@ -56,7 +56,7 @@ const ui: Locale['ui'] = {
   'guide.gameHow': 'Come funziona:',
   'guide.faqH': 'Consigli e Domande Frequenti (FAQ)',
   'guide.faq1Q': 'Quanto tempo dovrei allenarmi ogni giorno?',
-  'guide.faq1A': 'La costanza è più importante dell’intensità. Bastano 10-15 minuti al giorno (l’allenamento giornaliero più eventualmente il Neuro Score). Allenarsi 4 o 5 giorni a settimana produce risultati molto superiori rispetto a una sessione lunga sporadica, ed è anche per questo che in classifica un giorno in più vale più di un allenamento in più nello stesso giorno.',
+  'guide.faq1A': 'La costanza è più importante dell’intensità. Bastano 10-15 minuti al giorno (l’allenamento giornaliero; il Neuro Score, se vuoi, richiede altri 15-20 minuti). Allenarsi 4 o 5 giorni a settimana produce risultati molto superiori rispetto a una sessione lunga sporadica, ed è anche per questo che in classifica un giorno in più vale più di un allenamento in più nello stesso giorno.',
   'guide.faq2Q': 'I miei dati personali e punteggi dove sono salvati?',
   'guide.faq2A': 'Tutto resta sul tuo dispositivo. Synapse Dojo non richiede account o password e non usa cookie di tracciamento: punteggi e progressi sono salvati nel browser (localStorage). Solo se aderisci alla classifica settimanale facoltativa viene inviato un riepilogo della settimana, con un nickname casuale.',
   'guide.faq3Q': 'I giochi hanno delle istruzioni durante la partita?',
@@ -455,7 +455,7 @@ const ui: Locale['ui'] = {
 
   // stories
   'ex.stories.name': 'Memoria delle Storie',
-  'ex.stories.desc': 'Leggi una breve scena e ricorda i dettagli episodici',
+  'ex.stories.desc': 'Leggi una o più brevi scene e, dopo una pausa con un piccolo compito, ricorda i dettagli di ciascuna',
   'ex.stories.why': 'La memoria episodica collega personaggi, luoghi e tempi, stimolando il richiamo narrativo dipendente dall’ippocampo.',
   'ex.stories.example': 'Leggi attentamente la storia e rispondi alle domande sui dettagli',
   'ex.stories.title': 'Scena {n}',
@@ -505,7 +505,7 @@ const ui: Locale['ui'] = {
 
   // binding
   'ex.binding.name': 'Colore e Forma',
-  'ex.binding.desc': 'Trova l’oggetto che abbina sia la forma che il colore corretto',
+  'ex.binding.desc': 'Trova l’oggetto che abbina sia la forma che il colore corretto prima che scada il tempo',
   'ex.binding.why': 'L’integrazione di caratteristiche (feature binding) stimola l’elaborazione visiva combinata di colore e forma.',
   'ex.binding.example': 'Trova il Cerchio Blu tra Quadrati Blu e Cerchi Rossi',
   'ex.binding.find': 'Trova',
@@ -604,7 +604,7 @@ const ui: Locale['ui'] = {
   'ex.tapSeq.desc': 'Coordina entrambi i pollici per riprodurre sequenze alternate',
   'ex.tapSeq.why': 'Il tocco bimanuale alternato stimola le cortecce motorie di entrambi gli emisferi e attiva il corpo calloso.',
   'ex.tapSeq.example': '◀ ▶ ◀ ▶   Segui il ritmo con entrambi i pollici',
-  'ex.tapSeq.hint': 'Tocca sinistra e destra nella sequenza indicata',
+  'ex.tapSeq.hint': 'Tocca sinistra e destra nella sequenza indicata prima che scada il tempo',
   'ex.tapSeq.detail': '{ok}/{n} sequenze completate',
 
   // swipePattern
@@ -735,7 +735,6 @@ const ui: Locale['ui'] = {
 
   'ex.resources.money': '🪙 Spesi {cost} su {budget} · ne restano {left}',
   'ex.resources.over': '🪙 Spesi {cost} su {budget}: troppo, togli qualcosa',
-  'ex.resources.total': '📈 Guadagno: {val} · obiettivo: almeno {target}',
   'ex.resources.earned': '📈 Guadagno: {val}',
   'ex.resources.cost': 'Costa {n} 🪙',
   'ex.resources.gain': 'Guadagni {n} 🪙',

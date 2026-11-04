@@ -1,5 +1,5 @@
 import { h, pick, shuffle, flash } from '../dom';
-import { t } from '../i18n';
+import { t, num } from '../i18n';
 import type { Exercise } from './types';
 
 const SHAPES = [
@@ -30,7 +30,7 @@ export const binding: Exercise = {
   example: 'ex.binding.example',
   minutes: 2,
   levels: { min: 1, max: 10, start: 2 },
-  levelLabel: (l) => `${itemsFor(l)} ◆ · ${(limitFor(l) / 1000).toFixed(1)} s`,
+  levelLabel: (l) => `${itemsFor(l)} ◆ · ${num(limitFor(l) / 1000)} s`,
 
   async run(ctx) {
     const total = ctx.count(16, 10, 3);

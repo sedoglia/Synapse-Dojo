@@ -3,11 +3,11 @@ import { t, words, anagramWords, graphemes, wordNear } from '../i18n';
 import { canon, isPlayable, scramble, solutionsOf } from './anagramRules';
 import type { Exercise } from './types';
 
-const MAX_LEVEL = 6;
+const MAX_LEVEL = 5;
 
 /**
- * Word length for a level: 3 to 8 letters where the language has them. Each language spreads its own range over the
- * levels (Chinese words have 2–4 characters, Hindi 2–5 letters), so level 1 is its shortest words and the top its longest.
+ * Word length for a level. Each language spreads over the levels the lengths it has enough words for: 4 to 8 letters in
+ * most languages, shorter elsewhere (Arabic 3–6, Japanese 2–5, Chinese and Hindi 2–4, where some levels share a length).
  */
 function lenFor(level: number): number {
   const lengths = [...new Set(words().map((w) => graphemes(w).length))].filter((n) => n >= 2 && n <= 8).sort((a, b) => a - b);

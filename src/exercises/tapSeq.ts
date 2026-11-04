@@ -1,5 +1,5 @@
 import { h, flash } from '../dom';
-import { t } from '../i18n';
+import { t, num } from '../i18n';
 import { onKeys } from '../widgets';
 import type { Exercise } from './types';
 
@@ -19,7 +19,7 @@ export const tapSeq: Exercise = {
   example: 'ex.tapSeq.example',
   minutes: 2,
   levels: { min: 1, max: 10, start: 2 },
-  levelLabel: (l) => `${lenFor(l)} 👆 · ${(perTapFor(l) / 1000).toFixed(2)} s`,
+  levelLabel: (l) => `${lenFor(l)} 👆 · ${num(perTapFor(l) / 1000, 2)} s`,
 
   async run(ctx) {
     const trials = ctx.count(10, 8, 3);

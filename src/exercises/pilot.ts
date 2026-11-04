@@ -1,5 +1,5 @@
 ﻿import { h, pick, flash } from '../dom';
-import { t } from '../i18n';
+import { t, num } from '../i18n';
 import { store } from '../storage';
 import { DETRAIN_DAYS } from '../adaptive';
 import { fitCanvas, cssVar } from '../widgets';
@@ -90,7 +90,7 @@ export const pilot: Exercise = {
   example: 'ex.pilot.example',
   minutes: 1.5,
   levels: { min: 1, max: MAX_LEVEL, start: 1 },
-  levelLabel: (l) => `${(answerFor(l) / 1000).toFixed(1)} s${l >= 5 ? ' · ≈' : ''}`,
+  levelLabel: (l) => `${num(answerFor(l) / 1000)} s${l >= 5 ? ' · ≈' : ''}`,
 
   async run(ctx) {
     // Only informative events move the signs level: hits, misses and false alarms. Correctly ignoring a distractor
