@@ -6,6 +6,17 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.10.10] - 2026-11-05
+
+### Changed
+
+- App, guide, page metadata and README texts now match the scientific documentation, in all 12 languages. The Neuro Score is described as a trend over several weeks, not validated and not clinical; claims about neuroplasticity and about effects on brain areas are gone; the "Evidence-Based" badge is now "Research-Inspired". The exercise card "Why it works" is now "What it's based on" (`3690f66`).
+
+### Fixed
+
+- Guide and FAQ gave the Neuro Score 15–20 minutes while the home screen said about 4; they now say about 4 (`3690f66`).
+- The README and the no-JavaScript page described Rotations as 3D, the no-JavaScript page still used an old game name, and the manifest said "open-source" although the license is source-available (`3690f66`).
+
 ## [0.10.9] - 2026-11-05
 
 ### Fixed
