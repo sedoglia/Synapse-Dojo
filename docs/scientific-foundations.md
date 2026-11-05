@@ -152,7 +152,7 @@ The program must be usable by people with slower reaction times, reduced sight o
 * **Neuro Score scales calibrated for older age**: zero corresponds to slow but plausible performance (e.g. 4 s per number in Number trail, 8 s per calculation, 3 s per answer in the Stroop), so an older adult doesn't score zero just for being slower than a young person.
 * **Untimed tasks** where speed is not the point (memory, reasoning, anagrams): answer calmly. Market Stall is the exception, with ample, visible time. The Neuro Score also removes the time limit from the Stroop, Rule switch and Card Sorting, and measures response speed instead.
 * **Guided practice** the first time, with hints after each mistake and no score.
-* **Multisensory feedback**: big ✓/✗ in the center, colors, sound and vibration; color names are always written, for people who confuse red and green.
+* **Multisensory feedback**: big ✓/✗ in the center, colors and sound; color names are always written, for people who confuse red and green.
 * **Large text** option in Settings and large buttons.
 * **N-Back letters** both spoken and written, for people who are hard of hearing.
 

@@ -152,7 +152,7 @@ Il programma deve essere fruibile anche da chi ha tempi di reazione più lenti, 
 * **Scale del Neuro Score tarate sull'età avanzata**: il punteggio zero corrisponde a prestazioni lente ma plausibili (per esempio 4 s per numero nel Sentiero dei numeri, 8 s per calcolo, 3 s per risposta nello Stroop), così un anziano non ottiene zero solo perché è più lento di un giovane.
 * **Compiti senza tempo** dove la velocità non è lo scopo (memoria, ragionamento, anagrammi): si risponde con calma. Fa eccezione il Banco del mercato, con un tempo ampio e visibile. Il Neuro Score toglie anche il limite di tempo da Stroop, Doppia regola e Ordinamento carte, e misura la velocità di risposta.
 * **Prova guidata** obbligatoria la prima volta, con suggerimenti dopo ogni errore e senza punteggio.
-* **Feedback multisensoriale**: ✓/✗ grandi al centro, colori, suono e vibrazione; il nome dei colori è sempre scritto, per chi distingue male rosso e verde.
+* **Feedback multisensoriale**: ✓/✗ grandi al centro, colori e suono; il nome dei colori è sempre scritto, per chi distingue male rosso e verde.
 * **Testo grande** attivabile nelle Impostazioni e pulsanti ampi.
 * **Lettere dell'N-Back** sia pronunciate sia scritte, per chi sente poco.
 

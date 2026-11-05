@@ -18,12 +18,6 @@ function tone(freq: number, dur: number, type: OscillatorType = 'sine', gain = 0
   osc.stop(t + dur);
 }
 
-function vibrate(pattern: number | number[]) {
-  // Browsers refuse vibration until the user has interacted with the page.
-  const active = (navigator as Navigator & { userActivation?: { hasBeenActive: boolean } }).userActivation?.hasBeenActive ?? true;
-  if (store.data.settings.vibration && active && 'vibrate' in navigator) navigator.vibrate(pattern);
-}
-
 export const sfx = {
   /** Rises a semitone with every answer in a streak (up to an octave), so a good run sounds like one. */
   ok: (streak = 0) => tone(880 * Math.pow(2, Math.min(streak, 12) / 12), 0.12, 'triangle'),
@@ -32,12 +26,4 @@ export const sfx = {
   go: () => tone(1040, 0.18, 'triangle'),
   levelUp: () => [660, 990].forEach((f, i) => tone(f, 0.16, 'triangle', 0.07, i * 0.09)),
   fanfare: () => [523, 659, 784, 1046].forEach((f, i) => tone(f, 0.22, 'triangle', 0.07, i * 0.11)),
-};
-
-// Pulses under about 40 ms are hard to feel, or do nothing at all, on many Android vibration motors.
-// Chrome on Android also drops every vibration while the phone is in silent mode, with no error to detect.
-export const haptic = {
-  ok: () => vibrate(40),
-  bad: () => vibrate([80, 60, 80]),
-  celebrate: () => vibrate([60, 50, 60, 50, 120]),
 };

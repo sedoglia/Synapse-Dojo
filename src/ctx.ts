@@ -18,7 +18,7 @@ export interface FeedbackOptions {
   rt?: number;
 }
 
-/** Visual/haptic feedback the play view provides to exercises. */
+/** Visual feedback the play view provides to exercises. */
 export interface Effects {
   progress(fraction: number, label: string): void;
   combo(streak: number): void;
@@ -80,7 +80,7 @@ export class Ctx {
     this.fx.progress(fraction, label);
   }
 
-  /** Reports an answer: big ✓/✗, streak counter, sound and vibration. Returns `ok`. */
+  /** Reports an answer: big ✓/✗, streak counter and sound. Returns `ok`. */
   feedback(ok: boolean, opts: FeedbackOptions = {}): boolean {
     this.totalAnswers++;
     if (ok) {

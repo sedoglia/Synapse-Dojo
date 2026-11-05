@@ -1,7 +1,6 @@
 import { h, todayKey } from '../dom';
 import { store, parseSave, type Settings } from '../storage';
 import { t, dateText } from '../i18n';
-import { haptic } from '../audio';
 import { APP_NAME, VERSION, GITHUB_REPO } from '../config';
 import { render, page, applySettings, langSelect, setLang } from '../ui';
 import { showHome } from './home';
@@ -72,7 +71,7 @@ async function importSave(file: File) {
   else showOnboarding();
 }
 
-function toggle(key: 'sound' | 'vibration' | 'relaxed' | 'bigText' | 'shareOffer', label: string): HTMLElement {
+function toggle(key: 'sound' | 'relaxed' | 'bigText' | 'shareOffer', label: string): HTMLElement {
   const box = h('input', {
     type: 'checkbox',
     checked: store.data.settings[key],
@@ -80,8 +79,6 @@ function toggle(key: 'sound' | 'vibration' | 'relaxed' | 'bigText' | 'shareOffer
       (store.data.settings as Settings)[key] = (e.target as HTMLInputElement).checked;
       store.save();
       applySettings();
-      // Turning it on buzzes once, so the player finds out right here whether this phone can vibrate.
-      if (key === 'vibration' && store.data.settings.vibration) haptic.ok();
     },
   });
   return h('label', { class: 'inline' }, box, label);
@@ -165,7 +162,6 @@ export function showSettings() {
         h('label', {}, t('settings.lang'), langSelect(showSettings)),
         toggle('sound', t('settings.sound')),
         toggle('relaxed', t('settings.relaxed')),
-        toggle('vibration', t('settings.vibration')),
         toggle('bigText', t('settings.bigText')),
         toggle('shareOffer', t('settings.shareOffer')),
       ),

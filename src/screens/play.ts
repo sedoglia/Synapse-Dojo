@@ -1,6 +1,6 @@
 import { h, todayKey, pick } from '../dom';
 import { Ctx, Aborted, type Mode } from '../ctx';
-import { sfx, haptic } from '../audio';
+import { sfx } from '../audio';
 import { store, NEURO_SCALE } from '../storage';
 import { t } from '../i18n';
 import { render, page, countUp, rankName, sparkline, xpBar } from '../ui';
@@ -100,10 +100,8 @@ async function runExercise(ex: Exercise, mode: Mode, level: number): Promise<{ r
     answer: (ok, streak, opts) => {
       if (ok) {
         sfx.ok(streak);
-        haptic.ok();
       } else {
         sfx.bad();
-        haptic.bad();
         if (mode === 'practice') toast(t(ex.example), 'hint');
       }
       if (opts.subtle) return;
@@ -186,7 +184,6 @@ function practiceDone(ex: Exercise): Promise<boolean> {
 
 function badgeList(badges: Badge[]): HTMLElement | null {
   if (!badges.length) return null;
-  haptic.celebrate();
   return h(
     'div',
     { class: 'new-badges' },
