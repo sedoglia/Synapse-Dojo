@@ -6,6 +6,12 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.11.6] - 2026-11-05
+
+### Rimosso
+
+- La vibrazione e la relativa opzione nelle impostazioni. Dipendeva dal browser e dalle impostazioni del telefono: Firefox per Android non la supporta e Chrome per Android la scarta in silenzioso, quindi l'opzione poteva restare attiva senza effetto e l'app non poteva accorgersene. Allungare gli impulsi nella 0.11.5 non ha risolto il problema sul telefono dove era stato segnalato, e la causa indicata lì non era mai stata misurata. I salvataggi esistenti si caricano ancora (`f15dc31`).
+
 ## [0.11.5] - 2026-11-05
 
 ### Corretto
