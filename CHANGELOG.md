@@ -6,6 +6,12 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.11.8] - 2026-11-05
+
+### Fixed
+
+- Go/No-Go, Choice reflex, Color & Shape, Bilateral Tap, Bilateral Swipe, Bilateral Dual-Task, Pilot and Towers showed "Right answer:" before phrases that are not answers, such as "too slow" or "Time’s up". These cases now show only the reason for the mistake. Real answers stay as they were (`190e5dd`).
+
 ## [0.11.7] - 2026-11-05
 
 ### Changed

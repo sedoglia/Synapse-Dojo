@@ -6,6 +6,12 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.11.8] - 2026-11-05
+
+### Corretto
+
+- Go/No-Go, Riflesso a scelta, Colore e Forma, Tap Bilaterale, Swipe Bilaterale, Dual-Task Bilaterale, Pilota e Torri mostravano «Risposta giusta:» davanti a frasi che non sono risposte, come «troppo lento» o «Tempo scaduto». Ora questi casi mostrano solo il motivo dell'errore. Le risposte vere restano come prima (`190e5dd`).
+
 ## [0.11.7] - 2026-11-05
 
 ### Modificato
