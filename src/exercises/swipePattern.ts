@@ -222,7 +222,8 @@ export const swipePattern: Exercise = {
       const finished = leftSwiped !== null && rightSwiped !== null;
       const isMatch = rightMoves && together;
       const ok = ctx.track(st, isMatch, {
-        was: !finished ? t('common.timeout') : rightMoves ? t('ex.swipePattern.together') : `${leftDir.arrow} | ${rightDir.arrow}`,
+        note: !finished ? t('common.timeout') : rightMoves ? t('ex.swipePattern.together') : undefined,
+        was: finished && !rightMoves ? `${leftDir.arrow} | ${rightDir.arrow}` : undefined,
       });
 
       if (isMatch) {

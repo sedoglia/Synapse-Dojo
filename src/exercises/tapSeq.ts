@@ -110,7 +110,8 @@ export const tapSeq: Exercise = {
 
       bar.stop();
       const ok = ctx.track(st, finished && !hasError, {
-        was: finished ? pattern.map((s) => ARROW[s]).join(' ') : t('common.timeout'),
+        was: finished ? pattern.map((s) => ARROW[s]).join(' ') : undefined,
+        note: finished ? undefined : t('common.timeout'),
       });
 
       if (ok) {

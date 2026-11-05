@@ -128,7 +128,7 @@ export const towers: Exercise = {
         redraw();
       });
 
-      const ok = ctx.track(st, solved, { was: t('fb.minMoves', { n: min }) });
+      const ok = ctx.track(st, solved, { note: t('fb.minMoves', { n: min }) });
       if (ok) perfect++;
       counter.textContent = ok ? '✓' : t('ex.towers.too');
       flash(playArea, ok ? 'good' : 'bad', 500);
