@@ -14,6 +14,8 @@ export interface FeedbackOptions {
   subtle?: boolean;
   /** The right answer, shown next to ✗ after a mistake. */
   was?: string;
+  /** Why it counts as a mistake, shown next to ✗ as is: for mistakes with no right answer to show (too slow, too early). */
+  note?: string;
   /** Response time in ms (if measured independently by the exercise). */
   rt?: number;
 }

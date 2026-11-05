@@ -3084,7 +3084,20 @@ html.big-text {
   background: #d97706;
 }
 .resources-bar.gained > div {
-  background: #10b981;
+  background: var(--accent);
+}
+.resources-header.reached {
+  outline: 2px solid var(--good);
+}
+.reached .resources-goal {
+  color: var(--good);
+  font-weight: 800;
+}
+.reached .resources-bar.gained {
+  height: 14px;
+}
+.reached .resources-bar.gained > div {
+  background: var(--good);
 }
 .overbudget .resources-bar.spent > div {
   background: var(--c-red);
@@ -3114,7 +3127,14 @@ html.big-text {
   background: #f59e0b;
   color: white;
 }
+.stage-reaction {
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+}
 .reaction-pad.active {
+  /* The signal must appear at once: a fade would eat into the time being measured. */
+  transition: none;
   background: #10b981;
   color: white;
   box-shadow: 0 0 30px rgba(16, 185, 129, 0.5);

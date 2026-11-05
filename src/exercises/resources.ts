@@ -125,13 +125,16 @@ export const resources: Exercise = {
         const spent = total('cost');
         const gained = total('gain');
         const over = spent > budget;
+        // A full bar looks much like a nearly full one, so the goal changes its colour: only a basket that wins counts.
+        const reached = !over && gained >= target;
         header.replaceChildren(
           h('div', {}, over ? t('ex.resources.over', { cost: spent, budget }) : t('ex.resources.money', { cost: spent, budget, left: budget - spent })),
           bar(spent / budget, 'spent'),
-          h('div', {}, t('ex.resources.total', { val: gained, target })),
+          h('div', { class: 'resources-goal' }, `${reached ? '✓ ' : ''}${t('ex.resources.total', { val: gained, target })}`),
           bar(gained / target, 'gained'),
         );
         header.classList.toggle('overbudget', over);
+        header.classList.toggle('reached', reached);
         submitBtn.disabled = over || selected.size === 0;
 
         cardList.replaceChildren(
@@ -170,7 +173,7 @@ export const resources: Exercise = {
       const spent = total('cost');
       const reason = spent > budget ? t('ex.resources.over', { cost: spent, budget }) : t('ex.resources.below', { val: total('gain'), target, n: maxGain });
       const why = inTime ? reason : `${t('common.timeout')}. ${reason}`;
-      const ok = ctx.track(st, isSuccess, { was: why });
+      const ok = ctx.track(st, isSuccess, { note: why });
 
       if (isSuccess) {
         correct++;

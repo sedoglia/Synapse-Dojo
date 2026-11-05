@@ -6,6 +6,20 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.11.7] - 2026-11-05
+
+### Changed
+
+- In Market Stall the earnings bar is purple until the goal is reached, then turns green and thicker, with a check mark and a green border. It does not light up when over budget (`ae6e790`).
+- In Simple Reaction the whole play area now counts, not just the pad (`ae6e790`).
+- The Neuro Score has a new scale because of the fix below: earlier results stay saved but are no longer compared (`ae6e790`).
+
+### Fixed
+
+- Simple Reaction could call a well-timed tap slow: the green faded in over 150 ms and the clock started before it was on screen. The green now appears at once, and the time runs from the visible green to the touch (`ae6e790`).
+- Simple Reaction and Market Stall showed "Right answer:" before the player's own time or the reason for the mistake. They now show only the reason, such as the time and the target missed (`ae6e790`).
+- An exercise could score 0 despite several right answers, because accuracy counted only the second half of the trials, the hardest ones in the Neuro Score. It now uses the better of the second half and the whole session. This applies to almost all exercises (`ae6e790`).
+
 ## [0.11.6] - 2026-11-05
 
 ### Removed

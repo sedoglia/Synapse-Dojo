@@ -97,9 +97,11 @@ export class Staircase {
    * failing at the easiest level scores near 0 instead of getting the bottom level's credit.
    */
   score(): number {
-    // Accuracy over the same window as the threshold, so early errors while the level settles don't count.
+    const share = (list: boolean[]) => (list.length ? list.filter(Boolean).length / list.length : 0);
+    // The better of two windows. The second half alone ignores early errors while the level settles, but in a short
+    // session with a fast climb it holds only the hardest trials: right answers followed by misses would score 0.
     const tail = this.results.slice(Math.floor(this.results.length / 2));
-    const acc = tail.length ? tail.filter(Boolean).length / tail.length : 0;
+    const acc = Math.max(share(tail), share(this.results));
     return levelScore(this.threshold(), this.min, this.max) * clamp(acc / this.target, 0, 1);
   }
 }

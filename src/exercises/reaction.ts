@@ -43,9 +43,9 @@ export const reaction: Exercise = {
 
       // Waits a random foreperiod; a tap before it ends is a false start.
       const early = await ctx.timed<boolean>(rand(1300, 3200), false, (done) => {
-        pad.onpointerdown = () => done(true);
+        ctx.stage.onpointerdown = () => done(true);
         return () => {
-          pad.onpointerdown = null;
+          ctx.stage.onpointerdown = null;
         };
       });
 
@@ -53,7 +53,7 @@ export const reaction: Exercise = {
         pad.className = 'reaction-pad false-start';
         text.textContent = t('ex.reaction.early');
         subtext.textContent = t('ex.reaction.penalty');
-        ctx.track(st, false, { was: t('ex.reaction.early') });
+        ctx.track(st, false, { note: t('ex.reaction.early') });
         await ctx.wait(1200);
         continue;
       }
@@ -64,22 +64,33 @@ export const reaction: Exercise = {
       subtext.textContent = '⚡';
       flash(pad, 'pop', 100);
 
-      const shown = performance.now();
+      // The clock starts when the green is on screen, not when it is requested: the second frame callback runs
+      // once the frame with the change has been presented. Until then (or if frames are paused) the request time holds.
+      let shown = performance.now();
+      requestAnimationFrame(() =>
+        requestAnimationFrame((now) => {
+          shown = now;
+        }),
+      );
 
       const rt = await ctx.input<number>((done) => {
-        pad.onpointerdown = (e) => {
+        ctx.stage.onpointerdown = (e) => {
           e.preventDefault();
-          done(performance.now() - shown);
+          // It stops at the touch itself, not when the page gets round to handling it. Old browsers use another clock.
+          const now = performance.now();
+          const touched = e.timeStamp > 0 && e.timeStamp <= now ? e.timeStamp : now;
+          done(Math.max(0, touched - shown));
         };
         return () => {
-          pad.onpointerdown = null;
+          ctx.stage.onpointerdown = null;
         };
       });
 
       rts.push(rt);
       const target = targetMsFor(st.level) * ctx.pace;
       const ok = rt <= target;
-      ctx.track(st, ok, { was: `${Math.round(rt)} ms` });
+      // A slow tap has no "right answer" to show: it says the time and the target it missed.
+      ctx.track(st, ok, { note: `${Math.round(rt)} ms · ${t('ex.reaction.target', { ms: Math.round(target) })}` });
 
       if (ok) {
         correct++;
