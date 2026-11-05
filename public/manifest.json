@@ -1,7 +1,7 @@
 {
   "name": "Synapse Dojo",
   "short_name": "Synapse Dojo",
-  "description": "Open-source brain-training game",
+  "description": "Source-available brain-training game, for fun only",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
