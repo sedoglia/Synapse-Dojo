@@ -6,6 +6,12 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.11.2] - 2026-11-05
+
+### Corretto
+
+- Home, pagina di benvenuto e FAQ dicevano che il Neuro Score dura circa 4 minuti, un valore che la 0.10.10 aveva riportato per errore anche in guida e FAQ. Ora dicono circa 10-15 minuti nelle 12 lingue: è una stima basata su prove e tempi degli esercizi, non un cronometraggio (`20c796a`).
+
 ## [0.11.1] - 2026-11-05
 
 ### Modificato
