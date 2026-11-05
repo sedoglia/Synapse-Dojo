@@ -6,6 +6,12 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.11.2] - 2026-11-05
+
+### Fixed
+
+- The home screen, welcome page and FAQ said the Neuro Score takes about 4 minutes, a figure that 0.10.10 had also wrongly restored in the guide and FAQ. They now say about 10–15 minutes in all 12 languages, an estimate from the exercises' trials and timings, not a timed measurement (`20c796a`).
+
 ## [0.11.1] - 2026-11-05
 
 ### Changed
