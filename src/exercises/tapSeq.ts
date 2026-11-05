@@ -17,7 +17,7 @@ export const tapSeq: Exercise = {
   desc: 'ex.tapSeq.desc',
   why: 'ex.tapSeq.why',
   example: 'ex.tapSeq.example',
-  minutes: 2,
+  minutes: [1, 2],
   levels: { min: 1, max: 10, start: 2 },
   levelLabel: (l) => `${lenFor(l)} 👆 · ${num(perTapFor(l) / 1000, 2)} s`,
 

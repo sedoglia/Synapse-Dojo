@@ -82,7 +82,7 @@ export const stories: Exercise = {
   desc: 'ex.stories.desc',
   why: 'ex.stories.why',
   example: 'ex.stories.example',
-  minutes: 3,
+  minutes: [2, 5],
   levels: { min: 1, max: 6, start: 2 },
   levelLabel: (l) => {
     const c = configFor(l);

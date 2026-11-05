@@ -68,7 +68,7 @@ export const echo: Exercise = {
   desc: 'ex.echo.desc',
   why: 'ex.echo.why',
   example: 'ex.echo.example',
-  minutes: 3,
+  minutes: [2, 4],
   levels: { min: 1, max: MAX_LEVEL, start: 1 },
   levelLabel: labelFor,
 

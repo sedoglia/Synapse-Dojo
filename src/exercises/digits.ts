@@ -14,7 +14,7 @@ export const digits: Exercise = {
   desc: 'ex.digits.desc',
   why: 'ex.digits.why',
   example: 'ex.digits.example',
-  minutes: 2.5,
+  minutes: [2, 3],
   levels: { min: MIN_SPAN, max: MAX_SPAN, start: 3 },
   levelLabel: (l) => `${l} 🔟`,
 

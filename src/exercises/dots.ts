@@ -43,7 +43,7 @@ export const dots: Exercise = {
   desc: 'ex.dots.desc',
   why: 'ex.dots.why',
   example: 'ex.dots.example',
-  minutes: 2,
+  minutes: [1, 2],
   levels: { min: 1, max: 12, start: 2 },
   levelLabel: (l) => `${(ratioFor(l) * 100).toFixed(0)}%`,
 

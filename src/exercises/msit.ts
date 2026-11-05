@@ -13,7 +13,7 @@ export const msit: Exercise = {
   desc: 'ex.msit.desc',
   why: 'ex.msit.why',
   example: 'ex.msit.example',
-  minutes: 2,
+  minutes: [1, 2],
   levels: { min: 1, max: 14, start: 1 },
   levelLabel: (l) => `${limitFor(l)} ms`,
 

@@ -77,7 +77,7 @@ export const grid: Exercise = {
   desc: 'ex.grid.desc',
   why: 'ex.grid.why',
   example: 'ex.grid.example',
-  minutes: 2.5,
+  minutes: [1, 3],
   levels: { min: MIN_SPAN, max: MAX_SPAN, start: 3 },
   levelLabel: (l) => `${l} 💡`,
 

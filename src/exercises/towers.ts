@@ -78,7 +78,7 @@ export const towers: Exercise = {
   desc: 'ex.towers.desc',
   why: 'ex.towers.why',
   example: 'ex.towers.example',
-  minutes: 3,
+  minutes: [2, 5],
   levels: { min: 1, max: MAX_LEVEL, start: 2 },
   levelLabel: (l) => `${movesFor(l)} ↔`,
 

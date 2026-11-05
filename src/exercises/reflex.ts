@@ -13,7 +13,7 @@ export const reflex: Exercise = {
   desc: 'ex.reflex.desc',
   why: 'ex.reflex.why',
   example: 'ex.reflex.example',
-  minutes: 1.5,
+  minutes: [1, 2],
   levels: { min: 1, max: 14, start: 1 },
   levelLabel: (l) => `${windowFor(l)} ms${noGoFor(l) ? ' · go/no-go' : ''}`,
 

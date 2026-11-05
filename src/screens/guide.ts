@@ -97,7 +97,7 @@ export function guideContent(): HTMLElement[] {
                     'div',
                     { class: 'guide-ex-meta' },
                     h('h3', { class: 'guide-ex-name' }, t(ex.name)),
-                    h('span', { class: 'guide-ex-time muted small' }, `⏱️ ~${ex.minutes} min`),
+                    h('span', { class: 'guide-ex-time muted small' }, `⏱️ ~${ex.minutes[0]}-${ex.minutes[1]} min`),
                   ),
                 ),
                 h(

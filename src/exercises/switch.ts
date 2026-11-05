@@ -19,7 +19,7 @@ export const ruleSwitch: Exercise = {
   desc: 'ex.switch.desc',
   why: 'ex.switch.why',
   example: 'ex.switch.example',
-  minutes: 2,
+  minutes: [1, 2],
   levels: { min: 1, max: 14, start: 1 },
   levelLabel: (l) => `${limitFor(l)} ms`,
 

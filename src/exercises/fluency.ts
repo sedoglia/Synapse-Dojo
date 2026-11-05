@@ -14,7 +14,7 @@ export const fluency: Exercise = {
   desc: 'ex.fluency.desc',
   why: 'ex.fluency.why',
   example: 'ex.fluency.example',
-  minutes: 2,
+  minutes: [1, 2],
   levels: { min: 1, max: 12, start: 1 },
   levelLabel: (l) => `${limitFor(l)} ms`,
 

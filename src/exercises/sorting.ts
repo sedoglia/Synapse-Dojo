@@ -80,7 +80,7 @@ export const sorting: Exercise = {
   desc: 'ex.sorting.desc',
   why: 'ex.sorting.why',
   example: 'ex.sorting.example',
-  minutes: 2.5,
+  minutes: [1, 2],
   levels: { min: 1, max: 10, start: 2 },
   levelLabel: (l) => `${num(limitFor(l) / 1000)} s`,
 

@@ -96,7 +96,7 @@ export const resources: Exercise = {
   desc: 'ex.resources.desc',
   why: 'ex.resources.why',
   example: 'ex.resources.example',
-  minutes: 2.5,
+  minutes: [3, 5],
   levels: { min: 1, max: 8, start: 2 },
   levelLabel: (l) => `${productCount(l)} 🧺 · ${secondsFor(l)} s`,
 

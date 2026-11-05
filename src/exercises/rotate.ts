@@ -70,7 +70,7 @@ export const rotate: Exercise = {
   desc: 'ex.rotate.desc',
   why: 'ex.rotate.why',
   example: 'ex.rotate.example',
-  minutes: 2,
+  minutes: [1, 2],
   levels: { min: 1, max: MAX_LEVEL, start: 1 },
   levelLabel: (l) => `${cellsFor(l)} ■ · ${num(limitFor(l) / 1000)} s`,
 

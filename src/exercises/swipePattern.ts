@@ -74,7 +74,7 @@ export const swipePattern: Exercise = {
   desc: 'ex.swipePattern.desc',
   why: 'ex.swipePattern.why',
   example: 'ex.swipePattern.example',
-  minutes: 2,
+  minutes: [1, 2],
   levels: { min: 1, max: 10, start: 2 },
   levelLabel: (l) => `${l <= 3 ? '← →' : l <= 6 ? '→ →' : '↑ →'} · ${gapFor(l)} ms`,
 
