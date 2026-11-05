@@ -6,6 +6,20 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.11.7] - 2026-11-05
+
+### Modificato
+
+- Nel Banco del mercato la barra del guadagno è viola finché non si raggiunge l'obiettivo, poi diventa verde e più spessa, con un segno di spunta e un bordo verde. Non si accende se il budget è sforato (`ae6e790`).
+- Nel Tempo di reazione conta tutta l'area di gioco, non solo il riquadro (`ae6e790`).
+- Il Neuro Score ha una nuova scala per la correzione qui sotto: i risultati precedenti restano salvati ma non vengono più confrontati (`ae6e790`).
+
+### Corretto
+
+- Il Tempo di reazione poteva giudicare lento un tocco fatto al momento giusto: il verde compariva con una dissolvenza di 150 ms e il cronometro partiva prima che fosse sullo schermo. Ora il verde appare di colpo e si misura dal verde visibile al tocco (`ae6e790`).
+- Il Tempo di reazione e il Banco del mercato mostravano «Risposta giusta:» davanti al tempo del giocatore o al motivo dell'errore. Ora mostrano solo il motivo, per esempio il tempo e l'obiettivo mancato (`ae6e790`).
+- Un esercizio poteva valere 0 pur con diverse risposte giuste, perché la precisione contava solo sulla seconda metà delle prove, le più difficili nel Neuro Score. Ora conta la migliore tra seconda metà e sessione intera. Vale per quasi tutti gli esercizi (`ae6e790`).
+
 ## [0.11.6] - 2026-11-05
 
 ### Rimosso
