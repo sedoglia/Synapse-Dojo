@@ -6,6 +6,12 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.11.3] - 2026-11-05
+
+### Modificato
+
+- L'allenamento giornaliero ora indica circa 10-15 minuti in home, nella pagina di benvenuto e nel README, nelle 12 lingue, invece di un valore calcolato come «circa 11 min», che sembrava un dato cronometrato (`504dcff`).
+
 ## [0.11.2] - 2026-11-05
 
 ### Corretto
