@@ -131,7 +131,7 @@ Per un obiettivo $p_{\text{target}} = 0,80$:
 2. **Freno alla Frustrazione**: tre errori consecutivi applicano una riduzione addizionale di un livello.
 3. **Riscaldamento Iniziale (Warm-Up)**: ogni sessione parte un quarto di livello sotto la soglia stimata nella sessione precedente.
 4. **Decadimento per Inattività**: se un esercizio non viene praticato per oltre 14 giorni, il livello di partenza scende di uno.
-5. **Punteggio di sessione**: livello medio raggiunto nella seconda metà della sessione, ridotto se l'accuratezza è sotto l'obiettivo. Chi sbaglia molto al livello più facile ottiene un punteggio basso invece del credito minimo.
+5. **Punteggio di sessione**: livello medio raggiunto nella seconda metà della sessione, ridotto se l'accuratezza è sotto l'obiettivo (conta la migliore tra quella della seconda metà e quella dell'intera sessione, così le risposte giuste seguite da errori sui livelli più alti non valgono zero). Chi sbaglia molto al livello più facile ottiene un punteggio basso invece del credito minimo.
 
 ### Il Neuro Score: Calcolo
 Il **Neuro Score** (da 0 a 1000) è la **media dei punteggi 0–100** di 9 esercizi brevi, uno per area, **moltiplicata per 10**. Ogni esercizio parte sempre dallo stesso livello iniziale e converte la prestazione (soglia raggiunta, tempi di risposta o accuratezza) in 0–100 con scale lineari fissate per esercizio. In ogni esercizio una prestazione perfetta vale 100, qualunque sia il giorno: la salita rapida è dimensionata per coprire tutta la gamma nelle prove disponibili, e il bonus di velocità non si applica. Eco misura da 1-back a 3-back in due serie, Coppie usa una lista fissa.

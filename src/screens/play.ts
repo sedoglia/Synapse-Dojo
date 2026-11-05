@@ -112,6 +112,7 @@ async function runExercise(ex: Exercise, mode: Mode, level: number): Promise<{ r
         h('span', { class: 'verdict-text' }, ok ? t('fb.right') : t('fb.wrong')),
       );
       if (!ok && opts.was) verdict.append(h('span', { class: 'verdict-was' }, t('fb.was', { v: opts.was })));
+      if (!ok && opts.note) verdict.append(h('span', { class: 'verdict-was' }, opts.note));
       void verdict.offsetWidth; // restart the animation
       verdict.classList.add('show');
       clearTimeout(hideVerdict); // also hides it when animations are reduced

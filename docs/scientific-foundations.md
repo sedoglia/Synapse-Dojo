@@ -131,7 +131,7 @@ For a target $p_{\text{target}} = 0.80$:
 2. **Frustration Brake**: three errors in a row drop one extra level.
 3. **Warm-Up**: each session starts a quarter of a level below the threshold estimated in the previous session.
 4. **Detraining**: if an exercise has not been played for more than 14 days, the starting level drops by one.
-5. **Session score**: average level reached in the second half of the session, reduced if accuracy is below target. Someone who keeps failing at the easiest level gets a low score instead of the minimum credit.
+5. **Session score**: average level reached in the second half of the session, reduced if accuracy is below target (the better of the second half's and the whole session's accuracy, so right answers followed by misses on the highest levels don't score zero). Someone who keeps failing at the easiest level gets a low score instead of the minimum credit.
 
 ### The Neuro Score: Calculation
 The **Neuro Score** (0 to 1000) is the **mean of the 0–100 scores** of 9 short exercises, one per domain, **multiplied by 10**. Each exercise always starts from the same initial level and converts performance (threshold reached, response times or accuracy) to 0–100 with fixed linear scales per exercise. In every exercise a perfect performance is worth 100, whatever the day: the fast climb is sized to cover the whole range in the trials available, and the speed bonus doesn't apply. Echo measures 1-back to 3-back in two series, Pairs uses a fixed list.

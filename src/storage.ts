@@ -18,7 +18,7 @@ export interface CheckRecord {
 }
 
 /** Current Neuro Score scale. Older checks stay saved, but are not compared with new ones. */
-export const NEURO_SCALE = 2;
+export const NEURO_SCALE = 3;
 /** Current meaning of the exercise levels; a save with a lower number is converted when loaded. */
 const BALANCE = 2;
 
