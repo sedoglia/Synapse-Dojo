@@ -6,6 +6,17 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.10.10] - 2026-11-05
+
+### Modificato
+
+- I testi di app, guida, metadati delle pagine e README ora corrispondono alla documentazione scientifica, nelle 12 lingue. Il Neuro Score è descritto come tendenza su più settimane, non validata e non clinica; spariscono le affermazioni sulla neuroplasticità e sugli effetti su aree cerebrali; il badge «Basato su studi clinici» diventa «Ispirato alla ricerca». La scheda degli esercizi «Perché funziona» diventa «Su cosa si basa» (`3690f66`).
+
+### Corretto
+
+- Guida e FAQ davano al Neuro Score 15-20 minuti mentre la home ne indicava circa 4: ora dicono circa 4 (`3690f66`).
+- Il README e la pagina senza JavaScript descrivevano Rotazioni come 3D, la pagina senza JavaScript usava ancora il vecchio nome di un gioco e il manifest diceva «open-source» anche se la licenza è source-available (`3690f66`).
+
 ## [0.10.9] - 2026-11-05
 
 ### Corretto
