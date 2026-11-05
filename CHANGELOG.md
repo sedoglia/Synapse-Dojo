@@ -6,6 +6,17 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.11.1] - 2026-11-05
+
+### Changed
+
+- Shared cards now say what was done ("First exercise completed") instead of repeating the badge's goal, and the offer button names the badge, in all 12 languages (`e5cb5d4`).
+
+### Fixed
+
+- The week card used the plural with a single training day (`e5cb5d4`).
+- The share dialog stays usable on older browsers, with a slow font or when the image can't be created: sharing the text and copying it still work (`e5cb5d4`).
+
 ## [0.11.0] - 2026-11-05
 
 ### Added

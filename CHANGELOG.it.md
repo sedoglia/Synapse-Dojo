@@ -6,6 +6,17 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.11.1] - 2026-11-05
+
+### Modificato
+
+- Le schede condivise ora dicono cosa è stato fatto («Primo esercizio completato») invece di ripetere l'obiettivo del badge, e il pulsante della proposta nomina il badge, nelle 12 lingue (`e5cb5d4`).
+
+### Corretto
+
+- La scheda della settimana usava il plurale con un solo giorno di allenamento (`e5cb5d4`).
+- Il dialogo di condivisione resta utilizzabile su browser vecchi, con un font lento o quando l'immagine non si crea: restano la condivisione del testo e la copia (`e5cb5d4`).
+
 ## [0.11.0] - 2026-11-05
 
 ### Aggiunto
