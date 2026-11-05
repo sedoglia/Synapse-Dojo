@@ -24,7 +24,7 @@ export interface Exercise {
   example: I18nKey;
   /** Set to false for exercises that don't need a guided practice round. */
   practice?: boolean;
-  /** Typical duration in minutes, used to size the daily plan. */
+  /** Typical duration in minutes, shown in the guide. */
   minutes: number;
   /** Difficulty range for adaptive exercises; `start` is the level for new players. */
   levels?: { min: number; max: number; start: number };
