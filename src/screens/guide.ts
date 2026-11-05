@@ -154,6 +154,12 @@ export function guideContent(): HTMLElement[] {
         h('h3', {}, t('guide.faq3Q')),
         h('p', {}, t('guide.faq3A')),
       ),
+      h(
+        'div',
+        { class: 'card guide-card' },
+        h('h3', {}, t('guide.faq4Q')),
+        h('p', {}, t('guide.faq4A')),
+      ),
     ),
   ];
 }

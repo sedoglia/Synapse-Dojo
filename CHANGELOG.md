@@ -6,6 +6,13 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.11.0] - 2026-11-05
+
+### Added
+
+- Optional milestone sharing: an image drawn on the device for sharing your training days this week and your consistency and exploration badges, from Progress or from an offer after earning a badge, in all 12 languages. The card holds no name, date, scores or age. The Neuro Score, levels, skill badges and leaderboard positions stay private, sharing gives no XP, and the offers can be turned off (`fac964f`).
+- The scientific documentation explains the choice in §2.7, and the privacy page and the guide's FAQ describe the feature (`fac964f`).
+
 ## [0.10.10] - 2026-11-05
 
 ### Changed

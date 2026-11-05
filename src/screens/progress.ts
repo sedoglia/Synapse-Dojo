@@ -5,6 +5,7 @@ import { render, page, sparkline } from '../ui';
 import { EXERCISES, DOMAINS } from '../exercises';
 import { capacity, domainScore } from '../stats';
 import { BADGES, earned } from '../rewards';
+import { canShareBadge, openShare } from '../share';
 import { levelText } from './play';
 import { showHome } from './home';
 
@@ -100,6 +101,9 @@ export function showProgress() {
         calendar(),
         h('p', { class: 'muted small' }, t('progress.week', { n: store.daysThisWeek() })),
         h('p', { class: 'muted small' }, t('progress.stats', { days: store.activeDays().size, runs: runs.length + checks.length })),
+        store.daysThisWeek() > 0
+          ? h('button', { class: 'btn small-btn', type: 'button', onClick: () => openShare({ kind: 'week', days: store.daysThisWeek() }) }, `📤 ${t('share.weekBtn')}`)
+          : null,
       ),
       h(
         'section',
@@ -145,6 +149,9 @@ function badgesSection(): HTMLElement {
           h('b', {}, t(b.name)),
           h('small', { class: 'muted' }, t(b.desc)),
           done ? h('small', { class: 'badge-date' }, `✓ ${dateText(store.data.badges[b.id])}`) : h('div', { class: 'goal-bar' }, h('div', { style: { width: `${pct}%` } })),
+          done && canShareBadge(b)
+            ? h('button', { class: 'link-btn small badge-share', type: 'button', onClick: () => openShare({ kind: 'badge', badge: b }) }, `📤 ${t('share.action')}`)
+            : null,
         );
       }),
     ),

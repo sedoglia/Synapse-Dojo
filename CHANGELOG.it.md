@@ -6,6 +6,13 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.11.0] - 2026-11-05
+
+### Aggiunto
+
+- Condivisione facoltativa dei traguardi: un'immagine disegnata sul dispositivo per condividere i giorni di allenamento della settimana e i badge di costanza ed esplorazione, da Progressi o da una proposta dopo un nuovo badge, nelle 12 lingue. La scheda non contiene nome, data, punteggi o età. Neuro Score, livelli, badge di prestazione e posizioni in classifica restano privati, condividere non dà XP e le proposte si possono disattivare (`fac964f`).
+- La documentazione scientifica spiega la scelta al §2.7; l'informativa sulla privacy e le FAQ della guida descrivono la funzione (`fac964f`).
+
 ## [0.10.10] - 2026-11-05
 
 ### Modificato
