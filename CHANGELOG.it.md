@@ -6,6 +6,12 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.11.4] - 2026-11-05
+
+### Modificato
+
+- La guida ora mostra la durata di ogni esercizio come intervallo, per esempio ~1-2 min o ~3-5 min per il Banco del mercato, invece di valori come ~2.5 min. Gli intervalli sono stimati da prove e tempi degli esercizi, non cronometrati (`69fd9b3`).
+
 ## [0.11.3] - 2026-11-05
 
 ### Modificato

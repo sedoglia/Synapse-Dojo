@@ -6,6 +6,12 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.11.4] - 2026-11-05
+
+### Changed
+
+- The guide now shows each exercise's duration as a range, such as ~1-2 min or ~3-5 min for Market Stall, instead of figures such as ~2.5 min. The ranges are estimated from the exercises' trials and timings, not timed (`69fd9b3`).
+
 ## [0.11.3] - 2026-11-05
 
 ### Changed
