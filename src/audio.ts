@@ -34,8 +34,10 @@ export const sfx = {
   fanfare: () => [523, 659, 784, 1046].forEach((f, i) => tone(f, 0.22, 'triangle', 0.07, i * 0.11)),
 };
 
+// Pulses under about 40 ms are hard to feel, or do nothing at all, on many Android vibration motors.
+// Chrome on Android also drops every vibration while the phone is in silent mode, with no error to detect.
 export const haptic = {
-  ok: () => vibrate(12),
-  bad: () => vibrate([30, 40, 30]),
-  celebrate: () => vibrate([20, 30, 20, 30, 60]),
+  ok: () => vibrate(40),
+  bad: () => vibrate([80, 60, 80]),
+  celebrate: () => vibrate([60, 50, 60, 50, 120]),
 };

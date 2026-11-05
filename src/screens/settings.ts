@@ -1,6 +1,7 @@
 import { h, todayKey } from '../dom';
 import { store, parseSave, type Settings } from '../storage';
 import { t, dateText } from '../i18n';
+import { haptic } from '../audio';
 import { APP_NAME, VERSION, GITHUB_REPO } from '../config';
 import { render, page, applySettings, langSelect, setLang } from '../ui';
 import { showHome } from './home';
@@ -79,6 +80,8 @@ function toggle(key: 'sound' | 'vibration' | 'relaxed' | 'bigText' | 'shareOffer
       (store.data.settings as Settings)[key] = (e.target as HTMLInputElement).checked;
       store.save();
       applySettings();
+      // Turning it on buzzes once, so the player finds out right here whether this phone can vibrate.
+      if (key === 'vibration' && store.data.settings.vibration) haptic.ok();
     },
   });
   return h('label', { class: 'inline' }, box, label);
