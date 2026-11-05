@@ -90,7 +90,7 @@ export const odd: Exercise = {
   desc: 'ex.odd.desc',
   why: 'ex.odd.why',
   example: 'ex.odd.example',
-  minutes: 2,
+  minutes: [1, 2],
   levels: { min: 1, max: MAX_LEVEL, start: 1 },
   levelLabel: (l) => `${itemsFor(l)} · ${variedFor(l)}×`,
 

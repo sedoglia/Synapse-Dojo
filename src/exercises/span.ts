@@ -14,7 +14,7 @@ export const span: Exercise = {
   desc: 'ex.span.desc',
   why: 'ex.span.why',
   example: 'ex.span.example',
-  minutes: 2.5,
+  minutes: [2, 3],
   levels: { min: MIN_SPAN, max: MAX_SPAN, start: 4 },
   levelLabel: (l) => `${l} 🔢`,
 

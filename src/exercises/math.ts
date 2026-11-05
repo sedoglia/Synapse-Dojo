@@ -55,7 +55,7 @@ export const math: Exercise = {
   desc: 'ex.math.desc',
   why: 'ex.math.why',
   example: 'ex.math.example',
-  minutes: 2,
+  minutes: [1, 2],
   levels: { min: 1, max: 10, start: 2 },
   levelLabel: (l) => `${configFor(l).ops.join(' ')} · ≤${BIG[l - 1]}`,
 

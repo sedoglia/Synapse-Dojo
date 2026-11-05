@@ -13,7 +13,7 @@ export const gonogo: Exercise = {
   desc: 'ex.gonogo.desc',
   why: 'ex.gonogo.why',
   example: 'ex.gonogo.example',
-  minutes: 2,
+  minutes: [1, 2],
   levels: { min: 1, max: 14, start: 1 },
   levelLabel: (l) => `${limitFor(l)} ms`,
 

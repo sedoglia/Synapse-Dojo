@@ -101,7 +101,7 @@ export const pilot: Exercise = {
   desc: 'ex.pilot.desc',
   why: 'ex.pilot.why',
   example: 'ex.pilot.example',
-  minutes: 1.5,
+  minutes: [1, 2],
   levels: { min: 1, max: MAX_LEVEL, start: 1 },
   levelLabel: (l) => `${num(answerFor(l) / 1000)} s${l >= 5 ? ' · ≈' : ''}`,
 

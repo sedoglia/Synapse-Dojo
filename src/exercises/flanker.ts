@@ -13,7 +13,7 @@ export const flanker: Exercise = {
   desc: 'ex.flanker.desc',
   why: 'ex.flanker.why',
   example: 'ex.flanker.example',
-  minutes: 2,
+  minutes: [1, 2],
   levels: { min: 1, max: 14, start: 1 },
   levelLabel: (l) => `${limitFor(l)} ms`,
 

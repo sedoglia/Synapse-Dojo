@@ -96,7 +96,7 @@ export const path: Exercise = {
   desc: 'ex.path.desc',
   why: 'ex.path.why',
   example: 'ex.path.example',
-  minutes: 1.5,
+  minutes: [1, 2],
   levels: { min: 1, max: MAX_LEVEL, start: 2 },
   levelLabel: (l) => (alternating(l) ? `1-A-2-B · ${countFor(l)}` : `1→${countFor(l)}`),
 

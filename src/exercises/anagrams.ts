@@ -25,7 +25,7 @@ export const anagrams: Exercise = {
   desc: 'ex.anagrams.desc',
   why: 'ex.anagrams.why',
   example: 'ex.anagrams.example',
-  minutes: 2.5,
+  minutes: [2, 3],
   levels: { min: 1, max: MAX_LEVEL, start: 2 },
   levelLabel: (l) => `${lenFor(l)} ${t('ex.anagrams.letters')}`,
 

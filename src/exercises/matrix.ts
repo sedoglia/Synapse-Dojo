@@ -23,7 +23,7 @@ export const matrix: Exercise = {
   desc: 'ex.matrix.desc',
   why: 'ex.matrix.why',
   example: 'ex.matrix.example',
-  minutes: 2.5,
+  minutes: [2, 3],
   levels: { min: 1, max: 9, start: 2 },
   levelLabel: (l) => {
     const a = angleFor(l);

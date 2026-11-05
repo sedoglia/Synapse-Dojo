@@ -13,7 +13,7 @@ export const dualTask: Exercise = {
   desc: 'ex.dualTask.desc',
   why: 'ex.dualTask.why',
   example: 'ex.dualTask.example',
-  minutes: 2,
+  minutes: [1, 2],
   levels: { min: 1, max: 10, start: 1 },
   levelLabel: (l) => `${num(limitFor(l) / 1000)} s`,
 

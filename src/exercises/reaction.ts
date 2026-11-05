@@ -17,7 +17,7 @@ export const reaction: Exercise = {
   desc: 'ex.reaction.desc',
   why: 'ex.reaction.why',
   example: 'ex.reaction.example',
-  minutes: 1.5,
+  minutes: [1, 2],
   levels: { min: 1, max: 12, start: 1 },
   levelLabel: (l) => `< ${targetMsFor(l)} ms`,
 

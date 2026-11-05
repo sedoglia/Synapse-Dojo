@@ -83,7 +83,7 @@ export const pairs: Exercise = {
   desc: 'ex.pairs.desc',
   why: 'ex.pairs.why',
   example: 'ex.pairs.example',
-  minutes: 3,
+  minutes: [1, 3],
   levels: { min: 1, max: MAX_LEVEL, start: 2 },
   levelLabel: (l) => `${pairsFor(l)} 🔗`,
 

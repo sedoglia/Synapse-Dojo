@@ -13,7 +13,7 @@ export const vault: Exercise = {
   desc: 'ex.vault.desc',
   why: 'ex.vault.why',
   example: 'ex.vault.example',
-  minutes: 2.5,
+  minutes: [1, 3],
   levels: { min: 1, max: MAX_LEVEL, start: 2 },
   levelLabel: (l) => `${countFor(l)} 📝`,
 

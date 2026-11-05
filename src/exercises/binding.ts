@@ -29,7 +29,7 @@ export const binding: Exercise = {
   desc: 'ex.binding.desc',
   why: 'ex.binding.why',
   example: 'ex.binding.example',
-  minutes: 2,
+  minutes: [1, 2],
   levels: { min: 1, max: 10, start: 2 },
   levelLabel: (l) => `${itemsFor(l)} ◆ · ${num(limitFor(l) / 1000)} s`,
 

@@ -26,7 +26,7 @@ export const glance: Exercise = {
   desc: 'ex.glance.desc',
   why: 'ex.glance.why',
   example: 'ex.glance.example',
-  minutes: 2,
+  minutes: [2, 3],
   levels: { min: 1, max: MAX_LEVEL, start: 1 },
   levelLabel: (l) => `${msFor(l)} ms`,
 

@@ -18,7 +18,7 @@ export const reading: Exercise = {
   desc: 'ex.reading.desc',
   why: 'ex.reading.why',
   example: 'ex.reading.example',
-  minutes: 2,
+  minutes: [1, 2],
   practice: false,
 
   async run(ctx) {

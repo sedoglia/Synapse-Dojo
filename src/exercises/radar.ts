@@ -27,7 +27,7 @@ export const radar: Exercise = {
   desc: 'ex.radar.desc',
   why: 'ex.radar.why',
   example: 'ex.radar.example',
-  minutes: 2.5,
+  minutes: [2, 3],
   levels: { min: 1, max: MAX_LEVEL, start: 1 },
   levelLabel: (l) => `${targetsFor(l)} 🎯 · ${speedFor(l)} px/s`,
 
