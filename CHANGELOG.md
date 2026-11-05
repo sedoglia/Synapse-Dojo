@@ -6,6 +6,12 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.11.6] - 2026-11-05
+
+### Removed
+
+- Vibration and its option in the settings. It depended on the browser and the phone's settings: Firefox for Android does not support it and Chrome on Android drops it in silent mode, so the option could stay on with no effect and the app could not tell. Lengthening the pulses in 0.11.5 did not fix this on the phone where the problem was reported, and the cause given there was never measured. Existing saves still load (`f15dc31`).
+
 ## [0.11.5] - 2026-11-05
 
 ### Fixed

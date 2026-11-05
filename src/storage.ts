@@ -25,7 +25,6 @@ const BALANCE = 2;
 export interface Settings {
   lang: Lang;
   sound: boolean;
-  vibration: boolean;
   relaxed: boolean;
   bigText: boolean;
   /** Offer to share a milestone when one is earned (sharing from Progress always stays available). */
@@ -94,7 +93,7 @@ function defaults(): SaveData {
     badges: {},
     bestStreak: 0,
     counters: {},
-    settings: { lang, sound: true, vibration: true, relaxed: false, bigText: false, shareOffer: true },
+    settings: { lang, sound: true, relaxed: false, bigText: false, shareOffer: true },
     board: null,
     boardInvite: null,
     boardPrompt: {},
@@ -173,7 +172,7 @@ function cleanSettings(saved: unknown): Partial<Settings> {
   const s = saved as Record<string, unknown>;
   const out: Partial<Settings> = {};
   if (typeof s.lang === 'string') out.lang = s.lang as Lang;
-  for (const k of ['sound', 'vibration', 'relaxed', 'bigText', 'shareOffer'] as const) if (typeof s[k] === 'boolean') out[k] = s[k];
+  for (const k of ['sound', 'relaxed', 'bigText', 'shareOffer'] as const) if (typeof s[k] === 'boolean') out[k] = s[k];
   return out;
 }
 
