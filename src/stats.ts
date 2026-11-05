@@ -113,4 +113,3 @@ export function markPlanDone(id: string) {
   store.save();
 }
 
-export const planMinutes = (plan: Exercise[]) => Math.round(plan.reduce((a, e) => a + e.minutes, 0) + plan.length * 0.5);

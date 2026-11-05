@@ -3,7 +3,7 @@ import { store } from '../storage';
 import { t } from '../i18n';
 import { APP_NAME } from '../config';
 import { render, rankName, xpBar, langPicker } from '../ui';
-import { currentPlan, planMinutes } from '../stats';
+import { currentPlan } from '../stats';
 import { playerLevel, nextBadge } from '../rewards';
 import { playDailyCheck, playPlan } from './play';
 import { showTraining } from './training';
@@ -158,7 +158,7 @@ export function showHome() {
       {},
       plan.complete
         ? t('plan.againSub')
-        : `${t('plan.sub', { n: plan.exercises.length, min: planMinutes(plan.exercises) })} · ${t('plan.progress', { done: planDone, n: plan.exercises.length })}`,
+        : `${t('plan.sub', { n: plan.exercises.length })} · ${t('plan.progress', { done: planDone, n: plan.exercises.length })}`,
     ),
     h(
       'span',
