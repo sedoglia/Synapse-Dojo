@@ -8,6 +8,7 @@ import { dailyCheckBattery, byId, type Exercise, type ExerciseResult } from '../
 import { nextPlan, markPlanDone } from '../stats';
 import { exampleCard } from '../examples';
 import { XP, addXp, playerLevel, checkBadges, type Badge } from '../rewards';
+import { shareOffer } from '../share';
 import { syncBoard } from '../board';
 import { DETRAIN_DAYS } from '../adaptive';
 import { showHome } from './home';
@@ -191,6 +192,7 @@ function badgeList(badges: Badge[]): HTMLElement | null {
     { class: 'new-badges' },
     h('b', {}, `🏅 ${t('result.newBadge')}`),
     ...badges.map((b) => h('div', { class: 'badge-pill' }, h('span', {}, b.icon), h('span', {}, t(b.name)))),
+    shareOffer(badges),
   );
 }
 

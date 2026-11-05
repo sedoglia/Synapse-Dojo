@@ -45,6 +45,7 @@ Gioco gratuito di allenamento cognitivo e coordinazione bilaterale (source-avail
 - **Esempi e Prova Guidata**: ogni esercizio offre una spiegazione illustrata e una prova pratica (trial) preliminare per familiarizzare con i comandi senza impattare record o livelli.
 - **Privacy Radicale & Zero Cookie**: nessun account, nessuna password, nessun cookie e nessun tracker. Tutti i progressi risiedono nel `localStorage` del browser, con opzioni di esportazione e importazione in formato JSON da *Impostazioni*. Unica eccezione la **classifica settimanale facoltativa**: chi aderisce invia solo un riepilogo della settimana con un nickname casuale, e solo in quel momento viene caricato il controllo anti-robot Cloudflare Turnstile. Il conteggio delle visite usa Cloudflare Web Analytics, senza cookie.
 - **Classifica Progettata per Non Scoraggiare**: premia impegno e miglioramento invece del talento, mostra a chi è nella metà bassa quanti punti mancano per salire invece della posizione, non penalizza chi torna dopo una pausa e non compare mai durante gli esercizi (razionale scientifico in [docs/basi-scientifiche.md](docs/basi-scientifiche.md), §2.6).
+- **Condivisione Facoltativa dei Traguardi**: un'immagine disegnata sul dispositivo per condividere i giorni di allenamento della settimana e i badge di costanza ed esplorazione. Non contiene nome, punteggi o età e il Neuro Score resta privato (razionale in [docs/basi-scientifiche.md](docs/basi-scientifiche.md), §2.7).
 - **Multilingua Nativo (12 Lingue)**: localizzato in inglese, italiano, spagnolo, francese, tedesco, portoghese, russo, cinese, giapponese, arabo (con layout RTL), hindi e indonesiano. I file linguistici sono separati e caricati dinamicamente on-demand.
 - **Accessibilità & Benessere**: modalità a ritmo rilassato (tempi maggiorati del 40%), supporto per testo grande, tema chiaro, tema scuro e installabilità come **PWA offline**.
 - **Pagine Dedicate del Progetto**:
@@ -75,6 +76,7 @@ synapse-dojo/
 │   ├── adaptive.ts         motore adattivo continuo (weighted up-down staircase)
 │   ├── audio.ts            effetti sonori sintetizzati via Web Audio API e sintesi vocale
 │   ├── rewards.ts          calcolo XP, livelli del giocatore e sblocco traguardi
+│   ├── share.ts            scheda condivisibile dei traguardi, disegnata sul dispositivo
 │   ├── examples.ts         generazione procedurale delle anteprime illustrate
 │   ├── stats.ts            analisi delle capacità per dominio e selezione allenamento
 │   ├── ctx.ts              runtime di esecuzione degli esercizi (input, timer, feedback, cancellazione)

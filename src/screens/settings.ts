@@ -71,7 +71,7 @@ async function importSave(file: File) {
   else showOnboarding();
 }
 
-function toggle(key: 'sound' | 'vibration' | 'relaxed' | 'bigText', label: string): HTMLElement {
+function toggle(key: 'sound' | 'vibration' | 'relaxed' | 'bigText' | 'shareOffer', label: string): HTMLElement {
   const box = h('input', {
     type: 'checkbox',
     checked: store.data.settings[key],
@@ -164,6 +164,7 @@ export function showSettings() {
         toggle('relaxed', t('settings.relaxed')),
         toggle('vibration', t('settings.vibration')),
         toggle('bigText', t('settings.bigText')),
+        toggle('shareOffer', t('settings.shareOffer')),
       ),
       (() => {
         const time = h('input', { class: 'input time', type: 'time', value: '18:00' });

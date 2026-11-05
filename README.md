@@ -44,6 +44,7 @@ Free cognitive training and bilateral coordination web application (source-avail
 - **Guided Trials & Illustrated Examples**: Every exercise provides visual step-by-step examples and a preliminary practice trial that does not affect your score or level.
 - **Radical Privacy & Zero Cookies**: No accounts, no passwords, no email sign-ups, no cookies and no trackers. All progress stays in your browser's local storage (`localStorage`), with one-click JSON backup export/import in Settings. The only exception is the **opt-in weekly leaderboard**: players who join send only a weekly summary under a random nickname, and only then is the Cloudflare Turnstile anti-bot check loaded. Visits are counted with cookie-free Cloudflare Web Analytics.
 - **A Leaderboard Designed Not to Discourage**: it rewards effort and improvement rather than talent, shows players in the lower half how many points move them up instead of their rank, never penalises coming back after a break, and never appears during exercises (scientific rationale in [docs/scientific-foundations.md](docs/scientific-foundations.md), §2.6).
+- **Optional Milestone Sharing**: an image drawn on the device for sharing your training days this week and your consistency and exploration badges. It holds no name, scores or age, and the Neuro Score stays private (rationale in [docs/scientific-foundations.md](docs/scientific-foundations.md), §2.7).
 - **Native Localization (12 Languages)**: English, Spanish, Chinese (Simplified), Hindi, Arabic (with native RTL mirroring), Portuguese, French, Russian, German, Japanese, Indonesian, and Italian. Language files are split and loaded asynchronously on-demand.
 - **Accessibility & Wellbeing**: Relaxed pace mode (adds 40% more time), large text option, automatic light and dark theme, and offline **Progressive Web App (PWA)** installation.
 - **Standalone Static Pages**:
@@ -74,6 +75,7 @@ synapse-dojo/
 │   ├── adaptive.ts         Continuous adaptive difficulty staircase engine (weighted up-down)
 │   ├── audio.ts            Procedural Web Audio API sound synthesis & native SpeechSynthesis
 │   ├── rewards.ts          XP calculation, player levels, and streak/achievement badges
+│   ├── share.ts            Shareable milestone card, drawn on the device
 │   ├── examples.ts         Procedural visual scene generation for illustrated instructions
 │   ├── stats.ts            Domain capacity computation & daily workout selector
 │   ├── ctx.ts              Exercise runtime context (timed inputs, feedback loops, cleanup)

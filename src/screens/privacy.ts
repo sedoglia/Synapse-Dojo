@@ -3,7 +3,7 @@ import { t, type I18nKey } from '../i18n';
 import { CONTACT } from '../config';
 import { render, page } from '../ui';
 
-const SECTIONS = ['data', 'cookies', 'board', 'hosting', 'stats', 'medical'] as const;
+const SECTIONS = ['data', 'cookies', 'board', 'share', 'hosting', 'stats', 'medical'] as const;
 
 /** Privacy and legal text, shared by the in-app screen and the static privacy.html page. */
 export function privacyContent(): HTMLElement[] {
