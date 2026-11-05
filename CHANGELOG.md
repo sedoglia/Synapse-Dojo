@@ -6,6 +6,12 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.11.5] - 2026-11-05
+
+### Fixed
+
+- Vibration was hard to feel, or absent, on many Android phones because its pulses lasted only 12-30 ms. They now start at 40 ms, and turning the option on in the settings buzzes once as a test. Chrome on Android still drops vibration while the phone is in silent mode, which the app cannot detect (`910df95`).
+
 ## [0.11.4] - 2026-11-05
 
 ### Changed

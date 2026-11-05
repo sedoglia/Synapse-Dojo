@@ -6,6 +6,12 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.11.5] - 2026-11-05
+
+### Corretto
+
+- La vibrazione si avvertiva appena, o per niente, su molti telefoni Android, perché gli impulsi duravano solo 12-30 ms. Ora partono da 40 ms, e attivando l'opzione nelle impostazioni il telefono vibra una volta come prova. Chrome per Android scarta comunque la vibrazione quando il telefono è in silenzioso, e l'app non può rilevarlo (`910df95`).
+
 ## [0.11.4] - 2026-11-05
 
 ### Modificato
