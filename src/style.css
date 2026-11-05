@@ -4071,3 +4071,10 @@ html.big-text {
 .badge-share {
   margin-top: 4px;
 }
+/* Only for browsers without showModal, where a dialog isn't centred or layered by itself. */
+.share-dialog.no-modal {
+  position: fixed;
+  inset: 12px 0 auto;
+  margin: 0 auto;
+  z-index: 100;
+}

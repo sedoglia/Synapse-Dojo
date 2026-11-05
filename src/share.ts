@@ -1,6 +1,6 @@
 import { h } from './dom';
 import { store } from './storage';
-import { t, meta } from './i18n';
+import { t, meta, type I18nKey } from './i18n';
 import { APP_NAME, SITE_URL } from './config';
 import type { Badge } from './rewards';
 
@@ -9,9 +9,19 @@ import type { Badge } from './rewards';
  * Score and leaderboard positions stay private on purpose: the Neuro Score isn't validated, and a public feed of high
  * scores would bring back the absolute comparison the leaderboard avoids (docs/basi-scientifiche.md, §2.7).
  */
-const SHAREABLE = new Set(['first', 'plan', 'plans10', 'week4', 'streak3', 'streak7', 'streak30', 'explorer', 'balanced']);
+const SHAREABLE: Partial<Record<string, I18nKey>> = {
+  first: 'share.done.first',
+  plan: 'share.done.plan',
+  plans10: 'share.done.plans10',
+  week4: 'share.done.week4',
+  streak3: 'share.done.streak3',
+  streak7: 'share.done.streak7',
+  streak30: 'share.done.streak30',
+  explorer: 'share.done.explorer',
+  balanced: 'share.done.balanced',
+};
 
-export const canShareBadge = (b: Badge) => SHAREABLE.has(b.id);
+export const canShareBadge = (b: Badge) => SHAREABLE[b.id] !== undefined;
 
 export type Milestone = { kind: 'badge'; badge: Badge } | { kind: 'week'; days: number };
 
@@ -55,13 +65,23 @@ function write(ctx: CanvasRenderingContext2D, text: string, y: number, o: { size
   return y + lines.length * height;
 }
 
+/** ctx.roundRect is missing from browsers older than 2023, which this game still supports. */
+function roundedRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+}
+
 /** The same network mark as public/icon.svg, drawn here so that the card needs no download. */
 function drawMark(ctx: CanvasRenderingContext2D, x: number, y: number, size: number) {
   const k = size / 512;
   const at = (px: number, py: number): [number, number] => [x + px * k, y + py * k];
   ctx.fillStyle = 'rgba(255,255,255,0.18)';
-  ctx.beginPath();
-  ctx.roundRect(x, y, size, size, 112 * k);
+  roundedRect(ctx, x, y, size, size, 112 * k);
   ctx.fill();
   ctx.strokeStyle = '#fff';
   ctx.lineWidth = 22 * k;
@@ -84,18 +104,21 @@ function drawMark(ctx: CanvasRenderingContext2D, x: number, y: number, size: num
 
 /** Draws the card. It holds no name, date, score or age: only the milestone and what the game is. */
 async function drawCard(canvas: HTMLCanvasElement, m: Milestone) {
-  const label = m.kind === 'badge' ? t('share.badgeLabel') : t('share.weekLabel');
+  const label = m.kind === 'badge' ? t('share.badgeLabel') : m.days === 1 ? t('share.weekLabel1') : t('share.weekLabel');
   const title = m.kind === 'badge' ? t(m.badge.name) : '';
-  const detail = m.kind === 'badge' ? t(m.badge.desc) : '';
+  // The badge's own description is a goal ("Complete your first exercise"); the card says what has been done.
+  const doneKey = m.kind === 'badge' ? SHAREABLE[m.badge.id] : undefined;
+  const detail = doneKey ? t(doneKey) : '';
   try {
-    // A canvas doesn't wait for web fonts by itself.
-    await Promise.all([800, 700, 900].map((w) => document.fonts.load(`${w} 60px Nunito`, `${label}${title}${detail}`)));
+    // A canvas doesn't wait for web fonts by itself. On a slow connection the system font is better than a long wait.
+    const fonts = Promise.all([800, 700, 900].map((w) => document.fonts.load(`${w} 60px Nunito`, `${label}${title}${detail}`)));
+    await Promise.race([fonts, new Promise((resolve) => setTimeout(resolve, 1500))]);
   } catch {
     /* falls back to the system font */
   }
 
   const ctx = canvas.getContext('2d');
-  if (!ctx) return;
+  if (!ctx) throw new Error('no canvas');
   ctx.direction = meta().rtl ? 'rtl' : 'ltr';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'top';
@@ -125,8 +148,7 @@ async function drawCard(canvas: HTMLCanvasElement, m: Milestone) {
   const panelH = 610;
   const inner = SIZE - 2 * panelX - 96;
   ctx.fillStyle = '#fff';
-  ctx.beginPath();
-  ctx.roundRect(panelX, panelY, SIZE - 2 * panelX, panelH, 56);
+  roundedRect(ctx, panelX, panelY, SIZE - 2 * panelX, panelH, 56);
   ctx.fill();
 
   const accent = '#4646d8';
@@ -222,17 +244,28 @@ export function openShare(m: Milestone) {
     h('p', { class: 'muted small center' }, `🔒 ${t('share.note')}`),
   );
   document.body.append(dialog);
-  dialog.showModal();
+  // Older browsers have no showModal: the `open` attribute still shows it, placed by the stylesheet.
+  if (dialog.showModal) dialog.showModal();
+  else {
+    dialog.classList.add('no-modal');
+    dialog.setAttribute('open', '');
+  }
 
-  void drawCard(canvas, m).then(() =>
-    canvas.toBlob((blob) => {
-      if (!blob) return;
-      // Prepared in advance: browsers only allow sharing right after a tap, with no waiting in between.
+  // Prepared in advance: browsers only allow sharing right after a tap, with no waiting in between.
+  // If the image can't be made, the text can still be shared and copied, and the empty preview goes away.
+  const ready = (blob: Blob | null) => {
+    if (blob) {
       file = new File([blob], 'synapse-dojo.png', { type: 'image/png' });
-      if (shareBtn) shareBtn.disabled = false;
       saveBtn.disabled = false;
-    }, 'image/png'),
-  );
+    } else {
+      canvas.remove();
+      saveBtn.remove();
+    }
+    if (shareBtn) shareBtn.disabled = false;
+  };
+  drawCard(canvas, m)
+    .then(() => canvas.toBlob(ready, 'image/png'))
+    .catch(() => ready(null));
 }
 
 /**
@@ -246,7 +279,7 @@ export function shareOffer(fresh: Badge[]): HTMLElement | null {
   const row = h(
     'div',
     { class: 'share-offer' },
-    h('button', { class: 'btn small-btn', type: 'button', onClick: () => openShare({ kind: 'badge', badge }) }, `📤 ${t('share.offer')}`),
+    h('button', { class: 'btn small-btn', type: 'button', onClick: () => openShare({ kind: 'badge', badge }) }, `📤 ${t('share.action')}: ${badge.icon} ${t(badge.name)}`),
     h(
       'button',
       {
