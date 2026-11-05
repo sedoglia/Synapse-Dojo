@@ -177,7 +177,7 @@ export const pilot: Exercise = {
       if (s.target) lastTarget = elapsed;
       if (s.target && !s.pressed) {
         s.missed = true;
-        ctx.track(st, false, { was: t('fb.pilotMissed') });
+        ctx.track(st, false, { note: t('fb.pilotMissed') });
         showStatus(false);
       } else if (s.pressed) {
         st.record(s.target); // the press already got its ✓/✗
@@ -198,14 +198,14 @@ export const pilot: Exercise = {
         if (visible.length || elapsed - lastTarget < LATE_PRESS) return;
         // Pressing with no sign in view is its own mistake; it doesn't spoil the next sign.
         flash(btn, 'bad');
-        ctx.track(st, false, { was: t('fb.pilotStray') });
+        ctx.track(st, false, { note: t('fb.pilotStray') });
         showStatus(false);
         return;
       }
       s.pressed = true;
       if (s.target) lastTarget = elapsed;
       flash(btn, s.target ? 'good' : 'bad');
-      ctx.feedback(s.target, { was: t('fb.pilotNotTarget') });
+      ctx.feedback(s.target, { note: t('fb.pilotNotTarget') });
       showStatus(s.target);
     };
 

@@ -51,7 +51,8 @@ export const reflex: Exercise = {
 
       const ok = ctx.track(st, noGo ? tapped === null : tapped === k, {
         rt,
-        was: noGo ? t('fb.noGo') : tapped === null ? t('fb.tooSlow') : t('fb.otherPad'),
+        note: noGo ? t('fb.noGo') : tapped === null ? t('fb.tooSlow') : undefined,
+        was: !noGo && tapped !== null ? t('fb.otherPad') : undefined,
       });
       if (ok) {
         correct++;

@@ -183,7 +183,8 @@ export const dualTask: Exercise = {
       const ok = parityOk && held;
 
       ctx.track(st, ok, {
-        was: !held ? t('ex.dualTask.notHolding') : choice === null ? t('common.timeout') : isEven ? t('ex.dualTask.even') : t('ex.dualTask.odd'),
+        note: !held ? t('ex.dualTask.notHolding') : choice === null ? t('common.timeout') : undefined,
+        was: held && choice !== null ? (isEven ? t('ex.dualTask.even') : t('ex.dualTask.odd')) : undefined,
       });
 
       if (ok) {

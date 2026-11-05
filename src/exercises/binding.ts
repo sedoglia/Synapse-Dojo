@@ -105,7 +105,8 @@ export const binding: Exercise = {
 
       bar.stop();
       const ok = ctx.track(st, chosen?.isTarget === true, {
-        was: chosen ? `${targetShape.symbol} ${t(`color.${targetColor.id}`)}` : t('common.timeout'),
+        was: chosen ? `${targetShape.symbol} ${t(`color.${targetColor.id}`)}` : undefined,
+        note: chosen ? undefined : t('common.timeout'),
       });
 
       if (ok) {
