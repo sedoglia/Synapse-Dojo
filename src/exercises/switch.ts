@@ -50,6 +50,8 @@ export const ruleSwitch: Exercise = {
       cue.dataset.rule = rule;
       num.dataset.rule = rule;
       pad.dataset.rule = rule;
+      ctx.stage.dataset.rule = rule;
+      if (switched) flash(cue, 'pop', 250);
       num.textContent = String(n);
       flash(num, 'pop', 200);
 

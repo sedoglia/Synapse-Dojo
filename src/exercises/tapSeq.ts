@@ -1,4 +1,5 @@
 import { h, flash } from '../dom';
+import { sfx } from '../audio';
 import { t, num } from '../i18n';
 import { onKeys, timeBar } from '../widgets';
 import type { Exercise } from './types';
@@ -91,11 +92,15 @@ export const tapSeq: Exercise = {
       bar.start(limit);
       const finished = await ctx.timed<boolean>(limit, false, (done) => {
         onTap = (side) => {
+          sfx.drum(side === 'L' ? 'left' : 'right');
           if (side === pattern[currentStep]) {
             flash(side === 'L' ? btnLeft : btnRight, 'good', 150);
             currentStep++;
             renderSeq();
-            if (currentStep >= len) done(true);
+            if (currentStep >= len) {
+              sfx.sparkle();
+              done(true);
+            }
           } else {
             // The sequence is already lost: no point in making the player finish it.
             hasError = true;

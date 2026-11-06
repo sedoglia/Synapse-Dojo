@@ -1,4 +1,4 @@
-﻿import { h, rand, pick } from '../dom';
+import { h, rand, pick } from '../dom';
 import { t, num } from '../i18n';
 import { onKeys } from '../widgets';
 import type { Exercise } from './types';
@@ -92,7 +92,9 @@ export const rotate: Exercise = {
       const mirrored = Math.random() < 0.5;
       const a1 = rand(0, 11) * 30;
       const a2 = a1 + rand(1, 11) * 30;
-      pair.replaceChildren(render(shape, a1, false), render(shape, a2, mirrored));
+      const b1 = render(shape, a1, false);
+      const b2 = render(shape, a2, mirrored);
+      pair.replaceChildren(b1, b2);
 
       const limit = ctx.practice ? 60_000 : limitFor(st.level) * ctx.pace;
       const bar = timer.firstElementChild as HTMLElement;
@@ -106,10 +108,17 @@ export const rotate: Exercise = {
         onAnswer = done;
         return () => (onAnswer = null);
       });
+
+      const svg2 = b2.querySelector('svg');
+      if (svg2) {
+        svg2.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        svg2.style.transform = `rotate(${a1}deg) scaleX(${mirrored ? -1 : 1})`;
+      }
+
       const ok = ctx.track(st, said === mirrored, { was: mirrored ? t('ex.rotate.mirror') : t('ex.rotate.same') });
       if (ok) correct++;
       pair.classList.add(ok ? 'good' : 'bad');
-      await ctx.wait(ok ? 400 : 1300);
+      await ctx.wait(ok ? 500 : 1300);
       pair.classList.remove('good', 'bad');
     }
     ctx.progress(1);

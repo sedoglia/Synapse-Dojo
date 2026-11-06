@@ -1,4 +1,5 @@
-﻿import { h, rand, pick, shuffle } from '../dom';
+import { h, rand, pick, shuffle, flash } from '../dom';
+import { sfx } from '../audio';
 import { t } from '../i18n';
 import type { Exercise } from './types';
 
@@ -107,7 +108,10 @@ export const glance: Exercise = {
       prompt.textContent = t('ex.glance.which');
       choices.classList.remove('hidden');
       const saidVehicle = await ctx.input<number>((done) => {
-        onCenter = done;
+        onCenter = (i) => {
+          sfx.tick();
+          done(i);
+        };
         return () => (onCenter = null);
       });
       choices.classList.add('hidden');
@@ -115,7 +119,10 @@ export const glance: Exercise = {
       prompt.textContent = t('ex.glance.where');
       outer.forEach((s) => s.classList.add('pickable'));
       const saidWhere = await ctx.input<number>((done) => {
-        onSlot = done;
+        onSlot = (k) => {
+          sfx.note(k);
+          done(k);
+        };
         return () => (onSlot = null);
       });
 
@@ -127,8 +134,11 @@ export const glance: Exercise = {
       center.classList.add(saidVehicle === vehicle ? 'right' : 'wrong');
       outer[where].textContent = '★';
       outer[where].classList.add('target', 'reveal');
-      if (ok) correct++;
-      else if (saidWhere !== where) {
+      if (ok) {
+        correct++;
+        sfx.sparkle();
+        flash(outer[where], 'pop', 250);
+      } else if (saidWhere !== where) {
         outer[saidWhere].textContent = '✗';
         outer[saidWhere].classList.add('wrong-pick');
       }

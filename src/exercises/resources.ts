@@ -139,6 +139,7 @@ export const resources: Exercise = {
         );
 
         submitBtn.disabled = over || selected.size === 0;
+        submitBtn.textContent = selected.size > 0 ? `🧺 ${t('ex.resources.sell')} (${selected.size})` : t('ex.resources.sell');
 
         cardList.replaceChildren(
           ...products.map((p, i) =>
@@ -148,9 +149,13 @@ export const resources: Exercise = {
                 class: `resource-card ${selected.has(i) ? 'selected' : ''}`,
                 'aria-pressed': String(selected.has(i)),
                 onClick: () => {
-                  sfx.tick();
-                  if (selected.has(i)) selected.delete(i);
-                  else selected.add(i);
+                  if (selected.has(i)) {
+                    selected.delete(i);
+                    sfx.clack();
+                  } else {
+                    selected.add(i);
+                    sfx.coins();
+                  }
                   updateUI();
                 },
               },

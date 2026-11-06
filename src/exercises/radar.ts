@@ -1,4 +1,4 @@
-﻿import { h, rand, shuffle } from '../dom';
+import { h, rand, shuffle } from '../dom';
 import { sfx } from '../audio';
 import { t } from '../i18n';
 import { fitCanvas, cssVar } from '../widgets';
@@ -146,7 +146,12 @@ export const radar: Exercise = {
           const hit = balls.find((b) => Math.hypot(b.x - x, b.y - y) < R * 1.6);
           if (!hit) return;
           hit.picked = !hit.picked;
-          sfx.tick();
+          if (hit.picked) {
+            const pickedCount = balls.filter((b) => b.picked).length;
+            sfx.note(pickedCount);
+          } else {
+            sfx.clack();
+          }
           draw();
           if (balls.filter((b) => b.picked).length === nTargets) done();
         };
@@ -157,6 +162,7 @@ export const radar: Exercise = {
       const ok = ctx.track(st, balls.every((b) => b.picked === b.target));
       if (ok) {
         wins++;
+        sfx.sparkle();
         bestTracked = Math.max(bestTracked, nTargets);
       }
       reveal = true;

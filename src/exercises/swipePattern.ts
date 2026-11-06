@@ -1,4 +1,5 @@
 import { h, pick, flash } from '../dom';
+import { sfx } from '../audio';
 import { t } from '../i18n';
 import { onKeys, timeBar } from '../widgets';
 import type { Exercise } from './types';
@@ -188,6 +189,7 @@ export const swipePattern: Exercise = {
           if (leftSwiped === null) {
             leftSwiped = dir;
             leftAt = performance.now();
+            sfx.whoosh();
             flash(leftZone, dir === leftDir.id ? 'good' : 'bad', 200);
             checkBoth();
           }
@@ -197,6 +199,7 @@ export const swipePattern: Exercise = {
           if (rightSwiped === null) {
             rightSwiped = dir;
             rightAt = performance.now();
+            sfx.whoosh();
             flash(rightZone, dir === rightDir.id ? 'good' : 'bad', 200);
             checkBoth();
           }
@@ -228,6 +231,7 @@ export const swipePattern: Exercise = {
 
       if (isMatch) {
         correct++;
+        sfx.sparkle();
         flash(container, 'good', 250);
       } else {
         flash(container, 'bad', 400);

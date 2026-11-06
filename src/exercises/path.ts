@@ -1,4 +1,5 @@
-﻿import { h, rand, scale, flash, clamp } from '../dom';
+import { h, rand, scale, flash, clamp } from '../dom';
+import { sfx } from '../audio';
 import { t, num } from '../i18n';
 import { levelScore } from '../adaptive';
 import type { Ctx } from '../ctx';
@@ -62,7 +63,10 @@ async function board(ctx: Ctx, labels: string[], from: number, of: number) {
       text,
     ),
   );
-  area.append(...nodes);
+
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('class', 'path-svg');
+  area.append(svg, ...nodes);
 
   let next = 0;
   let errors = 0;
@@ -71,10 +75,29 @@ async function board(ctx: Ctx, labels: string[], from: number, of: number) {
     onTap = (i) => {
       if (i === next) {
         ctx.feedback(true, { subtle: true });
+        flash(nodes[i], 'pop', 200);
         nodes[i].classList.add('done');
+        if (next > 0) {
+          const p1 = nodes[next - 1];
+          const p2 = nodes[i];
+          const x1 = p1.offsetLeft + p1.offsetWidth / 2;
+          const y1 = p1.offsetTop + p1.offsetHeight / 2;
+          const x2 = p2.offsetLeft + p2.offsetWidth / 2;
+          const y2 = p2.offsetTop + p2.offsetHeight / 2;
+          const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+          line.setAttribute('x1', String(x1));
+          line.setAttribute('y1', String(y1));
+          line.setAttribute('x2', String(x2));
+          line.setAttribute('y2', String(y2));
+          line.setAttribute('class', 'path-laser-line');
+          svg.append(line);
+        }
         next++;
         ctx.progress((from + next / labels.length) / of, `${next}/${labels.length}`);
-        if (next === labels.length) return done();
+        if (next === labels.length) {
+          sfx.sparkle();
+          return done();
+        }
         hint.textContent = t('ex.path.next', { v: labels[next] });
       } else if (i > next) {
         errors++;

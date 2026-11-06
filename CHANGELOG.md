@@ -6,6 +6,23 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.0] - 2026-11-06
+
+### Added
+
+- Comprehensive game-feel, sensory responsiveness, and audio overhaul across exercises to maximize engagement and flow:
+  - Number Trail: added dynamic glowing laser connecting lines between tapped nodes (SVG trails) and node pop animation on successful taps.
+  - Tower of London: added an Undo (↩) button to revert accidental moves before reaching the minimum move threshold; added a natural woody clack sound effect on ball drops.
+  - Anagrams: added a Scramble (🔀) button to shuffle available letter tiles; added ascending marimba musical notes when typing letters.
+  - Word Sprint: added mobile touch swipe gestures (swipe right for match, swipe left for mismatch) with card tilt feedback.
+  - Light Grid: sequence blocks now play a harmonious pentatonic melody during both memorization and user reproduction.
+  - Color Clash: added a radial glowing "Color Splash" matching the target color on correct answers.
+  - Mental Rotation: added smooth snap rotation animation aligning the test shape with the reference shape on reveal.
+  - Bilateral Rhythm & Bilateral Tap: added percussive acoustic drum samples differentiated for left (low tom/bongo) and right (high conga) and natural metronome groove.
+  - Bilateral Dual-Task: pulsing energy reactor glow and audio feedback for continuous isometric motor hold.
+  - Celebratory confetti particle burst on result screen when beating a personal best, earning a badge, or scoring ≥85.
+  - Global audio engine upgrade: ascending warm pentatonic chord progression on streaks and replaced harsh 180Hz sawtooth with gentle wooden thud on errors.
+
 ## [0.11.9] - 2026-11-06
 
 ### Changed

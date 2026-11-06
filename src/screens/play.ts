@@ -33,6 +33,33 @@ function startLevel(ex: Exercise): number {
 
 type IntroChoice = 'start' | 'practice' | null;
 
+export function burstConfetti(container: HTMLElement) {
+  const colors = ['#f59e0b', '#3b82f6', '#10b981', '#ec4899', '#8b5cf6', '#ef4444'];
+  const n = 28;
+  const frag = document.createDocumentFragment();
+  for (let i = 0; i < n; i++) {
+    const p = document.createElement('div');
+    p.className = 'confetti-particle';
+    const angle = (i / n) * 2 * Math.PI + (Math.random() - 0.5) * 0.4;
+    const distance = 70 + Math.random() * 110;
+    const dx = Math.cos(angle) * distance;
+    const dy = Math.sin(angle) * distance - 40;
+    const color = colors[i % colors.length];
+    p.style.setProperty('--dx', `${dx}px`);
+    p.style.setProperty('--dy', `${dy}px`);
+    p.style.setProperty('--rot', `${(Math.random() - 0.5) * 720}deg`);
+    p.style.backgroundColor = color;
+    p.style.left = '50%';
+    p.style.top = '30%';
+    frag.append(p);
+  }
+  container.style.position = 'relative';
+  container.append(frag);
+  setTimeout(() => {
+    container.querySelectorAll('.confetti-particle').forEach((el) => el.remove());
+  }, 1200);
+}
+
 /** Intro card with an illustrated example. First-timers are steered to a guided practice round. */
 function intro(ex: Exercise, step: string | null): Promise<IntroChoice> {
   return new Promise((resolve) => {
@@ -255,61 +282,59 @@ async function practiceRound(ex: Exercise, step: { i: number; n: number } | null
 
   const num = h('div', { class: 'big-score' }, '0');
   return new Promise<After>((resolve) => {
-    render(
-      page(
-        t('result.title'),
-        () => resolve('menu'),
-        h(
-          'div',
-          { class: 'card result' },
-          h('div', { class: 'intro-icon' }, ex.icon),
-          h('h2', {}, t(ex.name)),
-          num,
-          h('div', { class: 'muted' }, `/ 100 · ${res.detail}${res.timeBonus ? ` · ⚡ +${res.timeBonus} ${t('result.timeBonusPts')}` : ''}`),
-          ctx.bestStreak >= 3 ? h('div', { class: 'muted' }, `🔥 ${t('result.combo', { n: ctx.bestStreak })}`) : null,
-          speedBonusEarned ? h('div', { class: 'badge-speed' }, `⚡ ${t('result.speedBonus')}`) : null,
-          isBest
-            ? h('div', { class: 'badge-best' }, `🏆 ${t('common.newBest')}`)
-            : h('div', { class: 'muted' }, `${t('common.best')}: ${prevBest}`),
-          ex.levels && res.level !== undefined
-            ? h(
-                'div',
-                { class: 'level-box' },
-                h(
-                  'div',
-                  { class: `level-change ${change > 0 ? 'up' : change < 0 ? 'down' : ''}` },
-                  change === 0
-                    ? `${t('common.level')}: ${levelText(ex, res.level)}`
-                    : t('common.levelChange', { from: levelText(ex, before), to: levelText(ex, res.level) }),
-                ),
-                h('p', { class: 'muted small' }, message),
-                history.length >= 2
-                  ? h(
-                      'div',
-                      { class: 'history' },
-                      h('small', { class: 'muted' }, t('result.history')),
-                      sparkline(history.slice(-20)),
-                      now !== first
-                        ? h('small', { class: 'muted' }, t('result.sinceFirst', { pct: `${now > first ? '+' : ''}${Math.round(((now - first) / Math.max(1, first)) * 100)}%` }))
-                        : null,
-                    )
-                  : null,
-              )
-            : null,
-          xpLine(xp.gained, xp.levelUp),
-          badgeList(badges),
-          h(
+    const resultCard = h(
+      'div',
+      { class: 'card result' },
+      h('div', { class: 'intro-icon' }, ex.icon),
+      h('h2', {}, t(ex.name)),
+      num,
+      h('div', { class: 'muted' }, `/ 100 · ${res.detail}${res.timeBonus ? ` · ⚡ +${res.timeBonus} ${t('result.timeBonusPts')}` : ''}`),
+      ctx.bestStreak >= 3 ? h('div', { class: 'muted' }, `🔥 ${t('result.combo', { n: ctx.bestStreak })}`) : null,
+      speedBonusEarned ? h('div', { class: 'badge-speed' }, `⚡ ${t('result.speedBonus')}`) : null,
+      isBest
+        ? h('div', { class: 'badge-best' }, `🏆 ${t('common.newBest')}`)
+        : h('div', { class: 'muted' }, `${t('common.best')}: ${prevBest}`),
+      ex.levels && res.level !== undefined
+        ? h(
             'div',
-            { class: 'row' },
-            h('button', { class: 'btn', onClick: () => resolve('menu') }, t('common.menu')),
-            step
-              ? h('button', { class: 'btn primary', onClick: () => resolve('next') }, t('common.next'))
-              : h('button', { class: 'btn primary', onClick: () => resolve('retry') }, t('common.retry')),
-          ),
-        ),
+            { class: 'level-box' },
+            h(
+              'div',
+              { class: `level-change ${change > 0 ? 'up' : change < 0 ? 'down' : ''}` },
+              change === 0
+                ? `${t('common.level')}: ${levelText(ex, res.level)}`
+                : t('common.levelChange', { from: levelText(ex, before), to: levelText(ex, res.level) }),
+            ),
+            h('p', { class: 'muted small' }, message),
+            history.length >= 2
+              ? h(
+                  'div',
+                  { class: 'history' },
+                  h('small', { class: 'muted' }, t('result.history')),
+                  sparkline(history.slice(-20)),
+                  now !== first
+                    ? h('small', { class: 'muted' }, t('result.sinceFirst', { pct: `${now > first ? '+' : ''}${Math.round(((now - first) / Math.max(1, first)) * 100)}%` }))
+                    : null,
+                )
+              : null,
+          )
+        : null,
+      xpLine(xp.gained, xp.levelUp),
+      badgeList(badges),
+      h(
+        'div',
+        { class: 'row' },
+        h('button', { class: 'btn', onClick: () => resolve('menu') }, t('common.menu')),
+        step
+          ? h('button', { class: 'btn primary', onClick: () => resolve('next') }, t('common.next'))
+          : h('button', { class: 'btn primary', onClick: () => resolve('retry') }, t('common.retry')),
       ),
     );
+    render(page(t('result.title'), () => resolve('menu'), resultCard));
     countUp(num, score);
+    if (isBest || badges.length || score >= 85) {
+      setTimeout(() => burstConfetti(resultCard), 200);
+    }
   });
 }
 
