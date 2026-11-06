@@ -508,7 +508,8 @@ const ui: Locale['ui'] = {
   'ex.resources.task3': 'Miele',
   'ex.resources.task2': 'Formaggio',
   'ex.resources.task1': 'Mele',
-  'ex.resources.confirm': 'Compra',
+  'ex.resources.confirm': '🧺 Vendi al mercato',
+  'ex.resources.sell': '🧺 Vendi al mercato',
   'ex.reaction.target': 'Obiettivo: < {ms} ms',
 
   // flanker
@@ -568,7 +569,7 @@ const ui: Locale['ui'] = {
 
   // resources
   'ex.resources.name': 'Banco del mercato',
-  'ex.resources.desc': 'Compra la merce da rivendere: senza spendere più di quello che hai, raggiungi il guadagno indicato prima che finisca la barra',
+  'ex.resources.desc': 'Scegli la merce da mettere sul banco: senza superare il budget, stima la combinazione che raggiunge l’incasso richiesto prima che scada il tempo',
   'ex.resources.why': 'È il «problema dello zaino», studiato nelle scienze cognitive (Murawski & Bossaerts, 2016): trovare la combinazione migliore entro un limite richiede pianificazione, memoria di lavoro e confronto tra costi e benefici.',
   'ex.resources.example': 'Esempio: hai 50 monete. Le mele costano 20 e fanno guadagnare 25, il pane costa 30 e fa guadagnare 30, il miele costa 40 e fa guadagnare 35 → mele e pane fanno guadagnare 55 con 50 monete: meglio del solo miele.',
   'ex.resources.detail': '{ok}/{n} completati',
@@ -768,9 +769,15 @@ const ui: Locale['ui'] = {
   'ex.resources.money': '🪙 Spesi {cost} su {budget} · ne restano {left}',
   'ex.resources.over': '🪙 Spesi {cost} su {budget}: troppo, togli qualcosa',
   'ex.resources.total': '📈 Guadagno: {val} · obiettivo: almeno {target}',
+  'ex.resources.targetGoal': '🎯 Obiettivo: incassare almeno {target} 🪙',
+  'ex.resources.tally': '📈 Calcolo incasso: {val} / {target} 🪙',
+  'ex.resources.success': '✓ Ottimo affare! Incassati {val} 🪙 (obiettivo: {target})',
+  'ex.resources.perfect': '🌟 Combinazione perfetta! Massimo incasso possibile ({val} 🪙)',
+  'ex.resources.itemsCount': '🧺 {n} prodotti scelti · pronto per vendere',
+  'ex.resources.selectPrompt': '🧺 Tocca i prodotti da mettere sul banco',
   'ex.resources.cost': 'Costa {n} 🪙',
-  'ex.resources.gain': 'Guadagni {n} 🪙',
-  'ex.resources.below': 'Hai guadagnato {val}: sotto il minimo di {target} (il massimo possibile era {n})',
+  'ex.resources.gain': 'Rende {n} 🪙',
+  'ex.resources.below': 'Hai incassato {val} 🪙: sotto il minimo di {target} (il massimo possibile era {n})',
 
   'groups.creator': 'creatore',
   'groups.idle': 'Nessun allenamento questa settimana',

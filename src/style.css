@@ -3017,17 +3017,34 @@ html.big-text {
 /* resources */
 .resources-header {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 8px;
   width: 100%;
-  padding: 10px 14px;
-  border-radius: 8px;
+  padding: 12px 14px;
+  border-radius: var(--radius);
   background: var(--surface-2);
   margin-bottom: 14px;
   font-size: 0.95rem;
+  transition: all 0.2s ease;
 }
 .resources-header.overbudget {
-  background: #fee2e2;
+  background: rgba(239, 68, 68, 0.15);
   color: var(--c-red);
+}
+.resources-budget-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+}
+.resources-hint-text {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.resources-error-reason {
+  color: var(--c-red);
+  font-size: 0.9rem;
+  margin-top: 4px;
 }
 .resources-grid {
   display: grid;
@@ -3047,6 +3064,10 @@ html.big-text {
   text-align: left;
   cursor: pointer;
   transition: all 0.15s ease;
+  user-select: none;
+}
+.resource-card:active:not(:disabled) {
+  transform: scale(0.98);
 }
 .resource-card.selected {
   border-color: var(--accent);
@@ -3061,13 +3082,11 @@ html.big-text {
   font-size: 0.85rem;
   color: #10b981;
 }
+.resource-card b {
+  font-size: 1.05rem;
+}
 .resources-submit {
   width: 100%;
-}
-.resources-header {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
 }
 .resources-bar {
   height: 8px;
@@ -3094,16 +3113,24 @@ html.big-text {
   font-weight: 800;
 }
 .reached .resources-bar.gained {
-  height: 14px;
+  height: 12px;
 }
 .reached .resources-bar.gained > div {
   background: var(--good);
 }
+.resources-header.perfect {
+  outline: 2px solid #eab308;
+  background: rgba(234, 179, 8, 0.15);
+}
+.perfect .resources-goal {
+  color: #ca8a04;
+  font-weight: 800;
+}
+.perfect .resources-bar.gained > div {
+  background: #eab308;
+}
 .overbudget .resources-bar.spent > div {
   background: var(--c-red);
-}
-.resource-card b {
-  font-size: 1.05rem;
 }
 
 /* reaction */

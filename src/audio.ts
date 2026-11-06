@@ -1,4 +1,4 @@
-﻿import { store } from './storage';
+import { store } from './storage';
 
 let ac: AudioContext | null = null;
 
@@ -26,4 +26,5 @@ export const sfx = {
   go: () => tone(1040, 0.18, 'triangle'),
   levelUp: () => [660, 990].forEach((f, i) => tone(f, 0.16, 'triangle', 0.07, i * 0.09)),
   fanfare: () => [523, 659, 784, 1046].forEach((f, i) => tone(f, 0.22, 'triangle', 0.07, i * 0.11)),
+  coins: () => [988, 1318, 1760].forEach((f, i) => tone(f, 0.12, 'sine', 0.06, i * 0.07)),
 };
