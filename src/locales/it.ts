@@ -569,7 +569,7 @@ const ui: Locale['ui'] = {
 
   // resources
   'ex.resources.name': 'Banco del mercato',
-  'ex.resources.desc': 'Scegli la merce da mettere sul banco: senza superare il budget, stima la combinazione che raggiunge l’incasso richiesto prima che scada il tempo',
+  'ex.resources.desc': 'Scegli la merce da mettere sul banco: senza superare il budget, stima la combinazione che raggiunge l’incasso richiesto',
   'ex.resources.why': 'È il «problema dello zaino», studiato nelle scienze cognitive (Murawski & Bossaerts, 2016): trovare la combinazione migliore entro un limite richiede pianificazione, memoria di lavoro e confronto tra costi e benefici.',
   'ex.resources.example': 'Esempio: hai 50 monete. Le mele costano 20 e fanno guadagnare 25, il pane costa 30 e fa guadagnare 30, il miele costa 40 e fa guadagnare 35 → mele e pane fanno guadagnare 55 con 50 monete: meglio del solo miele.',
   'ex.resources.detail': '{ok}/{n} completati',

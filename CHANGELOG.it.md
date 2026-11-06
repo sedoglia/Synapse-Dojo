@@ -10,7 +10,7 @@ I numeri di versione vengono da `package.json` e ogni data è il giorno del comm
 
 ### Modificato
 
-- Banco del mercato: riprogettato per stimolare la stima euristica e il piacere di gioco. Costi e guadagni usano valori amichevoli (multipli di 5) per evitare calcoli noiosi a mente; la barra del guadagno viene svelata solo alla vendita con animazione progressiva e riscontro sonoro di monete (eliminando i tentativi casuali a raffica); aggiunto il riconoscimento speciale «Combinazione perfetta» per la soluzione ottima assoluta.
+- Banco del mercato: riprogettato per stimolare la stima euristica e il piacere di gioco. Rimosso completamente il timer e la barra del conto alla rovescia, allineandolo agli altri esercizi di ragionamento (Torri, L'intruso) dove si risponde con calma; costi e guadagni usano valori amichevoli (multipli di 5) per evitare calcoli noiosi a mente; la barra del guadagno viene svelata solo alla vendita con animazione progressiva e riscontro sonoro di monete (eliminando i tentativi casuali a raffica); aggiunto il riconoscimento speciale «Combinazione perfetta» per la soluzione ottima assoluta e time bonus positivo opzionale per risposte veloci.
 - La conservazione dei risultati della classifica settimanale passa da 8 a 2 settimane: l'API e l'interfaccia non consentivano di consultare settimane precedenti e i miglioramenti sono calcolati localmente, quindi le settimane precedenti erano inutilizzate.
 - La conservazione dei giocatori inattivi passa da 90 a 30 giorni. Chi attiva la classifica ma non invia mai risultati e non entra in gruppi viene cancellato dopo 7 giorni.
 - Aggiornata l'informativa sulla privacy in tutte le lingue e la documentazione scientifica con i nuovi tempi di conservazione.
