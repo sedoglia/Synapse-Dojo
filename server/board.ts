@@ -23,8 +23,9 @@ export const isExId = (v: unknown): v is string => typeof v === 'string' && (v =
 
 /** Seconds between two result uploads from the same player. */
 export const SUBMIT_INTERVAL = 30;
-const KEEP_WEEKS = 8;
-const KEEP_PLAYERS_DAYS = 90;
+const KEEP_WEEKS = 2;
+const KEEP_PLAYERS_DAYS = 30;
+const KEEP_GHOST_DAYS = 7;
 const MAX_BODY = 8 * 1024;
 const DAY = 86_400_000;
 
@@ -143,6 +144,9 @@ export function readableWeek(value: unknown, now = new Date()): string | null {
 /** Groups left without members are deleted together with their name. */
 export const DROP_EMPTY_GROUPS = 'DELETE FROM friend_groups WHERE id NOT IN (SELECT group_id FROM group_members)';
 
+/** Bans left without a group are deleted (SQLite/D1 does not enforce ON DELETE CASCADE by default). */
+export const DROP_ORPHAN_BANS = 'DELETE FROM group_bans WHERE group_id NOT IN (SELECT id FROM friend_groups)';
+
 /** A group whose creator is gone passes to its oldest member, so someone can always manage it. */
 export const REASSIGN_OWNERS = `UPDATE friend_groups SET owner = COALESCE(
     (SELECT m.player_id FROM group_members m WHERE m.group_id = friend_groups.id ORDER BY m.joined, m.player_id LIMIT 1), owner)
@@ -156,6 +160,7 @@ export const deletePlayer = (db: D1Database, id: string) => [
   db.prepare('DELETE FROM players WHERE id = ?').bind(id),
   db.prepare(REASSIGN_OWNERS),
   db.prepare(DROP_EMPTY_GROUPS),
+  db.prepare(DROP_ORPHAN_BANS),
 ];
 
 /**
@@ -165,17 +170,25 @@ export const deletePlayer = (db: D1Database, id: string) => [
 export async function cleanUp(db: D1Database, now = new Date()) {
   const oldWeek = isoWeek(new Date(now.getTime() - KEEP_WEEKS * 7 * DAY));
   const idle = now.getTime() - KEEP_PLAYERS_DAYS * DAY;
-  const idlePlayers = 'SELECT id FROM players WHERE last_seen < ?';
-  const [weeks, idleEntries, , , players, , groups] = await db.batch([
+  const idleGhost = now.getTime() - KEEP_GHOST_DAYS * DAY;
+  const idlePlayers =
+    'SELECT id FROM players WHERE last_seen < ?1 OR (last_submit = 0 AND last_seen < ?2 AND id NOT IN (SELECT player_id FROM group_members))';
+  const [weeks, idleEntries, , bansIdle, players, , groups, bansOrphan] = await db.batch([
     db.prepare('DELETE FROM entries WHERE week < ?').bind(oldWeek),
-    db.prepare(`DELETE FROM entries WHERE player_id IN (${idlePlayers})`).bind(idle),
-    db.prepare(`DELETE FROM group_members WHERE player_id IN (${idlePlayers})`).bind(idle),
-    db.prepare(`DELETE FROM group_bans WHERE player_id IN (${idlePlayers})`).bind(idle),
-    db.prepare('DELETE FROM players WHERE last_seen < ?').bind(idle),
+    db.prepare(`DELETE FROM entries WHERE player_id IN (${idlePlayers})`).bind(idle, idleGhost),
+    db.prepare(`DELETE FROM group_members WHERE player_id IN (${idlePlayers})`).bind(idle, idleGhost),
+    db.prepare(`DELETE FROM group_bans WHERE player_id IN (${idlePlayers})`).bind(idle, idleGhost),
+    db.prepare(`DELETE FROM players WHERE id IN (${idlePlayers})`).bind(idle, idleGhost),
     db.prepare(REASSIGN_OWNERS),
     db.prepare(DROP_EMPTY_GROUPS),
+    db.prepare(DROP_ORPHAN_BANS),
   ]);
-  return { entries: weeks.meta.changes + idleEntries.meta.changes, players: players.meta.changes, groups: groups.meta.changes };
+  return {
+    entries: (weeks.meta.changes ?? 0) + (idleEntries.meta.changes ?? 0),
+    players: players.meta.changes ?? 0,
+    groups: groups.meta.changes ?? 0,
+    bans: (bansIdle.meta.changes ?? 0) + (bansOrphan.meta.changes ?? 0),
+  };
 }
 
 // ---- Groups ----

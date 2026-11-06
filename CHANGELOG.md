@@ -6,6 +6,18 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.11.9] - 2026-11-06
+
+### Changed
+
+- Weekly leaderboard results retention is reduced from 8 to 2 weeks: earlier weeks cannot be viewed in the UI or API and improvement is computed locally, so older entries were unused.
+- Inactive player retention is reduced from 90 to 30 days. Players who enable the leaderboard but never submit results and join no groups are removed after 7 days.
+- Updated the privacy policy across all languages and the scientific documentation to reflect the updated retention rules.
+
+### Fixed
+
+- Deleting an empty group did not clean up its associated bans from the D1 database: orphan bans are now purged automatically during nightly cleanup, when the last member leaves, or when an account is deleted.
+
 ## [0.11.8] - 2026-11-05
 
 ### Fixed
