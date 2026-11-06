@@ -82,11 +82,12 @@ export const rhythm: Exercise = {
     const taps: { at: number; side: 'L' | 'R' }[] = [];
     onTap = (side) => {
       taps.push({ at: performance.now(), side });
+      sfx.drum(side === 'L' ? 'left' : 'right');
       flash(side === 'L' ? btnLeft : btnRight, 'pop', 100);
     };
     const until = (at: number) => ctx.wait(Math.max(0, at - performance.now()));
-    const pulse = () => {
-      sfx.tick();
+    const pulse = (accent = false) => {
+      sfx.beat(accent);
       flash(indicator, 'beat', 160);
     };
 
@@ -96,7 +97,7 @@ export const rhythm: Exercise = {
       await until(t0 - c * interval);
       indicator.className = 'rhythm-beat-indicator';
       indicator.textContent = String(c);
-      pulse();
+      pulse(c === 1);
     }
 
     const showTap = (error: number | null, hit: boolean) => {
@@ -116,7 +117,7 @@ export const rhythm: Exercise = {
       indicator.className = `rhythm-beat-indicator side-${targetSide}`;
       indicator.textContent = targetSide === 'L' ? '◀' : '▶';
       await until(beat);
-      pulse();
+      pulse(i % 4 === 0);
       await until(beat + interval / 2);
 
       const tap = taps.find((x) => x.at >= beat - interval / 2 && x.at < beat + interval / 2);

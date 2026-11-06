@@ -1,4 +1,5 @@
 import { h, rand, flash } from '../dom';
+import { sfx } from '../audio';
 import { t } from '../i18n';
 import { onKeys } from '../widgets';
 import type { Exercise } from './types';
@@ -66,6 +67,7 @@ export const crossMove: Exercise = {
       const isCross = Math.random() < (ctx.practice ? 0.35 : 0.5);
       ruleLabel.textContent = isCross ? t('ex.crossMove.cross') : t('ex.crossMove.same');
       ruleLabel.className = `cross-rule ${isCross ? 'cross-mode' : 'same-mode'}`;
+      arena.className = `cross-arena ${isCross ? 'is-crossing' : 'is-same'}`;
 
       const stimulusSide: 'left' | 'right' = Math.random() < 0.5 ? 'left' : 'right';
       const targetSide: 'left' | 'right' = isCross
@@ -81,7 +83,10 @@ export const crossMove: Exercise = {
       const limit = limitFor(st.level) * ctx.pace;
 
       const choice = await ctx.timed<'left' | 'right' | null>(limit, null, (done) => {
-        onTap = done;
+        onTap = (side) => {
+          sfx.drum(side);
+          done(side);
+        };
         return () => (onTap = null);
       });
       const rt = performance.now() - shown;

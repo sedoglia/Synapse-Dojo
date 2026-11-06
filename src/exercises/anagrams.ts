@@ -1,4 +1,5 @@
 import { h, shuffle, flash } from '../dom';
+import { sfx } from '../audio';
 import { t, words, anagramWords, graphemes, wordNear } from '../i18n';
 import { canon, isPlayable, scramble, solutionsOf } from './anagramRules';
 import type { Exercise } from './types';
@@ -89,11 +90,13 @@ export const anagrams: Exercise = {
 
       const clearBtn = h('button', { class: 'btn' }, 'C');
       const delBtn = h('button', { class: 'btn' }, '⌫');
-      actions.replaceChildren(clearBtn, delBtn);
+      const scrambleBtn = h('button', { class: 'btn anagram-scramble-btn', title: 'Rimescola lettere' }, '🔀');
+      actions.replaceChildren(clearBtn, delBtn, scrambleBtn);
 
       const typedWord = await ctx.input<string>((done) => {
         const handleTile = (idx: number) => {
           selectedIndices.push(idx);
+          sfx.note(selectedIndices.length);
           render(handleTile);
           if (selectedIndices.length === letters.length) {
             const result = selectedIndices.map((k) => scrambled[k]).join('');
@@ -103,11 +106,20 @@ export const anagrams: Exercise = {
 
         clearBtn.onclick = () => {
           selectedIndices.length = 0;
+          sfx.tick();
           render(handleTile);
         };
 
         delBtn.onclick = () => {
           selectedIndices.pop();
+          sfx.tick();
+          render(handleTile);
+        };
+
+        scrambleBtn.onclick = () => {
+          selectedIndices.length = 0;
+          sfx.whoosh();
+          shuffle(scrambled);
           render(handleTile);
         };
 
@@ -116,6 +128,7 @@ export const anagrams: Exercise = {
         return () => {
           clearBtn.onclick = null;
           delBtn.onclick = null;
+          scrambleBtn.onclick = null;
         };
       });
 
@@ -123,6 +136,7 @@ export const anagrams: Exercise = {
 
       if (ok) {
         correct++;
+        sfx.sparkle();
         flash(slotContainer, 'good', 300);
       } else {
         flash(slotContainer, 'bad', 500);

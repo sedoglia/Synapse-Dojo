@@ -6,6 +6,23 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.0] - 2026-11-06
+
+### Aggiunto
+
+- Grande aggiornamento al game-feel, reattività sensoriale e audio design su tutti gli esercizi per massimizzare il coinvolgimento e lo stato di flow:
+  - Sentiero dei numeri: aggiunte linee laser dinamiche di collegamento progressivo fra i nodi (SVG glowing trails) e micro-pop animato ad ogni tocco corretto.
+  - Torri di Londra: aggiunto il pulsante «Annulla» (Undo ↩) per ripristinare l'ultima mossa ed evitare fallimenti da tocco involontario prima del limite di mosse; nuovo effetto sonoro ligneo naturale per il movimento delle palline.
+  - Anagrammi: aggiunto il pulsante «Rimescola» (Scramble 🔀) per riordinare visivamente le lettere disponibili; digitazione delle lettere con note musicali marimba ascendenti.
+  - Sprint di parole: introdotta la possibilità di rispondere tramite swipe touch (verso destra per «Sì», verso sinistra per «No») con animazione tridimensionale di inclinazione della carta.
+  - Griglia di luci: la sequenza di blocchi riproduce ora una melodia armoniosa pentatonica durante la memorizzazione e la digitazione.
+  - Scontro di colori: effetto «Color Splash» con alone radiale luminoso del colore target ad ogni risposta esatta.
+  - Rotazioni mentali: animazione «Snap Rotation» che fa ruotare e allineare visivamente la figura di test con la figura di riferimento al reveal della risposta.
+  - Ritmo bilaterale e Tap bilaterale: integrazione di campionamenti percussivi armonici stile bongo/conga differenziati per lato sinistro (grave) e destro (acuto) e beat acustico per il metronomo.
+  - Dual-Task bilaterale: animazione a reattore energetico pulsante per evidenziare la tenuta motoria isometrica continua.
+  - Esplosione di coriandoli celebrativi nella schermata dei risultati quando si batte un record personale, si sblocca un badge o si ottiene un punteggio d'eccellenza (≥85).
+  - Motore audio potenziato: risposte corrette con progressione pentatonica armonica ed errore sostituito da un morbido rintocco ligneo anziché un dente di sega gracchiante.
+
 ## [0.11.9] - 2026-11-06
 
 ### Modificato

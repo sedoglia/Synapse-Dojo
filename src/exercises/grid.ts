@@ -29,7 +29,7 @@ async function round(
   await ctx.wait(500);
   for (const i of seq) {
     tiles[i].classList.add('lit');
-    sfx.tick();
+    sfx.note(i);
     await ctx.wait(550 * Math.min(ctx.pace, 1.2));
     tiles[i].classList.remove('lit');
     await ctx.wait(200);
@@ -44,6 +44,7 @@ async function round(
   const ok = await ctx.input<boolean>((done) => {
     let pos = 0;
     onTap = (i) => {
+      sfx.note(i);
       flash(tiles[i], 'tap', 220);
       if (i !== expected[pos]) return done(false);
       if (++pos === expected.length) done(true);
@@ -52,6 +53,7 @@ async function round(
   });
 
   board.classList.add('locked');
+  if (ok) sfx.sparkle();
   judge(ok);
   flash(board, ok ? 'good' : 'bad', 450);
   if (!ok) {

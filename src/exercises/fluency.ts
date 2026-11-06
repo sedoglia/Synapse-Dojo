@@ -1,4 +1,5 @@
 import { h, flash, pick } from '../dom';
+import { sfx } from '../audio';
 import { t, words } from '../i18n';
 import { onKeys } from '../widgets';
 import type { Exercise } from './types';
@@ -42,6 +43,27 @@ export const fluency: Exercise = {
     const skipBtn = h('button', { class: 'btn big fluency-btn', onPointerdown: () => onAnswer?.(false) }, `✗ ≠ ${targetLetter}`);
     const matchBtn = h('button', { class: 'btn big good-btn fluency-btn', onPointerdown: () => onAnswer?.(true) }, `✓ ${targetLetter}...`);
     const controls = h('div', { class: 'fluency-controls' }, skipBtn, matchBtn);
+
+    let startX = 0;
+    let startY = 0;
+    card.addEventListener('pointerdown', (e: PointerEvent) => {
+      startX = e.clientX;
+      startY = e.clientY;
+    });
+    card.addEventListener('pointerup', (e: PointerEvent) => {
+      const dx = e.clientX - startX;
+      const dy = e.clientY - startY;
+      if (Math.abs(dx) > 30 && Math.abs(dx) > Math.abs(dy)) {
+        sfx.whoosh();
+        if (dx > 0) {
+          card.classList.add('swipe-right');
+          onAnswer?.(true);
+        } else {
+          card.classList.add('swipe-left');
+          onAnswer?.(false);
+        }
+      }
+    });
 
     ctx.stage.append(header, card, controls);
 
@@ -92,6 +114,7 @@ export const fluency: Exercise = {
         if (choice !== null) flash(choice ? matchBtn : skipBtn, 'bad', 400);
         await ctx.wait(300);
       }
+      card.classList.remove('swipe-right', 'swipe-left');
       card.textContent = choice !== null ? '' : `⏱ ${t('common.timeout')}`;
       await ctx.wait(ok ? 250 : 650);
     }

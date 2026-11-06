@@ -96,36 +96,60 @@ export const towers: Exercise = {
 
       const goalBox = h('div', { class: 'tower-goal' }, h('span', { class: 'muted' }, t('ex.towers.goal')), renderBoard(goal, true));
       const counter = h('div', { class: 'grid-status' });
+      const undoBtn = h('button', { class: 'btn ghost small tower-undo', disabled: true, title: 'Annulla mossa' }, '↩');
+      const counterRow = h('div', { class: 'row center tower-header-row' }, counter, undoBtn);
       const playArea = h('div');
-      ctx.stage.replaceChildren(goalBox, counter, playArea);
+      ctx.stage.replaceChildren(goalBox, counterRow, playArea);
 
       const solved = await ctx.input<boolean>((done) => {
+        const history: { state: State; moves: number }[] = [];
         const redraw = () => {
           counter.textContent = t('ex.towers.moves', { m: moves, min });
+          undoBtn.disabled = history.length === 0;
           playArea.replaceChildren(renderBoard(state, false, selected, onPeg));
+        };
+        undoBtn.onclick = () => {
+          if (history.length) {
+            const prev = history.pop()!;
+            state = prev.state;
+            moves = prev.moves;
+            selected = -1;
+            sfx.clack();
+            redraw();
+          }
         };
         const onPeg = (i: number) => {
           const pegs = state.split('|');
           if (selected === -1) {
-            if (pegs[i]) selected = i;
+            if (pegs[i]) {
+              selected = i;
+              sfx.clack();
+            }
           } else if (selected === i) {
             selected = -1;
+            sfx.clack();
           } else if (pegs[i].length < CAPS[i]) {
+            history.push({ state, moves });
             pegs[i] += pegs[selected].slice(-1);
             pegs[selected] = pegs[selected].slice(0, -1);
             state = pegs.join('|');
             selected = -1;
             moves++;
-            sfx.tick();
+            sfx.clack();
           } else {
             flash(playArea, 'bad');
             return;
           }
           redraw();
-          if (state === goal) done(true);
-          else if (moves >= min) done(false); // `min` is the shortest solution, so it is also the most moves allowed
+          if (state === goal) {
+            sfx.sparkle();
+            done(true);
+          } else if (moves >= min) done(false); // `min` is the shortest solution, so it is also the most moves allowed
         };
         redraw();
+        return () => {
+          undoBtn.onclick = null;
+        };
       });
 
       const ok = ctx.track(st, solved, { note: t('fb.minMoves', { n: min }) });

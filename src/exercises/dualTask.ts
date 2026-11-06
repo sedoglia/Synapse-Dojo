@@ -1,4 +1,5 @@
 import { h, flash } from '../dom';
+import { sfx } from '../audio';
 import { t, num } from '../i18n';
 import { onKeys, timeBar } from '../widgets';
 import type { Exercise } from './types';
@@ -73,6 +74,7 @@ export const dualTask: Exercise = {
       if (isHolding === state) return;
       isHolding = state;
       clearTimeout(breakTimer);
+      if (state) sfx.tick();
       if (!state) {
         lastHoldingTimestamp = performance.now();
         if (trialActive) breakTimer = setTimeout(() => (holdBroken = trialActive && !isHolding), GRACE_MS);
@@ -81,7 +83,7 @@ export const dualTask: Exercise = {
       holdMeter.classList.toggle('holding', state);
       const mainSpan = holdBtn.querySelector('.hold-main');
       if (mainSpan) {
-        mainSpan.textContent = state ? `🟢 ${t('ex.dualTask.hold')} ✓` : `🔒 ${t('ex.dualTask.hold')}`;
+        mainSpan.textContent = state ? `⚡ ${t('ex.dualTask.hold')} ✓` : `🔒 ${t('ex.dualTask.hold')}`;
       }
     };
 
