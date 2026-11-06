@@ -10,7 +10,7 @@ Version numbers come from `package.json`, and each date is the day of the commit
 
 ### Changed
 
-- Market Stall: redesigned to train heuristic estimation and gameplay engagement. Costs and earnings now use friendly numbers (multiples of 5) to eliminate tedious mental arithmetic; earnings are revealed only upon selling via a dynamic count-up animation and coin chime sound effects (preventing blind trial-and-error clicking); added a "Perfect combination" highlight for finding the exact knapsack optimum.
+- Market Stall: redesigned to train heuristic estimation and gameplay engagement. Completely removed the timer and countdown bar, aligning it with other untimed reasoning exercises (Towers, Odd one out); costs and earnings now use friendly numbers (multiples of 5) to eliminate tedious mental arithmetic; earnings are revealed only upon selling via a dynamic count-up animation and coin chime sound effects (preventing blind trial-and-error clicking); added a "Perfect combination" highlight for finding the exact knapsack optimum and an optional speed efficiency bonus.
 - Weekly leaderboard results retention is reduced from 8 to 2 weeks: earlier weeks cannot be viewed in the UI or API and improvement is computed locally, so older entries were unused.
 - Inactive player retention is reduced from 90 to 30 days. Players who enable the leaderboard but never submit results and join no groups are removed after 7 days.
 - Updated the privacy policy across all languages and the scientific documentation to reflect the updated retention rules.

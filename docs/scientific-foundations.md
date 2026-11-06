@@ -150,7 +150,7 @@ The program must be usable by people with slower reaction times, reduced sight o
 * **Generous starting times**: e.g. a 600 ms threshold in Simple Reaction (an older adult's simple reaction time on a touch screen, screen latency included, is often 400–550 ms), 3 s in the Stroop, 4 s for the dual task, 7.6 s for a mental rotation, 5.5 s per card in card sorting.
 * **Relaxed pace**: the option in Settings multiplies response windows and presentation times by 1.4, and is also taken into account in the Neuro Score. The exception is Glance's exposure time, which is what it measures.
 * **Neuro Score scales calibrated for older age**: zero corresponds to slow but plausible performance (e.g. 4 s per number in Number trail, 8 s per calculation, 3 s per answer in the Stroop), so an older adult doesn't score zero just for being slower than a young person.
-* **Untimed tasks** where speed is not the point (memory, reasoning, anagrams): answer calmly. Market Stall is the exception, with ample, visible time. The Neuro Score also removes the time limit from the Stroop, Rule switch and Card Sorting, and measures response speed instead.
+* **Untimed tasks** where speed is not the point (memory, reasoning, anagrams): answer calmly. The Neuro Score also removes the time limit from the Stroop, Rule switch and Card Sorting, and measures response speed instead.
 * **Guided practice** the first time, with hints after each mistake and no score.
 * **Multisensory feedback**: big ✓/✗ in the center, colors and sound; color names are always written, for people who confuse red and green.
 * **Large text** option in Settings and large buttons.

@@ -1,7 +1,6 @@
 import { h, rand, flash, shuffle } from '../dom';
 import { t, type I18nKey } from '../i18n';
 import { sfx } from '../audio';
-import { timeBar } from '../widgets';
 import type { Exercise } from './types';
 
 interface Product {
@@ -13,11 +12,6 @@ interface Product {
 
 const ICONS = ['🍎', '🧀', '🍯', '🥖', '🍅', '🥚', '🐟', '🌻'];
 const productCount = (level: number) => Math.min(8, 4 + Math.floor(level / 2));
-/**
- * Generous timer that grows with the number of products. Since the earnings bar is only revealed upon selling,
- * players can no longer brute-force combinations; the timer keeps the session lively without undue panic.
- */
-const secondsFor = (level: number) => 15 + 6 * productCount(level);
 /** Share of the best possible earnings that is good enough: from a close second choice up to the exact optimum. */
 const toleranceFor = (level: number) => (level <= 2 ? 0.9 : level <= 4 ? 0.95 : 1);
 
@@ -89,8 +83,8 @@ const bar = (fraction: number, cls: string) =>
 
 /**
  * The knapsack problem (Murawski & Bossaerts, 2016; Franco et al., 2021) set at a market stall.
- * Costs and earnings are clean, cognitive numbers (multiples of 5). The player estimates trade-offs
- * and commits their selection, followed by a dynamic reveal with coin audio feedback.
+ * Untimed reasoning exercise: costs and earnings are clean, cognitive numbers (multiples of 5).
+ * The player estimates trade-offs with calm and commits their selection, followed by a dynamic reveal with coin audio feedback.
  */
 export const resources: Exercise = {
   id: 'resources',
@@ -100,9 +94,9 @@ export const resources: Exercise = {
   desc: 'ex.resources.desc',
   why: 'ex.resources.why',
   example: 'ex.resources.example',
-  minutes: [3, 5],
+  minutes: [2, 4],
   levels: { min: 1, max: 8, start: 2 },
-  levelLabel: (l) => `${productCount(l)} 🧺 · ${secondsFor(l)} s`,
+  levelLabel: (l) => `${productCount(l)} 🧺`,
 
   async run(ctx) {
     const trials = ctx.count(8, 6, 2);
@@ -118,9 +112,7 @@ export const resources: Exercise = {
       const header = h('div', { class: 'resources-header' });
       const cardList = h('div', { class: 'resources-grid' });
       const submitBtn = h('button', { class: 'btn primary resources-submit' }, t('ex.resources.sell'));
-      const clock = timeBar();
-      clock.el.classList.toggle('off', ctx.practice);
-      ctx.stage.replaceChildren(header, clock.el, cardList, submitBtn);
+      ctx.stage.replaceChildren(header, cardList, submitBtn);
 
       const selected = new Set<number>();
       const total = (key: 'cost' | 'gain') => [...selected].reduce((sum, i) => sum + products[i][key], 0);
@@ -172,12 +164,10 @@ export const resources: Exercise = {
 
       updateUI();
 
-      const limit = (ctx.practice ? 600 : secondsFor(st.int)) * 1000 * ctx.pace;
-      clock.start(limit);
-      const inTime = await ctx.timed<boolean>(limit, false, (done) => {
-        submitBtn.onclick = () => done(true);
+      // Untimed input: player commits with calm by clicking "Sell at market"
+      await ctx.input<void>((done) => {
+        submitBtn.onclick = () => done();
       });
-      clock.stop();
 
       // Disable card interactions during evaluation
       [...cardList.children].forEach((card) => {
@@ -187,7 +177,7 @@ export const resources: Exercise = {
 
       const spent = total('cost');
       const gained = total('gain');
-      const isSuccess = inTime && spent <= budget && gained >= target;
+      const isSuccess = spent <= budget && gained >= target;
       const isPerfect = isSuccess && gained === maxGain;
 
       // Dynamic animated reveal of market earnings
@@ -207,10 +197,9 @@ export const resources: Exercise = {
         }
       }
 
-      const reason = spent > budget
+      const why = spent > budget
         ? t('ex.resources.over', { cost: spent, budget })
         : t('ex.resources.below', { val: gained, target, n: maxGain });
-      const why = inTime ? reason : `${t('common.timeout')}. ${reason}`;
 
       if (isSuccess) {
         correct++;
@@ -263,10 +252,13 @@ export const resources: Exercise = {
     }
     ctx.progress(1);
 
+    const { score, timeBonus } = ctx.withTimeBonus(st.score(), 8 + 2 * productCount(st.threshold()));
+
     return {
-      score: st.score(),
+      score,
       detail: t('ex.resources.detail', { ok: correct, n: trials }),
       level: st.next(),
+      timeBonus,
     };
   },
 };
