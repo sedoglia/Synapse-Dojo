@@ -1,4 +1,4 @@
-import { DROP_EMPTY_GROUPS, REASSIGN_OWNERS, authenticate, fail, json, type Handler } from '../../../server/board';
+import { DROP_EMPTY_GROUPS, DROP_ORPHAN_BANS, REASSIGN_OWNERS, authenticate, fail, json, type Handler } from '../../../server/board';
 
 /** DELETE /api/groups/<id>: leaves a group. A creator who leaves hands over to the oldest member; an empty group is deleted. */
 export const onRequestDelete: Handler = async ({ request, env, params }) => {
@@ -10,6 +10,7 @@ export const onRequestDelete: Handler = async ({ request, env, params }) => {
     env.DB.prepare('DELETE FROM group_members WHERE group_id = ? AND player_id = ?').bind(id, player.id),
     env.DB.prepare(REASSIGN_OWNERS),
     env.DB.prepare(DROP_EMPTY_GROUPS),
+    env.DB.prepare(DROP_ORPHAN_BANS),
   ]);
   return json({ left: true });
 };

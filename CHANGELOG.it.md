@@ -6,6 +6,18 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.11.9] - 2026-11-06
+
+### Modificato
+
+- La conservazione dei risultati della classifica settimanale passa da 8 a 2 settimane: l'API e l'interfaccia non consentivano di consultare settimane precedenti e i miglioramenti sono calcolati localmente, quindi le settimane precedenti erano inutilizzate.
+- La conservazione dei giocatori inattivi passa da 90 a 30 giorni. Chi attiva la classifica ma non invia mai risultati e non entra in gruppi viene cancellato dopo 7 giorni.
+- Aggiornata l'informativa sulla privacy in tutte le lingue e la documentazione scientifica con i nuovi tempi di conservazione.
+
+### Corretto
+
+- L'eliminazione di un gruppo vuoto non rimuoveva i ban associati dal database D1: ora i ban orfani vengono rimossi automaticamente sia durante la pulizia notturna che all'uscita dell'ultimo membro o all'eliminazione dell'account.
+
 ## [0.11.8] - 2026-11-05
 
 ### Corretto
