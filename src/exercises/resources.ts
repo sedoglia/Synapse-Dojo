@@ -1,5 +1,6 @@
 import { h, rand, flash, shuffle } from '../dom';
 import { t, type I18nKey } from '../i18n';
+import { sfx } from '../audio';
 import { timeBar } from '../widgets';
 import type { Exercise } from './types';
 
@@ -13,8 +14,8 @@ interface Product {
 const ICONS = ['🍎', '🧀', '🍯', '🥖', '🍅', '🥚', '🐟', '🌻'];
 const productCount = (level: number) => Math.min(8, 4 + Math.floor(level / 2));
 /**
- * Seconds to choose. The goal is on screen, so with no limit anyone could try combinations until the bar fills up and
- * never get one wrong; the time is generous, grows with the products, and a bar shows how much is left.
+ * Generous timer that grows with the number of products. Since the earnings bar is only revealed upon selling,
+ * players can no longer brute-force combinations; the timer keeps the session lively without undue panic.
  */
 const secondsFor = (level: number) => 15 + 6 * productCount(level);
 /** Share of the best possible earnings that is good enough: from a close second choice up to the exact optimum. */
@@ -22,8 +23,11 @@ const toleranceFor = (level: number) => (level <= 2 ? 0.9 : level <= 4 ? 0.95 : 
 
 function randomStock(count: number): Product[] {
   return shuffle(ICONS.map((icon, i) => ({ icon, i }))).slice(0, count).map(({ icon, i }) => {
-    const cost = rand(15, 35);
-    return { icon, name: t(`ex.resources.task${i + 1}` as I18nKey), cost, gain: Math.round(cost * (0.8 + Math.random() * 0.7)) };
+    // Multiples of 5 (10, 15, 20, 25, 30) for cognitively intuitive heuristics without tedious column arithmetic
+    const cost = rand(2, 6) * 5;
+    const mult = [0.8, 1.0, 1.2, 1.4, 1.6][rand(0, 4)];
+    const gain = Math.max(5, Math.round((cost * mult) / 5) * 5);
+    return { icon, name: t(`ex.resources.task${i + 1}` as I18nKey), cost, gain };
   });
 }
 
@@ -42,14 +46,14 @@ function greedyGain(products: Product[], budget: number): number {
 
 /**
  * The budget is about half of what everything costs, where knapsack instances are hardest (Yadav et al.; Franco et al.,
- * 2021). From level 3 the shortcut must fall short, otherwise more products would only make the task easier.
+ * 2021). From level 3 the greedy shortcut must fall short of the target.
  */
 function stock(level: number): { products: Product[]; budget: number; maxGain: number; target: number } {
   for (let tries = 0; ; tries++) {
     const products = randomStock(productCount(level));
-    const budget = Math.round(products.reduce((sum, p) => sum + p.cost, 0) * 0.5);
+    const budget = Math.round((products.reduce((sum, p) => sum + p.cost, 0) * 0.5) / 5) * 5;
     const maxGain = bestGain(products, budget);
-    const target = Math.floor(maxGain * toleranceFor(level));
+    const target = Math.max(5, Math.floor((maxGain * toleranceFor(level)) / 5) * 5);
     if (level < 3 || tries > 300 || greedyGain(products, budget) < target) return { products, budget, maxGain, target };
   }
 }
@@ -81,12 +85,12 @@ function bestChoice(products: Product[], budget: number): { gain: number; mask: 
 }
 
 const bar = (fraction: number, cls: string) =>
-  h('div', { class: `resources-bar ${cls}` }, h('div', { style: { width: `${Math.min(100, Math.round(fraction * 100))}%` } }));
+  h('div', { class: `resources-bar ${cls}` }, h('div', { style: { width: `${Math.min(100, Math.max(0, Math.round(fraction * 100)))}%` } }));
 
 /**
- * The knapsack problem (Murawski & Bossaerts, 2016) set at a market stall: money to spend, money to earn.
- * Costs and gains are spelled out in words and in coins, so the task is clear from the first look, in any country.
- * The goal is shown, as in the decision version of the problem (Franco et al., 2021): reach at least this much.
+ * The knapsack problem (Murawski & Bossaerts, 2016; Franco et al., 2021) set at a market stall.
+ * Costs and earnings are clean, cognitive numbers (multiples of 5). The player estimates trade-offs
+ * and commits their selection, followed by a dynamic reveal with coin audio feedback.
  */
 export const resources: Exercise = {
   id: 'resources',
@@ -113,7 +117,7 @@ export const resources: Exercise = {
 
       const header = h('div', { class: 'resources-header' });
       const cardList = h('div', { class: 'resources-grid' });
-      const submitBtn = h('button', { class: 'btn primary resources-submit' }, t('ex.resources.confirm'));
+      const submitBtn = h('button', { class: 'btn primary resources-submit' }, t('ex.resources.sell'));
       const clock = timeBar();
       clock.el.classList.toggle('off', ctx.practice);
       ctx.stage.replaceChildren(header, clock.el, cardList, submitBtn);
@@ -123,18 +127,25 @@ export const resources: Exercise = {
 
       const updateUI = () => {
         const spent = total('cost');
-        const gained = total('gain');
         const over = spent > budget;
-        // A full bar looks much like a nearly full one, so the goal changes its colour: only a basket that wins counts.
-        const reached = !over && gained >= target;
-        header.replaceChildren(
-          h('div', {}, over ? t('ex.resources.over', { cost: spent, budget }) : t('ex.resources.money', { cost: spent, budget, left: budget - spent })),
-          bar(spent / budget, 'spent'),
-          h('div', { class: 'resources-goal' }, `${reached ? '✓ ' : ''}${t('ex.resources.total', { val: gained, target })}`),
-          bar(gained / target, 'gained'),
-        );
         header.classList.toggle('overbudget', over);
-        header.classList.toggle('reached', reached);
+        header.classList.remove('reached', 'perfect');
+
+        const budgetText = over
+          ? t('ex.resources.over', { cost: spent, budget })
+          : t('ex.resources.money', { cost: spent, budget, left: budget - spent });
+
+        const hintText = selected.size === 0
+          ? t('ex.resources.selectPrompt')
+          : t('ex.resources.itemsCount', { n: selected.size });
+
+        header.replaceChildren(
+          h('div', { class: 'resources-budget-row' }, budgetText),
+          bar(spent / budget, 'spent'),
+          h('div', { class: 'resources-goal' }, t('ex.resources.targetGoal', { target })),
+          h('div', { class: 'resources-hint-text' }, hintText),
+        );
+
         submitBtn.disabled = over || selected.size === 0;
 
         cardList.replaceChildren(
@@ -145,6 +156,7 @@ export const resources: Exercise = {
                 class: `resource-card ${selected.has(i) ? 'selected' : ''}`,
                 'aria-pressed': String(selected.has(i)),
                 onClick: () => {
+                  sfx.tick();
                   if (selected.has(i)) selected.delete(i);
                   else selected.add(i);
                   updateUI();
@@ -160,7 +172,6 @@ export const resources: Exercise = {
 
       updateUI();
 
-      // When time runs out the basket is judged as it stands.
       const limit = (ctx.practice ? 600 : secondsFor(st.int)) * 1000 * ctx.pace;
       clock.start(limit);
       const inTime = await ctx.timed<boolean>(limit, false, (done) => {
@@ -168,32 +179,87 @@ export const resources: Exercise = {
       });
       clock.stop();
 
-      const isSuccess = total('cost') <= budget && total('gain') >= target;
-      // The real reason, with its numbers: reaching the goal always wins, so a mistake is never about "could do better".
+      // Disable card interactions during evaluation
+      [...cardList.children].forEach((card) => {
+        (card as HTMLButtonElement).disabled = true;
+      });
+      submitBtn.disabled = true;
+
       const spent = total('cost');
-      const reason = spent > budget ? t('ex.resources.over', { cost: spent, budget }) : t('ex.resources.below', { val: total('gain'), target, n: maxGain });
+      const gained = total('gain');
+      const isSuccess = inTime && spent <= budget && gained >= target;
+      const isPerfect = isSuccess && gained === maxGain;
+
+      // Dynamic animated reveal of market earnings
+      const baseTarget = Math.max(target, maxGain);
+      if (selected.size > 0 && spent <= budget) {
+        const revealSteps = Math.min(8, Math.max(4, Math.ceil(gained / 5)));
+        for (let s = 1; s <= revealSteps; s++) {
+          const val = Math.round((gained * s) / revealSteps);
+          header.replaceChildren(
+            h('div', { class: 'resources-budget-row' }, t('ex.resources.money', { cost: spent, budget, left: Math.max(0, budget - spent) })),
+            bar(spent / budget, 'spent'),
+            h('div', { class: 'resources-goal' }, t('ex.resources.tally', { val, target })),
+            bar(val / baseTarget, 'gained'),
+          );
+          sfx.tick();
+          await ctx.wait(45);
+        }
+      }
+
+      const reason = spent > budget
+        ? t('ex.resources.over', { cost: spent, budget })
+        : t('ex.resources.below', { val: gained, target, n: maxGain });
       const why = inTime ? reason : `${t('common.timeout')}. ${reason}`;
-      const ok = ctx.track(st, isSuccess, { note: why });
 
       if (isSuccess) {
         correct++;
+        if (isPerfect) {
+          sfx.fanfare();
+          header.classList.add('reached', 'perfect');
+          header.replaceChildren(
+            h('div', { class: 'resources-budget-row' }, t('ex.resources.money', { cost: spent, budget, left: budget - spent })),
+            bar(spent / budget, 'spent'),
+            h('div', { class: 'resources-goal' }, t('ex.resources.perfect', { val: gained })),
+            bar(gained / baseTarget, 'gained'),
+          );
+        } else {
+          sfx.coins();
+          header.classList.add('reached');
+          header.replaceChildren(
+            h('div', { class: 'resources-budget-row' }, t('ex.resources.money', { cost: spent, budget, left: budget - spent })),
+            bar(spent / budget, 'spent'),
+            h('div', { class: 'resources-goal' }, t('ex.resources.success', { val: gained, target })),
+            bar(gained / baseTarget, 'gained'),
+          );
+        }
         flash(header, 'good', 400);
+        ctx.track(st, true);
+        await ctx.wait(1200);
       } else {
+        sfx.bad();
         flash(header, 'bad', 500);
-        // Shows the best purchase and waits for the player: a mistake should teach something, at their own pace.
+
         const { mask } = bestChoice(products, budget);
         [...cardList.children].forEach((card, i) => {
           card.classList.toggle('correct-hint', ((mask >> i) & 1) === 1);
-          (card as HTMLButtonElement).disabled = true;
         });
-        header.append(h('b', {}, why));
+
+        header.replaceChildren(
+          h('div', { class: 'resources-budget-row' }, spent > budget ? t('ex.resources.over', { cost: spent, budget }) : t('ex.resources.money', { cost: spent, budget, left: Math.max(0, budget - spent) })),
+          bar(spent / budget, 'spent'),
+          h('div', { class: 'resources-goal' }, t('ex.resources.targetGoal', { target })),
+          bar(gained / baseTarget, 'gained'),
+          h('div', { class: 'resources-error-reason' }, why),
+        );
+
+        ctx.track(st, false, { note: why });
         submitBtn.disabled = false;
         submitBtn.textContent = t('common.continue');
         await ctx.input<void>((done) => {
           submitBtn.onclick = () => done();
         }, false);
       }
-      if (ok) await ctx.wait(500);
     }
     ctx.progress(1);
 

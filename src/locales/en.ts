@@ -509,6 +509,7 @@ export const ui = {
   'ex.resources.task2': 'Cheese',
   'ex.resources.task1': 'Apples',
   'ex.resources.confirm': 'Buy',
+  'ex.resources.sell': '🧺 Sell at market',
   'ex.reaction.target': 'Target: < {ms} ms',
 
   // flanker
@@ -568,7 +569,7 @@ export const ui = {
 
   // resources
   'ex.resources.name': 'Market Stall',
-  'ex.resources.desc': 'Buy goods to resell: without spending more than you have, reach the earnings shown before the bar runs out',
+  'ex.resources.desc': 'Choose goods for your stall: stay within budget and estimate the combination that reaches the target earnings',
   'ex.resources.why': 'This is the “knapsack problem”, studied in cognitive science (Murawski & Bossaerts, 2016): finding the best combination within a limit calls on planning, working memory and weighing costs against benefits.',
   'ex.resources.example': 'Example: you have 50 coins. Apples cost 20 and earn 25, bread costs 30 and earns 30, honey costs 40 and earns 35 → apples and bread earn 55 for 50 coins: better than honey alone.',
   'ex.resources.detail': '{ok}/{n} completed',
@@ -770,6 +771,12 @@ export const ui = {
   'ex.resources.money': '🪙 Spent {cost} of {budget} · {left} left',
   'ex.resources.over': '🪙 Spent {cost} of {budget}: too much, remove something',
   'ex.resources.total': '📈 Earnings: {val} · goal: at least {target}',
+  'ex.resources.targetGoal': '🎯 Target: earn at least {target} 🪙',
+  'ex.resources.tally': '📈 Tallying sales: {val} / {target} 🪙',
+  'ex.resources.success': '✓ Great sale! Earned {val} 🪙 (goal was {target})',
+  'ex.resources.perfect': '🌟 Perfect combination! Maximum possible earnings ({val} 🪙)',
+  'ex.resources.itemsCount': '🧺 {n} items selected · ready to sell',
+  'ex.resources.selectPrompt': '🧺 Tap items to put on your stall',
   'ex.resources.cost': 'Costs {n} 🪙',
   'ex.resources.gain': 'Earns {n} 🪙',
   'ex.resources.below': 'You earned {val}: below the minimum of {target} (the most possible was {n})',
