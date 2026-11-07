@@ -6,6 +6,14 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.11] - 2026-11-07
+
+### Modificato
+
+- Ordinamento di Carte (`ex.sorting`):
+  - Riformulata la terminologia in tutte le 12 lingue supportate, eliminando la metafora astrusa del "cifrario/protocollo" («Cifrario segreto», «protocollo», «decodifica») a favore del linguaggio chiaro e naturale dell'ordinamento di carte («Regola segreta», «Carte di riferimento», «Carta da abbinare», «Progresso serie»).
+  - Sostituita l'icona del lucchetto nel titolo con l'icona naturale della carta da gioco (`🃏`).
+
 ## [0.12.10] - 2026-11-07
 
 ### Modificato

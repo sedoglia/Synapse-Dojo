@@ -6,6 +6,14 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.11] - 2026-11-07
+
+### Changed
+
+- Card Sorting (`ex.sorting`):
+  - Streamlined and unified terminology across all 12 supported languages, eliminating artificial "cipher/protocol" metaphors in favor of natural, crystal-clear card sorting language ("Regola segreta", "Carte di riferimento", "Carta da abbinare", "Progresso serie").
+  - Replaced title lock icon with clean card icon (`🃏`).
+
 ## [0.12.10] - 2026-11-07
 
 ### Changed
