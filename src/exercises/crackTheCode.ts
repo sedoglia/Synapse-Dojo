@@ -549,6 +549,7 @@ export const crackTheCode: Exercise = {
           if (isCorrect) {
             isDone = true;
             shackle.classList.add('unlocked');
+            unlockBtn.textContent = `🔓 ${t('ex.crackTheCode.unlocked')}`;
             burstConfetti(ctx.stage);
             sfx.clack();
             setTimeout(() => sfx.sparkle(), 180);
@@ -556,6 +557,7 @@ export const crackTheCode: Exercise = {
           } else {
             triesLeft--;
             triesEl.textContent = t('ex.crackTheCode.attempts', { n: triesLeft });
+            unlockBtn.textContent = `❌ ${t('ex.crackTheCode.wrongCode')}`;
             flash(lockBody, 'bad', 400);
             sfx.bad();
 
@@ -564,6 +566,12 @@ export const crackTheCode: Exercise = {
               // Reveal the correct code in dials
               puzzle.solution.forEach((v, i) => setDial(i, v));
               done(false);
+            } else {
+              setTimeout(() => {
+                if (!isDone) {
+                  unlockBtn.textContent = `🔓 ${t('ex.crackTheCode.unlock')}`;
+                }
+              }, 700);
             }
           }
         };
