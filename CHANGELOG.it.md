@@ -6,6 +6,16 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.15] - 2026-11-07
+
+### Modificato
+
+- 2048 (`ex.game2048`):
+  - Architettura a schemi indipendenti e scala adattiva: ogni traguardo costituisce ora un puzzle a sé stante con generazione dinamica e scalata della difficoltà conforme alla staircase up-down di Kaernbach (1991).
+  - Ricalibrazione della curva di difficoltà: avvio dolce dal livello 1 (obiettivo 16 anziché 64) per favorire l'apprendimento e il successo immediato, budget mosse ampliato a 35–60 mosse (rispetto alle 22 precedenti) e 3 annullamenti per puzzle.
+  - Varietà organica dei puzzle: orientamento casuale nei 4 angoli della scacchiera e tessere secondarie dinamiche, azzerando la ripetizione statica del medesimo schema in caso di sconfitta.
+  - Controllo rigoroso del tempo: partita strutturata su 3 schemi da circa 20–25 secondi ciascuno per una durata complessiva di ~60–80 secondi, allineata agli altri esercizi di ragionamento (Torri, Nonogram).
+
 ## [0.12.14] - 2026-11-07
 
 ### Modificato

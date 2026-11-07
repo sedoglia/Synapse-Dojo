@@ -6,6 +6,16 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.15] - 2026-11-07
+
+### Changed
+
+- 2048 (`ex.game2048`):
+  - Standardized adaptive trial architecture: each milestone now generates a distinct, self-contained puzzle with dynamic corner seeding, fully integrated with the Kaernbach (1991) staircase algorithm.
+  - Re-tuned difficulty curve: starts smoothly at level 1 (target 16 instead of 64), ramping up through progressive powers of 2 with generous move budgets (35–60 moves instead of 22) and 3 undos per puzzle.
+  - Organic puzzle variety: randomized corner anchoring (bottom-right, bottom-left, top-right, top-left) and secondary placements ensure no two boards are identical, completely eliminating repetitive groundhog-day loops upon defeat.
+  - Controlled game duration: session takes 60–80 seconds across 3 puzzles (approx. 20–25s per puzzle), perfectly aligned with other reasoning exercises like Towers and Nonogram.
+
 ## [0.12.14] - 2026-11-07
 
 ### Changed

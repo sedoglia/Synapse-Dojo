@@ -11,19 +11,19 @@ export type Direction = 'up' | 'down' | 'left' | 'right';
 
 /** Target tile for each difficulty level */
 export const targetFor = (level: number): number => {
-  const targets = [32, 64, 128, 256, 512, 1024, 2048, 2048, 4096, 4096];
+  const targets = [16, 32, 64, 128, 256, 512, 1024, 2048, 2048, 4096];
   return targets[clamp(Math.round(level) - 1, 0, targets.length - 1)];
 };
 
 /** Move budget per milestone based on level */
 const movesFor = (level: number, pace: number): number => {
-  const baseMoves = [24, 22, 22, 24, 24, 26, 26, 28, 28, 26];
+  const baseMoves = [35, 38, 40, 42, 45, 48, 50, 55, 55, 60];
   const b = baseMoves[clamp(Math.round(level) - 1, 0, baseMoves.length - 1)];
-  return Math.round(b * (pace > 1 ? 1.25 : 1));
+  return Math.round(b * (pace > 1 ? 1.3 : 1));
 };
 
 /** Whether this level includes a stone obstacle */
-const hasObstacle = (level: number): boolean => Math.round(level) === 8 || Math.round(level) === 10;
+const hasObstacle = (level: number): boolean => Math.round(level) === 9 || Math.round(level) === 10;
 
 /** Pure slide and merge logic for a 4x4 grid */
 export function slideGrid(
@@ -134,96 +134,78 @@ function spawnTile(grid: number[], target: number): { grid: number[]; spawnedIdx
   return { grid: next, spawnedIdx: idx };
 }
 
+type Corner = 'br' | 'bl' | 'tr' | 'tl';
+
+const CORNER_PATHS: Record<Corner, number[]> = {
+  br: [15, 14, 13, 11, 10, 7],
+  bl: [12, 13, 14, 8, 9, 4],
+  tr: [3, 2, 1, 7, 6, 11],
+  tl: [0, 1, 2, 4, 5, 8],
+};
+
+function getSeedsForLevel(lvl: number): number[] {
+  switch (lvl) {
+    case 1:
+      return [8, 4, 2, 2];
+    case 2:
+      return [16, 8, 4, 2, 2];
+    case 3:
+      return [32, 16, 8, 4, 4];
+    case 4:
+      return [64, 32, 16, 8, 8];
+    case 5:
+      return [128, 64, 32, 16, 16];
+    case 6:
+      return [256, 128, 64, 32, 32];
+    case 7:
+      return [512, 256, 128, 64, 64];
+    case 8:
+      return [1024, 512, 256, 128, 128];
+    case 9:
+      return [1024, 512, 256, 128, 128];
+    case 10:
+    default:
+      return [2048, 1024, 512, 256, 256];
+  }
+}
+
 /**
  * Creates an intelligent starting board tailored for the target tile level.
  * Seeds a clean, structured set of tiles in a natural monotonic corner arrangement,
  * leaving ample space (10-12 empty cells) for strategic building.
+ * Randomizes corner orientation and secondary placements so each puzzle feels unique.
  */
-function seedBoard(level: number): number[] {
+export function createPuzzleBoard(level: number): number[] {
   const grid = new Array(TOTAL_CELLS).fill(0);
   const lvl = clamp(Math.round(level), 1, MAX_LEVEL);
+  const seeds = getSeedsForLevel(lvl);
+  const corners: Corner[] = ['br', 'bl', 'tr', 'tl'];
+  const corner = pick(corners);
+  const path = CORNER_PATHS[corner];
 
-  // Position seeds starting from bottom-right / corner
-  if (lvl === 1) {
-    grid[15] = 4;
-    grid[14] = 4;
-    grid[11] = 2;
-    grid[10] = 2;
-  } else if (lvl === 2) {
-    grid[15] = 16;
-    grid[14] = 8;
-    grid[13] = 8;
-    grid[11] = 4;
-    grid[10] = 2;
-  } else if (lvl === 3) {
-    grid[15] = 32;
-    grid[14] = 16;
-    grid[13] = 16;
-    grid[11] = 8;
-    grid[10] = 4;
-  } else if (lvl === 4) {
-    grid[15] = 64;
-    grid[14] = 32;
-    grid[13] = 32;
-    grid[11] = 16;
-    grid[10] = 8;
-  } else if (lvl === 5) {
-    grid[15] = 128;
-    grid[14] = 64;
-    grid[13] = 64;
-    grid[11] = 32;
-    grid[10] = 16;
-  } else if (lvl === 6) {
-    grid[15] = 256;
-    grid[14] = 128;
-    grid[13] = 128;
-    grid[11] = 64;
-    grid[10] = 32;
-  } else if (lvl === 7) {
-    grid[15] = 512;
-    grid[14] = 256;
-    grid[13] = 256;
-    grid[11] = 128;
-    grid[10] = 64;
-  } else if (lvl === 8) {
-    // Target 2048 with obstacle
-    grid[15] = 512;
-    grid[14] = 256;
-    grid[13] = 256;
-    grid[11] = 128;
-    grid[10] = 64;
-    grid[5] = -1; // Stone block in inner cell
-  } else if (lvl === 9) {
-    grid[15] = 1024;
-    grid[14] = 512;
-    grid[13] = 512;
-    grid[11] = 256;
-    grid[10] = 128;
-  } else {
-    // Master: Target 4096 with obstacle
-    grid[15] = 1024;
-    grid[14] = 512;
-    grid[13] = 512;
-    grid[11] = 256;
-    grid[10] = 128;
-    grid[5] = -1;
+  for (let i = 0; i < seeds.length && i < path.length; i++) {
+    grid[path[i]] = seeds[i];
+  }
+
+  // Stone block in inner cell for master challenge levels
+  if (hasObstacle(lvl)) {
+    const centerOptions = [5, 6, 9, 10].filter((idx) => grid[idx] === 0);
+    if (centerOptions.length) {
+      grid[pick(centerOptions)] = -1;
+    }
+  }
+
+  // Add 1 extra small tile in an empty cell for natural dynamic board feel
+  const empties: number[] = [];
+  for (let i = 0; i < TOTAL_CELLS; i++) {
+    if (grid[i] === 0) empties.push(i);
+  }
+  if (empties.length) {
+    const extraIdx = pick(empties);
+    grid[extraIdx] = lvl >= 5 ? (Math.random() < 0.4 ? 4 : 2) : 2;
   }
 
   return grid;
-}
-
-/** Cleans lowest 2s when board gets crowded upon milestone clear */
-function cleanupLowTiles(grid: number[]): number[] {
-  const occupied = grid.filter((v) => v > 0).length;
-  if (occupied <= 11) return grid;
-  let cleared = 0;
-  return grid.map((v) => {
-    if (v === 2 && cleared < 2) {
-      cleared++;
-      return 0;
-    }
-    return v;
-  });
 }
 
 export const game2048: Exercise = {
@@ -235,35 +217,27 @@ export const game2048: Exercise = {
   why: 'ex.game2048.why',
   example: 'ex.game2048.example',
   minutes: [1, 2],
-  levels: { min: 1, max: MAX_LEVEL, start: 2 },
+  levels: { min: 1, max: MAX_LEVEL, start: 1 },
   levelLabel: (l) => `${targetFor(l)} 🎯`,
 
   async run(ctx) {
     const milestones = ctx.count(3, 2, 1);
     const st = ctx.stair(milestones, 1, MAX_LEVEL, { target: 0.75 });
 
-    let currentGrid = seedBoard(st.int);
     let totalScore = 0;
     let completedMilestones = 0;
-    let highestTileAchieved = Math.max(...currentGrid.filter((v) => v > 0));
-    let moveRts: number[] = [];
+    let highestTileAchieved = 0;
+    const moveRts: number[] = [];
 
     for (let m = 0; m < milestones; m++) {
       ctx.progress(m / milestones, `${m + 1}/${milestones}`);
 
       const targetTile = targetFor(st.int);
       let movesLeft = movesFor(st.int, ctx.pace);
-      let undosLeft = 2;
+      let undosLeft = 3;
 
-      // If grid has no path to target or lacks high tiles after defeat, re-seed
-      const maxCurrent = Math.max(...currentGrid.filter((v) => v > 0), 0);
-      if (maxCurrent < targetTile / 4 || !canMove(currentGrid)) {
-        currentGrid = seedBoard(st.int);
-      } else if (hasObstacle(st.int) && !currentGrid.includes(-1)) {
-        // Ensure obstacle cell is present at levels 8 and 10
-        const centerIndices = [5, 6, 9, 10].filter((idx) => currentGrid[idx] === 0);
-        if (centerIndices.length) currentGrid[centerIndices[0]] = -1;
-      }
+      let currentGrid = createPuzzleBoard(st.int);
+      highestTileAchieved = Math.max(highestTileAchieved, ...currentGrid.filter((v) => v > 0));
 
       // UI Construction
       ctx.stage.replaceChildren();
@@ -300,7 +274,7 @@ export const game2048: Exercise = {
         {
           class: 'game2048-undo-btn',
           title: t('ex.game2048.undo'),
-          disabled: undosLeft <= 0,
+          disabled: true,
         },
         `↩ ${undosLeft}`,
       );
@@ -602,10 +576,9 @@ export const game2048: Exercise = {
 
       if (ok) {
         completedMilestones++;
-        currentGrid = cleanupLowTiles(currentGrid);
         await ctx.wait(600);
       } else {
-        await ctx.wait(1000);
+        await ctx.wait(800);
       }
     }
 
