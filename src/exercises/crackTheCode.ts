@@ -60,14 +60,11 @@ export interface Puzzle {
 const MAX_LEVEL = 8;
 
 export function codeLengthFor(level: number): number {
-  if (level <= 2) return 2;
-  if (level <= 5) return 3;
-  return 4;
+  return level >= 6 ? 4 : 3;
 }
 
 export function cluesCountFor(level: number): number {
-  if (level <= 2) return 4;
-  if (level <= 4) return 5;
+  if (level <= 3) return 5;
   if (level <= 5) return 4;
   if (level <= 7) return 5;
   return 4;
@@ -75,8 +72,8 @@ export function cluesCountFor(level: number): number {
 
 /** Adaptive attempt budget based on difficulty level */
 export function attemptsFor(level: number): number {
-  if (level <= 1) return 6;
-  if (level <= 3) return 5;
+  if (level === 1) return 6;
+  if (level <= 3 || level === 6) return 5;
   return 4;
 }
 
@@ -126,33 +123,25 @@ export function solve(clues: Clue[], length: number, maxSolutions = 2): number[]
 const FALLBACK_PUZZLES: Record<number, Puzzle[]> = {
   1: [
     {
-      solution: [3, 7],
-      length: 2,
+      solution: [5, 6, 4],
+      length: 3,
       clues: [
-        { guess: [6, 5], type: 'none', count: 0 },
-        { guess: [8, 4], type: 'none', count: 0 },
-        { guess: [7, 3], type: 'wrong', count: 2 },
-        { guess: [3, 2], type: 'well', count: 1 },
+        { guess: [1, 0, 3], type: 'none', count: 0 },
+        { guess: [7, 9, 8], type: 'none', count: 0 },
+        { guess: [3, 6, 4], type: 'well', count: 2 },
+        { guess: [6, 3, 5], type: 'wrong', count: 2 },
+        { guess: [5, 2, 8], type: 'well', count: 1 },
       ],
     },
     {
-      solution: [9, 4],
-      length: 2,
+      solution: [7, 3, 9],
+      length: 3,
       clues: [
-        { guess: [1, 7], type: 'none', count: 0 },
-        { guess: [2, 8], type: 'none', count: 0 },
-        { guess: [4, 9], type: 'wrong', count: 2 },
-        { guess: [9, 5], type: 'well', count: 1 },
-      ],
-    },
-    {
-      solution: [5, 2],
-      length: 2,
-      clues: [
-        { guess: [7, 9], type: 'none', count: 0 },
-        { guess: [4, 8], type: 'none', count: 0 },
-        { guess: [2, 5], type: 'wrong', count: 2 },
-        { guess: [5, 1], type: 'well', count: 1 },
+        { guess: [5, 6, 8], type: 'none', count: 0 },
+        { guess: [4, 2, 1], type: 'none', count: 0 },
+        { guess: [2, 3, 9], type: 'well', count: 2 },
+        { guess: [3, 4, 7], type: 'wrong', count: 2 },
+        { guess: [7, 8, 0], type: 'well', count: 1 },
       ],
     },
   ],
@@ -218,7 +207,7 @@ export function generatePuzzle(level: number): Puzzle {
     const clues: Clue[] = [];
 
     // Elimination clues ('none')
-    const noneCount = level === 1 || level === 3 ? 2 : level <= 6 || secureRandom() < 0.6 ? 1 : 0;
+    const noneCount = level === 1 ? 2 : level <= 4 || level === 6 || level === 7 ? 1 : secureRandom() < 0.4 ? 1 : 0;
     let nonPool = secureShuffle(nonSolution);
     for (let nc = 0; nc < noneCount; nc++) {
       if (nonPool.length >= length) {
@@ -229,15 +218,10 @@ export function generatePuzzle(level: number): Puzzle {
 
     // Generate candidate clues from combinations of solution and non-solution digits
     for (let c = 0; c < 30; c++) {
-      let combined: number[];
-      if (length === 2 && c === 0 && secureRandom() < 0.75) {
-        combined = [solution[1], solution[0]];
-      } else {
-        const numSolution = secureRandom() < 0.75 ? 1 : Math.min(2, length - 1);
-        const chosenSolution = secureShuffle(solution).slice(0, numSolution);
-        const chosenNon = secureShuffle(nonSolution).slice(0, length - numSolution);
-        combined = secureShuffle([...chosenSolution, ...chosenNon]);
-      }
+      const numSolution = secureRandom() < 0.65 ? 1 : Math.min(2, length - 1);
+      const chosenSolution = secureShuffle(solution).slice(0, numSolution);
+      const chosenNon = secureShuffle(nonSolution).slice(0, length - numSolution);
+      const combined = secureShuffle([...chosenSolution, ...chosenNon]);
 
       const evalRes = evaluateClue(solution, combined);
       if (evalRes.well > 0 && evalRes.wrong === 0) {

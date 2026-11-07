@@ -6,6 +6,18 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.20] - 2026-11-07
+
+### Modificato
+
+- Decifra il Codice (`ex.crackTheCode`):
+  - Calibrazione a un minimo di 3 cifre: ripristinata la lunghezza minima della combinazione ad almeno 3 cifre per i livelli 1–5 (e 4 cifre per i livelli 6–8), preservando l'autentica identità del puzzle logico e la giusta profondità deduttiva.
+  - Difficoltà adattiva (DDA) ricalibrata con precisione:
+    - Livello 1: combinazione a 3 cifre con 2 indizi di esclusione ("Nessuna cifra corretta", che consentono di barrare subito 6 cifre impossibili su 10, lasciando solo 4 candidate per i 3 cilindri) e 6 tentativi a disposizione, per un avvio guidato e privo di frustrazione.
+    - Livelli 2–3: 3 cifre con 1 indizio di esclusione e 5 indizi complessivi (5 tentativi).
+    - Livelli 4–5: 3 cifre con 4 indizi stretti (4 tentativi) che richiedono incroci logici più rigorosi e ragionamento per esclusione.
+    - Livelli 6–8: 4 cifre con progressione da 5 a 4 indizi minimalisti (da 5 a 4 tentativi).
+
 ## [0.12.19] - 2026-11-07
 
 ### Modificato
