@@ -6,6 +6,12 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.6] - 2026-11-07
+
+### Modificato
+
+- Eco (N-Back): attivazione del banner di verdetto esplicito «✓ Corretto! (Nessun bersaglio)» e del bagliore verde a tutto schermo sulle non-azioni corrette (*Correct Rejections*). Rimosso l'occultamento della modalità *subtle* per garantire che l'utente riceva sempre una conferma chiara, inequivocabile e visibile del successo dell'inibizione motoria, accompagnata dal suono di successo e dall'incremento del combo.
+
 ## [0.12.5] - 2026-11-07
 
 ### Aggiunto

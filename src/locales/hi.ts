@@ -193,6 +193,7 @@ const ui: Locale['ui'] = {
   'ex.echo.rule': '{n}-back · {n} कदम पहले से मिलाएँ',
   'ex.echo.block': 'ब्लॉक {i}: {acc}% सटीकता (सही पकड़ घटा झूठे अलार्म)',
   'ex.echo.cr': '✓ कोई मेल नहीं: न दबाना सही था',
+  'ex.echo.crNote': 'कोई मेल नहीं',
   'ex.echo.crPractice': '✓ वे अलग थे: न दबाकर अच्छा किया!',
 
   'ex.grid.name': 'रोशनी का ग्रिड',

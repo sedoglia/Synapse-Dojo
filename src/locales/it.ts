@@ -193,6 +193,7 @@ const ui: Locale['ui'] = {
   'ex.echo.rule': '{n}-back · confronta con {n} passi fa',
   'ex.echo.block': 'Blocco {i}: precisione {acc}% (bersagli colti meno falsi allarmi)',
   'ex.echo.cr': '✓ Nessun bersaglio: corretto non premere',
+  'ex.echo.crNote': 'Nessun bersaglio',
   'ex.echo.crPractice': '✓ Erano diverse: ben fatto a non premere!',
 
   'ex.grid.name': 'Griglia di luci',

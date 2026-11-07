@@ -193,6 +193,7 @@ export const ui = {
   'ex.echo.rule': '{n}-back · compare with {n} steps back',
   'ex.echo.block': 'Block {i}: {acc}% accuracy (hits minus false alarms)',
   'ex.echo.cr': '✓ No match: correctly withheld',
+  'ex.echo.crNote': 'No match',
   'ex.echo.crPractice': '✓ They differed: good job not pressing!',
 
   'ex.grid.name': 'Light grid',

@@ -193,6 +193,7 @@ const ui: Locale['ui'] = {
   'ex.echo.rule': '{n}-back · compare com {n} passos atrás',
   'ex.echo.block': 'Bloco {i}: {acc}% de precisão (acertos menos alarmes falsos)',
   'ex.echo.cr': '✓ Sem correspondência: certo não pressionar',
+  'ex.echo.crNote': 'Sem correspondência',
   'ex.echo.crPractice': '✓ Eram diferentes: muito bem em não pressionar!',
 
   'ex.grid.name': 'Grade de luzes',

@@ -193,6 +193,7 @@ const ui: Locale['ui'] = {
   'ex.echo.rule': '{n}-back · bandingkan dengan {n} langkah sebelumnya',
   'ex.echo.block': 'Blok {i}: akurasi {acc}% (tepat dikurangi alarm palsu)',
   'ex.echo.cr': '✓ Tidak ada kecocokan: tepat untuk tidak menekan',
+  'ex.echo.crNote': 'Tidak ada kecocokan',
   'ex.echo.crPractice': '✓ Keduanya berbeda: bagus tidak menekan!',
 
   'ex.grid.name': 'Kisi cahaya',

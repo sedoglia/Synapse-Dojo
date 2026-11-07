@@ -2372,6 +2372,8 @@ html.big-text {
 }
 .echo-turn.good-cr {
   color: var(--good);
+  font-weight: 900;
+  animation: pop 0.25s ease-out;
 }
 .echo-strip-hint.good {
   color: var(--good);

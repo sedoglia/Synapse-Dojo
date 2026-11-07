@@ -193,6 +193,7 @@ const ui: Locale['ui'] = {
   'ex.echo.rule': '{n}バック · {n}ステップ前と比べる',
   'ex.echo.block': 'ブロック {i}：正確さ {acc}%（ヒット数から誤反応を引いたもの）',
   'ex.echo.cr': '✓ 一致なし：押さずに正解',
+  'ex.echo.crNote': '一致なし',
   'ex.echo.crPractice': '✓ 違っていました：押さずに正解です！',
 
   'ex.grid.name': '光るマス目',

@@ -193,6 +193,7 @@ const ui: Locale['ui'] = {
   'ex.echo.rule': '{n}-back · 和 {n} 步之前比较',
   'ex.echo.block': '第 {i} 组：准确率 {acc}%（命中减去误报）',
   'ex.echo.cr': '✓ 无匹配：不按是正确的',
+  'ex.echo.crNote': '无匹配',
   'ex.echo.crPractice': '✓ 它们不同：很好，没有按！',
 
   'ex.grid.name': '光格',

@@ -193,6 +193,7 @@ const ui: Locale['ui'] = {
   'ex.echo.rule': '{n}-back · vergleiche mit {n} Schritten zurück',
   'ex.echo.block': 'Block {i}: {acc} % Genauigkeit (Treffer minus Fehlalarme)',
   'ex.echo.cr': '✓ Keine Übereinstimmung: richtig nicht gedrückt',
+  'ex.echo.crNote': 'Keine Übereinstimmung',
   'ex.echo.crPractice': '✓ Sie waren verschieden: gut gemacht!',
 
   'ex.grid.name': 'Lichtgitter',

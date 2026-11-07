@@ -243,10 +243,10 @@ export const echo: Exercise = {
             const nothingToPress = !posTarget && (!dual || !letTarget);
             const nothingPressed = !posPressed && (!dual || !letPressed);
             if (nothingToPress && nothingPressed) {
-              flash(timer, 'echo-timer-good', 380);
-              flash(board, 'echo-grid-zen', 380);
-              flash(posBtn, 'echo-btn-zen', 400);
-              if (dual) flash(letBtn, 'echo-btn-zen', 400);
+              flash(timer, 'echo-timer-good', 450);
+              flash(board, 'echo-grid-zen', 450);
+              flash(posBtn, 'echo-btn-zen', 500);
+              if (dual) flash(letBtn, 'echo-btn-zen', 500);
               turn.textContent = t('ex.echo.cr');
               turn.classList.add('good-cr');
               if (ctx.practice) {
@@ -256,11 +256,11 @@ export const echo: Exercise = {
                   hint.classList.add('good');
                 }
               }
-              ctx.feedback(true, { subtle: true, sound: 'zen' });
-              pause = 520;
+              ctx.feedback(true, { note: t('ex.echo.crNote') });
+              pause = 700;
             } else if (dual) {
-              if (!posTarget && !posPressed) flash(posBtn, 'echo-btn-zen', 350);
-              if (!letTarget && !letPressed) flash(letBtn, 'echo-btn-zen', 350);
+              if (!posTarget && !posPressed) flash(posBtn, 'echo-btn-zen', 400);
+              if (!letTarget && !letPressed) flash(letBtn, 'echo-btn-zen', 400);
             }
           }
         }
