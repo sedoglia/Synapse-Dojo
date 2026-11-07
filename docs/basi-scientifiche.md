@@ -52,7 +52,7 @@ Dalle evidenze sopra descritte derivano i pilastri costruttivi della piattaforma
 
 ---
 
-## 3. Il Catalogo Completo dei 36 Esercizi (9 Domini)
+## 3. Il Catalogo Completo dei 37 Esercizi (9 Domini)
 
 L'applicazione organizza 36 compiti originali distribuiti su 9 domini cognitivi e motori:
 
@@ -61,7 +61,7 @@ L'applicazione organizza 36 compiti originali distribuiti su 9 domini cognitivi 
                                   ├─── 🎯 Attenzione (6)
                                   ├─── 🎛️ Controllo Esecutivo (3)
                                   ├─── 🧠 Memoria di Lavoro (4)
-       Synapse Dojo (36 Esercizi) ├─── 🔐 Memoria Episodica (3)
+       Synapse Dojo (37 Esercizi) ├─── 🔐 Memoria Episodica (3)
                                   ├─── 🧊 Spaziale (2)
                                   ├─── 🧩 Ragionamento (4)
                                   ├─── ➗ Calcolo e Lettura (5)

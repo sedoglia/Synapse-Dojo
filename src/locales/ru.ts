@@ -626,6 +626,22 @@ const ui: Locale['ui'] = {
   'ex.game2048.milestoneReached': 'Цель достигнута: {val}!',
   'ex.game2048.detail': '{ok}/{n} целей · макс {max} · {pts} очков',
 
+  // nonogram
+  'ex.nonogram.name': 'Японский кроссворд',
+  'ex.nonogram.desc': 'Заполняйте клетки по числовым подсказкам в строках и столбцах, чтобы открыть рисунок',
+  'ex.nonogram.why': 'Тренирует зрительно-пространственную логику, удовлетворение ограничений и рабочую память.',
+  'ex.nonogram.example': 'Используйте числа строк и столбцов для вычисления закрашиваемых и пустых клеток',
+  'ex.nonogram.detail': 'Открыто картинок: {ok}/{n}',
+  'ex.nonogram.fill': 'Закрасить',
+  'ex.nonogram.cross': 'Крестик',
+  'ex.nonogram.clear': 'Сброс',
+  'ex.nonogram.undo': 'Отмена',
+  'ex.nonogram.hint': 'Подсказка',
+  'ex.nonogram.solved': 'Открыто: {name}!',
+  'ex.nonogram.check': 'Проверить',
+  'ex.nonogram.mistakes': 'Несовпадений: {n}',
+
+
 
 
 

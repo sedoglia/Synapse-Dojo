@@ -626,6 +626,22 @@ const ui: Locale['ui'] = {
   'ex.game2048.milestoneReached': '目标达成：{val}！',
   'ex.game2048.detail': '{ok}/{n} 个目标 · 最高 {max} · {pts} 分',
 
+  // nonogram
+  'ex.nonogram.name': '数织图案',
+  'ex.nonogram.desc': '根据行与列的数字提示涂色网格，揭示隐藏的像素图像',
+  'ex.nonogram.why': '锻炼视觉空间逻辑演绎、约束满足与工作记忆规划能力。',
+  'ex.nonogram.example': '观察行列数字提示，推断需要涂黑或排空格的格子',
+  'ex.nonogram.detail': '已揭示 {ok}/{n} 幅图案',
+  'ex.nonogram.fill': '填充',
+  'ex.nonogram.cross': '标记',
+  'ex.nonogram.clear': '重置',
+  'ex.nonogram.undo': '撤销',
+  'ex.nonogram.hint': '提示',
+  'ex.nonogram.solved': '揭晓：{name}！',
+  'ex.nonogram.check': '检查',
+  'ex.nonogram.mistakes': '发现 {n} 处不匹配',
+
+
 
 
 

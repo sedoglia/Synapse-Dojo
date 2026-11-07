@@ -653,6 +653,23 @@ const ui: Locale['ui'] = {
   'ex.game2048.milestoneReached': 'Traguardo raggiunto: {val}!',
   'ex.game2048.detail': '{ok}/{n} traguardi · max {max} · {pts} pt',
 
+  // nonogram
+  'ex.nonogram.name': 'Nonogram',
+  'ex.nonogram.desc': 'Riempi le celle seguendo gli indizi numerici di riga e colonna per svelare l\'illustrazione nascosta',
+  'ex.nonogram.why': 'Allena la deduzione visuo-spaziale, il soddisfacimento di vincoli e la pianificazione nella memoria di lavoro.',
+  'ex.nonogram.example': 'Osserva i numeri di riga e colonna per dedurre i blocchi da annerire o escludere',
+  'ex.nonogram.detail': '{ok}/{n} illustrazioni svelate',
+  'ex.nonogram.fill': 'Riempi',
+  'ex.nonogram.cross': 'Escludi',
+  'ex.nonogram.clear': 'Ripristina',
+  'ex.nonogram.undo': 'Annulla',
+  'ex.nonogram.hint': 'Aiuto',
+  'ex.nonogram.solved': 'Svelato: {name}!',
+  'ex.nonogram.check': 'Verifica',
+  'ex.nonogram.mistakes': '{n} incongruenze rilevate',
+
+
+
 
 
 

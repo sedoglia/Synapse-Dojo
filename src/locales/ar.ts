@@ -626,6 +626,22 @@ const ui: Locale['ui'] = {
   'ex.game2048.milestoneReached': 'تم بلوغ الهدف: {val}!',
   'ex.game2048.detail': '{ok}/{n} أهداف · أقصى بلاطة {max} · {pts} نقطة',
 
+  // nonogram
+  'ex.nonogram.name': 'نونوجرام (شبكة البكسل)',
+  'ex.nonogram.desc': 'املأ خلايا الشبكة باتباع الأرقام الإرشادية للصفوف والأعمدة لكشف الصورة المخفية',
+  'ex.nonogram.why': 'ينمي الاستنتاج البصري المكاني، وتلبية القيود الرياضية والتخطيط في الذاكرة العاملة.',
+  'ex.nonogram.example': 'استعن بأرقام الصفوف والأعمدة لاستنتاج المربعات المطلوب تظليلها أو استبعادها',
+  'ex.nonogram.detail': 'تم كشف {ok}/{n} صورة',
+  'ex.nonogram.fill': 'تظليل',
+  'ex.nonogram.cross': 'استبعاد',
+  'ex.nonogram.clear': 'إعادة ضبط',
+  'ex.nonogram.undo': 'تراجع',
+  'ex.nonogram.hint': 'تلميح',
+  'ex.nonogram.solved': 'تم الكشف: {name}!',
+  'ex.nonogram.check': 'تحقق',
+  'ex.nonogram.mistakes': 'تم رصد {n} أخطاء',
+
+
 
 
 

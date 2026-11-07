@@ -52,7 +52,7 @@ The evidence above leads to the platform's building blocks:
 
 ---
 
-## 3. The Complete Catalog of 36 Exercises (9 Domains)
+## 3. The Complete Catalog of 37 Exercises (9 Domains)
 
 The app organizes 36 original tasks across 9 cognitive and motor domains:
 
@@ -61,7 +61,7 @@ The app organizes 36 original tasks across 9 cognitive and motor domains:
                                   ├─── 🎯 Attention (6)
                                   ├─── 🎛️ Executive Control (3)
                                   ├─── 🧠 Working Memory (4)
-     Synapse Dojo (36 Exercises)  ├─── 🔐 Episodic Memory (3)
+     Synapse Dojo (37 Exercises)  ├─── 🔐 Episodic Memory (3)
                                   ├─── 🧊 Spatial (2)
                                   ├─── 🧩 Reasoning (4)
                                   ├─── ➗ Calculation & Reading (5)

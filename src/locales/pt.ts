@@ -626,6 +626,22 @@ const ui: Locale['ui'] = {
   'ex.game2048.milestoneReached': 'Marco alcançado: {val}!',
   'ex.game2048.detail': '{ok}/{n} marcos · máx {max} · {pts} pts',
 
+  // nonogram
+  'ex.nonogram.name': 'Nonograma',
+  'ex.nonogram.desc': 'Preencha as células seguindo as pistas numéricas de linhas e colunas para revelar a imagem oculta',
+  'ex.nonogram.why': 'Treina a dedução visoespacial, a satisfação de restrições e a memória de trabalho.',
+  'ex.nonogram.example': 'Use os números de linha e coluna para deduzir quais células preencher ou marcar com X',
+  'ex.nonogram.detail': '{ok}/{n} imagens reveladas',
+  'ex.nonogram.fill': 'Preencher',
+  'ex.nonogram.cross': 'Marcar X',
+  'ex.nonogram.clear': 'Limpar',
+  'ex.nonogram.undo': 'Desfazer',
+  'ex.nonogram.hint': 'Dica',
+  'ex.nonogram.solved': 'Revelado: {name}!',
+  'ex.nonogram.check': 'Verificar',
+  'ex.nonogram.mistakes': '{n} discrepâncias detectadas',
+
+
 
 
 

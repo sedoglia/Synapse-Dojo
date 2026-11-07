@@ -653,6 +653,23 @@ export const ui = {
   'ex.game2048.milestoneReached': 'Milestone reached: {val}!',
   'ex.game2048.detail': '{ok}/{n} milestones · max {max} · {pts} pts',
 
+  // nonogram
+  'ex.nonogram.name': 'Nonogram',
+  'ex.nonogram.desc': 'Fill the grid cells following numeric clues along rows and columns to reveal hidden pixel art',
+  'ex.nonogram.why': 'Engages visuospatial deduction, constraint satisfaction, and multi-axis working memory planning.',
+  'ex.nonogram.example': 'Use row and column numbers to deduce which cells to fill or cross out',
+  'ex.nonogram.detail': '{ok}/{n} pictures revealed',
+  'ex.nonogram.fill': 'Fill',
+  'ex.nonogram.cross': 'Cross',
+  'ex.nonogram.clear': 'Reset',
+  'ex.nonogram.undo': 'Undo',
+  'ex.nonogram.hint': 'Hint',
+  'ex.nonogram.solved': 'Revealed: {name}!',
+  'ex.nonogram.check': 'Check',
+  'ex.nonogram.mistakes': '{n} mismatches detected',
+
+
+
 
 
 
