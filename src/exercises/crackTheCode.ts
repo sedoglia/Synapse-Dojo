@@ -60,11 +60,14 @@ export interface Puzzle {
 const MAX_LEVEL = 8;
 
 export function codeLengthFor(level: number): number {
-  return level >= 6 ? 4 : 3;
+  if (level <= 2) return 2;
+  if (level <= 5) return 3;
+  return 4;
 }
 
 export function cluesCountFor(level: number): number {
-  if (level <= 2) return 5;
+  if (level <= 2) return 4;
+  if (level <= 4) return 5;
   if (level <= 5) return 4;
   if (level <= 7) return 5;
   return 4;
@@ -74,7 +77,6 @@ export function cluesCountFor(level: number): number {
 export function attemptsFor(level: number): number {
   if (level <= 1) return 6;
   if (level <= 3) return 5;
-  if (level <= 5) return 4;
   return 4;
 }
 
@@ -124,6 +126,38 @@ export function solve(clues: Clue[], length: number, maxSolutions = 2): number[]
 const FALLBACK_PUZZLES: Record<number, Puzzle[]> = {
   1: [
     {
+      solution: [3, 7],
+      length: 2,
+      clues: [
+        { guess: [6, 5], type: 'none', count: 0 },
+        { guess: [8, 4], type: 'none', count: 0 },
+        { guess: [7, 3], type: 'wrong', count: 2 },
+        { guess: [3, 2], type: 'well', count: 1 },
+      ],
+    },
+    {
+      solution: [9, 4],
+      length: 2,
+      clues: [
+        { guess: [1, 7], type: 'none', count: 0 },
+        { guess: [2, 8], type: 'none', count: 0 },
+        { guess: [4, 9], type: 'wrong', count: 2 },
+        { guess: [9, 5], type: 'well', count: 1 },
+      ],
+    },
+    {
+      solution: [5, 2],
+      length: 2,
+      clues: [
+        { guess: [7, 9], type: 'none', count: 0 },
+        { guess: [4, 8], type: 'none', count: 0 },
+        { guess: [2, 5], type: 'wrong', count: 2 },
+        { guess: [5, 1], type: 'well', count: 1 },
+      ],
+    },
+  ],
+  3: [
+    {
       solution: [0, 4, 2],
       length: 3,
       clues: [
@@ -145,8 +179,6 @@ const FALLBACK_PUZZLES: Record<number, Puzzle[]> = {
         { guess: [7, 9, 0], type: 'wrong', count: 2 },
       ],
     },
-  ],
-  3: [
     {
       solution: [1, 8, 5],
       length: 3,
@@ -176,6 +208,7 @@ const FALLBACK_PUZZLES: Record<number, Puzzle[]> = {
 /** Generates a uniquely solvable puzzle for the specified difficulty level */
 export function generatePuzzle(level: number): Puzzle {
   const length = codeLengthFor(level);
+  const targetClues = cluesCountFor(level);
   const digits = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
 
   // Try generating dynamically
@@ -184,18 +217,27 @@ export function generatePuzzle(level: number): Puzzle {
     const nonSolution = digits.filter((d) => !solution.includes(d));
     const clues: Clue[] = [];
 
-    // Clue 1: A "none" clue (very helpful for deductive elimination)
-    if (level <= 6 || secureRandom() < 0.6) {
-      const noneDigits = secureShuffle(nonSolution).slice(0, length);
-      clues.push({ guess: noneDigits, type: 'none', count: 0 });
+    // Elimination clues ('none')
+    const noneCount = level === 1 || level === 3 ? 2 : level <= 6 || secureRandom() < 0.6 ? 1 : 0;
+    let nonPool = secureShuffle(nonSolution);
+    for (let nc = 0; nc < noneCount; nc++) {
+      if (nonPool.length >= length) {
+        clues.push({ guess: nonPool.slice(0, length), type: 'none', count: 0 });
+        nonPool = nonPool.slice(length);
+      }
     }
 
     // Generate candidate clues from combinations of solution and non-solution digits
-    for (let c = 0; c < 24; c++) {
-      const numSolution = secureRandom() < 0.75 ? 1 : Math.min(2, length - 1);
-      const chosenSolution = secureShuffle(solution).slice(0, numSolution);
-      const chosenNon = secureShuffle(nonSolution).slice(0, length - numSolution);
-      const combined = secureShuffle([...chosenSolution, ...chosenNon]);
+    for (let c = 0; c < 30; c++) {
+      let combined: number[];
+      if (length === 2 && c === 0 && secureRandom() < 0.75) {
+        combined = [solution[1], solution[0]];
+      } else {
+        const numSolution = secureRandom() < 0.75 ? 1 : Math.min(2, length - 1);
+        const chosenSolution = secureShuffle(solution).slice(0, numSolution);
+        const chosenNon = secureShuffle(nonSolution).slice(0, length - numSolution);
+        combined = secureShuffle([...chosenSolution, ...chosenNon]);
+      }
 
       const evalRes = evaluateClue(solution, combined);
       if (evalRes.well > 0 && evalRes.wrong === 0) {
@@ -207,11 +249,10 @@ export function generatePuzzle(level: number): Puzzle {
       // Check if unique solution is achieved
       const sols = solve(clues, length, 2);
       if (sols.length === 1 && sols[0].every((d, i) => d === solution[i])) {
-        // Prune redundant clues while keeping uniqueness
+        // Prune redundant clues while keeping uniqueness down to targetClues
         let pruned = [...clues];
-        const minKeep = level <= 2 ? 4 : 3;
         for (let i = pruned.length - 1; i >= 0; i--) {
-          if (pruned.length <= minKeep) break;
+          if (pruned.length <= targetClues) break;
           const candidatePruned = pruned.filter((_, idx) => idx !== i);
           if (solve(candidatePruned, length, 2).length === 1) {
             pruned = candidatePruned;
@@ -242,11 +283,11 @@ export const crackTheCode: Exercise = {
   why: 'ex.crackTheCode.why',
   example: 'ex.crackTheCode.example',
   minutes: [1, 2],
-  levels: { min: 1, max: MAX_LEVEL, start: 2 },
+  levels: { min: 1, max: MAX_LEVEL, start: 1 },
   levelLabel: (l) => `${codeLengthFor(l)} 🔢 · ${attemptsFor(l)} 🛡️ · ${cluesCountFor(l)} 💡`,
 
   async run(ctx) {
-    const trials = ctx.count(2, 1, 1);
+    const trials = ctx.count(1, 1, 1);
     const st = ctx.stair(trials, 1, MAX_LEVEL, { target: 0.8 });
     let solvedCount = 0;
 
@@ -429,7 +470,12 @@ export const crackTheCode: Exercise = {
       const scratchBar = h(
         'div',
         { class: 'ctc-scratch-wrap' },
-        h('div', { class: 'ctc-scratch-label' }, `📝 ${t('ex.crackTheCode.scratchpad')}`),
+        h(
+          'div',
+          { class: 'ctc-scratch-header' },
+          h('span', { class: 'ctc-scratch-label' }, `📝 ${t('ex.crackTheCode.scratchpad')}`),
+          h('span', { class: 'ctc-scratch-hint' }, `· ${t('ex.crackTheCode.scratchpadHint')}`),
+        ),
         h('div', { class: 'ctc-scratch-bar' }, ...scratchChips),
       );
 

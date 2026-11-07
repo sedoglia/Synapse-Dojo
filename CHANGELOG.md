@@ -6,6 +6,16 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.19] - 2026-11-07
+
+### Changed
+
+- Crack the Code (`ex.crackTheCode`):
+  - Single-puzzle focused session: reduced trials from 2 to 1 in workout/gym mode (`ctx.count(1, 1, 1)`), making each session a concise, self-contained ~30–45s challenge that delivers a high-impact dopamine reward upon unlock without cognitive overload.
+  - Gentle learning curve starting at Level 1 (`start: 1`): corrected initial level from 2 to 1 and introduced an approachable 2-digit padlock for levels 1–2, 3 digits for levels 3–5, and 4 digits for levels 6–8.
+  - Guided deductive progression: Level 1 and 3 puzzles now supply 2 elimination ("none") clues (crossing out candidate digits immediately) alongside direct placement clues, ensuring intuitive, stress-free solving for beginners.
+  - Interactive scratchpad guidance: added an explicit subtitle hint (`· Tap a digit to eliminate or mark it`) directly beneath the scratchpad header for clear discovery.
+
 ## [0.12.18] - 2026-11-07
 
 ### Changed

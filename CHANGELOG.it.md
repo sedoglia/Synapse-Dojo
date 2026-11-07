@@ -6,6 +6,16 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.19] - 2026-11-07
+
+### Modificato
+
+- Decifra il Codice (`ex.crackTheCode`):
+  - Sessione concentrata su un singolo enigma: ridotto il numero di schemi da 2 a 1 in modalità palestra (`ctx.count(1, 1, 1)`), rendendo ogni partita una sfida concisa e appagante da ~30–45 secondi che offre un gratificante rilascio di dopamina allo sblocco senza affaticamento cognitivo.
+  - Curva d'ingresso graduale dal Livello 1 (`start: 1`): corretta la partenza impostata al livello 1 (invece di livello 2) e introdotta una progressione dolce con combinazioni a 2 cifre per i livelli 1–2, a 3 cifre per i livelli 3–5 e a 4 cifre per i livelli 6–8.
+  - Deduzione guidata e accessibile: i livelli 1 e 3 includono 2 indizi di esclusione ("Nessuna cifra corretta", che eliminano subito candidati sulla striscia appunti) affiancati da indizi di posizione diretti, rendendo la deduzione intuitiva e gratificante fin dal primo approccio.
+  - Istruzioni per gli appunti cifre: aggiunto un sottotitolo esplicativo (`· Tocca una cifra per eliminarla o segnarla`) visibile direttamente nell'intestazione degli appunti.
+
 ## [0.12.18] - 2026-11-07
 
 ### Modificato
