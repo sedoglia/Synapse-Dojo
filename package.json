@@ -1,7 +1,7 @@
 {
   "name": "synapse-dojo",
   "private": true,
-  "version": "0.12.8",
+  "version": "0.12.9",
   "type": "module",
   "license": "PolyForm-Noncommercial-1.0.0",
   "engines": {
@@ -12,6 +12,7 @@
     "build": "tsc && npm run check:api && vite build --mode web",
     "build:web": "tsc && npm run check:api && vite build --mode web",
     "check:anagrams": "node scripts/check-anagrams.mjs",
+    "check:i18n": "node scripts/verify-i18n.mjs",
     "check:api": "wrangler types server/worker-configuration.d.ts && tsc -p tsconfig.api.json",
     "dev:api": "wrangler d1 migrations apply synapse-board --local && wrangler pages dev dist --port 8788",
     "preview": "vite preview",

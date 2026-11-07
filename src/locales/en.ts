@@ -223,6 +223,7 @@ export const ui = {
   'ex.towers.why': 'The Tower of London: planning a sequence of moves before acting. It’s a classic test of planning, an executive function.',
   'ex.towers.goal': 'Goal',
   'ex.towers.moves': 'Moves: {m} · maximum: {min}',
+  'ex.towers.undo': 'Undo move',
   'ex.towers.too': 'Out of moves',
   'ex.towers.detail': 'Solved within the maximum: {ok}/{n}',
 
@@ -609,6 +610,7 @@ export const ui = {
   'ex.anagrams.why': 'Engages orthographic working memory, lexical search, and mental manipulation of phonological units.',
   'ex.anagrams.example': 'Tap letters in the right order to spell the word',
   'ex.anagrams.hint': 'Tap letters to reconstruct the word',
+  'ex.anagrams.scramble': 'Scramble letters',
   'ex.anagrams.detail': '{ok}/{n} solved',
 
   // fluency

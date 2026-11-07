@@ -223,6 +223,7 @@ const ui: Locale['ui'] = {
   'ex.towers.why': 'Torre di Londra: pianificare una sequenza di mosse prima di agire. È un test classico delle funzioni esecutive di pianificazione.',
   'ex.towers.goal': 'Obiettivo',
   'ex.towers.moves': 'Mosse: {m} · massimo: {min}',
+  'ex.towers.undo': 'Annulla mossa',
   'ex.towers.too': 'Mosse finite',
   'ex.towers.detail': 'Risolte entro il massimo: {ok}/{n}',
 
@@ -609,6 +610,7 @@ const ui: Locale['ui'] = {
   'ex.anagrams.why': 'Coinvolge la memoria di lavoro ortografica, l’accesso lessicale e la ricombinazione mentale di fonemi.',
   'ex.anagrams.example': 'Tocca le tessere nell’ordine corretto per comporre la parola',
   'ex.anagrams.hint': 'Tocca le lettere per ricostruire la parola',
+  'ex.anagrams.scramble': 'Rimescola lettere',
   'ex.anagrams.detail': '{ok}/{n} risolti',
 
   // fluency
