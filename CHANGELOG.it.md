@@ -18,6 +18,7 @@ I numeri di versione vengono da `package.json` e ogni data è il giorno del comm
   - Difficoltà adattiva continua: 8 livelli calibrati dall'algoritmo Kaernbach (1991) verso la soglia ottimale dell'80% di accuratezza (Wilson et al., 2019). Da combinazioni a 3 cifre con 5 indizi generosi fino a codici a 4 cifre con indizi stretti.
   - Durata bilanciata: 3 puzzle in modalità palestra (~60–90 secondi complessivi) e 1 prova rapida nel Neuro Score giornaliero.
   - Localizzazione nativa completa in tutte le 12 lingue supportate.
+  - Sicurezza: sostituito Math.random con la Web Crypto API (`crypto.getRandomValues`) e rinominati gli identificatori della combinazione in Decifra il Codice (CWE-338), risolvendo l'avviso CodeQL #2 (`js/insecure-randomness`).
 
 ## [0.12.16] - 2026-11-07
 
