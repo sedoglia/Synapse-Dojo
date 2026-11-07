@@ -6,6 +6,17 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.8] - 2026-11-07
+
+### Modificato
+
+- Colpo d'occhio (UFOV / Double Decision) e Radar (MOT):
+  - Risoluzione del disallineamento al clic sul pulsante della stella: isolamento della centratura con `translate: -50% -50%` e animazione elastica dedicata `glance-pop`, eliminando qualsiasi salto spaziale durante il tocco.
+  - Estetica radar avanzata: reticolo a cerchi concentrici radiali corrispondenti alla geometria effettiva degli anelli (24%, 42%, 50%) e assi mirino di precisione.
+  - Stella luminescente dorata con bagliore bloom, feedback aptico e tattile istantaneo su pressione (`:active`) e alone verde smeraldo sulle scelte corrette.
+  - MOT Radar: orbi tridimensionali con illuminazione sferica a gradiente radiale, aura luminosa per i bersagli in fase di memorizzazione, griglia sonar in background e segnalazione tratteggiata chiara dei bersagli mancati.
+  - Sincronizzazione multisensoriale audio-visiva-aptica per stimolare il reward dopaminergico ed esaltare il *flow state*.
+
 ## [0.12.7] - 2026-11-07
 
 ### Modificato
