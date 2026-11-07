@@ -6,6 +6,15 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.7] - 2026-11-07
+
+### Modificato
+
+- Eco (N-Back): ottimizzazione ergonomica della durata e del pacing per allineare l'esercizio alla media dell'applicazione (durata ridotta da ~3:00 min a ~1:30 min):
+  - Calibrazione delle serie: lunghezza di ciascun blocco ridotta da 20+N a 14+N caselle (e 10+N nel Neuro Score rapido), preservando la sensibilità psicometrica e l'adattatività intra-sessione.
+  - Pacing dinamico: finestra di risposta ridotta da 2200 ms a 1600 ms e tempo stimolo a 500 ms, eliminando i tempi morti e rendendo il ritmo stimolante e fluido come un rhythm game.
+  - Range dichiarato aggiornato da `[2, 4]` a `[1, 2]` minuti.
+
 ## [0.12.6] - 2026-11-07
 
 ### Modificato

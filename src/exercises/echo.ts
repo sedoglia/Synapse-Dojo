@@ -68,7 +68,7 @@ export const echo: Exercise = {
   desc: 'ex.echo.desc',
   why: 'ex.echo.why',
   example: 'ex.echo.example',
-  minutes: [2, 4],
+  minutes: [1, 2],
   levels: { min: 1, max: MAX_LEVEL, start: 1 },
   levelLabel: labelFor,
 
@@ -109,7 +109,7 @@ export const echo: Exercise = {
     for (let b = 0; b < blocks; b++) {
       const n = nFor(level);
       const dual = dualFor(level);
-      const len = (ctx.practice ? 8 : 20) + n;
+      const len = (ctx.practice ? 8 : ctx.quick ? 10 : 14) + n;
       const back = n === 1 ? t('ex.echo.back1') : t('ex.echo.backN', { n });
       const positions = stream(len, n, [0, 1, 2, 3, 4, 5, 6, 7, 8]);
       const letters = stream(len, n, meta().letters);
@@ -204,7 +204,7 @@ export const echo: Exercise = {
         }
 
         // The turn: the square lights up with a tick, and a bar shows the time left to answer.
-        const windowMs = 600 + 2200 * ctx.pace;
+        const windowMs = 500 + 1600 * ctx.pace;
         const bar = timer.firstElementChild as HTMLElement;
         bar.style.transition = 'none';
         bar.style.width = '100%';
@@ -220,14 +220,14 @@ export const echo: Exercise = {
           speak(letters[i]);
           cell.textContent = letters[i];
         }
-        await ctx.wait(600);
+        await ctx.wait(500);
         cell.classList.remove('lit');
         cell.textContent = '';
-        await ctx.wait(windowMs - 600);
+        await ctx.wait(windowMs - 500);
 
         // End of the turn: a missed match is reported now, before the next square appears.
         pressPos = pressLetter = null;
-        let pause = 450;
+        let pause = 400;
         if (!warmup) {
           count(tally.pos, posTarget, posPressed);
           if (dual) count(tally.let, letTarget, letPressed);
@@ -238,7 +238,7 @@ export const echo: Exercise = {
             if (posTarget && !posPressed) flash(posBtn, 'bad');
             if (dual && letTarget && !letPressed) flash(letBtn, 'bad');
             ctx.feedback(false, { was: t('fb.echoMissed', { btn: missed.toUpperCase() }) });
-            pause = 1200; // leave time to read the message before the next square
+            pause = 1100; // leave time to read the message before the next square
           } else {
             const nothingToPress = !posTarget && (!dual || !letTarget);
             const nothingPressed = !posPressed && (!dual || !letPressed);
@@ -257,7 +257,7 @@ export const echo: Exercise = {
                 }
               }
               ctx.feedback(true, { note: t('ex.echo.crNote') });
-              pause = 700;
+              pause = 600;
             } else if (dual) {
               if (!posTarget && !posPressed) flash(posBtn, 'echo-btn-zen', 400);
               if (!letTarget && !letPressed) flash(letBtn, 'echo-btn-zen', 400);

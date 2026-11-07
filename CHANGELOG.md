@@ -6,6 +6,15 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.7] - 2026-11-07
+
+### Changed
+
+- Echo (N-Back): ergonomic duration and pacing optimization, aligning exercise length with app averages (reduced from ~3:00 min down to ~1:30 min):
+  - Calibrated series: block length reduced from 20+N to 14+N items (and 10+N in quick Neuro Score check), maintaining psychometric sensitivity and intra-session level adaptation.
+  - Dynamic pacing: response window streamlined from 2200 ms to 1600 ms and stimulus duration to 500 ms, eliminating idle dead-time and creating a brisk, rhythm-like flow state.
+  - Declared duration updated from `[2, 4]` to `[1, 2]` minutes.
+
 ## [0.12.6] - 2026-11-07
 
 ### Changed
