@@ -18,6 +18,29 @@ const gridSizeFor = (level: number): number => {
   return 7;
 };
 
+const RECENT_KEY = 'synapse_nonogram_recent_puzzles';
+const MAX_RECENT_MEMORY = 30;
+
+function getRecentPuzzleIds(): string[] {
+  try {
+    const raw = localStorage.getItem(RECENT_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveRecentPuzzleId(id: string) {
+  try {
+    const recent = getRecentPuzzleIds().filter((x) => x !== id);
+    recent.push(id);
+    if (recent.length > MAX_RECENT_MEMORY) recent.shift();
+    localStorage.setItem(RECENT_KEY, JSON.stringify(recent));
+  } catch {
+    // Ignore storage quota or disabled storage in private browsing
+  }
+}
+
 export const nonogram: Exercise = {
   id: 'nonogram',
   icon: '🖼️',
@@ -39,14 +62,20 @@ export const nonogram: Exercise = {
     for (let trial = 0; trial < trials; trial++) {
       ctx.progress(trial / trials, `${trial + 1}/${trials}`);
 
-      // Pick a puzzle matching current level
+      // Pick a puzzle matching current level, prioritizing unplayed puzzles across recent sessions
       const currentLevel = ctx.practice ? 1 : st.int;
       const pool = NONOGRAM_PUZZLES.filter((p) => p.level === currentLevel);
-      const candidates = pool.filter((p) => !usedPuzzleIds.has(p.id));
+      const recentIds = new Set(getRecentPuzzleIds());
+      let candidates = pool.filter((p) => !usedPuzzleIds.has(p.id) && !recentIds.has(p.id));
+      if (!candidates.length) {
+        // If all puzzles of this level were recently played, recycle within session constraint
+        candidates = pool.filter((p) => !usedPuzzleIds.has(p.id));
+      }
       const puzzle: NonogramPuzzle = candidates.length
         ? pick(candidates)
         : (pool.length ? pick(pool) : pick(NONOGRAM_PUZZLES));
       usedPuzzleIds.add(puzzle.id);
+      saveRecentPuzzleId(puzzle.id);
 
       const { binary: target, rows: rowClues, cols: colClues, size } = parsePuzzleGrid(puzzle.grid);
 

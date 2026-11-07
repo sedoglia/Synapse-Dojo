@@ -6,6 +6,19 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.23] - 2026-11-07
+
+### Changed
+
+- Nonogram (`ex.nonogram`):
+  - Massive puzzle library expansion to 124 unique pixel-art nonograms:
+    - Multiplied puzzle variety across all tiers, particularly high levels: Level 1 (8 puzzles, 4×4), Level 2 (10 puzzles, 5×5), Level 3 (16 puzzles, 5×5), Level 4 (16 puzzles, 6×6), Level 5 (16 puzzles, 6×6), Level 6 (18 puzzles, 7×7), Level 7 (18 puzzles, 7×7), and Level 8 (22 master puzzles, 7×7).
+    - High tiers (Levels 6, 7, and 8) now feature an extensive collection of 58 distinct 7×7 puzzles (up from 15), providing weeks of daily gym training with zero puzzle repetition.
+    - Every single one of the 124 puzzles was exhaustively verified with a backtracking solver to guarantee exactly 1 unique solution solvable with pure deductive reasoning.
+  - Cross-session persistent anti-repetition memory (Shuffle-bag):
+    - Added a persistent history cache via `localStorage` (`synapse_nonogram_recent_puzzles`) tracking recently solved puzzles across sessions (sliding window of up to 30 puzzles).
+    - The puzzle picker filters out recently played puzzles, ensuring high-level players cycle through all puzzles in their difficulty tier before any puzzle is reused.
+
 ## [0.12.22] - 2026-11-07
 
 ### Changed

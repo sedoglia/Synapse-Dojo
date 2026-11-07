@@ -6,6 +6,19 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.23] - 2026-11-07
+
+### Modificato
+
+- Nonogram (`ex.nonogram`):
+  - Massiccia espansione del catalogo a 124 puzzle unici con pixel art:
+    - Triplicata e quadruplicata la varietà soprattutto per i livelli intermedi e avanzati: Livello 1 (8 puzzle 4×4), Livello 2 (10 puzzle 5×5), Livello 3 (16 puzzle 5×5), Livello 4 (16 puzzle 6×6), Livello 5 (16 puzzle 6×6), Livello 6 (18 puzzle 7×7), Livello 7 (18 puzzle 7×7) e Livello 8 (ben 22 puzzle master 7×7).
+    - I soli livelli avanzati (6, 7 e 8) offrono ora una rosa di 58 puzzle distinti 7×7 (contro i 15 precedenti), garantendo settimane di allenamento quotidiano senza ripetizioni.
+    - Tutti i 124 schemi sono stati verificati matematicamente con un solver esaustivo di backtracking per certificare che ognuno possieda esattamente 1 unica soluzione valida e sia risolvibile con pura logica deduttiva lineare.
+  - Memoria persistente anti-ripetizione (Shuffle-bag tra sessioni):
+    - Introdotto un registro cronologico su `localStorage` (`synapse_nonogram_recent_puzzles`) che memorizza gli schemi completati di recente (finestra a scorrimento fino a 30 puzzle).
+    - L'algoritmo di selezione esclude sistematicamente i puzzle già giocati nelle sessioni precedenti, garantendo a chi raggiunge i livelli alti di esplorare l'intero catalogo del livello prima di incontrare un qualsiasi ripasso.
+
 ## [0.12.22] - 2026-11-07
 
 ### Modificato
