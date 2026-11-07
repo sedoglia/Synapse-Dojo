@@ -6,6 +6,22 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.21] - 2026-11-07
+
+### Modificato
+
+- Nonogram (`ex.nonogram`):
+  - Ricalibrazione della difficoltà adattiva (DDA) con progressione continua e reattiva:
+    - Attivato il passo rapido adattivo (`fastStart: true`) con step intero unitario (+1.0 livello a vittoria pulita), permettendo ai giocatori abili di avanzare di livello già all'interno della medesima sessione senza rimanere bloccati sulla stessa dimensione di griglia.
+    - Partenza calibrata al Livello 3 (`start: 3`): avvio diretto su schemi 5×5 deduttivi con vincoli multipli ed esclusioni incrociate (eliminando le righe banali da 5 celle piene che rendevano i primi livelli privi di sfida).
+    - Nuova curva di progressione delle dimensioni: Livello 1 (4×4), Livelli 2–3 (5×5), Livelli 4–5 (6×6, 36 celle), Livelli 6–8 (7×7, 49 celle con incroci master).
+    - Sessione a 3 schemi (`ctx.count(3, 2, 1)`): garantisce una sessione calibrata di ~75–90 secondi con un arco di progressione dinamico su 3 livelli distinti.
+  - Limitazione degli aiuti e tracciamento delle vittorie pulite:
+    - Pulsante "Verifica" limitato a 2 utilizzi per schema (`checksLeft = 2`), evitando il trial-and-error indiscriminato e premiando la pianificazione deduttiva.
+    - Suggerimenti limitati a 2 nei livelli 1–3 e a 1 solo nei livelli 4–8 (`maxHints`), con contatore dinamico sul pulsante (`💡`).
+    - Distinzione tra risoluzione assistita e vittoria pulita nel Kaernbach staircase: l'uso di aiuti o errori di verifica stabilizza il livello senza sovrapromuovere il giocatore a schemi più grandi, celebrando comunque il completamento dell'illustrazione.
+  - Espansione del catalogo a 45 puzzle matematicamente verificati: aggiunti 5 nuovi schemi complessi di livello master 7×7 (Drago 🐉, Fenice 🦅, Samurai ⚔️, Tempio ⛩️, Scorpione 🦂), tutti rigorosamente testati per garantire un'unica soluzione valida e risolvibilità logica pura.
+
 ## [0.12.20] - 2026-11-07
 
 ### Modificato

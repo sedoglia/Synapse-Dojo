@@ -6,6 +6,22 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.21] - 2026-11-07
+
+### Changed
+
+- Nonogram (`ex.nonogram`):
+  - Recalibrated adaptive difficulty (DDA) with dynamic, responsive progression:
+    - Enabled responsive fast-climb staircase (`fastStart: true`) with unit step (+1.0 level per clean independent solve), allowing skilled players to level up across rounds within a single session instead of being trapped on the same grid size.
+    - Adjusted starting level to Level 3 (`start: 3`): players start directly on deductive 5×5 puzzles featuring multi-run constraints and cross-eliminations (eliminating trivial full-row giveaways).
+    - Refined grid scaling curve: Level 1 (4×4), Levels 2–3 (5×5), Levels 4–5 (6×6, 36 cells), Levels 6–8 (7×7, 49 cells with master-tier constraints).
+    - Balanced 3-puzzle workout sessions (`ctx.count(3, 2, 1)`): provides an engaging 75–90 second session with a 3-stage challenge arc.
+  - Assistance caps & clean solve tracking:
+    - Capped "Check" button at 2 uses per puzzle (`checksLeft = 2`), preventing blind trial-and-error and encouraging prospective deduction.
+    - Capped hints at 2 on levels 1–3 and 1 on levels 4–8 (`maxHints`), displayed directly on the button badge (`💡`).
+    - Clean solve tracking in Kaernbach staircase: using hints or incurring check errors prevents premature overpromotion to larger boards while still rewarding picture completion.
+  - Expanded puzzle library to 45 mathematically verified nonograms: added 5 new 7×7 master-tier puzzles (Dragon 🐉, Phoenix 🦅, Samurai ⚔️, Temple ⛩️, Scorpion 🦂), each exhaustively proven to possess exactly 1 unique solution solvable with pure deductive logic.
+
 ## [0.12.20] - 2026-11-07
 
 ### Changed

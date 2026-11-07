@@ -209,10 +209,10 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
     ],
   },
 
-  // --- LEVEL 4: 5x5 (Intricate cross-referencing) ---
+  // --- LEVEL 3: 5x5 (Intricate cross-referencing & multi-runs) ---
   {
     id: 'l4_crown',
-    level: 4,
+    level: 3,
     name: 'Corona',
     icon: '👑',
     grid: [
@@ -225,7 +225,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   },
   {
     id: 'l4_star',
-    level: 4,
+    level: 3,
     name: 'Stella',
     icon: '⭐',
     grid: [
@@ -238,7 +238,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   },
   {
     id: 'l4_fish',
-    level: 4,
+    level: 3,
     name: 'Pesce',
     icon: '🐟',
     grid: [
@@ -251,7 +251,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   },
   {
     id: 'l4_sword',
-    level: 4,
+    level: 3,
     name: 'Spada',
     icon: '🗡️',
     grid: [
@@ -264,7 +264,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   },
   {
     id: 'l4_ghost',
-    level: 4,
+    level: 3,
     name: 'Fantasma',
     icon: '👻',
     grid: [
@@ -276,10 +276,10 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
     ],
   },
 
-  // --- LEVEL 5: 6x6 (Intermediate grid expansion) ---
+  // --- LEVEL 4: 6x6 (Intermediate grid expansion) ---
   {
     id: 'l5_umbrella',
-    level: 5,
+    level: 4,
     name: 'Ombrello',
     icon: '☂️',
     grid: [
@@ -293,7 +293,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   },
   {
     id: 'l5_clock',
-    level: 5,
+    level: 4,
     name: 'Orologio',
     icon: '⏰',
     grid: [
@@ -307,7 +307,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   },
   {
     id: 'l5_car',
-    level: 5,
+    level: 4,
     name: 'Automobile',
     icon: '🚗',
     grid: [
@@ -321,7 +321,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   },
   {
     id: 'l5_cherries',
-    level: 5,
+    level: 4,
     name: 'Ciliegie',
     icon: '🍒',
     grid: [
@@ -335,7 +335,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   },
   {
     id: 'l5_sailboat',
-    level: 5,
+    level: 4,
     name: 'Barca a vela',
     icon: '⛵',
     grid: [
@@ -348,10 +348,10 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
     ],
   },
 
-  // --- LEVEL 6: 6x6 (Advanced multi-run coordination) ---
+  // --- LEVEL 5: 6x6 (Advanced multi-run coordination) ---
   {
     id: 'l6_cat',
-    level: 6,
+    level: 5,
     name: 'Gatto',
     icon: '🐱',
     grid: [
@@ -365,7 +365,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   },
   {
     id: 'l6_guitar',
-    level: 6,
+    level: 5,
     name: 'Chitarra',
     icon: '🎸',
     grid: [
@@ -379,7 +379,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   },
   {
     id: 'l6_skull',
-    level: 6,
+    level: 5,
     name: 'Teschio',
     icon: '💀',
     grid: [
@@ -393,7 +393,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   },
   {
     id: 'l6_anchor_big',
-    level: 6,
+    level: 5,
     name: 'Ancora grande',
     icon: '⚓',
     grid: [
@@ -407,7 +407,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   },
   {
     id: 'l6_tulip',
-    level: 6,
+    level: 5,
     name: 'Tulipano',
     icon: '🌷',
     grid: [
@@ -420,10 +420,10 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
     ],
   },
 
-  // --- LEVEL 7: 7x7 (Rich, wide deduction) ---
+  // --- LEVEL 6: 7x7 (Rich, wide deduction) ---
   {
     id: 'l7_robot',
-    level: 7,
+    level: 6,
     name: 'Robot',
     icon: '🤖',
     grid: [
@@ -438,7 +438,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   },
   {
     id: 'l7_butterfly',
-    level: 7,
+    level: 6,
     name: 'Farfalla',
     icon: '🦋',
     grid: [
@@ -453,7 +453,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   },
   {
     id: 'l7_apple',
-    level: 7,
+    level: 6,
     name: 'Mela',
     icon: '🍎',
     grid: [
@@ -468,7 +468,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   },
   {
     id: 'l7_diamond',
-    level: 7,
+    level: 6,
     name: 'Diamante',
     icon: '💎',
     grid: [
@@ -483,7 +483,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   },
   {
     id: 'l7_trophy',
-    level: 7,
+    level: 6,
     name: 'Trofeo',
     icon: '🏆',
     grid: [
@@ -497,10 +497,10 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
     ],
   },
 
-  // --- LEVEL 8: 7x7 (Master constraint satisfaction) ---
+  // --- LEVEL 7: 7x7 (Challenging sparse constraints) ---
   {
     id: 'l8_owl',
-    level: 8,
+    level: 7,
     name: 'Gufo',
     icon: '🦉',
     grid: [
@@ -515,7 +515,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   },
   {
     id: 'l8_castle',
-    level: 8,
+    level: 7,
     name: 'Castello',
     icon: '🏰',
     grid: [
@@ -530,7 +530,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   },
   {
     id: 'l8_penguin',
-    level: 8,
+    level: 7,
     name: 'Pinguino',
     icon: '🐧',
     grid: [
@@ -545,7 +545,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   },
   {
     id: 'l8_crab',
-    level: 8,
+    level: 7,
     name: 'Granchio',
     icon: '🦀',
     grid: [
@@ -560,7 +560,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   },
   {
     id: 'l8_dog',
-    level: 8,
+    level: 7,
     name: 'Cagnolino',
     icon: '🐶',
     grid: [
@@ -571,6 +571,83 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
       '.#####.',
       '..###..',
       '...#...',
+    ],
+  },
+
+  // --- LEVEL 8: 7x7 (Master constraint satisfaction) ---
+  {
+    id: 'l8_dragon',
+    level: 8,
+    name: 'Drago',
+    icon: '🐉',
+    grid: [
+      '...##..',
+      '..####.',
+      '.#.#.##',
+      '######.',
+      '.##....',
+      '.####..',
+      '..##...',
+    ],
+  },
+  {
+    id: 'l8_phoenix',
+    level: 8,
+    name: 'Fenice',
+    icon: '🦅',
+    grid: [
+      '#..#..#',
+      '###.###',
+      '.#####.',
+      '..###..',
+      '.#####.',
+      '.#.#.#.',
+      '..#.#..',
+    ],
+  },
+  {
+    id: 'l8_samurai',
+    level: 8,
+    name: 'Samurai',
+    icon: '⚔️',
+    grid: [
+      '#.....#',
+      '.##.##.',
+      '.#####.',
+      '##.#.##',
+      '.#####.',
+      '..###..',
+      '..#.#..',
+    ],
+  },
+  {
+    id: 'l8_temple',
+    level: 8,
+    name: 'Tempio',
+    icon: '⛩️',
+    grid: [
+      '#######',
+      '..###..',
+      '.#.#.#.',
+      '.#...#.',
+      '##...##',
+      '.#...#.',
+      '.#...#.',
+    ],
+  },
+  {
+    id: 'l8_scorpion',
+    level: 8,
+    name: 'Scorpione',
+    icon: '🦂',
+    grid: [
+      '..##.#.',
+      '..#..#.',
+      '..####.',
+      '..###..',
+      '.#####.',
+      '#.#.#.#',
+      '#.....#',
     ],
   },
 ];

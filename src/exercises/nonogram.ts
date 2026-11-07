@@ -13,8 +13,8 @@ interface HistoryStep {
 
 const gridSizeFor = (level: number): number => {
   if (level <= 1) return 4;
-  if (level <= 4) return 5;
-  if (level <= 6) return 6;
+  if (level <= 3) return 5;
+  if (level <= 5) return 6;
   return 7;
 };
 
@@ -26,13 +26,13 @@ export const nonogram: Exercise = {
   desc: 'ex.nonogram.desc',
   why: 'ex.nonogram.why',
   example: 'ex.nonogram.example',
-  minutes: [1, 2],
-  levels: { min: 1, max: 8, start: 2 },
+  minutes: [1.5, 2],
+  levels: { min: 1, max: 8, start: 3 },
   levelLabel: (l) => `${gridSizeFor(l)}×${gridSizeFor(l)}`,
 
   async run(ctx) {
-    const trials = ctx.count(2, 1, 1);
-    const st = ctx.stair(trials, 1, 8, { target: 0.75 });
+    const trials = ctx.count(3, 2, 1);
+    const st = ctx.stair(trials, 1, 8, { target: 0.75, fastStart: true });
     const usedPuzzleIds = new Set<string>();
     let correct = 0;
 
@@ -41,12 +41,11 @@ export const nonogram: Exercise = {
 
       // Pick a puzzle matching current level
       const currentLevel = ctx.practice ? 1 : st.int;
-      const candidates = NONOGRAM_PUZZLES.filter(
-        (p) => p.level === currentLevel && !usedPuzzleIds.has(p.id),
-      );
+      const pool = NONOGRAM_PUZZLES.filter((p) => p.level === currentLevel);
+      const candidates = pool.filter((p) => !usedPuzzleIds.has(p.id));
       const puzzle: NonogramPuzzle = candidates.length
         ? pick(candidates)
-        : pick(NONOGRAM_PUZZLES.filter((p) => p.level === currentLevel));
+        : (pool.length ? pick(pool) : pick(NONOGRAM_PUZZLES));
       usedPuzzleIds.add(puzzle.id);
 
       const { binary: target, rows: rowClues, cols: colClues, size } = parsePuzzleGrid(puzzle.grid);
@@ -54,7 +53,10 @@ export const nonogram: Exercise = {
       // Initialize player board: 0 = empty, 1 = filled, 2 = crossed
       let board: CellState[][] = Array.from({ length: size }, () => new Array(size).fill(0));
       const history: HistoryStep[] = [];
+      const maxHints = currentLevel <= 3 ? 2 : 1;
       let hintsUsed = 0;
+      let checksLeft = 2;
+      let checkMistakesCount = 0;
       let mode: InputMode = 'fill';
       let solved = false;
 
@@ -66,8 +68,8 @@ export const nonogram: Exercise = {
       const infoBadge = h('div', { class: 'nonogram-badge' }, `${size}×${size} · ${puzzle.icon}`);
       const undoBtn = h('button', { class: 'btn ghost small nonogram-tool-btn', disabled: true, title: t('ex.nonogram.undo') }, '↩');
       const resetBtn = h('button', { class: 'btn ghost small nonogram-tool-btn', title: t('ex.nonogram.clear') }, '↺');
-      const hintBtn = h('button', { class: 'btn ghost small nonogram-tool-btn', title: t('ex.nonogram.hint') }, '💡');
-      const checkBtn = h('button', { class: 'btn primary small nonogram-tool-btn' }, t('ex.nonogram.check'));
+      const hintBtn = h('button', { class: 'btn ghost small nonogram-tool-btn', title: t('ex.nonogram.hint') }, `💡 ${maxHints}`);
+      const checkBtn = h('button', { class: 'btn primary small nonogram-tool-btn', title: t('ex.nonogram.check') }, `${t('ex.nonogram.check')} (${checksLeft})`);
 
       const actionsRow = h('div', { class: 'nonogram-actions' }, undoBtn, resetBtn, hintBtn, checkBtn);
       const headerBar = h('div', { class: 'nonogram-header' }, infoBadge, actionsRow);
@@ -372,7 +374,7 @@ export const nonogram: Exercise = {
         };
 
         hintBtn.onclick = () => {
-          if (solved || hintsUsed >= 2) return;
+          if (solved || hintsUsed >= maxHints) return;
           // Find first cell that differs from target
           let targetR = -1;
           let targetC = -1;
@@ -396,6 +398,9 @@ export const nonogram: Exercise = {
             sfx.zen();
             flash(cellEls[targetR][targetC], 'hint-pop', 600);
             renderBoardState();
+            const hintsRemaining = maxHints - hintsUsed;
+            hintBtn.textContent = hintsRemaining > 0 ? `💡 ${hintsRemaining}` : '💡';
+            if (hintsRemaining <= 0) hintBtn.disabled = true;
             ctx.hint(t('ex.nonogram.hint'));
 
             if (isCompletedCorrectly()) {
@@ -405,7 +410,11 @@ export const nonogram: Exercise = {
         };
 
         checkBtn.onclick = () => {
-          if (solved) return;
+          if (solved || checksLeft <= 0) return;
+          checksLeft--;
+          checkBtn.textContent = `${t('ex.nonogram.check')} (${checksLeft})`;
+          if (checksLeft <= 0) checkBtn.disabled = true;
+
           if (isCompletedCorrectly()) {
             triggerVictory();
           } else {
@@ -421,6 +430,7 @@ export const nonogram: Exercise = {
             }
 
             if (wrongFills > 0) {
+              checkMistakesCount += wrongFills;
               sfx.bad();
               for (let r = 0; r < size; r++) {
                 let rowMistake = false;
@@ -454,13 +464,14 @@ export const nonogram: Exercise = {
         };
       });
 
-      const passed = ctx.track(st, result);
-      if (passed) correct++;
+      const cleanSolve = result && hintsUsed === 0 && checkMistakesCount === 0;
+      ctx.track(st, cleanSolve, { heard: result });
+      if (result) correct++;
       await ctx.wait(300);
     }
 
     ctx.progress(1);
-    const benchmarkSecs = 18 + st.threshold() * 6;
+    const benchmarkSecs = 20 + st.threshold() * 6;
     const { score, timeBonus } = ctx.withTimeBonus(st.score(), benchmarkSecs);
 
     return {
