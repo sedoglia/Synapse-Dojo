@@ -52,18 +52,18 @@ Dalle evidenze sopra descritte derivano i pilastri costruttivi della piattaforma
 
 ---
 
-## 3. Il Catalogo Completo dei 35 Esercizi (9 Domini)
+## 3. Il Catalogo Completo dei 36 Esercizi (9 Domini)
 
-L'applicazione organizza 35 compiti originali distribuiti su 9 domini cognitivi e motori:
+L'applicazione organizza 36 compiti originali distribuiti su 9 domini cognitivi e motori:
 
 ```
                                   ┌─── ⚡ Velocità (4)
                                   ├─── 🎯 Attenzione (6)
                                   ├─── 🎛️ Controllo Esecutivo (3)
                                   ├─── 🧠 Memoria di Lavoro (4)
-       Synapse Dojo (35 Esercizi) ├─── 🔐 Memoria Episodica (3)
+       Synapse Dojo (36 Esercizi) ├─── 🔐 Memoria Episodica (3)
                                   ├─── 🧊 Spaziale (2)
-                                  ├─── 🧩 Ragionamento (3)
+                                  ├─── 🧩 Ragionamento (4)
                                   ├─── ➗ Calcolo e Lettura (5)
                                   └─── 👐 Coordinazione Bilaterale (5)
 ```
@@ -96,6 +96,7 @@ Gli esercizi sono **ispirati** ai paradigmi indicati: si tratta di versioni brev
 | **🔐 Memoria** | **Memoria delle storie** | Ispirato alla memoria logica di brevi racconti | Scene da tenere distinte (1–3), domande su cosa, dove e quando (2 o 3), pausa riempita da un compito distraente senza punteggio e al proprio ritmo (3–15 s); da due scene in su le risposte sbagliate includono dettagli di un'altra scena. |
 | **🧊 Spaziale** | **Rotazioni** | Rotazione mentale (*Shepard & Metzler, 1971*), versione bidimensionale con polimini chirali | Numero di quadrati (4–9), rotazioni a passi di 30°, tempo limite (7,5 → 1,8 s). |
 | **🧊 Spaziale** | **Matrice spaziale** | Memoria spaziale con trasformazione di coordinate | Blocchi da ricordare (2–6), griglia 3×3 e poi 4×4 agli ultimi livelli, rotazione (0°, 90°, 180°, poi casuale), tempo di studio (4,8 → 3,2 s). |
+| **🧊 Spaziale** | **Nonogram** | Soddisfacimento di vincoli bidimensionali (*Constraint Satisfaction Problem* / Tomografia Discreta; *Ueda & Nagao, 1996*; *Batenburg & Kosters, 2009, 2012*) e chiusura gestaltica (*Gestalt closure*; *Wertheimer, 1923*; *Wagemans et al., 2012*) con gratificazione dopaminergica "Aha!" (*Jung-Beeman et al., 2004*; *Danek et al., 2014*) e pianificazione visuo-spaziale fronto-parietale (*Baddeley, 2000*; *Franco et al., 2021*) | Dimensioni della griglia (4×4 nel livello 1, 5×5 nei livelli 2–4, 6×6 nei livelli 5–6, 7×7 nei livelli 7–8); 40 puzzle originali a soluzione unica rigorosamente verificati per risolvibilità lineare pura (0 tentativi ciechi o indovinelli richiesti). Riscontro visivo immediato con spunta dei vincoli soddisfatti, pennellata continua e modalità crocetta per marcatura logica. |
 | **🧩 Ragionamento** | **Torri** | *Tower of London* (*Shallice, 1982*) | Mosse della soluzione più breve (2–8), che sono anche il massimo consentito. |
 | **🧩 Ragionamento** | **L'intruso** | Odd-one-out per regole multidimensionali | Numero di figure (4–9) e caratteristiche irrilevanti che variano (1–3), in cui ogni valore compare su almeno due figure, così la soluzione è una sola. Dopo un errore il gioco indica la caratteristica che distingue la figura giusta. |
 | **🧩 Ragionamento** | **Banco del mercato** | Problema dello zaino (*knapsack*; Murawski & Bossaerts, 2016) in un contesto quotidiano di costi e guadagni | Numero di prodotti (4–8) con budget pari a circa metà del costo totale; guadagno minimo da raggiungere, mostrato a schermo (90% → 100% dell'ottimo); dal livello 3 la scorciatoia di comprare per miglior guadagno a moneta non basta. L'incasso reale viene calcolato e svelato alla vendita con un'animazione e riscontro sonoro, premiando la stima euristica e impedendo di indovinare per tentativi casuali. Dopo un errore la scelta migliore resta evidenziata finché il giocatore non prosegue. |
@@ -267,3 +268,12 @@ Per garantire che la piattaforma rimanga uno strumento al servizio dell'utente e
 52. Aral, S., & Nicolaides, C. (2017). *Exercise contagion in a global social network.* Nature Communications, 8, 14753. [DOI: 10.1038/ncomms14753](https://doi.org/10.1038/ncomms14753)
 53. Lindström, B., Bellander, M., Schultner, D. T., Chang, A., Tobler, P. N., & Amodio, D. M. (2021). *A computational reward learning account of social media engagement.* Nature Communications, 12, 1311. [DOI: 10.1038/s41467-020-19607-x](https://doi.org/10.1038/s41467-020-19607-x)
 54. Lamont, R. A., Swift, H. J., & Abrams, D. (2015). *A review and meta-analysis of age-based stereotype threat: negative stereotypes, not facts, do the damage.* Psychology and Aging, 30(1), 180-193, corretto nel 2018. [DOI: 10.1037/a0038586](https://doi.org/10.1037/a0038586)
+
+**Deduzione visuo-spaziale, soddisfacimento di vincoli e chiusura gestaltica (Nonogram)**
+
+55. Ueda, N., & Nagao, T. (1996). *NP-completeness results for NONOGRAM via parsimonious reductions.* Technical Report TR96-0008, Department of Computer Science, Tokyo Institute of Technology.
+56. Batenburg, K. J., & Kosters, W. A. (2009). *Solving Nonograms by combining relaxations.* Pattern Recognition, 42(8), 1672-1683. [DOI: 10.1016/j.patcog.2009.01.026](https://doi.org/10.1016/j.patcog.2009.01.026)
+57. Batenburg, K. J., & Kosters, W. A. (2012). *On the ease of solving Nonograms.* Discrete Applied Mathematics, 160(16-17), 2350-2371. [DOI: 10.1016/j.dam.2012.06.002](https://doi.org/10.1016/j.dam.2012.06.002)
+58. Wertheimer, M. (1923). *Untersuchungen zur Lehre von der Gestalt. II.* Psychologische Forschung, 4(1), 301-350. (Legge della chiusura e organizzazione percettiva visuo-spaziale; trad. e rassegna in Wagemans et al., 2012, *Psychological Bulletin*, 138(6), 1172-1217).
+59. Jung-Beeman, M., Bowden, E. M., Haberman, J., Frymiare, J. L., Arambel-Liu, S., Greenblatt, R., Reber, P. J., & Kounios, J. (2004). *Neural activity when people solve verbal and spatial problems with insight.* PLoS Biology, 2(4), e97. [DOI: 10.1371/journal.pbio.0020097](https://doi.org/10.1371/journal.pbio.0020097)
+60. Danek, A. H., Fraps, T., von Müller, A., Grothe, B., & Öllinger, M. (2014). *It's a pleasure: The cognitive and affective components of the Eureka! experience.* Cognition, 131(3), 398-418. [DOI: 10.1016/j.cognition.2014.02.008](https://doi.org/10.1016/j.cognition.2014.02.008)

@@ -9,7 +9,7 @@ const ui: Locale['ui'] = {
   'onboard.go': 'Iniziamo',
 
   'landing.heroTitle': 'Allena la mente pochi minuti al giorno',
-  'landing.heroSub': '35 esercizi cognitivi e bilaterali ispirati ai paradigmi della ricerca, per esercitare memoria, attenzione, coordinazione e riflessi. 100% gratuito, senza pubblicità, nessun account o password.',
+  'landing.heroSub': '36 esercizi cognitivi e bilaterali ispirati ai paradigmi della ricerca, per esercitare memoria, attenzione, coordinazione e riflessi. 100% gratuito, senza pubblicità, nessun account o password.',
   'landing.badgeFree': '100% Gratuito',
   'landing.badgePrivacy': 'Privacy totale · Dati locali',
   'landing.badgeScience': 'Ispirato alla ricerca',
@@ -24,13 +24,13 @@ const ui: Locale['ui'] = {
   'landing.pillar1Desc': '4 esercizi selezionati ogni giorno che si adattano al tuo livello. Bastano circa 10-15 minuti.',
   'landing.pillar2Title': 'Neuro Score Quotidiano',
   'landing.pillar2Desc': 'Una prova di circa 10-15 minuti su tutte le 9 aree per seguire il tuo andamento nelle settimane. Non è un test clinico.',
-  'landing.pillar3Title': 'Palestra Libera (35 Giochi)',
+  'landing.pillar3Title': 'Palestra Libera (36 Giochi)',
   'landing.pillar3Desc': 'Tutti i giochi disponibili liberamente per allenare le 9 aree cognitive e bilaterali quando vuoi.',
   'landing.pillar4Title': 'Classifica settimanale (facoltativa)',
   'landing.pillar4Desc': 'Se ti va, confronta costanza e miglioramento con altri giocatori o con gli amici, con un nickname casuale. È disattivata finché non aderisci e puoi uscire quando vuoi.',
   'landing.domainsTitle': 'Le 9 Aree Allenate',
-  'landing.guideCtaTitle': 'Vuoi scoprire tutti i dettagli dei 35 giochi?',
-  'landing.guideCtaDesc': 'Leggi la nostra guida dettagliata con gli studi a cui si ispirano gli esercizi e le regole di tutti i 35 giochi.',
+  'landing.guideCtaTitle': 'Vuoi scoprire tutti i dettagli dei 36 giochi?',
+  'landing.guideCtaDesc': 'Leggi la nostra guida dettagliata con gli studi a cui si ispirano gli esercizi e le regole di tutti i 36 giochi.',
   'landing.guideCtaBtn': 'Leggi la Guida Completa',
   'landing.footerTagline': 'Synapse Dojo · Allenamento Cognitivo Gratuito',
 
@@ -43,8 +43,8 @@ const ui: Locale['ui'] = {
   'guide.planP': 'Ogni giorno Synapse Dojo compone per te una sequenza di 4 esercizi su domini diversi (ad esempio velocità, memoria, controllo esecutivo e ragionamento). Gli esercizi sono adattivi: se rispondi correttamente la difficoltà sale, se commetti errori scende, così non è né troppo facile né troppo difficile per te. Completando l’allenamento aumenti la tua serie quotidiana (streak) e guadagni punti XP per salire di livello.',
   'guide.checkH': '📏 Misura il Neuro Score (Daily Check)',
   'guide.checkP': 'Il Neuro Score è una breve prova quotidiana su tutte le 9 aree, con un esercizio per area scelto a rotazione ogni giorno. Il punteggio (da 0 a 1000) ti aiuta a seguire il tuo andamento in questi esercizi: va letto su più settimane, non giorno per giorno, perché gli esercizi ruotano e ogni prova è breve. Non è ancora stato validato su giocatori reali, non è un test clinico e non ha valore diagnostico.',
-  'guide.trainingH': '🧩 Palestra Libera (35 Esercizi)',
-  'guide.trainingP': 'Nella sezione Palestra trovi l’intero catalogo dei 35 esercizi, suddivisi nelle 9 abilità cerebrali e di coordinazione bilaterale. Puoi allenarti liberamente su qualunque esercizio senza limiti di tempo, approfondire compiti specifici o superare i tuoi record personali.',
+  'guide.trainingH': '🧩 Palestra Libera (36 Esercizi)',
+  'guide.trainingP': 'Nella sezione Palestra trovi l’intero catalogo dei 36 esercizi, suddivisi nelle 9 abilità cerebrali e di coordinazione bilaterale. Puoi allenarti liberamente su qualunque esercizio senza limiti di tempo, approfondire compiti specifici o superare i tuoi record personali.',
   'guide.progressH': '📈 Progressi e Statistiche',
   'guide.progressP': 'Consulta il tuo profilo cognitivo con i livelli raggiunti in ciascuna abilità, lo storico dei tuoi Neuro Score, i badge e traguardi sbloccati (come serie di giorni consecutivi o livelli avanzati) e il calendario mensile delle tue sessioni di allenamento.',
   'guide.boardH': '🏆 Classifica Settimanale e Gruppi di Amici',
@@ -377,7 +377,7 @@ const ui: Locale['ui'] = {
   'badge.combo10.name': 'Lampo',
   'badge.combo10.desc': '10 risposte giuste di fila',
   'badge.explorer.name': 'Esploratore',
-  'badge.explorer.desc': 'Prova tutti i 35 esercizi',
+  'badge.explorer.desc': 'Prova tutti i 36 esercizi',
   'badge.balanced.name': 'Mente completa',
   'badge.balanced.desc': 'Allena tutte le 9 abilità in 7 giorni',
   'badge.levelups25.name': 'In salita',
@@ -416,7 +416,7 @@ const ui: Locale['ui'] = {
   'share.done.streak3': '3 giorni di allenamento di fila',
   'share.done.streak7': '7 giorni di allenamento di fila',
   'share.done.streak30': '30 giorni di allenamento di fila',
-  'share.done.explorer': 'Tutti i 35 esercizi provati',
+  'share.done.explorer': 'Tutti i 36 esercizi provati',
   'share.done.balanced': 'Tutte le 9 abilità allenate in 7 giorni',
   'share.note': 'L’immagine mostra solo questo traguardo: niente nome, punteggi o età. Non viene inviato nulla finché non scegli tu dove condividerla.',
   'share.save': 'Salva l’immagine',
@@ -639,7 +639,22 @@ const ui: Locale['ui'] = {
   'ex.matrix.detail': '{ok}/{n} corretti',
   'ex.matrix.confirm': 'Conferma ({sel}/{n})',
 
-  
+  // nonogram
+  'ex.nonogram.name': 'Nonogram',
+  'ex.nonogram.desc': 'Riempi le celle seguendo gli indizi numerici di riga e colonna per svelare l\'illustrazione nascosta',
+  'ex.nonogram.why': 'Allena la deduzione visuo-spaziale, il soddisfacimento di vincoli e la pianificazione nella memoria di lavoro.',
+  'ex.nonogram.example': 'Osserva i numeri di riga e colonna per dedurre i blocchi da annerire o escludere',
+  'ex.nonogram.detail': '{ok}/{n} illustrazioni svelate',
+  'ex.nonogram.fill': 'Riempi',
+  'ex.nonogram.cross': 'Escludi',
+  'ex.nonogram.clear': 'Ripristina',
+  'ex.nonogram.undo': 'Annulla',
+  'ex.nonogram.hint': 'Aiuto',
+  'ex.nonogram.solved': 'Svelato: {name}!',
+  'ex.nonogram.check': 'Verifica',
+  'ex.nonogram.mistakes': '{n} incongruenze rilevate',
+
+
 
   // tapSeq
   'ex.tapSeq.name': 'Tap Bilaterale',

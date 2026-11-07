@@ -155,6 +155,7 @@ const SCENES: Record<string, Scene> = {
     return row(tag(`${t('ex.fluency.targetLetter')} ${first}`), arrow(), tag(yes), answer('✓'), tag(no), answer('✗'));
   },
   matrix: () => row(miniGrid(9, { 0: '🔷' }), arrow(), tag('↻ 90°'), arrow(), miniGrid(9, { 2: '🔷' })),
+  game2048: () => row(tag('2'), tag('+'), tag('2'), arrow(), answer('4 🧱')),
   tapSeq: () => row(tag('◀ ▶ ◀ ▶'), arrow(), answer('👈'), answer('👉')),
   swipePattern: () => row(tag(`${t('ex.dots.left')}: ↑`), tag(`${t('ex.dots.right')}: ↓`), arrow(), answer('✓')),
   rhythm: () => row(tag('🥁'), h('span', {}, '♪'), tag('🥁'), arrow(), answer('✓ ♪')),
