@@ -21,7 +21,7 @@ Free cognitive training and bilateral coordination web application (source-avail
 - **🧩 Free Gym**: Full catalog of **36 exercises** categorized into **9 cognitive and bilateral coordination domains**. Each exercise (except Speed reading, which is not adaptive) features a **continuous adaptive difficulty engine** that calibrates in real-time to stay near your own threshold, neither too easy nor too hard, saving your progress across sessions.
 - **🏆 Weekly Leaderboard & Friend Groups** (optional, off by default): each week compare **consistency** (10 points per training day plus 1 per exercise, up to 12 a day), **improvement** against your own starting point and **best level** per exercise, with optional age groups and a separate board for relaxed-pace players. It resets every Monday, shows the top 3 and the players near you, and works for everyone or in **private groups** joined with a link or a code. It uses a random nickname, and leaving at any time deletes all data.
 
-### The 9 Domains and 36 Exercises
+### The 9 Domains and 37 Exercises
 
 | Domain | Exercises & Core Scientific Paradigms |
 |---|---|

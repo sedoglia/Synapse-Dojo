@@ -155,6 +155,17 @@ const SCENES: Record<string, Scene> = {
     return row(tag(`${t('ex.fluency.targetLetter')} ${first}`), arrow(), tag(yes), answer('✓'), tag(no), answer('✗'));
   },
   matrix: () => row(miniGrid(9, { 0: '🔷' }), arrow(), tag('↻ 90°'), arrow(), miniGrid(9, { 2: '🔷' })),
+  nonogram: () => {
+    const topClues = h('div', { class: 'ex-nono-cols' },
+      h('span', {}, '2'), h('span', {}, '4'), h('span', {}, '4'), h('span', {}, '2'),
+    );
+    const row1 = h('div', { class: 'ex-nono-row' }, h('span', { class: 'clue' }, '1 1'), h('span'), h('span', { class: 'on' }), h('span'), h('span', { class: 'on' }));
+    const row2 = h('div', { class: 'ex-nono-row' }, h('span', { class: 'clue' }, '4'), h('span', { class: 'on' }), h('span', { class: 'on' }), h('span', { class: 'on' }), h('span', { class: 'on' }));
+    const row3 = h('div', { class: 'ex-nono-row' }, h('span', { class: 'clue' }, '4'), h('span', { class: 'on' }), h('span', { class: 'on' }), h('span', { class: 'on' }), h('span', { class: 'on' }));
+    const row4 = h('div', { class: 'ex-nono-row' }, h('span', { class: 'clue' }, '2'), h('span'), h('span', { class: 'on' }), h('span', { class: 'on' }), h('span'));
+    const mini = h('div', { class: 'ex-nono-wrap' }, topClues, row1, row2, row3, row4);
+    return row(mini, arrow(), answer('❤️'));
+  },
   game2048: () => row(tag('2'), tag('+'), tag('2'), arrow(), answer('4 🧱')),
   tapSeq: () => row(tag('◀ ▶ ◀ ▶'), arrow(), answer('👈'), answer('👉')),
   swipePattern: () => row(tag(`${t('ex.dots.left')}: ↑`), tag(`${t('ex.dots.right')}: ↓`), arrow(), answer('✓')),

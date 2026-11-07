@@ -626,6 +626,22 @@ const ui: Locale['ui'] = {
   'ex.game2048.milestoneReached': 'लक्ष्य प्राप्त: {val}!',
   'ex.game2048.detail': '{ok}/{n} लक्ष्य · अधिकतम {max} · {pts} अंक',
 
+  // nonogram
+  'ex.nonogram.name': 'नोनोग्राम (पिक्सेल पहेली)',
+  'ex.nonogram.desc': 'पंक्तियों और स्तंभों के संख्यात्मक संकेतों का पालन कर खानों को भरें और छिपी तस्वीर सामने लाएं',
+  'ex.nonogram.why': 'दृष्टि-स्थानिक कटौती, बाधा संतुष्टि और कार्यशील स्मृति योजना को प्रशिक्षित करता है।',
+  'ex.nonogram.example': 'पंक्ति और स्तंभ संख्याओं की मदद से तय करें कि कौन से खाने भरने हैं या क्रॉस करने हैं',
+  'ex.nonogram.detail': '{ok}/{n} चित्र सामने आए',
+  'ex.nonogram.fill': 'भरें',
+  'ex.nonogram.cross': 'क्रॉस',
+  'ex.nonogram.clear': 'रीसेट',
+  'ex.nonogram.undo': 'पूर्ववत',
+  'ex.nonogram.hint': 'संकेत',
+  'ex.nonogram.solved': 'प्रकट: {name}!',
+  'ex.nonogram.check': 'जाँचें',
+  'ex.nonogram.mistakes': '{n} बेमेल पाए गए',
+
+
 
 
 

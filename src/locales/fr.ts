@@ -626,6 +626,22 @@ const ui: Locale['ui'] = {
   'ex.game2048.milestoneReached': 'Étape atteinte : {val} !',
   'ex.game2048.detail': '{ok}/{n} étapes · max {max} · {pts} pts',
 
+  // nonogram
+  'ex.nonogram.name': 'Nonogramme',
+  'ex.nonogram.desc': 'Remplissez les cases selon les indices numériques en lignes et colonnes pour révéler l\'image cachée',
+  'ex.nonogram.why': 'Entraîne la déduction visuo-spatiale, la satisfaction de contraintes et la mémoire de travail.',
+  'ex.nonogram.example': 'Utilisez les indices de ligne et colonne pour déduire les cases à noircir ou barrer',
+  'ex.nonogram.detail': '{ok}/{n} images révélées',
+  'ex.nonogram.fill': 'Remplir',
+  'ex.nonogram.cross': 'Barrer',
+  'ex.nonogram.clear': 'Effacer',
+  'ex.nonogram.undo': 'Annuler',
+  'ex.nonogram.hint': 'Indice',
+  'ex.nonogram.solved': 'Révélé : {name} !',
+  'ex.nonogram.check': 'Vérifier',
+  'ex.nonogram.mistakes': '{n} anomalies détectées',
+
+
 
 
 

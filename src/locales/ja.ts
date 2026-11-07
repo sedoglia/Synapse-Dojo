@@ -626,6 +626,22 @@ const ui: Locale['ui'] = {
   'ex.game2048.milestoneReached': '目標達成：{val}！',
   'ex.game2048.detail': '{ok}/{n} 達成 · 最大 {max} · {pts} 点',
 
+  // nonogram
+  'ex.nonogram.name': 'ピクロス (イラストロジック)',
+  'ex.nonogram.desc': '行と列の数字のヒントをもとにマス目を塗りつぶし、隠されたドット絵を完成させましょう',
+  'ex.nonogram.why': '視空間推論、制約充足、作業記憶による直交プランニングを鍛えます。',
+  'ex.nonogram.example': '行と列の数字から確定するマスを推理し、塗りつぶしや×マークをつけます',
+  'ex.nonogram.detail': '{ok}/{n} 枚の絵を完成',
+  'ex.nonogram.fill': '塗る',
+  'ex.nonogram.cross': 'バツ印',
+  'ex.nonogram.clear': 'リセット',
+  'ex.nonogram.undo': '元に戻す',
+  'ex.nonogram.hint': 'ヒント',
+  'ex.nonogram.solved': '完成：{name}！',
+  'ex.nonogram.check': '確認',
+  'ex.nonogram.mistakes': '{n} か所の不一致があります',
+
+
 
 
 

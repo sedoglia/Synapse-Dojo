@@ -626,6 +626,22 @@ const ui: Locale['ui'] = {
   'ex.game2048.milestoneReached': 'Meilenstein erreicht: {val}!',
   'ex.game2048.detail': '{ok}/{n} Meilensteine · max {max} · {pts} Pkt.',
 
+  // nonogram
+  'ex.nonogram.name': 'Nonogramm',
+  'ex.nonogram.desc': 'Fülle die Rasterzellen anhand der Zeilen- und Spaltenhinweise, um das verborgene Bild aufzudecken',
+  'ex.nonogram.why': 'Trainiert visuell-räumliche Deduktion, Constraint-Satisfaction und Arbeitsgedächtnisplanung.',
+  'ex.nonogram.example': 'Nutze die Zahlen an Zeilen und Spalten, um gefüllte oder gestrichene Zellen abzuleiten',
+  'ex.nonogram.detail': '{ok}/{n} Bilder aufgedeckt',
+  'ex.nonogram.fill': 'Füllen',
+  'ex.nonogram.cross': 'Streichen',
+  'ex.nonogram.clear': 'Zurücksetzen',
+  'ex.nonogram.undo': 'Rückgängig',
+  'ex.nonogram.hint': 'Hinweis',
+  'ex.nonogram.solved': 'Aufgedeckt: {name}!',
+  'ex.nonogram.check': 'Prüfen',
+  'ex.nonogram.mistakes': '{n} Unstimmigkeiten erkannt',
+
+
 
 
 
