@@ -1382,7 +1382,13 @@ h3 {
 .tower-goal {
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+  gap: 14px;
+  padding: 8px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 .tower-header-row {
   display: flex;
@@ -1390,23 +1396,54 @@ h3 {
   justify-content: center;
   gap: 16px;
   width: 100%;
+  min-height: 40px;
+}
+.tower-counter {
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  font-size: 1.1rem;
 }
 .tower-undo {
   font-size: 1.15rem;
-  padding: 4px 12px;
+  padding: 4px 14px;
   min-height: 36px;
   border-radius: 999px;
   cursor: pointer;
-  transition: transform 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+.tower-undo:disabled {
+  opacity: 0.35;
+  cursor: default;
 }
 .tower-undo:not(:disabled):active {
-  transform: scale(0.9);
+  transform: scale(0.92);
+}
+.tower-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  user-select: none;
+  -webkit-user-select: none;
 }
 .tower-board {
   display: flex;
   align-items: flex-end;
   gap: 14px;
   justify-content: center;
+  position: relative;
+}
+.tower-base {
+  width: min(100%, 330px);
+  height: 10px;
+  background: var(--muted);
+  opacity: 0.28;
+  border-radius: 6px;
+  margin-top: -3px;
 }
 .peg {
   width: 92px;
@@ -1415,10 +1452,19 @@ h3 {
   align-items: center;
   gap: 6px;
   padding: 8px 0 10px;
+  margin: 0;
   border: none;
   border-bottom: 8px solid var(--muted);
-  border-radius: 10px 10px 4px 4px;
+  border-radius: 12px 12px 4px 4px;
   background: linear-gradient(var(--muted), var(--muted)) center / 8px 100% no-repeat, var(--surface-2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  touch-action: manipulation;
+  appearance: none;
+  -webkit-appearance: none;
+  outline: none;
+  box-sizing: border-box;
+  transition: box-shadow 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), background-color 0.2s ease, transform 0.15s ease;
 }
 .peg.cap3 {
   height: 240px;
@@ -1430,17 +1476,54 @@ h3 {
   height: 104px;
 }
 .peg.selected {
-  outline: 3px solid var(--accent);
+  box-shadow: 0 0 0 3px var(--accent), 0 8px 24px color-mix(in srgb, var(--accent) 25%, transparent);
+  background-color: color-mix(in srgb, var(--accent) 6%, var(--surface-2));
+}
+.peg:focus-visible {
+  box-shadow: 0 0 0 3px var(--accent);
+}
+.peg.peg-shake {
+  animation: peg-shake 0.35s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  box-shadow: 0 0 0 3px var(--bad), 0 6px 16px color-mix(in srgb, var(--bad) 30%, transparent);
+}
+@keyframes peg-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
 }
 .ball {
   width: 58px;
   height: 58px;
   border-radius: 50%;
-  box-shadow: inset -6px -6px 0 rgba(0, 0, 0, 0.18);
-  transition: transform 0.12s;
+  box-sizing: border-box;
+  box-shadow: inset -4px -5px 10px rgba(0, 0, 0, 0.28), inset 4px 4px 8px rgba(255, 255, 255, 0.35), 0 3px 6px rgba(0, 0, 0, 0.16);
+  transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.22s ease;
+  position: relative;
+  z-index: 2;
+  flex-shrink: 0;
 }
 .ball.up {
-  transform: translateY(-10px);
+  transform: translateY(-24px) scale(1.04);
+  box-shadow: inset -4px -5px 10px rgba(0, 0, 0, 0.28), inset 4px 4px 8px rgba(255, 255, 255, 0.35), 0 16px 22px rgba(0, 0, 0, 0.24), 0 0 14px color-mix(in srgb, var(--accent) 40%, transparent);
+  animation: ball-hover 1.8s ease-in-out infinite alternate;
+  z-index: 10;
+}
+@keyframes ball-hover {
+  0% { transform: translateY(-24px) scale(1.04); }
+  100% { transform: translateY(-30px) scale(1.06); }
+}
+.ball-flyer {
+  position: fixed;
+  border-radius: 50%;
+  box-sizing: border-box;
+  box-shadow: inset -4px -5px 10px rgba(0, 0, 0, 0.28), inset 4px 4px 8px rgba(255, 255, 255, 0.35), 0 14px 22px rgba(0, 0, 0, 0.28);
+  pointer-events: none;
+  z-index: 999;
+}
+.tower-board.small {
+  gap: 8px;
 }
 .tower-board.small .peg {
   width: 36px;
@@ -1448,6 +1531,8 @@ h3 {
   padding: 3px 0 4px;
   border-bottom-width: 4px;
   background-size: 4px 100%;
+  box-shadow: none;
+  cursor: default;
 }
 .tower-board.small .peg.cap3 {
   height: 82px;
@@ -1461,7 +1546,8 @@ h3 {
 .tower-board.small .ball {
   width: 22px;
   height: 22px;
-  box-shadow: none;
+  box-shadow: inset -2px -2px 4px rgba(0, 0, 0, 0.22), inset 2px 2px 4px rgba(255, 255, 255, 0.3);
+  transition: none;
 }
 
 /* odd one out */

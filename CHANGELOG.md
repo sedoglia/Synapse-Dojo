@@ -6,6 +6,16 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.10] - 2026-11-07
+
+### Changed
+
+- Towers of London (`ex.towers`):
+  - Fixed peg button shifting and layout jumps: converted pegs into persistent DOM elements with zero-reflow `box-shadow` selection halo and physical grounded baseplate (`.tower-base`).
+  - Fluid flight and levitation physics: top ball smoothly elevates with gentle breathing hover on pickup, followed by a parabolic arc flight trajectory across pegs with landing squash-and-stretch.
+  - Localized error feedback: attempting to drop a ball onto a full peg now triggers a targeted, tactile shake on that specific peg without jarring the rest of the board.
+  - Enhanced sensory feedback: airy lift swoosh on ball pickup, warm mechanical woody clack on drop, tabular numerals on move counter, and celebratory sparkles on completion.
+
 ## [0.12.9] - 2026-11-07
 
 ### Fixed

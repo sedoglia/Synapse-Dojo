@@ -57,17 +57,141 @@ function puzzle(moves: number): { start: State; goal: State; min: number } {
 }
 
 export function renderBoard(state: State, small: boolean, selected = -1, onPeg?: (i: number) => void): HTMLElement {
-  return h(
+  const board = h(
     'div',
     { class: `tower-board ${small ? 'small' : ''}` },
     ...state.split('|').map((balls, i) =>
       h(
         small ? 'div' : 'button',
-        { class: `peg cap${CAPS[i]} ${selected === i ? 'selected' : ''}`, onPointerdown: onPeg ? () => onPeg(i) : null },
-        ...[...balls].map((b, k) => h('span', { class: `ball ${selected === i && k === balls.length - 1 ? 'up' : ''}`, style: { background: COLORS[b] } })),
+        {
+          class: `peg cap${CAPS[i]} ${selected === i ? 'selected' : ''}`,
+          ...(small ? {} : { type: 'button' }),
+          onpointerdown: onPeg ? () => onPeg(i) : null,
+        },
+        ...[...balls].map((b, k) =>
+          h('span', {
+            class: `ball ${selected === i && k === balls.length - 1 ? 'up' : ''}`,
+            style: { background: COLORS[b] },
+          }),
+        ),
       ),
     ),
   );
+  if (small) return board;
+  return h('div', { class: 'tower-wrap' }, board, h('div', { class: 'tower-base' }));
+}
+
+interface InteractiveBoard {
+  element: HTMLElement;
+  update(state: State, selected: number): void;
+  getPegElement(i: number): HTMLElement;
+  animateMove(from: number, to: number, color: string, onDone: () => void): void;
+}
+
+function createInteractiveBoard(initialState: State, onPeg: (i: number) => void): InteractiveBoard {
+  const pegElements: HTMLElement[] = [];
+
+  const board = h(
+    'div',
+    { class: 'tower-board' },
+    ...CAPS.map((cap, i) => {
+      const peg = h('button', {
+        class: `peg cap${cap}`,
+        type: 'button',
+        'aria-label': `Peg ${i + 1}`,
+        onpointerdown: () => onPeg(i),
+      });
+      pegElements.push(peg);
+      return peg;
+    }),
+  );
+
+  const base = h('div', { class: 'tower-base' });
+  const wrap = h('div', { class: 'tower-wrap' }, board, base);
+
+  const update = (state: State, selected: number) => {
+    const pegs = state.split('|');
+    pegs.forEach((balls, i) => {
+      const peg = pegElements[i];
+      if (selected === i) {
+        peg.classList.add('selected');
+      } else {
+        peg.classList.remove('selected');
+      }
+      peg.replaceChildren(
+        ...[...balls].map((b, k) =>
+          h('span', {
+            class: `ball ${selected === i && k === balls.length - 1 ? 'up' : ''}`,
+            style: { background: COLORS[b] },
+          }),
+        ),
+      );
+    });
+  };
+
+  update(initialState, -1);
+
+  const animateMove = (from: number, to: number, color: string, onDone: () => void) => {
+    const fromPeg = pegElements[from];
+    const toPeg = pegElements[to];
+    const fromBall = fromPeg.querySelector<HTMLElement>('.ball:last-child');
+    if (!fromBall) {
+      onDone();
+      return;
+    }
+
+    const rFrom = fromBall.getBoundingClientRect();
+
+    // Temporarily attach a ghost ball in toPeg to measure landing coordinate
+    const ghost = h('span', { class: 'ball', style: { visibility: 'hidden' } });
+    toPeg.appendChild(ghost);
+    const rTo = ghost.getBoundingClientRect();
+    ghost.remove();
+
+    // Hide original ball while flyer clone animates
+    fromBall.style.visibility = 'hidden';
+
+    const flyer = h('div', {
+      class: 'ball-flyer',
+      style: {
+        left: `${rFrom.left}px`,
+        top: `${rFrom.top}px`,
+        width: `${rFrom.width}px`,
+        height: `${rFrom.height}px`,
+        background: COLORS[color],
+      },
+    });
+    document.body.appendChild(flyer);
+
+    const dx = rTo.left - rFrom.left;
+    const dy = rTo.top - rFrom.top;
+    const peakY = Math.min(dy * 0.5 - 45, -55);
+
+    const keyframes = [
+      { transform: 'translate(0px, 0px) scale(1.05)', opacity: 1 },
+      { transform: `translate(${dx * 0.5}px, ${peakY}px) scale(1.10)`, opacity: 1, offset: 0.5 },
+      { transform: `translate(${dx}px, ${dy + 4}px) scale(0.96, 1.04)`, opacity: 1, offset: 0.88 },
+      { transform: `translate(${dx}px, ${dy}px) scale(1)`, opacity: 1 },
+    ];
+
+    const anim = flyer.animate(keyframes, {
+      duration: 250,
+      easing: 'cubic-bezier(0.25, 1, 0.5, 1)',
+      fill: 'forwards',
+    });
+
+    anim.onfinish = () => {
+      flyer.remove();
+      onDone();
+    };
+  };
+
+  return {
+    element: wrap,
+    update,
+    getPegElement: (i: number) => pegElements[i],
+    animateMove,
+  };
 }
 
 export const towers: Exercise = {
@@ -95,7 +219,7 @@ export const towers: Exercise = {
       let selected = -1;
 
       const goalBox = h('div', { class: 'tower-goal' }, h('span', { class: 'muted' }, t('ex.towers.goal')), renderBoard(goal, true));
-      const counter = h('div', { class: 'grid-status' });
+      const counter = h('div', { class: 'grid-status tower-counter' });
       const undoBtn = h('button', { class: 'btn ghost small tower-undo', disabled: true, title: t('ex.towers.undo') }, '↩');
       const counterRow = h('div', { class: 'row center tower-header-row' }, counter, undoBtn);
       const playArea = h('div');
@@ -103,50 +227,73 @@ export const towers: Exercise = {
 
       const solved = await ctx.input<boolean>((done) => {
         const history: { state: State; moves: number }[] = [];
-        const redraw = () => {
+        let animating = false;
+
+        const board = createInteractiveBoard(state, (i) => onPeg(i));
+        playArea.replaceChildren(board.element);
+
+        const updateStatus = () => {
           counter.textContent = t('ex.towers.moves', { m: moves, min });
           undoBtn.disabled = history.length === 0;
-          playArea.replaceChildren(renderBoard(state, false, selected, onPeg));
         };
+        updateStatus();
+
         undoBtn.onclick = () => {
-          if (history.length) {
-            const prev = history.pop()!;
-            state = prev.state;
-            moves = prev.moves;
-            selected = -1;
-            sfx.clack();
-            redraw();
-          }
+          if (animating || history.length === 0) return;
+          const prev = history.pop()!;
+          state = prev.state;
+          moves = prev.moves;
+          selected = -1;
+          sfx.clack();
+          board.update(state, -1);
+          updateStatus();
         };
+
         const onPeg = (i: number) => {
+          if (animating) return;
           const pegs = state.split('|');
+
           if (selected === -1) {
             if (pegs[i]) {
               selected = i;
-              sfx.clack();
+              sfx.whoosh();
+              board.update(state, selected);
             }
           } else if (selected === i) {
             selected = -1;
             sfx.clack();
+            board.update(state, -1);
           } else if (pegs[i].length < CAPS[i]) {
+            animating = true;
+            const fromIndex = selected;
+            const movingColor = pegs[fromIndex].slice(-1);
+
             history.push({ state, moves });
-            pegs[i] += pegs[selected].slice(-1);
-            pegs[selected] = pegs[selected].slice(0, -1);
+            pegs[i] += movingColor;
+            pegs[fromIndex] = pegs[fromIndex].slice(0, -1);
             state = pegs.join('|');
             selected = -1;
             moves++;
-            sfx.clack();
+            updateStatus();
+
+            board.animateMove(fromIndex, i, movingColor, () => {
+              board.update(state, -1);
+              sfx.clack();
+              animating = false;
+
+              if (state === goal) {
+                sfx.sparkle();
+                done(true);
+              } else if (moves >= min) {
+                done(false); // `min` is the shortest solution, so it is also the most moves allowed
+              }
+            });
           } else {
-            flash(playArea, 'bad');
-            return;
+            flash(board.getPegElement(i), 'peg-shake', 360);
+            sfx.bad();
           }
-          redraw();
-          if (state === goal) {
-            sfx.sparkle();
-            done(true);
-          } else if (moves >= min) done(false); // `min` is the shortest solution, so it is also the most moves allowed
         };
-        redraw();
+
         return () => {
           undoBtn.onclick = null;
         };

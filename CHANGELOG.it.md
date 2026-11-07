@@ -6,6 +6,16 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.10] - 2026-11-07
+
+### Modificato
+
+- Torri di Londra (`ex.towers`):
+  - Risolto lo scatto visivo e lo slittamento dei pulsanti dei paletti: struttura DOM persistente con alone di selezione `box-shadow` a zero reflow e solida base d'appoggio fisica (`.tower-base`).
+  - Fisica fluida di volo e levitazione: risalita elastica della pallina con fluttuazione viva durante la presa, seguita da traiettoria di volo ad arco parabolico tra i paletti e assestamento al piazzamento.
+  - Feedback d'errore localizzato: tentare di inserire una pallina su un paletto pieno attiva una vibrazione mirata unicamente su quel paletto, eliminando lo scuotimento violento dell'intero tabellone.
+  - Rafforzamento multisensoriale: fruscio arioso alla presa, snap ligneo caldo al rilascio, cifre numeriche tabulari sul contatore e scintillio gratificante al completamento del puzzle.
+
 ## [0.12.9] - 2026-11-07
 
 ### Risolto
