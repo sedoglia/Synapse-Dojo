@@ -157,7 +157,7 @@ const SCENES: Record<string, Scene> = {
   matrix: () => row(miniGrid(9, { 0: '🔷' }), arrow(), tag('↻ 90°'), arrow(), miniGrid(9, { 2: '🔷' })),
   nonogram: () => {
     const topClues = h('div', { class: 'ex-nono-cols' },
-      h('span', {}, '2'), h('span', {}, '4'), h('span', {}, '4'), h('span', {}, '2'),
+      h('span', {}, '2'), h('span', {}, '4'), h('span', {}, '3'), h('span', {}, '3'),
     );
     const row1 = h('div', { class: 'ex-nono-row' }, h('span', { class: 'clue' }, '1 1'), h('span'), h('span', { class: 'on' }), h('span'), h('span', { class: 'on' }));
     const row2 = h('div', { class: 'ex-nono-row' }, h('span', { class: 'clue' }, '4'), h('span', { class: 'on' }), h('span', { class: 'on' }), h('span', { class: 'on' }), h('span', { class: 'on' }));

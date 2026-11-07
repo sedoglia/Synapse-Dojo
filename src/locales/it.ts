@@ -667,6 +667,7 @@ const ui: Locale['ui'] = {
   'ex.nonogram.solved': 'Svelato: {name}!',
   'ex.nonogram.check': 'Verifica',
   'ex.nonogram.mistakes': '{n} incongruenze rilevate',
+  'ex.nonogram.okSoFar': 'Tutto corretto finora! Continua a dedurre 🔍',
 
 
 

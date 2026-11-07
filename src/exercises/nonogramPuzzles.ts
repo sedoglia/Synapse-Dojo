@@ -69,9 +69,9 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
     icon: '🪟',
     grid: [
       '####',
-      '#.##',
+      '#..#',
+      '#..#',
       '####',
-      '#.##',
     ],
   },
 

@@ -640,6 +640,7 @@ const ui: Locale['ui'] = {
   'ex.nonogram.solved': 'प्रकट: {name}!',
   'ex.nonogram.check': 'जाँचें',
   'ex.nonogram.mistakes': '{n} बेमेल पाए गए',
+  'ex.nonogram.okSoFar': 'अब तक सब सही है! निष्कर्ष निकालते रहें 🔍',
 
 
 

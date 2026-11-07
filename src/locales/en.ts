@@ -667,6 +667,7 @@ export const ui = {
   'ex.nonogram.solved': 'Revealed: {name}!',
   'ex.nonogram.check': 'Check',
   'ex.nonogram.mistakes': '{n} mismatches detected',
+  'ex.nonogram.okSoFar': 'All correct so far! Keep deducing 🔍',
 
 
 

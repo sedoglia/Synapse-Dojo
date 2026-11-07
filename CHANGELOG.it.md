@@ -6,6 +6,17 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.16] - 2026-11-07
+
+### Modificato
+
+- Nonogram (`ex.nonogram`):
+  - Durata ottimizzata: sessione ridotta da 4 a 2 schemi (1 nel check giornaliero e in prova) per una durata ideale di ~60–90 secondi, eliminando il rischio di affaticamento e allineando l'esercizio al ritmo rapido e coinvolgente dell'app.
+  - Correzione della validazione: rimossa la penalizzazione in `ctx.track` che contrassegnava come errati gli schemi risolti utilizzando gli aiuti; la vittoria viene ora riconosciuta sia per corrispondenza esatta sia per pieno soddisfacimento dei vincoli di riga e colonna.
+  - Verifica non punitiva: il pulsante «Verifica» distingue gli schemi incompleti ma privi di errori (fornendo incoraggiamento positivo anziché feedback negativo) da quelli con celle effettivamente errate.
+  - Tracciamento e trascinamento continui: pittura a pennello fluida su mouse e touch screen senza ripristini involontari o deviazioni spurie.
+  - Correzione schema e anteprima: regolarizzato lo schema 4×4 `l1_window` in una finestra perfettamente simmetrica e corretto l'esempio visivo nella schermata guida.
+
 ## [0.12.15] - 2026-11-07
 
 ### Modificato

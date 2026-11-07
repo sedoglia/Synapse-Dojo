@@ -26,12 +26,12 @@ export const nonogram: Exercise = {
   desc: 'ex.nonogram.desc',
   why: 'ex.nonogram.why',
   example: 'ex.nonogram.example',
-  minutes: [2, 3],
+  minutes: [1, 2],
   levels: { min: 1, max: 8, start: 2 },
   levelLabel: (l) => `${gridSizeFor(l)}×${gridSizeFor(l)}`,
 
   async run(ctx) {
-    const trials = ctx.count(4, 2, 1);
+    const trials = ctx.count(2, 1, 1);
     const st = ctx.stair(trials, 1, 8, { target: 0.75 });
     const usedPuzzleIds = new Set<string>();
     let correct = 0;
@@ -132,6 +132,8 @@ export const nonogram: Exercise = {
           const cell = h('button', {
             class: 'nonogram-cell',
             type: 'button',
+            'data-r': String(r),
+            'data-c': String(c),
             'aria-label': `R${r + 1} C${c + 1}`,
           });
           cellEls[r].push(cell);
@@ -140,46 +142,34 @@ export const nonogram: Exercise = {
         gridBody.append(rowEl);
       }
 
+      // Check whether a line's filled runs match its clue
+      const checkLineSatisfied = (line: number[], clue: number[]): boolean => {
+        const currentRuns: number[] = [];
+        let run = 0;
+        for (const cell of line) {
+          if (cell === 1) {
+            run++;
+          } else if (run > 0) {
+            currentRuns.push(run);
+            run = 0;
+          }
+        }
+        if (run > 0) currentRuns.push(run);
+        return (
+          (currentRuns.length === 0 && clue.length === 1 && clue[0] === 0) ||
+          (currentRuns.length === clue.length && currentRuns.every((v, i) => v === clue[i]))
+        );
+      };
+
       // Check clue satisfaction for styling feedback
       const updateClueIndicators = () => {
-        // Rows
         for (let r = 0; r < size; r++) {
-          const currentRuns: number[] = [];
-          let run = 0;
-          for (let c = 0; c < size; c++) {
-            if (board[r][c] === 1) {
-              run++;
-            } else if (run > 0) {
-              currentRuns.push(run);
-              run = 0;
-            }
-          }
-          if (run > 0) currentRuns.push(run);
-          const clue = rowClues[r];
-          const match =
-            (currentRuns.length === 0 && clue.length === 1 && clue[0] === 0) ||
-            (currentRuns.length === clue.length && currentRuns.every((v, i) => v === clue[i]));
-          rowClueEls[r].classList.toggle('satisfied', match);
+          rowClueEls[r].classList.toggle('satisfied', checkLineSatisfied(board[r], rowClues[r]));
         }
-
-        // Columns
         for (let c = 0; c < size; c++) {
-          const currentRuns: number[] = [];
-          let run = 0;
-          for (let r = 0; r < size; r++) {
-            if (board[r][c] === 1) {
-              run++;
-            } else if (run > 0) {
-              currentRuns.push(run);
-              run = 0;
-            }
-          }
-          if (run > 0) currentRuns.push(run);
-          const clue = colClues[c];
-          const match =
-            (currentRuns.length === 0 && clue.length === 1 && clue[0] === 0) ||
-            (currentRuns.length === clue.length && currentRuns.every((v, i) => v === clue[i]));
-          colClueEls[c].classList.toggle('satisfied', match);
+          const col: number[] = [];
+          for (let r = 0; r < size; r++) col.push(board[r][c]);
+          colClueEls[c].classList.toggle('satisfied', checkLineSatisfied(col, colClues[c]));
         }
       };
 
@@ -212,7 +202,19 @@ export const nonogram: Exercise = {
         undoBtn.disabled = false;
       };
 
-      const isCompletedCorrectly = (): boolean => {
+      const areAllCluesSatisfied = (): boolean => {
+        for (let r = 0; r < size; r++) {
+          if (!checkLineSatisfied(board[r], rowClues[r])) return false;
+        }
+        for (let c = 0; c < size; c++) {
+          const col: number[] = [];
+          for (let r = 0; r < size; r++) col.push(board[r][c]);
+          if (!checkLineSatisfied(col, colClues[c])) return false;
+        }
+        return true;
+      };
+
+      const isTargetMatch = (): boolean => {
         for (let r = 0; r < size; r++) {
           for (let c = 0; c < size; c++) {
             const isFilled = board[r][c] === 1;
@@ -223,28 +225,37 @@ export const nonogram: Exercise = {
         return true;
       };
 
+      const isCompletedCorrectly = (): boolean => isTargetMatch() || areAllCluesSatisfied();
+
       // Main interaction loop
       const result = await ctx.input<boolean>((done) => {
         let isPointerDown = false;
         let dragAction: CellState = 0;
-        let startR = -1;
-        let startC = -1;
-        let pendingStrokeChanges: { r: number; c: number; prev: CellState }[] = [];
+        let lastTouchedCell = '';
 
-        const applyCellAction = (r: number, c: number, action: CellState) => {
-          if (board[r][c] !== action) {
-            pendingStrokeChanges.push({ r, c, prev: board[r][c] });
-            board[r][c] = action;
+        const applyToCell = (r: number, c: number) => {
+          const key = `${r},${c}`;
+          if (lastTouchedCell === key) return;
+          lastTouchedCell = key;
+
+          if (board[r][c] !== dragAction) {
+            board[r][c] = dragAction;
+            if (dragAction === 1) sfx.clack();
+            else if (dragAction === 2) sfx.whoosh();
+            else sfx.tick();
+            renderBoardState();
+
+            if (isCompletedCorrectly()) {
+              triggerVictory();
+            }
           }
         };
 
         const handlePointerDown = (r: number, c: number, button: number) => {
           if (solved) return;
           pushHistory();
-          pendingStrokeChanges = [];
           isPointerDown = true;
-          startR = r;
-          startC = c;
+          lastTouchedCell = '';
 
           // Right click = toggle cross; Left click = uses active mode
           if (button === 2) {
@@ -257,47 +268,32 @@ export const nonogram: Exercise = {
             }
           }
 
-          applyCellAction(r, c, dragAction);
-          if (dragAction === 1) sfx.clack();
-          else if (dragAction === 2) sfx.whoosh();
-          else sfx.tick();
-          renderBoardState();
+          applyToCell(r, c);
         };
 
-        const handlePointerMove = (r: number, c: number) => {
+        const handlePointerEnter = (r: number, c: number) => {
           if (!isPointerDown || solved) return;
-          // Revert current stroke changes and re-project along straight line from start
-          for (const ch of pendingStrokeChanges) {
-            board[ch.r][ch.c] = ch.prev;
-          }
-          pendingStrokeChanges = [];
+          applyToCell(r, c);
+        };
 
-          const dr = Math.abs(r - startR);
-          const dc = Math.abs(c - startC);
-
-          if (dr >= dc) {
-            // Drag along column startC
-            const minR = Math.min(startR, r);
-            const maxR = Math.max(startR, r);
-            for (let rowIdx = minR; rowIdx <= maxR; rowIdx++) {
-              applyCellAction(rowIdx, startC, dragAction);
-            }
-          } else {
-            // Drag along row startR
-            const minC = Math.min(startC, c);
-            const maxC = Math.max(startC, c);
-            for (let colIdx = minC; colIdx <= maxC; colIdx++) {
-              applyCellAction(startR, colIdx, dragAction);
+        const handleGlobalPointerMove = (e: PointerEvent) => {
+          if (!isPointerDown || solved) return;
+          if (e.pointerType === 'touch') {
+            const targetEl = document.elementFromPoint(e.clientX, e.clientY) as HTMLElement | null;
+            if (targetEl && targetEl.classList.contains('nonogram-cell')) {
+              const r = Number(targetEl.dataset.r);
+              const c = Number(targetEl.dataset.c);
+              if (!Number.isNaN(r) && !Number.isNaN(c)) {
+                applyToCell(r, c);
+              }
             }
           }
-          renderBoardState();
         };
 
         const handlePointerEnd = () => {
           if (!isPointerDown) return;
           isPointerDown = false;
-          startR = -1;
-          startC = -1;
+          lastTouchedCell = '';
 
           if (isCompletedCorrectly()) {
             triggerVictory();
@@ -346,7 +342,7 @@ export const nonogram: Exercise = {
               handlePointerDown(r, c, e.button);
             };
             cell.onpointerenter = () => {
-              handlePointerMove(r, c);
+              handlePointerEnter(r, c);
             };
             cell.oncontextmenu = (e) => {
               e.preventDefault();
@@ -354,6 +350,7 @@ export const nonogram: Exercise = {
           }
         }
 
+        window.addEventListener('pointermove', handleGlobalPointerMove);
         window.addEventListener('pointerup', handlePointerEnd);
         window.addEventListener('pointercancel', handlePointerEnd);
 
@@ -412,47 +409,58 @@ export const nonogram: Exercise = {
           if (isCompletedCorrectly()) {
             triggerVictory();
           } else {
-            sfx.bad();
-            let mismatches = 0;
-            // Flash mismatched rows and columns
+            // Check if there are cells filled where target is empty
+            let wrongFills = 0;
             for (let r = 0; r < size; r++) {
-              let rowMistake = false;
               for (let c = 0; c < size; c++) {
-                if ((board[r][c] === 1) !== (target[r][c] === 1)) {
-                  rowMistake = true;
-                  mismatches++;
+                if (board[r][c] === 1 && target[r][c] === 0) {
+                  wrongFills++;
+                  flash(cellEls[r][c], 'bad', 400);
                 }
               }
-              if (rowMistake) flash(rowClueEls[r], 'bad', 400);
             }
-            for (let c = 0; c < size; c++) {
-              let colMistake = false;
+
+            if (wrongFills > 0) {
+              sfx.bad();
               for (let r = 0; r < size; r++) {
-                if ((board[r][c] === 1) !== (target[r][c] === 1)) {
-                  colMistake = true;
+                let rowMistake = false;
+                for (let c = 0; c < size; c++) {
+                  if (board[r][c] === 1 && target[r][c] === 0) rowMistake = true;
                 }
+                if (rowMistake) flash(rowClueEls[r], 'bad', 400);
               }
-              if (colMistake) flash(colClueEls[c], 'bad', 400);
+              for (let c = 0; c < size; c++) {
+                let colMistake = false;
+                for (let r = 0; r < size; r++) {
+                  if (board[r][c] === 1 && target[r][c] === 0) colMistake = true;
+                }
+                if (colMistake) flash(colClueEls[c], 'bad', 400);
+              }
+              ctx.hint(t('ex.nonogram.mistakes', { n: wrongFills }));
+            } else {
+              // Work so far has 0 wrong filled cells!
+              sfx.tick();
+              ctx.hint(t('ex.nonogram.okSoFar'));
             }
-            ctx.hint(t('ex.nonogram.mistakes', { n: mismatches }));
           }
         };
 
         renderBoardState();
 
         return () => {
+          window.removeEventListener('pointermove', handleGlobalPointerMove);
           window.removeEventListener('pointerup', handlePointerEnd);
           window.removeEventListener('pointercancel', handlePointerEnd);
         };
       });
 
-      const passed = ctx.track(st, result && hintsUsed <= 1);
+      const passed = ctx.track(st, result);
       if (passed) correct++;
       await ctx.wait(300);
     }
 
     ctx.progress(1);
-    const benchmarkSecs = 18 + st.threshold() * 8;
+    const benchmarkSecs = 18 + st.threshold() * 6;
     const { score, timeBonus } = ctx.withTimeBonus(st.score(), benchmarkSecs);
 
     return {

@@ -640,6 +640,7 @@ const ui: Locale['ui'] = {
   'ex.nonogram.solved': 'Открыто: {name}!',
   'ex.nonogram.check': 'Проверить',
   'ex.nonogram.mistakes': 'Несовпадений: {n}',
+  'ex.nonogram.okSoFar': 'Пока всё верно! Продолжайте рассуждать 🔍',
 
 
 

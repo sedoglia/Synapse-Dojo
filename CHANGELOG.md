@@ -6,6 +6,17 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.16] - 2026-11-07
+
+### Changed
+
+- Nonogram (`ex.nonogram`):
+  - Balanced session duration: reduced trials from 4 to 2 puzzles (1 in daily check and practice) for a concise, engaging ~60–90s session that prevents fatigue and matches the rhythm of the app.
+  - Accurate solution validation: removed the staircase penalty that falsely marked puzzles completed with hints as errors; victory is now recognized both by exact solution and by full row/column constraint satisfaction.
+  - Constructive checking feedback: the "Check" button differentiates between genuinely incorrect filled cells and incomplete boards, encouraging players when all current deductions are correct.
+  - Continuous drag painting: smooth brush-style drag interaction across mouse and touch without unintentional reverts or axis-locking issues.
+  - Puzzle refinement: polished the 4×4 `l1_window` grid into a clean symmetric window frame and corrected the guide illustration's column clues.
+
 ## [0.12.15] - 2026-11-07
 
 ### Changed
