@@ -159,6 +159,7 @@ export const echo: Exercise = {
           ? t('ex.echo.turnWait', { i: i + 1, len })
           : t(dual ? 'ex.echo.turnAskDual' : 'ex.echo.turnAsk', { i: i + 1, len, back });
         turn.classList.toggle('wait', warmup);
+        turn.classList.remove('good-cr');
         posBtn.classList.toggle('off', warmup);
         letBtn.classList.toggle('off', warmup);
 
@@ -238,6 +239,29 @@ export const echo: Exercise = {
             if (dual && letTarget && !letPressed) flash(letBtn, 'bad');
             ctx.feedback(false, { was: t('fb.echoMissed', { btn: missed.toUpperCase() }) });
             pause = 1200; // leave time to read the message before the next square
+          } else {
+            const nothingToPress = !posTarget && (!dual || !letTarget);
+            const nothingPressed = !posPressed && (!dual || !letPressed);
+            if (nothingToPress && nothingPressed) {
+              flash(timer, 'echo-timer-good', 380);
+              flash(board, 'echo-grid-zen', 380);
+              flash(posBtn, 'echo-btn-zen', 400);
+              if (dual) flash(letBtn, 'echo-btn-zen', 400);
+              turn.textContent = t('ex.echo.cr');
+              turn.classList.add('good-cr');
+              if (ctx.practice) {
+                const hint = strip.querySelector('.echo-strip-hint');
+                if (hint) {
+                  hint.textContent = t('ex.echo.crPractice');
+                  hint.classList.add('good');
+                }
+              }
+              ctx.feedback(true, { subtle: true, sound: 'zen' });
+              pause = 520;
+            } else if (dual) {
+              if (!posTarget && !posPressed) flash(posBtn, 'echo-btn-zen', 350);
+              if (!letTarget && !letPressed) flash(letBtn, 'echo-btn-zen', 350);
+            }
           }
         }
         board.classList.add('between');

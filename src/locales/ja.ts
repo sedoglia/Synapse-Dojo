@@ -192,6 +192,8 @@ const ui: Locale['ui'] = {
   'ex.echo.ruleDual': '{n}バック ×2 · マスと文字を{back}と比べる',
   'ex.echo.rule': '{n}バック · {n}ステップ前と比べる',
   'ex.echo.block': 'ブロック {i}：正確さ {acc}%（ヒット数から誤反応を引いたもの）',
+  'ex.echo.cr': '✓ 一致なし：押さずに正解',
+  'ex.echo.crPractice': '✓ 違っていました：押さずに正解です！',
 
   'ex.grid.name': '光るマス目',
   'ex.grid.desc': 'マスが光る順番を見て、同じ順番を繰り返してください。注意：逆順で繰り返すこともあります！',

@@ -192,6 +192,8 @@ const ui: Locale['ui'] = {
   'ex.echo.ruleDual': '{n}-back ×2 · confronta casella e lettera con {back}',
   'ex.echo.rule': '{n}-back · confronta con {n} passi fa',
   'ex.echo.block': 'Blocco {i}: precisione {acc}% (bersagli colti meno falsi allarmi)',
+  'ex.echo.cr': '✓ Nessun bersaglio: corretto non premere',
+  'ex.echo.crPractice': '✓ Erano diverse: ben fatto a non premere!',
 
   'ex.grid.name': 'Griglia di luci',
   'ex.grid.desc': 'Osserva le caselle che si accendono e ripeti la sequenza. Attenzione: a volte va ripetuta al contrario!',

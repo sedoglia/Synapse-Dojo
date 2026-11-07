@@ -93,7 +93,7 @@ const SCENES: Record<string, Scene> = {
       const s = steps[k];
       prevBox.replaceChildren(k > 0 ? miniGrid(9, { [steps[k - 1].pos]: '' }) : h('span', { class: 'muted' }, '—'));
       nowBox.replaceChildren(miniGrid(9, { [s.pos]: '' }));
-      verdict.replaceChildren(s.press === null ? '' : s.press ? answer(`👆 ${t('ex.echo.pos')}`) : h('span', { class: 'ex-chip' }, '✋'));
+      verdict.replaceChildren(s.press === null ? '' : s.press ? answer(`👆 ${t('ex.echo.pos')}`) : h('span', { class: 'ex-chip zen' }, '✓ ✋'));
       caption.textContent = `${k + 1}/${steps.length} · ${t(s.text)}`;
       k = (k + 1) % steps.length;
     };

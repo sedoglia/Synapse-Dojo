@@ -6,6 +6,16 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.4] - 2026-11-07
+
+### Added
+
+- Echo (N-Back): introduced Zen sensory micro-feedback for successful response withholding (*Correct Rejections* - Signal Detection Theory, Green & Swets 1966), eliminating the feedback void on 70% of non-target trials:
+  - Visual validation featuring an emerald pulse on the timer, a gentle aura on the board and unpressed action buttons, and clear affirmative text (`✓ No match: correctly withheld`).
+  - Dedicated harmonic `sfx.zen` soft sine chime evolving along the pentatonic scale for calming non-action reinforcement.
+  - Continuous combo streak advancement (`🔥 ×3`, `🔥 ×5`...) for successful motor inhibition and attentional filtering, reinforcing dopamine reward pathways (Guitart-Masip et al., 2012) and sustaining flow state.
+  - Updated animated walkthrough with `✓ ✋` zen chip and full native localization across all 12 languages.
+
 ## [0.12.3] - 2026-11-07
 
 ### Added

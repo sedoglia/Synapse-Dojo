@@ -126,7 +126,8 @@ async function runExercise(ex: Exercise, mode: Mode, level: number): Promise<{ r
     toast,
     answer: (ok, streak, opts) => {
       if (ok) {
-        sfx.ok(streak);
+        if (opts.sound === 'zen') sfx.zen(streak);
+        else if (opts.sound !== 'none') sfx.ok(streak);
       } else {
         sfx.bad();
         if (mode === 'practice') toast(t(ex.example), 'hint');

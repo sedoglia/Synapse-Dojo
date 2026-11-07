@@ -192,6 +192,8 @@ const ui: Locale['ui'] = {
   'ex.echo.ruleDual': '{n}-back ×2 · 把方格和字与{back}比较',
   'ex.echo.rule': '{n}-back · 和 {n} 步之前比较',
   'ex.echo.block': '第 {i} 组：准确率 {acc}%（命中减去误报）',
+  'ex.echo.cr': '✓ 无匹配：不按是正确的',
+  'ex.echo.crPractice': '✓ 它们不同：很好，没有按！',
 
   'ex.grid.name': '光格',
   'ex.grid.desc': '看格子依次亮起，然后重复这个顺序。注意：有时要倒着重复！',
