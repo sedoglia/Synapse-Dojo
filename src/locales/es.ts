@@ -612,20 +612,20 @@ const ui: Locale['ui'] = {
   'ex.matrix.detail': '{ok}/{n} correctos',
   'ex.matrix.confirm': 'Confirmar ({sel}/{n})',
 
-  // nonogram
-  'ex.nonogram.name': 'Nonograma',
-  'ex.nonogram.desc': 'Rellena las celdas siguiendo las pistas numéricas de filas y columnas para revelar la imagen oculta',
-  'ex.nonogram.why': 'Entrena la deducción visoespacial, la satisfacción de restricciones y la memoria de trabajo.',
-  'ex.nonogram.example': 'Usa los números de fila y columna para deducir qué casillas rellenar o tachar',
-  'ex.nonogram.detail': '{ok}/{n} imágenes reveladas',
-  'ex.nonogram.fill': 'Rellenar',
-  'ex.nonogram.cross': 'Tachar',
-  'ex.nonogram.clear': 'Reiniciar',
-  'ex.nonogram.undo': 'Deshacer',
-  'ex.nonogram.hint': 'Pista',
-  'ex.nonogram.solved': '¡Revelado: {name}!',
-  'ex.nonogram.check': 'Comprobar',
-  'ex.nonogram.mistakes': '{n} discrepancias detectadas',
+  // 2048
+  'ex.game2048.name': '2048',
+  'ex.game2048.desc': 'Desliza las fichas numeradas por la cuadrícula para fusionar números iguales y alcanzar el objetivo antes de quedarte sin movimientos o espacio',
+  'ex.game2048.why': 'Planificación secuencial y control inhibitorio prefrontal: 2048 entrena la simulación visoespacial de fusiones en cascada, frenando deslizamientos impulsivos para conservar la estructura y activando recompensas dopaminérgicas.',
+  'ex.game2048.example': 'Desliza para unir números iguales: 2 + 2 = 4, 4 + 4 = 8. ¡Alcanza la ficha objetivo!',
+  'ex.game2048.target': 'Objetivo',
+  'ex.game2048.moves': 'Movimientos: {m}',
+  'ex.game2048.score': 'Puntos: {s}',
+  'ex.game2048.undo': 'Deshacer',
+  'ex.game2048.outOfMoves': 'Sin movimientos',
+  'ex.game2048.boardLocked': 'Sin movimientos posibles',
+  'ex.game2048.milestoneReached': '¡Objetivo alcanzado: {val}!',
+  'ex.game2048.detail': '{ok}/{n} objetivos · máx {max} · {pts} pts',
+
 
 
 

@@ -29,7 +29,7 @@ import { matrix } from './matrix';
 import { towers } from './towers';
 import { odd } from './odd';
 import { resources } from './resources';
-import { nonogram } from './nonogram';
+import { game2048 } from './game2048';
 
 import { math } from './math';
 import { reading } from './reading';
@@ -58,9 +58,9 @@ export const EXERCISES: Exercise[] = [
   // Memory
   vault, pairs, stories,
   // Spatial
-  rotate, matrix, nonogram,
+  rotate, matrix,
   // Reasoning
-  towers, odd, resources,
+  towers, odd, resources, game2048,
   // Language & Calculation
   math, reading, dots, anagrams, fluency,
   // Coordination (Bilateral)

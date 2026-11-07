@@ -639,20 +639,20 @@ export const ui = {
   'ex.matrix.detail': '{ok}/{n} correct',
   'ex.matrix.confirm': 'Confirm ({sel}/{n})',
 
-  // nonogram
-  'ex.nonogram.name': 'Nonogram',
-  'ex.nonogram.desc': 'Fill the grid cells following numeric clues along rows and columns to reveal hidden pixel art',
-  'ex.nonogram.why': 'Engages visuospatial deduction, constraint satisfaction, and multi-axis working memory planning.',
-  'ex.nonogram.example': 'Use row and column numbers to deduce which cells to fill or cross out',
-  'ex.nonogram.detail': '{ok}/{n} pictures revealed',
-  'ex.nonogram.fill': 'Fill',
-  'ex.nonogram.cross': 'Cross',
-  'ex.nonogram.clear': 'Reset',
-  'ex.nonogram.undo': 'Undo',
-  'ex.nonogram.hint': 'Hint',
-  'ex.nonogram.solved': 'Revealed: {name}!',
-  'ex.nonogram.check': 'Check',
-  'ex.nonogram.mistakes': '{n} mismatches detected',
+  // 2048
+  'ex.game2048.name': '2048',
+  'ex.game2048.desc': 'Slide numbered tiles across the grid to merge matching numbers and reach the target milestone before running out of moves or space',
+  'ex.game2048.why': 'Sequential planning and prefrontal inhibitory control: 2048 exercises visuospatial mental simulation of cascading merges, dampening impulsive swipes to preserve grid structure while reinforcing milestones through dopaminergic prediction error.',
+  'ex.game2048.example': 'Slide to merge matching numbers: 2 + 2 = 4, 4 + 4 = 8. Reach the target tile!',
+  'ex.game2048.target': 'Target',
+  'ex.game2048.moves': 'Moves: {m}',
+  'ex.game2048.score': 'Score: {s}',
+  'ex.game2048.undo': 'Undo move',
+  'ex.game2048.outOfMoves': 'Out of moves',
+  'ex.game2048.boardLocked': 'No moves possible',
+  'ex.game2048.milestoneReached': 'Milestone reached: {val}!',
+  'ex.game2048.detail': '{ok}/{n} milestones · max {max} · {pts} pts',
+
 
 
 

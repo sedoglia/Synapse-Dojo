@@ -612,20 +612,20 @@ const ui: Locale['ui'] = {
   'ex.matrix.detail': '{ok}/{n} richtig',
   'ex.matrix.confirm': 'Bestätigen ({sel}/{n})',
 
-  // nonogram
-  'ex.nonogram.name': 'Nonogramm',
-  'ex.nonogram.desc': 'Fülle die Rasterzellen anhand der Zeilen- und Spaltenhinweise, um das verborgene Bild aufzudecken',
-  'ex.nonogram.why': 'Trainiert visuell-räumliche Deduktion, Constraint-Satisfaction und Arbeitsgedächtnisplanung.',
-  'ex.nonogram.example': 'Nutze die Zahlen an Zeilen und Spalten, um gefüllte oder gestrichene Zellen abzuleiten',
-  'ex.nonogram.detail': '{ok}/{n} Bilder aufgedeckt',
-  'ex.nonogram.fill': 'Füllen',
-  'ex.nonogram.cross': 'Streichen',
-  'ex.nonogram.clear': 'Zurücksetzen',
-  'ex.nonogram.undo': 'Rückgängig',
-  'ex.nonogram.hint': 'Hinweis',
-  'ex.nonogram.solved': 'Aufgedeckt: {name}!',
-  'ex.nonogram.check': 'Prüfen',
-  'ex.nonogram.mistakes': '{n} Unstimmigkeiten erkannt',
+  // 2048
+  'ex.game2048.name': '2048',
+  'ex.game2048.desc': 'Verschiebe Zahlenkacheln auf dem Raster, um gleiche Zahlen zu verschmelzen und das Ziel zu erreichen, bevor Züge oder Platz ausgehen',
+  'ex.game2048.why': 'Sequenzielle Planung und präfrontale Hemmung: 2048 schult die visuell-räumliche Simulation kaskadierender Züge, bremst impulsive Wischbewegungen und belohnt Meilensteine mit dopaminerger Bestätigung.',
+  'ex.game2048.example': 'Verschieben zum Verschmelzen: 2 + 2 = 4, 4 + 4 = 8. Erreiche die Zielkachel!',
+  'ex.game2048.target': 'Ziel',
+  'ex.game2048.moves': 'Züge: {m}',
+  'ex.game2048.score': 'Punkte: {s}',
+  'ex.game2048.undo': 'Zug rückgängig',
+  'ex.game2048.outOfMoves': 'Keine Züge mehr',
+  'ex.game2048.boardLocked': 'Keine Züge möglich',
+  'ex.game2048.milestoneReached': 'Meilenstein erreicht: {val}!',
+  'ex.game2048.detail': '{ok}/{n} Meilensteine · max {max} · {pts} Pkt.',
+
 
 
 

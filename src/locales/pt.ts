@@ -612,20 +612,20 @@ const ui: Locale['ui'] = {
   'ex.matrix.detail': '{ok}/{n} corretos',
   'ex.matrix.confirm': 'Confirmar ({sel}/{n})',
 
-  // nonogram
-  'ex.nonogram.name': 'Nonograma',
-  'ex.nonogram.desc': 'Preencha as células seguindo as pistas numéricas de linhas e colunas para revelar a imagem oculta',
-  'ex.nonogram.why': 'Treina a dedução visoespacial, a satisfação de restrições e a memória de trabalho.',
-  'ex.nonogram.example': 'Use os números de linha e coluna para deduzir quais células preencher ou marcar com X',
-  'ex.nonogram.detail': '{ok}/{n} imagens reveladas',
-  'ex.nonogram.fill': 'Preencher',
-  'ex.nonogram.cross': 'Marcar X',
-  'ex.nonogram.clear': 'Limpar',
-  'ex.nonogram.undo': 'Desfazer',
-  'ex.nonogram.hint': 'Dica',
-  'ex.nonogram.solved': 'Revelado: {name}!',
-  'ex.nonogram.check': 'Verificar',
-  'ex.nonogram.mistakes': '{n} discrepâncias detectadas',
+  // 2048
+  'ex.game2048.name': '2048',
+  'ex.game2048.desc': 'Deslize as peças numeradas pela grade para combinar números iguais e atingir o objetivo antes de esgotar os movimentos ou o espaço',
+  'ex.game2048.why': 'Planejamento sequencial e controle inibitório pré-frontal: o 2048 treina a simulação visuoespacial de fusões em cascata na memória de trabalho, contendo deslizes impulsivos e recompensando cada conquista.',
+  'ex.game2048.example': 'Deslize para juntar números iguais: 2 + 2 = 4, 4 + 4 = 8. Alcance a peça alvo!',
+  'ex.game2048.target': 'Objetivo',
+  'ex.game2048.moves': 'Movimentos: {m}',
+  'ex.game2048.score': 'Pontos: {s}',
+  'ex.game2048.undo': 'Desfazer',
+  'ex.game2048.outOfMoves': 'Sem movimentos',
+  'ex.game2048.boardLocked': 'Nenhum movimento possível',
+  'ex.game2048.milestoneReached': 'Marco alcançado: {val}!',
+  'ex.game2048.detail': '{ok}/{n} marcos · máx {max} · {pts} pts',
+
 
 
 

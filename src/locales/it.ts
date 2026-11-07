@@ -639,20 +639,20 @@ const ui: Locale['ui'] = {
   'ex.matrix.detail': '{ok}/{n} corretti',
   'ex.matrix.confirm': 'Conferma ({sel}/{n})',
 
-  // nonogram
-  'ex.nonogram.name': 'Nonogram',
-  'ex.nonogram.desc': 'Riempi le celle seguendo gli indizi numerici di riga e colonna per svelare l\'illustrazione nascosta',
-  'ex.nonogram.why': 'Allena la deduzione visuo-spaziale, il soddisfacimento di vincoli e la pianificazione nella memoria di lavoro.',
-  'ex.nonogram.example': 'Osserva i numeri di riga e colonna per dedurre i blocchi da annerire o escludere',
-  'ex.nonogram.detail': '{ok}/{n} illustrazioni svelate',
-  'ex.nonogram.fill': 'Riempi',
-  'ex.nonogram.cross': 'Escludi',
-  'ex.nonogram.clear': 'Ripristina',
-  'ex.nonogram.undo': 'Annulla',
-  'ex.nonogram.hint': 'Aiuto',
-  'ex.nonogram.solved': 'Svelato: {name}!',
-  'ex.nonogram.check': 'Verifica',
-  'ex.nonogram.mistakes': '{n} incongruenze rilevate',
+  // 2048
+  'ex.game2048.name': '2048',
+  'ex.game2048.desc': 'Fai scorrere i tasselli numerati sulla griglia per unire quelli uguali e raggiungere il valore obiettivo prima di esaurire le mosse o lo spazio',
+  'ex.game2048.why': 'Pianificazione sequenziale ed inibizione prefrontale: 2048 allena la simulazione visuo-spaziale di fusioni a catena nella memoria di lavoro, frenando gli scorrimenti impulsivi per mantenere la struttura della griglia e stimolando il rilascio dopaminergico ad ogni traguardo.',
+  'ex.game2048.example': 'Fai scorrere per unire i numeri uguali: 2 + 2 = 4, 4 + 4 = 8. Raggiungi il tassello obiettivo!',
+  'ex.game2048.target': 'Obiettivo',
+  'ex.game2048.moves': 'Mosse: {m}',
+  'ex.game2048.score': 'Punti: {s}',
+  'ex.game2048.undo': 'Annulla mossa',
+  'ex.game2048.outOfMoves': 'Mosse esaurite',
+  'ex.game2048.boardLocked': 'Nessuna mossa possibile',
+  'ex.game2048.milestoneReached': 'Traguardo raggiunto: {val}!',
+  'ex.game2048.detail': '{ok}/{n} traguardi · max {max} · {pts} pt',
+
 
 
 

@@ -612,20 +612,20 @@ const ui: Locale['ui'] = {
   'ex.matrix.detail': '{ok}/{n} corrects',
   'ex.matrix.confirm': 'Confirmer ({sel}/{n})',
 
-  // nonogram
-  'ex.nonogram.name': 'Nonogramme',
-  'ex.nonogram.desc': 'Remplissez les cases selon les indices numériques en lignes et colonnes pour révéler l\'image cachée',
-  'ex.nonogram.why': 'Entraîne la déduction visuo-spatiale, la satisfaction de contraintes et la mémoire de travail.',
-  'ex.nonogram.example': 'Utilisez les indices de ligne et colonne pour déduire les cases à noircir ou barrer',
-  'ex.nonogram.detail': '{ok}/{n} images révélées',
-  'ex.nonogram.fill': 'Remplir',
-  'ex.nonogram.cross': 'Barrer',
-  'ex.nonogram.clear': 'Effacer',
-  'ex.nonogram.undo': 'Annuler',
-  'ex.nonogram.hint': 'Indice',
-  'ex.nonogram.solved': 'Révélé : {name} !',
-  'ex.nonogram.check': 'Vérifier',
-  'ex.nonogram.mistakes': '{n} anomalies détectées',
+  // 2048
+  'ex.game2048.name': '2048',
+  'ex.game2048.desc': 'Faites glisser les tuiles numérotées sur la grille pour fusionner les nombres identiques et atteindre l’objectif avant d’épuiser les mouvements ou l’espace',
+  'ex.game2048.why': 'Planification séquentielle et contrôle inhibiteur préfrontal : 2048 entraîne la simulation visuo-spatiale des cascades de fusions, freinant les glissements impulsifs pour préserver l’ordre de la grille tout en libérant de la dopamine à chaque étape franchie.',
+  'ex.game2048.example': 'Glissez pour fusionner : 2 + 2 = 4, 4 + 4 = 8. Atteignez la tuile cible !',
+  'ex.game2048.target': 'Objectif',
+  'ex.game2048.moves': 'Mouvements : {m}',
+  'ex.game2048.score': 'Score : {s}',
+  'ex.game2048.undo': 'Annuler',
+  'ex.game2048.outOfMoves': 'Mouvements épuisés',
+  'ex.game2048.boardLocked': 'Aucun mouvement possible',
+  'ex.game2048.milestoneReached': 'Étape atteinte : {val} !',
+  'ex.game2048.detail': '{ok}/{n} étapes · max {max} · {pts} pts',
+
 
 
 

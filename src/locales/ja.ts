@@ -612,20 +612,20 @@ const ui: Locale['ui'] = {
   'ex.matrix.detail': '{ok}/{n} 正解',
   'ex.matrix.confirm': '確認 ({sel}/{n})',
 
-  // nonogram
-  'ex.nonogram.name': 'ピクロス (イラストロジック)',
-  'ex.nonogram.desc': '行と列の数字のヒントをもとにマス目を塗りつぶし、隠されたドット絵を完成させましょう',
-  'ex.nonogram.why': '視空間推論、制約充足、作業記憶による直交プランニングを鍛えます。',
-  'ex.nonogram.example': '行と列の数字から確定するマスを推理し、塗りつぶしや×マークをつけます',
-  'ex.nonogram.detail': '{ok}/{n} 枚の絵を完成',
-  'ex.nonogram.fill': '塗る',
-  'ex.nonogram.cross': 'バツ印',
-  'ex.nonogram.clear': 'リセット',
-  'ex.nonogram.undo': '元に戻す',
-  'ex.nonogram.hint': 'ヒント',
-  'ex.nonogram.solved': '完成：{name}！',
-  'ex.nonogram.check': '確認',
-  'ex.nonogram.mistakes': '{n} か所の不一致があります',
+  // 2048
+  'ex.game2048.name': '2048',
+  'ex.game2048.desc': '数字タイルをスライドして同じ数字同士を合体させ、手数が尽きる前に目標の数字を作りましょう',
+  'ex.game2048.why': '順次計画と前頭葉の抑制制御：2048は作業記憶による合体連鎖の視空間シミュレーションを鍛え、衝動的なスワイプを抑えて盤面を整えることで達成感をもたらします。',
+  'ex.game2048.example': 'スワイプして合体：2 + 2 = 4、4 + 4 = 8。目標タイルを達成！',
+  'ex.game2048.target': '目標',
+  'ex.game2048.moves': '残り手数：{m}',
+  'ex.game2048.score': 'スコア：{s}',
+  'ex.game2048.undo': '1手戻す',
+  'ex.game2048.outOfMoves': '手数がなくなりました',
+  'ex.game2048.boardLocked': '動かせる手がありません',
+  'ex.game2048.milestoneReached': '目標達成：{val}！',
+  'ex.game2048.detail': '{ok}/{n} 達成 · 最大 {max} · {pts} 点',
+
 
 
 

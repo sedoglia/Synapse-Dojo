@@ -612,20 +612,20 @@ const ui: Locale['ui'] = {
   'ex.matrix.detail': '{ok}/{n} benar',
   'ex.matrix.confirm': 'Konfirmasi ({sel}/{n})',
 
-  // nonogram
-  'ex.nonogram.name': 'Nonogram',
-  'ex.nonogram.desc': 'Isi kotak kisi mengikuti petunjuk angka di baris dan kolom untuk mengungkap gambar piksel tersembunyi',
-  'ex.nonogram.why': 'Melatih deduksi spasial visual, pemenuhan batasan logika, dan perencanaan memori kerja.',
-  'ex.nonogram.example': 'Gunakan angka baris dan kolom untuk menyimpulkan kotak mana yang diisi atau disilang',
-  'ex.nonogram.detail': '{ok}/{n} gambar terungkap',
-  'ex.nonogram.fill': 'Isi',
-  'ex.nonogram.cross': 'Silang',
-  'ex.nonogram.clear': 'Reset',
-  'ex.nonogram.undo': 'Urungkan',
-  'ex.nonogram.hint': 'Petunjuk',
-  'ex.nonogram.solved': 'Terungkap: {name}!',
-  'ex.nonogram.check': 'Periksa',
-  'ex.nonogram.mistakes': '{n} ketidakcocokan terdeteksi',
+  // 2048
+  'ex.game2048.name': '2048',
+  'ex.game2048.desc': 'Geser ubin bernomor di kisi untuk menggabungkan angka yang sama dan mencapai target sebelum kehabisan langkah atau ruang',
+  'ex.game2048.why': 'Perencanaan sekuensial dan kontrol penghambatan prefrontal: 2048 melatih simulasi visual-spasial dalam memori kerja, mengerem geseran impulsif, dan memberikan dorongan motivasi dopaminergik.',
+  'ex.game2048.example': 'Geser untuk menggabungkan: 2 + 2 = 4, 4 + 4 = 8. Capai ubin target!',
+  'ex.game2048.target': 'Target',
+  'ex.game2048.moves': 'Langkah: {m}',
+  'ex.game2048.score': 'Skor: {s}',
+  'ex.game2048.undo': 'Batal langkah',
+  'ex.game2048.outOfMoves': 'Langkah habis',
+  'ex.game2048.boardLocked': 'Tidak ada langkah tersisa',
+  'ex.game2048.milestoneReached': 'Target tercapai: {val}!',
+  'ex.game2048.detail': '{ok}/{n} target · maks {max} · {pts} poin',
+
 
 
 

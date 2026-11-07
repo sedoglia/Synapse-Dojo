@@ -612,20 +612,20 @@ const ui: Locale['ui'] = {
   'ex.matrix.detail': '{ok}/{n} 正确',
   'ex.matrix.confirm': '确认 ({sel}/{n})',
 
-  // nonogram
-  'ex.nonogram.name': '数织图案',
-  'ex.nonogram.desc': '根据行与列的数字提示涂色网格，揭示隐藏的像素图像',
-  'ex.nonogram.why': '锻炼视觉空间逻辑演绎、约束满足与工作记忆规划能力。',
-  'ex.nonogram.example': '观察行列数字提示，推断需要涂黑或排空格的格子',
-  'ex.nonogram.detail': '已揭示 {ok}/{n} 幅图案',
-  'ex.nonogram.fill': '填充',
-  'ex.nonogram.cross': '标记',
-  'ex.nonogram.clear': '重置',
-  'ex.nonogram.undo': '撤销',
-  'ex.nonogram.hint': '提示',
-  'ex.nonogram.solved': '揭晓：{name}！',
-  'ex.nonogram.check': '检查',
-  'ex.nonogram.mistakes': '发现 {n} 处不匹配',
+  // 2048
+  'ex.game2048.name': '2048',
+  'ex.game2048.desc': '在网格上滑动数字方块以合并相同数字，在步数用尽或棋盘填满前达成目标数值',
+  'ex.game2048.why': '序列规划与前额叶抑制控制：2048训练工作记忆对连锁合并的视觉空间心理模拟，克制冲动滑动以维持棋盘秩序，并通过多巴胺奖励强化目标达成。',
+  'ex.game2048.example': '滑动合并相同方块：2 + 2 = 4，4 + 4 = 8。达成目标方块！',
+  'ex.game2048.target': '目标',
+  'ex.game2048.moves': '步数：{m}',
+  'ex.game2048.score': '得分：{s}',
+  'ex.game2048.undo': '撤销',
+  'ex.game2048.outOfMoves': '步数用尽',
+  'ex.game2048.boardLocked': '无有效移动',
+  'ex.game2048.milestoneReached': '目标达成：{val}！',
+  'ex.game2048.detail': '{ok}/{n} 个目标 · 最高 {max} · {pts} 分',
+
 
 
 
