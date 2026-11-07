@@ -192,6 +192,8 @@ const ui: Locale['ui'] = {
   'ex.echo.ruleDual': '{n}-back ×2 · vergleiche Quadrat und Buchstabe mit {back}',
   'ex.echo.rule': '{n}-back · vergleiche mit {n} Schritten zurück',
   'ex.echo.block': 'Block {i}: {acc} % Genauigkeit (Treffer minus Fehlalarme)',
+  'ex.echo.cr': '✓ Keine Übereinstimmung: richtig nicht gedrückt',
+  'ex.echo.crPractice': '✓ Sie waren verschieden: gut gemacht!',
 
   'ex.grid.name': 'Lichtgitter',
   'ex.grid.desc': 'Sieh zu, wie die Felder aufleuchten, und wiederhole die Reihenfolge. Achtung: Manchmal musst du sie rückwärts wiederholen!',

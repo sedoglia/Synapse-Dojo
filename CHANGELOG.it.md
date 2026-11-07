@@ -6,6 +6,16 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.4] - 2026-11-07
+
+### Aggiunto
+
+- Eco (N-Back): introdotto il sistema di micro-feedback visuo-acustico Zen per le non-azioni corrette (*Correct Rejections* - Signal Detection Theory, Green & Swets 1966), risolvendo l'asimmetria di feedback sul 70% dei turni non-bersaglio:
+  - Convalida visiva con pulsazione verde smeraldo sul timer, bagliore morbido sulla griglia e sui pulsanti non premuti, e dicitura esplicativa di conferma (`✓ Nessun bersaglio: corretto non premere`).
+  - Nuovo rintocco armonico rilassante `sfx.zen` su onda sinusoidale morbida intonata sulla scala pentatonica progressiva.
+  - Progressione continua del moltiplicatore combo (`🔥 ×3`, `🔥 ×5`...) anche per l'autocontrollo e l'inibizione motoria, stimolando il circuito dopaminergico della ricompensa (Guitart-Masip et al., 2012) e proteggendo lo stato di flow.
+  - Guida visiva aggiornata con chip zen `✓ ✋` nella schermata dimostrativa e localizzazione completa in tutte le 12 lingue.
+
 ## [0.12.3] - 2026-11-07
 
 ### Aggiunto

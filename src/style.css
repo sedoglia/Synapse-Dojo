@@ -1625,6 +1625,12 @@ html.big-text {
   font-size: 1.2rem;
   padding: 2px 8px;
 }
+.ex-chip.zen {
+  background: color-mix(in srgb, var(--good) 15%, var(--surface));
+  border-color: var(--good);
+  color: var(--good);
+  font-weight: 800;
+}
 .ex-big {
   font-size: 1.5rem;
   font-weight: 900;
@@ -2342,6 +2348,33 @@ html.big-text {
 .echo-actions.single {
   grid-template-columns: 1fr;
   width: min(100%, 320px);
+}
+.echo-timer.echo-timer-good {
+  outline: 2px solid var(--good);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--good) 65%, transparent);
+}
+.echo-timer.echo-timer-good div {
+  background: var(--good);
+  width: 100% !important;
+  opacity: 0.9;
+}
+.echo-grid.echo-grid-zen {
+  outline: 2px solid color-mix(in srgb, var(--good) 50%, transparent);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--good) 30%, transparent);
+  border-radius: 14px;
+}
+.echo-actions .btn.echo-btn-zen {
+  outline: 2px solid var(--good) !important;
+  border-color: var(--good) !important;
+  background: color-mix(in srgb, var(--good) 16%, var(--surface-2)) !important;
+  color: var(--good) !important;
+  box-shadow: 0 0 14px color-mix(in srgb, var(--good) 35%, transparent);
+}
+.echo-turn.good-cr {
+  color: var(--good);
+}
+.echo-strip-hint.good {
+  color: var(--good);
 }
 
 /* Privacy page and data tools */

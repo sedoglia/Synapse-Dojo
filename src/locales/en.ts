@@ -192,6 +192,8 @@ export const ui = {
   'ex.echo.ruleDual': '{n}-back ×2 · compare square and letter with {back}',
   'ex.echo.rule': '{n}-back · compare with {n} steps back',
   'ex.echo.block': 'Block {i}: {acc}% accuracy (hits minus false alarms)',
+  'ex.echo.cr': '✓ No match: correctly withheld',
+  'ex.echo.crPractice': '✓ They differed: good job not pressing!',
 
   'ex.grid.name': 'Light grid',
   'ex.grid.desc': 'Watch the tiles light up and repeat the sequence. Careful: sometimes you must repeat it backwards!',

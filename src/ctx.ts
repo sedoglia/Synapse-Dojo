@@ -18,6 +18,8 @@ export interface FeedbackOptions {
   note?: string;
   /** Response time in ms (if measured independently by the exercise). */
   rt?: number;
+  /** Custom sound effect style for correct answers: 'zen' for soft inhibition chimes. */
+  sound?: 'ok' | 'zen' | 'none';
 }
 
 /** Visual feedback the play view provides to exercises. */

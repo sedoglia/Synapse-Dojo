@@ -122,6 +122,20 @@ export const sfx = {
     }
   },
 
+  /**
+   * Gentle, crystalline water-drop chime for successful response inhibition
+   * (Correct Rejection / Zen filter). Evolves along the pentatonic scale.
+   */
+  zen: (streak = 0) => {
+    const s = Math.max(1, streak);
+    haptic('tap');
+    const step = (s - 1) % PENTATONIC.length;
+    const f = PENTATONIC[step];
+    // Warm harmonic sine waves with delicate decay, like a smooth singing bowl or clear water droplet
+    tone(f * 1.5, 0.18, 'sine', 0.045);
+    tone(f * 0.75, 0.20, 'sine', 0.03, 0.015);
+  },
+
   /** Gentle, low wooden thud rather than a harsh abrasive buzz. */
   bad: () => {
     haptic('bad');
