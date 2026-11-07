@@ -6,6 +6,12 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.2] - 2026-11-07
+
+### Fixed
+
+- Audio: resolved pentatonic streak ceiling issue where long correct streaks repeated the highest pitch indefinitely (`3135 Hz`). Replaced with a cyclical multi-tier harmonic system (spanning 523 Hz – 1760 Hz to prevent ear fatigue) that seamlessly evolves with tiered harmonic overtones, fifth-interval chords every 5th consecutive hit, and grand major chords every 10th milestone hit.
+
 ## [0.12.1] - 2026-11-07
 
 ### Fixed
