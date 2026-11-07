@@ -6,6 +6,19 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.17] - 2026-11-07
+
+### Added
+
+- Crack the Code (`ex.crackTheCode`):
+  - New deductive reasoning game under the **Reasoning & Planning** domain, inspired by classic padlock deduction puzzles (Cognitive Train, Mastermind, Bulls & Cows).
+  - Grounded in neuroscience: engages the left frontoparietal network and basal ganglia in multi-constraint satisfaction and hypothesis testing (Prado et al., 2011; Goel, 2007), updates working memory sets (Baddeley, 2000; Miyake et al., 2000), and delivers a burst of dopaminergic reward upon discovering the solution ("Aha!" moment; Tik et al., 2018; Kounios & Beeman, 2014).
+  - 100% mathematically proven unique solvability: dynamic puzzle generator with an exact constraint-satisfaction solver guarantees every combination has one and only one unique solution.
+  - Interactive Padlock & Scratchpad: physical dial wheels (keyboard 0-9 and arrow key navigation supported), spring-open shackle animation, and a tactile digit scratchpad (0-9) to cross out impossible digits and highlight confirmed ones across clues.
+  - Dynamic Difficulty Adjustment: 8 adaptive levels calibrated by Kaernbach's (1991) staircase algorithm towards the optimal 80% accuracy zone (Wilson et al., 2019). Scales from 3-digit combinations with 5 redundant clues down to 4-digit master codes with tight clues.
+  - Balanced session duration: 3 trials in gym mode (~60–90 seconds total) and 1 quick trial in daily check mode.
+  - Full native localization in all 12 languages.
+
 ## [0.12.16] - 2026-11-07
 
 ### Changed

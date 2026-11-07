@@ -6,6 +6,19 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.17] - 2026-11-07
+
+### Aggiunto
+
+- Decifra il Codice (`ex.crackTheCode`):
+  - Nuovo gioco di ragionamento deduttivo nell'area **Ragionamento**, ispirato ai classici enigmi a combinazione per lucchetti (Cognitive Train, Mastermind, Bulls & Cows).
+  - Basi neuroscientifiche: allena la rete fronto-parietale sinistra e i gangli della base nella risoluzione di vincoli logici multipli e nel test di ipotesi (Prado et al., 2011; Goel, 2007), aggiorna attivamente la memoria di lavoro (Baddeley, 2000; Miyake et al., 2000) e rilascia una gratificazione dopaminergica nel nucleus accumbens al momento della scoperta ("esperienza Eureka"; Tik et al., 2018; Kounios & Beeman, 2014).
+  - Soluzione unica garantita al 100%: generatore dinamico con risolutore esatto a soddisfazione di vincoli che assicura che ogni combinazione abbia una sola e unica soluzione valida, eliminando ogni frustrazione o ambiguità.
+  - Lucchetto interattivo e taccuino appunti: cilindri combinatori (con supporto tastiera 0-9 e frecce direzionali), animazione dello sblocco del grillo con coriandoli e suoni meccanici, e striscia appunti interattiva (0-9) per barrare le cifre escluse ed evidenziare quelle confermate negli indizi.
+  - Difficoltà adattiva continua: 8 livelli calibrati dall'algoritmo Kaernbach (1991) verso la soglia ottimale dell'80% di accuratezza (Wilson et al., 2019). Da combinazioni a 3 cifre con 5 indizi generosi fino a codici a 4 cifre con indizi stretti.
+  - Durata bilanciata: 3 puzzle in modalità palestra (~60–90 secondi complessivi) e 1 prova rapida nel Neuro Score giornaliero.
+  - Localizzazione nativa completa in tutte le 12 lingue supportate.
+
 ## [0.12.16] - 2026-11-07
 
 ### Modificato

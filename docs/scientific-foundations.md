@@ -52,18 +52,18 @@ The evidence above leads to the platform's building blocks:
 
 ---
 
-## 3. The Complete Catalog of 37 Exercises (9 Domains)
+## 3. The Complete Catalog of 38 Exercises (9 Domains)
 
-The app organizes 36 original tasks across 9 cognitive and motor domains:
+The app organizes 38 original tasks across 9 cognitive and motor domains:
 
 ```
                                   ┌─── ⚡ Speed (4)
                                   ├─── 🎯 Attention (6)
                                   ├─── 🎛️ Executive Control (3)
                                   ├─── 🧠 Working Memory (4)
-     Synapse Dojo (37 Exercises)  ├─── 🔐 Episodic Memory (3)
-                                  ├─── 🧊 Spatial (2)
-                                  ├─── 🧩 Reasoning (4)
+     Synapse Dojo (38 Exercises)  ├─── 🔐 Episodic Memory (3)
+                                  ├─── 🧊 Spatial (3)
+                                  ├─── 🧩 Reasoning (5)
                                   ├─── ➗ Calculation & Reading (5)
                                   └─── 👐 Bilateral Coordination (5)
 ```
@@ -101,6 +101,7 @@ The exercises are **inspired by** the paradigms listed: they are short, game-lik
 | **🧩 Reasoning** | **Odd one out** | Odd-one-out with multidimensional rules | Number of figures (4–9) and irrelevant features that vary (1–3), with every value on at least two figures, so there is only one solution. After a mistake the game names the feature that sets the right figure apart. |
 | **🧩 Reasoning** | **Market Stall** | Knapsack problem (Murawski & Bossaerts, 2016) in an everyday setting of costs and earnings | Number of products (4–8) with a budget of about half the total cost; minimum earnings to reach, shown on screen (90% → 100% of the best); from level 3 the shortcut of buying by best earnings per coin isn't enough. Actual earnings are revealed upon selling with animation and coin audio feedback, rewarding heuristic estimation and preventing blind trial and error. After a mistake the best choice stays highlighted until the player moves on. |
 | **🧩 Reasoning** | **2048** | Sliding block puzzle and sequential strategic planning (*Cirulli, 2014*; *Shallice, 1982*; *Diamond, 2013*) engaging prefrontal inhibitory control (*Aron et al., 2004*), visuospatial working memory simulation of merge cascades, and reward prediction error reinforcement (*Schultz, 1998*; *Csikszentmihalyi, 1990*; *Wilson et al., 2019*) | Milestone target tile (32 → 4096), calibrated move budget to preserve brief, engaging session length, and obstacle blocks at levels 8 and 10 restricting grid space to require deeper prospective planning. |
+| **🧩 Reasoning** | **Crack the Code** | Deductive reasoning and constraint satisfaction (*Prado et al., 2011*; *Goel, 2007*) with working memory set updating (*Baddeley, 2000*; *Miyake et al., 2000*) and dopaminergic Eureka insight in the nucleus accumbens (*Tik et al., 2018*; *Kounios & Beeman, 2014*) | Code length (3 digits at levels 1–5, 4 digits at levels 6–8), clue quantity and tightness (5 → 4 clues), and elimination scratchpad for tactile hypothesis testing. Every puzzle is mathematically validated for 100% unique solvability. |
 | **➗ Calculation & reading** | **Math sprint** | Fast mental arithmetic (*Learning Therapy*, Kawashima) | Operations (+ − → × → ÷) and number size, multiplication tables included. |
 | **➗ Calculation & reading** | **Speed reading** | Reading aloud with a comprehension question | Not adaptive: words per minute and comprehension (comprehension weighs more than speed). In *Learning Therapy* the point is reading regularly, not tackling ever harder texts. |
 | **➗ Calculation & reading** | **Dot Estimation** | *Approximate Number System* (*Halberda et al., 2008*) | Ratio between the two quantities (40 → 88%) and exposure time (1.5 → 0.8 s). |
@@ -278,3 +279,9 @@ To make sure the platform stays a tool serving the user rather than advertising 
 58. Wertheimer, M. (1923). *Untersuchungen zur Lehre von der Gestalt. II.* Psychologische Forschung, 4(1), 301-350. (Law of closure and visuospatial perceptual grouping; reviewed in Wagemans et al., 2012, *Psychological Bulletin*, 138(6), 1172-1217).
 59. Jung-Beeman, M., Bowden, E. M., Haberman, J., Frymiare, J. L., Arambel-Liu, S., Greenblatt, R., Reber, P. J., & Kounios, J. (2004). *Neural activity when people solve verbal and spatial problems with insight.* PLoS Biology, 2(4), e97. [DOI: 10.1371/journal.pbio.0020097](https://doi.org/10.1371/journal.pbio.0020097)
 60. Danek, A. H., Fraps, T., von Müller, A., Grothe, B., & Öllinger, M. (2014). *It's a pleasure: The cognitive and affective components of the Eureka! experience.* Cognition, 131(3), 398-418. [DOI: 10.1016/j.cognition.2014.02.008](https://doi.org/10.1016/j.cognition.2014.02.008)
+
+**Deductive reasoning, constraint satisfaction, and dopaminergic insight (Crack the Code)**
+
+61. Prado, J., Chadha, A., & Booth, J. R. (2011). *The brain network for deductive reasoning: A quantitative meta-analysis of 28 neuroimaging studies.* Journal of Cognitive Neuroscience, 23(11), 3483-3497. [DOI: 10.1162/jocn_a_00063](https://doi.org/10.1162/jocn_a_00063)
+62. Tik, M., Sladky, R., Luft, C. D. B., Willinger, D., Hoffmann, A., Banissy, M. J., Bhattacharya, J., & Windischberger, C. (2018). *Ultra-high-field fMRI insights on insight: Neural correlates of the Aha!-moment.* Human Brain Mapping, 39(8), 3241-3252. [DOI: 10.1002/hbm.24073](https://doi.org/10.1002/hbm.24073)
+63. Goel, V. (2007). *Anatomy of deductive reasoning.* Trends in Cognitive Sciences, 11(10), 435-441. [DOI: 10.1016/j.tics.2007.09.003](https://doi.org/10.1016/j.tics.2007.09.003)

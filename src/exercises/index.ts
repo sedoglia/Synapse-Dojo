@@ -30,6 +30,7 @@ import { towers } from './towers';
 import { odd } from './odd';
 import { resources } from './resources';
 import { game2048 } from './game2048';
+import { crackTheCode } from './crackTheCode';
 import { nonogram } from './nonogram';
 
 import { math } from './math';
@@ -61,7 +62,7 @@ export const EXERCISES: Exercise[] = [
   // Spatial
   rotate, matrix, nonogram,
   // Reasoning
-  towers, odd, resources, game2048,
+  towers, odd, resources, game2048, crackTheCode,
   // Language & Calculation
   math, reading, dots, anagrams, fluency,
   // Coordination (Bilateral)
