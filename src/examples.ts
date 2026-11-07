@@ -167,6 +167,16 @@ const SCENES: Record<string, Scene> = {
     return row(mini, arrow(), answer('❤️'));
   },
   game2048: () => row(tag('2'), tag('+'), tag('2'), arrow(), answer('4 🧱')),
+  crackTheCode: () =>
+    row(
+      tag('6 8 2'),
+      answer('1 ✓'),
+      tag('7 3 8'),
+      answer('0 ✗'),
+      arrow(),
+      tag('0 4 2', 'good'),
+      answer('🔓'),
+    ),
   tapSeq: () => row(tag('◀ ▶ ◀ ▶'), arrow(), answer('👈'), answer('👉')),
   swipePattern: () => row(tag(`${t('ex.dots.left')}: ↑`), tag(`${t('ex.dots.right')}: ↓`), arrow(), answer('✓')),
   rhythm: () => row(tag('🥁'), h('span', {}, '♪'), tag('🥁'), arrow(), answer('✓ ♪')),

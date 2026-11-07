@@ -52,18 +52,18 @@ Dalle evidenze sopra descritte derivano i pilastri costruttivi della piattaforma
 
 ---
 
-## 3. Il Catalogo Completo dei 37 Esercizi (9 Domini)
+## 3. Il Catalogo Completo dei 38 Esercizi (9 Domini)
 
-L'applicazione organizza 36 compiti originali distribuiti su 9 domini cognitivi e motori:
+L'applicazione organizza 38 compiti originali distribuiti su 9 domini cognitivi e motori:
 
 ```
                                   ┌─── ⚡ Velocità (4)
                                   ├─── 🎯 Attenzione (6)
                                   ├─── 🎛️ Controllo Esecutivo (3)
                                   ├─── 🧠 Memoria di Lavoro (4)
-       Synapse Dojo (37 Esercizi) ├─── 🔐 Memoria Episodica (3)
-                                  ├─── 🧊 Spaziale (2)
-                                  ├─── 🧩 Ragionamento (4)
+       Synapse Dojo (38 Esercizi) ├─── 🔐 Memoria Episodica (3)
+                                  ├─── 🧊 Spaziale (3)
+                                  ├─── 🧩 Ragionamento (5)
                                   ├─── ➗ Calcolo e Lettura (5)
                                   └─── 👐 Coordinazione Bilaterale (5)
 ```
@@ -101,6 +101,7 @@ Gli esercizi sono **ispirati** ai paradigmi indicati: si tratta di versioni brev
 | **🧩 Ragionamento** | **L'intruso** | Odd-one-out per regole multidimensionali | Numero di figure (4–9) e caratteristiche irrilevanti che variano (1–3), in cui ogni valore compare su almeno due figure, così la soluzione è una sola. Dopo un errore il gioco indica la caratteristica che distingue la figura giusta. |
 | **🧩 Ragionamento** | **Banco del mercato** | Problema dello zaino (*knapsack*; Murawski & Bossaerts, 2016) in un contesto quotidiano di costi e guadagni | Numero di prodotti (4–8) con budget pari a circa metà del costo totale; guadagno minimo da raggiungere, mostrato a schermo (90% → 100% dell'ottimo); dal livello 3 la scorciatoia di comprare per miglior guadagno a moneta non basta. L'incasso reale viene calcolato e svelato alla vendita con un'animazione e riscontro sonoro, premiando la stima euristica e impedendo di indovinare per tentativi casuali. Dopo un errore la scelta migliore resta evidenziata finché il giocatore non prosegue. |
 | **🧩 Ragionamento** | **2048** | Puzzle a scorrimento e pianificazione strategica sequenziale (*Cirulli, 2014*; *Shallice, 1982*; *Diamond, 2013*) con controllo inibitorio prefrontale (*Aron et al., 2004*), simulazione visuo-spaziale delle fusioni a catena e rinforzo per errore di predizione della ricompensa (*Schultz, 1998*; *Csikszentmihalyi, 1990*; *Wilson et al., 2019*) | Tassello traguardo (32 → 4096), budget di mosse calibrato per mantenere sessioni brevi e ritmo incalzante, blocchi ostacolo ai livelli 8 e 10 per vincolare lo spazio di manovra e richiedere traiettorie a lungo raggio. |
+| **🧩 Ragionamento** | **Decifra il Codice** | Ragionamento deduttivo e soddisfazione di vincoli multipli (*Prado et al., 2011*; *Goel, 2007*) con aggiornamento continuo della memoria di lavoro (*Baddeley, 2000*; *Miyake et al., 2000*) e rilascio dopaminergico dell'esperienza Eureka nel nucleus accumbens (*Tik et al., 2018*; *Kounios & Beeman, 2014*) | Lunghezza codice (3 cifre ai livelli 1–5, 4 cifre ai livelli 6–8), densità e selettività degli indizi (5 → 4 indizi), con taccuino interattivo di eliminazione per il test di ipotesi. Ogni combinazione è validata matematicamente per garantire l'univocità della soluzione. |
 | **➗ Calcolo e lettura** | **Sprint di calcolo** | Aritmetica mentale rapida (*Learning Therapy*, Kawashima) | Operazioni (+ − → × → ÷) e grandezza dei numeri, tabelline comprese. |
 | **➗ Calcolo e lettura** | **Lettura veloce** | Lettura ad alta voce con domanda di comprensione | Non adattivo: parole al minuto e comprensione (la comprensione pesa più della velocità). Nel *Learning Therapy* lo scopo è leggere con regolarità, non affrontare testi sempre più difficili. |
 | **➗ Calcolo e lettura** | **Calcolo con i punti** | *Approximate Number System* (*Halberda et al., 2008*) | Rapporto tra le due quantità (40 → 88%) e tempo di esposizione (1,5 → 0,8 s). |
@@ -287,3 +288,9 @@ Per garantire che la piattaforma rimanga uno strumento al servizio dell'utente e
 64. Wertheimer, M. (1923). *Untersuchungen zur Lehre von der Gestalt. II.* Psychologische Forschung, 4(1), 301-350. (Legge della chiusura e organizzazione percettiva visuo-spaziale; trad. e rassegna in Wagemans et al., 2012, *Psychological Bulletin*, 138(6), 1172-1217).
 65. Jung-Beeman, M., Bowden, E. M., Haberman, J., Frymiare, J. L., Arambel-Liu, S., Greenblatt, R., Reber, P. J., & Kounios, J. (2004). *Neural activity when people solve verbal and spatial problems with insight.* PLoS Biology, 2(4), e97. [DOI: 10.1371/journal.pbio.0020097](https://doi.org/10.1371/journal.pbio.0020097)
 66. Danek, A. H., Fraps, T., von Müller, A., Grothe, B., & Öllinger, M. (2014). *It's a pleasure: The cognitive and affective components of the Eureka! experience.* Cognition, 131(3), 398-418. [DOI: 10.1016/j.cognition.2014.02.008](https://doi.org/10.1016/j.cognition.2014.02.008)
+
+**Ragionamento deduttivo, soddisfacimento di vincoli e intuizione dopaminergica (Decifra il Codice)**
+
+67. Prado, J., Chadha, A., & Booth, J. R. (2011). *The brain network for deductive reasoning: A quantitative meta-analysis of 28 neuroimaging studies.* Journal of Cognitive Neuroscience, 23(11), 3483-3497. [DOI: 10.1162/jocn_a_00063](https://doi.org/10.1162/jocn_a_00063)
+68. Tik, M., Sladky, R., Luft, C. D. B., Willinger, D., Hoffmann, A., Banissy, M. J., Bhattacharya, J., & Windischberger, C. (2018). *Ultra-high-field fMRI insights on insight: Neural correlates of the Aha!-moment.* Human Brain Mapping, 39(8), 3241-3252. [DOI: 10.1002/hbm.24073](https://doi.org/10.1002/hbm.24073)
+69. Goel, V. (2007). *Anatomy of deductive reasoning.* Trends in Cognitive Sciences, 11(10), 435-441. [DOI: 10.1016/j.tics.2007.09.003](https://doi.org/10.1016/j.tics.2007.09.003)
