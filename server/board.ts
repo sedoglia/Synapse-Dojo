@@ -197,7 +197,24 @@ export async function cleanUp(db: D1Database, now = new Date()) {
 const CODE_CHARS = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
 export const MAX_GROUPS = 10;
 export const MAX_MEMBERS = 100;
-export const newCode = () => [...crypto.getRandomValues(new Uint8Array(10))].map((b) => CODE_CHARS[b % CODE_CHARS.length]).join('');
+
+/**
+ * Generates an invite code uniformly at random without modulo bias.
+ * Since CODE_CHARS has 31 characters, taking 5 bits (0..31) and rejecting index 31
+ * guarantees each character has an exact 1/31 probability without using the modulo operator.
+ */
+export function newCode(): string {
+  let code = '';
+  const buf = new Uint8Array(16);
+  while (code.length < 10) {
+    crypto.getRandomValues(buf);
+    for (let i = 0; i < buf.length && code.length < 10; i++) {
+      const idx = buf[i] & 0x1f;
+      if (idx < CODE_CHARS.length) code += CODE_CHARS[idx];
+    }
+  }
+  return code;
+}
 /** Accepts codes typed with spaces, dashes or lowercase letters. */
 export const normalizeCode = (v: unknown) => (typeof v === 'string' ? v.toUpperCase().replace(/[^A-Z0-9]/g, '') : '');
 export const isCode = (v: string) => v.length === 10 && [...v].every((c) => CODE_CHARS.includes(c));
