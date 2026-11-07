@@ -4595,3 +4595,307 @@ html.big-text {
     opacity: 0;
   }
 }
+
+/* confetti burst celebration */
+.confetti-particle {
+  position: absolute;
+  width: 9px;
+  height: 14px;
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 999;
+  animation: confettiExplode 1.1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+@keyframes confettiExplode {
+  0% {
+    transform: translate(-50%, -50%) scale(0.6) rotate(0deg);
+    opacity: 1;
+  }
+  65% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy) + 70px)) rotate(var(--rot)) scale(0.85);
+    opacity: 0;
+  }
+}
+
+/* nonogram */
+.nonogram-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto 10px;
+  gap: 8px;
+}
+.nonogram-badge {
+  font-weight: 800;
+  font-size: 0.95rem;
+  background: var(--surface-2);
+  color: var(--text);
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+}
+.nonogram-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.nonogram-tool-btn {
+  padding: 6px 10px;
+  font-size: 0.95rem;
+  border-radius: 12px;
+}
+.nonogram-mode-pill {
+  display: flex;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 3px;
+  margin: 0 auto 12px;
+  width: fit-content;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+.nonogram-toggle-btn {
+  background: transparent;
+  color: var(--muted);
+  border: none;
+  border-radius: 20px;
+  padding: 6px 16px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.nonogram-toggle-btn.active {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(91, 91, 240, 0.3);
+}
+.nonogram-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
+  touch-action: none;
+  margin: 0 auto;
+}
+.nonogram-grid-top {
+  display: flex;
+  align-items: flex-end;
+}
+.nonogram-corner {
+  width: 58px;
+  flex-shrink: 0;
+}
+.nonogram-cols-header {
+  display: flex;
+  gap: 2px;
+}
+.nonogram-col-clue {
+  width: var(--nono-cell-size, 42px);
+  min-height: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--muted);
+  padding-bottom: 4px;
+  line-height: 1.15;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+.nonogram-col-clue.satisfied {
+  color: var(--good);
+  opacity: 0.85;
+}
+.nonogram-grid-body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.nonogram-grid-row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.nonogram-row-clue {
+  width: 58px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 4px;
+  padding-right: 6px;
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: var(--muted);
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+.nonogram-row-clue.satisfied {
+  color: var(--good);
+  opacity: 0.85;
+}
+.nonogram-cell {
+  width: var(--nono-cell-size, 42px);
+  height: var(--nono-cell-size, 42px);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.12s ease, border-color 0.12s ease, transform 0.08s ease;
+  font-family: inherit;
+  font-weight: 800;
+}
+.nonogram-cell:active {
+  transform: scale(0.92);
+}
+.nonogram-cell.filled {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  border-radius: 5px;
+  transform: scale(0.95);
+}
+.nonogram-cell.crossed {
+  color: var(--muted);
+  font-size: 1.05rem;
+  font-weight: 700;
+  background: var(--surface-2);
+}
+.nonogram-cell.hint-pop {
+  animation: hintPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+@keyframes hintPop {
+  0% {
+    transform: scale(1.4);
+    background: #facc15;
+    border-color: #facc15;
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(0.95);
+  }
+}
+
+/* Board sizing per grid dimension */
+.nonogram-board.size-4 {
+  --nono-cell-size: min(52px, calc((100vw - 110px) / 4));
+}
+.nonogram-board.size-5 {
+  --nono-cell-size: min(46px, calc((100vw - 110px) / 5));
+}
+.nonogram-board.size-6 {
+  --nono-cell-size: min(40px, calc((100vw - 110px) / 6));
+}
+.nonogram-board.size-7 {
+  --nono-cell-size: min(36px, calc((100vw - 110px) / 7));
+}
+
+/* Solved state: picture reveal */
+.nonogram-board.solved .nonogram-cell.revealed-block {
+  background: var(--accent);
+  border-color: transparent;
+  border-radius: 3px;
+  transform: scale(0.98);
+  animation: nonoSolvedPop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+.nonogram-board.solved .nonogram-cell.revealed-empty {
+  background: transparent;
+  border-color: transparent;
+}
+.nonogram-board.solved .nonogram-col-clue,
+.nonogram-board.solved .nonogram-row-clue {
+  opacity: 0.18;
+}
+@keyframes nonoSolvedPop {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  60% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(0.98);
+    opacity: 1;
+  }
+}
+
+.nonogram-reveal-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface);
+  border: 2px solid var(--accent);
+  border-radius: 18px;
+  padding: 10px 22px;
+  margin: 14px auto 0;
+  box-shadow: var(--shadow);
+  width: fit-content;
+}
+.nonogram-reveal-banner.hidden {
+  display: none;
+}
+.reveal-icon {
+  font-size: 2.2rem;
+  line-height: 1;
+}
+.reveal-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text);
+}
+
+/* Mini preview in guide/examples */
+.ex-nono-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 0.65rem;
+  font-weight: 700;
+}
+.ex-nono-cols {
+  display: flex;
+  gap: 2px;
+  margin-left: 20px;
+}
+.ex-nono-cols span {
+  width: 14px;
+  text-align: center;
+  color: var(--muted);
+}
+.ex-nono-row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.ex-nono-row .clue {
+  width: 18px;
+  text-align: right;
+  color: var(--muted);
+  font-size: 0.65rem;
+  padding-right: 2px;
+}
+.ex-nono-row span:not(.clue) {
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  background: var(--surface);
+}
+.ex-nono-row span.on {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+

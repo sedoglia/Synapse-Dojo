@@ -6,6 +6,18 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.12] - 2026-11-07
+
+### Aggiunto
+
+- 2048 (`ex.game2048`):
+  - Introdotto il 36° esercizio nel catalogo della palestra cognitiva sotto il dominio *Ragionamento e Pianificazione* (`reasoning`).
+  - Struttura a traguardi progressivi (*milestone trials*) da 32 a 4096 ottimizzata per sessioni rapide da 60–120 secondi.
+  - Difficoltà adattiva continua (*weighted up-down staircase*) con introduzione di blocchi ostacolo (`🪨`) ai livelli 8 e 10 per stimolare percorsi di scorrimento complessi.
+  - Controlli accessibili per tutte le età: swipe/trascinamento, tastiera (frecce, WASD) e D-Pad tattile a schermo progettato per touchscreen e anziani, con funzione Annulla (↩).
+  - Feedback sensoriale gratificante: scala musicale progressiva per le fusioni, animazioni di pulsazione, aptica e palette pastello ad alto contrasto.
+  - Razionale neuroscientifico documentato in `docs/basi-scientifiche.md` e traduzione nativa completa in tutte le 12 lingue supportate.
+
 ## [0.12.11] - 2026-11-07
 
 ### Modificato

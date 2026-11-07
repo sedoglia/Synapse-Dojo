@@ -9,7 +9,7 @@ export const ui = {
   'onboard.go': 'Let’s go',
 
   'landing.heroTitle': 'Train your mind a few minutes a day',
-  'landing.heroSub': '35 cognitive and bilateral games inspired by research paradigms, to practise memory, attention, coordination, processing speed and reflexes. 100% free, no ads, no sign-up or passwords required.',
+  'landing.heroSub': '36 cognitive and bilateral games inspired by research paradigms, to practise memory, attention, coordination, processing speed and reflexes. 100% free, no ads, no sign-up or passwords required.',
   'landing.badgeFree': '100% Free',
   'landing.badgePrivacy': 'Total Privacy · Local Data',
   'landing.badgeScience': 'Research-Inspired',
@@ -24,13 +24,13 @@ export const ui = {
   'landing.pillar1Desc': '4 personalized exercises picked daily that adapt in real time to your performance. Takes about 10–15 minutes.',
   'landing.pillar2Title': 'Daily Neuro Score',
   'landing.pillar2Desc': 'A test of about 10–15 minutes across all 9 areas to follow your own trend over the weeks. It is not a clinical test.',
-  'landing.pillar3Title': 'Free Gym (35 Games)',
+  'landing.pillar3Title': 'Free Gym (36 Games)',
   'landing.pillar3Desc': 'Practice freely across all 9 cognitive and bilateral domains whenever you want to beat your personal bests.',
   'landing.pillar4Title': 'Weekly Leaderboard (optional)',
   'landing.pillar4Desc': 'If you like, compare your consistency and improvement with other players or friends, under a random nickname. It is off unless you join, and you can leave at any time.',
   'landing.domainsTitle': 'The 9 Trained Skill Domains',
   'landing.guideCtaTitle': 'Want to learn how every exercise works?',
-  'landing.guideCtaDesc': 'Explore our detailed guide with the studies behind the exercises and the rules for all 35 games.',
+  'landing.guideCtaDesc': 'Explore our detailed guide with the studies behind the exercises and the rules for all 36 games.',
   'landing.guideCtaBtn': 'Read the Full Guide',
   'landing.footerTagline': 'Synapse Dojo · Free Cognitive Training',
 
@@ -43,8 +43,8 @@ export const ui = {
   'guide.planP': 'Every day, Synapse Dojo composes a balanced 4-exercise routine across different cognitive domains (e.g., speed, memory, attention, and executive control). The games adapt automatically: succeed and the difficulty increases; make mistakes and it scales down, so it stays neither too easy nor too hard for you. Finishing your daily workout builds your streak and awards XP towards leveling up.',
   'guide.checkH': '📏 Measure your Neuro Score (Daily Check)',
   'guide.checkP': 'The Neuro Score is a short daily battery covering all 9 areas, with one exercise per area chosen in daily rotation. Your score (0–1000) helps you follow your own trend in these exercises: read it over several weeks, not day by day, because the exercises rotate and each test is short. It has not yet been validated on real players, is not a clinical test and has no diagnostic value.',
-  'guide.trainingH': '🧩 Free Gym (35 Exercises)',
-  'guide.trainingP': 'In the Gym section, you have unlimited access to all 35 exercises, categorized by domain. Use it to focus on specific skills you want to strengthen, explore different exercise mechanics, or challenge your personal high scores.',
+  'guide.trainingH': '🧩 Free Gym (36 Exercises)',
+  'guide.trainingP': 'In the Gym section, you have unlimited access to all 36 exercises, categorized by domain. Use it to focus on specific skills you want to strengthen, explore different exercise mechanics, or challenge your personal high scores.',
   'guide.progressH': '📈 Progress & Statistics',
   'guide.progressP': 'Track your cognitive evolution over time. View your radar profile across all 9 skill domains, review your historical Neuro Score curve, unlock achievement badges (such as consecutive day streaks and master levels), and inspect your monthly training calendar.',
   'guide.boardH': '🏆 Weekly Leaderboard and Friend Groups',
@@ -377,7 +377,7 @@ export const ui = {
   'badge.combo10.name': 'Lightning',
   'badge.combo10.desc': '10 correct answers in a row',
   'badge.explorer.name': 'Explorer',
-  'badge.explorer.desc': 'Try all 35 exercises',
+  'badge.explorer.desc': 'Try all 36 exercises',
   'badge.balanced.name': 'Whole mind',
   'badge.balanced.desc': 'Train all 9 skills within 7 days',
   'badge.levelups25.name': 'Climbing',
@@ -416,7 +416,7 @@ export const ui = {
   'share.done.streak3': '3 training days in a row',
   'share.done.streak7': '7 training days in a row',
   'share.done.streak30': '30 training days in a row',
-  'share.done.explorer': 'All 35 exercises tried',
+  'share.done.explorer': 'All 36 exercises tried',
   'share.done.balanced': 'All 9 skills trained within 7 days',
   'share.note': 'The image shows only this milestone: no name, scores or age. Nothing is sent unless you choose where to share it.',
   'share.save': 'Save the image',
@@ -639,7 +639,22 @@ export const ui = {
   'ex.matrix.detail': '{ok}/{n} correct',
   'ex.matrix.confirm': 'Confirm ({sel}/{n})',
 
-  
+  // nonogram
+  'ex.nonogram.name': 'Nonogram',
+  'ex.nonogram.desc': 'Fill the grid cells following numeric clues along rows and columns to reveal hidden pixel art',
+  'ex.nonogram.why': 'Engages visuospatial deduction, constraint satisfaction, and multi-axis working memory planning.',
+  'ex.nonogram.example': 'Use row and column numbers to deduce which cells to fill or cross out',
+  'ex.nonogram.detail': '{ok}/{n} pictures revealed',
+  'ex.nonogram.fill': 'Fill',
+  'ex.nonogram.cross': 'Cross',
+  'ex.nonogram.clear': 'Reset',
+  'ex.nonogram.undo': 'Undo',
+  'ex.nonogram.hint': 'Hint',
+  'ex.nonogram.solved': 'Revealed: {name}!',
+  'ex.nonogram.check': 'Check',
+  'ex.nonogram.mistakes': '{n} mismatches detected',
+
+
 
   // tapSeq
   'ex.tapSeq.name': 'Bilateral Tap',

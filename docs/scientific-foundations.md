@@ -52,18 +52,18 @@ The evidence above leads to the platform's building blocks:
 
 ---
 
-## 3. The Complete Catalog of 35 Exercises (9 Domains)
+## 3. The Complete Catalog of 36 Exercises (9 Domains)
 
-The app organizes 35 original tasks across 9 cognitive and motor domains:
+The app organizes 36 original tasks across 9 cognitive and motor domains:
 
 ```
                                   ┌─── ⚡ Speed (4)
                                   ├─── 🎯 Attention (6)
                                   ├─── 🎛️ Executive Control (3)
                                   ├─── 🧠 Working Memory (4)
-     Synapse Dojo (35 Exercises)  ├─── 🔐 Episodic Memory (3)
+     Synapse Dojo (36 Exercises)  ├─── 🔐 Episodic Memory (3)
                                   ├─── 🧊 Spatial (2)
-                                  ├─── 🧩 Reasoning (3)
+                                  ├─── 🧩 Reasoning (4)
                                   ├─── ➗ Calculation & Reading (5)
                                   └─── 👐 Bilateral Coordination (5)
 ```
@@ -96,6 +96,7 @@ The exercises are **inspired by** the paradigms listed: they are short, game-lik
 | **🔐 Memory** | **Story Memory** | Inspired by logical memory for short stories | Scenes to keep apart (1–3), questions on what, where and when (2 or 3), a pause filled by an unscored distracting task at the player's own pace (3–15 s); from two scenes up the wrong answers include details from another scene. |
 | **🧊 Spatial** | **Rotations** | Mental rotation (*Shepard & Metzler, 1971*), two-dimensional version with chiral polyominoes | Number of squares (4–9), rotations in 30° steps, time limit (7.5 → 1.8 s). |
 | **🧊 Spatial** | **Spatial Matrix** | Spatial memory with coordinate transformation | Blocks to remember (2–6), a 3×3 and then a 4×4 grid at the top levels, rotation (0°, 90°, 180°, then random), study time (4.8 → 3.2 s). |
+| **🧊 Spatial** | **Nonogram** | 2D Constraint Satisfaction Problem (Discrete Tomography; *Ueda & Nagao, 1996*; *Batenburg & Kosters, 2009, 2012*) and Gestalt closure (*Wertheimer, 1923*; *Wagemans et al., 2012*) driven by dopaminergic "Aha!" insight (*Jung-Beeman et al., 2004*; *Danek et al., 2014*) and frontoparietal visuospatial planning (*Baddeley, 2000*; *Franco et al., 2021*) | Grid dimensions (4×4 at level 1, 5×5 at levels 2–4, 6×6 at levels 5–6, 7×7 at levels 7–8); 40 handcrafted pixel-art puzzles strictly verified for 100% pure line-solvability with unique solutions (0 blind guessing required). Real-time satisfaction checkmarks, continuous drag-painting, and cross-out exclusion mode. |
 | **🧩 Reasoning** | **Towers** | *Tower of London* (*Shallice, 1982*) | Moves of the shortest solution (2–8), which are also the maximum allowed. |
 | **🧩 Reasoning** | **Odd one out** | Odd-one-out with multidimensional rules | Number of figures (4–9) and irrelevant features that vary (1–3), with every value on at least two figures, so there is only one solution. After a mistake the game names the feature that sets the right figure apart. |
 | **🧩 Reasoning** | **Market Stall** | Knapsack problem (Murawski & Bossaerts, 2016) in an everyday setting of costs and earnings | Number of products (4–8) with a budget of about half the total cost; minimum earnings to reach, shown on screen (90% → 100% of the best); from level 3 the shortcut of buying by best earnings per coin isn't enough. Actual earnings are revealed upon selling with animation and coin audio feedback, rewarding heuristic estimation and preventing blind trial and error. After a mistake the best choice stays highlighted until the player moves on. |
@@ -267,3 +268,12 @@ To make sure the platform stays a tool serving the user rather than advertising 
 52. Aral, S., & Nicolaides, C. (2017). *Exercise contagion in a global social network.* Nature Communications, 8, 14753. [DOI: 10.1038/ncomms14753](https://doi.org/10.1038/ncomms14753)
 53. Lindström, B., Bellander, M., Schultner, D. T., Chang, A., Tobler, P. N., & Amodio, D. M. (2021). *A computational reward learning account of social media engagement.* Nature Communications, 12, 1311. [DOI: 10.1038/s41467-020-19607-x](https://doi.org/10.1038/s41467-020-19607-x)
 54. Lamont, R. A., Swift, H. J., & Abrams, D. (2015). *A review and meta-analysis of age-based stereotype threat: negative stereotypes, not facts, do the damage.* Psychology and Aging, 30(1), 180-193, corrected in 2018. [DOI: 10.1037/a0038586](https://doi.org/10.1037/a0038586)
+
+**Visuospatial deduction, constraint satisfaction, and Gestalt closure (Nonogram)**
+
+55. Ueda, N., & Nagao, T. (1996). *NP-completeness results for NONOGRAM via parsimonious reductions.* Technical Report TR96-0008, Department of Computer Science, Tokyo Institute of Technology.
+56. Batenburg, K. J., & Kosters, W. A. (2009). *Solving Nonograms by combining relaxations.* Pattern Recognition, 42(8), 1672-1683. [DOI: 10.1016/j.patcog.2009.01.026](https://doi.org/10.1016/j.patcog.2009.01.026)
+57. Batenburg, K. J., & Kosters, W. A. (2012). *On the ease of solving Nonograms.* Discrete Applied Mathematics, 160(16-17), 2350-2371. [DOI: 10.1016/j.dam.2012.06.002](https://doi.org/10.1016/j.dam.2012.06.002)
+58. Wertheimer, M. (1923). *Untersuchungen zur Lehre von der Gestalt. II.* Psychologische Forschung, 4(1), 301-350. (Law of closure and visuospatial perceptual grouping; reviewed in Wagemans et al., 2012, *Psychological Bulletin*, 138(6), 1172-1217).
+59. Jung-Beeman, M., Bowden, E. M., Haberman, J., Frymiare, J. L., Arambel-Liu, S., Greenblatt, R., Reber, P. J., & Kounios, J. (2004). *Neural activity when people solve verbal and spatial problems with insight.* PLoS Biology, 2(4), e97. [DOI: 10.1371/journal.pbio.0020097](https://doi.org/10.1371/journal.pbio.0020097)
+60. Danek, A. H., Fraps, T., von Müller, A., Grothe, B., & Öllinger, M. (2014). *It's a pleasure: The cognitive and affective components of the Eureka! experience.* Cognition, 131(3), 398-418. [DOI: 10.1016/j.cognition.2014.02.008](https://doi.org/10.1016/j.cognition.2014.02.008)

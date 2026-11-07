@@ -6,6 +6,18 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.12] - 2026-11-07
+
+### Added
+
+- 2048 (`ex.game2048`):
+  - Added the 36th exercise in the cognitive gym under the *Reasoning & Planning* domain (`reasoning`).
+  - Structured around adaptive milestone challenges (target tiles from 32 up to 4096) tailored for quick 60–120s training sessions.
+  - Continuous adaptive difficulty via the weighted up-down staircase algorithm with stone obstacles (`🪨`) introduced at levels 8 and 10 to stimulate complex spatial rerouting.
+  - Multi-input accessible controls: touch/mouse swipe, keyboard (Arrow keys, WASD), and an on-screen tactile D-Pad designed for older adults and touch accessibility, plus an Undo action (↩).
+  - Rich multimodal feedback: harmonic musical pitch scale for merges, merge pulses, haptics, and high-contrast pastel tile palettes.
+  - Neuroscientific grounding documented in `docs/scientific-foundations.md` and complete localization across all 12 supported languages.
+
 ## [0.12.11] - 2026-11-07
 
 ### Changed
