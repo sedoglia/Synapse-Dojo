@@ -6,6 +6,12 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.1] - 2026-11-07
+
+### Fixed
+
+- Security: eliminated modulo bias in group invite code generation (`newCode`), ensuring completely uniform distribution across characters via rejection sampling and resolving CodeQL alert #1 (`js/biased-cryptographic-random`).
+
 ## [0.12.0] - 2026-11-06
 
 ### Added

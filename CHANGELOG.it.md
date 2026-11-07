@@ -6,6 +6,12 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.1] - 2026-11-07
+
+### Risolto
+
+- Sicurezza: eliminato il modulo bias nella generazione dei codici di invito dei gruppi (`newCode`), garantendo una distribuzione perfettamente uniforme tramite rejection sampling e risolvendo l'avviso CodeQL #1 (`js/biased-cryptographic-random`).
+
 ## [0.12.0] - 2026-11-06
 
 ### Aggiunto
