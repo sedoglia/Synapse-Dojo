@@ -5567,12 +5567,27 @@ html.big-text {
   padding: 8px 10px;
 }
 
+.ctc-scratch-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
 .ctc-scratch-label {
   font-size: 0.72rem;
   font-weight: 700;
   color: var(--muted);
   letter-spacing: 0.02em;
   text-transform: uppercase;
+}
+
+.ctc-scratch-hint {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--muted);
+  opacity: 0.85;
 }
 
 .ctc-scratch-bar {
