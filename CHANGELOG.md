@@ -6,6 +6,17 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.8] - 2026-11-07
+
+### Changed
+
+- Glance (UFOV / Double Decision) & Radar (MOT):
+  - Fixed star button displacement on click: decoupled spatial centering via `translate: -50% -50%` and introduced dedicated elastic `glance-pop` animation, eliminating unwanted spatial shifts during interaction.
+  - High-fidelity radar aesthetics: concentric radial ring reticle matching the exact ring geometry (24%, 42%, 50%) with precision crosshairs.
+  - Luminous golden star with bloom effect, instant tactile pressed states (`:active`), and emerald halo reveals on correct choices.
+  - MOT Radar: 3D spherical rendering with radial lighting gradients, glowing target auras during cue phase, subtle sonar background grid, and clear dashed indicators for missed targets.
+  - Synchronized multisensory audio-visual-haptic feedback to boost dopaminergic reward loops and flow state engagement.
+
 ## [0.12.7] - 2026-11-07
 
 ### Changed

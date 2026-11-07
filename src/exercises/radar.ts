@@ -1,5 +1,5 @@
 import { h, rand, shuffle } from '../dom';
-import { sfx } from '../audio';
+import { sfx, haptic } from '../audio';
 import { t } from '../i18n';
 import { fitCanvas, cssVar } from '../widgets';
 import type { Exercise } from './types';
@@ -47,18 +47,70 @@ export const radar: Exercise = {
 
     const draw = () => {
       ctx2d.clearRect(0, 0, size.w, size.h);
+
+      // Subtle radar grid background
+      const cx = size.w / 2;
+      const cy = size.h / 2;
+      const maxR = Math.hypot(cx, cy);
+      ctx2d.strokeStyle = 'rgba(128, 138, 150, 0.12)';
+      ctx2d.lineWidth = 1;
+      for (let r = 60; r < maxR; r += 60) {
+        ctx2d.beginPath();
+        ctx2d.arc(cx, cy, r, 0, Math.PI * 2);
+        ctx2d.stroke();
+      }
+      ctx2d.beginPath();
+      ctx2d.moveTo(cx, 0);
+      ctx2d.lineTo(cx, size.h);
+      ctx2d.moveTo(0, cy);
+      ctx2d.lineTo(size.w, cy);
+      ctx2d.stroke();
+
       for (const b of balls) {
+        const highlight = (b.target && phase === 'cue') || (reveal && b.target);
+
+        // Halo glow for targets in cue phase
+        if (b.target && phase === 'cue') {
+          ctx2d.beginPath();
+          ctx2d.arc(b.x, b.y, R + 6, 0, Math.PI * 2);
+          ctx2d.fillStyle = accent;
+          ctx2d.globalAlpha = 0.28;
+          ctx2d.fill();
+          ctx2d.globalAlpha = 1;
+        }
+
         ctx2d.beginPath();
         ctx2d.arc(b.x, b.y, R, 0, Math.PI * 2);
-        const highlight = (b.target && phase === 'cue') || (reveal && b.target);
-        ctx2d.fillStyle = highlight ? accent : neutral;
-        ctx2d.globalAlpha = phase === 'cue' && !b.target ? 0.55 : 1;
+        const grad = ctx2d.createRadialGradient(b.x - R * 0.35, b.y - R * 0.35, R * 0.15, b.x, b.y, R);
+        if (highlight) {
+          grad.addColorStop(0, '#ffffff');
+          grad.addColorStop(0.35, accent);
+          grad.addColorStop(1, accent);
+        } else {
+          grad.addColorStop(0, '#f1f5f9');
+          grad.addColorStop(0.35, neutral);
+          grad.addColorStop(1, '#475569');
+        }
+        ctx2d.fillStyle = grad;
+        ctx2d.globalAlpha = phase === 'cue' && !b.target ? 0.45 : 1;
         ctx2d.fill();
         ctx2d.globalAlpha = 1;
+
         if (b.picked) {
-          ctx2d.lineWidth = 4;
+          ctx2d.beginPath();
+          ctx2d.arc(b.x, b.y, R + 3, 0, Math.PI * 2);
+          ctx2d.lineWidth = 3.5;
           ctx2d.strokeStyle = reveal ? (b.target ? '#16a34a' : '#e5484d') : accent;
           ctx2d.stroke();
+        } else if (reveal && b.target) {
+          // Missed target: show dashed green halo
+          ctx2d.beginPath();
+          ctx2d.arc(b.x, b.y, R + 3, 0, Math.PI * 2);
+          ctx2d.lineWidth = 2.5;
+          ctx2d.setLineDash([4, 3]);
+          ctx2d.strokeStyle = '#16a34a';
+          ctx2d.stroke();
+          ctx2d.setLineDash([]);
         }
       }
     };
@@ -149,8 +201,10 @@ export const radar: Exercise = {
           if (hit.picked) {
             const pickedCount = balls.filter((b) => b.picked).length;
             sfx.note(pickedCount);
+            haptic('tap');
           } else {
             sfx.clack();
+            haptic('tap');
           }
           draw();
           if (balls.filter((b) => b.picked).length === nTargets) done();
@@ -163,7 +217,10 @@ export const radar: Exercise = {
       if (ok) {
         wins++;
         sfx.sparkle();
+        haptic('good');
         bestTracked = Math.max(bestTracked, nTargets);
+      } else {
+        haptic('bad');
       }
       reveal = true;
       draw();

@@ -1,5 +1,5 @@
 import { h, rand, pick, shuffle, flash } from '../dom';
-import { sfx } from '../audio';
+import { sfx, haptic } from '../audio';
 import { t } from '../i18n';
 import type { Exercise } from './types';
 
@@ -110,6 +110,7 @@ export const glance: Exercise = {
       const saidVehicle = await ctx.input<number>((done) => {
         onCenter = (i) => {
           sfx.tick();
+          haptic('tap');
           done(i);
         };
         return () => (onCenter = null);
@@ -121,6 +122,7 @@ export const glance: Exercise = {
       const saidWhere = await ctx.input<number>((done) => {
         onSlot = (k) => {
           sfx.note(k);
+          haptic('tap');
           done(k);
         };
         return () => (onSlot = null);
@@ -137,12 +139,16 @@ export const glance: Exercise = {
       if (ok) {
         correct++;
         sfx.sparkle();
-        flash(outer[where], 'pop', 250);
-      } else if (saidWhere !== where) {
-        outer[saidWhere].textContent = '✗';
-        outer[saidWhere].classList.add('wrong-pick');
+        haptic('good');
+        flash(outer[where], 'pop', 280);
+      } else {
+        haptic('bad');
+        if (saidWhere !== where) {
+          outer[saidWhere].textContent = '✗';
+          outer[saidWhere].classList.add('wrong-pick');
+        }
       }
-      await ctx.wait(ok ? 700 : 1500);
+      await ctx.wait(ok ? 650 : 1400);
       center.classList.remove('right', 'wrong');
       outer.forEach((s) => s.classList.remove('reveal', 'wrong-pick'));
     }
