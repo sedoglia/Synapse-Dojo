@@ -6,6 +6,18 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.14] - 2026-11-07
+
+### Changed
+
+- 2048 (`ex.game2048`):
+  - Balanced session duration: reduced milestone challenges from 5 to 3 in workout/gym mode (2 in daily check battery, 1 in practice), bringing total game time to a snappy ~60–90 seconds consistent with all other exercises.
+  - Hyper-responsive swipe engine: swipe gestures now trigger immediately on `pointermove` as soon as a 16px threshold is crossed without waiting for finger release (`pointerup`), eliminating touch lag.
+  - Broad swipe capture: swipe detection now covers the entire game board wrapper area, preventing dropped swipes started near the edges.
+  - Zero-delay tactile D-Pad: D-Pad buttons now execute moves instantly on `pointerdown` with event propagation isolation and snappy press animations.
+  - DOM diffing optimization: pre-allocated persistent 4×4 cell elements to eliminate grid layout reflows and DOM destruction on each move.
+  - Cleaned keyboard listeners preventing duplicate listener accumulation across trials.
+
 ## [0.12.13] - 2026-11-07
 
 ### Added

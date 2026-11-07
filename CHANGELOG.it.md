@@ -6,6 +6,18 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.14] - 2026-11-07
+
+### Modificato
+
+- 2048 (`ex.game2048`):
+  - Durata di gioco ribilanciata: ridotti i traguardi da 5 a 3 nella palestra/allenamento libero (2 nella batteria giornaliera, 1 in prova), portando la durata complessiva a ~60–90 secondi, perfettamente in linea con gli altri giochi del catalogo.
+  - Motore di swipe iper-reattivo: i movimenti scorrono all'istante su `pointermove` non appena superata una soglia di soli 16px, senza attendere il sollevamento del dito (`pointerup`) ed eliminando ogni ritardo percepito.
+  - Area di rilevamento estesa: il gesto di scorrimento viene intercettato su tutta l'area del tabellone di gioco, evitando scorrimenti persi ai bordi.
+  - D-Pad a risposta istantanea: i pulsanti direzionali eseguono la mossa al primo tocco (`pointerdown`) con blocco della propagazione e animazione immediata.
+  - Ottimizzazione del rendering DOM: le 16 celle 4×4 sono ora persistenti in memoria, evitando il reflow e la ricreazione dell'intero albero DOM a ogni mossa.
+  - Gestione pulita degli ascoltatori da tastiera evitando accumuli tra un traguardo e l'altro.
+
 ## [0.12.13] - 2026-11-07
 
 ### Aggiunto

@@ -1,7 +1,6 @@
 import { h, flash, clamp, pick } from '../dom';
 import { sfx, haptic } from '../audio';
 import { t } from '../i18n';
-import { onKeys } from '../widgets';
 import type { Exercise } from './types';
 
 const GRID_SIZE = 4;
@@ -235,12 +234,12 @@ export const game2048: Exercise = {
   desc: 'ex.game2048.desc',
   why: 'ex.game2048.why',
   example: 'ex.game2048.example',
-  minutes: [2, 3],
+  minutes: [1, 2],
   levels: { min: 1, max: MAX_LEVEL, start: 2 },
   levelLabel: (l) => `${targetFor(l)} 🎯`,
 
   async run(ctx) {
-    const milestones = ctx.count(5, 4, 2);
+    const milestones = ctx.count(3, 2, 1);
     const st = ctx.stair(milestones, 1, MAX_LEVEL, { target: 0.75 });
 
     let currentGrid = seedBoard(st.int);
@@ -326,34 +325,38 @@ export const game2048: Exercise = {
 
       ctx.stage.append(boardWrap, dpad);
 
-      // Render cells into the grid
+      // Pre-allocate persistent cell elements in the 4x4 grid (avoids layout thrashing)
       const cellEls: HTMLElement[] = [];
-      const renderCells = (spawnIdx = -1, mergedVal = 0) => {
-        gridEl.replaceChildren();
-        cellEls.length = 0;
+      gridEl.replaceChildren();
+      for (let i = 0; i < TOTAL_CELLS; i++) {
+        const cell = h('div', { class: 'game2048-cell' });
+        cellEls.push(cell);
+        gridEl.append(cell);
+      }
 
+      const renderCells = (spawnIdx = -1, mergedVal = 0) => {
         for (let i = 0; i < TOTAL_CELLS; i++) {
           const val = currentGrid[i];
-          const cell = h('div', { class: 'game2048-cell' });
+          const cell = cellEls[i];
 
           if (val > 0) {
             const isSpawned = i === spawnIdx;
             const isMerged = val === mergedVal;
             const textClass = val >= 1024 ? 'xsmall-text' : val >= 128 ? 'small-text' : '';
-            const tile = h(
-              'div',
-              {
-                class: `game2048-tile val-${val} ${textClass} ${isSpawned ? 'tile-spawn' : ''} ${isMerged ? 'tile-merge' : ''}`,
-              },
-              String(val),
+            cell.replaceChildren(
+              h(
+                'div',
+                {
+                  class: `game2048-tile val-${val} ${textClass} ${isSpawned ? 'tile-spawn' : ''} ${isMerged ? 'tile-merge' : ''}`,
+                },
+                String(val),
+              ),
             );
-            cell.append(tile);
           } else if (val === -1) {
-            const stone = h('div', { class: 'game2048-tile val-obstacle' }, '🪨');
-            cell.append(stone);
+            cell.replaceChildren(h('div', { class: 'game2048-tile val-obstacle' }, '🪨'));
+          } else {
+            cell.replaceChildren();
           }
-          cellEls.push(cell);
-          gridEl.append(cell);
         }
       };
 
@@ -459,95 +462,126 @@ export const game2048: Exercise = {
           updateHud();
         };
 
-        // Touch & Mouse Swipe Handlers
+        // Ultra-responsive touch & mouse swipe handlers
         let touchStartX = 0;
         let touchStartY = 0;
         let isPointerDown = false;
+        let swipeFired = false;
 
         const onPointerDown = (e: PointerEvent) => {
+          if (!e.isPrimary) return;
+          if ((e.target as HTMLElement)?.closest?.('button')) return;
           isPointerDown = true;
+          swipeFired = false;
           touchStartX = e.clientX;
           touchStartY = e.clientY;
-          if (gridEl.setPointerCapture) {
-            try {
-              gridEl.setPointerCapture(e.pointerId);
-            } catch {}
-          }
         };
 
-        const onPointerUp = (e: PointerEvent) => {
-          if (!isPointerDown) return;
-          isPointerDown = false;
-          if (gridEl.releasePointerCapture) {
-            try {
-              gridEl.releasePointerCapture(e.pointerId);
-            } catch {}
-          }
+        const onPointerMove = (e: PointerEvent) => {
+          if (!isPointerDown || swipeFired) return;
           const dx = e.clientX - touchStartX;
           const dy = e.clientY - touchStartY;
           const absDx = Math.abs(dx);
           const absDy = Math.abs(dy);
 
-          if (Math.max(absDx, absDy) < 22) return; // ignore tap
-
-          if (absDx > absDy) {
-            executeMove(dx > 0 ? 'right' : 'left');
-          } else {
-            executeMove(dy > 0 ? 'down' : 'up');
+          // Fast swipe threshold: triggers immediately as soon as finger moves 16px!
+          if (Math.max(absDx, absDy) >= 16) {
+            swipeFired = true;
+            if (absDx > absDy) {
+              executeMove(dx > 0 ? 'right' : 'left');
+            } else {
+              executeMove(dy > 0 ? 'down' : 'up');
+            }
           }
+        };
+
+        const onPointerUp = (e: PointerEvent) => {
+          if (isPointerDown && !swipeFired) {
+            // Micro-flick fallback on release
+            const dx = e.clientX - touchStartX;
+            const dy = e.clientY - touchStartY;
+            const absDx = Math.abs(dx);
+            const absDy = Math.abs(dy);
+            if (Math.max(absDx, absDy) >= 10) {
+              swipeFired = true;
+              if (absDx > absDy) {
+                executeMove(dx > 0 ? 'right' : 'left');
+              } else {
+                executeMove(dy > 0 ? 'down' : 'up');
+              }
+            }
+          }
+          isPointerDown = false;
+          swipeFired = false;
         };
 
         const onPointerCancel = () => {
           isPointerDown = false;
+          swipeFired = false;
         };
 
-        gridEl.addEventListener('pointerdown', onPointerDown);
-        gridEl.addEventListener('pointerup', onPointerUp);
-        gridEl.addEventListener('pointercancel', onPointerCancel);
+        boardWrap.addEventListener('pointerdown', onPointerDown);
+        window.addEventListener('pointermove', onPointerMove, { passive: true });
         window.addEventListener('pointerup', onPointerUp);
+        window.addEventListener('pointercancel', onPointerCancel);
 
-        // Tactile D-Pad Click Handlers
-        btnUp.onpointerdown = (e) => {
-          e.preventDefault();
-          executeMove('up');
+        // Tactile D-Pad Click Handlers (instant on touch down)
+        const bindDbtn = (btn: HTMLElement, dir: Direction) => {
+          btn.onpointerdown = (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            executeMove(dir);
+          };
         };
-        btnDown.onpointerdown = (e) => {
-          e.preventDefault();
-          executeMove('down');
-        };
-        btnLeft.onpointerdown = (e) => {
-          e.preventDefault();
-          executeMove('left');
-        };
-        btnRight.onpointerdown = (e) => {
-          e.preventDefault();
-          executeMove('right');
-        };
+        bindDbtn(btnUp, 'up');
+        bindDbtn(btnDown, 'down');
+        bindDbtn(btnLeft, 'left');
+        bindDbtn(btnRight, 'right');
 
-        // Keyboard Controls
-        onKeys(ctx, {
-          ArrowUp: () => executeMove('up'),
-          ArrowDown: () => executeMove('down'),
-          ArrowLeft: () => executeMove('left'),
-          ArrowRight: () => executeMove('right'),
-          w: () => executeMove('up'),
-          W: () => executeMove('up'),
-          s: () => executeMove('down'),
-          S: () => executeMove('down'),
-          a: () => executeMove('left'),
-          A: () => executeMove('left'),
-          d: () => executeMove('right'),
-          D: () => executeMove('right'),
-          z: () => undoBtn.click(),
-          Z: () => undoBtn.click(),
-        });
+        // Direct Keyboard Controls
+        const onKeyDown = (e: KeyboardEvent) => {
+          switch (e.key) {
+            case 'ArrowUp':
+            case 'w':
+            case 'W':
+              e.preventDefault();
+              executeMove('up');
+              break;
+            case 'ArrowDown':
+            case 's':
+            case 'S':
+              e.preventDefault();
+              executeMove('down');
+              break;
+            case 'ArrowLeft':
+            case 'a':
+            case 'A':
+              e.preventDefault();
+              executeMove('left');
+              break;
+            case 'ArrowRight':
+            case 'd':
+            case 'D':
+              e.preventDefault();
+              executeMove('right');
+              break;
+            case 'z':
+            case 'Z':
+            case 'Backspace':
+              e.preventDefault();
+              undoBtn.click();
+              break;
+          }
+        };
+        window.addEventListener('keydown', onKeyDown);
 
         return () => {
           undoBtn.onclick = null;
-          gridEl.removeEventListener('pointerdown', onPointerDown);
-          gridEl.removeEventListener('pointerup', onPointerUp);
-          gridEl.removeEventListener('pointercancel', onPointerCancel);
+          boardWrap.removeEventListener('pointerdown', onPointerDown);
+          window.removeEventListener('pointermove', onPointerMove);
           window.removeEventListener('pointerup', onPointerUp);
+          window.removeEventListener('pointercancel', onPointerCancel);
+          window.removeEventListener('keydown', onKeyDown);
           btnUp.onpointerdown = null;
           btnDown.onpointerdown = null;
           btnLeft.onpointerdown = null;
