@@ -6,6 +6,16 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.18] - 2026-11-07
+
+### Modificato
+
+- Decifra il Codice (`ex.crackTheCode`):
+  - Calibrazione della durata della sessione: ridotto il numero di schemi da 3 a 2 in modalità palestra (`ctx.count(2, 1, 1)`), portando la durata complessiva a circa 60–80 secondi per evitare l'affaticamento cognitivo e allinearsi con gli altri giochi di ragionamento (come Nonogram e 2048).
+  - Budget tentativi adattivo: numero di tentativi di sblocco calibrato sulla difficoltà del livello (`attemptsFor(level)`), con 6 tentativi al livello 1, 5 ai livelli 2–3 e 4 ai livelli superiori. Questo previene la frustrazione iniziale, favorisce l'esplorazione logica senza stress nei primi livelli e stringe gradualmente la sfida all'aumentare dell'abilità.
+  - Banner esplicativo della regola di deduzione: aggiunto un banner ben visibile in cima al gioco (`💡 Ogni riga indica l’esatto numero di cifre presenti nel codice. Le altre sono escluse.`) che chiarisce senza equivoci l'esclusione delle cifre non menzionate.
+  - Frasi degli indizi rese inequivocabili: riformulato il testo degli indizi in tutte le 12 lingue supportate (es. "Solo 1 cifra corretta...", "1 correct digit...", "Nur 1 richtige Ziffer...", ecc.) per rendere evidente il vincolo esatto ed eliminare qualsiasi percezione di dover andare a tentativi casuali.
+
 ## [0.12.17] - 2026-11-07
 
 ### Aggiunto

@@ -6,6 +6,16 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.18] - 2026-11-07
+
+### Changed
+
+- Crack the Code (`ex.crackTheCode`):
+  - Calibrated session pacing: reduced trials from 3 to 2 in gym mode (`ctx.count(2, 1, 1)`), keeping session time at an engaging ~60–80 seconds that prevents cognitive fatigue and matches other reasoning games (like Nonogram and 2048).
+  - Adaptive attempt budget: dynamically allocates deduction attempts based on level (`attemptsFor(level)`), giving 6 attempts at level 1, 5 at levels 2–3, and 4 at higher levels. This prevents early frustration, enables stress-free hypothesis testing for beginners, and smoothly tightens constraints as mastery increases.
+  - In-game deduction rule banner: added a prominent explanatory banner (`💡 Each row shows the exact count of digits in the code. Other digits are excluded.`) that explicitly clarifies all unmentioned digits are excluded.
+  - Disambiguated clue phrasings: refined clue copy across all 12 supported languages to make it crystal clear that clues specify the *exact* count of matching digits, completely eliminating ambiguity and guessing.
+
 ## [0.12.17] - 2026-11-07
 
 ### Added
