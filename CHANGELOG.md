@@ -6,6 +6,18 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.20] - 2026-11-07
+
+### Changed
+
+- Crack the Code (`ex.crackTheCode`):
+  - Calibrated minimum 3-digit combination: restored combination length to a minimum of 3 digits across levels 1–5, scaling to 4 digits for levels 6–8 (`codeLengthFor`), ensuring the exercise retains its authentic padlock identity and intellectual depth.
+  - Fine-tuned Dynamic Difficulty Adjustment (DDA):
+    - Level 1: 3 digits with 2 elimination ("none") clues (crossing off 6 impossible digits immediately, leaving only 4 candidate digits for 3 dial positions) with 6 attempts for friendly, confident onboarding.
+    - Levels 2–3: 3 digits with 1 elimination clue and 5 total clues (5 attempts).
+    - Levels 4–5: 3 digits with 4 tight clues (4 attempts) requiring advanced cross-referencing and proof-by-contradiction.
+    - Levels 6–8: 4 digits ramping from 5 clues down to 4 minimalist clues (5 to 4 attempts).
+
 ## [0.12.19] - 2026-11-07
 
 ### Changed
