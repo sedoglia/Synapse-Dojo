@@ -6,6 +6,15 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.9] - 2026-11-07
+
+### Risolto
+
+- Internazionalizzazione (i18n): verifica approfondita e copertura del 100% delle traduzioni in tutte le 12 lingue supportate (en, it, es, zh, hi, ar, pt, fr, ru, de, ja, id):
+  - Banco del mercato (`ex.resources`): tradotte e integrate le 7 chiavi mancanti (`sell`, `targetGoal`, `tally`, `success`, `perfect`, `itemsCount`, `selectPrompt`) in tutte le 10 lingue che ne erano sprovviste.
+  - Anagrammi e Torri di Hanoi: rimossi i tooltip hardcoded in italiano (`'Rimescola lettere'` e `'Annulla mossa'`), ora internazionalizzati tramite le nuove chiavi `ex.anagrams.scramble` e `ex.towers.undo` in tutte le 12 lingue.
+  - Introdotto lo script di verifica automatica `npm run check:i18n` per garantire l'integrità strutturale continua, la parità delle chiavi e la coerenza dei parametri in tutte le lingue.
+
 ## [0.12.8] - 2026-11-07
 
 ### Modificato

@@ -96,7 +96,7 @@ export const towers: Exercise = {
 
       const goalBox = h('div', { class: 'tower-goal' }, h('span', { class: 'muted' }, t('ex.towers.goal')), renderBoard(goal, true));
       const counter = h('div', { class: 'grid-status' });
-      const undoBtn = h('button', { class: 'btn ghost small tower-undo', disabled: true, title: 'Annulla mossa' }, '↩');
+      const undoBtn = h('button', { class: 'btn ghost small tower-undo', disabled: true, title: t('ex.towers.undo') }, '↩');
       const counterRow = h('div', { class: 'row center tower-header-row' }, counter, undoBtn);
       const playArea = h('div');
       ctx.stage.replaceChildren(goalBox, counterRow, playArea);

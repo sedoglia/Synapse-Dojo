@@ -90,7 +90,7 @@ export const anagrams: Exercise = {
 
       const clearBtn = h('button', { class: 'btn' }, 'C');
       const delBtn = h('button', { class: 'btn' }, '⌫');
-      const scrambleBtn = h('button', { class: 'btn anagram-scramble-btn', title: 'Rimescola lettere' }, '🔀');
+      const scrambleBtn = h('button', { class: 'btn anagram-scramble-btn', title: t('ex.anagrams.scramble') }, '🔀');
       actions.replaceChildren(clearBtn, delBtn, scrambleBtn);
 
       const typedWord = await ctx.input<string>((done) => {

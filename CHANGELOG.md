@@ -6,6 +6,15 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.9] - 2026-11-07
+
+### Fixed
+
+- Internationalization (i18n): comprehensive audit and 100% translation coverage across all 12 supported languages (en, it, es, zh, hi, ar, pt, fr, ru, de, ja, id):
+  - Market Stall (`ex.resources`): translated and integrated all 7 missing keys (`sell`, `targetGoal`, `tally`, `success`, `perfect`, `itemsCount`, `selectPrompt`) across the 10 languages that were previously lacking them.
+  - Anagrams & Towers of Hanoi: eliminated hardcoded Italian tooltips (`'Rimescola lettere'` and `'Annulla mossa'`), now fully localized via new `ex.anagrams.scramble` and `ex.towers.undo` keys across all 12 languages.
+  - Added automated audit script `npm run check:i18n` ensuring complete key parity, placeholder consistency, and structural integrity across all locales.
+
 ## [0.12.8] - 2026-11-07
 
 ### Changed
