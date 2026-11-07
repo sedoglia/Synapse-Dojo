@@ -17,11 +17,31 @@
  *    Maintains the challenge within the optimal ~80% accuracy zone, preventing both boredom and frustration.
  */
 
-import { h, flash, shuffle } from '../dom';
+import { h, flash } from '../dom';
 import { sfx } from '../audio';
 import { t } from '../i18n';
 import type { Exercise } from './types';
 import { burstConfetti } from '../screens/play';
+
+/** Cryptographically secure random float in [0, 1) using crypto.getRandomValues (CWE-338 compliant) */
+function secureRandom(): number {
+  const buf = new Uint32Array(1);
+  crypto.getRandomValues(buf);
+  return buf[0] / (0xffffffff + 1);
+}
+
+function secureShuffle<T>(arr: readonly T[]): T[] {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(secureRandom() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function securePick<T>(arr: readonly T[]): T {
+  return arr[Math.floor(secureRandom() * arr.length)];
+}
 
 export type ClueType = 'well' | 'wrong' | 'none';
 
@@ -32,7 +52,7 @@ export interface Clue {
 }
 
 export interface Puzzle {
-  secret: number[];
+  solution: number[];
   clues: Clue[];
   length: number;
 }
@@ -51,13 +71,13 @@ export function cluesCountFor(level: number): number {
 }
 
 /** Evaluates how many digits are well placed and how many are misplaced */
-export function evaluateClue(secret: number[], guess: number[]): { well: number; wrong: number } {
+export function evaluateClue(solution: number[], guess: number[]): { well: number; wrong: number } {
   let well = 0;
   let wrong = 0;
   for (let i = 0; i < guess.length; i++) {
-    if (secret[i] === guess[i]) {
+    if (solution[i] === guess[i]) {
       well++;
-    } else if (secret.includes(guess[i])) {
+    } else if (solution.includes(guess[i])) {
       wrong++;
     }
   }
@@ -96,7 +116,7 @@ export function solve(clues: Clue[], length: number, maxSolutions = 2): number[]
 const FALLBACK_PUZZLES: Record<number, Puzzle[]> = {
   1: [
     {
-      secret: [0, 4, 2],
+      solution: [0, 4, 2],
       length: 3,
       clues: [
         { guess: [6, 8, 2], type: 'well', count: 1 },
@@ -107,7 +127,7 @@ const FALLBACK_PUZZLES: Record<number, Puzzle[]> = {
       ],
     },
     {
-      secret: [3, 7, 9],
+      solution: [3, 7, 9],
       length: 3,
       clues: [
         { guess: [3, 1, 4], type: 'well', count: 1 },
@@ -120,7 +140,7 @@ const FALLBACK_PUZZLES: Record<number, Puzzle[]> = {
   ],
   3: [
     {
-      secret: [1, 8, 5],
+      solution: [1, 8, 5],
       length: 3,
       clues: [
         { guess: [1, 4, 9], type: 'well', count: 1 },
@@ -132,7 +152,7 @@ const FALLBACK_PUZZLES: Record<number, Puzzle[]> = {
   ],
   6: [
     {
-      secret: [4, 1, 7, 2],
+      solution: [4, 1, 7, 2],
       length: 4,
       clues: [
         { guess: [4, 8, 3, 9], type: 'well', count: 1 },
@@ -152,24 +172,24 @@ export function generatePuzzle(level: number): Puzzle {
 
   // Try generating dynamically
   for (let attempt = 0; attempt < 80; attempt++) {
-    const secret = shuffle(digits).slice(0, length);
-    const nonSecret = digits.filter((d) => !secret.includes(d));
+    const solution = secureShuffle(digits).slice(0, length);
+    const nonSolution = digits.filter((d) => !solution.includes(d));
     const clues: Clue[] = [];
 
     // Clue 1: A "none" clue (very helpful for deductive elimination)
-    if (level <= 6 || Math.random() < 0.6) {
-      const noneDigits = shuffle(nonSecret).slice(0, length);
+    if (level <= 6 || secureRandom() < 0.6) {
+      const noneDigits = secureShuffle(nonSolution).slice(0, length);
       clues.push({ guess: noneDigits, type: 'none', count: 0 });
     }
 
-    // Generate candidate clues from combinations of secret and non-secret digits
+    // Generate candidate clues from combinations of solution and non-solution digits
     for (let c = 0; c < 24; c++) {
-      const numSecret = Math.random() < 0.75 ? 1 : Math.min(2, length - 1);
-      const chosenSecret = shuffle(secret).slice(0, numSecret);
-      const chosenNon = shuffle(nonSecret).slice(0, length - numSecret);
-      const combined = shuffle([...chosenSecret, ...chosenNon]);
+      const numSolution = secureRandom() < 0.75 ? 1 : Math.min(2, length - 1);
+      const chosenSolution = secureShuffle(solution).slice(0, numSolution);
+      const chosenNon = secureShuffle(nonSolution).slice(0, length - numSolution);
+      const combined = secureShuffle([...chosenSolution, ...chosenNon]);
 
-      const evalRes = evaluateClue(secret, combined);
+      const evalRes = evaluateClue(solution, combined);
       if (evalRes.well > 0 && evalRes.wrong === 0) {
         clues.push({ guess: combined, type: 'well', count: evalRes.well });
       } else if (evalRes.wrong > 0 && evalRes.well === 0) {
@@ -178,7 +198,7 @@ export function generatePuzzle(level: number): Puzzle {
 
       // Check if unique solution is achieved
       const sols = solve(clues, length, 2);
-      if (sols.length === 1 && sols[0].every((d, i) => d === secret[i])) {
+      if (sols.length === 1 && sols[0].every((d, i) => d === solution[i])) {
         // Prune redundant clues while keeping uniqueness
         let pruned = [...clues];
         const minKeep = level <= 2 ? 4 : 3;
@@ -189,7 +209,7 @@ export function generatePuzzle(level: number): Puzzle {
             pruned = candidatePruned;
           }
         }
-        return { secret, clues: shuffle(pruned), length };
+        return { solution, clues: secureShuffle(pruned), length };
       }
     }
   }
@@ -197,9 +217,9 @@ export function generatePuzzle(level: number): Puzzle {
   // Fallback if random generation timed out
   const fallbackKey = level >= 6 ? 6 : level >= 3 ? 3 : 1;
   const list = FALLBACK_PUZZLES[fallbackKey] || FALLBACK_PUZZLES[1];
-  const picked = list[Math.floor(Math.random() * list.length)];
+  const picked = securePick(list);
   return {
-    secret: [...picked.secret],
+    solution: [...picked.solution],
     length: picked.length,
     clues: picked.clues.map((c) => ({ guess: [...c.guess], type: c.type, count: c.count })),
   };
@@ -467,8 +487,8 @@ export const crackTheCode: Exercise = {
         onUnlockAttempt = () => {
           if (isDone) return;
 
-          // Check if current dials match secret
-          const isCorrect = dialValues.every((v, i) => v === puzzle.secret[i]);
+          // Check if current dials match solution
+          const isCorrect = dialValues.every((v, i) => v === puzzle.solution[i]);
 
           if (isCorrect) {
             isDone = true;
@@ -486,7 +506,7 @@ export const crackTheCode: Exercise = {
             if (triesLeft <= 0) {
               isDone = true;
               // Reveal the correct code in dials
-              puzzle.secret.forEach((v, i) => setDial(i, v));
+              puzzle.solution.forEach((v, i) => setDial(i, v));
               done(false);
             }
           }
@@ -523,7 +543,7 @@ export const crackTheCode: Exercise = {
       });
 
       const ok = ctx.track(st, solved, {
-        was: solved ? undefined : puzzle.secret.join(' '),
+        was: solved ? undefined : puzzle.solution.join(' '),
       });
 
       if (ok) {

@@ -18,6 +18,7 @@ Version numbers come from `package.json`, and each date is the day of the commit
   - Dynamic Difficulty Adjustment: 8 adaptive levels calibrated by Kaernbach's (1991) staircase algorithm towards the optimal 80% accuracy zone (Wilson et al., 2019). Scales from 3-digit combinations with 5 redundant clues down to 4-digit master codes with tight clues.
   - Balanced session duration: 3 trials in gym mode (~60–90 seconds total) and 1 quick trial in daily check mode.
   - Full native localization in all 12 languages.
+  - Security: replaced Math.random with Web Crypto API (`crypto.getRandomValues`) and renamed puzzle solution identifiers in Crack the Code (CWE-338), resolving CodeQL alert #2 (`js/insecure-randomness`).
 
 ## [0.12.16] - 2026-11-07
 
