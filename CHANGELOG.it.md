@@ -6,6 +6,19 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.3] - 2026-11-07
+
+### Aggiunto
+
+- Ordinamento di Carte: riprogettazione completa in chiave neuro-gaming («Cifrario Segreto») per eliminare la freddezza clinica e massimizzare motivazione intrinseca, rilascio dopaminergico e stato di flow:
+  - Carte visivamente strutturate e tangibili con layout a pip simmetrici (1, 2, 3 o griglia 2x2) e animazioni fisiche d'ingresso.
+  - Ricco comparto audio e feedback aptico (`sfx.whoosh` alla pescata, `sfx.clack` alla selezione, scala pentatonica armonica ascendente sulle combo, `sfx.sparkle` per la violazione del codice e `sfx.coins` per le deduzioni Eureka).
+  - HUD deduttivo con 3 indicatori di frequenza (Colore, Forma, Quantità) per un testing di ipotesi non punitivo, con indizi informativi alla scoperta delle regole errate.
+  - Evidenziazione automatica Eureka: non appena 2 dimensioni vengono escluse, il sistema mette in risalto il criterio dedotto con un bagliore dorato.
+  - Indicatore di sequenza a 4 gemme (`[ ● ● ● ○ ]`) per una visualizzazione chiara e gratificante dell'avanzamento verso il completamento del codice.
+  - Transizione emozionante al cambio di regola («Protocollo riallineato!») che celebra il codice risolto invece di punire il giocatore con errori inevitabili.
+  - Curva temporale umana e bilanciata (da 5,5 s a 2,2 s) abbinata a bonus efficienza di velocità.
+
 ## [0.12.2] - 2026-11-07
 
 ### Risolto

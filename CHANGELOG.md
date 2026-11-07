@@ -6,6 +6,19 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.3] - 2026-11-07
+
+### Added
+
+- Card Sorting: comprehensive neuro-gaming redesign ("Secret Cipher" / Cifrario Segreto) to eliminate clinical dryness and maximize intrinsic motivation, dopamine feedback, and flow state:
+  - Structured, tactile cards with symmetrical pip layouts (1, 2, 3, or 2x2 grid) and smooth entrance animations.
+  - Rich audio design and haptic feedback (`sfx.whoosh` on deal, `sfx.clack` on selection, ascending pentatonic scale chords on combos, `sfx.sparkle` on cracked codes, and `sfx.coins` on Eureka discoveries).
+  - Visual deduction HUD with 3 protocol frequency pills (Color, Shape, Count) providing non-punitive hypothesis testing and eliminating false rules with informative clues.
+  - Automated deduction highlight: when 2 dimensions are ruled out, the system automatically spotlights the deduced target rule with a golden glow.
+  - 4-combo progress dots (`[ ● ● ● ○ ]`) providing clear, rewarding visual feedback on sequence completion.
+  - Seamless, exciting rule shift transitions ("Protocol Shifted!") celebrating cracked codes rather than penalizing players with unpredictable errors.
+  - Humane timing curve (scaling from 5.5s down to 2.2s) coupled with additive speed efficiency bonus.
+
 ## [0.12.2] - 2026-11-07
 
 ### Fixed
