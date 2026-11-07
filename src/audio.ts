@@ -50,21 +50,76 @@ function sweep(startFreq: number, endFreq: number, dur: number, type: Oscillator
   osc.stop(t + dur);
 }
 
-// Warm pentatonic scale: C5, D5, E5, G5, A5, C6, D6, E6, G6, A6, C7, D7, E7...
+// Warm, golden pentatonic scale across 2 octaves (C5 to A6: 10 notes).
+// Stays strictly in the comfortable auditory range (520 Hz - 1760 Hz) avoiding ear fatigue or shrillness.
 const PENTATONIC = [
-  523.25, 587.33, 659.25, 783.99, 880.00,
-  1046.50, 1174.66, 1318.51, 1567.98, 1760.00,
-  2093.00, 2349.32, 2637.02, 3135.96
+  523.25,  // 0: C5
+  587.33,  // 1: D5
+  659.25,  // 2: E5
+  783.99,  // 3: G5
+  880.00,  // 4: A5
+  1046.50, // 5: C6
+  1174.66, // 6: D6
+  1318.51, // 7: E6
+  1567.98, // 8: G6
+  1760.00, // 9: A6
 ];
 
 export const sfx = {
-  /** Rises through a harmonious pentatonic scale with every answer in a streak, with a sparkling overtone. */
+  /**
+   * Ascending pentatonic chime that never runs out or gets stuck repeating a ceiling note.
+   * Steps through pitches continually, cycling through scales with evolving harmonic depth (tiers)
+   * on long streaks, and celebrating every 5th and 10th consecutive hit with resonant chords.
+   */
   ok: (streak = 0) => {
-    haptic(streak >= 3 ? 'combo' : 'good');
-    const idx = Math.min(streak, PENTATONIC.length - 1);
-    const f = PENTATONIC[idx];
-    tone(f, 0.16, 'sine', 0.08);
-    tone(f * 2, 0.12, 'triangle', 0.03, 0.01);
+    const s = Math.max(1, streak);
+    haptic(s >= 3 ? 'combo' : 'good');
+
+    const step = (s - 1) % PENTATONIC.length;
+    const tier = Math.floor((s - 1) / PENTATONIC.length);
+    const f = PENTATONIC[step];
+
+    // Every 10th answer: grand major milestone chime (C-E-G-C)
+    if (s % 10 === 0) {
+      tone(523.25, 0.22, 'triangle', 0.055);
+      tone(659.25, 0.22, 'sine', 0.045, 0.01);
+      tone(783.99, 0.24, 'sine', 0.05, 0.02);
+      tone(1046.50, 0.26, 'sine', 0.06, 0.03);
+      if (tier >= 1) tone(1318.51, 0.20, 'triangle', 0.03, 0.04);
+      return;
+    }
+
+    // Every 5th answer (5, 15, 25...): resonant fifth-power chord chime
+    if (s % 5 === 0) {
+      tone(f, 0.20, 'sine', 0.07);
+      tone(f * 1.5, 0.18, 'triangle', 0.04, 0.01);
+      tone(f * 2, 0.16, 'sine', 0.03, 0.02);
+      return;
+    }
+
+    // Individual step notes evolve across tiers:
+    if (tier === 0) {
+      // Tier 0 (streak 1-9): Pure crystalline chime (fundamental + delicate overtone)
+      tone(f, 0.16, 'sine', 0.08);
+      tone(f * 2, 0.12, 'triangle', 0.025, 0.01);
+    } else if (tier === 1) {
+      // Tier 1 (streak 11-19): Harmonized carillon (fundamental + warm lower base + fifth)
+      tone(f, 0.17, 'sine', 0.07);
+      tone(f * 1.5, 0.14, 'triangle', 0.035, 0.01);
+      tone(f * 0.5, 0.16, 'sine', 0.035);
+    } else if (tier === 2) {
+      // Tier 2 (streak 21-29): Shimmering triad chime
+      tone(f, 0.18, 'sine', 0.065);
+      tone(f * 1.25, 0.15, 'sine', 0.03, 0.01);
+      tone(f * 1.5, 0.15, 'triangle', 0.03, 0.02);
+      tone(f * 2, 0.14, 'triangle', 0.025, 0.03);
+    } else {
+      // Tier 3+ (streak 31+): Supreme cascade chime with full overtone resonance
+      tone(f, 0.20, 'sine', 0.06);
+      tone(f * 1.5, 0.18, 'triangle', 0.03, 0.01);
+      tone(f * 2, 0.16, 'sine', 0.03, 0.02);
+      tone(f * 0.5, 0.18, 'sine', 0.035);
+    }
   },
 
   /** Gentle, low wooden thud rather than a harsh abrasive buzz. */

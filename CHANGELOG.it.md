@@ -6,6 +6,12 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.2] - 2026-11-07
+
+### Risolto
+
+- Audio: risolto il problema di saturazione della scala pentatonica per cui, eseguendo serie corrette lunghe, veniva ripetuto all'infinito il tono più acuto (`3135 Hz`). Sostituito con un sistema ciclico armonico a scaglioni (nel range confortevole 523 Hz – 1760 Hz per prevenire affaticamento uditivo) che arricchisce il suono con armoniche a più livelli, accordi di quinta ogni 5 risposte corrette e accordi maggiori trionfali ogni 10 traguardi consecutivi.
+
 ## [0.12.1] - 2026-11-07
 
 ### Risolto
