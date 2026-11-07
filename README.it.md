@@ -58,7 +58,7 @@ Gioco gratuito di allenamento cognitivo e coordinazione bilaterale (source-avail
 
 ## 🛠️ Architettura Tecnica
 
-Il progetto è costruito con **TypeScript** e **Vite**, senza l'impiego di framework pesanti (React, Vue o Angular), garantendo un caricamento istantaneo, rendering DOM nativo ultra-performante e un bundle gzippato di appena ~30 KB.
+Il progetto è costruito con **TypeScript** e **Vite**, senza l'impiego di framework pesanti (React, Vue o Angular), garantendo un caricamento istantaneo, rendering DOM nativo ultra-performante e un'impronta gzippata minuscola (~34 KB per il runtime UI di base, ~110 KB totali per l'intera app inclusi tutti i 38 giochi).
 
 ```
 synapse-dojo/
@@ -67,34 +67,39 @@ synapse-dojo/
 ├── server/board.ts         codice condiviso dalle API: autenticazione, validazione, settimane ISO, punti, gruppi
 ├── migrations/             schema del database D1 della classifica (applicato in automatico dal deploy)
 ├── cleanup/                Worker con cron che applica ogni notte le regole di conservazione della classifica
-├── scripts/deploy-web.mjs  build, migrazioni e pubblicazione su Cloudflare Pages
+├── scripts/                build e deploy (deploy-web.mjs), verifica dizionari (check-anagrams.mjs) e coerenza i18n (verify-i18n.mjs)
 ├── src/
-│   ├── exercises/          i 38 esercizi (uno per file) + index.ts (batteria e selezione giornaliera)
+│   ├── exercises/          i 38 esercizi (uno per file), index.ts (catalogo e batteria), types.ts e dataset dei puzzle
 │   ├── screens/            schermate dell'app: home, onboarding, training, play, progress, settings, board, boardJoin, groups, guide, privacy, license
 │   ├── locales/            moduli di traduzione per le 12 lingue (en.ts è la base di tipizzazione)
-│   ├── board.ts            classifica lato app: riepilogo settimanale, invio in background, gruppi e inviti
 │   ├── adaptive.ts         motore adattivo continuo (weighted up-down staircase)
 │   ├── audio.ts            effetti sonori sintetizzati via Web Audio API e sintesi vocale
+│   ├── board.ts            classifica lato app: riepilogo settimanale, invio in background, gruppi e inviti
+│   ├── config.ts           costanti globali dell'applicazione: URL del sito, versione, contatti e repository
+│   ├── ctx.ts              runtime di esecuzione degli esercizi (input, timer, feedback, cancellazione)
+│   ├── dom.ts              costruttore di elementi DOM senza framework (h()), funzioni matematiche/casuali e animazioni
+│   ├── examples.ts         generazione procedurale delle anteprime illustrate
+│   ├── guide.ts            entrypoint della pagina guida autonoma
+│   ├── i18n.ts             motore di internazionalizzazione asincrono con fallback a tipi sicuri
+│   ├── license.ts          entrypoint della pagina licenza autonoma
+│   ├── main.ts             entrypoint dell'applicazione principale
+│   ├── privacy.ts          entrypoint della pagina privacy autonoma
 │   ├── rewards.ts          calcolo XP, livelli del giocatore e sblocco traguardi
 │   ├── share.ts            scheda condivisibile dei traguardi, disegnata sul dispositivo
-│   ├── examples.ts         generazione procedurale delle anteprime illustrate
 │   ├── stats.ts            analisi delle capacità per dominio e selezione allenamento
-│   ├── ctx.ts              runtime di esecuzione degli esercizi (input, timer, feedback, cancellazione)
-│   ├── widgets.ts          componenti riutilizzabili (canvas, tastierini numerici, sparkline)
-│   ├── i18n.ts             motore di internazionalizzazione asincrono con fallback a tipi sicuri
 │   ├── storage.ts          gestione del salvataggio locale, convalida schema e backup JSON
-│   ├── ui.ts               utility di layout e gestione del rendering DOM
-│   ├── main.ts             entrypoint dell'applicazione principale
-│   ├── guide.ts            entrypoint della pagina guida autonoma
-│   ├── privacy.ts          entrypoint della pagina privacy autonoma
-│   └── license.ts          entrypoint della pagina licenza autonoma
+│   ├── style.css           foglio di stile principale (layout responsivo, temi chiaro/scuro, RTL e stili di gioco)
+│   ├── ui.ts               utility di layout, barre di navigazione, modali, toast e gestione impostazioni
+│   ├── update.ts           rilevamento automatico di nuove versioni distribuite e ricaricamento
+│   └── widgets.ts          componenti riutilizzabili (canvas, tastierini numerici, sparkline)
 ├── index.html              pagina principale (PWA)
 ├── guide.html              pagina indipendente per la guida
 ├── privacy.html            pagina indipendente per la privacy
 ├── license.html            pagina indipendente per la licenza
 ├── vite.config.ts          configurazione build multi-pagina, proxy /api in sviluppo e Cloudflare Web Analytics
 ├── wrangler.toml           progetto Cloudflare Pages e collegamento al database D1
-├── tsconfig.api.json       type-check del codice server (functions/ e server/)
+├── tsconfig.json           configurazione TypeScript dell'applicazione client (src/)
+├── tsconfig.api.json       type-check del codice server, functions/ e cleanup cron Worker
 └── package.json
 ```
 

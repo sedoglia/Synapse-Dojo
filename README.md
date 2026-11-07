@@ -57,7 +57,7 @@ Free cognitive training and bilateral coordination web application (source-avail
 
 ## 🛠️ Technical Architecture
 
-Built purely with **TypeScript** and **Vite**, with **zero UI framework dependencies** (no React, Vue, or Angular bloat). This guarantees instant startup times, native DOM rendering performance, and a tiny gzipped bundle size (~30 KB).
+Built purely with **TypeScript** and **Vite**, with **zero UI framework dependencies** (no React, Vue, or Angular bloat). This guarantees instant startup times, native DOM rendering performance, and a tiny gzipped bundle size (~34 KB for the core UI runtime, ~110 KB total for the entire app including all 38 games).
 
 ```
 synapse-dojo/
@@ -66,34 +66,39 @@ synapse-dojo/
 ├── server/board.ts         Code shared by the API: authentication, validation, ISO weeks, points, groups
 ├── migrations/             Leaderboard D1 database schema (applied automatically on deploy)
 ├── cleanup/                Cron Worker that applies the leaderboard retention rules every night
-├── scripts/deploy-web.mjs  Build, migrations and publishing to Cloudflare Pages
+├── scripts/                Build & deploy (deploy-web.mjs), dictionary checks (check-anagrams.mjs) & i18n verify (verify-i18n.mjs)
 ├── src/
-│   ├── exercises/          38 exercise implementations (1 file each) + index.ts (daily rotation & battery)
+│   ├── exercises/          38 exercise implementations, index.ts (catalog & battery), types.ts, puzzle datasets
 │   ├── screens/            App views: home, onboarding, training, play, progress, settings, board, boardJoin, groups, guide, privacy, license
 │   ├── locales/            12 standalone locale bundles (en.ts is the type-safe blueprint)
-│   ├── board.ts            Leaderboard client: weekly summary, background upload, groups and invites
 │   ├── adaptive.ts         Continuous adaptive difficulty staircase engine (weighted up-down)
 │   ├── audio.ts            Procedural Web Audio API sound synthesis & native SpeechSynthesis
+│   ├── board.ts            Leaderboard client: weekly summary, background upload, groups and invites
+│   ├── config.ts           Global application constants, site URLs, versioning and repository metadata
+│   ├── ctx.ts              Exercise runtime context (timed inputs, feedback loops, cleanup)
+│   ├── dom.ts              Lightweight virtual-less DOM builder (h()), math and random utilities, flash animations
+│   ├── examples.ts         Procedural visual scene generation for illustrated instructions
+│   ├── guide.ts            Standalone guide page entrypoint
+│   ├── i18n.ts             Asynchronous localization loader with type-safe fallbacks
+│   ├── license.ts          Standalone license page entrypoint
+│   ├── main.ts             Main application entrypoint
+│   ├── privacy.ts          Standalone privacy page entrypoint
 │   ├── rewards.ts          XP calculation, player levels, and streak/achievement badges
 │   ├── share.ts            Shareable milestone card, drawn on the device
-│   ├── examples.ts         Procedural visual scene generation for illustrated instructions
 │   ├── stats.ts            Domain capacity computation & daily workout selector
-│   ├── ctx.ts              Exercise runtime context (timed inputs, feedback loops, cleanup)
-│   ├── widgets.ts          Shared components (HTML5 canvas, numeric keypads, sparklines)
-│   ├── i18n.ts             Asynchronous localization loader with type-safe fallbacks
 │   ├── storage.ts          Local storage persistence, schema validation, and JSON backup export/import
-│   ├── ui.ts               DOM rendering utilities and layout containers
-│   ├── main.ts             Main application entrypoint
-│   ├── guide.ts            Standalone guide page entrypoint
-│   ├── privacy.ts          Standalone privacy page entrypoint
-│   └── license.ts          Standalone license page entrypoint
+│   ├── style.css           Master stylesheet (responsive layout, themes, RTL support, game styling)
+│   ├── ui.ts               UI page layouts, navigation bars, modals, toasts and settings sync
+│   ├── update.ts           Automatic update detection across deploys and graceful reload
+│   └── widgets.ts          Shared components (HTML5 canvas, numeric keypads, sparklines)
 ├── index.html              Primary single-page application (PWA)
 ├── guide.html              Standalone guide view
 ├── privacy.html            Standalone privacy view
 ├── license.html            Standalone license view
 ├── vite.config.ts          Multi-page build configuration, /api proxy in development & Cloudflare Web Analytics hook
 ├── wrangler.toml           Cloudflare Pages project and D1 database binding
-├── tsconfig.api.json       Type-check of the server code (functions/ and server/)
+├── tsconfig.json           Client application TypeScript configuration (src/)
+├── tsconfig.api.json       Server, functions/ and cleanup cron Worker TypeScript configuration
 └── package.json
 ```
 
