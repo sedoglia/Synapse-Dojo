@@ -101,8 +101,8 @@ export const sorting: Exercise = {
     const trials = ctx.count(24, 16, 5);
     const st = ctx.stair(trials, 1, 10);
 
-    // Header & Protocol Indicators (HUD)
-    const title = h('div', { class: 'sorting-title' }, `🔐 ${t('ex.sorting.secretRule')}`);
+    // Header & Criteria HUD
+    const title = h('div', { class: 'sorting-title' }, `🃏 ${t('ex.sorting.secretRule')}`);
     const pillColor = h('span', { class: 'sorting-dim-pill' }, `🎨 ${t('ex.sorting.dimColor')}`);
     const pillShape = h('span', { class: 'sorting-dim-pill' }, `🔺 ${t('ex.sorting.dimShape')}`);
     const pillCount = h('span', { class: 'sorting-dim-pill' }, `🔢 ${t('ex.sorting.dimCount')}`);
