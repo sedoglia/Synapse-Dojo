@@ -11,15 +11,15 @@ export type Direction = 'up' | 'down' | 'left' | 'right';
 
 /** Target tile for each difficulty level */
 export const targetFor = (level: number): number => {
-  const targets = [16, 32, 64, 128, 256, 512, 1024, 2048, 2048, 4096];
+  const targets = [32, 64, 128, 128, 256, 256, 512, 1024, 1024, 2048];
   return targets[clamp(Math.round(level) - 1, 0, targets.length - 1)];
 };
 
 /** Move budget per milestone based on level */
 const movesFor = (level: number, pace: number): number => {
-  const baseMoves = [35, 38, 40, 42, 45, 48, 50, 55, 55, 60];
+  const baseMoves = [28, 32, 36, 36, 40, 40, 45, 48, 50, 55];
   const b = baseMoves[clamp(Math.round(level) - 1, 0, baseMoves.length - 1)];
-  return Math.round(b * (pace > 1 ? 1.3 : 1));
+  return Math.round(b * (pace > 1 ? 1.25 : 1));
 };
 
 /** Whether this level includes a stone obstacle */
@@ -136,73 +136,54 @@ function spawnTile(grid: number[], target: number): { grid: number[]; spawnedIdx
 
 type Corner = 'br' | 'bl' | 'tr' | 'tl';
 
-const CORNER_PATHS: Record<Corner, number[]> = {
-  br: [15, 14, 13, 11, 10, 7],
-  bl: [12, 13, 14, 8, 9, 4],
-  tr: [3, 2, 1, 7, 6, 11],
-  tl: [0, 1, 2, 4, 5, 8],
-};
-
-function getSeedsForLevel(lvl: number): number[] {
-  switch (lvl) {
-    case 1:
-      return [8, 4, 2, 2];
-    case 2:
-      return [16, 8, 4, 2, 2];
-    case 3:
-      return [32, 16, 8, 4, 4];
-    case 4:
-      return [64, 32, 16, 8, 8];
-    case 5:
-      return [128, 64, 32, 16, 16];
-    case 6:
-      return [256, 128, 64, 32, 32];
-    case 7:
-      return [512, 256, 128, 64, 64];
-    case 8:
-      return [1024, 512, 256, 128, 128];
-    case 9:
-      return [1024, 512, 256, 128, 128];
-    case 10:
-    default:
-      return [2048, 1024, 512, 256, 256];
-  }
+interface CornerLayout {
+  anchor: number;  // Corner cell for highest tile (T/2)
+  s1: number;      // Adjacent edge cell for secondary tile (T/4)
+  s2: number;      // Orthogonal edge cell for third tile (T/8)
+  s3: number;      // Opposite edge cell for matching third tile (T/8) - separated across board!
+  support: number; // Far foundation cell (2 or 4)
 }
+
+const CORNER_LAYOUTS: Record<Corner, CornerLayout> = {
+  br: { anchor: 15, s1: 14, s2: 11, s3: 1,  support: 8 },
+  bl: { anchor: 12, s1: 13, s2: 8,  s3: 2,  support: 11 },
+  tr: { anchor: 3,  s1: 2,  s2: 7,  s3: 13, support: 4 },
+  tl: { anchor: 0,  s1: 1,  s2: 4,  s3: 14, support: 7 },
+};
 
 /**
  * Creates an intelligent starting board tailored for the target tile level.
- * Seeds a clean, structured set of tiles in a natural monotonic corner arrangement,
- * leaving ample space (10-12 empty cells) for strategic building.
- * Randomizes corner orientation and secondary placements so each puzzle feels unique.
+ * Places the anchor tile (T/2) and secondary tiles with strategic separation,
+ * requiring active spatial navigation and planning rather than trivial auto-merges.
+ * Leaves 10-11 empty cells for tactical building and maneuvers.
  */
 export function createPuzzleBoard(level: number): number[] {
   const grid = new Array(TOTAL_CELLS).fill(0);
   const lvl = clamp(Math.round(level), 1, MAX_LEVEL);
-  const seeds = getSeedsForLevel(lvl);
+  const target = targetFor(lvl);
+
   const corners: Corner[] = ['br', 'bl', 'tr', 'tl'];
   const corner = pick(corners);
-  const path = CORNER_PATHS[corner];
+  const layout = CORNER_LAYOUTS[corner];
 
-  for (let i = 0; i < seeds.length && i < path.length; i++) {
-    grid[path[i]] = seeds[i];
-  }
+  const anchor = target / 2;
+  const s1 = target / 4;
+  const s2 = Math.max(2, target / 8);
+  const s3 = Math.max(2, target / 8);
+  const supportVal = lvl >= 5 ? 4 : 2;
 
-  // Stone block in inner cell for master challenge levels
+  grid[layout.anchor] = anchor;
+  grid[layout.s1] = s1;
+  grid[layout.s2] = s2;
+  grid[layout.s3] = s3;
+  grid[layout.support] = supportVal;
+
+  // Stone block in inner cell for master challenge levels (levels 9 and 10)
   if (hasObstacle(lvl)) {
     const centerOptions = [5, 6, 9, 10].filter((idx) => grid[idx] === 0);
     if (centerOptions.length) {
       grid[pick(centerOptions)] = -1;
     }
-  }
-
-  // Add 1 extra small tile in an empty cell for natural dynamic board feel
-  const empties: number[] = [];
-  for (let i = 0; i < TOTAL_CELLS; i++) {
-    if (grid[i] === 0) empties.push(i);
-  }
-  if (empties.length) {
-    const extraIdx = pick(empties);
-    grid[extraIdx] = lvl >= 5 ? (Math.random() < 0.4 ? 4 : 2) : 2;
   }
 
   return grid;

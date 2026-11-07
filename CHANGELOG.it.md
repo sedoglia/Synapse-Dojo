@@ -6,6 +6,17 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.22] - 2026-11-07
+
+### Modificato
+
+- 2048 (`ex.game2048`):
+  - Ricalibrazione della difficoltà adattiva e del carico cognitivo:
+    - Sostituite le tessere domino pre-allineate con una disposizione ortogonale angolare e tessere gemelle separate (`CORNER_LAYOUTS` sui 4 angoli), richiedendo vera navigazione spaziale, allineamento e pianificazione attiva anziché banali fusioni automatiche in 2 scorrimenti.
+    - Riprogettata la scala degli obiettivi da livello 1 a 10: avvio da Obiettivo 32 (🎯 32) anziché l'eccessivamente banale 16, crescendo progressivamente verso 64, 128, 256, 512, 1024 fino a 2048 (con ostacoli rocciosi ai livelli 9–10).
+    - Budget mosse calibrato scientificamente (da 28 a 55 mosse), verificato matematicamente su 2.000 simulazioni algoritmiche per mantenere il tasso di successo al 75–85% (staircase Kaernbach 1991) con una media di 10–18 mosse per puzzle.
+    - Durata della sessione preservata a circa 50–70 secondi complessivi per i 3 schemi, perfettamente allineata a tutti gli altri esercizi della palestra.
+
 ## [0.12.21] - 2026-11-07
 
 ### Modificato

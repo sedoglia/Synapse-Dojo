@@ -6,6 +6,17 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.22] - 2026-11-07
+
+### Changed
+
+- 2048 (`ex.game2048`):
+  - Recalibrated adaptive difficulty and cognitive challenge:
+    - Replaced pre-stacked adjacent domino chains with an orthogonal corner-and-far-edge layout (`CORNER_LAYOUTS` across all 4 orientations), requiring genuine spatial navigation, tile alignment, and active planning instead of trivial 2-swipe auto-merges.
+    - Re-tuned target progression from level 1 to 10: starts at Target 32 (🎯 32) instead of trivial 16, advancing through 64, 128, 256, 512, 1024, to 2048 (with stone obstacles at levels 9–10).
+    - Scientifically calibrated move budgets (28 to 55 moves) mathematically verified across 2,000 algorithmic simulation runs to maintain the Kaernbach (1991) 75–85% target accuracy and an engaging 10–18 moves per puzzle.
+    - Preserves snappy session pacing (~50–70 seconds total for 3 puzzles), perfectly matching the duration of other gym exercises.
+
 ## [0.12.21] - 2026-11-07
 
 ### Changed
