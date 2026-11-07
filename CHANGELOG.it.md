@@ -8,6 +8,19 @@ I numeri di versione vengono da `package.json` e ogni data è il giorno del comm
 
 ## [0.12.13] - 2026-11-07
 
+### Aggiunto
+
+- Nonogram (`ex.nonogram`):
+  - Introdotto il 37° esercizio di ginnastica cognitiva sotto il dominio *Abilità Spaziali* (`spatial`), portando a 3 gli esercizi dell'area spaziale per completare la rotazione quotidiana del Neuro Score.
+  - Generati e matematicamente verificati 40 puzzle originali a soluzione deterministica unica, distribuiti su 8 livelli di difficoltà progressiva (da 4×4 a 7×7) e 100% risolvibili per linea pura senza ricorrere a tentativi ciechi (*Batenburg & Kosters, 2009*).
+  - Pennellata continua touch/mouse (`pointerdown` e `pointerenter`) per tracciare rapidamente righe e blocchi di celle annerite senza clic ripetuti.
+  - Doppia modalità operativa *Riempi* ed *Escludi* con scorciatoia immediata tramite tasto destro del mouse su desktop per posizionare crocette.
+  - Indicatore visivo dinamico dei vincoli: numeri di riga e colonna soddisfatti evidenziati in verde tenue; pulsante *Verifica* non punitivo e sistema di *Aiuto* (💡) con animazione pulsante.
+  - Funzione *Annulla* (↩) con stack completo delle azioni per consentire la sperimentazione logica e la pianificazione visuo-spaziale.
+  - Chiusura gestaltica gratificante: all'ultimo tocco la griglia unifica i blocchi rivelando la pixel art con animazione pop elastica, fanfara audio armonica Web Audio API, coriandoli a schermo e badge col nome del soggetto.
+  - Fondamenti neuroscientifici (tomografia discreta NP-completa, memoria di lavoro visuo-spaziale fronto-parietale e gratificazione dopaminergica "Aha!") documentati in `docs/basi-scientifiche.md`.
+  - Localizzazione completa con 13 chiavi dedicate tradotte in tutte le 12 lingue supportate.
+
 ### Risolto
 
 - 2048 (`ex.game2048`):

@@ -8,6 +8,19 @@ Version numbers come from `package.json`, and each date is the day of the commit
 
 ## [0.12.13] - 2026-11-07
 
+### Added
+
+- Nonogram (`ex.nonogram`):
+  - Introduced the 37th exercise in the cognitive gym under the *Spatial Skills* domain (`spatial`), bringing the spatial area to 3 exercises to balance the daily Neuro Score battery rotation.
+  - Authored and mathematically verified 40 original single-solution puzzles across 8 progressive difficulty levels (4×4 to 7×7), guaranteed 100% line-solvable with zero blind guessing required (*Batenburg & Kosters, 2009*).
+  - Continuous drag-and-swipe painting (`pointerdown` and `pointerenter`) for swift cell marking across mobile touch and desktop mouse.
+  - Dual input toggle (*Fill* and *Cross*) plus desktop right-click shortcut to place crosses instantly.
+  - Real-time constraint satisfaction indicators: satisfied row and column clues highlight in green; non-punitive *Check* button and subtle *Hint* (💡) system with pulse animation.
+  - Full *Undo* stack (↩) allowing risk-free hypothesis testing and mental spatial planning.
+  - Rewarding Gestalt closure celebration: grid borders dissolve upon completion to reveal pixel art with an elastic pop animation, Web Audio API harmonic fanfare, celebratory confetti, and reveal banner naming the illustration.
+  - Neuroscientific grounding (NP-complete discrete tomography, frontoparietal visuospatial working memory, and dopaminergic "Aha!" reward surge) documented in `docs/scientific-foundations.md`.
+  - Full localization with 13 dedicated strings translated across all 12 supported languages.
+
 ### Fixed
 
 - 2048 (`ex.game2048`):
