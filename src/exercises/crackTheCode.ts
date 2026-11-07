@@ -70,6 +70,14 @@ export function cluesCountFor(level: number): number {
   return 4;
 }
 
+/** Adaptive attempt budget based on difficulty level */
+export function attemptsFor(level: number): number {
+  if (level <= 1) return 6;
+  if (level <= 3) return 5;
+  if (level <= 5) return 4;
+  return 4;
+}
+
 /** Evaluates how many digits are well placed and how many are misplaced */
 export function evaluateClue(solution: number[], guess: number[]): { well: number; wrong: number } {
   let well = 0;
@@ -235,10 +243,10 @@ export const crackTheCode: Exercise = {
   example: 'ex.crackTheCode.example',
   minutes: [1, 2],
   levels: { min: 1, max: MAX_LEVEL, start: 2 },
-  levelLabel: (l) => `${codeLengthFor(l)} 🔢 · ${cluesCountFor(l)} 💡`,
+  levelLabel: (l) => `${codeLengthFor(l)} 🔢 · ${attemptsFor(l)} 🛡️ · ${cluesCountFor(l)} 💡`,
 
   async run(ctx) {
-    const trials = ctx.count(3, 1, 1);
+    const trials = ctx.count(2, 1, 1);
     const st = ctx.stair(trials, 1, MAX_LEVEL, { target: 0.8 });
     let solvedCount = 0;
 
@@ -258,7 +266,7 @@ export const crackTheCode: Exercise = {
       // Current dial values for player's guess
       const dialValues: number[] = new Array(codeLen).fill(0);
       let focusedDial = 0;
-      let triesLeft = ctx.practice ? 99 : 3;
+      let triesLeft = ctx.practice ? 99 : attemptsFor(lvl);
 
       // Build Safe / Padlock UI
       ctx.stage.className = 'stage stage-crack-the-code';
@@ -425,8 +433,10 @@ export const crackTheCode: Exercise = {
         h('div', { class: 'ctc-scratch-bar' }, ...scratchChips),
       );
 
+      const ruleBanner = h('div', { class: 'ctc-rule-banner' }, `💡 ${t('ex.crackTheCode.rule')}`);
+
       // Append all sections into the stage
-      ctx.stage.append(lockWrap, cluesList, scratchBar);
+      ctx.stage.append(lockWrap, ruleBanner, cluesList, scratchBar);
 
       // Helper UI functions
       function setDial(index: number, val: number) {
