@@ -655,7 +655,7 @@ const ui: Locale['ui'] = {
   'ex.crackTheCode.clueWellMulti': 'Apenas {n} dígitos corretos, posição certa',
   'ex.crackTheCode.clueWrongOne': 'Apenas 1 dígito correto, mas posição errada',
   'ex.crackTheCode.clueWrongMulti': 'Apenas {n} dígitos corretos, mas posição errada',
-  'ex.crackTheCode.clueNone': 'Nenhum número correto',
+  'ex.crackTheCode.clueNone': 'Nenhum dígito correto',
   'ex.crackTheCode.attempts': 'Tentativas restantes: {n}',
   'ex.crackTheCode.wrongCode': 'Código incorreto',
   'ex.crackTheCode.unlocked': 'Código decifrado!',
