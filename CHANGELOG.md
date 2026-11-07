@@ -6,6 +6,12 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.5] - 2026-11-07
+
+### Added
+
+- Internationalization: full native translation of the redesigned Card Sorting ("Secret Cipher") exercise across all 12 supported languages (English, Italian, Spanish, French, German, Portuguese, Russian, Japanese, Chinese, Arabic, Hindi, and Indonesian). All HUD indicators, deduction clues, Eureka prompts, protocol states, and combo feedback are fully localized.
+
 ## [0.12.4] - 2026-11-07
 
 ### Added
