@@ -4620,6 +4620,391 @@ html.big-text {
   }
 }
 
+/* 2048 (videogame) */
+.stage-game2048 {
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.game2048-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 380px;
+  margin: 0 auto;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.game2048-hud {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr 1fr auto;
+  align-items: center;
+  width: 100%;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.game2048-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 6px 8px;
+  min-height: 52px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: border-color 0.15s, background 0.15s, transform 0.15s;
+}
+
+.game2048-pill .pill-label {
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--muted);
+  line-height: 1.1;
+  margin-bottom: 2px;
+}
+
+.game2048-pill .pill-val {
+  font-size: 1.15rem;
+  font-weight: 900;
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+
+.game2048-pill.target-pill {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+.game2048-pill.target-pill .pill-label,
+.game2048-pill.target-pill .pill-val {
+  color: var(--accent);
+}
+
+.game2048-pill.moves-pill.danger {
+  border-color: var(--bad);
+  background: rgba(229, 72, 77, 0.12);
+  animation: movesPulse 1s infinite alternate;
+}
+.game2048-pill.moves-pill.danger .pill-label,
+.game2048-pill.moves-pill.danger .pill-val {
+  color: var(--bad);
+}
+
+@keyframes movesPulse {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.04); }
+}
+
+.game2048-undo-btn {
+  height: 52px;
+  padding: 0 14px;
+  font-weight: 800;
+  font-size: 0.95rem;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  transition: transform 0.1s ease, background 0.15s ease, opacity 0.2s ease;
+  user-select: none;
+  touch-action: manipulation;
+}
+.game2048-undo-btn:hover:not(:disabled) {
+  background: var(--surface-2);
+  transform: translateY(-1px);
+}
+.game2048-undo-btn:active:not(:disabled) {
+  transform: scale(0.95);
+}
+.game2048-undo-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.game2048-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 8px;
+  background: #bbada0;
+  border: 5px solid #bbada0;
+  border-radius: 18px;
+  padding: 6px;
+  width: 100%;
+  max-width: 360px;
+  aspect-ratio: 1 / 1;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
+  margin-bottom: 14px;
+}
+.game2048-grid:active {
+  cursor: grabbing;
+}
+
+@media (prefers-color-scheme: dark) {
+  .game2048-grid {
+    background: #2e2b28;
+    border-color: #2e2b28;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.game2048-cell {
+  background: rgba(238, 228, 218, 0.35);
+  border-radius: 10px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+@media (prefers-color-scheme: dark) {
+  .game2048-cell {
+    background: rgba(255, 255, 255, 0.08);
+  }
+}
+
+.game2048-tile {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: clamp(1.4rem, 5.2vw, 1.95rem);
+  line-height: 1;
+  font-family: inherit;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.12);
+  transition: transform 0.08s ease;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.game2048-tile.small-text {
+  font-size: clamp(1.15rem, 4.2vw, 1.55rem);
+}
+.game2048-tile.xsmall-text {
+  font-size: clamp(0.92rem, 3.4vw, 1.25rem);
+}
+
+.game2048-tile.tile-spawn {
+  animation: tileSpawn 0.18s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+.game2048-tile.tile-merge {
+  animation: tileMerge 0.22s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes tileSpawn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  80% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes tileMerge {
+  0% {
+    transform: scale(0.85);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Iconic Tile Values & Palettes */
+.game2048-tile.val-2 {
+  background: #eee4da;
+  color: #776e65;
+}
+.game2048-tile.val-4 {
+  background: #ede0c8;
+  color: #776e65;
+}
+.game2048-tile.val-8 {
+  background: #f2b179;
+  color: #ffffff;
+}
+.game2048-tile.val-16 {
+  background: #f59563;
+  color: #ffffff;
+}
+.game2048-tile.val-32 {
+  background: #f67c5f;
+  color: #ffffff;
+}
+.game2048-tile.val-64 {
+  background: #f65e3b;
+  color: #ffffff;
+}
+.game2048-tile.val-128 {
+  background: #edcf72;
+  color: #ffffff;
+  box-shadow: 0 0 14px rgba(237, 207, 114, 0.55);
+}
+.game2048-tile.val-256 {
+  background: #edcc61;
+  color: #ffffff;
+  box-shadow: 0 0 18px rgba(237, 204, 97, 0.65);
+}
+.game2048-tile.val-512 {
+  background: #edc850;
+  color: #ffffff;
+  box-shadow: 0 0 22px rgba(237, 200, 80, 0.75);
+}
+.game2048-tile.val-1024 {
+  background: #edc53f;
+  color: #ffffff;
+  box-shadow: 0 0 26px rgba(237, 197, 63, 0.85);
+}
+.game2048-tile.val-2048 {
+  background: #edc22e;
+  color: #ffffff;
+  box-shadow: 0 0 30px rgba(237, 194, 46, 0.95);
+}
+.game2048-tile.val-4096 {
+  background: #9333ea;
+  color: #ffffff;
+  box-shadow: 0 0 32px rgba(147, 51, 234, 0.95);
+}
+.game2048-tile.val-obstacle {
+  background: #475569;
+  color: #ffffff;
+  font-size: 1.4rem;
+}
+
+/* Accessibility D-Pad Controls */
+.game2048-dpad {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 0 auto;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.game2048-dpad .dpad-row {
+  display: flex;
+  gap: 12px;
+}
+.game2048-dbtn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 1.25rem;
+  font-weight: 900;
+  width: 62px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: transform 0.08s ease, background 0.12s ease, box-shadow 0.08s ease;
+  user-select: none;
+  touch-action: manipulation;
+}
+.game2048-dbtn:hover {
+  background: var(--surface-2);
+}
+.game2048-dbtn:active {
+  transform: scale(0.92);
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+@media (max-width: 380px) {
+  .game2048-hud {
+    gap: 5px;
+  }
+  .game2048-pill {
+    padding: 4px 6px;
+    min-height: 46px;
+  }
+  .game2048-pill .pill-val {
+    font-size: 1.05rem;
+  }
+  .game2048-undo-btn {
+    height: 46px;
+    padding: 0 10px;
+    font-size: 0.85rem;
+  }
+  .game2048-dbtn {
+    width: 54px;
+    height: 42px;
+    font-size: 1.15rem;
+  }
+}
+
+@media (max-height: 700px) {
+  .game2048-grid {
+    max-width: 300px;
+    margin-bottom: 8px;
+  }
+  .game2048-dbtn {
+    height: 40px;
+  }
+}
+
+/* confetti burst celebration */
+.confetti-particle {
+  position: absolute;
+  width: 9px;
+  height: 14px;
+  border-radius: 2px;
+  pointer-events: none;
+  z-index: 999;
+  animation: confettiExplode 1.1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+@keyframes confettiExplode {
+  0% {
+    transform: translate(-50%, -50%) scale(0.6) rotate(0deg);
+    opacity: 1;
+  }
+  65% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy) + 70px)) rotate(var(--rot)) scale(0.85);
+    opacity: 0;
+  }
+}
+
 /* nonogram */
 .nonogram-header {
   display: flex;
@@ -4898,4 +5283,3 @@ html.big-text {
   background: var(--accent);
   border-color: var(--accent);
 }
-

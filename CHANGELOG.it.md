@@ -6,6 +6,15 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.13] - 2026-11-07
+
+### Risolto
+
+- 2048 (`ex.game2048`):
+  - Integrati gli stili CSS completi per la scacchiera a griglia 4×4, slot delle celle vuote, tasselli colorati ad alto contrasto, animazioni di comparsa e pulsazione di fusione.
+  - Riorganizzato l'HUD superiore con badge pill distinti per Obiettivo, Mosse (con avviso pulsante sotto le 5 mosse), Punteggio e pulsante Annulla.
+  - Rifinito il D-Pad direzionale con pulsanti tattili ampi, feedback visivo alla pressione e perfetta compatibilità touch e desktop.
+
 ## [0.12.12] - 2026-11-07
 
 ### Aggiunto

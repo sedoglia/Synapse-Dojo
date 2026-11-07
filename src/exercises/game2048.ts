@@ -268,30 +268,38 @@ export const game2048: Exercise = {
 
       // UI Construction
       ctx.stage.replaceChildren();
+      ctx.stage.className = 'stage stage-game2048';
 
+      const targetValEl = h('span', { class: 'pill-val' }, String(targetTile));
       const targetBadge = h(
         'div',
         { class: 'game2048-pill target-pill' },
         h('span', { class: 'pill-label' }, t('ex.game2048.target')),
-        h('span', { class: 'pill-val' }, String(targetTile)),
+        targetValEl,
       );
 
+      const movesLabel = t('ex.game2048.moves', { m: '' }).replace(/:\s*$/, '').trim();
+      const movesValEl = h('span', { class: 'pill-val' }, String(movesLeft));
       const movesCounter = h(
         'div',
         { class: 'game2048-pill moves-pill' },
-        h('span', { class: 'pill-label' }, t('ex.game2048.moves', { m: movesLeft })),
+        h('span', { class: 'pill-label' }, movesLabel),
+        movesValEl,
       );
 
+      const scoreLabel = t('ex.game2048.score', { s: '' }).replace(/:\s*$/, '').trim();
+      const scoreValEl = h('span', { class: 'pill-val' }, String(totalScore));
       const scoreCounter = h(
         'div',
         { class: 'game2048-pill score-pill' },
-        h('span', { class: 'pill-label' }, t('ex.game2048.score', { s: totalScore })),
+        h('span', { class: 'pill-label' }, scoreLabel),
+        scoreValEl,
       );
 
       const undoBtn = h(
         'button',
         {
-          class: 'btn ghost small game2048-undo-btn',
+          class: 'game2048-undo-btn',
           title: t('ex.game2048.undo'),
           disabled: undosLeft <= 0,
         },
@@ -331,10 +339,11 @@ export const game2048: Exercise = {
           if (val > 0) {
             const isSpawned = i === spawnIdx;
             const isMerged = val === mergedVal;
+            const textClass = val >= 1024 ? 'xsmall-text' : val >= 128 ? 'small-text' : '';
             const tile = h(
               'div',
               {
-                class: `game2048-tile val-${val} ${val >= 1024 ? 'small-text' : ''} ${isSpawned ? 'tile-spawn' : ''} ${isMerged ? 'tile-merge' : ''}`,
+                class: `game2048-tile val-${val} ${textClass} ${isSpawned ? 'tile-spawn' : ''} ${isMerged ? 'tile-merge' : ''}`,
               },
               String(val),
             );
@@ -357,8 +366,10 @@ export const game2048: Exercise = {
         let lastMoveTimestamp = performance.now();
 
         const updateHud = () => {
-          movesCounter.textContent = t('ex.game2048.moves', { m: movesLeft });
-          scoreCounter.textContent = t('ex.game2048.score', { s: totalScore });
+          movesValEl.textContent = String(movesLeft);
+          if (movesLeft <= 5) movesCounter.classList.add('danger');
+          else movesCounter.classList.remove('danger');
+          scoreValEl.textContent = String(totalScore);
           undoBtn.textContent = `↩ ${undosLeft}`;
           undoBtn.disabled = undosLeft <= 0 || history.length === 0;
         };
@@ -457,17 +468,27 @@ export const game2048: Exercise = {
           isPointerDown = true;
           touchStartX = e.clientX;
           touchStartY = e.clientY;
+          if (gridEl.setPointerCapture) {
+            try {
+              gridEl.setPointerCapture(e.pointerId);
+            } catch {}
+          }
         };
 
         const onPointerUp = (e: PointerEvent) => {
           if (!isPointerDown) return;
           isPointerDown = false;
+          if (gridEl.releasePointerCapture) {
+            try {
+              gridEl.releasePointerCapture(e.pointerId);
+            } catch {}
+          }
           const dx = e.clientX - touchStartX;
           const dy = e.clientY - touchStartY;
           const absDx = Math.abs(dx);
           const absDy = Math.abs(dy);
 
-          if (Math.max(absDx, absDy) < 28) return; // ignore tap
+          if (Math.max(absDx, absDy) < 22) return; // ignore tap
 
           if (absDx > absDy) {
             executeMove(dx > 0 ? 'right' : 'left');
@@ -476,7 +497,13 @@ export const game2048: Exercise = {
           }
         };
 
+        const onPointerCancel = () => {
+          isPointerDown = false;
+        };
+
         gridEl.addEventListener('pointerdown', onPointerDown);
+        gridEl.addEventListener('pointerup', onPointerUp);
+        gridEl.addEventListener('pointercancel', onPointerCancel);
         window.addEventListener('pointerup', onPointerUp);
 
         // Tactile D-Pad Click Handlers
@@ -518,6 +545,8 @@ export const game2048: Exercise = {
         return () => {
           undoBtn.onclick = null;
           gridEl.removeEventListener('pointerdown', onPointerDown);
+          gridEl.removeEventListener('pointerup', onPointerUp);
+          gridEl.removeEventListener('pointercancel', onPointerCancel);
           window.removeEventListener('pointerup', onPointerUp);
           btnUp.onpointerdown = null;
           btnDown.onpointerdown = null;

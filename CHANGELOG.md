@@ -6,6 +6,15 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.13] - 2026-11-07
+
+### Fixed
+
+- 2048 (`ex.game2048`):
+  - Added full visual and layout CSS styling for the 4×4 grid board, empty cell slots, high-contrast pastel tile backgrounds, pop-in and merge animations.
+  - Refined the HUD dashboard with structured pill badges for Target, Moves (with warning pulse under 5 moves), Score, and Undo.
+  - Styled the tactile accessibility D-Pad with generous touch targets and tactile feedback states.
+
 ## [0.12.12] - 2026-11-07
 
 ### Added
