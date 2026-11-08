@@ -6,6 +6,15 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.30] - 2026-11-08
+
+### Ottimizzato
+
+- Potenziamento della memoria anti-ripetizione del gioco **Tangram**:
+  - Verifica della persistenza degli schemi proposti in `localStorage` (`synapse_tangram_recent_puzzles`) con sliding window a 30 elementi per prevenire la riproposta di puzzle recenti, allineato alle logiche di `nonogram`, `towers`, `stories` e `reading`.
+  - Introduzione del riciclo ordinato LRU (*Least Recently Used*): quando tutti gli schemi di un dato livello sono già stati giocati nelle ultime sessioni, il sistema privilegia gli schemi visti più indietro nel tempo invece di effettuare un sorteggio casuale.
+  - Esclusione della modalità pratica/tutorial (`ctx.practice`) dal salvataggio nella cronologia recente per evitare di inquinare la memoria di rotazione delle sessioni reali.
+
 ## [0.12.29] - 2026-11-08
 
 ### Modificato
