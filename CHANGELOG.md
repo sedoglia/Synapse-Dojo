@@ -6,6 +6,24 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.35] - 2026-11-08
+
+### Added
+
+- Comprehensive profile transfer and temporary cloud sync across devices:
+  - Added temporary cloud transfer via D1 database (`temp_transfers` table) generating unique, unambiguous 8-character codes (`XXXX-XXXX`, e.g. `K9XP-4M2J`).
+  - Added copy code, copy link (`?transfer=CODE`), and native share buttons for seamless migration between devices without user accounts.
+  - Added import by transfer code dialog with real-time profile preview (name, leaderboard nickname, exercise runs, levels, and last activity) before replacement.
+  - Automatic privacy deletion: temporary database records are purged immediately upon successful import, and expired transfers (>24 hours) are cleaned up by the nightly cron Worker.
+  - Added direct import shortcut on the Onboarding screen for new devices.
+  - Localized all transfer dialogs and error notifications in all 12 supported languages.
+
+### Fixed
+
+- Preserved complete user profile data during export, import, and device migration:
+  - Fixed `exportJson()`, `parseSave()`, and `store.replace()` to retain leaderboard accounts (`board.id`, `board.secret`, `board.nameCode`, `board.ageBand`) and group memberships.
+  - Restoring a save file on another device now completely restores the player's nickname, weekly leaderboard rankings, and group owner/member privileges without data loss.
+
 ## [0.12.34] - 2026-11-08
 
 ### Changed

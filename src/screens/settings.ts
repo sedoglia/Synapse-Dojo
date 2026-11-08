@@ -8,10 +8,11 @@ import { showOnboarding } from './onboarding';
 import { showPrivacy } from './privacy';
 import { showGuide } from './guide';
 import { showLicense } from './license';
-import { boardAvailable, boardErrorText, leaveBoard, nickname, updateBoardProfile } from '../board';
+import { boardAvailable, boardErrorText, leaveBoard, nickname, updateBoardProfile, syncBoard } from '../board';
 import { showBoard } from './board';
 import { ageSelect, joinCard } from './boardJoin';
 import { showGroups } from './groups';
+import { showTransferExportDialog, showTransferImportDialog } from '../transfer';
 
 /** Escapes a text value for an iCalendar property (RFC 5545 §3.3.11). */
 const icsText = (s: string) => s.replace(/[\\;,]/g, (c) => `\\${c}`).replace(/\r?\n/g, '\\n');
@@ -63,9 +64,13 @@ async function importSave(file: File) {
   }
   if (!data) return alert(t('settings.importBad'));
   const last = [...data.runs.map((r) => r.date), ...data.checks.map((c) => c.date)].sort().pop() ?? data.created;
-  if (!confirm(t('settings.importConfirm', { name: data.name || '—', runs: data.runs.length, last: dateText(last) }))) return;
+  const displayName = data.name
+    ? (data.board ? `${data.name} (${nickname(data.board.nameCode)})` : data.name)
+    : (data.board ? nickname(data.board.nameCode) : '—');
+  if (!confirm(t('settings.importConfirm', { name: displayName, runs: data.runs.length, last: dateText(last) }))) return;
   store.replace(data);
   await setLang(store.data.settings.lang);
+  if (store.data.board) syncBoard();
   alert(t('settings.importDone'));
   if (store.data.name) showSettings();
   else showOnboarding();
@@ -193,6 +198,12 @@ export function showSettings() {
           { class: 'card form' },
           h('h3', {}, `💾 ${t('settings.data')}`),
           h('p', { class: 'muted small' }, t('settings.dataHint')),
+          h(
+            'div',
+            { class: 'row left', style: { marginBottom: '8px' } },
+            h('button', { class: 'btn primary', onClick: showTransferExportDialog }, `☁️ ${t('settings.transferExport')}`),
+            h('button', { class: 'btn', onClick: () => showTransferImportDialog('', showSettings) }, `📥 ${t('settings.transferImport')}`),
+          ),
           h(
             'div',
             { class: 'row left' },

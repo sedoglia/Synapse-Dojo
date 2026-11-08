@@ -226,8 +226,7 @@ export function parseSave(json: unknown): SaveData | null {
     (d.badges === undefined || (isObj(d.badges) && Object.values(d.badges).every(isDate))) &&
     (d.counters === undefined || numbers(d.counters)) &&
     (d.settings === undefined || isObj(d.settings));
-  // Leaderboard membership belongs to the device, never to a file.
-  return ok ? withDefaults({ ...(d as Partial<SaveData>), board: null }) : null;
+  return ok ? withDefaults(d as Partial<SaveData>) : null;
 }
 
 export const store = {
@@ -241,15 +240,19 @@ export const store = {
     }
   },
 
-  /** The whole save wrapped with a marker, ready to be downloaded as a file (without the leaderboard secret). */
+  /** The complete save wrapped with a marker, ready to be downloaded as a file or transferred. */
   exportJson(): string {
-    const data = { ...this.data, board: null };
+    const data = { ...this.data };
     return JSON.stringify({ app: 'synapse-dojo', version: 1, exported: new Date().toISOString(), data }, null, 1);
   },
 
-  /** Loads an imported save; this device stays on the leaderboard (or off it), with its pending invite, as before. */
+  /** Loads an imported save, restoring all game progress, levels, settings, leaderboard account and groups. */
   replace(data: SaveData) {
-    this.data = { ...data, board: this.data.board, boardInvite: this.data.boardInvite };
+    this.data = {
+      ...data,
+      board: data.board !== undefined ? data.board : this.data.board,
+      boardInvite: data.boardInvite !== undefined ? data.boardInvite : this.data.boardInvite,
+    };
     this.save();
   },
 

@@ -8,6 +8,7 @@ import { showHome } from './home';
 import { showPrivacy } from './privacy';
 import { showGuide } from './guide';
 import { showLicense } from './license';
+import { showTransferImportDialog } from '../transfer';
 
 export function showOnboarding() {
   const input = h('input', {
@@ -84,6 +85,20 @@ export function showOnboarding() {
             { class: 'start-input-group' },
             h('label', { class: 'visually-hidden' }, t('onboard.ask'), input),
             h('button', { class: 'btn primary big', type: 'submit' }, `🚀 ${t('onboard.go')}`),
+          ),
+        ),
+        h(
+          'div',
+          { class: 'center small', style: { margin: '-10px 0 18px' } },
+          h('span', { class: 'muted' }, `${t('transfer.onboardPrompt')} `),
+          h(
+            'button',
+            {
+              class: 'link-btn',
+              type: 'button',
+              onClick: () => showTransferImportDialog('', showHome),
+            },
+            `📥 ${t('transfer.onboardBtn')}`,
           ),
         ),
 

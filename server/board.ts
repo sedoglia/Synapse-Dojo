@@ -26,6 +26,7 @@ export const SUBMIT_INTERVAL = 30;
 const KEEP_WEEKS = 2;
 const KEEP_PLAYERS_DAYS = 30;
 const KEEP_GHOST_DAYS = 7;
+export const KEEP_TRANSFER_DAYS = 1;
 const MAX_BODY = 8 * 1024;
 const DAY = 86_400_000;
 
@@ -38,10 +39,10 @@ export const json = (data: unknown, status = 200, headers: Record<string, string
 export const fail = (status: number, error: string) => json({ error }, status);
 
 /** Parses a small JSON object body, or returns null. */
-export async function readBody(request: Request): Promise<Record<string, unknown> | null> {
-  if (Number(request.headers.get('Content-Length') ?? 0) > MAX_BODY) return null;
+export async function readBody(request: Request, max = MAX_BODY): Promise<Record<string, unknown> | null> {
+  if (Number(request.headers.get('Content-Length') ?? 0) > max) return null;
   const text = await request.text();
-  if (text.length > MAX_BODY) return null;
+  if (text.length > max) return null;
   try {
     const v: unknown = JSON.parse(text);
     return typeof v === 'object' && v !== null && !Array.isArray(v) ? (v as Record<string, unknown>) : null;
@@ -171,9 +172,10 @@ export async function cleanUp(db: D1Database, now = new Date()) {
   const oldWeek = isoWeek(new Date(now.getTime() - KEEP_WEEKS * 7 * DAY));
   const idle = now.getTime() - KEEP_PLAYERS_DAYS * DAY;
   const idleGhost = now.getTime() - KEEP_GHOST_DAYS * DAY;
+  const transferCutoff = now.getTime() - KEEP_TRANSFER_DAYS * DAY;
   const idlePlayers =
     'SELECT id FROM players WHERE last_seen < ?1 OR (last_submit = 0 AND last_seen < ?2 AND id NOT IN (SELECT player_id FROM group_members))';
-  const [weeks, idleEntries, , bansIdle, players, , groups, bansOrphan] = await db.batch([
+  const [weeks, idleEntries, , bansIdle, players, , groups, bansOrphan, transfers] = await db.batch([
     db.prepare('DELETE FROM entries WHERE week < ?').bind(oldWeek),
     db.prepare(`DELETE FROM entries WHERE player_id IN (${idlePlayers})`).bind(idle, idleGhost),
     db.prepare(`DELETE FROM group_members WHERE player_id IN (${idlePlayers})`).bind(idle, idleGhost),
@@ -182,12 +184,14 @@ export async function cleanUp(db: D1Database, now = new Date()) {
     db.prepare(REASSIGN_OWNERS),
     db.prepare(DROP_EMPTY_GROUPS),
     db.prepare(DROP_ORPHAN_BANS),
+    db.prepare('DELETE FROM temp_transfers WHERE created < ?').bind(transferCutoff),
   ]);
   return {
     entries: (weeks.meta.changes ?? 0) + (idleEntries.meta.changes ?? 0),
     players: players.meta.changes ?? 0,
     groups: groups.meta.changes ?? 0,
     bans: (bansIdle.meta.changes ?? 0) + (bansOrphan.meta.changes ?? 0),
+    transfers: transfers.meta.changes ?? 0,
   };
 }
 
@@ -218,6 +222,28 @@ export function newCode(): string {
 /** Accepts codes typed with spaces, dashes or lowercase letters. */
 export const normalizeCode = (v: unknown) => (typeof v === 'string' ? v.toUpperCase().replace(/[^A-Z0-9]/g, '') : '');
 export const isCode = (v: string) => v.length === 10 && [...v].every((c) => CODE_CHARS.includes(c));
+
+/** Generates an 8-character transfer code formatted as XXXX-XXXX. */
+export function newTransferCode(): string {
+  let code = '';
+  const buf = new Uint8Array(16);
+  while (code.length < 8) {
+    crypto.getRandomValues(buf);
+    for (let i = 0; i < buf.length && code.length < 8; i++) {
+      const idx = buf[i] & 0x1f;
+      if (idx < CODE_CHARS.length) code += CODE_CHARS[idx];
+    }
+  }
+  return `${code.slice(0, 4)}-${code.slice(4)}`;
+}
+
+/** Accepts 8-character transfer codes typed with spaces, dashes or lowercase letters, returning XXXX-XXXX or empty. */
+export function normalizeTransferCode(v: unknown): string {
+  if (typeof v !== 'string') return '';
+  const clean = v.toUpperCase().replace(/[^A-Z0-9]/g, '');
+  if (clean.length !== 8 || ![...clean].every((c) => CODE_CHARS.includes(c))) return '';
+  return `${clean.slice(0, 4)}-${clean.slice(4)}`;
+}
 
 /** A group name: 1–30 characters, single spaces, no control characters. Only members ever see it. */
 export function cleanGroupName(v: unknown): string | null {
