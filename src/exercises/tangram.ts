@@ -103,10 +103,15 @@ export const tangram: Exercise = {
       // Select puzzle matching current staircase level with recency avoidance
       const currentLevel = ctx.practice ? 1 : st.int;
       const pool = TANGRAM_PUZZLES.filter((p) => p.level === currentLevel);
-      const recentIds = new Set(getRecentPuzzleIds());
+      const recentList = getRecentPuzzleIds();
+      const recentIds = new Set(recentList);
       let candidates = pool.filter((p) => !usedPuzzleIds.has(p.id) && !recentIds.has(p.id));
       if (!candidates.length) {
-        candidates = pool.filter((p) => !usedPuzzleIds.has(p.id));
+        // If all puzzles of this level were recently played, recycle the oldest (least recently used)
+        const recycled = pool.filter((p) => !usedPuzzleIds.has(p.id));
+        recycled.sort((a, b) => recentList.indexOf(a.id) - recentList.indexOf(b.id));
+        const sliceLen = Math.max(1, Math.ceil(recycled.length / 2));
+        candidates = recycled.slice(0, sliceLen);
       }
       const puzzle: TangramPuzzle = candidates.length
         ? pick(candidates)
@@ -115,7 +120,9 @@ export const tangram: Exercise = {
         : pick(TANGRAM_PUZZLES);
 
       usedPuzzleIds.add(puzzle.id);
-      saveRecentPuzzleId(puzzle.id);
+      if (!ctx.practice) {
+        saveRecentPuzzleId(puzzle.id);
+      }
 
       // Initialize puzzle state
       const slots: ActiveSlot[] = puzzle.slots.map((s) => ({

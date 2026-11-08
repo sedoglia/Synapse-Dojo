@@ -6,6 +6,15 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.30] - 2026-11-08
+
+### Optimized
+
+- Anti-repetition recency memory enhancements for **Tangram**:
+  - Verified persistence of proposed puzzle IDs in `localStorage` (`synapse_tangram_recent_puzzles`) with a 30-item sliding window to prevent repeating recent puzzles, matching `nonogram`, `towers`, `stories`, and `reading`.
+  - Added deterministic LRU (*Least Recently Used*) fallback recycling: when all puzzles of a staircase level have been completed in recent sessions, the system prioritizes the puzzles played furthest in the past rather than picking randomly.
+  - Excluded tutorial practice mode (`ctx.practice`) from recency storage to preserve the memory window exclusively for real training sessions.
+
 ## [0.12.29] - 2026-11-08
 
 ### Changed
