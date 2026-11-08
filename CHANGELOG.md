@@ -6,6 +6,19 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.32] - 2026-11-08
+
+### Changed
+
+- Addressed all 7 feedback points in **Tangram** with comprehensive geometric overhaul, ergonomic controls, and dopaminergic pacing:
+  - **1:1 Piece Scale & Tray Visibility**: Tray items enlarged from 54px to 72px with tight viewBox (`-52 -52 104 104`) eliminating the jarring size disparity with the silhouette; dragging clones now scale 1:1 with board units (96px, 1 SVG unit = 1 CSS px) providing seamless visual fit.
+  - **Zero Layout Jitter & Rock-solid Stability**: Eliminated bouncing animations and `translateY` shifts that caused vertical layout jumps on interaction; rotating a piece now directly modifies the SVG polygon transform in place without tearing down the board DOM; `.stage-tangram` is top-anchored and the flip button preserves layout geometry via `visibility: hidden`.
+  - **Certified Geometry & Clear Snap Feedback**: Fully regenerated puzzles eliminating 72 legacy geometric distortions (e.g. non-orthogonal triangle legs in boat and complex shapes); fixed canonical centered coordinates for the parallelogram `PR`; implemented SVG coordinate snapping with generous proximity tolerance (58 units) and visual orientation pulsing (`.tangram-slot-hint-glow`), clearly demonstrating the required alignment on angle mismatch and eliminating blind trial-and-error.
+  - **Optimized Session Length (2 Puzzles)**: Calibrated match length to 2 puzzles per session (1 in practice/check), aligning total duration to ~1.5 minutes like all other dojo exercises.
+  - **Speed Bonuses & Dopaminergic Calibration**: Rebalanced adaptive time benchmarks per level (`18s + 6s per piece`) connected to `ctx.withTimeBonus` and `ctx.isSpeedBonus` to reward swift spatial insights with +10 XP bonus and score multipliers.
+  - **80 Mathematically Certified Schemes**: Authored 80 zero-distortion puzzles across all 8 levels (10 unique puzzles per level, 3 to 7 tans), localized in all 12 supported languages.
+  - **Intuitive Multi-modal Controls**: Added mouse wheel scrolling (WheelUp/WheelDown) for instant rotation, right-click quick spin, live magnetic highlight during drag (`.tangram-slot.target-ready`), and keyboard shortcuts (1-4, A/D, arrows, Space).
+
 ## [0.12.31] - 2026-11-08
 
 ### Changed
