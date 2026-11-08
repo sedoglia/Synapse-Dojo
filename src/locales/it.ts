@@ -43,7 +43,7 @@ const ui: Locale['ui'] = {
   'guide.planP': 'Ogni giorno Synapse Dojo compone per te una sequenza di 4 esercizi su domini diversi (ad esempio velocità, memoria, controllo esecutivo e ragionamento). Gli esercizi sono adattivi: se rispondi correttamente la difficoltà sale, se commetti errori scende, così non è né troppo facile né troppo difficile per te. Completando l’allenamento aumenti la tua serie quotidiana (streak) e guadagni punti XP per salire di livello.',
   'guide.checkH': '📏 Misura il Neuro Score (Daily Check)',
   'guide.checkP': 'Il Neuro Score è una breve prova quotidiana su tutte le 9 aree, con un esercizio per area scelto a rotazione ogni giorno. Il punteggio (da 0 a 1000) ti aiuta a seguire il tuo andamento in questi esercizi: va letto su più settimane, non giorno per giorno, perché gli esercizi ruotano e ogni prova è breve. Non è ancora stato validato su giocatori reali, non è un test clinico e non ha valore diagnostico.',
-  'guide.trainingH': '🧩 Palestra Libera (39 Esercizi)',
+  'guide.trainingH': '🥋 Palestra Libera (39 Esercizi)',
   'guide.trainingP': 'Nella sezione Palestra trovi l’intero catalogo dei 39 esercizi, suddivisi nelle 9 abilità cerebrali e di coordinazione bilaterale. Puoi allenarti liberamente su qualunque esercizio senza limiti di tempo, approfondire compiti specifici o superare i tuoi record personali.',
   'guide.progressH': '📈 Progressi e Statistiche',
   'guide.progressP': 'Consulta il tuo profilo cognitivo con i livelli raggiunti in ciascuna abilità, lo storico dei tuoi Neuro Score, i badge e traguardi sbloccati (come serie di giorni consecutivi o livelli avanzati) e il calendario mensile delle tue sessioni di allenamento.',

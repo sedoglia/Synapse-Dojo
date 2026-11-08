@@ -6,6 +6,15 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.33] - 2026-11-08
+
+### Modificato
+
+- Risolto il conflitto visivo di icona tra la **Palestra** e il gioco **Tangram**:
+  - Assegnata alla **Palestra** e alla scheda **Esercizi** nei progressi l'icona dedicata `🥋` (Dojo / divisa di allenamento mentale), che rafforza l'identità del brand Synapse Dojo e si armonizza con la card Allenamento (`🏋️`), la Guida e l'Onboarding.
+  - Mantenuta per **Tangram** l'icona `🧩` (tessera di incastro / puzzle), coerente con il badge *Maestro del Tangram*.
+  - Aggiornati i file `README.md`, `README.it.md`, `onboarding.ts` e le 12 localizzazioni con l'icona `🥋` e il conteggio ufficiale a 39 esercizi.
+
 ## [0.12.32] - 2026-11-08
 
 ### Modificato
