@@ -1,6 +1,7 @@
 import { h, flash, pick } from '../dom';
 import { t } from '../i18n';
 import { sfx } from '../audio';
+import { getRecentHistory, saveRecentHistory } from '../storage';
 import type { Exercise } from './types';
 import { NONOGRAM_PUZZLES, parsePuzzleGrid, type NonogramPuzzle } from './nonogramPuzzles';
 
@@ -21,25 +22,8 @@ const gridSizeFor = (level: number): number => {
 const RECENT_KEY = 'synapse_nonogram_recent_puzzles';
 const MAX_RECENT_MEMORY = 30;
 
-function getRecentPuzzleIds(): string[] {
-  try {
-    const raw = localStorage.getItem(RECENT_KEY);
-    return raw ? JSON.parse(raw) : [];
-  } catch {
-    return [];
-  }
-}
-
-function saveRecentPuzzleId(id: string) {
-  try {
-    const recent = getRecentPuzzleIds().filter((x) => x !== id);
-    recent.push(id);
-    if (recent.length > MAX_RECENT_MEMORY) recent.shift();
-    localStorage.setItem(RECENT_KEY, JSON.stringify(recent));
-  } catch {
-    // Ignore storage quota or disabled storage in private browsing
-  }
-}
+const getRecentPuzzleIds = (): string[] => getRecentHistory(RECENT_KEY);
+const saveRecentPuzzleId = (id: string) => saveRecentHistory(RECENT_KEY, id, MAX_RECENT_MEMORY);
 
 export const nonogram: Exercise = {
   id: 'nonogram',

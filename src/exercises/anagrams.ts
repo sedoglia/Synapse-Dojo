@@ -1,10 +1,13 @@
-import { h, shuffle, flash } from '../dom';
+import { h, shuffle, flash, pick } from '../dom';
 import { sfx } from '../audio';
 import { t, words, anagramWords, graphemes, wordNear } from '../i18n';
+import { getRecentHistory, saveRecentHistory } from '../storage';
 import { canon, isPlayable, scramble, solutionsOf } from './anagramRules';
 import type { Exercise } from './types';
 
 const MAX_LEVEL = 5;
+const RECENT_KEY = 'synapse_anagrams_recent_words';
+const MAX_RECENT_MEMORY = 40;
 
 /**
  * Word length for a level. Each language spreads over the levels the lengths it has enough words for: 4 to 8 letters in
@@ -43,16 +46,28 @@ export const anagrams: Exercise = {
 
     const solutions = solutionsOf(words(), anagramWords());
     const puzzles = words().filter((w) => isPlayable(w, solutions, graphemes));
+    const usedInSession = new Set<string>();
     let correct = 0;
 
     for (let i = 0; i < trials; i++) {
       ctx.progress(i / trials, `${i + 1}/${trials}`);
       const targetLen = lenFor(st.level);
+      const recentWords = new Set(getRecentHistory(RECENT_KEY));
 
-      // Find words matching desired length
-      // Lengths are counted in letters as readers see them (see `graphemes`); languages with short words,
-      // such as Chinese, get the closest length available.
-      const targetWord = wordNear(puzzles, targetLen).toUpperCase();
+      // Find words matching desired length, prioritizing unplayed words across recent sessions
+      const dist = (w: string) => Math.abs(graphemes(w).length - targetLen);
+      const bestDist = Math.min(...puzzles.map(dist));
+      const pool = puzzles.filter((w) => dist(w) === bestDist);
+
+      let candidates = pool.filter((w) => !usedInSession.has(w.toUpperCase()) && !recentWords.has(w.toUpperCase()));
+      if (!candidates.length) {
+        // If all words of this length were recently played, recycle within session constraints
+        candidates = pool.filter((w) => !usedInSession.has(w.toUpperCase()));
+      }
+      const chosen = candidates.length ? pick(candidates) : (pool.length ? pick(pool) : wordNear(puzzles, targetLen));
+      const targetWord = chosen.toUpperCase();
+      usedInSession.add(targetWord);
+      saveRecentHistory(RECENT_KEY, targetWord, MAX_RECENT_MEMORY);
 
       const letters = graphemes(targetWord);
       const scrambled = scramble(targetWord, solutions, graphemes, shuffle);

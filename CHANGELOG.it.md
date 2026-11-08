@@ -6,6 +6,19 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.24] - 2026-11-08
+
+### Modificato
+
+- Memoria persistente anti-ripetizione su tutti i giochi a schemi e contenuti fissi:
+  - Estesa l'architettura anti-ripetizione introdotta in Nonogram a tutti gli esercizi dotati di schemi, puzzle o scenari predefiniti, per evitare la noia della ripetizione e impedire che il giocatore sia facilitato dal ricordare la soluzione a memoria.
+  - Funzioni condivise in `src/storage.ts`: introdotte `getRecentHistory` e `saveRecentHistory` con memoria persistente FIFO su `localStorage` tollerante alla navigazione privata.
+  - Lettura Veloce (`ex.reading`): registro `synapse_reading_recent_passages` (fino a 20 brani) che propone prioritariamente passaggi non letti di recente e ripesca con criterio Least-Recently-Used (LRU), garantendo che la domanda di comprensione finale misuri sempre la reale abilità e non la memoria della risposta esatta.
+  - Storie (`ex.stories`): registro `synapse_stories_recent_scenarios` (fino a 20 scenari) con esclusione delle persone e scenari già affrontati di recente e controllo anti-duplicato nella medesima sessione, preservando la freschezza della memoria episodica.
+  - Anagrammi (`ex.anagrams`): registro `synapse_anagrams_recent_words` (fino a 40 parole) che prioritizza parole non ancora risolte e garantisce l'assenza di parole doppie nella stessa sessione di allenamento.
+  - Torri di Londra (`ex.towers`): registro `synapse_towers_recent_puzzles` (fino a 30 puzzle) che memorizza le configurazioni `${start}->${goal}`, assicurando la continua rotazione di puzzle inediti a pari numero di mosse ottimali.
+  - Nonogram (`ex.nonogram`): allineato alle funzioni condivise di memoria recente (`synapse_nonogram_recent_puzzles`).
+
 ## [0.12.23] - 2026-11-07
 
 ### Modificato
