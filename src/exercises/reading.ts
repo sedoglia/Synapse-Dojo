@@ -1,8 +1,11 @@
-﻿import { h, shuffle, scale, flash } from '../dom';
+import { h, shuffle, scale, flash } from '../dom';
 import { t, passages as allPassages, meta } from '../i18n';
+import { getRecentHistory, saveRecentHistory } from '../storage';
 import type { Exercise } from './types';
 
 const ROUNDS = 2;
+const RECENT_KEY = 'synapse_reading_recent_passages';
+const MAX_RECENT_MEMORY = 20;
 
 /** Words in a passage; scripts written without spaces (Chinese, Japanese) count characters instead. */
 function wordCount(text: string): number {
@@ -22,13 +25,29 @@ export const reading: Exercise = {
   practice: false,
 
   async run(ctx) {
-    const passages = shuffle(allPassages()).slice(0, ROUNDS);
+    const all = allPassages();
+    const recentIds = new Set(getRecentHistory(RECENT_KEY));
+    const unread = shuffle(all.filter((p) => !recentIds.has(p.question)));
+    let passages: typeof all;
+    if (unread.length >= ROUNDS) {
+      passages = unread.slice(0, ROUNDS);
+    } else {
+      const recentList = getRecentHistory(RECENT_KEY);
+      const readPool = all.filter((p) => recentIds.has(p.question));
+      readPool.sort((a, b) => recentList.indexOf(a.question) - recentList.indexOf(b.question));
+      passages = [...unread, ...readPool].slice(0, ROUNDS);
+    }
+    if (!passages.length) {
+      passages = shuffle(all).slice(0, ROUNDS);
+    }
+
     const scores: number[] = [];
     let understood = 0;
     let wpmSum = 0;
 
     for (let r = 0; r < passages.length; r++) {
       const p = passages[r];
+      saveRecentHistory(RECENT_KEY, p.question, MAX_RECENT_MEMORY);
       ctx.progress(r / ROUNDS, `${r + 1}/${ROUNDS}`);
       const doneBtn = h('button', { class: 'btn primary big' }, t('ex.reading.done'));
       ctx.stage.replaceChildren(

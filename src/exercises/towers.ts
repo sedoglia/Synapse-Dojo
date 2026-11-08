@@ -1,12 +1,19 @@
 import { h, pick, flash } from '../dom';
 import { sfx } from '../audio';
 import { t } from '../i18n';
+import { getRecentHistory, saveRecentHistory } from '../storage';
 import type { Exercise } from './types';
 
 const CAPS = [3, 2, 1];
 const COLORS: Record<string, string> = { R: 'var(--c-red)', G: 'var(--c-green)', B: 'var(--c-blue)' };
 const MAX_LEVEL = 7;
 const movesFor = (level: number) => level + 1;
+
+const RECENT_KEY = 'synapse_towers_recent_puzzles';
+const MAX_RECENT_MEMORY = 30;
+
+const getRecentPuzzleKeys = (): string[] => getRecentHistory(RECENT_KEY);
+const saveRecentPuzzleKey = (key: string) => saveRecentHistory(RECENT_KEY, key, MAX_RECENT_MEMORY);
 
 type State = string; // pegs bottom→top joined by '|', e.g. "RG|B|"
 
@@ -45,15 +52,32 @@ function distances(start: State): Map<State, number> {
 const ALL_STATES = [...distances('RGB||').keys()];
 
 /** A start/goal pair whose shortest solution is exactly `moves` (or the longest available below it). */
-function puzzle(moves: number): { start: State; goal: State; min: number } {
+function puzzle(
+  moves: number,
+  usedInSession?: Set<string>,
+  recentKeys?: Set<string>,
+): { start: State; goal: State; min: number; key: string } {
   for (let want = moves; want > 0; want--) {
-    for (let tries = 0; tries < 20; tries++) {
-      const goal = pick(ALL_STATES);
+    const candidatePairs: { start: State; goal: State; key: string }[] = [];
+    for (const goal of ALL_STATES) {
       const starts = [...distances(goal)].filter(([, d]) => d === want).map(([s]) => s);
-      if (starts.length) return { start: pick(starts), goal, min: want };
+      for (const start of starts) {
+        candidatePairs.push({ start, goal, key: `${start}->${goal}` });
+      }
+    }
+    if (candidatePairs.length) {
+      let filtered = candidatePairs.filter(
+        (p) => (!usedInSession || !usedInSession.has(p.key)) && (!recentKeys || !recentKeys.has(p.key)),
+      );
+      if (!filtered.length && usedInSession) {
+        // If all pairs were recently played, recycle while avoiding in-session duplicates
+        filtered = candidatePairs.filter((p) => !usedInSession.has(p.key));
+      }
+      const chosen = filtered.length ? pick(filtered) : pick(candidatePairs);
+      return { ...chosen, min: want };
     }
   }
-  return { start: 'RGB||', goal: 'RG|B|', min: 1 };
+  return { start: 'RGB||', goal: 'RG|B|', min: 1, key: 'RGB||->RG|B|' };
 }
 
 export function renderBoard(state: State, small: boolean, selected = -1, onPeg?: (i: number) => void): HTMLElement {
@@ -209,11 +233,16 @@ export const towers: Exercise = {
   async run(ctx) {
     const puzzles = ctx.count(8, 6, 2);
     const st = ctx.stair(puzzles, 1, MAX_LEVEL, { target: 0.7 });
+    const usedPuzzleKeys = new Set<string>();
+    const recentKeys = new Set(getRecentPuzzleKeys());
     let perfect = 0;
 
     for (let p = 0; p < puzzles; p++) {
       ctx.progress(p / puzzles, `${p + 1}/${puzzles}`);
-      const { start, goal, min } = puzzle(movesFor(st.int));
+      const puzzleObj = puzzle(movesFor(st.int), usedPuzzleKeys, recentKeys);
+      usedPuzzleKeys.add(puzzleObj.key);
+      saveRecentPuzzleKey(puzzleObj.key);
+      const { start, goal, min } = puzzleObj;
       let state = start;
       let moves = 0;
       let selected = -1;

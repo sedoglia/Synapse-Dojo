@@ -1,4 +1,4 @@
-﻿import { STORAGE_KEY } from './config';
+import { STORAGE_KEY } from './config';
 import type { Lang } from './i18n';
 import { todayKey } from './dom';
 
@@ -353,3 +353,30 @@ export const store = {
     return n;
   },
 };
+
+/**
+ * Reads a recent list of item IDs/keys from localStorage for anti-repetition memory.
+ */
+export function getRecentHistory(key: string): string[] {
+  try {
+    const raw = localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+/**
+ * Saves a recently completed item ID/key into a FIFO sliding-window in localStorage.
+ */
+export function saveRecentHistory(key: string, id: string, maxItems = 30): void {
+  try {
+    const recent = getRecentHistory(key).filter((x) => x !== id);
+    recent.push(id);
+    if (recent.length > maxItems) recent.shift();
+    localStorage.setItem(key, JSON.stringify(recent));
+  } catch {
+    // Ignore storage quota or disabled storage in private browsing
+  }
+}
+

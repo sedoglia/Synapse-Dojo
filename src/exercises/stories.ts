@@ -1,7 +1,11 @@
 import { h, shuffle, flash, rand } from '../dom';
 import { t, stories as allStories } from '../i18n';
+import { getRecentHistory, saveRecentHistory } from '../storage';
 import type { Ctx } from '../ctx';
 import type { Exercise } from './types';
+
+const RECENT_KEY = 'synapse_stories_recent_scenarios';
+const MAX_RECENT_MEMORY = 20;
 
 /**
  * What each level asks: scenes to keep apart, questions per scene, seconds of busy pause before the questions.
@@ -92,8 +96,15 @@ export const stories: Exercise = {
   async run(ctx) {
     const rounds = ctx.count(3, 2, 1);
     const st = ctx.stair(8, 1, 6, { target: 0.75 });
-    const pool = shuffle([...allStories()]);
+    const all = allStories();
+    const recentIds = new Set(getRecentHistory(RECENT_KEY));
+    const unplayed = shuffle(all.filter((s) => !recentIds.has(s.name)));
+    const recentList = getRecentHistory(RECENT_KEY);
+    const played = all.filter((s) => recentIds.has(s.name));
+    played.sort((a, b) => recentList.indexOf(a.name) - recentList.indexOf(b.name));
+    const pool = [...unplayed, ...played];
     let next = 0;
+    const usedInSession = new Set<string>();
 
     let correct = 0;
     let totalQuestions = 0;
@@ -104,9 +115,15 @@ export const stories: Exercise = {
 
       // Scenes in a round have different people, so a question can only belong to one of them.
       const scenes: typeof pool = [];
-      while (scenes.length < config.scenes) {
+      while (scenes.length < config.scenes && pool.length > 0) {
         const scene = pool[next++ % pool.length];
-        if (scenes.every((s) => s.name !== scene.name) || next > pool.length * 2) scenes.push(scene);
+        const isFreshInRound = scenes.every((s) => s.name !== scene.name);
+        const isFreshInSession = !usedInSession.has(scene.name);
+        if ((isFreshInRound && isFreshInSession) || next > pool.length * 2) {
+          scenes.push(scene);
+          usedInSession.add(scene.name);
+          saveRecentHistory(RECENT_KEY, scene.name, MAX_RECENT_MEMORY);
+        }
       }
 
       for (let s = 0; s < scenes.length; s++) {

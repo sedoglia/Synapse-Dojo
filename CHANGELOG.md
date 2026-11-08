@@ -6,6 +6,19 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.24] - 2026-11-08
+
+### Changed
+
+- Persistent anti-repetition memory across all fixed-puzzle and fixed-content exercises:
+  - Extended the persistent anti-repetition shuffle-bag architecture originally introduced in Nonogram to all games with fixed puzzles, boards, or scenarios, preventing boredom and avoiding answer recall from prior sessions.
+  - Shared storage utilities in `src/storage.ts`: added `getRecentHistory` and `saveRecentHistory` with robust FIFO sliding windows in `localStorage` safe against private browsing restrictions.
+  - Speed Reading (`ex.reading`): added `synapse_reading_recent_passages` (up to 20 passages) prioritizing unread texts and falling back to least-recently-used (LRU), ensuring comprehension questions measure authentic processing instead of remembered answers.
+  - Stories (`ex.stories`): added `synapse_stories_recent_scenarios` (up to 20 scenarios) preventing repeat characters/scenarios across sessions and within the same session.
+  - Anagrams (`ex.anagrams`): added `synapse_anagrams_recent_words` (up to 40 words) prioritizing unplayed words at each target length and eliminating in-session duplicate words.
+  - Tower of London (`ex.towers`): added `synapse_towers_recent_puzzles` (up to 30 puzzles) tracking `${start}->${goal}` configurations to continuously cycle unique planning challenges.
+  - Nonogram (`ex.nonogram`): harmonized to use the shared storage helpers.
+
 ## [0.12.23] - 2026-11-07
 
 ### Changed
