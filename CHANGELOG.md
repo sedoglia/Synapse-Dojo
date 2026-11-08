@@ -6,6 +6,16 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.34] - 2026-11-08
+
+### Changed
+
+- Recalibrated match length and adaptive staircase progression for **Tangram**:
+  - Increased puzzle count from 2 to 3 schemes per match in training mode (`ctx.count(3, 2, 1)`: 3 in training, 2 in daily check, 1 in practice/tutorial) matching player feedback following fluid piece controls and instant snapping.
+  - Updated duration estimate to `minutes: [1.5, 2.5]`.
+  - Re-aligned adaptive staircase to target accuracy `0.75` (consistent with `nonogram`, `stories`, and `game2048`), ensuring natural progression across 3 trials: 3 unassisted solves step up, 2 maintain mastery without punitive drops.
+  - Verified speed bonus benchmarks measuring average solving time per puzzle, ensuring consistent dopamine rewards (+10 XP and score bonuses) across 3-puzzle matches.
+
 ## [0.12.33] - 2026-11-08
 
 ### Changed

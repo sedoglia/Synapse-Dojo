@@ -101,14 +101,14 @@ export const tangram: Exercise = {
   desc: 'ex.tangram.desc',
   why: 'ex.tangram.why',
   example: 'ex.tangram.example',
-  minutes: [1.5, 2],
+  minutes: [1.5, 2.5],
   levels: { min: 1, max: 8, start: 2 },
   levelLabel: (l) => `${piecesCountForLevel(l)} ${t('ex.tangram.pieces')}`,
 
   async run(ctx) {
-    // 2 schemes per match keeps duration at ~1.5m, aligning with all other exercises
-    const trials = ctx.count(2, 2, 1);
-    const st = ctx.stair(trials, 1, 8, { target: 0.8, fastStart: true });
+    // 3 schemes per match in training (2 in daily check, 1 in practice)
+    const trials = ctx.count(3, 2, 1);
+    const st = ctx.stair(trials, 1, 8, { target: 0.75, fastStart: true });
     const usedPuzzleIds = new Set<string>();
     let correct = 0;
 
