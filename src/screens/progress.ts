@@ -126,7 +126,7 @@ function renderTabBar(): HTMLElement {
           type: 'button',
           onClick: () => {
             currentTab = tab.id;
-            showProgress();
+            showProgress(tab.id);
           },
         },
         `${tab.icon} ${tab.label}`,
@@ -606,14 +606,25 @@ function renderBadges(): HTMLElement[] {
   ];
 }
 
-export function showProgress(tab?: ProgressTab) {
-  if (tab) currentTab = tab;
+export function showProgress(tab?: ProgressTab | unknown) {
+  if (tab === 'overview' || tab === 'exercises' || tab === 'habits' || tab === 'badges') {
+    currentTab = tab;
+  } else if (tab === undefined) {
+    if (!currentTab) currentTab = 'overview';
+  } else {
+    // When invoked with non-string argument (e.g. DOM click event), always default to 'overview'
+    currentTab = 'overview';
+  }
 
   let tabContent: (HTMLElement | null)[] = [];
   if (currentTab === 'overview') tabContent = renderOverview();
   else if (currentTab === 'exercises') tabContent = renderExercises();
   else if (currentTab === 'habits') tabContent = renderHabits();
   else if (currentTab === 'badges') tabContent = renderBadges();
+  else {
+    currentTab = 'overview';
+    tabContent = renderOverview();
+  }
 
   render(page(t('progress.title'), showHome, renderTabBar(), ...tabContent));
 }
