@@ -6,6 +6,16 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.13.2] - 2026-11-08
+
+### Aggiunto
+
+- Potenziamento della difficoltà e rigore neuroscientifico per **Tangram**:
+  - **Cronometro visivo e barra a fasce dinamiche (Oro / Argento / Bronzo / Standard)**: introdotto un timer attivo a schermo con monitoraggio millisecondo per millisecondo; completare lo schema nella fascia Oro conferisce il massimo punteggio e sblocca il bonus rapidità (+10 XP) secondo la teoria della velocità di elaborazione visuo-spaziale (Salthouse, 1996; WAIS-IV Block Design).
+  - **Sagoma cieca monolitica (*True Blind Silhouette*)**: disattivata l'evidenziazione magnetica `.target-ready` durante il drag e rimosse le linee interne di giunzione della sagoma; il giocatore deve operare una vera scomposizione parte-tutto (*Part-Whole Decomposition*, Shepard & Metzler, 1971) analizzando la figura senza radar o suggerimenti di forma.
+  - **Pezzi distrattori (*Decoy Pieces*) nei livelli 5–8**: aggiunti pezzi geometrici extra nel vassoio che non appartengono alla figura, stimolando la corteccia prefrontale dorsolaterale (DLPFC) nell'inibizione delle opzioni irrilevanti e nella selezione attiva delle caratteristiche.
+  - **Sistema anti-bruteforce**: tracciamento dei tentativi a vuoto e feedback sobrio (`Nessun incastro valido qui`) per scoraggiare i click casuali impulsivi e premiare la simulazione mentale preventiva.
+
 ## [0.13.1] - 2026-11-08
 
 ### Modificato

@@ -49,6 +49,16 @@ const CANONICAL_PTS: Record<TangramPieceType, [number, number][]> = {
   ],
 };
 
+const PIECE_COLORS: Record<TangramPieceType, string> = {
+  ST: '#10B981',
+  MT: '#06B6D4',
+  SQ: '#8B5CF6',
+  PR: '#EC4899',
+  LT: '#F59E0B',
+};
+
+const CLASSIC_SET: TangramPieceType[] = ['LT', 'LT', 'MT', 'SQ', 'PR', 'ST', 'ST'];
+
 interface TrayPiece {
   id: string;
   type: TangramPieceType;
@@ -56,6 +66,7 @@ interface TrayPiece {
   rot: number;
   flip: boolean;
   placedSlotId: string | null;
+  isDecoy?: boolean;
 }
 
 interface ActiveSlot extends TangramSlot {
@@ -156,9 +167,29 @@ export const tangram: Exercise = {
         placedSlotId: null,
       }));
 
+      // Distractor (decoy) piece for advanced levels (Level 5–8) in non-practice mode:
+      // Forces prefrontal feature-selection & inhibition: deduce which pieces to use and which to discard!
+      const hasDecoy = !ctx.practice && currentLevel >= 5;
+      if (hasDecoy) {
+        // Find an unused classic tangram piece type if any, or pick a plausible distractor shape
+        const usedTypes = new Set(puzzle.slots.map((s) => s.type));
+        const missing = CLASSIC_SET.find((pt) => !usedTypes.has(pt));
+        const decoyType: TangramPieceType = missing ?? (currentLevel >= 7 ? 'SQ' : 'ST');
+        pieces.push({
+          id: `decoy_${Math.random().toString(36).slice(2, 7)}`,
+          type: decoyType,
+          color: PIECE_COLORS[decoyType],
+          rot: (Math.floor(Math.random() * 8) * 45) % 360,
+          flip: false,
+          placedSlotId: null,
+          isDecoy: true,
+        });
+      }
+
       let selectedPieceId: string | null = pieces[0]?.id ?? null;
       let hintsLeft = currentLevel <= 3 ? 2 : 1;
       let hintsUsed = 0;
+      let misplaces = 0;
       const undoStack: { pieceId: string; slotId: string }[] = [];
       let solved = false;
 
@@ -174,6 +205,7 @@ export const tangram: Exercise = {
         'div',
         { class: 'tangram-badge' },
         `${t('ex.tangram.level', { l: currentLevel })} · ${puzzle.slots.length} ${t('ex.tangram.pieces')} · ${puzzle.icon}`,
+        ...(hasDecoy ? [h('span', { class: 'tangram-decoy-badge' }, '⚠️ ' + t('ex.tangram.decoyWarning'))] : []),
       );
 
       const undoBtn = h(
@@ -195,6 +227,59 @@ export const tangram: Exercise = {
       const actionsRow = h('div', { class: 'tangram-actions' }, undoBtn, resetBtn, hintBtn);
       const headerBar = h('div', { class: 'tangram-header' }, infoBadge, actionsRow);
 
+      // Speed Benchmark & Dynamic Tier Stopwatch (Gold / Silver / Bronze / Standard)
+      // Visual feedback on processing speed stimulates striatal dopamine and focus (Salthouse 1996; WAIS-IV)
+      const benchmarkSecs = 18 + piecesCountForLevel(currentLevel) * 6;
+      const timerIcon = h('span', { class: 'tangram-timer-icon' }, '🏆');
+      const timerLabel = h('span', { class: 'tangram-timer-label' }, t('ex.tangram.tierGold'));
+      const timerSec = h('span', { class: 'tangram-timer-sec' }, '00:00');
+      const timerBadge = h('div', { class: 'tangram-timer-badge gold' }, timerIcon, timerLabel, timerSec);
+      const timerFill = h('div', { class: 'tangram-timer-fill gold', style: 'width: 100%' });
+      const timerTrack = h('div', { class: 'tangram-timer-track' }, timerFill);
+      const timerRow = h('div', { class: 'tangram-timer-row' }, timerBadge, timerTrack);
+
+      const puzzleStartTime = performance.now();
+      let activeTier: 'gold' | 'silver' | 'bronze' | 'standard' = 'gold';
+
+      const updateTimerDisplay = () => {
+        if (solved) return;
+        const elapsedSecs = (performance.now() - puzzleStartTime) / 1000;
+        const mins = Math.floor(elapsedSecs / 60);
+        const secs = Math.floor(elapsedSecs % 60);
+        timerSec.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+
+        let tier: 'gold' | 'silver' | 'bronze' | 'standard' = 'gold';
+        let progress = 1;
+
+        if (elapsedSecs <= benchmarkSecs) {
+          tier = 'gold';
+          progress = Math.max(0, 1 - elapsedSecs / benchmarkSecs);
+        } else if (elapsedSecs <= benchmarkSecs * 1.4) {
+          tier = 'silver';
+          progress = Math.max(0, 1 - (elapsedSecs - benchmarkSecs) / (benchmarkSecs * 0.4));
+        } else if (elapsedSecs <= benchmarkSecs * 1.8) {
+          tier = 'bronze';
+          progress = Math.max(0, 1 - (elapsedSecs - benchmarkSecs * 1.4) / (benchmarkSecs * 0.4));
+        } else {
+          tier = 'standard';
+          progress = 0;
+        }
+
+        if (tier !== activeTier) {
+          activeTier = tier;
+          sfx.tick();
+        }
+
+        timerBadge.className = `tangram-timer-badge ${tier}`;
+        timerIcon.textContent = tier === 'gold' ? '🏆' : tier === 'silver' ? '🥈' : tier === 'bronze' ? '🥉' : '⏱️';
+        const labelKey = tier === 'gold' ? 'ex.tangram.tierGold' : tier === 'silver' ? 'ex.tangram.tierSilver' : tier === 'bronze' ? 'ex.tangram.tierBronze' : 'ex.tangram.tierStandard';
+        timerLabel.textContent = t(labelKey as any);
+        timerFill.className = `tangram-timer-fill ${tier}`;
+        timerFill.style.width = `${Math.round(progress * 100)}%`;
+      };
+
+      const timerInterval = setInterval(updateTimerDisplay, 100);
+
       // Main Game Board (SVG)
       const boardContainer = h('div', { class: 'tangram-board-container' });
       const svgNS = 'http://www.w3.org/2000/svg';
@@ -202,7 +287,7 @@ export const tangram: Exercise = {
       boardSvg.setAttribute('viewBox', puzzle.viewBox);
       boardSvg.setAttribute('class', 'tangram-svg-board');
 
-      // Base unified solid silhouette (clean dark silhouette without internal lines)
+      // Base solid silhouette: impenetrable black shadow without internal lines (Part-Whole decomposition)
       const baseGroup = document.createElementNS(svgNS, 'g');
       baseGroup.setAttribute('class', 'tangram-silhouette-base');
       for (const slot of puzzle.slots) {
@@ -213,12 +298,24 @@ export const tangram: Exercise = {
       }
       boardSvg.append(baseGroup);
 
-      // Group for Placed Pieces and Interactive Target Slots
+      // Group for Placed Pieces
       const slotsGroup = document.createElementNS(svgNS, 'g');
       slotsGroup.setAttribute('class', 'tangram-slots-group');
       boardSvg.append(slotsGroup);
 
       boardContainer.append(boardSvg);
+
+      // Clicking on board: attempt deduction placement at clicked coordinates
+      boardSvg.onclick = (e) => {
+        if (solved) return;
+        const sp = getSelectedPiece();
+        if (!sp) {
+          sfx.tick();
+          ctx.hint(t('ex.tangram.selectPieceFirst'));
+          return;
+        }
+        trySnapAtPoint(e.clientX, e.clientY, sp);
+      };
 
       // Controls Bar (Rotation & Flip)
       const rotLeftBtn = h(
@@ -236,7 +333,6 @@ export const tangram: Exercise = {
         { class: 'btn small tangram-control-btn', title: t('ex.tangram.flip') },
         '⇄',
       );
-      // Keep flipBtn in layout with visibility:hidden to avoid any layout jump
       flipBtn.style.visibility = 'hidden';
       flipBtn.style.pointerEvents = 'none';
 
@@ -249,7 +345,7 @@ export const tangram: Exercise = {
       const revealBanner = h('div', { class: 'tangram-reveal-banner hidden' });
 
       // Assemble stage layout
-      tangramWrap.append(headerBar, boardContainer, controlsBar, trayContainer, revealBanner);
+      tangramWrap.append(headerBar, timerRow, boardContainer, controlsBar, trayContainer, revealBanner);
       stage.append(tangramWrap);
 
       // Map to keep track of piece DOM elements and SVGs for zero-reflow rotations
@@ -294,15 +390,14 @@ export const tangram: Exercise = {
         }
       };
 
-      // Visual ghost hint for orientation mismatch on a slot
+      // Visual ghost hint (only used when Hint button is clicked or in practice mode)
       const flashSlotHint = (slot: ActiveSlot) => {
-        const slotEl = slotsGroup.querySelector(`[data-slot-id="${slot.id}"]`);
-        if (!slotEl) return;
-        slotEl.classList.remove('tangram-slot-hint-glow');
-        void (slotEl as HTMLElement).offsetWidth; // Trigger reflow for animation restart
-        slotEl.classList.add('tangram-slot-hint-glow');
+        const ghost = document.createElementNS(svgNS, 'polygon');
+        ghost.setAttribute('points', slot.points.map((p) => `${p[0]},${p[1]}`).join(' '));
+        ghost.setAttribute('class', 'tangram-slot-hint-glow');
+        slotsGroup.append(ghost);
         setTimeout(() => {
-          slotEl.classList.remove('tangram-slot-hint-glow');
+          ghost.remove();
         }, 750);
       };
 
@@ -310,67 +405,31 @@ export const tangram: Exercise = {
         slotsGroup.replaceChildren();
 
         for (const slot of slots) {
-          const slotEl = document.createElementNS(svgNS, 'polygon');
-          const ptsStr = slot.points.map((p) => `${p[0]},${p[1]}`).join(' ');
-          slotEl.setAttribute('points', ptsStr);
-          slotEl.setAttribute('data-slot-id', slot.id);
-
-          const isFilled = slot.filledByPieceId !== null;
-          if (isFilled) {
+          if (slot.filledByPieceId !== null) {
+            // Render placed piece with its color
             const fillingPiece = pieces.find((p) => p.id === slot.filledByPieceId);
+            const slotEl = document.createElementNS(svgNS, 'polygon');
+            slotEl.setAttribute('points', slot.points.map((p) => `${p[0]},${p[1]}`).join(' '));
             slotEl.setAttribute('class', 'tangram-slot filled');
             slotEl.setAttribute('fill', fillingPiece?.color ?? slot.color);
             slotEl.setAttribute('stroke', '#ffffff');
             slotEl.setAttribute('stroke-width', '1.5');
-          } else {
-            let cls = 'tangram-slot empty';
-            if (ctx.practice) cls += ' practice-guide';
 
-            slotEl.setAttribute('class', cls);
-            slotEl.setAttribute('fill', 'var(--tangram-silhouette-fill)');
-            slotEl.setAttribute('stroke', ctx.practice ? 'rgba(255, 255, 255, 0.22)' : 'var(--tangram-silhouette-fill)');
-            if (ctx.practice) slotEl.setAttribute('stroke-dasharray', '3,3');
-            slotEl.setAttribute('stroke-width', ctx.practice ? '1' : '1.5');
+            // Click placed piece: unplace back to tray
+            slotEl.onclick = (e) => {
+              e.stopPropagation();
+              if (solved) return;
+              if (slot.filledByPieceId) unplacePiece(slot.filledByPieceId);
+            };
+
+            slotsGroup.append(slotEl);
+          } else if (ctx.practice) {
+            // Scaffolding only in beginner tutorial practice mode
+            const guideEl = document.createElementNS(svgNS, 'polygon');
+            guideEl.setAttribute('points', slot.points.map((p) => `${p[0]},${p[1]}`).join(' '));
+            guideEl.setAttribute('class', 'tangram-slot empty practice-guide');
+            slotsGroup.append(guideEl);
           }
-
-          // Slot click handler: click-to-place or click to return to tray
-          slotEl.onclick = (e) => {
-            e.stopPropagation();
-            if (solved) return;
-
-            if (slot.filledByPieceId) {
-              unplacePiece(slot.filledByPieceId);
-              return;
-            }
-
-            const selected = getSelectedPiece();
-            if (!selected) {
-              sfx.tick();
-              ctx.hint(t('ex.tangram.selectPieceFirst'));
-              return;
-            }
-
-            if (selected.type !== slot.type) {
-              sfx.bad();
-              flash(boardContainer, 'tangram-flash-bad', 250);
-              ctx.hint(t('ex.tangram.wrongPiece'));
-              return;
-            }
-
-            // Shape matches this region: check orientation
-            if (!isAngleMatch(selected.type, selected.rot, slot.rot)) {
-              flashSlotHint(slot);
-              sfx.bad();
-              flash(boardContainer, 'tangram-flash-bad', 250);
-              ctx.hint(t('ex.tangram.wrongAngle'));
-              return;
-            }
-
-            // Match and orientation verified: SNAP!
-            snapPieceIntoSlot(selected, slot);
-          };
-
-          slotsGroup.append(slotEl);
         }
       };
 
@@ -445,6 +504,7 @@ export const tangram: Exercise = {
       };
 
       // Pointer drag & drop logic with 1:1 scale piece following cursor
+      // Note: Live scanner is intentionally disabled so the player must deduce the placement themselves!
       const attachDragLogic = (el: HTMLElement, piece: TrayPiece) => {
         let isDragging = false;
         let startX = 0;
@@ -476,17 +536,6 @@ export const tangram: Exercise = {
             if (isDragging && dragClone) {
               dragClone.style.left = `${me.clientX}px`;
               dragClone.style.top = `${me.clientY}px`;
-
-              // Live magnetic snap feedback over empty slots
-              const { x: svgX, y: svgY } = clientToSvgPoint(boardSvg, me.clientX, me.clientY);
-              const emptySlots = slots.filter((s) => s.filledByPieceId === null);
-              for (const s of emptySlots) {
-                const sEl = slotsGroup.querySelector(`[data-slot-id="${s.id}"]`);
-                if (!sEl) continue;
-                const d = Math.hypot(svgX - s.cx, svgY - s.cy);
-                const isReady = d < 56 && s.type === piece.type && isAngleMatch(piece.type, piece.rot, s.rot);
-                sEl.classList.toggle('target-ready', isReady);
-              }
             }
           };
 
@@ -494,10 +543,6 @@ export const tangram: Exercise = {
             window.removeEventListener('pointermove', onPointerMove);
             window.removeEventListener('pointerup', onPointerUp);
             window.removeEventListener('pointercancel', onPointerUp);
-
-            // Clean up any target-ready outlines
-            const targetReadyEls = slotsGroup.querySelectorAll('.target-ready');
-            targetReadyEls.forEach((el) => el.classList.remove('target-ready'));
 
             if (dragClone) {
               dragClone.remove();
@@ -520,7 +565,7 @@ export const tangram: Exercise = {
       const trySnapAtPoint = (clientX: number, clientY: number, piece: TrayPiece) => {
         const { x: svgX, y: svgY } = clientToSvgPoint(boardSvg, clientX, clientY);
 
-        // Find the closest empty slot within generous snap proximity
+        // Find the closest empty slot within snap proximity
         let bestSlot: ActiveSlot | null = null;
         let bestDist = Infinity;
 
@@ -533,23 +578,27 @@ export const tangram: Exercise = {
           }
         }
 
-        // 58 SVG units tolerance covers the entire slot area
-        if (bestSlot && bestDist < 58) {
-          if (bestSlot.type === piece.type) {
-            if (isAngleMatch(piece.type, piece.rot, bestSlot.rot)) {
-              snapPieceIntoSlot(piece, bestSlot);
-              return;
-            } else {
-              flashSlotHint(bestSlot);
-              sfx.bad();
-              flash(boardContainer, 'tangram-flash-bad', 250);
-              ctx.hint(t('ex.tangram.wrongAngle'));
-            }
-          } else {
-            sfx.bad();
-            flash(boardContainer, 'tangram-flash-bad', 250);
-            ctx.hint(t('ex.tangram.wrongPiece'));
-          }
+        // Authentic Tangram check: piece must match the type AND the orientation
+        if (
+          bestSlot &&
+          bestDist < 50 &&
+          bestSlot.type === piece.type &&
+          isAngleMatch(piece.type, piece.rot, bestSlot.rot) &&
+          !piece.isDecoy
+        ) {
+          snapPieceIntoSlot(piece, bestSlot);
+          return;
+        }
+
+        // Misplace attempt: no spoilers, promotes mental planning over random guessing
+        misplaces++;
+        sfx.bad();
+        flash(boardContainer, 'tangram-flash-bad', 220);
+        if (ctx.practice && bestSlot && bestSlot.type === piece.type) {
+          flashSlotHint(bestSlot);
+          ctx.hint(t('ex.tangram.wrongAngle'));
+        } else {
+          ctx.hint(t('ex.tangram.noMatch'));
         }
       };
 
@@ -565,8 +614,8 @@ export const tangram: Exercise = {
         haptic('good');
 
         // Next selected piece: auto-pick the first remaining piece in tray
-        const nextUnplaced = pieces.find((p) => p.placedSlotId === null && p.id !== piece.id);
-        selectedPieceId = nextUnplaced?.id ?? null;
+        const nextUnplaced = pieces.find((p) => p.placedSlotId === null && p.id !== piece.id && !p.isDecoy);
+        selectedPieceId = nextUnplaced?.id ?? pieces.find((p) => p.placedSlotId === null)?.id ?? null;
 
         renderBoard();
         renderTray();
@@ -655,7 +704,7 @@ export const tangram: Exercise = {
         const emptySlot = slots.find((s) => s.filledByPieceId === null);
         if (!emptySlot) return;
 
-        const piece = pieces.find((p) => p.placedSlotId === null && p.type === emptySlot.type);
+        const piece = pieces.find((p) => p.placedSlotId === null && p.type === emptySlot.type && !p.isDecoy);
         if (!piece) return;
 
         hintsLeft--;
@@ -668,6 +717,7 @@ export const tangram: Exercise = {
         piece.flip = Boolean(emptySlot.flip);
 
         sfx.sparkle();
+        flashSlotHint(emptySlot);
         snapPieceIntoSlot(piece, emptySlot);
       };
 
@@ -722,9 +772,8 @@ export const tangram: Exercise = {
           }
         },
         Space: () => {
-          // Snap selected piece to first available ready slot
           const sp = getSelectedPiece();
-          if (!sp || solved) return;
+          if (!sp || solved || sp.isDecoy) return;
           const readySlot = slots.find(
             (s) => s.filledByPieceId === null && s.type === sp.type && isAngleMatch(sp.type, sp.rot, s.rot),
           );
@@ -741,19 +790,34 @@ export const tangram: Exercise = {
       const triggerVictory = () => {
         if (solved) return;
         solved = true;
+        clearInterval(timerInterval);
 
         // Confetti explosion + fanfare chime
         sfx.fanfare();
         haptic('combo');
         burstConfetti(stage);
 
+        // Fade out unused decoy pieces in tray
+        for (const piece of pieces) {
+          if (piece.isDecoy && piece.placedSlotId === null) {
+            const entry = trayElements.get(piece.id);
+            if (entry) entry.itemEl.classList.add('decoy-unused');
+          }
+        }
+
         // Radiant glow on the solved board
         boardSvg.classList.add('solved-glow');
 
-        // Reveal the solved figure name
+        // Reveal the solved figure name and tier achieved
+        const tierIconStr = activeTier === 'gold' ? '🏆' : activeTier === 'silver' ? '🥈' : activeTier === 'bronze' ? '🥉' : '⏱️';
+        const tierLabelKey = activeTier === 'gold' ? 'ex.tangram.tierGold' : activeTier === 'silver' ? 'ex.tangram.tierSilver' : activeTier === 'bronze' ? 'ex.tangram.tierBronze' : 'ex.tangram.tierStandard';
         revealBanner.replaceChildren(
           h('span', { class: 'tangram-reveal-icon' }, puzzle.icon),
-          h('span', { class: 'tangram-reveal-text' }, t('ex.tangram.solved', { name: t(puzzle.name as any) })),
+          h(
+            'span',
+            { class: 'tangram-reveal-text' },
+            `${t('ex.tangram.solved', { name: t(puzzle.name as any) })} · ${tierIconStr} ${t(tierLabelKey as any)}`,
+          ),
         );
         revealBanner.classList.remove('hidden');
 
@@ -770,7 +834,9 @@ export const tangram: Exercise = {
 
       // Wait for solve or abort
       const result = await trialPromise;
-      const cleanSolve = result && hintsUsed === 0;
+      clearInterval(timerInterval);
+      // Clean solve requires completing without hints and with focused, deliberate moves
+      const cleanSolve = Boolean(result && hintsUsed === 0 && misplaces <= (currentLevel <= 3 ? 6 : 4));
       ctx.track(st, cleanSolve, { heard: result });
       if (result) correct++;
       await ctx.wait(350);
