@@ -8,7 +8,7 @@ const MAX_SPAN = 9;
 
 export const span: Exercise = {
   id: 'span',
-  icon: '🔢',
+  icon: '🧮',
   domain: 'wm',
   name: 'ex.span.name',
   desc: 'ex.span.desc',
@@ -16,7 +16,7 @@ export const span: Exercise = {
   example: 'ex.span.example',
   minutes: [2, 3],
   levels: { min: MIN_SPAN, max: MAX_SPAN, start: 4 },
-  levelLabel: (l) => `${l} 🔢`,
+  levelLabel: (l) => `${l} 🧮`,
 
   async run(ctx) {
     const trials = ctx.count(10, 10, 3);
