@@ -1,4 +1,4 @@
-﻿import { h } from '../dom';
+import { h } from '../dom';
 import { t, type I18nKey } from '../i18n';
 import { render, page, langPicker } from '../ui';
 import { EXERCISES, DOMAINS, type Domain } from '../exercises';
@@ -159,6 +159,12 @@ export function guideContent(): HTMLElement[] {
         { class: 'card guide-card' },
         h('h3', {}, t('guide.faq4Q')),
         h('p', {}, t('guide.faq4A')),
+      ),
+      h(
+        'div',
+        { class: 'card guide-card' },
+        h('h3', {}, t('guide.faq5Q')),
+        h('p', {}, t('guide.faq5A')),
       ),
     ),
   ];

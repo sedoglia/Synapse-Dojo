@@ -42,14 +42,14 @@ Free cognitive training and bilateral coordination web application (source-avail
 - **Adaptive Difficulty**: Uses the *weighted up-down* psychophysical staircase (Kaernbach, 1991) and targets 70–85% accuracy depending on the exercise, a range consistent with *The Eighty Five Percent Rule* (Wilson et al., *Nature Communications* 2019), a theoretical result about learning algorithms. Includes warm-up buffers and frustration brakes.
 - **Scientific Transparency**: Every exercise includes a card (labelled "What it’s based on" in the app) naming the paradigm that inspired it and the reference study. The exercises are short, playful versions, not clinical tests, and improvements mostly concern the trained tasks or very similar ones. What the evidence does and does not show, with the full bibliography, is in [docs/scientific-foundations.md](docs/scientific-foundations.md) (Italian: [docs/basi-scientifiche.md](docs/basi-scientifiche.md)).
 - **Guided Trials & Illustrated Examples**: Every exercise provides visual step-by-step examples and a preliminary practice trial that does not affect your score or level.
-- **Radical Privacy & Zero Cookies**: No accounts, no passwords, no email sign-ups, no cookies and no trackers. All progress stays in your browser's local storage (`localStorage`), with one-click JSON backup export/import in Settings. The only exception is the **opt-in weekly leaderboard**: players who join send only a weekly summary under a random nickname, and only then is the Cloudflare Turnstile anti-bot check loaded. Visits are counted with cookie-free Cloudflare Web Analytics.
+- **Radical Privacy & Zero Cookies**: No accounts, no passwords, no email sign-ups, no cookies and no trackers. All progress stays in your browser's local storage (`localStorage`). You can export/import full JSON backups (saving all games, levels, badges, nicknames, and group memberships) or migrate across devices with a temporary 8-character cloud transfer code (valid for 24 hours, automatically deleted immediately upon import or by nightly cleanup for radical privacy). The only exception is the **opt-in weekly leaderboard**: players who join send only a weekly summary under a random nickname, and only then is the Cloudflare Turnstile anti-bot check loaded. Visits are counted with cookie-free Cloudflare Web Analytics.
 - **A Leaderboard Designed Not to Discourage**: it rewards effort and improvement rather than talent, shows players in the lower half how many points move them up instead of their rank, never penalises coming back after a break, and never appears during exercises (scientific rationale in [docs/scientific-foundations.md](docs/scientific-foundations.md), §2.6).
 - **Optional Milestone Sharing**: an image drawn on the device for sharing your training days this week and your consistency and exploration badges. It holds no name, scores or age, and the Neuro Score stays private (rationale in [docs/scientific-foundations.md](docs/scientific-foundations.md), §2.7).
 - **Native Localization (12 Languages)**: English, Spanish, Chinese (Simplified), Hindi, Arabic (with native RTL mirroring), Portuguese, French, Russian, German, Japanese, Indonesian, and Italian. Language files are split and loaded asynchronously on-demand.
 - **Accessibility & Wellbeing**: Relaxed pace mode (adds 40% more time), large text option, automatic light and dark theme, and offline **Progressive Web App (PWA)** installation.
 - **Standalone Static Pages**:
   - [`index.html`](index.html): The complete interactive PWA game.
-  - [`guide.html`](guide.html): Comprehensive illustrated guide to all 38 games, paradigms, and FAQs.
+  - [`guide.html`](guide.html): Comprehensive illustrated guide to all 39 games, paradigms, and FAQs.
   - [`privacy.html`](privacy.html): Privacy policy, local data terms, and zero-cookie statement.
   - [`license.html`](license.html): Official PolyForm Noncommercial 1.0.0 license terms and copyright notices.
 
@@ -57,18 +57,18 @@ Free cognitive training and bilateral coordination web application (source-avail
 
 ## 🛠️ Technical Architecture
 
-Built purely with **TypeScript** and **Vite**, with **zero UI framework dependencies** (no React, Vue, or Angular bloat). This guarantees instant startup times, native DOM rendering performance, and a tiny gzipped bundle size (~34 KB for the core UI runtime, ~110 KB total for the entire app including all 38 games).
+Built purely with **TypeScript** and **Vite**, with **zero UI framework dependencies** (no React, Vue, or Angular bloat). This guarantees instant startup times, native DOM rendering performance, and a tiny gzipped bundle size (~34 KB for the core UI runtime, ~110 KB total for the entire app including all 39 games).
 
 ```
 synapse-dojo/
 ├── public/                 PWA manifest, SVG icons, Nunito font (OFL), robots.txt, sitemap.xml, _headers, service worker
-├── functions/api/          Leaderboard API (Cloudflare Pages Functions): join, submit, board, me, groups/
+├── functions/api/          Leaderboard & transfer API (Cloudflare Pages Functions): join, submit, board, me, groups, transfer
 ├── server/board.ts         Code shared by the API: authentication, validation, ISO weeks, points, groups
 ├── migrations/             Leaderboard D1 database schema (applied automatically on deploy)
 ├── cleanup/                Cron Worker that applies the leaderboard retention rules every night
 ├── scripts/                Build & deploy (deploy-web.mjs), dictionary checks (check-anagrams.mjs) & i18n verify (verify-i18n.mjs)
 ├── src/
-│   ├── exercises/          38 exercise implementations, index.ts (catalog & battery), types.ts, puzzle datasets
+│   ├── exercises/          39 exercise implementations, index.ts (catalog & battery), types.ts, puzzle datasets
 │   ├── screens/            App views: home, onboarding, training, play, progress, settings, board, boardJoin, groups, guide, privacy, license
 │   ├── locales/            12 standalone locale bundles (en.ts is the type-safe blueprint)
 │   ├── adaptive.ts         Continuous adaptive difficulty staircase engine (weighted up-down)
@@ -86,8 +86,12 @@ synapse-dojo/
 │   ├── rewards.ts          XP calculation, player levels, and streak/achievement badges
 │   ├── share.ts            Shareable milestone card, drawn on the device
 │   ├── stats.ts            Domain capacity computation & daily workout selector
-│   ├── storage.ts          Local storage persistence, schema validation, and JSON backup export/import
+│   ├── storage.ts          Local storage persistence, schema validation, and full profile export/import
 │   ├── style.css           Master stylesheet (responsive layout, themes, RTL support, game styling)
+│   ├── transfer.ts         Temporary cloud progress transfer across devices, codes, copy/share, and import dialogs
+│   ├── ui.ts               UI page layouts, navigation bars, modals, toasts and settings sync
+│   ├── update.ts           Automatic update detection across deploys and graceful reload
+│   └── widgets.ts          Shared components (HTML5 canvas, numeric keypads, sparklines)
 │   ├── ui.ts               UI page layouts, navigation bars, modals, toasts and settings sync
 │   ├── update.ts           Automatic update detection across deploys and graceful reload
 │   └── widgets.ts          Shared components (HTML5 canvas, numeric keypads, sparklines)

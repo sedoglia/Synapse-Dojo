@@ -680,6 +680,8 @@ const ui: Locale['ui'] = {
   'privacy.share': 'Das Bild wird auf deinem Gerät erstellt und zeigt nur den Meilenstein: keinen Namen, keine Punkte, kein Alter. Es wird nichts gesendet, solange du es nicht teilst; danach gelten die Datenschutzregeln der gewählten App oder des sozialen Netzwerks.',
   'guide.faq4Q': 'Kann ich meine Meilensteine teilen?',
   'guide.faq4A': 'Ja, wenn du möchtest: Unter Fortschritt kannst du deine Trainingstage der Woche und die Abzeichen für Regelmäßigkeit und Entdecken teilen. Punkte und Neuro Score bleiben privat, denn jeder trainiert auf seinem eigenen Niveau und der Neuro Score ist kein validiertes Maß. Die Vorschläge kannst du in den Einstellungen abschalten.',
+  'guide.faq5Q': 'Wie kann ich meinen Fortschritt auf ein anderes Gerät oder einen anderen Browser übertragen?',
+  'guide.faq5A': 'In den Einstellungen kannst du «Online speichern (temporärer Code)» wählen, um einen 24 Stunden gültigen 8-stelligen Code zu erstellen. Wähle auf dem neuen Gerät «Mit Online-Code importieren» (in den Einstellungen oder direkt im Startbildschirm), um alle Übungen, Stufen, Spitznamen, Gruppen und Ranglistenplätze wiederherzustellen. Die temporären Daten werden beim Import sofort vom Server gelöscht. Alternativ kannst du jederzeit eine JSON-Sicherungsdatei exportieren und importieren.',
   'settings.data': 'Dein Fortschritt',
   'settings.dataHint': 'Speichere deinen Fortschritt in einer Datei, um eine Kopie zu behalten oder ihn auf ein anderes Gerät oder eine andere Adresse des Spiels zu übertragen: Jede hat ihren eigenen Spielstand.',
   'settings.export': 'Fortschritt exportieren',

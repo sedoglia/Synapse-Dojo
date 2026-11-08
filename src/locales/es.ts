@@ -680,6 +680,8 @@ const ui: Locale['ui'] = {
   'privacy.share': 'La imagen se dibuja en tu dispositivo y muestra solo el logro: sin nombre, puntuaciones ni edad. No se envía nada a menos que decidas compartirla; a partir de ahí se aplican las normas de privacidad de la aplicación o red social que elijas.',
   'guide.faq4Q': '¿Puedo compartir mis logros?',
   'guide.faq4A': 'Sí, si quieres: en Progreso puedes compartir tus días de entrenamiento de la semana y las insignias de constancia y exploración. Las puntuaciones y el Neuro Score siguen siendo privados, porque cada persona entrena a su nivel y el Neuro Score no es una medida validada. Puedes desactivar las propuestas en Ajustes.',
+  'guide.faq5Q': '¿Cómo puedo transferir mi progreso a otro dispositivo o navegador?',
+  'guide.faq5A': 'En Ajustes puedes elegir «Guardar en línea (código temporal)» para generar un código de 8 caracteres válido durante 24 horas. En el nuevo dispositivo, selecciona «Importar con código en línea» (disponible en Ajustes o en la pantalla de bienvenida) para restaurar tus partidas, niveles, apodo, grupos y clasificación. Los datos temporales se eliminan de inmediato del servidor al completar la importación. También puedes exportar e importar una copia de seguridad en archivo JSON.',
   'settings.data': 'Tu progreso',
   'settings.dataHint': 'Guarda tu progreso en un archivo para tener una copia o pasarlo a otro dispositivo o dirección del juego: cada uno tiene su propio guardado.',
   'settings.export': 'Exportar progreso',

@@ -574,6 +574,8 @@ export const ui = {
   'privacy.share': 'The image is drawn on your device and shows only the milestone: no name, scores or age. Nothing is sent unless you choose to share it; from then on, the app or social network you pick applies its own privacy rules.',
   'guide.faq4Q': 'Can I share my milestones?',
   'guide.faq4A': 'Yes, if you want to: under Progress you can share your training days this week and your consistency and exploration badges. Scores and the Neuro Score stay private, because everyone trains at their own level and the Neuro Score is not a validated measure. You can turn off the offers in Settings.',
+  'guide.faq5Q': 'How do I transfer my progress to another device or browser?',
+  'guide.faq5A': 'In Settings you can choose \'Save online (temporary code)\' to generate an 8-character code valid for 24 hours. On your new device, choose \'Import with online code\' (available in Settings or directly on the welcome screen) to restore all your games, levels, nickname, groups, and leaderboard ranking. The temporary data is immediately deleted from the server upon import for your privacy. Alternatively, you can always download and import a physical JSON backup file.',
   'settings.data': 'Your progress',
   'settings.dataHint': 'Save your progress to a file to keep a copy or move it to another device or address of the game: each one has its own save.',
   'settings.export': 'Export progress',
