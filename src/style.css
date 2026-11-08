@@ -4698,6 +4698,98 @@ html.big-text {
   z-index: 100;
 }
 
+/* Online progress transfer across devices */
+.transfer-dialog {
+  max-width: 440px;
+}
+.transfer-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.transfer-hint {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: var(--text);
+}
+.transfer-code-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: var(--bg);
+  border: 2px dashed var(--accent);
+  border-radius: var(--radius);
+  margin: 4px 0;
+  user-select: all;
+}
+.transfer-code-value {
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 1.9rem;
+  font-weight: 800;
+  letter-spacing: 3px;
+  color: var(--accent);
+}
+.transfer-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.transfer-actions .btn {
+  flex: 1 1 120px;
+}
+.transfer-privacy {
+  margin: 4px 0 8px;
+  line-height: 1.4;
+}
+.transfer-code-input {
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-align: center;
+  text-transform: uppercase;
+}
+.transfer-input-row {
+  display: flex;
+  gap: 8px;
+}
+.transfer-input-row input {
+  flex: 1;
+}
+.transfer-preview-box {
+  padding: 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  animation: pop 0.25s ease-out;
+}
+.transfer-preview-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+.transfer-details {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.9rem;
+}
+.transfer-detail-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+.transfer-warning {
+  margin: 4px 0 0;
+  color: #f59e0b;
+  line-height: 1.4;
+}
+
 /* confetti burst celebration */
 .confetti-particle {
   position: absolute;

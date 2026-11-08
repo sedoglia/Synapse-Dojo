@@ -6,6 +6,24 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.35] - 2026-11-08
+
+### Aggiunto
+
+- Trasferimento completo del profilo e sincronizzazione temporanea su cloud tra dispositivi:
+  - Aggiunto salvataggio temporaneo nel database online D1 (`temp_transfers`) con generazione di codice univoco di 8 caratteri (`XXXX-XXXX`, es. `K9XP-4M2J`) privo di simboli ambigui.
+  - Aggiunti pulsanti dedicati per copia rapida del codice, copia del link diretto (`?transfer=CODICE`) e condivisione nativa (WhatsApp, Telegram, ecc.).
+  - Aggiunto pop-up di importazione tramite codice con anteprima in tempo reale del profilo (nome, nickname della classifica, esercizi svolti, livelli e data ultima attività) prima della conferma.
+  - Tutela della privacy: i record temporanei online vengono cancellati istantaneamente non appena l'importazione è completata con successo, e i codici scaduti (>24 ore) vengono eliminati dalla pulizia notturna automatica.
+  - Aggiunta scorciatoia per l'importazione rapida direttamente dalla schermata di benvenuto iniziale (Onboarding).
+  - Localizzate tutte le schermate e messaggi di errore nelle 12 lingue supportate.
+
+### Corretto
+
+- Conservazione integrale di tutti i dati del profilo locale durante l'esportazione e l'importazione:
+  - Corretti `exportJson()`, `parseSave()` e `store.replace()` per includere e ripristinare le credenziali della classifica (`board.id`, `board.secret`, `board.nameCode`, `board.ageBand`) e gli inviti dei gruppi.
+  - Spostando il file di salvataggio su un altro dispositivo o browser, il giocatore riprende fedelmente il proprio nickname, la posizione nella classifica settimanale e la gestione dei propri gruppi senza perdere nulla.
+
 ## [0.12.34] - 2026-11-08
 
 ### Modificato
