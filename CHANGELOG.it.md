@@ -6,6 +6,18 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.27] - 2026-11-08
+
+### Aggiunto
+
+- Riprogettazione modulare e neuroscientifica della pagina Progressi:
+  - Suddivisione dell'esperienza in 4 sezioni tematiche ad accesso rapido (`Panoramica`, `Esercizi`, `Costanza`, `Traguardi`) tramite barra a schede segmentata sticky, eliminando lo scroll infinito e azzerando il carico cognitivo estraneo (*Extraneous Cognitive Load*, Sweller 1988; Cowan 2001; Miller 1956).
+  - Sezione *Panoramica* ad alto impatto dopaminergico: cruscotto esecutivo con statistiche visive immediate (serie attiva, sessioni totali, traguardi sbloccati), barra XP, banner d'azione per il Neuro Check del giorno, modulo *Prossimi Traguardi* (le 3 medaglie più vicine) per sfruttare il gradiente dell'obiettivo (*Goal-Gradient Effect*, Hull 1932; Kivetz et al. 2006) e indurre anticipazione dopaminergica (*wanting*, Berridge & Robinson 1998), e grafico radar con evidenziazione del punto di forza e opportunità di crescita con pulsante rapido di potenziamento.
+  - Sezione *Esercizi & Competenze*: catalogazione a schede dei 38 compiti filtrabile per dominio cognitivo e per stato (giocati / da provare) con sparkline cronologico a 20 punti, livello, record e pulsante interattivo *▶ Gioca* per avviare subito la pratica con ritorno automatico alla schermata dei progressi.
+  - Sezione *Costanza & Abitudini*: calendario visivo delle ultime 4 settimane, obiettivo settimanale condivisibile, riepilogo metriche di regolarità e approfondimento educativo sulla neuroscienza della pratica distribuita (*Spacing Effect*, Cepeda et al. 2006; consolidamento dell'abitudine, Lally et al. 2010).
+  - Sezione *Traguardi & Medaglie*: Trophy Room completa con oltre 50 traguardi, barra di completamento master e filtri dedicati (*Tutti*, *In arrivo*, *Sbloccati*, *Da sbloccare*) per sfruttare l'effetto Zeigarnik (1927) e di progresso dotato (Nunes & Drèze 2006).
+  - Localizzazione integrale dei nuovi componenti e comandi in tutte le 12 lingue (`en`, `it`, `es`, `fr`, `de`, `pt`, `ru`, `zh`, `ja`, `ar`, `hi`, `id`).
+
 ## [0.12.26] - 2026-11-08
 
 ### Aggiunto

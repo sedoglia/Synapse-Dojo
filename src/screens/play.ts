@@ -351,9 +351,9 @@ async function practiceRound(ex: Exercise, step: { i: number; n: number } | null
   });
 }
 
-export async function playPractice(ex: Exercise) {
+export async function playPractice(ex: Exercise, onDone: () => void = showTraining) {
   while ((await practiceRound(ex, null)) === 'retry');
-  showTraining();
+  onDone();
 }
 
 const CHEERS = ['🎉', '💪', '🌟', '🚀', '🧠'];

@@ -6,6 +6,18 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.27] - 2026-11-08
+
+### Added
+
+- Modular, neuroscience-driven overhaul of the Progress dashboard:
+  - Divided the progress experience into 4 distinct, quickly accessible views (`Overview`, `Exercises`, `Consistency`, `Badges`) using a sticky segmented tab bar, eliminating endless scrolling and reducing extraneous cognitive load (*Sweller 1988; Cowan 2001; Miller 1956*).
+  - High-dopamine *Overview* tab: executive dashboard featuring key visual indicators (active streak flame, total sessions, badges earned), XP progress bar, daily Neuro Check action banner, a *Next Milestones* card highlighting the 3 closest badges to trigger the Goal-Gradient Effect (*Hull 1932; Kivetz et al. 2006; Berridge & Robinson 1998*), and an interactive 9-domain radar chart identifying top strengths and growth areas with a 1-tap Boost button.
+  - *Exercises & Skills* tab: chunked catalog of all 38 exercises filterable by cognitive domain and play status, featuring 20-point historical sparklines, levels, personal bests, and an interactive *▶ Play* button launching immediate practice with automatic return to Progress.
+  - *Consistency & Habits* tab: 28-day activity calendar, weekly goal progress bar, consistency metrics, and neuroscientific educational pill explaining distributed practice (*Spacing Effect*, Cepeda et al. 2006; habit automaticity, Lally et al. 2010).
+  - *Achievements & Trophies* tab: full Trophy Room with 50+ badges, master completion bar, and dedicated filters (*All*, *In Progress*, *Earned*, *Locked*) leveraging the Zeigarnik Effect (1927) and the endowed progress effect (Nunes & Drèze 2006).
+  - Comprehensive localization across all 12 supported languages (`en`, `it`, `es`, `fr`, `de`, `pt`, `ru`, `zh`, `ja`, `ar`, `hi`, `id`).
+
 ## [0.12.26] - 2026-11-08
 
 ### Added
