@@ -6,6 +6,23 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.26] - 2026-11-08
+
+### Aggiunto
+
+- Espansione del sistema di traguardi su basi neuroscientifiche da 17 a 53 badge complessivi (36 nuovi traguardi):
+  - Architettura a gradiente (*Goal-Gradient Effect*, Hull 1932; Kivetz et al. 2006) per mantenere costante l'anticipazione dopaminergica (*wanting*, Berridge & Robinson 1998) con micro-traguardi immediati, tappe intermedie e traguardi di maestria.
+  - Tappe di ancoraggio e consolidamento dell'abitudine (*Lally et al. 2010; Hebb 1949*): introdotti badge per 14 giorni (*Due settimane d'oro*), 21 giorni (*Abitudine d'acciaio*), 60 giorni (*Sentiero neuronale*) e 100 giorni (*Mente secolare*), oltre a *Settimana perfetta* (7/7 giorni), *Weekend attivo* e *Mente mattutina* (sessione completata prima delle 9:00).
+  - Volume di allenamento e costanza: traguardi a 5, 25, 50 e 100 allenamenti del giorno completati; traguardi a 10, 50, 100, 250 e 500 esercizi totali; traguardi a 7 e 30 misurazioni del Neuro Score.
+  - Riserva cognitiva multidominio e coordinazione bilaterale (*Stern 2002; Swinnen 2002; Livingston et al., Lancet 2024*): traguardi a 10 e 20 esercizi esplorati, *Mente versatile* (5 domini allenati nello stesso giorno) e *Ponte calloso* (tutti i 5 esercizi di coordinazione bilaterale provati).
+  - Flusso, precisione e rapidità (*Csikszentmihalyi 1990; Schultz 1998, 2015*): *Scintilla* (5 combo), *Stato di Flow* (50 combo), salite di livello a quota 50 e 100, bonus rapidità accumulati a 10 e 50 volte.
+  - Progressione XP, livello giocatore e maestria: traguardi a 1.000, 5.000, 10.000 e 25.000 XP, livello giocatore 5 e 10, e padronanza di livello 6 in Torri di Hanoi e Sprint di calcolo.
+- Componente celebrativo e promemoria di condivisione sociale (*Social Habit Loop*, Christakis & Fowler 2007; Aral & Nicolaides 2017; Ryan & Deci 2000):
+  - Al raggiungimento di uno o più traguardi alla fine di una sessione, compare un box celebrativo dorato con animazione e coriandoli, che ricorda all'utente di condividere il traguardo per festeggiare con amici e parenti e consolidare la motivazione sociale.
+  - Azioni dirette con un tocco: condivisione grafica su card quadrata (1080×1080 px su `<canvas>`, privata e priva di dati personali o punteggi grezzi), condivisione istantanea tramite WhatsApp (`💬 Invia su WhatsApp`) e Telegram (`✈️ Invia su Telegram`), copia del testo e salvataggio immagine.
+  - Estesa la condivisibilità a 49 traguardi su 53, mantenendo riservati solo i test di misurazione clinica / Neuro Score.
+  - Traduzione completa di tutti i nuovi testi, nomi e descrizioni in tutte le 12 lingue supportate (`en`, `it`, `es`, `fr`, `de`, `pt`, `ru`, `zh`, `ja`, `ar`, `hi`, `id`) con verifica automatica tramite `scripts/verify-i18n.mjs`.
+
 ## [0.12.25] - 2026-11-08
 
 ### Modificato

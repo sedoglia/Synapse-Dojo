@@ -5,20 +5,58 @@ import { APP_NAME, SITE_URL } from './config';
 import type { Badge } from './rewards';
 
 /**
- * Only consistency and exploration can be shared: anyone can earn these at their own level. Skill badges, the Neuro
- * Score and leaderboard positions stay private on purpose: the Neuro Score isn't validated, and a public feed of high
- * scores would bring back the absolute comparison the leaderboard avoids (docs/basi-scientifiche.md, §2.7).
+ * Milestones of consistency, effort, exploration, and healthy habits can be shared freely with friends and family.
+ * Raw unvalidated diagnostic scores stay private, protecting intrinsic motivation and preventing unhealthy comparison (docs/basi-scientifiche.md, §2.7).
  */
 const SHAREABLE: Partial<Record<string, I18nKey>> = {
   first: 'share.done.first',
   plan: 'share.done.plan',
+  plans5: 'share.done.plans5',
   plans10: 'share.done.plans10',
-  week4: 'share.done.week4',
+  plans25: 'share.done.plans25',
+  plans50: 'share.done.plans50',
+  plans100: 'share.done.plans100',
   streak3: 'share.done.streak3',
   streak7: 'share.done.streak7',
+  streak14: 'share.done.streak14',
+  streak21: 'share.done.streak21',
   streak30: 'share.done.streak30',
+  streak60: 'share.done.streak60',
+  streak100: 'share.done.streak100',
+  week4: 'share.done.week4',
+  week7: 'share.done.week7',
+  weekend: 'share.done.weekend',
+  earlyBird: 'share.done.earlyBird',
+  runs10: 'share.done.runs10',
+  runs50: 'share.done.runs50',
+  runs100: 'share.done.runs100',
+  runs250: 'share.done.runs250',
+  runs500: 'share.done.runs500',
+  checks7: 'share.done.checks7',
+  checks30: 'share.done.checks30',
+  explorer10: 'share.done.explorer10',
+  explorer20: 'share.done.explorer20',
   explorer: 'share.done.explorer',
   balanced: 'share.done.balanced',
+  multidomain5: 'share.done.multidomain5',
+  bilateralAll: 'share.done.bilateralAll',
+  combo5: 'share.done.combo5',
+  combo10: 'share.done.combo10',
+  combo25: 'share.done.combo25',
+  combo50: 'share.done.combo50',
+  levelups25: 'share.done.levelups25',
+  levelups50: 'share.done.levelups50',
+  levelups100: 'share.done.levelups100',
+  speed10: 'share.done.speed10',
+  speed50: 'share.done.speed50',
+  xp1000: 'share.done.xp1000',
+  xp5000: 'share.done.xp5000',
+  xp10000: 'share.done.xp10000',
+  xp25000: 'share.done.xp25000',
+  level5: 'share.done.level5',
+  level10: 'share.done.level10',
+  towersMaster: 'share.done.towersMaster',
+  mathMaster: 'share.done.mathMaster',
 };
 
 export const canShareBadge = (b: Badge) => SHAREABLE[b.id] !== undefined;
@@ -29,7 +67,7 @@ const SIZE = 1080;
 const CENTER = SIZE / 2;
 const FONT = 'Nunito, system-ui, -apple-system, "Segoe UI", sans-serif';
 
-const shareText = (m: Milestone) =>
+export const shareText = (m: Milestone) =>
   m.kind === 'badge' ? t('share.textBadge', { name: t(m.badge.name), url: SITE_URL }) : t('share.textWeek', { n: m.days, url: SITE_URL });
 
 /** Chinese and Japanese can break between any two characters; the other languages break at spaces. */
@@ -210,6 +248,29 @@ export function openShare(m: Milestone) {
         `📤 ${t('share.action')}`,
       )
     : null;
+
+  const waBtn = h(
+    'a',
+    {
+      class: 'btn btn-whatsapp',
+      href: `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`,
+      target: '_blank',
+      rel: 'noopener noreferrer',
+    },
+    `💬 ${t('share.whatsapp')}`,
+  );
+
+  const tgBtn = h(
+    'a',
+    {
+      class: 'btn btn-telegram',
+      href: `https://t.me/share/url?url=${encodeURIComponent(SITE_URL)}&text=${encodeURIComponent(text)}`,
+      target: '_blank',
+      rel: 'noopener noreferrer',
+    },
+    `✈️ ${t('share.telegram')}`,
+  );
+
   const saveBtn = h('button', { class: shareBtn ? 'btn' : 'btn primary', type: 'button', disabled: true, onClick: saveFile }, `🖼️ ${t('share.save')}`);
   const copyBtn = h(
     'button',
@@ -239,7 +300,7 @@ export function openShare(m: Milestone) {
     ),
     canvas,
     h('p', { class: 'muted small share-text' }, text),
-    h('div', { class: 'share-actions' }, shareBtn, saveBtn, copyBtn),
+    h('div', { class: 'share-actions' }, shareBtn, waBtn, tgBtn, saveBtn, copyBtn),
     status,
     h('p', { class: 'muted small center' }, `🔒 ${t('share.note')}`),
   );
@@ -269,30 +330,99 @@ export function openShare(m: Milestone) {
 }
 
 /**
- * A quiet offer below a newly earned badge. It appears once for each badge, because a badge is earned once, and gives
- * no reward: sharing must stay the player's own wish, not one more way to collect XP.
+ * High-dopamine celebration card and social reminder when milestones are earned.
+ * Reminds players to celebrate their progress with friends and family, satisfying intrinsic competence and relatedness (Ryan & Deci 2000).
  */
 export function shareOffer(fresh: Badge[]): HTMLElement | null {
+  if (!fresh.length) return null;
+  const shareables = fresh.filter(canShareBadge);
   if (!store.data.settings.shareOffer) return null;
-  const badge = fresh.filter(canShareBadge).pop();
-  if (!badge) return null;
-  const row = h(
+
+  const items = (shareables.length ? shareables : fresh).map((badge) => {
+    const isShareable = canShareBadge(badge);
+    const text = isShareable ? shareText({ kind: 'badge', badge }) : '';
+    const waUrl = isShareable ? `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}` : '';
+    const doneKey = SHAREABLE[badge.id];
+
+    return h(
+      'div',
+      { class: 'share-reminder-item' },
+      h(
+        'div',
+        { class: 'share-reminder-badge' },
+        h('span', { class: 'share-reminder-icon' }, badge.icon),
+        h(
+          'div',
+          { class: 'share-reminder-info' },
+          h('b', { class: 'share-reminder-name' }, t(badge.name)),
+          doneKey ? h('small', { class: 'muted' }, t(doneKey)) : h('small', { class: 'muted' }, t(badge.desc)),
+        ),
+      ),
+      isShareable
+        ? h(
+            'div',
+            { class: 'share-reminder-btns' },
+            h(
+              'button',
+              {
+                class: 'btn primary small-btn share-celebrate-btn',
+                type: 'button',
+                onClick: () => openShare({ kind: 'badge', badge }),
+              },
+              `📤 ${t('share.shareWithFriends')}`,
+            ),
+            h(
+              'a',
+              {
+                class: 'btn small-btn btn-whatsapp',
+                href: waUrl,
+                target: '_blank',
+                rel: 'noopener noreferrer',
+              },
+              `💬 ${t('share.whatsapp')}`,
+            ),
+          )
+        : null,
+    );
+  });
+
+  const celebration = h(
     'div',
-    { class: 'share-offer' },
-    h('button', { class: 'btn small-btn', type: 'button', onClick: () => openShare({ kind: 'badge', badge }) }, `📤 ${t('share.action')}: ${badge.icon} ${t(badge.name)}`),
+    { class: 'share-celebration' },
     h(
-      'button',
-      {
-        class: 'link-btn small',
-        type: 'button',
-        onClick: () => {
-          store.data.settings.shareOffer = false;
-          store.save();
-          row.remove();
+      'div',
+      { class: 'share-celebration-head' },
+      h('span', { class: 'celebration-sparkle' }, '🎉'),
+      h('h3', {}, fresh.length === 1 ? t('share.reminderSingle') : t('share.reminderMulti', { n: fresh.length })),
+      h('span', { class: 'celebration-sparkle' }, '🥳'),
+    ),
+    shareables.length > 0
+      ? h(
+          'div',
+          { class: 'share-reminder-banner' },
+          h('b', {}, `💡 ${t('share.reminderTipTitle')}`),
+          h('p', {}, t('share.reminderTip')),
+        )
+      : null,
+    h('div', { class: 'share-reminder-list' }, ...items),
+    h(
+      'div',
+      { class: 'share-celebration-foot' },
+      h(
+        'button',
+        {
+          class: 'link-btn small muted',
+          type: 'button',
+          onClick: () => {
+            store.data.settings.shareOffer = false;
+            store.save();
+            celebration.remove();
+          },
         },
-      },
-      t('share.never'),
+        t('share.never'),
+      ),
     ),
   );
-  return row;
+
+  return celebration;
 }

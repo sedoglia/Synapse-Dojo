@@ -6,6 +6,23 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.26] - 2026-11-08
+
+### Added
+
+- Neuroscience-backed milestone expansion from 17 to 53 badges (36 new achievements):
+  - Goal-gradient architecture (*Hull 1932; Kivetz et al. 2006*) sustaining continuous dopaminergic anticipation (*wanting*, Berridge & Robinson 1998) through granular micro-wins, progressive habit markers, and mastery milestones.
+  - Neural habit consolidation milestones (*Lally et al. 2010; Hebb 1949*): added badges for 14-day streak (*Two golden weeks*), 21-day streak (*Iron habit*), 60-day streak (*Neural highway*), and 100-day streak (*Centenary mind*), alongside *Perfect week* (7/7 days), *Active weekend*, and *Morning mind* (session completed before 9:00 AM).
+  - Training volume and dedication: milestones for 5, 25, 50, and 100 completed daily workouts; 10, 50, 100, 250, and 500 total exercises; 7 and 30 Neuro Score assessments.
+  - Multidomain cognitive reserve and bilateral coordination (*Stern 2002; Swinnen 2002; Livingston et al., Lancet 2024*): milestones for 10 and 20 exercises explored, *Versatile mind* (5 different cognitive skills in one day), and *Corpus callosum* (all 5 bilateral coordination tasks explored).
+  - Flow, precision, and speed (*Csikszentmihalyi 1990; Schultz 1998, 2015*): *Spark* (5 combo), *Flow State* (50 combo), total level-ups at 50 and 100, speed bonuses collected at 10 and 50 times.
+  - XP progression, player levels, and task mastery: milestones for 1,000, 5,000, 10,000, and 25,000 XP, player levels 5 and 10, and level 6 mastery in Towers of Hanoi and Speed math.
+- Celebration and social sharing reminder component (*Social Habit Loop*, Christakis & Fowler 2007; Aral & Nicolaides 2017; Ryan & Deci 2000):
+  - Upon earning one or more milestones at the end of a session, a festive golden celebration box appears with confetti burst and fanfare, reminding players to share their achievements with family and friends for social reinforcement and mutual inspiration.
+  - Direct 1-tap actions: private canvas social card (1080×1080 px, completely client-side without private metrics or names), instant WhatsApp share (`💬 Send on WhatsApp`), Telegram share (`✈️ Send on Telegram`), text copying, and image saving.
+  - Extended shareability to 49 out of 53 badges, keeping unvalidated raw diagnostic scores private.
+  - Full localization of all 118 new keys across all 12 languages (`en`, `it`, `es`, `fr`, `de`, `pt`, `ru`, `zh`, `ja`, `ar`, `hi`, `id`), verified with `scripts/verify-i18n.mjs`.
+
 ## [0.12.25] - 2026-11-08
 
 ### Changed

@@ -4564,6 +4564,130 @@ html.big-text {
 .badge-share {
   margin-top: 4px;
 }
+
+/* Celebration & reminder when achievements are reached */
+.share-celebration {
+  width: 100%;
+  margin: 16px 0 12px;
+  padding: 18px 16px;
+  border-radius: var(--radius);
+  border: 2px solid var(--accent);
+  background: linear-gradient(135deg, rgba(70, 70, 216, 0.12), rgba(15, 118, 110, 0.12));
+  box-shadow: 0 4px 20px rgba(70, 70, 216, 0.15);
+  animation: pop 0.4s ease-out;
+  text-align: center;
+}
+.share-celebration-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.share-celebration-head h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: var(--text);
+}
+.celebration-sparkle {
+  font-size: 1.4rem;
+}
+.share-reminder-banner {
+  background: rgba(234, 179, 8, 0.15);
+  border: 1px dashed #eab308;
+  border-radius: 12px;
+  padding: 10px 14px;
+  margin-bottom: 14px;
+  text-align: left;
+}
+.share-reminder-banner b {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.share-reminder-banner p {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.4;
+  color: var(--muted);
+}
+.share-reminder-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.share-reminder-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+.share-reminder-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-align: left;
+}
+.share-reminder-icon {
+  font-size: 2.2rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+.share-reminder-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.share-reminder-name {
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: var(--text);
+}
+.share-reminder-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: stretch;
+}
+.share-reminder-btns .btn {
+  flex: 1;
+  min-width: 140px;
+  justify-content: center;
+  text-decoration: none;
+}
+.share-celebrate-btn {
+  background: linear-gradient(135deg, #4646d8, #0f766e);
+  color: #fff;
+  border: none;
+  font-weight: 800;
+}
+.btn-whatsapp {
+  background: #25D366 !important;
+  color: #fff !important;
+  border: none !important;
+  font-weight: 800;
+}
+.btn-whatsapp:hover {
+  background: #1eb857 !important;
+}
+.btn-telegram {
+  background: #229ED9 !important;
+  color: #fff !important;
+  border: none !important;
+  font-weight: 800;
+}
+.btn-telegram:hover {
+  background: #1b85b8 !important;
+}
+.share-celebration-foot {
+  margin-top: 12px;
+}
 /* Only for browsers without showModal, where a dialog isn't centred or layered by itself. */
 .share-dialog.no-modal {
   position: fixed;
