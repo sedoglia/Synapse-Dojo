@@ -6,6 +6,19 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.25] - 2026-11-08
+
+### Changed
+
+- Extension, unblocking, and recalibration of time and XP bonuses grounded in neuroscience:
+  - Systematic audit across all 38 exercises to ensure the availability of the additive temporal efficiency bonus (`withTimeBonus`, awarding up to +10 score points and +10 XP with the `⚡ Speed bonus` badge).
+  - Unblocked bonus in Crack the Code (`ex.crackTheCode`): fixed the check in `src/ctx.ts` that required at least 2 correct trials and excluded single-puzzle sessions; introduced dynamic threshold `minCorrect = Math.min(2, Math.max(1, totalAnswers))` and scaled benchmark based on deductive combination length and clues count (`14 + codeLength * 6 + cluesCount * 2`).
+  - Fixed and recalibrated 2048 (`ex.game2048`): resolved milestone-level RT mismatch where full milestone durations (20–40s) were tested against the 1.4s benchmark; now tracks the mean decision time per slide move (`milestoneAvgRt`), rewarding fluidity and flow state.
+  - Nonogram (`ex.nonogram`): ensured compatibility with single clean solves and verified visuospatial puzzle benchmarks.
+  - Integration across missing non-strictly timed games: added score bonus and XP speed bonus logic to Mental Rotation (`ex.rotate`), Speed Reading (`ex.reading`, rewarding high WPM with 100% comprehension), Shape & Color conjunction search (`ex.binding`), and bilateral coordination tasks (`ex.crossMove`, `ex.tapSeq`, `ex.swipePattern`, `ex.dualTask`).
+  - Multisensory dopaminergic reinforcement: in `src/screens/play.ts`, earning the speed bonus triggers the crystalline `sfx.coins()` audio-haptic feedback even when not breaking an all-time personal best, maximizing the *Reward Prediction Error* (RPE) and intrinsic drive to keep playing.
+  - Academic documentation updated: expanded section 8 in `docs/basi-scientifiche.md` and `docs/scientific-foundations.md` detailing striatal dopaminergic reward loops, drift diffusion modeling (DDM), and insight-driven "Aha!" moment activation.
+
 ## [0.12.24] - 2026-11-08
 
 ### Changed

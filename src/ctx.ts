@@ -113,11 +113,13 @@ export class Ctx {
 
   /**
    * Calculates an additive speed efficiency bonus (0 to 10 points) on score for correct, swift responses.
-   * Prerequisite: enough accuracy and at least 2 correct trials (avoids rewarding impulsive guessing).
+   * Prerequisite: enough accuracy and at least enough correct trials (avoids rewarding impulsive guessing).
+   * For single-trial puzzle sessions, 1 correct solve suffices; multi-trial tasks require >= 2.
    * Never in the daily check, whose scores must stay comparable between exercises.
    */
   timeBonus(benchmarkSecs = 2.5): number {
-    if (this.quick || this.accuracy < BONUS_MIN_ACCURACY || this.correctRts.length < 2) return 0;
+    const minCorrect = Math.min(2, Math.max(1, this.totalAnswers));
+    if (this.quick || this.accuracy < BONUS_MIN_ACCURACY || this.correctRts.length < minCorrect) return 0;
     const avgSecs = (this.avgCorrectRt / 1000) / this.pace;
     const maxSecs = benchmarkSecs * 2;
     if (avgSecs >= maxSecs) return 0;
@@ -138,7 +140,8 @@ export class Ctx {
 
   /** Whether the session qualified for the XP speed bonus (+10 XP). */
   get isSpeedBonus(): boolean {
-    if (this.correctRts.length >= 2 && this.accuracy >= BONUS_MIN_ACCURACY) {
+    const minCorrect = Math.min(2, Math.max(1, this.totalAnswers));
+    if (this.correctRts.length >= minCorrect && this.accuracy >= BONUS_MIN_ACCURACY) {
       return this.timeBonus(3.0) >= 3;
     }
     return false;

@@ -550,7 +550,10 @@ export const game2048: Exercise = {
           ? t('ex.game2048.boardLocked')
           : t('ex.game2048.outOfMoves');
 
+      // Pass the average decision time per move as the trial RT so the 1.4s benchmark evaluates fluid slide execution
+      const milestoneAvgRt = moveRts.length ? moveRts.reduce((a, b) => a + b, 0) / moveRts.length : undefined;
       const ok = ctx.track(st, result.solved, {
+        rt: milestoneAvgRt,
         note: noteText,
         sound: result.solved ? 'ok' : 'none',
       });

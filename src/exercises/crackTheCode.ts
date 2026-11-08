@@ -605,7 +605,9 @@ export const crackTheCode: Exercise = {
     }
 
     ctx.progress(1);
-    const { score, timeBonus } = ctx.withTimeBonus(st.score(), 25);
+    // Benchmark scales with deductive complexity (digits to resolve and clues to cross-reference)
+    const benchmarkSecs = 14 + codeLengthFor(st.threshold()) * 6 + cluesCountFor(st.threshold()) * 2;
+    const { score, timeBonus } = ctx.withTimeBonus(st.score(), benchmarkSecs);
     const detail = t('ex.crackTheCode.detail', { ok: solvedCount, n: trials, lvl: st.int });
 
     return {

@@ -110,10 +110,12 @@ export const crossMove: Exercise = {
     ctx.progress(1);
 
     const avg = rts.length ? Math.round(rts.reduce((a, b) => a + b, 0) / rts.length) : 0;
+    const { score, timeBonus } = ctx.withTimeBonus(st.score(), 1.4);
     return {
-      score: st.score(),
+      score,
       detail: t('ex.crossMove.detail', { ok: correct, n: trials, ms: avg }),
       level: st.next(),
+      timeBonus,
     };
   },
 };

@@ -122,6 +122,7 @@ export const rotate: Exercise = {
       pair.classList.remove('good', 'bad');
     }
     ctx.progress(1);
-    return { score: st.score(), detail: t('common.correct', { ok: correct, n: trials }), level: st.next() };
+    const { score, timeBonus } = ctx.withTimeBonus(st.score(), 3.5);
+    return { score, detail: t('common.correct', { ok: correct, n: trials }), level: st.next(), timeBonus };
   },
 };
