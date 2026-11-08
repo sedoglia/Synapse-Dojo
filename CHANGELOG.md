@@ -6,6 +6,15 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.33] - 2026-11-08
+
+### Changed
+
+- Resolved visual icon collision between the **Gym** and the **Tangram** game:
+  - Assigned the dedicated `🥋` icon (Dojo uniform / mental training gi) to the **Gym** menu card and the **Exercises** tab in Progress, reinforcing the Synapse Dojo brand identity alongside Daily Workout (`🏋️`), Onboarding, and Guide.
+  - Preserved `🧩` exclusively for **Tangram** and the *Tangram Master* badge.
+  - Updated `README.md`, `README.it.md`, `onboarding.ts`, and all 12 localization files with the `🥋` icon and the 39-exercise catalog count.
+
 ## [0.12.32] - 2026-11-08
 
 ### Changed

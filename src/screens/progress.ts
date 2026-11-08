@@ -108,7 +108,7 @@ function calendar(): HTMLElement {
 function renderTabBar(): HTMLElement {
   const tabs: { id: ProgressTab; icon: string; label: string }[] = [
     { id: 'overview', icon: '📊', label: t('progress.tab.overview') },
-    { id: 'exercises', icon: '🧩', label: t('progress.tab.exercises') },
+    { id: 'exercises', icon: '🥋', label: t('progress.tab.exercises') },
     { id: 'habits', icon: '📅', label: t('progress.tab.habits') },
     { id: 'badges', icon: '🏅', label: t('progress.tab.badges') },
   ];

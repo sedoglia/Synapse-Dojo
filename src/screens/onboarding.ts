@@ -112,7 +112,7 @@ export function showOnboarding() {
             h(
               'div',
               { class: 'card pillar-card' },
-              h('div', { class: 'pillar-icon' }, '🧩'),
+              h('div', { class: 'pillar-icon' }, '🥋'),
               h('h3', {}, t('landing.pillar3Title')),
               h('p', { class: 'muted small' }, t('landing.pillar3Desc')),
             ),

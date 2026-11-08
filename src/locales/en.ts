@@ -43,7 +43,7 @@ export const ui = {
   'guide.planP': 'Every day, Synapse Dojo composes a balanced 4-exercise routine across different cognitive domains (e.g., speed, memory, attention, and executive control). The games adapt automatically: succeed and the difficulty increases; make mistakes and it scales down, so it stays neither too easy nor too hard for you. Finishing your daily workout builds your streak and awards XP towards leveling up.',
   'guide.checkH': '📏 Measure your Neuro Score (Daily Check)',
   'guide.checkP': 'The Neuro Score is a short daily battery covering all 9 areas, with one exercise per area chosen in daily rotation. Your score (0–1000) helps you follow your own trend in these exercises: read it over several weeks, not day by day, because the exercises rotate and each test is short. It has not yet been validated on real players, is not a clinical test and has no diagnostic value.',
-  'guide.trainingH': '🧩 Free Gym (39 Exercises)',
+  'guide.trainingH': '🥋 Free Gym (39 Exercises)',
   'guide.trainingP': 'In the Gym section, you have unlimited access to all 39 exercises, categorized by domain. Use it to focus on specific skills you want to strengthen, explore different exercise mechanics, or challenge your personal high scores.',
   'guide.progressH': '📈 Progress & Statistics',
   'guide.progressP': 'Track your cognitive evolution over time. View your radar profile across all 9 skill domains, review your historical Neuro Score curve, unlock achievement badges (such as consecutive day streaks and master levels), and inspect your monthly training calendar.',
