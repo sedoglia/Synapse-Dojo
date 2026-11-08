@@ -6,6 +6,19 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.32] - 2026-11-08
+
+### Modificato
+
+- Risolti i 7 problemi segnalati nel gioco **Tangram** con revisione geometrica, ergonomica e calibrazione dopaminica:
+  - **Scala pezzi 1:1 e visibilità vassoio**: ingranditi i pezzi nel vassoio (da 54px a 72px) con viewBox compatto (`-52 -52 104 104`) riducendo il divario di scala rispetto alla sagoma; durante il drag il pezzo clonato segue il cursore a dimensione reale 1:1 (96px, 1 SVG unit = 1 CSS px) incastrandosi visivamente a pennello sul bersaglio.
+  - **Eliminazione sobbalzi e spostamenti di layout**: rimosse le animazioni e i salti `translateY` che destabilizzavano la struttura durante la rotazione; la rotazione aggiorna direttamente in-place la trasformazione SVG del poligono (`transform="scale(...) rotate(...)"`) senza distruggere o rigenerare il DOM della scacchiera; ancoraggio superiore in `.stage-tangram` e mantenimento dello spazio del pulsante flip con `visibility: hidden` per garantire stabilità millimetrica a schermo.
+  - **Correzione geometrica e incastro chiaro (Barca e tutti i pezzi)**: rigenerati tutti gli schemi eliminando 72 distorsioni geometriche del generatore precedente (es. ipotenusa e cateti dei triangoli MT/LT non ortogonali o deformati); corretti i vertici canonici del parallelogramma centrato `PR`; implementato il punto di snap in coordinate SVG con tolleranza generosa (58 unità) e feedback luminoso di orientamento (`.tangram-slot-hint-glow`), che mostra esattamente la sagoma desiderata in caso di angolazione errata eliminando i tentativi alla cieca.
+  - **Durata partita calibrata (2 schemi)**: ridotto il numero di schemi per sessione da 3 a 2 (1 in pratica/controllo), portando la durata della sessione a ~1.5 minuti in linea con tutti gli altri esercizi del dojo.
+  - **Bonus rapidità XP e punteggio dopaminico**: ricalibrato il benchmark di velocità per livello (`18s + 6s per pezzo`) e collegato al sistema globale `ctx.withTimeBonus` e `ctx.isSpeedBonus` per premiare le risoluzioni agili e brillanti con +10 XP e bonus al punteggio.
+  - **80 schemi matematicamente certificati**: generata una libreria di 80 schemi convalidate geometricamente (10 schemi unici per livello su tutti gli 8 livelli, da 3 a 7 pezzi), con traduzione dei nomi in tutte le 12 lingue ufficiali.
+  - **Controlli intuitivi e fluidi**: aggiunta rotazione fluida con rotellina del mouse (Wheel) e tasto destro del mouse, feedback magnetico verde in tempo reale durante il trascinamento (`.tangram-slot.target-ready`), e selezione rapida da tastiera (1-4, A/D, frecce, Spazio).
+
 ## [0.12.31] - 2026-11-08
 
 ### Modificato
