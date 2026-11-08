@@ -217,7 +217,7 @@ export function showHome() {
           check ? 'done' : '',
         ),
         menuCard('🧩', t('home.training'), t('home.trainingSub'), showTraining),
-        menuCard('📈', t('home.progress'), t('home.progressSub'), showProgress),
+        menuCard('📈', t('home.progress'), t('home.progressSub'), () => showProgress('overview')),
         boardCard(),
         goal
           ? h(

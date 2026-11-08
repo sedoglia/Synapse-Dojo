@@ -18,6 +18,10 @@ Version numbers come from `package.json`, and each date is the day of the commit
   - *Achievements & Trophies* tab: full Trophy Room with 50+ badges, master completion bar, and dedicated filters (*All*, *In Progress*, *Earned*, *Locked*) leveraging the Zeigarnik Effect (1927) and the endowed progress effect (Nunes & Drèze 2006).
   - Comprehensive localization across all 12 supported languages (`en`, `it`, `es`, `fr`, `de`, `pt`, `ru`, `zh`, `ja`, `ar`, `hi`, `id`).
 
+### Fixed
+
+- Fixed DOM event forwarding from Home to Progress, ensuring the Overview tab always opens and renders immediately by default with all its data and metrics.
+
 ## [0.12.26] - 2026-11-08
 
 ### Added

@@ -18,6 +18,10 @@ I numeri di versione vengono da `package.json` e ogni data è il giorno del comm
   - Sezione *Traguardi & Medaglie*: Trophy Room completa con oltre 50 traguardi, barra di completamento master e filtri dedicati (*Tutti*, *In arrivo*, *Sbloccati*, *Da sbloccare*) per sfruttare l'effetto Zeigarnik (1927) e di progresso dotato (Nunes & Drèze 2006).
   - Localizzazione integrale dei nuovi componenti e comandi in tutte le 12 lingue (`en`, `it`, `es`, `fr`, `de`, `pt`, `ru`, `zh`, `ja`, `ar`, `hi`, `id`).
 
+### Risolto
+
+- Risolto il passaggio del parametro evento DOM al click da Home a Progressi, garantendo che all'accesso venga sempre aperta e renderizzata per default la scheda Panoramica con tutti i relativi dati e statistiche.
+
 ## [0.12.26] - 2026-11-08
 
 ### Aggiunto
