@@ -166,6 +166,7 @@ const SCENES: Record<string, Scene> = {
     const mini = h('div', { class: 'ex-nono-wrap' }, topClues, row1, row2, row3, row4);
     return row(mini, arrow(), answer('❤️'));
   },
+  tangram: () => row(tag('📐 🧩'), arrow(), tag('↻ 45°'), arrow(), answer('🦢 ✨')),
   game2048: () => row(tag('2'), tag('+'), tag('2'), arrow(), answer('4 🧱')),
   crackTheCode: () =>
     row(

@@ -143,6 +143,7 @@ export const BADGES: Badge[] = [
   { id: 'glance50', icon: '👁️', name: 'badge.glance50.name', desc: 'badge.glance50.desc', progress: () => frac(level('glance'), 18) },
   { id: 'towersMaster', icon: '🗼', name: 'badge.towersMaster.name', desc: 'badge.towersMaster.desc', progress: () => frac(level('towers'), 6) },
   { id: 'mathMaster', icon: '➗', name: 'badge.mathMaster.name', desc: 'badge.mathMaster.desc', progress: () => frac(level('math'), 6) },
+  { id: 'tangramMaster', icon: '🧩', name: 'badge.tangramMaster.name', desc: 'badge.tangramMaster.desc', progress: () => frac(level('tangram'), 6) },
   { id: 'neuro800', icon: '🧠', name: 'badge.neuro800.name', desc: 'badge.neuro800.desc', progress: () => frac(Math.max(0, ...store.data.checks.map((c) => c.score)), 800) },
 ];
 

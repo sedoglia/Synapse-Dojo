@@ -25,6 +25,7 @@ import { stories } from './stories';
 
 import { rotate } from './rotate';
 import { matrix } from './matrix';
+import { tangram } from './tangram';
 
 import { towers } from './towers';
 import { odd } from './odd';
@@ -60,7 +61,7 @@ export const EXERCISES: Exercise[] = [
   // Memory
   vault, pairs, stories,
   // Spatial
-  rotate, matrix, nonogram,
+  rotate, matrix, nonogram, tangram,
   // Reasoning
   towers, odd, resources, game2048, crackTheCode,
   // Language & Calculation
