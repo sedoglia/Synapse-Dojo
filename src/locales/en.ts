@@ -817,9 +817,9 @@ export const ui = {
 
   // Tangram
   'ex.tangram.name': 'Tangram',
-  'ex.tangram.desc': 'Assemble geometric blocks to reconstruct target silhouettes and figures',
+  'ex.tangram.desc': 'Deduce how to deconstruct and fill solid mystery silhouettes using geometric blocks without guidelines',
   'ex.tangram.why': 'Mental rotation, part-whole decomposition, and visuospatial reasoning: recruits the posterior parietal cortex (PPC) and intraparietal sulcus to perform metric coordinate transformations (Shepard & Metzler, 1971; Baddeley, 1986). Sudden insight unlocks a positive reward prediction error (RPE) triggering a dopaminergic burst in the nucleus accumbens (Schultz, 1998; Tik et al., 2018), reinforcing geometric synthesis.',
-  'ex.tangram.example': 'Rotate geometric pieces (tans) and fit them neatly into the silhouette outline',
+  'ex.tangram.example': 'Analyze the solid silhouette: deduce which pieces form it, rotate and fit them without guidelines!',
   'ex.tangram.detail': '{ok}/{n} figures solved',
   'ex.tangram.pieces': 'pieces',
   'ex.tangram.level': 'Level {l}',
@@ -830,6 +830,9 @@ export const ui = {
   'ex.tangram.undo': 'Undo',
   'ex.tangram.clear': 'Reset',
   'ex.tangram.rotateHint': 'Rotate by 45° to align!',
+  'ex.tangram.wrongPiece': 'This shape does not fit in this part of the silhouette',
+  'ex.tangram.wrongAngle': 'Correct shape for this area! Rotate it to find the exact angle',
+  'ex.tangram.selectPieceFirst': 'Select a piece from the tray below first',
   'ex.tangram.solved': '✨ {name} completed!',
 
   // Tangram Puzzles

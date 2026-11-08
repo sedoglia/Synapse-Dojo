@@ -6,6 +6,17 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.29] - 2026-11-08
+
+### Modificato
+
+- Riprogettazione radicale della sfida cognitiva del gioco **Tangram**:
+  - Trasformazione della sagoma bersaglio in una **silhouette piena ("sagoma pura")**: eliminate tutte le linee guida interne tratteggiate e gli indicatori visivi di hover/trascinamento che suggerivano la posizione dei pezzi durante il gioco effettivo.
+  - Ripristino della reale complessità neuroscientifica e della scomposizione parte-tutto (*Wagemans et al., 2012; Shepard & Metzler, 1971*): il giocatore deve dedurre mentalmente la disposizione geometrica interna, orientare i tan e incastrarli senza "spoiler".
+  - Sistema di feedback intelligente e non invasivo: toccare o rilasciare un pezzo sulla silhouette fornisce indicazioni precise ma sfidanti (distingue se il pezzo è errato o se la forma è corretta ma l'orientamento è da ruotare).
+  - Modalità tutorial guidata preservata: le linee guida tratteggiate rimangono visibili esclusivamente nella modalità pratica/tutorial iniziale per facilitare l'onboarding dei nuovi giocatori.
+  - Aggiornamento della descrizione dell'esercizio e dell'esempio pratico e sincronizzazione di tutte le nuove stringhe di feedback nelle 12 lingue supportate.
+
 ## [0.12.28] - 2026-11-08
 
 ### Aggiunto
