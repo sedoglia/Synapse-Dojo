@@ -1,4 +1,4 @@
-﻿import { h, todayKey } from '../dom';
+import { h, todayKey } from '../dom';
 import { store } from '../storage';
 import { t } from '../i18n';
 import { APP_NAME } from '../config';
@@ -222,7 +222,7 @@ export function showHome() {
         goal
           ? h(
               'button',
-              { class: 'next-goal', onClick: showProgress },
+              { class: 'next-goal', onClick: () => showProgress('badges') },
               h('span', { class: 'goal-icon' }, goal.icon),
               h(
                 'span',

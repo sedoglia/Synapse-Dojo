@@ -162,3 +162,12 @@ export function nextBadge(): Badge | undefined {
     .map((b) => ({ b, p: b.progress() }))
     .sort((x, y) => y.p - x.p)[0]?.b;
 }
+
+/** The unearned badges closest to completion: triggers the Goal-Gradient effect (Hull 1932; Kivetz 2006). */
+export function nearBadges(limit = 3): { badge: Badge; progress: number }[] {
+  const unearned = BADGES.filter((b) => !earned(b)).map((b) => ({ badge: b, progress: b.progress() }));
+  const inProgress = unearned.filter((x) => x.progress > 0).sort((a, b) => b.progress - a.progress);
+  if (inProgress.length >= limit) return inProgress.slice(0, limit);
+  const remaining = unearned.filter((x) => x.progress === 0);
+  return [...inProgress, ...remaining].slice(0, limit);
+}
