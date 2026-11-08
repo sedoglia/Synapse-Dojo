@@ -6,6 +6,15 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.13.3] - 2026-11-08
+
+### Security
+
+- **Resolution for CodeQL alert #3 (`js/insecure-randomness` / CWE-338)**:
+  - Implemented Web Crypto API (`crypto.getRandomValues`) in global randomness utilities (`secureRandom`, `rand`, `pick`, `shuffle`) in `src/dom.ts` and in `wordNear` (`src/i18n.ts`), eliminating `Math.random` for element selection and sequence shuffling.
+  - Replaced `Math.random` in `check-anagrams.mjs` with `node:crypto` (`randomInt`), and in `tangram` (piece rotation & distractor ID), `path`, `sorting`, and `dualTask` exercises.
+  - Strengthened profile token validation (`board.secret`) in `src/storage.ts` with strict regex matching server specifications (`/^[A-Za-z0-9_-]{30,60}$/`).
+
 ## [0.13.2] - 2026-11-08
 
 ### Added

@@ -1,4 +1,4 @@
-import { h, flash, pick } from '../dom';
+import { h, flash, pick, rand } from '../dom';
 import { t } from '../i18n';
 import { sfx, haptic } from '../audio';
 import { getRecentHistory, saveRecentHistory } from '../storage';
@@ -162,7 +162,7 @@ export const tangram: Exercise = {
         type: s.type,
         color: s.color,
         // Randomized initial rotation to stimulate active mental rotation (0, 45, 90, 135...)
-        rot: ctx.practice ? s.rot : ((Math.floor(Math.random() * 8) * 45) % 360),
+        rot: ctx.practice ? s.rot : ((rand(0, 7) * 45) % 360),
         flip: false,
         placedSlotId: null,
       }));
@@ -176,10 +176,10 @@ export const tangram: Exercise = {
         const missing = CLASSIC_SET.find((pt) => !usedTypes.has(pt));
         const decoyType: TangramPieceType = missing ?? (currentLevel >= 7 ? 'SQ' : 'ST');
         pieces.push({
-          id: `decoy_${Math.random().toString(36).slice(2, 7)}`,
+          id: `decoy_${decoyType}_${puzzle.id}`,
           type: decoyType,
           color: PIECE_COLORS[decoyType],
-          rot: (Math.floor(Math.random() * 8) * 45) % 360,
+          rot: (rand(0, 7) * 45) % 360,
           flip: false,
           placedSlotId: null,
           isDecoy: true,

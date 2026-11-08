@@ -1,4 +1,5 @@
 import { store } from './storage';
+import { pick } from './dom';
 import { reloadForNewVersion } from './update';
 import en, { ui as enUi } from './locales/en';
 
@@ -120,7 +121,7 @@ export function wordNear(list: readonly string[], n: number): string {
   const dist = (w: string) => Math.abs(graphemes(w).length - n);
   const best = Math.min(...pool.map(dist));
   const near = pool.filter((w) => dist(w) === best);
-  return near[Math.floor(Math.random() * near.length)];
+  return pick(near);
 }
 
 export const words = () => locale().words;

@@ -6,6 +6,15 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.13.3] - 2026-11-08
+
+### Sicurezza
+
+- **Risoluzione avviso CodeQL #3 (`js/insecure-randomness` / CWE-338)**:
+  - Adottata la Web Crypto API (`crypto.getRandomValues`) nelle funzioni di generazione casuale fondamentali (`secureRandom`, `rand`, `pick`, `shuffle`) in `src/dom.ts` e in `wordNear` (`src/i18n.ts`), eliminando `Math.random` per la selezione e permutazione di sequenze.
+  - Sostituito `Math.random` in `check-anagrams.mjs` con `node:crypto` (`randomInt`), e negli esercizi `tangram` (generazione ID e rotazione pezzi), `path`, `sorting` e `dualTask`.
+  - Rafforzata la validazione dei token del profilo (`board.secret`) in `src/storage.ts` con espressione regolare rigorosa conforme alle specifiche del server (`/^[A-Za-z0-9_-]{30,60}$/`).
+
 ## [0.13.2] - 2026-11-08
 
 ### Aggiunto

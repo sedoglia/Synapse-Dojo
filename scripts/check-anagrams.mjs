@@ -1,6 +1,7 @@
 // Checks the Anagrams game in every language, using the same rules as the game. Run with `npm run check:anagrams`.
 // Run it after changing a word list; new words also need their valid anagrams added to `anagramWords`.
 import { readdirSync } from 'node:fs';
+import { randomInt } from 'node:crypto';
 import { canon, isPlayable, scramble, solutionsOf } from '../src/exercises/anagramRules.ts';
 
 const LOCALES = new URL('../src/locales/', import.meta.url);
@@ -9,7 +10,7 @@ const LEVEL_LENGTHS = [3, 4, 5, 6, 7, 8]; // what `lenFor` in anagrams.ts asks f
 
 const shuffle = (items) => {
   for (let i = items.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = randomInt(i + 1);
     [items[i], items[j]] = [items[j], items[i]];
   }
   return items;

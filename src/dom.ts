@@ -1,4 +1,4 @@
-﻿type Child = Node | string | number | null | undefined | false;
+type Child = Node | string | number | null | undefined | false;
 type Attrs = Record<string, unknown>;
 
 export function h<K extends keyof HTMLElementTagNameMap>(
@@ -25,14 +25,24 @@ export function h<K extends keyof HTMLElementTagNameMap>(
   return el;
 }
 
-export const rand = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min;
-export const pick = <T>(arr: readonly T[]): T => arr[Math.floor(Math.random() * arr.length)];
+/**
+ * Cryptographically secure pseudo-random float in [0, 1) using Web Crypto API (`crypto.getRandomValues`).
+ * CWE-338 compliant.
+ */
+export function secureRandom(): number {
+  const buf = new Uint32Array(1);
+  crypto.getRandomValues(buf);
+  return buf[0] / (0xffffffff + 1);
+}
+
+export const rand = (min: number, max: number) => Math.floor(secureRandom() * (max - min + 1)) + min;
+export const pick = <T>(arr: readonly T[]): T => arr[Math.floor(secureRandom() * arr.length)];
 export const clamp = (v: number, lo: number, hi: number) => Math.min(hi, Math.max(lo, v));
 
-export function shuffle<T>(arr: T[]): T[] {
+export function shuffle<T>(arr: readonly T[]): T[] {
   const a = [...arr];
   for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = Math.floor(secureRandom() * (i + 1));
     [a[i], a[j]] = [a[j], a[i]];
   }
   return a;

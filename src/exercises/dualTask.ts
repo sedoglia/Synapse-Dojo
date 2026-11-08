@@ -1,4 +1,4 @@
-import { h, flash } from '../dom';
+import { h, flash, rand } from '../dom';
 import { sfx } from '../audio';
 import { t, num } from '../i18n';
 import { onKeys, timeBar } from '../widgets';
@@ -161,7 +161,7 @@ export const dualTask: Exercise = {
       ctx.progress(i / trials, `${i + 1}/${trials}`);
       await ctx.wait(400);
 
-      const num = Math.floor(Math.random() * 9) + 1;
+      const num = rand(1, 9);
       const isEven = num % 2 === 0;
       const expectedAnswer: 'even' | 'odd' = isEven ? 'even' : 'odd';
 
