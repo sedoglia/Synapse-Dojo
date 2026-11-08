@@ -680,6 +680,8 @@ const ui: Locale['ui'] = {
   'privacy.share': 'L’image est dessinée sur ton appareil et montre seulement l’étape : ni nom, ni scores, ni âge. Rien n’est envoyé tant que tu ne choisis pas de la partager ; ensuite, les règles de confidentialité de l’application ou du réseau social choisi s’appliquent.',
   'guide.faq4Q': 'Puis-je partager mes étapes ?',
   'guide.faq4A': 'Oui, si tu le souhaites : dans Progrès, tu peux partager tes jours d’entraînement de la semaine et tes badges de régularité et d’exploration. Les scores et le Neuro Score restent privés, car chacun s’entraîne à son niveau et le Neuro Score n’est pas une mesure validée. Tu peux désactiver les propositions dans les Réglages.',
+  'guide.faq5Q': 'Comment transférer mes progrès vers un autre appareil ou navigateur ?',
+  'guide.faq5A': 'Dans les Réglages, choisis « Enregistrer en ligne (code temporaire) » pour générer un code à 8 caractères valable 24 heures. Sur le nouvel appareil, sélectionne « Importer avec code en ligne » (dans les Réglages ou sur l\'écran d\'accueil) pour restaurer tous tes jeux, niveaux, pseudo, groupes et classement. Les données temporaires sont supprimées immédiatement du serveur dès l\'importation terminée. Tu peux aussi exporter et importer un fichier JSON de sauvegarde.',
   'settings.data': 'Tes progrès',
   'settings.dataHint': 'Enregistre tes progrès dans un fichier pour en garder une copie ou les transférer vers un autre appareil ou une autre adresse du jeu : chacun a sa propre sauvegarde.',
   'settings.export': 'Exporter les progrès',

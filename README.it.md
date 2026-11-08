@@ -43,14 +43,14 @@ Gioco gratuito di allenamento cognitivo e coordinazione bilaterale (source-avail
 - **Difficoltà Adattiva**: usa l'algoritmo psicofisico *weighted up-down* (Kaernbach, 1991) e mira al 70–85% di accuratezza secondo l'esercizio, una zona coerente con la *regola dell'85%* (Wilson et al., *Nature Communications* 2019), un risultato teorico sugli algoritmi di apprendimento. Include riscaldamento e freno alla frustrazione.
 - **Trasparenza Scientifica**: ogni esercizio include una scheda (nell'app «Su cosa si basa») con il paradigma a cui si ispira e lo studio di riferimento. Gli esercizi sono versioni brevi e ludiche, non test clinici, e i miglioramenti riguardano soprattutto i compiti allenati o molto simili. Cosa le prove dimostrano e cosa no, con la bibliografia completa, è in [docs/basi-scientifiche.md](docs/basi-scientifiche.md) — English: [docs/scientific-foundations.md](docs/scientific-foundations.md).
 - **Esempi e Prova Guidata**: ogni esercizio offre una spiegazione illustrata e una prova pratica (trial) preliminare per familiarizzare con i comandi senza impattare record o livelli.
-- **Privacy Radicale & Zero Cookie**: nessun account, nessuna password, nessun cookie e nessun tracker. Tutti i progressi risiedono nel `localStorage` del browser, con opzioni di esportazione e importazione in formato JSON da *Impostazioni*. Unica eccezione la **classifica settimanale facoltativa**: chi aderisce invia solo un riepilogo della settimana con un nickname casuale, e solo in quel momento viene caricato il controllo anti-robot Cloudflare Turnstile. Il conteggio delle visite usa Cloudflare Web Analytics, senza cookie.
+- **Privacy Radicale & Zero Cookie**: nessun account, nessuna password, nessun cookie e nessun tracker. Tutti i progressi risiedono nel `localStorage` del browser. Puoi esportare e importare backup completi in formato JSON (salvando tutti i giochi, livelli, badge, nickname e gruppi di amici) oppure migrare su un altro dispositivo tramite un codice temporaneo cloud a 8 caratteri (valido per 24 ore, eliminato automaticamente subito dopo l'importazione o dalla pulizia notturna per garantire la massima riservatezza). Unica eccezione la **classifica settimanale facoltativa**: chi aderisce invia solo un riepilogo della settimana con un nickname casuale, e solo in quel momento viene caricato il controllo anti-robot Cloudflare Turnstile. Il conteggio delle visite usa Cloudflare Web Analytics, senza cookie.
 - **Classifica Progettata per Non Scoraggiare**: premia impegno e miglioramento invece del talento, mostra a chi è nella metà bassa quanti punti mancano per salire invece della posizione, non penalizza chi torna dopo una pausa e non compare mai durante gli esercizi (razionale scientifico in [docs/basi-scientifiche.md](docs/basi-scientifiche.md), §2.6).
 - **Condivisione Facoltativa dei Traguardi**: un'immagine disegnata sul dispositivo per condividere i giorni di allenamento della settimana e i badge di costanza ed esplorazione. Non contiene nome, punteggi o età e il Neuro Score resta privato (razionale in [docs/basi-scientifiche.md](docs/basi-scientifiche.md), §2.7).
 - **Multilingua Nativo (12 Lingue)**: localizzato in inglese, italiano, spagnolo, francese, tedesco, portoghese, russo, cinese, giapponese, arabo (con layout RTL), hindi e indonesiano. I file linguistici sono separati e caricati dinamicamente on-demand.
 - **Accessibilità & Benessere**: modalità a ritmo rilassato (tempi maggiorati del 40%), supporto per testo grande, tema chiaro, tema scuro e installabilità come **PWA offline**.
 - **Pagine Dedicate del Progetto**:
   - [`index.html`](index.html): l'applicazione completa PWA.
-  - [`guide.html`](guide.html): guida approfondita e illustrata alle sezioni, a tutti i 38 giochi e alle FAQ.
+  - [`guide.html`](guide.html): guida approfondita e illustrata alle sezioni, a tutti i 39 giochi e alle FAQ.
   - [`privacy.html`](privacy.html): informativa su privacy, zero tracciamento e assenza di cookie.
   - [`license.html`](license.html): dettagli ufficiali della licenza PolyForm Noncommercial 1.0.0.
 
@@ -58,18 +58,18 @@ Gioco gratuito di allenamento cognitivo e coordinazione bilaterale (source-avail
 
 ## 🛠️ Architettura Tecnica
 
-Il progetto è costruito con **TypeScript** e **Vite**, senza l'impiego di framework pesanti (React, Vue o Angular), garantendo un caricamento istantaneo, rendering DOM nativo ultra-performante e un'impronta gzippata minuscola (~34 KB per il runtime UI di base, ~110 KB totali per l'intera app inclusi tutti i 38 giochi).
+Il progetto è costruito con **TypeScript** e **Vite**, senza l'impiego di framework pesanti (React, Vue o Angular), garantendo un caricamento istantaneo, rendering DOM nativo ultra-performante e un'impronta gzippata minuscola (~34 KB per il runtime UI di base, ~110 KB totali per l'intera app inclusi tutti i 39 giochi).
 
 ```
 synapse-dojo/
 ├── public/                 manifest PWA, icone, font Nunito (OFL), robots.txt, sitemap.xml, _headers, service worker
-├── functions/api/          API della classifica (Cloudflare Pages Functions): join, submit, board, me, groups/
+├── functions/api/          API della classifica e trasferimento (Cloudflare Pages Functions): join, submit, board, me, groups, transfer
 ├── server/board.ts         codice condiviso dalle API: autenticazione, validazione, settimane ISO, punti, gruppi
 ├── migrations/             schema del database D1 della classifica (applicato in automatico dal deploy)
 ├── cleanup/                Worker con cron che applica ogni notte le regole di conservazione della classifica
 ├── scripts/                build e deploy (deploy-web.mjs), verifica dizionari (check-anagrams.mjs) e coerenza i18n (verify-i18n.mjs)
 ├── src/
-│   ├── exercises/          i 38 esercizi (uno per file), index.ts (catalogo e batteria), types.ts e dataset dei puzzle
+│   ├── exercises/          i 39 esercizi (uno per file), index.ts (catalogo e batteria), types.ts e dataset dei puzzle
 │   ├── screens/            schermate dell'app: home, onboarding, training, play, progress, settings, board, boardJoin, groups, guide, privacy, license
 │   ├── locales/            moduli di traduzione per le 12 lingue (en.ts è la base di tipizzazione)
 │   ├── adaptive.ts         motore adattivo continuo (weighted up-down staircase)
@@ -87,8 +87,12 @@ synapse-dojo/
 │   ├── rewards.ts          calcolo XP, livelli del giocatore e sblocco traguardi
 │   ├── share.ts            scheda condivisibile dei traguardi, disegnata sul dispositivo
 │   ├── stats.ts            analisi delle capacità per dominio e selezione allenamento
-│   ├── storage.ts          gestione del salvataggio locale, convalida schema e backup JSON
+│   ├── storage.ts          gestione del salvataggio locale, convalida schema ed esportazione/importazione profilo
 │   ├── style.css           foglio di stile principale (layout responsivo, temi chiaro/scuro, RTL e stili di gioco)
+│   ├── transfer.ts         trasferimento temporaneo del profilo su cloud, codici, copia/condivisione e dialoghi di importazione
+│   ├── ui.ts               utility di layout, barre di navigazione, modali, toast e gestione impostazioni
+│   ├── update.ts           rilevamento automatico di nuove versioni distribuite e ricaricamento
+│   └── widgets.ts          componenti riutilizzabili (canvas, tastierini numerici, sparkline)
 │   ├── ui.ts               utility di layout, barre di navigazione, modali, toast e gestione impostazioni
 │   ├── update.ts           rilevamento automatico di nuove versioni distribuite e ricaricamento
 │   └── widgets.ts          componenti riutilizzabili (canvas, tastierini numerici, sparkline)

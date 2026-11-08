@@ -680,6 +680,8 @@ const ui: Locale['ui'] = {
   'privacy.share': 'Gambar dibuat di perangkatmu dan hanya menampilkan pencapaian: tanpa nama, skor, atau usia. Tidak ada yang dikirim kecuali kamu memilih membagikannya; setelah itu berlaku aturan privasi aplikasi atau jejaring sosial yang kamu pilih.',
   'guide.faq4Q': 'Bisakah aku membagikan pencapaianku?',
   'guide.faq4A': 'Ya, jika kamu mau: di Kemajuan kamu bisa membagikan hari latihan minggu ini serta lencana konsistensi dan eksplorasi. Skor dan Neuro Score tetap pribadi, karena setiap orang berlatih di levelnya sendiri dan Neuro Score bukan ukuran yang tervalidasi. Tawaran dapat dimatikan di Pengaturan.',
+  'guide.faq5Q': 'Bagaimana cara memindahkan kemajuan saya ke perangkat atau browser lain?',
+  'guide.faq5A': 'Di Pengaturan, kamu dapat memilih \'Simpan online (kode sementara)\' untuk membuat kode 8 karakter yang berlaku selama 24 jam. Di perangkat baru, pilih \'Impor dengan kode online\' (di Pengaturan atau layar awal) untuk memulihkan semua latihan, level, nama panggilan, grup, dan peringkat. Data sementara langsung dihapus dari server setelah impor selesai demi privasi. Sebagai alternatif, kamu juga selalu dapat mengekspor dan mengimpor file cadangan JSON.',
   'settings.data': 'Kemajuanmu',
   'settings.dataHint': 'Simpan kemajuanmu ke sebuah file untuk menyimpan salinan atau memindahkannya ke perangkat atau alamat permainan lain: masing-masing punya simpanan sendiri.',
   'settings.export': 'Ekspor kemajuan',
