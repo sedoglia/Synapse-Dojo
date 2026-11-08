@@ -6,6 +6,16 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.13.1] - 2026-11-08
+
+### Modificato
+
+- Risolti i duplicati di icone tra i giochi del catalogo per garantire un'icona univoca e caratterizzante a ogni gioco ed elemento dell'interfaccia:
+  - **Radar** (`radar`): icona aggiornata a `📡` (antenna radar per il tracciamento di bersagli multipli in movimento), risolvendo la collisione con **Test di Flanker** che mantiene l'icona `🎯` (attenzione selettiva e inibizione).
+  - **Span di Cifre** (`span`): icona aggiornata a `🧮` (abaco per la memoria di lavoro numerica diretta e inversa), risolvendo la collisione con **Sentiero dei numeri** (`🔢`).
+  - **Sprint di Parole** (`fluency`): icona aggiornata a `💬` (linguaggio e produzione lessicale rapida), risolvendo la collisione con **Griglia di luci** (`💡`).
+  - Aggiornate le tabelle di riferimento in `README.md` e `README.it.md` per riflettere le 39 icone univoche.
+
 ## [0.13.0] - 2026-11-08
 
 ### Aggiunto

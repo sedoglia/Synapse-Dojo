@@ -9,7 +9,7 @@ const limitFor = (level: number) => Math.max(800, Math.round(2200 * Math.pow(0.9
 
 export const fluency: Exercise = {
   id: 'fluency',
-  icon: '💡',
+  icon: '💬',
   domain: 'language',
   name: 'ex.fluency.name',
   desc: 'ex.fluency.desc',

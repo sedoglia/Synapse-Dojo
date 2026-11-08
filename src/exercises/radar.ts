@@ -21,7 +21,7 @@ interface Ball {
 
 export const radar: Exercise = {
   id: 'radar',
-  icon: '🎯',
+  icon: '📡',
   domain: 'attention',
   name: 'ex.radar.name',
   desc: 'ex.radar.desc',

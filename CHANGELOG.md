@@ -6,6 +6,16 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.13.1] - 2026-11-08
+
+### Changed
+
+- Resolved icon collisions across catalog games to ensure every game and interface section has a unique, characteristic icon:
+  - **Radar** (`radar`): icon updated to `📡` (radar dish for multiple object tracking), removing collision with **Flanker Test** which retains `🎯` (selective attention and flanker inhibition).
+  - **Digit Span** (`span`): icon updated to `🧮` (abacus for forward and backward digit working memory), removing collision with **Number Path** (`🔢`).
+  - **Word Sprint** (`fluency`): icon updated to `💬` (verbal fluency and lexical classification), removing collision with **Light Grid** (`💡`).
+  - Updated reference tables in `README.md` and `README.it.md` with the 39 unique icons.
+
 ## [0.13.0] - 2026-11-08
 
 ### Added
