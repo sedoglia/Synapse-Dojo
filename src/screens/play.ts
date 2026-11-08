@@ -213,12 +213,14 @@ function practiceDone(ex: Exercise): Promise<boolean> {
 
 function badgeList(badges: Badge[]): HTMLElement | null {
   if (!badges.length) return null;
-  return h(
-    'div',
-    { class: 'new-badges' },
-    h('b', {}, `🏅 ${t('result.newBadge')}`),
-    ...badges.map((b) => h('div', { class: 'badge-pill' }, h('span', {}, b.icon), h('span', {}, t(b.name)))),
-    shareOffer(badges),
+  return (
+    shareOffer(badges) ??
+    h(
+      'div',
+      { class: 'new-badges' },
+      h('b', {}, `🏅 ${t('result.newBadge')}`),
+      ...badges.map((b) => h('div', { class: 'badge-pill' }, h('span', {}, b.icon), h('span', {}, t(b.name)))),
+    )
   );
 }
 
@@ -265,6 +267,12 @@ async function practiceRound(ex: Exercise, step: { i: number; n: number } | null
   store.bump('levelUps', ctx.levelUps);
   const isBest = prevBest === null || score > prevBest;
   const speedBonusEarned = res.speedBonus ?? (res.timeBonus !== undefined ? res.timeBonus >= 3 : ctx.isSpeedBonus);
+  if (speedBonusEarned) {
+    store.bump('speedBonuses');
+  }
+  if (new Date().getHours() < 9) {
+    store.bump('earlyBird');
+  }
   // Level-ups are capped so one lucky session can't outweigh steady daily practice.
   const xp = addXp(
     XP.exercise +
@@ -364,6 +372,9 @@ export async function playPlan() {
   }
 
   store.bump('plans');
+  if (new Date().getHours() < 9) {
+    store.bump('earlyBird');
+  }
   const xp = addXp(XP.plan);
   const badges = checkBadges();
   const reward = xpLine(xp.gained, xp.levelUp);
@@ -413,6 +424,9 @@ export async function playDailyCheck() {
   const values = Object.values(parts);
   const score = Math.round((values.reduce((a, b) => a + b, 0) / values.length) * 10);
   store.addCheck({ date: todayKey(), score, parts, v: NEURO_SCALE });
+  if (new Date().getHours() < 9) {
+    store.bump('earlyBird');
+  }
   syncBoard();
   const xp = addXp(XP.check);
   sfx.fanfare();
