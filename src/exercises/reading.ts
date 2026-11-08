@@ -83,9 +83,19 @@ export const reading: Exercise = {
       await ctx.wait(900);
     }
     ctx.progress(1);
+    const avgWpm = Math.round(wpmSum / passages.length);
+    const allCorrect = understood === passages.length;
+    // Swift and fluent reading aloud with high comprehension (140–200+ WPM) earns the speed efficiency bonus
+    const timeBonus = allCorrect && avgWpm >= 140 ? Math.min(10, Math.max(0, Math.round(((avgWpm - 130) / 70) * 10))) : 0;
+    const baseScore = scores.reduce((a, b) => a + b, 0) / scores.length;
+    const score = Math.min(100, Math.round(baseScore + timeBonus));
+    const speedBonus = timeBonus >= 3;
+
     return {
-      score: scores.reduce((a, b) => a + b, 0) / scores.length,
-      detail: t('ex.reading.detail', { wpm: Math.round(wpmSum / passages.length), ok: understood, n: passages.length }),
+      score,
+      detail: t('ex.reading.detail', { wpm: avgWpm, ok: understood, n: passages.length }),
+      timeBonus: timeBonus > 0 ? timeBonus : undefined,
+      speedBonus,
     };
   },
 };

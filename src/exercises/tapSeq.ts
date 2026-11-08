@@ -130,10 +130,12 @@ export const tapSeq: Exercise = {
 
     ctx.progress(1);
 
+    const { score, timeBonus } = ctx.withTimeBonus(st.score(), 2.5);
     return {
-      score: st.score(),
+      score,
       detail: t('ex.tapSeq.detail', { ok: correct, n: trials }),
       level: st.next(),
+      timeBonus,
     };
   },
 };

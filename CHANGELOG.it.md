@@ -6,6 +6,19 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.25] - 2026-11-08
+
+### Modificato
+
+- Estensione, sblocco e ricalibrazione dei bonus di tempo e XP su base neuroscientifica:
+  - Analisi e verifica sistematica su tutti i 38 esercizi della piattaforma per garantire la presenza del bonus additivo di efficienza temporale (`withTimeBonus`, fino a +10 punti sul punteggio e +10 XP con badge `⚡ Bonus rapidità`).
+  - Sblocco del bonus in Decifra il Codice (`ex.crackTheCode`): corretta la condizione in `src/ctx.ts` che esigeva almeno 2 prove corrette escludendo i giochi a singolo puzzle; introdotta la soglia minima dinamica `minCorrect = Math.min(2, Math.max(1, totalAnswers))` e benchmark scalato sulla complessità deduttiva della combinazione e degli indizi (`14 + codeLength * 6 + cluesCount * 2`).
+  - Correzione e ricalibrazione in 2048 (`ex.game2048`): risolto il disallineamento in cui la durata dell'intero traguardo (20–40 s) veniva confrontata con il benchmark di 1,4 s; ora il tempo di reazione registrato corrisponde alla media dei tempi di decisione per mossa (`milestoneAvgRt`), premiando la fluidità e lo stato di flusso dello scorrimento.
+  - Nonogram (`ex.nonogram`): allineata la compatibilità con le prove singole e verificata la taratura dei puzzle visuo-spaziali.
+  - Integrazione nei giochi non strettamente a tempo mancanti: aggiunti i calcoli di bonus e punteggio in Rotazione Mentale (`ex.rotate`), Lettura Veloce (`ex.reading`, con bonus proporzionale a WPM elevati e 100% di comprensione), Colore e Forma (`ex.binding`), e nei compiti di coordinazione bilaterale (`ex.crossMove`, `ex.tapSeq`, `ex.swipePattern`, `ex.dualTask`).
+  - Rinforzo dopaminergico multisensoriale: in `src/screens/play.ts` l'ottenimento del bonus rapidità attiva ora il feedback audio-aptico cristallino `sfx.coins()` anche quando non si stabilisce un record assoluto, massimizzando il *Reward Prediction Error* (RPE) e la motivazione intrinseca al gioco continuativo.
+  - Documentazione scientifica aggiornata: integrata in `docs/basi-scientifiche.md` e `docs/scientific-foundations.md` la sezione 8 dedicata ai circuiti dopaminergici striatali, al modello di diffusione del drift (DDM) e all'attivazione da insight / momento Eureka.
+
 ## [0.12.24] - 2026-11-08
 
 ### Modificato

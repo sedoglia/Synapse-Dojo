@@ -273,7 +273,11 @@ async function practiceRound(ex: Exercise, step: { i: number; n: number } | null
       (speedBonusEarned ? XP.speed : 0),
   );
   const badges = checkBadges();
-  if (isBest || badges.length) sfx.fanfare();
+  if (isBest || badges.length) {
+    sfx.fanfare();
+  } else if (speedBonusEarned) {
+    sfx.coins();
+  }
 
   const history = (store.data.history[ex.id] ?? []).map((p) => p.level);
   const first = history[0];
