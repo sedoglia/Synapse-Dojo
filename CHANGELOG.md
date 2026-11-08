@@ -6,7 +6,7 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
-## [0.12.35] - 2026-11-08
+## [0.13.0] - 2026-11-08
 
 ### Added
 
