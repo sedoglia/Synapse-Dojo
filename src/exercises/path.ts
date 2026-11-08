@@ -1,4 +1,4 @@
-import { h, rand, scale, flash, clamp } from '../dom';
+import { h, rand, scale, flash, clamp, shuffle } from '../dom';
 import { sfx } from '../audio';
 import { t, num } from '../i18n';
 import { levelScore } from '../adaptive';
@@ -32,7 +32,7 @@ function placeNodes(n: number, w: number, hgt: number): { x: number; y: number }
   const cw = (w - NODE) / Math.max(1, cols - 1);
   const ch = (hgt - NODE) / Math.max(1, rows - 1);
   const cells = Array.from({ length: cols * rows }, (_, i) => ({ x: (i % cols) * cw, y: Math.floor(i / cols) * ch }));
-  return cells.sort(() => Math.random() - 0.5).slice(0, n);
+  return shuffle(cells).slice(0, n);
 }
 
 /** Plays one board; returns seconds taken and wrong taps. */

@@ -1,4 +1,4 @@
-import { h, pick, flash, scale } from '../dom';
+import { h, pick, flash, scale, shuffle } from '../dom';
 import { t, num } from '../i18n';
 import { sfx, haptic } from '../audio';
 import { onKeys } from '../widgets';
@@ -68,7 +68,7 @@ function generateStimulus(): {
   shapeIdx: number;
   countIdx: number;
 } {
-  const indices = [0, 1, 2, 3].sort(() => Math.random() - 0.5);
+  const indices = shuffle([0, 1, 2, 3]);
   const colorIdx = indices[0];
   const shapeIdx = indices[1];
   const countIdx = indices[2];

@@ -17,31 +17,11 @@
  *    Maintains the challenge within the optimal ~80% accuracy zone, preventing both boredom and frustration.
  */
 
-import { h, flash } from '../dom';
+import { h, flash, secureRandom, shuffle as secureShuffle, pick as securePick } from '../dom';
 import { sfx } from '../audio';
 import { t } from '../i18n';
 import type { Exercise } from './types';
 import { burstConfetti } from '../screens/play';
-
-/** Cryptographically secure random float in [0, 1) using crypto.getRandomValues (CWE-338 compliant) */
-function secureRandom(): number {
-  const buf = new Uint32Array(1);
-  crypto.getRandomValues(buf);
-  return buf[0] / (0xffffffff + 1);
-}
-
-function secureShuffle<T>(arr: readonly T[]): T[] {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(secureRandom() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
-
-function securePick<T>(arr: readonly T[]): T {
-  return arr[Math.floor(secureRandom() * arr.length)];
-}
 
 export type ClueType = 'well' | 'wrong' | 'none';
 

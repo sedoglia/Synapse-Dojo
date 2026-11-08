@@ -161,9 +161,17 @@ function cleanBoard(saved: unknown): BoardAccount | null {
     typeof b.id === 'string' &&
     /^[0-9a-f-]{36}$/.test(b.id) &&
     typeof b.secret === 'string' &&
+    /^[A-Za-z0-9_-]{30,60}$/.test(b.secret) &&
     typeof b.nameCode === 'number' &&
     (b.ageBand === null || typeof b.ageBand === 'string');
-  return ok ? { id: b.id as string, secret: b.secret as string, nameCode: b.nameCode as number, ageBand: b.ageBand as string | null, pending: b.pending === true } : null;
+  if (!ok) return null;
+  return {
+    id: b.id as string,
+    secret: b.secret as string,
+    nameCode: b.nameCode as number,
+    ageBand: b.ageBand as string | null,
+    pending: b.pending === true,
+  };
 }
 
 /** Keeps only settings of the right type, so a hand-edited or old save can't switch on the wrong option. */
