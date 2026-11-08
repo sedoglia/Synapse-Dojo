@@ -870,6 +870,12 @@ const ui: Locale['ui'] = {
   'ex.tangram.wrongAngle': 'Forma corretta per quest\'area! Ruotala per trovare l\'angolazione esatta',
   'ex.tangram.selectPieceFirst': 'Seleziona prima un pezzo nel vassoio in basso',
   'ex.tangram.solved': '✨ {name} completato!',
+  'ex.tangram.tierGold': "Oro",
+  'ex.tangram.tierSilver': "Argento",
+  'ex.tangram.tierBronze': "Bronzo",
+  'ex.tangram.tierStandard': "Standard",
+  'ex.tangram.decoyWarning': "Distrattori presenti",
+  'ex.tangram.noMatch': "Nessun incastro valido qui",
 
   // Tangram Puzzles
       'ex.tangram.puzzle.mountain': 'Montagna',

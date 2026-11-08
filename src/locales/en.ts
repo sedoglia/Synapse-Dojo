@@ -870,6 +870,12 @@ export const ui = {
   'ex.tangram.wrongAngle': 'Correct shape for this area! Rotate it to find the exact angle',
   'ex.tangram.selectPieceFirst': 'Select a piece from the tray below first',
   'ex.tangram.solved': '✨ {name} completed!',
+  'ex.tangram.tierGold': "Gold",
+  'ex.tangram.tierSilver': "Silver",
+  'ex.tangram.tierBronze': "Bronze",
+  'ex.tangram.tierStandard': "Standard",
+  'ex.tangram.decoyWarning': "Distractors present",
+  'ex.tangram.noMatch': "No valid fit here",
 
   // Tangram Puzzles
       'ex.tangram.puzzle.mountain': 'Mountain',

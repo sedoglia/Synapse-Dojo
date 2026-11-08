@@ -6,6 +6,16 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.13.2] - 2026-11-08
+
+### Added
+
+- Cognitive difficulty overhaul and neuroscientific pacing for **Tangram**:
+  - **Dynamic Tier Stopwatch & Timer Bar (Gold / Silver / Bronze / Standard)**: Introduced active visual timer bar tracking processing speed in real-time; finishing within the Gold tier awards maximum score bonus and triggers the +10 XP Speed Bonus according to processing speed theory (Salthouse, 1996; WAIS-IV Block Design).
+  - **Monolithic Blind Silhouette**: Disabled magnetic target highlighting (`.target-ready`) during drag and eliminated internal seam hints; solvers must engage authentic part-whole mental decomposition (Shepard & Metzler, 1971) by analyzing the dark silhouette unassisted.
+  - **Decoy Distractor Pieces (Levels 5–8)**: Added extra geometric shapes to the tray that do not belong to the target silhouette, challenging dorsolateral prefrontal cortex (DLPFC) feature selection and inhibition.
+  - **Anti-Bruteforce Accuracy Tracking**: Logs misplace attempts and suppresses angle reveals, penalizing blind trial-and-error to reward deliberative mental simulation.
+
 ## [0.13.1] - 2026-11-08
 
 ### Changed
