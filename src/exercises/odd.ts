@@ -84,7 +84,7 @@ export function glyph(it: Item): SVGElement {
 
 export const odd: Exercise = {
   id: 'odd',
-  icon: '🧩',
+  icon: '🔍',
   domain: 'reasoning',
   name: 'ex.odd.name',
   desc: 'ex.odd.desc',
