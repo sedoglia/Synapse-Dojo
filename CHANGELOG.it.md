@@ -6,6 +6,16 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.34] - 2026-11-08
+
+### Modificato
+
+- Ricalibrazione della durata e della progressione adattiva di **Tangram**:
+  - Incrementato il numero di schemi per partita da 2 a 3 nella modalità allenamento (`ctx.count(3, 2, 1)`: 3 in allenamento, 2 nel controllo giornaliero, 1 in pratica/tutorial) in risposta all'aumentata fluidità dei controlli e all'immediatezza degli incastri.
+  - Aggiornato l'intervallo stimato a `minutes: [1.5, 2.5]`.
+  - Calibrata la scala adattiva su target di convergenza `0.75` (allineata a `nonogram`, `stories` e `game2048`), garantendo una progressione fluida con 3 schemi: 3 risoluzioni pulite avanzano di livello, 2 consolidano la soglia senza penalizzazioni eccessive.
+  - Verificato il benchmark per il calcolo del bonus rapidità (+10 XP e bonus al punteggio), che misura la media di tempo a schema risolto ed elargisce premi gratificanti ai giocatori svelti.
+
 ## [0.12.33] - 2026-11-08
 
 ### Modificato
