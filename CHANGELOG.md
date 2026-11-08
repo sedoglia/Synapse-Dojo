@@ -6,6 +6,17 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.28] - 2026-11-08
+
+### Added
+
+- New cognitive game **Tangram** (#39) in the Visuospatial domain:
+  - Grounded in neuroscience of mental rotation (*Shepard & Metzler, 1971*), part-whole decomposition (*Wagemans et al., 2012*), and frontoparietal networks (posterior parietal cortex PPC, intraparietal sulcus IPS, and dlPFC, *Baddeley 1986; Prado et al. 2011*).
+  - High-dopamine "Game Feel" (*Juice*, Swink 2008): magnetic snapping with satisfying tactile woody clacks (`sfx.clack`) and haptic pulse, ascending pentatonic pitch scale on each placed tan (*Goal-Gradient Effect*, Hull 1932; Kivetz et al. 2006), victory fanfare with confetti explosion (`burstConfetti`) and thematic silhouette reveal to drive Eureka insight and positive reward prediction errors (*RPE*, Schultz 1998; Tik et al. 2018).
+  - Dual frictionless interaction: tap to select, rotate (↺ -45° / ↻ +45°) and tap target slot, or smooth pointer drag-and-drop with magnetic auto-snap; full keyboard accessibility (arrows, A/D, R, Space, Enter, H, Z).
+  - Continuous staircase adaptive difficulty (*Kaernbach 1991; Wilson et al. 2019 "85% rule"*): 8 difficulty tiers ranging from 3 to 7 tans across a rich catalog of 48 mathematically verified puzzle figures (animals, objects, characters, architecture, and classic tangram forms).
+  - Seamless ecosystem integration: calibrated session length (~1.5–2 minutes), speed efficiency bonus (+XP & score bonus), recent puzzle anti-repetition memory (`synapse_tangram_recent_puzzles`), dedicated *Tangram Master* achievement badge (level 6), and complete localization across all 12 languages.
+
 ## [0.12.27] - 2026-11-08
 
 ### Added

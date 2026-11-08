@@ -6,6 +6,17 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.28] - 2026-11-08
+
+### Aggiunto
+
+- Nuovo gioco cognitivo **Tangram** (#39) nel dominio Visuo-Spaziale:
+  - Basi neuroscientifiche su rotazione mentale (*Shepard & Metzler, 1971*), scomposizione parte-tutto (*Wagemans et al., 2012*) e coordinazione fronto-parietale (corteccia parietale posteriore PPC, solco intraparietale IPS e dlPFC, *Baddeley 1986; Prado et al. 2011*).
+  - Circuito dopaminergico ad alto ingaggio e "Game Feel" (*Juice*, Swink 2008): incastro magnetico con suono ligneo tattile (`clack`) e feedback aptico, scala musicale pentatonica ascendente ad ogni pezzo posizionato (*Goal-Gradient Effect*, Hull 1932; Kivetz et al. 2006), fanfare di vittoria con esplosione di particelle/coriandoli (`burstConfetti`) e svelamento della figura tematica per stimolare l'insight Eureka e l'errore di predizione positivo della ricompensa (*RPE*, Schultz 1998; Tik et al. 2018).
+  - Doppia modalità di interazione senza attrito: tocca per selezionare, ruota (↺ -45° / ↻ +45°) e tocca lo slot per incastrare, oppure trascina liberamente (Drag & Drop) con snap magnetico automatico; pieno supporto tastiera (frecce, A/D, R, Spazio, Invio, H, Z).
+  - Sistema di difficoltà adattiva a scala (*Kaernbach 1991; Wilson et al. 2019 "85% rule"*): 8 livelli progressivi da 3 a 7 pezzi (tan) con una ricca libreria di 48 schemi geometrici certificati (animali, oggetti, personaggi, architetture e forme classiche).
+  - Integrazione completa con le logiche di Synapse Dojo: sessioni bilanciate (1,5–2 minuti), bonus tempo e bonus velocità (+XP), memoria anticiclica recente (`synapse_tangram_recent_puzzles`) per evitare ripetizioni, badge di maestria dedicato *Maestro del Tangram* (livello 6) e localizzazione integrale in tutte le 12 lingue dell'app.
+
 ## [0.12.27] - 2026-11-08
 
 ### Aggiunto
