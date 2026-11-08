@@ -180,7 +180,18 @@ export const tangram: Exercise = {
       boardSvg.setAttribute('viewBox', puzzle.viewBox);
       boardSvg.setAttribute('class', 'tangram-svg-board');
 
-      // Group for Silhouette and Target Slots
+      // Base unified solid silhouette (clean dark silhouette with no internal piece lines)
+      const baseGroup = document.createElementNS(svgNS, 'g');
+      baseGroup.setAttribute('class', 'tangram-silhouette-base');
+      for (const slot of puzzle.slots) {
+        const basePoly = document.createElementNS(svgNS, 'polygon');
+        basePoly.setAttribute('points', slot.points.map((p) => `${p[0]},${p[1]}`).join(' '));
+        basePoly.setAttribute('class', 'tangram-base-polygon');
+        baseGroup.append(basePoly);
+      }
+      boardSvg.append(baseGroup);
+
+      // Group for Placed Pieces and Interactive Hit Areas
       const slotsGroup = document.createElementNS(svgNS, 'g');
       slotsGroup.setAttribute('class', 'tangram-slots-group');
       boardSvg.append(slotsGroup);
@@ -243,21 +254,18 @@ export const tangram: Exercise = {
             slotEl.setAttribute('stroke', '#ffffff');
             slotEl.setAttribute('stroke-width', '1.5');
           } else {
-            // Empty target slot
-            const isMatchPossible = selected && selected.type === slot.type;
-            const isAngleReady = isMatchPossible && isAngleMatch(selected.type, selected.rot, slot.rot);
-
+            // Empty target slot: solid mysterious silhouette without internal division lines
             let cls = 'tangram-slot empty';
-            if (isAngleReady) cls += ' target-ready';
-            else if (isMatchPossible) cls += ' target-compatible';
+            if (ctx.practice) cls += ' practice-guide';
 
             slotEl.setAttribute('class', cls);
-            slotEl.setAttribute('stroke', isAngleReady ? '#10b981' : 'var(--border)');
-            slotEl.setAttribute('stroke-dasharray', isAngleReady ? 'none' : '4,3');
-            slotEl.setAttribute('stroke-width', isAngleReady ? '2.5' : '1.5');
+            slotEl.setAttribute('fill', 'var(--tangram-silhouette-fill)');
+            slotEl.setAttribute('stroke', ctx.practice ? 'rgba(255, 255, 255, 0.22)' : 'var(--tangram-silhouette-fill)');
+            if (ctx.practice) slotEl.setAttribute('stroke-dasharray', '3,3');
+            slotEl.setAttribute('stroke-width', ctx.practice ? '1' : '1.5');
           }
 
-          // Slot click: if piece is selected and slot is empty -> attempt placement
+          // Slot click: if piece is selected and slot is empty -> attempt deduction placement
           slotEl.onclick = (e) => {
             e.stopPropagation();
             if (solved) return;
@@ -268,19 +276,23 @@ export const tangram: Exercise = {
               return;
             }
 
-            if (!selected) return;
-
-            if (selected.type !== slot.type) {
+            if (!selected) {
               sfx.tick();
-              flash(boardContainer, 'bad', 200);
+              ctx.hint(t('ex.tangram.selectPieceFirst'));
               return;
             }
 
-            // Check orientation alignment
-            if (!isAngleMatch(selected.type, selected.rot, slot.rot)) {
-              // Prompt user to rotate
+            if (selected.type !== slot.type) {
               sfx.bad();
-              ctx.hint(t('ex.tangram.rotateHint'));
+              flash(boardContainer, 'bad', 250);
+              ctx.hint(t('ex.tangram.wrongPiece'));
+              return;
+            }
+
+            // Shape matches this region! Check orientation alignment:
+            if (!isAngleMatch(selected.type, selected.rot, slot.rot)) {
+              sfx.bad();
+              ctx.hint(t('ex.tangram.wrongAngle'));
               flash(boardContainer, 'bad', 350);
               return;
             }
@@ -382,9 +394,6 @@ export const tangram: Exercise = {
             if (isDragging && dragClone) {
               dragClone.style.left = `${me.clientX}px`;
               dragClone.style.top = `${me.clientY}px`;
-
-              // Check if hovering near a valid matching slot
-              checkSlotProximity(me.clientX, me.clientY, piece);
             }
           };
 
@@ -412,32 +421,6 @@ export const tangram: Exercise = {
         el.addEventListener('pointerdown', onPointerDown);
       };
 
-      const checkSlotProximity = (clientX: number, clientY: number, piece: TrayPiece) => {
-        const slotElements = boardSvg.querySelectorAll('.tangram-slot.empty');
-        let matchedOne = false;
-
-        slotElements.forEach((el) => {
-          const rect = el.getBoundingClientRect();
-          const cx = rect.left + rect.width / 2;
-          const cy = rect.top + rect.height / 2;
-          const dist = Math.hypot(clientX - cx, clientY - cy);
-          const slotId = el.getAttribute('data-slot-id');
-          const targetSlot = slots.find((s) => s.id === slotId);
-
-          if (targetSlot && targetSlot.type === piece.type && dist < 45) {
-            const angleMatch = isAngleMatch(piece.type, piece.rot, targetSlot.rot);
-            if (angleMatch) {
-              el.classList.add('magnetic-active');
-              matchedOne = true;
-            }
-          } else {
-            el.classList.remove('magnetic-active');
-          }
-        });
-
-        if (matchedOne) haptic('tap');
-      };
-
       const trySnapAtPoint = (clientX: number, clientY: number, piece: TrayPiece) => {
         const slotElements = boardSvg.querySelectorAll('.tangram-slot.empty');
         let snapped = false;
@@ -450,15 +433,21 @@ export const tangram: Exercise = {
           const slotId = el.getAttribute('data-slot-id');
           const targetSlot = slots.find((s) => s.id === slotId);
 
-          if (targetSlot && targetSlot.type === piece.type && dist < 50) {
-            if (isAngleMatch(piece.type, piece.rot, targetSlot.rot)) {
-              snapPieceIntoSlot(piece, targetSlot);
-              snapped = true;
-              break;
+          if (targetSlot && dist < 34) {
+            if (targetSlot.type === piece.type) {
+              if (isAngleMatch(piece.type, piece.rot, targetSlot.rot)) {
+                snapPieceIntoSlot(piece, targetSlot);
+                snapped = true;
+                break;
+              } else {
+                sfx.bad();
+                ctx.hint(t('ex.tangram.wrongAngle'));
+                flash(boardContainer, 'bad', 350);
+              }
             } else {
               sfx.bad();
-              ctx.hint(t('ex.tangram.rotateHint'));
-              flash(boardContainer, 'bad', 350);
+              ctx.hint(t('ex.tangram.wrongPiece'));
+              flash(boardContainer, 'bad', 250);
             }
           }
         }

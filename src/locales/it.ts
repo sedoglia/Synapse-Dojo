@@ -817,9 +817,9 @@ const ui: Locale['ui'] = {
 
   // Tangram
   'ex.tangram.name': 'Tangram',
-  'ex.tangram.desc': 'Componi i blocchi geometrici (tan) per ricostruire sagome e figure suggestive',
+  'ex.tangram.desc': 'Deduci come scomporre e ricostruire sagome piene senza linee guida usando i blocchi geometrici',
   'ex.tangram.why': 'Rotazione mentale, scomposizione parte-tutto e ragionamento visuo-spaziale: recluta la corteccia parietale posteriore (PPC) e il solco intraparietale per manipolare coordinate metriche (Shepard & Metzler, 1971; Baddeley, 1986). L\'incastro improvviso (insight) genera un errore di predizione positivo della ricompensa (RPE) che rilascia dopamina nel nucleus accumbens (Schultz, 1998; Tik et al., 2018), premiando la sintesi geometrica.',
-  'ex.tangram.example': 'Ruota i pezzi geometrici e incastrali con precisione all\'interno della sagoma',
+  'ex.tangram.example': 'Analizza la sagoma nera misteriosa: deduci dove va ciascun pezzo e ruotalo per incastrarlo senza aiuti!',
   'ex.tangram.detail': '{ok}/{n} figure completate',
   'ex.tangram.pieces': 'pezzi',
   'ex.tangram.level': 'Livello {l}',
@@ -830,6 +830,9 @@ const ui: Locale['ui'] = {
   'ex.tangram.undo': 'Annulla',
   'ex.tangram.clear': 'Ripristina',
   'ex.tangram.rotateHint': 'Ruota di 45° per incastrare!',
+  'ex.tangram.wrongPiece': 'Questa forma non si adatta a questa parte della sagoma',
+  'ex.tangram.wrongAngle': 'Forma corretta per quest\'area! Ruotala per trovare l\'angolazione esatta',
+  'ex.tangram.selectPieceFirst': 'Seleziona prima un pezzo nel vassoio in basso',
   'ex.tangram.solved': '✨ {name} completato!',
 
   // Tangram Puzzles

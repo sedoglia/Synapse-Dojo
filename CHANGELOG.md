@@ -6,6 +6,17 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.29] - 2026-11-08
+
+### Changed
+
+- Radical cognitive challenge overhaul of **Tangram**:
+  - Transformed the target board into an authentic **solid mystery silhouette ("sagoma pura")**: removed all internal dashed piece division outlines and hover/drag magnetic highlights that gave away piece placements in live play.
+  - Restored genuine neuroscience-backed part-whole spatial decomposition and mental rotation complexity (*Wagemans et al., 2012; Shepard & Metzler, 1971*): players must mentally unpack the solid figure, deduce orientations, and place pieces through pure spatial reasoning.
+  - Smart, non-intrusive feedback: tapping or dropping a piece onto the silhouette informs the player whether the piece shape itself is unsuitable or whether the shape is correct but requires rotation.
+  - Preserved tutorial onboarding: dashed internal guidelines remain active exclusively during the initial interactive practice mode to facilitate onboarding.
+  - Updated exercise description and worked example, with full localization of all new guidance keys across all 12 supported languages.
+
 ## [0.12.28] - 2026-11-08
 
 ### Added
