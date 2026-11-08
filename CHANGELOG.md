@@ -6,6 +6,15 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.12.31] - 2026-11-08
+
+### Changed
+
+- Resolved visual icon collision in the Gym catalog between **Tangram** and **Odd One Out** (L'intruso):
+  - Assigned **Odd One Out** (`odd`) its own dedicated icon `🔍` (magnifying glass / inspection), intuitive for spotting the outlier figure that breaks the common inductive rule, and eliminating duplicate usage of the general Reasoning domain icon (`🧩`).
+  - Preserved `🧩` (jigsaw puzzle piece) exclusively for **Tangram**, perfectly matching the classic 7-piece dissection puzzle and the *Tangram Master* achievement badge.
+  - Updated `README.md` and `README.it.md` reflecting the 39 exercises and cataloging Tangram in the Visuospatial domain.
+
 ## [0.12.30] - 2026-11-08
 
 ### Optimized

@@ -6,6 +6,15 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.12.31] - 2026-11-08
+
+### Modificato
+
+- Risolto il conflitto visivo di icone nella schermata Palestra tra **Tangram** e **L'intruso**:
+  - Assegnata a **L'intruso** l'icona dedicata `🔍` (lente di ingrandimento / rilevamento anomalie), perfetta per rappresentare la ricerca dell'elemento outlier che viola la regola geometrica condivisa ed evitando la duplicazione dell'icona generale dell'area Ragionamento (`🧩`).
+  - Mantenuta per **Tangram** l'icona iconica `🧩` (tessera di puzzle / incastro), coerente con la natura del celebre rompicapo a 7 pezzi e con il badge *Maestro del Tangram*.
+  - Aggiornati i file `README.it.md` e `README.md` con il conteggio a 39 esercizi e l'inserimento formale di Tangram nell'area Spaziale.
+
 ## [0.12.30] - 2026-11-08
 
 ### Ottimizzato
