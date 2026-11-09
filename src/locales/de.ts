@@ -962,6 +962,19 @@ const ui: Locale['ui'] = {
 
 
   
+    // memoria
+  'ex.memoria.name': 'Karten-Memory',
+  'ex.memoria.desc': 'Decke jeweils zwei verdeckte Karten auf und finde alle Paare mit so wenigen Zügen wie möglich.',
+  'ex.memoria.why': 'Pelmanism und What-Where-Bindung: verknüpft Objektidentität mit 2D-Raumkoordinaten im Hippocampus und im visuell-räumlichen Arbeitsgedächtnis.',
+  'ex.memoria.example': 'Decke 🦁 auf, erinnere dich an die Position des anderen 🦁 und bilde das Paar.',
+  'ex.memoria.tip': 'Tippe zwei Karten an. Bei einem Treffer bleiben sie offen; wenn nicht, merke dir die Positionen!',
+  'ex.memoria.moves': '{n} Züge',
+  'ex.memoria.pairsLeft': '{k}/{n} Paare',
+  'ex.memoria.combo': 'KOMBO ×{n}!',
+  'ex.memoria.match': 'PAAR GEFUNDEN!',
+  'ex.memoria.clear': 'FELD GELÖST!',
+  'ex.memoria.detail': '{pairs} Paare in {turns} Zügen ({eff}% Effizienz)',
+
   'ex.tapSeq.name': "Bilaterales Tippen",
   'ex.tapSeq.desc': "Koordiniere beide Daumen, um abwechselnde Rhythmen nachzuspielen",
   'ex.tapSeq.why': 'Tippfolgen links und rechts: eine Übung für beidhändige Koordination und Aufmerksamkeit. Es gibt keine Belege, dass eine solche App das Corpus Callosum stärkt.',

@@ -56,25 +56,25 @@ Dalle evidenze sopra descritte derivano i pilastri costruttivi della piattaforma
    - **Cancello di accuratezza anti-impulsività**: per il modello di diffusione del drift (DDM, Ratcliff & McKoon 2008), premiare la rapidità indiscriminata abbasserebbe la soglia di decisione spingendo al guessing casuale. Il bonus scatta solo con accuratezza $\ge 65\%$, premiando l'efficienza di elaborazione e preservando il valore ecologico dell'allenamento.
    - **Amplificazione dell'effetto Eureka / Insight**: nei giochi a deduzione e rompicapo visuo-spaziali (*Decifra il Codice*, *2048*, *Nonogram*, *Torri di Hanoi*, *Matrici*), l'intuizione improvvisa attiva l'area tegmentale ventrale e il nucleo accumbens (Tik et al. 2018; Danek et al. 2014; Jung-Beeman et al. 2004), generando quel picco di soddisfazione e flusso (Csikszentmihalyi 1990) che invoglia a continuare a giocare.
 9. **Architettura Modulare della Pagina Progressi: Chunking Cognitivo, Riduzione dell'Extraneous Load e Circuiti Dopaminergici d'Azione (Sweller 1988; Cowan 2001; Schultz 1998; Kivetz 2006; Zeigarnik 1927):**  
-   Una pagina progressi strutturata come un unico scroll infinito con 38 esercizi, oltre 50 medaglie, calendari e grafici genera un grave sovraccarico cognitivo estraneo (*extraneous cognitive load*, Sweller 1988) e saturazione visuo-spaziale nella memoria di lavoro (Cowan 2001; Miller 1956). Dal punto di vista neurobiologico, l'esposizione simultanea a decine di stimoli de-enfatizza i singoli traguardi, provocando assuefazione e spegnendo il segnale di anticipazione dopaminergica (*wanting*, Berridge & Robinson 1998; Schultz 2015). Synapse Dojo suddivide la consultazione dei progressi in 4 sottomondi tematici ad accesso rapido con navigazione a schede ancorata in alto:
+   Una pagina progressi strutturata come un unico scroll infinito con 40 esercizi, oltre 50 medaglie, calendari e grafici genera un grave sovraccarico cognitivo estraneo (*extraneous cognitive load*, Sweller 1988) e saturazione visuo-spaziale nella memoria di lavoro (Cowan 2001; Miller 1956). Dal punto di vista neurobiologico, l'esposizione simultanea a decine di stimoli de-enfatizza i singoli traguardi, provocando assuefazione e spegnendo il segnale di anticipazione dopaminergica (*wanting*, Berridge & Robinson 1998; Schultz 2015). Synapse Dojo suddivide la consultazione dei progressi in 4 sottomondi tematici ad accesso rapido con navigazione a schede ancorata in alto:
    - **Panoramica (Overview & Sintesi)**: Cruscotto esecutivo ad alto impatto dopaminergico che valorizza il rango giocatore, l'avanzamento XP, la serie attiva e lo stato del Neuro Check quotidiano. Integra in primo piano la sezione *Prossimi Traguardi* (le 3 medaglie più vicine al completamento), attivando direttamente l'effetto di gradiente dell'obiettivo (*Goal-Gradient Effect*, Hull 1932; Kivetz et al. 2006): vedere un obiettivo all'80% aumenta esponenzialmente la motivazione ad avviare subito una nuova sessione. Include inoltre il grafico a radar con evidenziazione immediata del punto di forza e dell'opportunità di crescita, con un tasto rapido di potenziamento.
-   - **Competenze & Esercizi (Chunking per Dominio & Azionabilità Immediata)**: Elimina lo scroll infinito frammentando i 38 compiti tramite filtri per macro-area (Velocità, Attenzione, Memoria, Coordinazione, ecc.) e per stato di gioco. Ogni scheda include lo sparkline di andamento temporale, il livello raggiunto, il record personale e un pulsante interattivo *▶ Gioca*: la consultazione dei dati non è passiva, ma diventa un trampolino immediato di gioco e flusso (*Flow*, Csikszentmihalyi 1990).
+   - **Competenze & Esercizi (Chunking per Dominio & Azionabilità Immediata)**: Elimina lo scroll infinito frammentando i 40 compiti tramite filtri per macro-area (Velocità, Attenzione, Memoria, Coordinazione, ecc.) e per stato di gioco. Ogni scheda include lo sparkline di andamento temporale, il livello raggiunto, il record personale e un pulsante interattivo *▶ Gioca*: la consultazione dei dati non è passiva, ma diventa un trampolino immediato di gioco e flusso (*Flow*, Csikszentmihalyi 1990).
    - **Costanza & Abitudini (Spaziatura & Neuroplasticità)**: Dedicata alla psicologia dell'abitudine. Presenta il calendario visivo a 28 giorni, l'obiettivo settimanale a barre, le metriche di streak e una pillola neuroscientifica sul paradigma della pratica distribuita (*Spacing Effect*, Cepeda et al. 2006; consolidamento sinaptico hebbiano, Hebb 1949; formazione dell'automatismo, Lally et al. 2010).
    - **Traguardi & Medaglie (Trophy Room & Effetto Zeigarnik)**: Vetrina celebrativa di tutte le oltre 50 medaglie, filtrabili per stato (*Tutti*, *In arrivo*, *Sbloccati*, *Da sbloccare*). Mostrare chiaramente i compiti quasi conclusi sfrutta l'effetto Zeigarnik (1927) e l'effetto di progresso dotato (*Endowed Progress Effect*, Nunes & Drèze 2006), creando quella tensione cognitiva positiva che spinge alla chiusura del cerchio.
 
 ---
 
-## 3. Il Catalogo Completo dei 38 Esercizi (9 Domini)
+## 3. Il Catalogo Completo dei 40 Esercizi (9 Domini)
 
-L'applicazione organizza 38 compiti originali distribuiti su 9 domini cognitivi e motori:
+L'applicazione organizza 40 compiti originali distribuiti su 9 domini cognitivi e motori:
 
 ```
                                   ┌─── ⚡ Velocità (4)
                                   ├─── 🎯 Attenzione (6)
                                   ├─── 🎛️ Controllo Esecutivo (3)
                                   ├─── 🧠 Memoria di Lavoro (4)
-       Synapse Dojo (38 Esercizi) ├─── 🔐 Memoria Episodica (3)
-                                  ├─── 🧊 Spaziale (3)
+       Synapse Dojo (40 Esercizi) ├─── 🔐 Memoria Episodica (4)
+                                  ├─── 🧊 Spaziale (4)
                                   ├─── 🧩 Ragionamento (5)
                                   ├─── ➗ Calcolo e Lettura (5)
                                   └─── 👐 Coordinazione Bilaterale (5)
@@ -105,6 +105,7 @@ Gli esercizi sono **ispirati** ai paradigmi indicati: si tratta di versioni brev
 | **🧠 Memoria di lavoro** | **Span di cifre** | *Digit Span* diretto e inverso | Lunghezza della serie (3–9), ordine inverso (due cifre in meno) dal livello 7. |
 | **🔐 Memoria** | **Cassaforte parole** | Riconoscimento vecchio/nuovo | Parole da studiare (6–20); il punteggio sottrae i falsi allarmi dalle risposte corrette. |
 | **🔐 Memoria** | **Coppie** | Apprendimento di coppie associate (*paired associates*) simbolo–parola | Numero di coppie (3–12). Nel Neuro Score una lista fissa di 8 coppie, con punteggio corretto per le risposte date a caso. |
+| **🔐 Memoria** | **Memoria di carte** | *Pelmanism / Concentration* (*What-Where Binding*, *Ungerleider & Mishkin, 1982*; *Pertzov et al., 2012*), codifica relazionale ippocampale (*Eichenbaum, 2004*), risoluzione dell'interferenza proattiva prefrontale (*Postle et al., 2004*; *Jonides & Nee, 2006*) e rinforzo per cascate di combo dopaminergiche RPE (*Schultz, 1998, 2015*; *Berridge & Robinson, 1998*) | Numero di coppie (3–18 coppie, da griglia 2×3 a 6×6); 6 mazzi tematici visivi a contrasto elevato (animali, cosmo, golosità, avventura, simboli geometrici ad alto conflitto e musica); progressione adattiva calibrata sull'85% di accuratezza ed efficienza di mosse con bonus di velocità additivo non punitivo. |
 | **🔐 Memoria** | **Memoria delle storie** | Ispirato alla memoria logica di brevi racconti | Scene da tenere distinte (1–3), domande su cosa, dove e quando (2 o 3), pausa riempita da un compito distraente senza punteggio e al proprio ritmo (3–15 s); da due scene in su le risposte sbagliate includono dettagli di un'altra scena. |
 | **🧊 Spaziale** | **Rotazioni** | Rotazione mentale (*Shepard & Metzler, 1971*), versione bidimensionale con polimini chirali | Numero di quadrati (4–9), rotazioni a passi di 30°, tempo limite (7,5 → 1,8 s). |
 | **🧊 Spaziale** | **Matrice spaziale** | Memoria spaziale con trasformazione di coordinate | Blocchi da ricordare (2–6), griglia 3×3 e poi 4×4 agli ultimi livelli, rotazione (0°, 90°, 180°, poi casuale), tempo di studio (4,8 → 3,2 s). |
@@ -325,3 +326,11 @@ Per garantire che la piattaforma rimanga uno strumento al servizio dell'utente e
 80. Miller, G. A. (1956). *The magical number seven, plus or minus two: Some limits on our capacity for processing information.* Psychological Review, 63(2), 81-97. [PubMed: 13310704](https://pubmed.ncbi.nlm.nih.gov/13310704/)
 81. Zeigarnik, B. (1927). *Das Behalten erledigter und unerledigter Handlungen.* Psychologische Forschung, 9, 1-85.
 82. Nunes, J. C., & Drèze, X. (2006). *The Endowed Progress Effect: How Artificial Advancement Increases Effort.* Journal of Consumer Research, 32(4), 504-512. [DOI: 10.1086/500480](https://doi.org/10.1086/500480)
+
+**Associazione congiunta (What-Where binding) e memoria visuo-spaziale relazionale (Pelmanism / Memoria di carte)**
+
+83. Ungerleider, L. G., & Mishkin, M. (1982). *Two cortical visual systems.* In: D. J. Ingle, M. A. Goodale, & R. J. W. Mansfield (Eds.), *Analysis of Visual Behavior*, MIT Press, 549-586.
+84. Pertzov, Y., Dong, M. Y., Peich, M. C., & Husain, M. (2012). *Binding what and where in visuospatial working memory in normal aging and Alzheimer's disease.* Brain, 135(8), 2469-2481. [DOI: 10.1093/brain/aws175](https://doi.org/10.1093/brain/aws175)
+85. Eichenbaum, H. (2004). *Hippocampus: cognitive processes and neural representations that underlie declarative memory.* Neuron, 44(1), 109-120. [DOI: 10.1016/j.neuron.2004.08.028](https://doi.org/10.1016/j.neuron.2004.08.028)
+86. Postle, B. R., Brush, L. N., & Nick, A. M. (2004). *Prefrontal cortex and the mediation of proactive interference in working memory.* Cognitive, Affective, & Behavioral Neuroscience, 4(4), 600-608. [DOI: 10.3758/CABN.4.4.600](https://doi.org/10.3758/CABN.4.4.600)
+87. Jonides, J., & Nee, D. E. (2006). *Brain mechanisms of proactive interference in working memory.* Neuroscience, 139(1), 181-193. [DOI: 10.1016/j.neuroscience.2005.06.042](https://doi.org/10.1016/j.neuroscience.2005.06.042)

@@ -56,25 +56,25 @@ The evidence above leads to the platform's building blocks:
    - **Anti-impulsivity accuracy gate**: under the Drift Diffusion Model (DDM, Ratcliff & McKoon 2008), rewarding unconstrained speed lowers the decision threshold and triggers random guessing. Synapse Dojo enforces an accuracy gate ($\ge 65\%$), ensuring the bonus rewards true neural processing efficiency rather than impulsive clicking.
    - **Amplifying the Eureka / Insight moment**: in deductive and spatial puzzle games (*Crack the Code*, *2048*, *Nonogram*, *Tower of Hanoi*, *Matrices*), sudden insight activates the ventral tegmental area and nucleus accumbens (Tik et al. 2018; Danek et al. 2014; Jung-Beeman et al. 2004), triggering a dopamine surge and flow state (Csikszentmihalyi 1990) that sustains deep intrinsic motivation to keep playing.
 9. **Modular Progress Architecture: Cognitive Chunking, Extraneous Load Reduction, and Actionable Dopaminergic Loops (Sweller 1988; Cowan 2001; Schultz 1998; Kivetz 2006; Zeigarnik 1927):**  
-   Presenting 38 exercises, over 50 achievements, calendars, and trend graphs in a single infinite scroll induces severe extraneous cognitive load (Sweller 1988) and working memory saturation (Cowan 2001; Miller 1956). Simultaneous visual exposure to dozens of disparate data points blunts salience, causing habituation and extinguishing anticipatory dopamine firing (*wanting*, Berridge & Robinson 1998; Schultz 2015). Synapse Dojo organizes player progress into 4 focused sub-views accessible via a sticky segmented tab bar:
+   Presenting 40 exercises, over 50 achievements, calendars, and trend graphs in a single infinite scroll induces severe extraneous cognitive load (Sweller 1988) and working memory saturation (Cowan 2001; Miller 1956). Simultaneous visual exposure to dozens of disparate data points blunts salience, causing habituation and extinguishing anticipatory dopamine firing (*wanting*, Berridge & Robinson 1998; Schultz 2015). Synapse Dojo organizes player progress into 4 focused sub-views accessible via a sticky segmented tab bar:
    - **Overview (Executive Synthesis & Goal Gradient)**: A dopamine-dense executive dashboard highlighting player level, XP bar, active streak, and today's Neuro Check status. Crucially, it surfaces *Next Milestones* (the 3 badges closest to completion), directly recruiting the Goal-Gradient Effect (Hull 1932; Kivetz et al. 2006): seeing tangible progress near 80% accelerates behavioral motivation to jump into a new training session. It also pairs the 9-domain radar chart with immediate highlights for strongest skill and growth opportunity, complete with a quick *Boost* button.
-   - **Exercises & Skills (Domain Chunking & Direct Play)**: Replaces the 38-item endless list with categorical domain filtering (Speed, Attention, Memory, Coordination, etc.) and completion status filters. Each card features historical sparklines, levels, personal records, and a direct *▶ Play* button—transforming passive stats review into an active launchpad for cognitive flow (Csikszentmihalyi 1990).
+   - **Exercises & Skills (Domain Chunking & Direct Play)**: Replaces the 40-item endless list with categorical domain filtering (Speed, Attention, Memory, Coordination, etc.) and completion status filters. Each card features historical sparklines, levels, personal records, and a direct *▶ Play* button—transforming passive stats review into an active launchpad for cognitive flow (Csikszentmihalyi 1990).
    - **Consistency & Habits (Spacing Effect & Neuroplasticity)**: Centered on habit formation science. Displays a 28-day visual calendar, weekly targets, streak milestones, and educational insights on distributed practice (Cepeda et al. 2006; Hebb 1949; Lally et al. 2010).
    - **Achievements & Trophies (Trophy Room & Zeigarnik Effect)**: A structured showcase of 50+ badges with filtering for *All*, *In Progress*, *Earned*, and *Locked*. Prioritizing nearly completed goals leverages the Zeigarnik effect (1927) and the endowed progress effect (Nunes & Drèze 2006), creating positive psychological tension that drives players to complete their open loops.
 
 ---
 
-## 3. The Complete Catalog of 38 Exercises (9 Domains)
+## 3. The Complete Catalog of 40 Exercises (9 Domains)
 
-The app organizes 38 original tasks across 9 cognitive and motor domains:
+The app organizes 40 original tasks across 9 cognitive and motor domains:
 
 ```
                                   ┌─── ⚡ Speed (4)
                                   ├─── 🎯 Attention (6)
                                   ├─── 🎛️ Executive Control (3)
                                   ├─── 🧠 Working Memory (4)
-     Synapse Dojo (38 Exercises)  ├─── 🔐 Episodic Memory (3)
-                                  ├─── 🧊 Spatial (3)
+     Synapse Dojo (40 Exercises)  ├─── 🔐 Episodic Memory (4)
+                                  ├─── 🧊 Spatial (4)
                                   ├─── 🧩 Reasoning (5)
                                   ├─── ➗ Calculation & Reading (5)
                                   └─── 👐 Bilateral Coordination (5)
@@ -105,6 +105,7 @@ The exercises are **inspired by** the paradigms listed: they are short, game-lik
 | **🧠 Working memory** | **Digit Span** | Forward and backward *Digit Span* | Series length (3–9), backward order (two digits fewer) from level 7. |
 | **🔐 Memory** | **Word vault** | Old/new recognition | Words to study (6–20); the score subtracts false alarms from hits. |
 | **🔐 Memory** | **Pairs** | Symbol–word *paired associates* learning | Number of pairs (3–12). In the Neuro Score a fixed list of 8 pairs, with the score corrected for chance answers. |
+| **🔐 Memory** | **Memory Match** | *Pelmanism / Concentration* (*What-Where Binding*, *Ungerleider & Mishkin, 1982*; *Pertzov et al., 2012*), hippocampal relational binding (*Eichenbaum, 2004*), prefrontal proactive interference resolution (*Postle et al., 2004*; *Jonides & Nee, 2006*), and dopaminergic RPE streak cascades (*Schultz, 1998, 2015*; *Berridge & Robinson, 1998*) | Number of pairs (3–18 pairs, 2×3 to 6×6 grid); 6 high-contrast thematic visual decks (wildlife, cosmos, treats, adventure, high-interference geometric symbols, and arts); adaptive progression calibrated to 85% accuracy and move efficiency with non-punitive additive speed bonus. |
 | **🔐 Memory** | **Story Memory** | Inspired by logical memory for short stories | Scenes to keep apart (1–3), questions on what, where and when (2 or 3), a pause filled by an unscored distracting task at the player's own pace (3–15 s); from two scenes up the wrong answers include details from another scene. |
 | **🧊 Spatial** | **Rotations** | Mental rotation (*Shepard & Metzler, 1971*), two-dimensional version with chiral polyominoes | Number of squares (4–9), rotations in 30° steps, time limit (7.5 → 1.8 s). |
 | **🧊 Spatial** | **Spatial Matrix** | Spatial memory with coordinate transformation | Blocks to remember (2–6), a 3×3 and then a 4×4 grid at the top levels, rotation (0°, 90°, 180°, then random), study time (4.8 → 3.2 s). |
@@ -316,3 +317,11 @@ To make sure the platform stays a tool serving the user rather than advertising 
 74. Miller, G. A. (1956). *The magical number seven, plus or minus two: Some limits on our capacity for processing information.* Psychological Review, 63(2), 81-97. [PubMed: 13310704](https://pubmed.ncbi.nlm.nih.gov/13310704/)
 75. Zeigarnik, B. (1927). *Das Behalten erledigter und unerledigter Handlungen.* Psychologische Forschung, 9, 1-85.
 76. Nunes, J. C., & Drèze, X. (2006). *The Endowed Progress Effect: How Artificial Advancement Increases Effort.* Journal of Consumer Research, 32(4), 504-512. [DOI: 10.1086/500480](https://doi.org/10.1086/500480)
+
+**Conjunctive "What-Where" Binding and Relational Visuospatial Memory (Pelmanism / Memory Match)**
+
+77. Ungerleider, L. G., & Mishkin, M. (1982). *Two cortical visual systems.* In: D. J. Ingle, M. A. Goodale, & R. J. W. Mansfield (Eds.), *Analysis of Visual Behavior*, MIT Press, 549-586.
+78. Pertzov, Y., Dong, M. Y., Peich, M. C., & Husain, M. (2012). *Binding what and where in visuospatial working memory in normal aging and Alzheimer's disease.* Brain, 135(8), 2469-2481. [DOI: 10.1093/brain/aws175](https://doi.org/10.1093/brain/aws175)
+79. Eichenbaum, H. (2004). *Hippocampus: cognitive processes and neural representations that underlie declarative memory.* Neuron, 44(1), 109-120. [DOI: 10.1016/j.neuron.2004.08.028](https://doi.org/10.1016/j.neuron.2004.08.028)
+80. Postle, B. R., Brush, L. N., & Nick, A. M. (2004). *Prefrontal cortex and the mediation of proactive interference in working memory.* Cognitive, Affective, & Behavioral Neuroscience, 4(4), 600-608. [DOI: 10.3758/CABN.4.4.600](https://doi.org/10.3758/CABN.4.4.600)
+81. Jonides, J., & Nee, D. E. (2006). *Brain mechanisms of proactive interference in working memory.* Neuroscience, 139(1), 181-193. [DOI: 10.1016/j.neuroscience.2005.06.042](https://doi.org/10.1016/j.neuroscience.2005.06.042)

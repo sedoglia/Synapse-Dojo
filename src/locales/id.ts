@@ -962,6 +962,19 @@ const ui: Locale['ui'] = {
 
 
   
+    // memoria
+  'ex.memoria.name': 'Kecocokan Kartu',
+  'ex.memoria.desc': 'Buka kartu dua per dua dan temukan semua pasangan yang cocok dengan sesedikit mungkin langkah.',
+  'ex.memoria.why': 'Pelmanism dan pengikatan What-Where: menghubungkan identitas visual ke koordinat spasial, melatih hipokampus dan memori kerja visual-spasial.',
+  'ex.memoria.example': 'Buka kartu dengan 🦁, ingat lokasi 🦁 lainnya dan pasangkan keduanya.',
+  'ex.memoria.tip': 'Ketuk dua kartu sekaligus. Jika cocok kartu tetap terbuka; jika beda, ingat posisinya!',
+  'ex.memoria.moves': '{n} langkah',
+  'ex.memoria.pairsLeft': '{k}/{n} pasang',
+  'ex.memoria.combo': 'KOMBO ×{n}!',
+  'ex.memoria.match': 'PASANGAN DITEMUKAN!',
+  'ex.memoria.clear': 'PAPAN SELESAI!',
+  'ex.memoria.detail': '{pairs} pasang dalam {turns} langkah (efisiensi {eff}%)',
+
   'ex.tapSeq.name': "Ketukan Bilateral",
   'ex.tapSeq.desc': "Koordinasikan kedua ibu jari untuk meniru ritme bergantian",
   'ex.tapSeq.why': 'Urutan ketukan kiri dan kanan: latihan koordinasi dua tangan dan perhatian. Tidak ada bukti bahwa aplikasi seperti ini memperkuat korpus kalosum.',

@@ -962,6 +962,19 @@ const ui: Locale['ui'] = {
 
 
   
+    // memoria
+  'ex.memoria.name': '神経衰弱',
+  'ex.memoria.desc': 'カードを2枚ずつめくり、できるだけ少ない手数ですべてのペアを見つけましょう。',
+  'ex.memoria.why': 'ペルマニズムとWhat-Where結合：絵柄の同一性と空間座標を海馬と視空間ワーキングメモリで結びつけて鍛えます。',
+  'ex.memoria.example': '🦁をめくったら、もう1枚の🦁の位置を思い出してペアを揃えます。',
+  'ex.memoria.tip': '1回に2枚のカードをめくります。一致すれば開いたままになり、違えば位置を記憶します！',
+  'ex.memoria.moves': '{n} 手',
+  'ex.memoria.pairsLeft': '{k}/{n} ペア',
+  'ex.memoria.combo': 'コンボ ×{n}!',
+  'ex.memoria.match': 'ペア発見！',
+  'ex.memoria.clear': 'クリア！',
+  'ex.memoria.detail': '{turns} 手で {pairs} ペア（効率 {eff}%）',
+
   'ex.tapSeq.name': "両手交互タップ",
   'ex.tapSeq.desc': "左右の親指をリズミカルに動かし、交互パターンを再現します",
   'ex.tapSeq.why': '左右のタップの連続は、両手の協調と注意の練習です。このようなアプリが脳梁を強くするという証拠はありません。',

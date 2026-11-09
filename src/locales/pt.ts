@@ -962,6 +962,19 @@ const ui: Locale['ui'] = {
 
 
   
+    // memoria
+  'ex.memoria.name': 'Memória de Cartas',
+  'ex.memoria.desc': 'Vire as cartas de duas em duas e encontre todos os pares com o menor número de jogadas possível.',
+  'ex.memoria.why': 'Pelmanism e ligação What-Where: vincula a identidade do objeto às suas coordenadas espaciais, exercitando o hipocampo e a memória de trabalho visoespacial.',
+  'ex.memoria.example': 'Vire uma carta com 🦁, lembre-se de onde estava o outro 🦁 e forme o par.',
+  'ex.memoria.tip': 'Toque em duas cartas por vez. Se forem iguais, permanecem abertas; se forem diferentes, memorize a posição!',
+  'ex.memoria.moves': '{n} jogadas',
+  'ex.memoria.pairsLeft': '{k}/{n} pares',
+  'ex.memoria.combo': 'COMBO ×{n}!',
+  'ex.memoria.match': 'PAR ENCONTRADO!',
+  'ex.memoria.clear': 'TABULEIRO CONCLUÍDO!',
+  'ex.memoria.detail': '{pairs} pares em {turns} jogadas ({eff}% eficiência)',
+
   'ex.tapSeq.name': "Tap Bilateral",
   'ex.tapSeq.desc': "Coordene ambos os polegares para reproduzir sequências alternadas",
   'ex.tapSeq.why': 'Sequências de toques à esquerda e à direita: um exercício de coordenação bimanual e atenção. Não há provas de que um app como este fortaleça o corpo caloso.',
