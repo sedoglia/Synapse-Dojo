@@ -2,6 +2,13 @@ import { Staircase, type StairOptions } from './adaptive';
 
 /** Below this accuracy no speed bonus is given. Under the lowest staircase target (70%), so a converged player can earn it. */
 const BONUS_MIN_ACCURACY = 0.65;
+/**
+ * In exercises where the time limit is the difficulty, the speed bonus goes to sessions answered on average within this
+ * share of the time allowed. A fixed benchmark in seconds would be met by every session (answers there take well under
+ * a second), turning a reward for a fast day into a certainty; a reward that is not predicted is what keeps it
+ * rewarding (Schultz 1998).
+ */
+const BONUS_WINDOW_SHARE = 0.65;
 
 /** Thrown into a running exercise when the player quits. */
 export class Aborted extends Error {}
@@ -37,7 +44,11 @@ export class Ctx {
   bestStreak = 0;
   levelUps = 0;
   lastInputDuration = 0;
+  /** Time limit of the last answer in ms, 0 if it had none (set by `timed`). */
+  private lastInputLimit = 0;
   correctRts: number[] = [];
+  /** For correct answers given under a time limit: the share of the limit they used (0–1). */
+  private windowShares: number[] = [];
   totalAnswers = 0;
   correctAnswers = 0;
   /** First session of this exercise: no saved level yet, so the staircase may climb fast to find it. */
@@ -90,7 +101,10 @@ export class Ctx {
     if (ok) {
       this.correctAnswers++;
       const rt = opts.rt ?? this.lastInputDuration;
-      if (rt > 0) this.correctRts.push(rt);
+      if (rt > 0) {
+        this.correctRts.push(rt);
+        if (this.lastInputLimit > 0) this.windowShares.push(Math.min(1, rt / this.lastInputLimit));
+      }
     }
     this.streak = ok ? this.streak + 1 : 0;
     this.bestStreak = Math.max(this.bestStreak, this.streak);
@@ -138,13 +152,15 @@ export class Ctx {
     };
   }
 
-  /** Whether the session qualified for the XP speed bonus (+10 XP). */
+  /**
+   * Whether the session qualified for the XP speed bonus (+10 XP), for exercises that don't compute a time bonus of
+   * their own: the ones played against a response window. Accurate enough, and answered well inside the window.
+   * Never in the daily check or the practice round.
+   */
   get isSpeedBonus(): boolean {
-    const minCorrect = Math.min(2, Math.max(1, this.totalAnswers));
-    if (this.correctRts.length >= minCorrect && this.accuracy >= BONUS_MIN_ACCURACY) {
-      return this.timeBonus(3.0) >= 3;
-    }
-    return false;
+    if (this.mode !== 'train' || this.accuracy < BONUS_MIN_ACCURACY || this.windowShares.length < 5) return false;
+    const share = this.windowShares.reduce((a, b) => a + b, 0) / this.windowShares.length;
+    return share <= BONUS_WINDOW_SHARE;
   }
 
   /**
@@ -204,7 +220,7 @@ export class Ctx {
         clearTimeout(id);
         cleanup?.();
       };
-    });
+    }, true, ms);
   }
 
   /**
@@ -212,7 +228,7 @@ export class Ctx {
    * `measure` records how long it took as the response time (off for plain pauses, so a wait never
    * overwrites the duration of the answer that preceded it).
    */
-  input<T>(setup: (done: (value: T) => void) => void | (() => void), measure = true): Promise<T> {
+  input<T>(setup: (done: (value: T) => void) => void | (() => void), measure = true, limit = 0): Promise<T> {
     const start = performance.now();
     return new Promise<T>((resolve, reject) => {
       const signal = this.ctrl.signal;
@@ -229,7 +245,10 @@ export class Ctx {
       cleanup = setup((value) => {
         if (settled) return;
         settled = true;
-        if (measure) this.lastInputDuration = performance.now() - start;
+        if (measure) {
+          this.lastInputDuration = performance.now() - start;
+          this.lastInputLimit = limit;
+        }
         signal.removeEventListener('abort', onAbort);
         cleanup?.();
         resolve(value);

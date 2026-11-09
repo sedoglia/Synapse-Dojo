@@ -222,7 +222,7 @@ export function showSettings() {
             class: 'btn danger',
             onClick: () => {
               if (confirm(t('settings.resetConfirm'))) {
-                // Starting over also takes this player off the leaderboard (if offline, the server forgets them after 90 days).
+                // Starting over also takes this player off the leaderboard (if offline, the server forgets them after 30 idle days).
                 leaveBoard().catch(() => {});
                 store.reset();
                 applySettings();

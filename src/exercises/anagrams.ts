@@ -167,12 +167,22 @@ export const anagrams: Exercise = {
           render();
         };
 
-        scrambleBtn.onclick = () => {
-          if (isChecking) return;
+        // `shuffle` returns a new array, so the tiles are replaced in place; the new order is never a right answer
+        // and, when the letters allow it, never the order already on screen.
+        const reshuffle = () => {
           selectedIndices.length = 0;
           sfx.whoosh();
-          shuffle(scrambled);
+          const before = scrambled.join('');
+          let next = scramble(targetWord, solutions, graphemes, shuffle);
+          for (let tries = 0; next.join('') === before && tries < 8; tries++) next = scramble(targetWord, solutions, graphemes, shuffle);
+          scrambled.splice(0, scrambled.length, ...next);
+          flash(tileContainer, 'pop', 200);
           render();
+        };
+
+        scrambleBtn.onclick = () => {
+          if (isChecking) return;
+          reshuffle();
         };
 
         const handleKey = (e: KeyboardEvent) => {
@@ -193,10 +203,7 @@ export const anagrams: Exercise = {
             }
           } else if (e.key === ' ' || e.key === 'Enter') {
             e.preventDefault();
-            selectedIndices.length = 0;
-            sfx.whoosh();
-            shuffle(scrambled);
-            render();
+            reshuffle();
           } else if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
             const pressed = canon(e.key);
             const tileIdx = scrambled.findIndex(

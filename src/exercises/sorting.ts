@@ -36,6 +36,8 @@ const REF_CARDS: CardDef[] = [
 
 /** Smooth, humane timing curve: from 5.5s down to 2.2s at max level */
 const limitFor = (level: number) => Math.max(2200, Math.round(5500 * Math.pow(0.90, level - 1)));
+/** From this level the rule changes without notice. */
+const SILENT_FROM = 6;
 
 /**
  * Renders a crisp card with structured pip layouts (1 pip, 2 pips, 3 pips, or 2x2 cluster)
@@ -96,7 +98,7 @@ export const sorting: Exercise = {
   example: 'ex.sorting.example',
   minutes: [1, 2],
   levels: { min: 1, max: 10, start: 2 },
-  levelLabel: (l) => `${num(limitFor(l) / 1000)} s`,
+  levelLabel: (l) => `${num(limitFor(l) / 1000)} s${l >= SILENT_FROM ? ' · 🤫' : ''}`,
 
   async run(ctx) {
     const trials = ctx.count(24, 16, 5);
@@ -196,6 +198,13 @@ export const sorting: Exercise = {
       'Numpad4': () => onSelect?.(3),
     });
 
+    /**
+     * Up to level 5 the game says when the rule changes and keeps the rule found lit on screen. From level 6, as in
+     * the original test (Grant & Berg, 1948), neither happens: the change must be noticed from the first "wrong".
+     * The practice round and the daily check always announce it.
+     */
+    const announced = () => ctx.mode !== 'train' || st.int < SILENT_FROM;
+
     let activeRule: Dimension = pick(['color', 'shape', 'count']);
     let consecutiveCorrect = 0;
     let correct = 0;
@@ -270,13 +279,16 @@ export const sorting: Exercise = {
         consecutiveCorrect++;
         ruleDiscovered = true;
 
-        // Visual feedback on HUD: ignite the active rule pill and eliminate others
-        dimPills[activeRule].className = 'sorting-dim-pill active-rule';
-        (['color', 'shape', 'count'] as Dimension[])
-          .filter((d) => d !== activeRule)
-          .forEach((d) => {
-            dimPills[d].className = 'sorting-dim-pill eliminated';
-          });
+        // Visual feedback on HUD: ignite the active rule pill and eliminate others (not at the unannounced levels,
+        // where the rule has to be held in mind)
+        if (announced()) {
+          dimPills[activeRule].className = 'sorting-dim-pill active-rule';
+          (['color', 'shape', 'count'] as Dimension[])
+            .filter((d) => d !== activeRule)
+            .forEach((d) => {
+              dimPills[d].className = 'sorting-dim-pill eliminated';
+            });
+        } else resetPills();
 
         updateDots(consecutiveCorrect);
         flash(refButtons[chosenRefIdx], 'good', 350);
@@ -286,7 +298,7 @@ export const sorting: Exercise = {
           sfx.coins();
           haptic('combo');
           feedback.className = 'sorting-feedback switch';
-          feedback.textContent = `🎯 ${t('ex.sorting.firstTryGenius')} (${consecutiveCorrect}/4)`;
+          feedback.textContent = `${t('ex.sorting.firstTryGenius')} (${consecutiveCorrect}/4)`; // the text has its own 🎯
         } else {
           // Pentatonic chime ascending with streak
           sfx.ok(consecutiveCorrect);
@@ -301,11 +313,12 @@ export const sorting: Exercise = {
         // Category cleared after 4 consecutive correct answers!
         if (consecutiveCorrect >= 4) {
           completedCategories++;
+          const told = announced();
           updateDots(4, true);
           sfx.sparkle();
           haptic('combo');
           feedback.className = 'sorting-feedback cracked';
-          feedback.textContent = t('ex.sorting.categoryCracked', { xp: 150 });
+          feedback.textContent = t('ex.sorting.categoryCracked');
           flash(feedback, 'pop', 500);
 
           await ctx.wait(850);
@@ -320,11 +333,16 @@ export const sorting: Exercise = {
           resetPills();
           updateDots(0, false);
 
-          sfx.whoosh();
-          feedback.className = 'sorting-feedback switch';
-          feedback.textContent = t('ex.sorting.ruleShifted');
-          flash(header, 'pop', 350);
-          await ctx.wait(650);
+          if (told) {
+            sfx.whoosh();
+            feedback.className = 'sorting-feedback switch';
+            feedback.textContent = t('ex.sorting.ruleShifted');
+            flash(header, 'pop', 350);
+            await ctx.wait(650);
+          } else {
+            // Unannounced: the series is celebrated, but nothing says that the rule is now another one.
+            await ctx.wait(300);
+          }
         } else {
           await ctx.wait(300);
         }

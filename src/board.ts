@@ -92,7 +92,7 @@ async function call(method: string, path: string, body?: unknown): Promise<Respo
   }
 }
 
-/** The server forgets players after 90 idle days: then this device is simply off the board again. */
+/** The server forgets players after 30 idle days: then this device is simply off the board again. */
 function forget(acc: BoardAccount) {
   if (store.data.board !== acc) return;
   store.data.board = null;

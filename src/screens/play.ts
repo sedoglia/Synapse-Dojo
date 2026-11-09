@@ -24,7 +24,8 @@ export function whyBox(ex: Exercise): HTMLElement {
 /** Starting level: the saved one, a step lower after a long break (skills fade without practice). */
 function startLevel(ex: Exercise): number {
   if (!ex.levels) return 1;
-  const saved = store.level(ex.id, ex.levels.start);
+  const { min, max } = ex.levels;
+  const saved = Math.min(max, Math.max(min, store.level(ex.id, ex.levels.start)));
   const last = store.lastPlayed(ex.id);
   if (!last) return saved;
   const days = (Date.now() - new Date(last).getTime()) / 86_400_000;

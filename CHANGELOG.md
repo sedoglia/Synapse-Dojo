@@ -6,6 +6,28 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.14.1] - 2026-11-09
+
+### Fixed
+
+- **Leaderboard blocked by 2048** (`server/board.ts`): the server accepted only exercise ids made of letters, so it refused `game2048`. After a game of 2048 every upload of the week was rejected as a whole (the summary lists every exercise played) and the player stayed frozen on the board until Monday; the 2048 "best level" board failed too. Ids may now contain digits, and the limit of exercises per upload has headroom (64) for future games.
+- **Anagrams, "Shuffle letters"**: the button and the Space key cleared the chosen letters but left the tiles in the same order. They now really shuffle them, into an order that is always different from the one on screen and never already solved.
+- **Day streak**: if yesterday was skipped, the Home screen showed the streak at zero until today's first exercise, when the weekly rest day brought it back. It now stays visible while the rest day can still save it.
+- **Import**: importing a save that had never joined the leaderboard (an old backup, for instance) silently took the device off the board. The device's membership is now kept. Hand-edited files with fields of the wrong type (`bestFrom`, `bestStreak`, `plan.done`…) are refused instead of breaking a screen; a saved level outside the scale is brought back within the exercise's range.
+- **Online transfer**: the save was uploaded indented and with a 512 KB limit, which a few months of daily training could exceed (the error shown was generic). It is now compact and the limit is 1.8 MB, checked in bytes against D1's limit.
+- **Card Sorting**: the instructions and the documentation said that from level 6 the rule change is not announced, but the game always announced it and kept the rule highlighted. From level 6 the change must now be noticed unaided and the rule held in mind, as in the original test (🤫 in the level label). Removed a "+150 XP" from the set-completed message that was never awarded.
+- **Speed bonus**: in exercises with a response window (Flanker, Go/No-Go, Stroop, Rule Switch, Multi-Source Interference, Choice Reflex) it was earned in every session, because it was compared with a fixed 3-second threshold. It now goes to sessions answered on average within 65% of the time allowed, so it is again a reward for a fast day; where speed is not the player's to choose it is no longer awarded.
+- **Go/No-Go**: the guided practice could show no stop signal at all (6 trials at 20%); it now always shows two.
+- **Story Memory**: a wrong answer taken from another scene could appear twice among the options.
+- **Nonogram**: quitting during the victory animation left an unhandled error in the console.
+- Comments and texts that spoke of 90 idle days for the leaderboard (it is 30).
+
+### Added
+
+- **Home, before the first exercise of the day**: how many days the streak will reach by training today and the welcome-back bonus (+15 XP), in 12 languages.
+- **Privacy notice**: a new section on the optional online transfer (what is stored on the server, for how long, and who can read it), in 12 languages.
+- Scientific documentation and README updated (Card Sorting, speed bonus, transfer, nightly cleanup); three repeated lines removed from the source tree in the README.
+
 ## [0.14.0] - 2026-11-09
 
 ### Fixed

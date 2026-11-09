@@ -12,7 +12,8 @@ import {
   type Handler,
 } from '../../server/board';
 
-const MAX_EXERCISES = 40;
+/** Above the number of exercises in the game (40), so adding one never makes every upload fail. */
+const MAX_EXERCISES = 64;
 /** Stored per day; only the first 12 earn points, the rest is kept to show how much someone trained. */
 const MAX_PER_DAY = 100;
 const isImprovement = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v) && v >= -100 && v <= 100;

@@ -22,7 +22,7 @@ export function transferErrorText(e: unknown): string {
  * Uploads current save data to temporary online storage and returns the 8-character transfer code (XXXX-XXXX).
  */
 export async function uploadTransferSave(): Promise<string> {
-  const payload = store.exportJson();
+  const payload = store.exportJson(true);
   let res: Response;
   try {
     res = await fetch('api/transfer', {

@@ -4,7 +4,7 @@ import { t } from '../i18n';
 import { APP_NAME } from '../config';
 import { render, rankName, xpBar, langPicker } from '../ui';
 import { currentPlan } from '../stats';
-import { playerLevel, nextBadge } from '../rewards';
+import { playerLevel, nextBadge, XP } from '../rewards';
 import { playDailyCheck, playPlan } from './play';
 import { showTraining } from './training';
 import { showProgress } from './progress';
@@ -148,7 +148,10 @@ export function showHome() {
   const week = store.daysThisWeek();
   const lvl = playerLevel();
   const goal = nextBadge();
-  const streakText =streak === 0 ? t('home.streak0') : streak === 1 ? t('home.streak1') : t('home.streak', { n: streak });
+  // Before the first exercise of the day: what training now is worth (a streak about to grow is a goal within reach,
+  // Kivetz et al. 2006; one about to lapse is something to protect, Kahneman & Tversky 1979).
+  const trainedToday = store.activeDays().has(todayKey());
+  const streakText = streak === 0 ? t('home.streak0') : streak === 1 ? t('home.streak1') : t('home.streak', { n: streak });
 
   const planSub = h(
     'small',
@@ -195,6 +198,14 @@ export function showHome() {
           h('div', { class: `streak ${streak ? 'on' : ''}` }, `🔥 ${streakText}`),
           h('div', { class: `streak ${week >= 4 ? 'on' : ''}` }, `🎯 ${t('home.week', { n: Math.min(4, week) })}`),
         ),
+        trainedToday
+          ? null
+          : h(
+              'div',
+              { class: 'today-hook' },
+              streak >= 1 ? h('span', {}, t('home.keepStreak', { n: streak + 1 })) : null,
+              h('span', {}, t('reward.welcome', { xp: XP.welcome })),
+            ),
         xpBar(lvl.level, store.data.xp, lvl.from, lvl.to),
       ),
       h(
