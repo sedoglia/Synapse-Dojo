@@ -345,7 +345,11 @@ export const nonogram: Exercise = {
           );
           flash(revealBanner, 'pop', 500);
 
-          await ctx.wait(1400);
+          try {
+            await ctx.wait(1400);
+          } catch {
+            return; // the player quit during the reveal
+          }
           done(true);
         };
 

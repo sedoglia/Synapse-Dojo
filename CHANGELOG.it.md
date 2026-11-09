@@ -6,6 +6,28 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.14.1] - 2026-11-09
+
+### Corretto
+
+- **Classifica bloccata da 2048** (`server/board.ts`): il server accettava solo identificativi di esercizio fatti di lettere, quindi rifiutava `game2048`. Dopo una partita a 2048 ogni invio della settimana veniva respinto per intero (il riepilogo contiene tutti gli esercizi giocati) e il giocatore restava fermo in classifica fino al lunedì; anche la classifica «livello migliore» di 2048 dava errore. Ora gli identificativi possono contenere cifre, e il limite di esercizi per invio ha margine (64) per i giochi futuri.
+- **Anagrammi, «Rimescola lettere»**: il pulsante e il tasto Spazio azzeravano le lettere scelte ma non cambiavano l'ordine delle tessere. Ora le rimescolano davvero, in un ordine sempre diverso da quello a schermo e mai già risolto.
+- **Serie di giorni**: se ieri era stato saltato, la Home mostrava la serie a zero fino al primo esercizio di oggi, quando il giorno di riposo settimanale la faceva ricomparire. Ora resta visibile finché il giorno di riposo può ancora salvarla.
+- **Importazione**: importare un salvataggio che non aveva mai aderito alla classifica (per esempio un vecchio backup) toglieva in silenzio il dispositivo dalla classifica. Ora l'adesione del dispositivo viene mantenuta. I file modificati a mano con campi di tipo sbagliato (`bestFrom`, `bestStreak`, `plan.done`…) vengono rifiutati invece di bloccare una schermata; un livello salvato fuori scala viene riportato nei limiti dell'esercizio.
+- **Trasferimento online**: il salvataggio veniva inviato indentato e con un limite di 512 KB, superabile dopo qualche mese di allenamento quotidiano (l'errore mostrato era generico). Ora è compatto e il limite è 1,8 MB, controllato in byte rispetto al limite di D1.
+- **Ordinamento di carte**: istruzioni e documentazione dicevano che dal livello 6 il cambio di regola non è annunciato, ma il gioco lo annunciava sempre e teneva la regola evidenziata. Ora dal livello 6 il cambio va notato da soli e la regola va tenuta a mente, come nel test originale (🤫 nell'etichetta del livello). Tolto dal messaggio di serie completata un «+150 XP» che non veniva assegnato.
+- **Bonus rapidità**: negli esercizi con finestra di risposta (Flanker, Go/No-Go, Stroop, Doppia regola, Interferenza multipla, Riflesso a scelta) scattava a ogni sessione, perché il confronto era con una soglia fissa di 3 secondi. Ora va alle sessioni risolte in media entro il 65% del tempo concesso, così torna a essere un premio per una giornata veloce; dove la velocità non dipende dal giocatore non viene più assegnato.
+- **Go/No-Go**: la prova guidata poteva non mostrare nessun segnale di stop (6 prove al 20%); ora ne mostra sempre due.
+- **Memoria delle storie**: una risposta sbagliata presa da un'altra scena poteva comparire due volte tra le opzioni.
+- **Nonogram**: uscire durante l'animazione di vittoria lasciava un errore non gestito in console.
+- Commenti e testi che parlavano di 90 giorni di inattività per la classifica (sono 30).
+
+### Aggiunto
+
+- **Home, prima del primo esercizio del giorno**: a quanti giorni salirà la serie allenandosi oggi e il bonus di bentornato (+15 XP), in 12 lingue.
+- **Informativa privacy**: nuova sezione sul trasferimento online facoltativo (cosa viene salvato sul server, per quanto, e chi può leggerlo), in 12 lingue.
+- Documentazione scientifica e README aggiornati (Ordinamento di carte, bonus rapidità, trasferimento, pulizia notturna); tolte tre righe ripetute dall'albero dei sorgenti nel README.
+
 ## [0.14.0] - 2026-11-09
 
 ### Corretto

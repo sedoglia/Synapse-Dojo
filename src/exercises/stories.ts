@@ -142,7 +142,7 @@ export const stories: Exercise = {
       // A detail from another scene of the round is the hardest wrong answer: it was seen, just not there.
       const lure = (scen: (typeof pool)[number], key: 'item' | 'place' | 'time', fallback: readonly string[]) => {
         const other = scenes.find((o) => o !== scen && o[key] !== scen[key]);
-        return other ? [other[key], ...shuffle([...fallback]).slice(0, 1)] : [...fallback];
+        return other ? [other[key], ...shuffle(fallback.filter((f) => f !== other[key] && f !== scen[key])).slice(0, 1)] : [...fallback];
       };
       const questions = shuffle(
         scenes.flatMap((scen) =>

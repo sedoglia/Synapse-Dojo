@@ -7,7 +7,12 @@ import {
   type Handler,
 } from '../../server/board';
 
-const MAX_TRANSFER_BODY = 512 * 1024; // 512 KB
+/**
+ * Years of daily training fit: a save grows by roughly 100 bytes per exercise played. The stored payload must stay
+ * under D1's 2 MB limit for a single value, which is counted in bytes, not characters.
+ */
+const MAX_TRANSFER_BODY = 1_800_000;
+const MAX_PAYLOAD_BYTES = 1_900_000;
 const DAY_MS = 86_400_000;
 
 /**
@@ -28,6 +33,8 @@ export const onRequestPost: Handler = async ({ request, env }) => {
   } else {
     return fail(400, 'invalid_payload');
   }
+
+  if (new TextEncoder().encode(payloadStr).length > MAX_PAYLOAD_BYTES) return fail(413, 'too_large');
 
   // Quick sanity check: must parse as valid JSON and resemble a Synapse Dojo save
   try {

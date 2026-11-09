@@ -18,7 +18,8 @@ export interface Player {
 export const AGE_BANDS = ['u30', '30-49', '50-64', '65-74', '75+'];
 /** Overall row in `entries`; every other `ex` is an exercise id. */
 export const ALL = '_all';
-const EX_ID = /^[a-zA-Z]{1,24}$/;
+/** Letters and digits, starting with a letter: `game2048` is an exercise id too. */
+const EX_ID = /^[a-zA-Z][a-zA-Z0-9]{0,23}$/;
 export const isExId = (v: unknown): v is string => typeof v === 'string' && (v === ALL || EX_ID.test(v));
 
 /** Seconds between two result uploads from the same player. */
@@ -145,7 +146,7 @@ export function readableWeek(value: unknown, now = new Date()): string | null {
 /** Groups left without members are deleted together with their name. */
 export const DROP_EMPTY_GROUPS = 'DELETE FROM friend_groups WHERE id NOT IN (SELECT group_id FROM group_members)';
 
-/** Bans left without a group are deleted (SQLite/D1 does not enforce ON DELETE CASCADE by default). */
+/** Bans left without a group are deleted explicitly, so the cleanup never depends on foreign keys being enforced. */
 export const DROP_ORPHAN_BANS = 'DELETE FROM group_bans WHERE group_id NOT IN (SELECT id FROM friend_groups)';
 
 /** A group whose creator is gone passes to its oldest member, so someone can always manage it. */

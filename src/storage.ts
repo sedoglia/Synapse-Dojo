@@ -36,7 +36,10 @@ export interface LevelPoint {
   level: number;
 }
 
-/** Opt-in leaderboard membership: an anonymous id and the secret that proves it (never exported). */
+/**
+ * Opt-in leaderboard membership: an anonymous id and the secret that proves it. Both are part of an exported save and
+ * of an online transfer, so the same anonymous player continues on the new device.
+ */
 export interface BoardAccount {
   id: string;
   secret: string;
@@ -233,7 +236,13 @@ export function parseSave(json: unknown): SaveData | null {
     (d.xp === undefined || typeof d.xp === 'number') &&
     (d.badges === undefined || (isObj(d.badges) && Object.values(d.badges).every(isDate))) &&
     (d.counters === undefined || numbers(d.counters)) &&
-    (d.settings === undefined || isObj(d.settings));
+    (d.settings === undefined || isObj(d.settings)) &&
+    // Fields the game reads without checking: a hand-edited file must not be able to break a screen.
+    (d.plan === undefined || d.plan === null || !isObj(d.plan) || d.plan.done === undefined || (Array.isArray(d.plan.done) && d.plan.done.every((x) => typeof x === 'string'))) &&
+    (d.plan === undefined || d.plan === null || !isObj(d.plan) || d.plan.round === undefined || typeof d.plan.round === 'number') &&
+    (d.bestStreak === undefined || (typeof d.bestStreak === 'number' && Number.isFinite(d.bestStreak))) &&
+    (d.balance === undefined || typeof d.balance === 'number') &&
+    (d.bestFrom === undefined || (isObj(d.bestFrom) && Object.values(d.bestFrom).every(isDate)));
   return ok ? withDefaults(d as Partial<SaveData>) : null;
 }
 
@@ -248,18 +257,25 @@ export const store = {
     }
   },
 
-  /** The complete save wrapped with a marker, ready to be downloaded as a file or transferred. */
-  exportJson(): string {
+  /**
+   * The complete save wrapped with a marker, ready to be downloaded as a file or transferred.
+   * `compact` leaves out the indentation: the online transfer has a size limit, and indenting adds about a third.
+   */
+  exportJson(compact = false): string {
     const data = { ...this.data };
-    return JSON.stringify({ app: 'synapse-dojo', version: 1, exported: new Date().toISOString(), data }, null, 1);
+    return JSON.stringify({ app: 'synapse-dojo', version: 1, exported: new Date().toISOString(), data }, null, compact ? undefined : 1);
   },
 
-  /** Loads an imported save, restoring all game progress, levels, settings, leaderboard account and groups. */
+  /**
+   * Loads an imported save, restoring all game progress, levels, settings, leaderboard account and groups.
+   * A save from a device that never joined the leaderboard keeps this device's membership (and a pending group
+   * invite) instead of silently dropping it: importing an old backup must not take the player off the board.
+   */
   replace(data: SaveData) {
     this.data = {
       ...data,
-      board: data.board !== undefined ? data.board : this.data.board,
-      boardInvite: data.boardInvite !== undefined ? data.boardInvite : this.data.boardInvite,
+      board: data.board ?? this.data.board,
+      boardInvite: data.boardInvite ?? this.data.boardInvite,
     };
     this.save();
   },
@@ -335,9 +351,17 @@ export const store = {
   streak(): number {
     const days = this.activeDays();
     const d = new Date();
-    if (!days.has(todayKey(d))) d.setDate(d.getDate() - 1);
     let n = 0;
     let sinceRest = 7;
+    if (!days.has(todayKey(d))) {
+      d.setDate(d.getDate() - 1);
+      if (!days.has(todayKey(d))) {
+        // Yesterday was skipped and today is still open: yesterday can be the week's rest day, so the streak is shown
+        // as still alive (it is, as soon as the player trains today) instead of dropping to 0 and coming back later.
+        d.setDate(d.getDate() - 1);
+        sinceRest = 0;
+      }
+    }
     for (;;) {
       if (days.has(todayKey(d))) {
         n++;

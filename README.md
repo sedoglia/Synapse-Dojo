@@ -93,9 +93,6 @@ synapse-dojo/
 │   ├── ui.ts               UI page layouts, navigation bars, modals, toasts and settings sync
 │   ├── update.ts           Automatic update detection across deploys and graceful reload
 │   └── widgets.ts          Shared components (HTML5 canvas, numeric keypads, sparklines)
-│   ├── ui.ts               UI page layouts, navigation bars, modals, toasts and settings sync
-│   ├── update.ts           Automatic update detection across deploys and graceful reload
-│   └── widgets.ts          Shared components (HTML5 canvas, numeric keypads, sparklines)
 ├── index.html              Primary single-page application (PWA)
 ├── guide.html              Standalone guide view
 ├── privacy.html            Standalone privacy view

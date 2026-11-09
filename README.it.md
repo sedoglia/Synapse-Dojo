@@ -94,9 +94,6 @@ synapse-dojo/
 │   ├── ui.ts               utility di layout, barre di navigazione, modali, toast e gestione impostazioni
 │   ├── update.ts           rilevamento automatico di nuove versioni distribuite e ricaricamento
 │   └── widgets.ts          componenti riutilizzabili (canvas, tastierini numerici, sparkline)
-│   ├── ui.ts               utility di layout, barre di navigazione, modali, toast e gestione impostazioni
-│   ├── update.ts           rilevamento automatico di nuove versioni distribuite e ricaricamento
-│   └── widgets.ts          componenti riutilizzabili (canvas, tastierini numerici, sparkline)
 ├── index.html              pagina principale (PWA)
 ├── guide.html              pagina indipendente per la guida
 ├── privacy.html            pagina indipendente per la privacy

@@ -47,7 +47,8 @@ export const gonogo: Exercise = {
       // Rare no-go trials at a quick pace: what actually builds up the urge to respond (Wessel, 2018).
       await ctx.wait(rand(300, 900));
 
-      const isNoGo = Math.random() < 0.2;
+      // The guided practice always includes stop signals: six random trials would often show none.
+      const isNoGo = ctx.practice ? i % 3 === 2 : Math.random() < 0.2;
       target.className = `gonogo-target ${isNoGo ? 'nogo' : 'go'}`;
       target.textContent = isNoGo ? '✕' : '●';
       flash(target, 'pop', 150);
