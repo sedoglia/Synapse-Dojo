@@ -17,13 +17,19 @@ Version numbers come from `package.json`, and each date is the day of the commit
 - **Choice reflex and Go/No-Go**: correctly withheld "don't tap" trials recorded the whole waiting window as a response time, skewing the speed bonus.
 - **Tangram**: quitting mid-puzzle left the stopwatch running in the background.
 - **Badges**: removed a rough estimate of speed bonuses guessed from result texts, which could make progress rise and then fall; badge icons are now all different (⚡, 🥋 and 🌌 were repeated).
-- **Timed Word Anagrams with progress bar**: introduced a dynamic trial time limit (16–30 s based on word length, expanded to 26–42 s at a relaxed pace) shown by a smooth time bar with urgency alert; prevents cognitive deadlock (*Einstellung effect* / impasse) at higher levels, supports direct physical keyboard input, and allows active hypothesis testing without prematurely forfeiting the trial on an invalid attempt.
 - **Documentation**: 2048 goes up to the 2048 tile (not 4096) and has the stone block at levels 9 and 10 (not 8 and 10).
 - **Tangram in 10 languages**: description, rationale, example, in-game messages, buttons, 49 figure names and the "Tangram Master" badge were still in English in Spanish, Portuguese, French, German, Russian, Chinese, Japanese, Hindi, Arabic and Indonesian; they are now translated (the "Flip ⇄" button included). Italian "pts tempo" is now "punti tempo".
 
 ### Added
 
 - **Step-by-step instructions for all 40 games**: a "How to play" box with 3–4 numbered steps (what appears, what to do, what counts as a mistake, how difficulty changes) on the intro card and in the guide, in all 12 languages (segmenting principle, Mayer 2009).
+- **Timed Word Anagrams with progress bar**:
+  - Dynamic trial time limit (16–30 s based on word length, expanded to 26–42 s at a relaxed pace) shown by a smooth progress bar with urgency alert in the closing seconds.
+  - Eliminates infinite cognitive deadlock (*Einstellung effect* / impasse; Smith & Blankenship 1991, Novick & Sherman 2003) that led to frustration on higher levels.
+  - Active hypothesis testing without aborting the trial: entering an invalid word provides immediate tactile feedback and resets tiles so players can keep trying until time runs out.
+  - Clear target word reveal on timeout in the letter slots to provide cognitive closure and lexical updating before adaptive level drop.
+  - Full physical keyboard support (direct typing, Backspace, Space to scramble, Esc/Delete to clear).
+  - Streamlined sessions calibrated to 8 trials (1.5–2.5 minutes), matching the pacing of the rest of the catalog.
 - **Adaptive Speed reading**: it was the only game without levels. The level now sets a reading-aloud pace to keep up with (90 → 180 words per minute), shown by a "hare" bar that empties at the target pace. The level rises when the text was understood and the bar beaten and drops after a wrong answer: comprehension always comes first. In the Neuro Score players read at their own pace.
 - **Rewards that bring players back**:
   - **Streak multiplier**: +10% XP for every day in a row, up to +50% (loss aversion, Kahneman & Tversky 1979; spaced practice, Cepeda et al. 2006).
