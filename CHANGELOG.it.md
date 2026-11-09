@@ -17,6 +17,7 @@ I numeri di versione vengono da `package.json` e ogni data è il giorno del comm
 - **Scelta rapida e Go/No-Go**: nei turni «non toccare» riusciti veniva registrato come tempo di risposta l'intera finestra di attesa, falsando il bonus rapidità.
 - **Tangram**: uscendo a metà schema il cronometro continuava a girare in background.
 - **Traguardi**: rimossa una stima approssimativa dei bonus rapidità ricavata dal testo dei risultati, che poteva far salire e poi scendere il progresso; icone dei traguardi rese tutte diverse (⚡, 🥋 e 🌌 erano ripetute).
+- **Anagrammi a tempo e barra di scorrimento**: introdotto un limite di tempo dinamico per prova (16–30 s calcolato sulla lunghezza della parola, esteso a 26–42 s con ritmo rilassato) visualizzato da una barra di avanzamento a scorrimento con avviso di urgenza; elimina il blocco cognitivo infinito (*Einstellung effect* / impasse) sui livelli più alti, supporta la digitazione diretta da tastiera fisica e permette la verifica attiva delle ipotesi senza abortire prematuramente la prova dopo un tentativo non valido.
 - **Documentazione**: 2048 arriva al tassello 2048 (non 4096) e ha il blocco di pietra ai livelli 9 e 10 (non 8 e 10).
 - **Tangram in 10 lingue**: descrizione, spiegazione, esempio, messaggi di gioco, pulsanti, 49 nomi di figure e il traguardo «Maestro del Tangram» erano rimasti in inglese in spagnolo, portoghese, francese, tedesco, russo, cinese, giapponese, hindi, arabo e indonesiano; ora sono tradotti (compreso il pulsante «Flip ⇄»). In italiano «pts tempo» diventa «punti tempo».
 

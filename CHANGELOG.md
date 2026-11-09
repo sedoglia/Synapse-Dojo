@@ -17,6 +17,7 @@ Version numbers come from `package.json`, and each date is the day of the commit
 - **Choice reflex and Go/No-Go**: correctly withheld "don't tap" trials recorded the whole waiting window as a response time, skewing the speed bonus.
 - **Tangram**: quitting mid-puzzle left the stopwatch running in the background.
 - **Badges**: removed a rough estimate of speed bonuses guessed from result texts, which could make progress rise and then fall; badge icons are now all different (⚡, 🥋 and 🌌 were repeated).
+- **Timed Word Anagrams with progress bar**: introduced a dynamic trial time limit (16–30 s based on word length, expanded to 26–42 s at a relaxed pace) shown by a smooth time bar with urgency alert; prevents cognitive deadlock (*Einstellung effect* / impasse) at higher levels, supports direct physical keyboard input, and allows active hypothesis testing without prematurely forfeiting the trial on an invalid attempt.
 - **Documentation**: 2048 goes up to the 2048 tile (not 4096) and has the stone block at levels 9 and 10 (not 8 and 10).
 - **Tangram in 10 languages**: description, rationale, example, in-game messages, buttons, 49 figure names and the "Tangram Master" badge were still in English in Spanish, Portuguese, French, German, Russian, Chinese, Japanese, Hindi, Arabic and Indonesian; they are now translated (the "Flip ⇄" button included). Italian "pts tempo" is now "punti tempo".
 

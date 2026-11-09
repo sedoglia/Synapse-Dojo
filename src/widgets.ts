@@ -1,4 +1,4 @@
-﻿import { h } from './dom';
+import { h } from './dom';
 import type { Ctx } from './ctx';
 
 /** Numeric keypad; also listens to the physical keyboard while `ctx.input` is pending. */
@@ -47,21 +47,40 @@ export function onKeys(ctx: Ctx, map: Record<string, () => void>) {
 }
 
 /** A bar that empties over a time limit, so the player can see how long they have. */
-export function timeBar() {
+export function timeBar(extraClass?: string) {
   const fill = h('div');
-  const el = h('div', { class: 'rotate-timer time-bar' }, fill);
+  const el = h('div', { class: `rotate-timer time-bar ${extraClass ?? ''}`.trim() }, fill);
+  let urgentTimer: ReturnType<typeof setTimeout> | null = null;
   return {
     el,
     start(ms: number) {
+      if (urgentTimer) clearTimeout(urgentTimer);
+      el.classList.remove('urgent');
       fill.style.transition = 'none';
       fill.style.width = '100%';
       void fill.offsetWidth;
       fill.style.transition = `width ${ms}ms linear`;
       fill.style.width = '0%';
+      urgentTimer = setTimeout(() => {
+        el.classList.add('urgent');
+      }, ms * 0.75);
     },
     stop() {
+      if (urgentTimer) {
+        clearTimeout(urgentTimer);
+        urgentTimer = null;
+      }
       fill.style.width = getComputedStyle(fill).width;
       fill.style.transition = 'none';
+    },
+    reset() {
+      if (urgentTimer) {
+        clearTimeout(urgentTimer);
+        urgentTimer = null;
+      }
+      el.classList.remove('urgent');
+      fill.style.transition = 'none';
+      fill.style.width = '100%';
     },
   };
 }

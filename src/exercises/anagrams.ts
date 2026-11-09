@@ -1,7 +1,8 @@
 import { h, shuffle, flash, pick } from '../dom';
 import { sfx } from '../audio';
-import { t, words, anagramWords, graphemes, wordNear } from '../i18n';
+import { t, num, words, anagramWords, graphemes, wordNear } from '../i18n';
 import { getRecentHistory, saveRecentHistory } from '../storage';
+import { timeBar } from '../widgets';
 import { canon, isPlayable, scramble, solutionsOf } from './anagramRules';
 import type { Exercise } from './types';
 
@@ -21,6 +22,16 @@ function lenFor(level: number): number {
   return usable[i];
 }
 
+/**
+ * Time limit per trial in milliseconds, calibrated to word length.
+ * Shorter words give ~16–19s; longer words (7–8 letters) give 28–30s to allow mental
+ * manipulation and hypothesis testing before reaching an impasse.
+ */
+function limitFor(level: number): number {
+  const len = lenFor(level);
+  return (8 + Math.round(len * 2.8)) * 1000;
+}
+
 export const anagrams: Exercise = {
   id: 'anagrams',
   icon: '🔤',
@@ -30,20 +41,22 @@ export const anagrams: Exercise = {
   how: 'ex.anagrams.how',
   why: 'ex.anagrams.why',
   example: 'ex.anagrams.example',
-  minutes: [2, 3],
+  minutes: [1.5, 2.5],
   levels: { min: 1, max: MAX_LEVEL, start: 2 },
-  levelLabel: (l) => `${lenFor(l)} ${t('ex.anagrams.letters')}`,
+  levelLabel: (l) => `${lenFor(l)} ${t('ex.anagrams.letters')} • ${num(limitFor(l) / 1000, 0)} s`,
 
   async run(ctx) {
-    const trials = ctx.count(10, 6, 2);
+    const trials = ctx.count(8, 6, 2);
     const st = ctx.stair(trials, 1, MAX_LEVEL);
 
     const status = h('div', { class: 'anagram-status' });
+    const bar = timeBar('anagram-timer');
+    bar.el.classList.toggle('off', ctx.practice);
     const slotContainer = h('div', { class: 'anagram-slots' });
     const tileContainer = h('div', { class: 'anagram-tiles' });
     const actions = h('div', { class: 'anagram-actions' });
 
-    ctx.stage.append(status, slotContainer, tileContainer, actions);
+    ctx.stage.append(status, bar.el, slotContainer, tileContainer, actions);
 
     const solutions = solutionsOf(words(), anagramWords());
     const puzzles = words().filter((w) => isPlayable(w, solutions, graphemes));
@@ -76,89 +89,157 @@ export const anagrams: Exercise = {
       status.textContent = t('ex.anagrams.hint');
 
       const selectedIndices: number[] = [];
-
-      const render = (onTileClick?: (idx: number) => void) => {
-        // Render slots
-        slotContainer.replaceChildren();
-        for (let s = 0; s < letters.length; s++) {
-          const char = selectedIndices[s] !== undefined ? scrambled[selectedIndices[s]] : '';
-          const slot = h('div', { class: `anagram-slot ${char ? 'filled' : ''}` }, char);
-          slotContainer.append(slot);
-        }
-
-        // Render tiles
-        tileContainer.replaceChildren();
-        scrambled.forEach((char, idx) => {
-          const isUsed = selectedIndices.includes(idx);
-          const btn = h(
-            'button',
-            {
-              class: `btn anagram-tile ${isUsed ? 'used' : ''}`,
-              onClick: () => {
-                if (!isUsed && onTileClick) onTileClick(idx);
-              },
-            },
-            char,
-          );
-          tileContainer.append(btn);
-        });
-      };
+      let isChecking = false;
+      let checkTimer: ReturnType<typeof setTimeout> | null = null;
 
       const clearBtn = h('button', { class: 'btn' }, 'C');
       const delBtn = h('button', { class: 'btn' }, '⌫');
       const scrambleBtn = h('button', { class: 'btn anagram-scramble-btn', title: t('ex.anagrams.scramble') }, '🔀');
       actions.replaceChildren(clearBtn, delBtn, scrambleBtn);
 
-      const typedWord = await ctx.input<string>((done) => {
+      const limit = (ctx.practice ? 60_000 : limitFor(st.level)) * ctx.pace;
+      bar.start(limit);
+
+      const typedWord = await ctx.timed<string | null>(limit, null, (done) => {
+        const render = () => {
+          // Render slots
+          slotContainer.replaceChildren();
+          for (let s = 0; s < letters.length; s++) {
+            const char = selectedIndices[s] !== undefined ? scrambled[selectedIndices[s]] : '';
+            const slot = h('div', { class: `anagram-slot ${char ? 'filled' : ''}` }, char);
+            slotContainer.append(slot);
+          }
+
+          // Render tiles
+          tileContainer.replaceChildren();
+          scrambled.forEach((char, idx) => {
+            const isUsed = selectedIndices.includes(idx);
+            const btn = h(
+              'button',
+              {
+                class: `btn anagram-tile ${isUsed ? 'used' : ''}`,
+                disabled: isUsed || isChecking,
+                onClick: () => {
+                  if (!isUsed && !isChecking) handleTile(idx);
+                },
+              },
+              char,
+            );
+            tileContainer.append(btn);
+          });
+        };
+
         const handleTile = (idx: number) => {
           selectedIndices.push(idx);
           sfx.note(selectedIndices.length);
-          render(handleTile);
+          render();
+
           if (selectedIndices.length === letters.length) {
-            const result = selectedIndices.map((k) => scrambled[k]).join('');
-            done(result);
+            const candidate = selectedIndices.map((k) => scrambled[k]).join('');
+            if (solutions.has(canon(candidate))) {
+              done(candidate);
+            } else {
+              // Hypothesis testing: an invalid attempt does not instantly abort the trial.
+              // It provides tactile feedback and resets letters so player can keep searching within time.
+              isChecking = true;
+              flash(slotContainer, 'bad', 400);
+              sfx.bad();
+              checkTimer = setTimeout(() => {
+                selectedIndices.length = 0;
+                isChecking = false;
+                render();
+              }, 400);
+            }
           }
         };
 
         clearBtn.onclick = () => {
+          if (isChecking || selectedIndices.length === 0) return;
           selectedIndices.length = 0;
           sfx.tick();
-          render(handleTile);
+          render();
         };
 
         delBtn.onclick = () => {
+          if (isChecking || selectedIndices.length === 0) return;
           selectedIndices.pop();
           sfx.tick();
-          render(handleTile);
+          render();
         };
 
         scrambleBtn.onclick = () => {
+          if (isChecking) return;
           selectedIndices.length = 0;
           sfx.whoosh();
           shuffle(scrambled);
-          render(handleTile);
+          render();
         };
 
-        render(handleTile);
+        const handleKey = (e: KeyboardEvent) => {
+          if (isChecking) return;
+          if (e.key === 'Backspace') {
+            e.preventDefault();
+            if (selectedIndices.length > 0) {
+              selectedIndices.pop();
+              sfx.tick();
+              render();
+            }
+          } else if (e.key === 'Escape' || e.key === 'Delete') {
+            e.preventDefault();
+            if (selectedIndices.length > 0) {
+              selectedIndices.length = 0;
+              sfx.tick();
+              render();
+            }
+          } else if (e.key === ' ' || e.key === 'Enter') {
+            e.preventDefault();
+            selectedIndices.length = 0;
+            sfx.whoosh();
+            shuffle(scrambled);
+            render();
+          } else if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
+            const pressed = canon(e.key);
+            const tileIdx = scrambled.findIndex(
+              (char, idx) => !selectedIndices.includes(idx) && canon(char) === pressed,
+            );
+            if (tileIdx !== -1) {
+              e.preventDefault();
+              handleTile(tileIdx);
+            }
+          }
+        };
+
+        window.addEventListener('keydown', handleKey);
+        render();
 
         return () => {
+          if (checkTimer) clearTimeout(checkTimer);
+          window.removeEventListener('keydown', handleKey);
           clearBtn.onclick = null;
           delBtn.onclick = null;
           scrambleBtn.onclick = null;
         };
       });
 
-      const ok = ctx.track(st, solutions.has(canon(typedWord)), { was: targetWord });
+      bar.stop();
+
+      const isSolved = typedWord !== null && solutions.has(canon(typedWord));
+      const ok = ctx.track(st, isSolved, {
+        was: targetWord,
+        note: typedWord === null ? t('common.timeout') : undefined,
+      });
 
       if (ok) {
         correct++;
         sfx.sparkle();
-        flash(slotContainer, 'good', 300);
+        flash(slotContainer, 'good', 350);
       } else {
         flash(slotContainer, 'bad', 500);
-        slotContainer.textContent = targetWord;
+        slotContainer.replaceChildren(
+          ...graphemes(targetWord).map((ch) => h('div', { class: 'anagram-slot filled revealed' }, ch)),
+        );
       }
-      await ctx.wait(ok ? 400 : 1200);
+      await ctx.wait(ok ? 400 : 1300);
     }
     ctx.progress(1);
 
