@@ -25,6 +25,7 @@ export const radar: Exercise = {
   domain: 'attention',
   name: 'ex.radar.name',
   desc: 'ex.radar.desc',
+  how: 'ex.radar.how',
   why: 'ex.radar.why',
   example: 'ex.radar.example',
   minutes: [2, 3],

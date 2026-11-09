@@ -12,6 +12,7 @@ export const dualTask: Exercise = {
   domain: 'coordination',
   name: 'ex.dualTask.name',
   desc: 'ex.dualTask.desc',
+  how: 'ex.dualTask.how',
   why: 'ex.dualTask.why',
   example: 'ex.dualTask.example',
   minutes: [1, 2],

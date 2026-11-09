@@ -66,6 +66,7 @@ export const echo: Exercise = {
   domain: 'wm',
   name: 'ex.echo.name',
   desc: 'ex.echo.desc',
+  how: 'ex.echo.how',
   why: 'ex.echo.why',
   example: 'ex.echo.example',
   minutes: [1, 2],

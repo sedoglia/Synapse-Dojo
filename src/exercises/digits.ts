@@ -12,6 +12,7 @@ export const digits: Exercise = {
   domain: 'wm',
   name: 'ex.digits.name',
   desc: 'ex.digits.desc',
+  how: 'ex.digits.how',
   why: 'ex.digits.why',
   example: 'ex.digits.example',
   minutes: [2, 3],

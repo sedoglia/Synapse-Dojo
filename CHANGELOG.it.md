@@ -6,6 +6,32 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.14.0] - 2026-11-09
+
+### Corretto
+
+- **Motore adattivo, sessioni brevi** (`src/adaptive.ts`): nei giochi con poche prove per sessione il livello successivo era calcolato escludendo l'ultima risposta e togliendo un quarto di livello di riscaldamento, che annullava il piccolo passo in salita. **Decifra il Codice** (una prova per sessione) scendeva così di 0,25 livelli a ogni sessione anche vincendo, e in simulazione (300 giocatori × 60 sessioni) restava bloccato al livello 1 con il 99,9% di successi. Ora la soglia include il livello dopo l'ultima risposta e le sessioni con meno di 8 risposte ripartono esattamente da dove si sono fermate: Decifra il Codice converge al 77% di successi (obiettivo 80%).
+- **Nonogram e Tangram**: forzavano la partenza rapida a ogni sessione, contro quanto documentato, e in simulazione tenevano i giocatori al 59% di successi invece del 75% previsto (troppo difficile). Ora la partenza rapida vale solo nella prima sessione, come negli altri giochi, e il successo converge al 75%.
+- **Memoria di carte**: l'efficienza era calcolata rispetto a una mossa per coppia, impossibile senza fortuna: anche giocando con memoria perfetta si otteneva circa il 60% e il livello non poteva mai salire. Ora l'efficienza è misurata rispetto alle mosse attese con memoria perfetta (circa 1,61 per coppia, Velleman & Warrington 2013); si sale sotto 1,25 volte quel valore e si scende oltre 1,8 volte. Scoprire carte nuove non conta più come errore (contava per la soglia del bonus rapidità, che quindi non scattava quasi mai): sbagliare è solo dimenticare una carta già vista. Eliminati i suoni doppi a ogni coppia e il tempo di risposta errato usato per il bonus.
+- **Lettura veloce**: il bonus rapidità veniva aggiunto anche al Neuro Score, che deve restare confrontabile tra esercizi.
+- **Scelta rapida e Go/No-Go**: nei turni «non toccare» riusciti veniva registrato come tempo di risposta l'intera finestra di attesa, falsando il bonus rapidità.
+- **Tangram**: uscendo a metà schema il cronometro continuava a girare in background.
+- **Traguardi**: rimossa una stima approssimativa dei bonus rapidità ricavata dal testo dei risultati, che poteva far salire e poi scendere il progresso; icone dei traguardi rese tutte diverse (⚡, 🥋 e 🌌 erano ripetute).
+- **Documentazione**: 2048 arriva al tassello 2048 (non 4096) e ha il blocco di pietra ai livelli 9 e 10 (non 8 e 10).
+- **Tangram in 10 lingue**: descrizione, spiegazione, esempio, messaggi di gioco, pulsanti, 49 nomi di figure e il traguardo «Maestro del Tangram» erano rimasti in inglese in spagnolo, portoghese, francese, tedesco, russo, cinese, giapponese, hindi, arabo e indonesiano; ora sono tradotti (compreso il pulsante «Flip ⇄»). In italiano «pts tempo» diventa «punti tempo».
+
+### Aggiunto
+
+- **Istruzioni passo-passo per tutti i 40 giochi**: un riquadro «Come si gioca» con 3–4 passi numerati (cosa appare, cosa fare, cosa conta come errore, come cambia la difficoltà) nella scheda introduttiva e nella guida, in tutte le 12 lingue (principio di segmentazione, Mayer 2009).
+- **Lettura veloce adattiva**: era l'unico gioco senza livelli. Ora il livello fissa un ritmo di lettura ad alta voce da raggiungere (90 → 180 parole al minuto), mostrato da una barra «lepre» che si svuota al ritmo obiettivo. Si sale capendo il testo e battendo la barra, si scende con una risposta sbagliata: la comprensione viene sempre prima. Nel Neuro Score si legge al proprio ritmo.
+- **Ricompense che fanno tornare**:
+  - **Moltiplicatore di serie**: +10% di XP per ogni giorno consecutivo di allenamento, fino a +50% (avversione alla perdita, Kahneman & Tversky 1979; pratica distribuita, Cepeda et al. 2006).
+  - **Bonus di bentornato**: +15 XP per il primo esercizio della giornata.
+  - **Sinapsi d'oro**: circa un esercizio su cinque assegna a sorpresa 15–50 XP con una carta dorata animata (ricompensa variabile: Schultz 1998; Fiorillo, Tobler & Schultz 2003), più il nuovo traguardo *Sinapsi d'oro* (3 bonus trovati).
+  - **Quasi record**: «A soli N punti dal tuo record!» quando il punteggio resta entro 5 punti dal migliore.
+  - **Gancio per domani**: a fine allenamento, quanti giorni raggiungerà la serie tornando domani.
+- Documentazione scientifica: aggiunti il Tangram (mancava dal catalogo), la regola delle sessioni brevi, le nuove ricompense e 5 nuovi riferimenti; nella versione inglese anche 6 riferimenti presenti solo in quella italiana.
+
 ## [0.13.4] - 2026-11-09
 
 ### Aggiunto

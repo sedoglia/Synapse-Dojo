@@ -88,6 +88,7 @@ export const odd: Exercise = {
   domain: 'reasoning',
   name: 'ex.odd.name',
   desc: 'ex.odd.desc',
+  how: 'ex.odd.how',
   why: 'ex.odd.why',
   example: 'ex.odd.example',
   minutes: [1, 2],

@@ -6898,3 +6898,97 @@ html.big-text {
   .memoria-grid.cols-6 .memoria-card-sym { font-size: 1.25rem; }
   .memoria-grid.cols-7 .memoria-card-sym { font-size: 1.1rem; }
 }
+
+/* ---------- how to play (intro card and guide) ---------- */
+.how-box {
+  width: 100%;
+  text-align: start;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 14px;
+}
+.how-box h3 {
+  margin: 0 0 6px;
+  font-size: 1rem;
+}
+.how-steps {
+  margin: 0;
+  padding-inline-start: 1.4em;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  line-height: 1.45;
+}
+.how-steps li::marker {
+  font-weight: 900;
+  color: var(--accent);
+}
+
+/* ---------- reading pacer ---------- */
+.reading-goal {
+  font-weight: 700;
+}
+.reading-pacer > div {
+  background: linear-gradient(90deg, var(--accent-2), var(--accent));
+}
+
+/* ---------- extra rewards on the result card ---------- */
+.xp-chip.extra {
+  font-weight: 800;
+  font-size: 0.9rem;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+.near-best {
+  font-weight: 800;
+  color: var(--accent);
+  animation: pop 0.5s;
+}
+.surprise-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 12px 18px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #fde68a, #f59e0b);
+  color: #451a03;
+  box-shadow: 0 6px 22px rgba(245, 158, 11, 0.45);
+  animation: surprise-in 0.7s cubic-bezier(0.2, 1.4, 0.4, 1);
+}
+.surprise-card b {
+  font-size: 1.15rem;
+  font-weight: 900;
+}
+.surprise-icon {
+  font-size: 1.6rem;
+}
+@keyframes surprise-in {
+  0% {
+    transform: scale(0.3) rotate(-8deg);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.08) rotate(2deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0);
+  }
+}
+.tomorrow-hook {
+  font-weight: 700;
+  color: var(--accent);
+}
+@media (prefers-color-scheme: dark) {
+  .xp-chip.extra {
+    background: #26264a;
+    color: #c7c7ff;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .surprise-card {
+    animation: none;
+  }
+}

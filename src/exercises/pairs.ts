@@ -81,6 +81,7 @@ export const pairs: Exercise = {
   domain: 'memory',
   name: 'ex.pairs.name',
   desc: 'ex.pairs.desc',
+  how: 'ex.pairs.how',
   why: 'ex.pairs.why',
   example: 'ex.pairs.example',
   minutes: [1, 3],

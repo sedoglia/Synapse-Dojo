@@ -11,6 +11,7 @@ export const msit: Exercise = {
   domain: 'attention',
   name: 'ex.msit.name',
   desc: 'ex.msit.desc',
+  how: 'ex.msit.how',
   why: 'ex.msit.why',
   example: 'ex.msit.example',
   minutes: [1, 2],

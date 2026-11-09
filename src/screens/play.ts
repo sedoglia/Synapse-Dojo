@@ -3,11 +3,11 @@ import { Ctx, Aborted, type Mode } from '../ctx';
 import { sfx } from '../audio';
 import { store, NEURO_SCALE } from '../storage';
 import { t } from '../i18n';
-import { render, page, countUp, rankName, sparkline, xpBar } from '../ui';
+import { render, page, countUp, rankName, sparkline, xpBar, howBox } from '../ui';
 import { dailyCheckBattery, byId, type Exercise, type ExerciseResult } from '../exercises';
 import { nextPlan, markPlanDone } from '../stats';
 import { exampleCard } from '../examples';
-import { XP, addXp, playerLevel, checkBadges, type Badge } from '../rewards';
+import { XP, addXp, playerLevel, checkBadges, streakMultiplier, rollSurprise, type Badge } from '../rewards';
 import { shareOffer } from '../share';
 import { syncBoard } from '../board';
 import { DETRAIN_DAYS } from '../adaptive';
@@ -81,6 +81,7 @@ function intro(ex: Exercise, step: string | null): Promise<IntroChoice> {
           h('h2', {}, t(ex.name)),
           h('span', { class: `chip domain-${ex.domain}` }, t(`domain.${ex.domain}`)),
           h('p', {}, t(ex.desc)),
+          howBox(ex.how),
           exampleCard(ex.id, t(ex.example)),
           level !== null ? h('div', { class: 'muted' }, `${t('common.level')}: ${levelText(ex, level)}`) : null,
           ex.levels ? h('p', { class: 'tip' }, `💡 ${t('intro.tip')}`) : null,
@@ -224,14 +225,35 @@ function badgeList(badges: Badge[]): HTMLElement | null {
   );
 }
 
-function xpLine(gained: number, levelUp: boolean): HTMLElement {
+/** Extra XP shown as separate chips, so each reward is noticed on its own. */
+interface XpExtras {
+  streak?: { mult: number; xp: number };
+  welcome?: number;
+}
+
+function xpLine(gained: number, levelUp: boolean, extras: XpExtras = {}): HTMLElement {
   const p = playerLevel();
   return h(
     'div',
     { class: 'xp-gain' },
     h('span', { class: 'xp-chip' }, `+${gained} XP`),
+    extras.streak && extras.streak.xp > 0
+      ? h('span', { class: 'xp-chip extra' }, t('reward.streak', { m: extras.streak.mult.toFixed(1), xp: extras.streak.xp }))
+      : null,
+    extras.welcome ? h('span', { class: 'xp-chip extra' }, t('reward.welcome', { xp: extras.welcome })) : null,
     levelUp ? h('b', { class: 'level-up' }, `🎉 ${t('level.up', { n: p.level })}`) : null,
     xpBar(p.level, store.data.xp, p.from, p.to),
+  );
+}
+
+/** The surprise bonus card: deliberately bigger and shinier than the routine rewards around it. */
+function surpriseCard(xp: number): HTMLElement {
+  return h(
+    'div',
+    { class: 'surprise-card' },
+    h('span', { class: 'surprise-icon' }, '✨🧠✨'),
+    h('b', {}, t('reward.surprise')),
+    h('span', {}, t('reward.surpriseSub', { xp })),
   );
 }
 
@@ -257,6 +279,8 @@ async function practiceRound(ex: Exercise, step: { i: number; n: number } | null
   const run = await runExercise(ex, 'train', before);
   if (!run) return 'quit';
   const { res, ctx } = run;
+  // Checked before the run is saved: the first exercise of the day earns a welcome-back bonus.
+  const firstToday = !store.activeDays().has(todayKey());
 
   const prevBest = store.best(ex.id);
   const score = Math.round(res.score);
@@ -274,18 +298,26 @@ async function practiceRound(ex: Exercise, step: { i: number; n: number } | null
     store.bump('earlyBird');
   }
   // Level-ups are capped so one lucky session can't outweigh steady daily practice.
-  const xp = addXp(
+  const baseXp =
     XP.exercise +
-      (isBest && prevBest !== null ? XP.best : 0) +
-      Math.min(ctx.levelUps, 4) * XP.levelUp +
-      (speedBonusEarned ? XP.speed : 0),
-  );
+    (isBest && prevBest !== null ? XP.best : 0) +
+    Math.min(ctx.levelUps, 4) * XP.levelUp +
+    (speedBonusEarned ? XP.speed : 0);
+  const mult = streakMultiplier();
+  const streakXp = Math.round(baseXp * (mult - 1));
+  const welcomeXp = firstToday ? XP.welcome : 0;
+  const surprise = rollSurprise();
+  if (surprise) store.bump('surprises');
+  const xp = addXp(baseXp + streakXp + welcomeXp + surprise);
   const badges = checkBadges();
   if (isBest || badges.length) {
     sfx.fanfare();
-  } else if (speedBonusEarned) {
+  } else if (speedBonusEarned || surprise) {
     sfx.coins();
   }
+  if (surprise) setTimeout(() => sfx.sparkle(), 450);
+  // Goal gradient (Hull 1932; Kivetz et al. 2006): a near miss on the record is a reason to try once more.
+  const gap = prevBest !== null && !isBest ? prevBest - score : 0;
 
   const history = (store.data.history[ex.id] ?? []).map((p) => p.level);
   const first = history[0];
@@ -306,7 +338,9 @@ async function practiceRound(ex: Exercise, step: { i: number; n: number } | null
       speedBonusEarned ? h('div', { class: 'badge-speed' }, `⚡ ${t('result.speedBonus')}`) : null,
       isBest
         ? h('div', { class: 'badge-best' }, `🏆 ${t('common.newBest')}`)
-        : h('div', { class: 'muted' }, `${t('common.best')}: ${prevBest}`),
+        : gap > 0 && gap <= 5
+          ? h('div', { class: 'near-best' }, `🎯 ${t('result.nearBest', { n: gap })} (${t('common.best')}: ${prevBest})`)
+          : h('div', { class: 'muted' }, `${t('common.best')}: ${prevBest}`),
       ex.levels && res.level !== undefined
         ? h(
             'div',
@@ -332,7 +366,8 @@ async function practiceRound(ex: Exercise, step: { i: number; n: number } | null
               : null,
           )
         : null,
-      xpLine(xp.gained, xp.levelUp),
+      surprise ? surpriseCard(surprise) : null,
+      xpLine(xp.gained, xp.levelUp, { streak: { mult, xp: streakXp }, welcome: welcomeXp }),
       badgeList(badges),
       h(
         'div',
@@ -390,6 +425,8 @@ export async function playPlan() {
         h('h2', {}, t('plan.done')),
         h('p', { class: 'muted' }, t('plan.doneSub')),
         reward,
+        // Zeigarnik / loss aversion: name tomorrow's open goal so the session ends with a reason to come back.
+        h('p', { class: 'tomorrow-hook' }, t('plan.tomorrow', { n: store.streak() + 1 })),
         badgeList(badges),
         h(
           'div',

@@ -20,6 +20,7 @@ export const rhythm: Exercise = {
   domain: 'coordination',
   name: 'ex.rhythm.name',
   desc: 'ex.rhythm.desc',
+  how: 'ex.rhythm.how',
   why: 'ex.rhythm.why',
   example: 'ex.rhythm.example',
   minutes: [1, 2],

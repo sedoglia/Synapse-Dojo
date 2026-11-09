@@ -17,6 +17,7 @@ export const ruleSwitch: Exercise = {
   domain: 'executive',
   name: 'ex.switch.name',
   desc: 'ex.switch.desc',
+  how: 'ex.switch.how',
   why: 'ex.switch.why',
   example: 'ex.switch.example',
   minutes: [1, 2],

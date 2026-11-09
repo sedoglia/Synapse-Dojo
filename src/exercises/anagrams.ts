@@ -27,6 +27,7 @@ export const anagrams: Exercise = {
   domain: 'language',
   name: 'ex.anagrams.name',
   desc: 'ex.anagrams.desc',
+  how: 'ex.anagrams.how',
   why: 'ex.anagrams.why',
   example: 'ex.anagrams.example',
   minutes: [2, 3],

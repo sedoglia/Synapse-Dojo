@@ -244,6 +244,7 @@ export const crackTheCode: Exercise = {
   domain: 'reasoning',
   name: 'ex.crackTheCode.name',
   desc: 'ex.crackTheCode.desc',
+  how: 'ex.crackTheCode.how',
   why: 'ex.crackTheCode.why',
   example: 'ex.crackTheCode.example',
   minutes: [1, 2],

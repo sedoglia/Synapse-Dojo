@@ -15,6 +15,7 @@ export const reaction: Exercise = {
   domain: 'speed',
   name: 'ex.reaction.name',
   desc: 'ex.reaction.desc',
+  how: 'ex.reaction.how',
   why: 'ex.reaction.why',
   example: 'ex.reaction.example',
   minutes: [1, 2],

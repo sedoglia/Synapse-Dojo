@@ -41,6 +41,7 @@ export const dots: Exercise = {
   domain: 'language',
   name: 'ex.dots.name',
   desc: 'ex.dots.desc',
+  how: 'ex.dots.how',
   why: 'ex.dots.why',
   example: 'ex.dots.example',
   minutes: [1, 2],

@@ -27,6 +27,7 @@ export const binding: Exercise = {
   domain: 'attention',
   name: 'ex.binding.name',
   desc: 'ex.binding.desc',
+  how: 'ex.binding.how',
   why: 'ex.binding.why',
   example: 'ex.binding.example',
   minutes: [1, 2],

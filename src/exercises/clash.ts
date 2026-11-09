@@ -19,6 +19,7 @@ export const clash: Exercise = {
   domain: 'executive',
   name: 'ex.clash.name',
   desc: 'ex.clash.desc',
+  how: 'ex.clash.how',
   why: 'ex.clash.why',
   example: 'ex.clash.example',
   minutes: [1, 2],

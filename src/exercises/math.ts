@@ -53,6 +53,7 @@ export const math: Exercise = {
   domain: 'language',
   name: 'ex.math.name',
   desc: 'ex.math.desc',
+  how: 'ex.math.how',
   why: 'ex.math.why',
   example: 'ex.math.example',
   minutes: [1, 2],

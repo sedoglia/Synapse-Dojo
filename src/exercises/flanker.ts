@@ -11,6 +11,7 @@ export const flanker: Exercise = {
   domain: 'attention',
   name: 'ex.flanker.name',
   desc: 'ex.flanker.desc',
+  how: 'ex.flanker.how',
   why: 'ex.flanker.why',
   example: 'ex.flanker.example',
   minutes: [1, 2],

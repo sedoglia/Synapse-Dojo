@@ -21,6 +21,7 @@ export const matrix: Exercise = {
   domain: 'spatial',
   name: 'ex.matrix.name',
   desc: 'ex.matrix.desc',
+  how: 'ex.matrix.how',
   why: 'ex.matrix.why',
   example: 'ex.matrix.example',
   minutes: [2, 3],

@@ -84,6 +84,7 @@ export const stories: Exercise = {
   domain: 'memory',
   name: 'ex.stories.name',
   desc: 'ex.stories.desc',
+  how: 'ex.stories.how',
   why: 'ex.stories.why',
   example: 'ex.stories.example',
   minutes: [2, 5],

@@ -91,6 +91,7 @@ export const sorting: Exercise = {
   domain: 'executive',
   name: 'ex.sorting.name',
   desc: 'ex.sorting.desc',
+  how: 'ex.sorting.how',
   why: 'ex.sorting.why',
   example: 'ex.sorting.example',
   minutes: [1, 2],

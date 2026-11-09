@@ -1,5 +1,5 @@
 ﻿import { h } from './dom';
-import { t, LANGS, loadLang, meta, type Lang } from './i18n';
+import { t, LANGS, loadLang, meta, type Lang, type I18nKey } from './i18n';
 import { store } from './storage';
 
 /** Reflects language and accessibility settings on the document. */
@@ -118,4 +118,21 @@ export function countUp(el: HTMLElement, to: number, ms = 900) {
   requestAnimationFrame(step);
   // rAF pauses in background tabs; make sure the final value always lands.
   setTimeout(() => (el.textContent = String(to)), ms + 100);
+}
+
+/**
+ * "How to play": the exercise's rules as a numbered list, one step per line of the text.
+ * Short numbered steps are easier to follow and remember than a paragraph (segmenting principle, Mayer 2009),
+ * which matters most for older players and for the first session of a game.
+ */
+export function howBox(how: I18nKey): HTMLElement {
+  const steps = t(how)
+    .split('\n')
+    .filter((s) => s.trim());
+  return h(
+    'section',
+    { class: 'how-box' },
+    h('h3', {}, `📋 ${t('intro.how')}`),
+    h('ol', { class: 'how-steps' }, ...steps.map((s) => h('li', {}, s))),
+  );
 }

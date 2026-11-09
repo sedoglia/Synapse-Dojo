@@ -12,6 +12,7 @@ export const span: Exercise = {
   domain: 'wm',
   name: 'ex.span.name',
   desc: 'ex.span.desc',
+  how: 'ex.span.how',
   why: 'ex.span.why',
   example: 'ex.span.example',
   minutes: [2, 3],

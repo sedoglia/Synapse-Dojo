@@ -110,6 +110,7 @@ export const tangram: Exercise = {
   domain: 'spatial',
   name: 'ex.tangram.name',
   desc: 'ex.tangram.desc',
+  how: 'ex.tangram.how',
   why: 'ex.tangram.why',
   example: 'ex.tangram.example',
   minutes: [1.5, 2.5],
@@ -119,7 +120,7 @@ export const tangram: Exercise = {
   async run(ctx) {
     // 3 schemes per match in training (2 in daily check, 1 in practice)
     const trials = ctx.count(3, 2, 1);
-    const st = ctx.stair(trials, 1, 8, { target: 0.75, fastStart: true });
+    const st = ctx.stair(trials, 1, 8, { target: 0.75 });
     const usedPuzzleIds = new Set<string>();
     let correct = 0;
 
@@ -785,6 +786,8 @@ export const tangram: Exercise = {
       let onTrialFinished: ((ok: boolean) => void) | null = null;
       const trialPromise = ctx.input<boolean>((done) => {
         onTrialFinished = done;
+        // Quitting mid-puzzle must also stop the stopwatch, which would otherwise tick forever.
+        return () => clearInterval(timerInterval);
       });
 
       const triggerVictory = () => {
