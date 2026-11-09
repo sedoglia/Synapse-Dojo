@@ -16,6 +16,7 @@ export const tapSeq: Exercise = {
   domain: 'coordination',
   name: 'ex.tapSeq.name',
   desc: 'ex.tapSeq.desc',
+  how: 'ex.tapSeq.how',
   why: 'ex.tapSeq.why',
   example: 'ex.tapSeq.example',
   minutes: [1, 2],

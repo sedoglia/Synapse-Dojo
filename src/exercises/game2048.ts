@@ -195,6 +195,7 @@ export const game2048: Exercise = {
   domain: 'reasoning',
   name: 'ex.game2048.name',
   desc: 'ex.game2048.desc',
+  how: 'ex.game2048.how',
   why: 'ex.game2048.why',
   example: 'ex.game2048.example',
   minutes: [1, 2],

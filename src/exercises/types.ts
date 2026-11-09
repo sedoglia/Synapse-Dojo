@@ -20,6 +20,9 @@ export interface Exercise {
   name: I18nKey;
   desc: I18nKey;
   why: I18nKey;
+  /** Step-by-step rules, one step per line ("
+"), shown as a numbered list on the intro card and in the guide. */
+  how: I18nKey;
   /** One-line worked example shown under the illustration (also used as a hint during practice). */
   example: I18nKey;
   /** Set to false for exercises that don't need a guided practice round. */

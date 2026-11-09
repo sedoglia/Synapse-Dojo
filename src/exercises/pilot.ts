@@ -99,6 +99,7 @@ export const pilot: Exercise = {
   domain: 'attention',
   name: 'ex.pilot.name',
   desc: 'ex.pilot.desc',
+  how: 'ex.pilot.how',
   why: 'ex.pilot.why',
   example: 'ex.pilot.example',
   minutes: [1, 2],

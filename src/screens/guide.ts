@@ -1,6 +1,6 @@
 import { h } from '../dom';
 import { t, type I18nKey } from '../i18n';
-import { render, page, langPicker } from '../ui';
+import { render, page, langPicker, howBox } from '../ui';
 import { EXERCISES, DOMAINS, type Domain } from '../exercises';
 
 /**
@@ -115,6 +115,7 @@ export function guideContent(): HTMLElement[] {
                     h('b', { class: 'guide-field-label' }, t('guide.gameHow')),
                     h('p', { class: 'guide-field-text' }, t(ex.desc)),
                   ),
+                  howBox(ex.how),
                   ex.example
                     ? h(
                         'div',

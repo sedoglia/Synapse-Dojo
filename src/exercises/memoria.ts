@@ -15,7 +15,7 @@
  * 4. Dopaminergic Reward Prediction Error (RPE) & Eureka Flow (Schultz, 1998, 2015; Berridge & Robinson, 1998):
  *    Successful pair identification triggers sudden positive prediction errors, releasing dopamine
  *    in the nucleus accumbens. Cascading match combos and escalating pentatonic chimes reinforce sustained engagement.
- * 5. Dynamic Difficulty Adjustment & 85% Rule (Kaernbach, 1991; Wilson et al., 2019):
+ * 5. Dynamic Difficulty Adjustment (Wilson et al., 2019), efficiency measured against perfect memory (Velleman & Warrington, 2013):
  *    Scales grid size and relational load smoothly from 3 pairs (6 cards) to 18 pairs (36 cards) across 10 levels,
  *    targeting an optimal balance between challenge and self-efficacy.
  */
@@ -89,7 +89,19 @@ interface RoundResult {
   turns: number;
   pairs: number;
   streakMax: number;
+  memoryErrors: number;
 }
+
+/**
+ * Expected turns for a player with perfect memory and the best strategy: (3 − 2 ln 2)·n + 7/8 − 2 ln 2
+ * (Velleman & Warrington, 2013, "What to expect in a game of memory"), never fewer than one turn per pair.
+ */
+export const optimalTurns = (pairs: number) =>
+  Math.max(pairs, (3 - 2 * Math.LN2) * pairs + 7 / 8 - 2 * Math.LN2);
+
+/** Efficiency (optimal ÷ actual turns) needed to move up a level, and below which the level drops. */
+const LEVEL_UP = 0.8;
+const LEVEL_DOWN = 0.55;
 
 /**
  * Runs one interactive round of Memoria card matching.
@@ -161,6 +173,10 @@ function round(
   let currentStreak = 0;
   let maxStreak = 0;
   let firstPick: { index: number; symbol: string; el: HTMLElement } | null = null;
+  /** Cards already seen face up: only a mismatch involving known cards is a memory error. */
+  const seen = new Set<number>();
+  let memoryErrors = 0;
+  let lastTurnAt = performance.now();
   let pendingMismatchTimer: ReturnType<typeof setTimeout> | null = null;
   let pendingMismatchCards: [HTMLElement, HTMLElement, number, number] | null = null;
   let finishTimer: ReturnType<typeof setTimeout> | null = null;
@@ -234,15 +250,17 @@ function round(
       settled = true;
       resolvePendingMismatch();
 
-      const minTurns = numPairs;
-      const extraTurns = Math.max(0, turns - minTurns);
-      const acc = clamp(1 - extraTurns / (numPairs * 1.5), 0.2, 1.0);
+      // Efficiency against a player with perfect memory, who still has to discover the cards: about 1.61 turns per
+      // pair on average (Velleman & Warrington, 2013). Counting against one turn per pair, as before, meant that even
+      // flawless play scored ~60% and the level could never rise.
+      const acc = clamp(optimalTurns(numPairs) / Math.max(1, turns), 0, 1);
 
       done({
         acc,
         turns,
         pairs: numPairs,
         streakMax: maxStreak,
+        memoryErrors,
       });
     }
 
@@ -294,6 +312,14 @@ function round(
             const idxA = firstPick.index;
             const idxB = index;
             firstPick = null;
+            const now = performance.now();
+            const turnMs = now - lastTurnAt;
+            lastTurnAt = now;
+            // A memory error: the partner of the first card had already been seen, or the second card was a known one.
+            const partnerKnown = cards.some((c, i) => i !== idxA && !c.matched && c.symbol === cards[idxA].symbol && seen.has(i));
+            const memoryError = !match && (partnerKnown || seen.has(idxB));
+            seen.add(idxA);
+            seen.add(idxB);
 
             if (match) {
               // --- MATCH FOUND ---
@@ -306,7 +332,7 @@ function round(
               cardA.classList.add('matched');
               cardB.classList.add('matched');
 
-              ctx.feedback(true, { subtle: true });
+              ctx.feedback(true, { subtle: true, rt: turnMs, sound: 'none' });
               sfx.ok(currentStreak);
 
               if (currentStreak >= 2) {
@@ -328,8 +354,13 @@ function round(
             } else {
               // --- MISMATCH ---
               currentStreak = 0;
-              ctx.feedback(false, { subtle: true });
-              sfx.bad();
+              if (memoryError) {
+                // Only forgetting is a mistake; turning up unknown cards is how the game is played.
+                memoryErrors++;
+                ctx.feedback(false, { subtle: true });
+              } else {
+                sfx.tick();
+              }
 
               cardA.classList.add('mismatch');
               cardB.classList.add('mismatch');
@@ -363,6 +394,7 @@ export const memoria: Exercise = {
   domain: 'memory',
   name: 'ex.memoria.name',
   desc: 'ex.memoria.desc',
+  how: 'ex.memoria.how',
   why: 'ex.memoria.why',
   example: 'ex.memoria.example',
   minutes: [1, 3],
@@ -389,27 +421,26 @@ export const memoria: Exercise = {
     const rounds = ctx.practice ? 1 : 2;
     const scores: number[] = [];
     let lastResult = { pairs: 3, turns: 3, acc: 1 };
-    let totalPairsSum = 0;
 
     for (let r = 0; r < rounds; r++) {
       const lvlToRun = ctx.practice ? 1 : level;
       const res = await round(ctx, lvlToRun, r, rounds);
       scores.push(((lvlToRun - 1 + res.acc) / MAX_LEVEL) * 100);
       lastResult = res;
-      totalPairsSum += res.pairs;
 
-      // Adaptive step between rounds (Kaernbach 85% rule)
-      if (res.acc >= 0.75) {
+      // Adaptive step between rounds: up when the board was cleared within 1.25× the turns of a perfect memory,
+      // down beyond ~1.8×, so most boards end in the 55–80% efficiency band where effort is needed but success is likely.
+      if (res.acc >= LEVEL_UP) {
         level = Math.min(MAX_LEVEL, level + 1);
-      } else if (res.acc < 0.45) {
+      } else if (res.acc < LEVEL_DOWN) {
         level = Math.max(1, level - 1);
       }
     }
 
     ctx.progress(1);
     const base = scores.reduce((a, b) => a + b, 0) / scores.length;
-    const avgPairs = totalPairsSum / rounds;
-    const { score, timeBonus } = ctx.withTimeBonus(base, 1.8 * avgPairs);
+    // Benchmark: about 2 s per turn (two flips and a glance), the pace of fluent but careful play.
+    const { score, timeBonus } = ctx.withTimeBonus(base, 2.0);
 
     const detail = t('ex.memoria.detail', {
       pairs: lastResult.pairs,

@@ -11,6 +11,7 @@ export const vault: Exercise = {
   domain: 'memory',
   name: 'ex.vault.name',
   desc: 'ex.vault.desc',
+  how: 'ex.vault.how',
   why: 'ex.vault.why',
   example: 'ex.vault.example',
   minutes: [1, 3],

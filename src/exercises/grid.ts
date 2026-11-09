@@ -77,6 +77,7 @@ export const grid: Exercise = {
   domain: 'wm',
   name: 'ex.grid.name',
   desc: 'ex.grid.desc',
+  how: 'ex.grid.how',
   why: 'ex.grid.why',
   example: 'ex.grid.example',
   minutes: [1, 3],

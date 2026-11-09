@@ -117,6 +117,7 @@ export const path: Exercise = {
   domain: 'speed',
   name: 'ex.path.name',
   desc: 'ex.path.desc',
+  how: 'ex.path.how',
   why: 'ex.path.why',
   example: 'ex.path.example',
   minutes: [1, 2],

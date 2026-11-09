@@ -224,6 +224,7 @@ export const towers: Exercise = {
   domain: 'reasoning',
   name: 'ex.towers.name',
   desc: 'ex.towers.desc',
+  how: 'ex.towers.how',
   why: 'ex.towers.why',
   example: 'ex.towers.example',
   minutes: [2, 5],

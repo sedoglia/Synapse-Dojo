@@ -3,6 +3,9 @@
 /** After this many days without practice an exercise restarts one level lower (skills fade without practice). */
 export const DETRAIN_DAYS = 14;
 
+/** Sessions with fewer answers than this carry their final level over instead of averaging it (see `Staircase.next`). */
+export const SHORT_SESSION = 8;
+
 /** Maps a level to 0–100 within its range; the lowest level still earns a little credit. */
 export const levelScore = (level: number, min: number, max: number) =>
   clamp((level - min + 1) / (max - min + 1), 0, 1) * 100;
@@ -79,16 +82,27 @@ export class Staircase {
     return this.results.length ? this.results.filter(Boolean).length / this.results.length : 0;
   }
 
-  /** Average level over the second half of the session: a stable estimate of the threshold. */
+  /**
+   * Average level over the second half of the session, the level after the last answer included:
+   * a stable estimate of the threshold. (Leaving out the last move made short sessions lag one answer behind.)
+   */
   threshold(): number {
-    const tail = this.trace.slice(Math.floor(this.trace.length / 2));
-    if (!tail.length) return this.level;
+    const trace = [...this.trace, this.level];
+    const tail = trace.slice(Math.floor(trace.length / 2));
     return tail.reduce((a, b) => a + b, 0) / tail.length;
   }
 
-  /** Next session starts a quarter of a step below the threshold: a warm-up small enough not to lower the level over time. */
+  /**
+   * Starting level for the next session.
+   * - Long sessions (≥ SHORT_SESSION answers): a quarter of a step below the threshold, a warm-up small enough not
+   *   to lower the level over time.
+   * - Short sessions (puzzles with 1–7 long trials): the staircase simply carries on from where it stopped. Averaging
+   *   and a warm-up would cancel the small up-step: a game with one puzzle per session could never climb
+   *   (simulated: stuck at level 1 with 99.9% success instead of converging on the target accuracy).
+   */
   next(): number {
-    return Math.round(clamp(this.threshold() - this.down / 4, this.min, this.max) * 10) / 10;
+    const level = this.results.length < SHORT_SESSION ? this.level : this.threshold() - this.down / 4;
+    return Math.round(clamp(level, this.min, this.max) * 10) / 10;
   }
 
   /**

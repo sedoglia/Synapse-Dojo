@@ -73,6 +73,7 @@ export const swipePattern: Exercise = {
   domain: 'coordination',
   name: 'ex.swipePattern.name',
   desc: 'ex.swipePattern.desc',
+  how: 'ex.swipePattern.how',
   why: 'ex.swipePattern.why',
   example: 'ex.swipePattern.example',
   minutes: [1, 2],

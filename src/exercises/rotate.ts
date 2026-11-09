@@ -68,6 +68,7 @@ export const rotate: Exercise = {
   domain: 'spatial',
   name: 'ex.rotate.name',
   desc: 'ex.rotate.desc',
+  how: 'ex.rotate.how',
   why: 'ex.rotate.why',
   example: 'ex.rotate.example',
   minutes: [1, 2],

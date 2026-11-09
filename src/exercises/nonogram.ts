@@ -31,6 +31,7 @@ export const nonogram: Exercise = {
   domain: 'spatial',
   name: 'ex.nonogram.name',
   desc: 'ex.nonogram.desc',
+  how: 'ex.nonogram.how',
   why: 'ex.nonogram.why',
   example: 'ex.nonogram.example',
   minutes: [1.5, 2],
@@ -39,7 +40,7 @@ export const nonogram: Exercise = {
 
   async run(ctx) {
     const trials = ctx.count(3, 2, 1);
-    const st = ctx.stair(trials, 1, 8, { target: 0.75, fastStart: true });
+    const st = ctx.stair(trials, 1, 8, { target: 0.75 });
     const usedPuzzleIds = new Set<string>();
     let correct = 0;
 

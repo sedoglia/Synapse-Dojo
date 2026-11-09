@@ -11,6 +11,7 @@ export const reflex: Exercise = {
   domain: 'speed',
   name: 'ex.reflex.name',
   desc: 'ex.reflex.desc',
+  how: 'ex.reflex.how',
   why: 'ex.reflex.why',
   example: 'ex.reflex.example',
   minutes: [1, 2],
@@ -50,7 +51,8 @@ export const reflex: Exercise = {
       pads[k].classList.remove('go', 'nogo');
 
       const ok = ctx.track(st, noGo ? tapped === null : tapped === k, {
-        rt,
+        // A withheld no-go response has no reaction time: counting the whole window would skew the speed bonus.
+        rt: noGo ? 0 : rt,
         note: noGo ? t('fb.noGo') : tapped === null ? t('fb.tooSlow') : undefined,
         was: !noGo && tapped !== null ? t('fb.otherPad') : undefined,
       });

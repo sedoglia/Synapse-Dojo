@@ -1,4 +1,4 @@
-import { todayKey } from './dom';
+import { todayKey, rand, secureRandom } from './dom';
 import { store } from './storage';
 import type { I18nKey } from './i18n';
 import { EXERCISES, DOMAINS } from './exercises';
@@ -7,7 +7,31 @@ import { EXERCISES, DOMAINS } from './exercises';
  * Rewards are for showing up and effort, not just for high scores: everyone at their own level
  * should feel progress. (Gamification raises motivation without changing what is trained.)
  */
-export const XP = { exercise: 20, practice: 5, best: 10, levelUp: 5, speed: 10, check: 30, plan: 50 };
+export const XP = { exercise: 20, practice: 5, best: 10, levelUp: 5, speed: 10, check: 30, plan: 50, welcome: 15 };
+
+/**
+ * Streak multiplier on exercise XP: +10% per day of the current streak, up to +50% from day 5.
+ * A chain that grows in value is something to protect (loss aversion, Kahneman & Tversky 1979) and rewards the
+ * spaced, daily practice that helps learning most (Cepeda et al. 2006). The cap keeps a long streak from making a
+ * single missed day feel like a disaster: the streak already forgives one rest day a week.
+ */
+export const streakMultiplier = (streak = store.streak()) => 1 + 0.1 * Math.min(5, Math.max(0, streak));
+
+/** Chance of a surprise bonus after an exercise, and the amounts it can take. */
+const SURPRISE_CHANCE = 0.2;
+const SURPRISE_XP = [15, 20, 25, 30, 50];
+
+/**
+ * Surprise bonus ("golden synapse"): about one exercise in five, at random, earns 15–50 extra XP.
+ * Dopamine neurons respond most to rewards that are not predicted (reward prediction error, Schultz 1998) and keep
+ * responding to uncertain ones (Fiorillo, Tobler & Schultz 2003), so an unpredictable extra keeps the end of every
+ * exercise interesting. It never depends on the score: it rewards showing up, not talent. Returns 0 when no bonus.
+ */
+export function rollSurprise(): number {
+  if (secureRandom() >= SURPRISE_CHANCE) return 0;
+  // Smaller amounts are more frequent: the 50 XP jackpot comes up once every five surprises at most.
+  return SURPRISE_XP[Math.min(rand(0, SURPRISE_XP.length - 1), rand(0, SURPRISE_XP.length - 1))];
+}
 
 /** Player level n needs 50·n·(n−1) XP in total: 100 for level 2, 300 for 3, 600 for 4… */
 export function playerLevel(xp = store.data.xp): { level: number; from: number; to: number } {
@@ -44,14 +68,7 @@ function domainsLastWeek(): number {
   return new Set(EXERCISES.filter((e) => ids.has(e.id)).map((e) => e.domain)).size;
 }
 
-function speedBonusesCount(): number {
-  const c = store.data.counters.speedBonuses ?? 0;
-  if (c === 0 && store.data.runs.length > 0) {
-    const fromRuns = store.data.runs.filter((r) => r.detail && r.detail.includes('+') && r.detail.includes('s')).length;
-    if (fromRuns > 0) return fromRuns;
-  }
-  return c;
-}
+const speedBonusesCount = () => store.data.counters.speedBonuses ?? 0;
 
 function hasActiveWeekend(): boolean {
   const days = store.activeDays();
@@ -92,12 +109,13 @@ export const BADGES: Badge[] = [
   { id: 'week4', icon: '🎯', name: 'badge.week4.name', desc: 'badge.week4.desc', progress: () => frac(store.daysThisWeek(), 4) },
   { id: 'streak7', icon: '☄️', name: 'badge.streak7.name', desc: 'badge.streak7.desc', progress: () => frac(store.streak(), 7) },
   { id: 'week7', icon: '🌟', name: 'badge.week7.name', desc: 'badge.week7.desc', progress: () => frac(store.daysThisWeek(), 7) },
-  { id: 'streak14', icon: '⚡', name: 'badge.streak14.name', desc: 'badge.streak14.desc', progress: () => frac(store.streak(), 14) },
+  { id: 'streak14', icon: '💪', name: 'badge.streak14.name', desc: 'badge.streak14.desc', progress: () => frac(store.streak(), 14) },
   { id: 'streak21', icon: '🛡️', name: 'badge.streak21.name', desc: 'badge.streak21.desc', progress: () => frac(store.streak(), 21) },
   { id: 'streak30', icon: '🏆', name: 'badge.streak30.name', desc: 'badge.streak30.desc', progress: () => frac(store.streak(), 30) },
   { id: 'streak60', icon: '🛤️', name: 'badge.streak60.name', desc: 'badge.streak60.desc', progress: () => frac(store.streak(), 60) },
   { id: 'streak100', icon: '👑', name: 'badge.streak100.name', desc: 'badge.streak100.desc', progress: () => frac(store.streak(), 100) },
   { id: 'weekend', icon: '🏖️', name: 'badge.weekend.name', desc: 'badge.weekend.desc', progress: () => (hasActiveWeekend() ? 1 : 0) },
+  { id: 'lucky', icon: '🍀', name: 'badge.lucky.name', desc: 'badge.lucky.desc', progress: () => frac(store.data.counters.surprises ?? 0, 3) },
   { id: 'earlyBird', icon: '🌅', name: 'badge.earlyBird.name', desc: 'badge.earlyBird.desc', progress: () => frac(store.data.counters.earlyBird ?? 0, 1) },
 
   // --- Dedication & Workout Volume (Ebbinghaus 1885; Ball et al. 2002) ---
@@ -127,15 +145,15 @@ export const BADGES: Badge[] = [
   { id: 'levelups50', icon: '🏔️', name: 'badge.levelups50.name', desc: 'badge.levelups50.desc', progress: () => frac(store.data.counters.levelUps ?? 0, 50) },
   { id: 'levelups100', icon: '🌠', name: 'badge.levelups100.name', desc: 'badge.levelups100.desc', progress: () => frac(store.data.counters.levelUps ?? 0, 100) },
   { id: 'speed10', icon: '🐇', name: 'badge.speed10.name', desc: 'badge.speed10.desc', progress: () => frac(speedBonusesCount(), 10) },
-  { id: 'speed50', icon: '⚡', name: 'badge.speed50.name', desc: 'badge.speed50.desc', progress: () => frac(speedBonusesCount(), 50) },
+  { id: 'speed50', icon: '🏎️', name: 'badge.speed50.name', desc: 'badge.speed50.desc', progress: () => frac(speedBonusesCount(), 50) },
 
   // --- Progression & Experience (Ryan & Deci 2000; Hull 1932) ---
   { id: 'xp1000', icon: '🔋', name: 'badge.xp1000.name', desc: 'badge.xp1000.desc', progress: () => frac(store.data.xp, 1000) },
-  { id: 'xp5000', icon: '⚡', name: 'badge.xp5000.name', desc: 'badge.xp5000.desc', progress: () => frac(store.data.xp, 5000) },
+  { id: 'xp5000', icon: '🔆', name: 'badge.xp5000.name', desc: 'badge.xp5000.desc', progress: () => frac(store.data.xp, 5000) },
   { id: 'xp10000', icon: '💫', name: 'badge.xp10000.name', desc: 'badge.xp10000.desc', progress: () => frac(store.data.xp, 10000) },
-  { id: 'xp25000', icon: '🌌', name: 'badge.xp25000.name', desc: 'badge.xp25000.desc', progress: () => frac(store.data.xp, 25000) },
+  { id: 'xp25000', icon: '🪐', name: 'badge.xp25000.name', desc: 'badge.xp25000.desc', progress: () => frac(store.data.xp, 25000) },
   { id: 'level5', icon: '🥋', name: 'badge.level5.name', desc: 'badge.level5.desc', progress: () => frac(playerLevel().level, 5) },
-  { id: 'level10', icon: '🥋', name: 'badge.level10.name', desc: 'badge.level10.desc', progress: () => frac(playerLevel().level, 10) },
+  { id: 'level10', icon: '🥇', name: 'badge.level10.name', desc: 'badge.level10.desc', progress: () => frac(playerLevel().level, 10) },
 
   // --- Specific Cognitive Mastery Benchmarks ---
   { id: 'nback3', icon: '🔁', name: 'badge.nback3.name', desc: 'badge.nback3.desc', progress: () => frac(level('echo'), 5) },

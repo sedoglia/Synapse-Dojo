@@ -92,6 +92,7 @@ export const resources: Exercise = {
   domain: 'reasoning',
   name: 'ex.resources.name',
   desc: 'ex.resources.desc',
+  how: 'ex.resources.how',
   why: 'ex.resources.why',
   example: 'ex.resources.example',
   minutes: [2, 4],

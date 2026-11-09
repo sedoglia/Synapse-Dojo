@@ -11,6 +11,7 @@ export const gonogo: Exercise = {
   domain: 'attention',
   name: 'ex.gonogo.name',
   desc: 'ex.gonogo.desc',
+  how: 'ex.gonogo.how',
   why: 'ex.gonogo.why',
   example: 'ex.gonogo.example',
   minutes: [1, 2],
@@ -69,7 +70,7 @@ export const gonogo: Exercise = {
       }
 
       ctx.track(st, ok, {
-        rt: !isNoGo && tapped ? rt : undefined,
+        rt: !isNoGo && tapped ? rt : 0, // 0 = no reaction time to count (a withheld or missed response)
         note: isNoGo ? t('fb.noGo') : t('fb.tooSlow'),
       });
 

@@ -16,7 +16,7 @@ export interface FeedbackOptions {
   was?: string;
   /** Why it counts as a mistake, shown next to ✗ as is: for mistakes with no right answer to show (too slow, too early). */
   note?: string;
-  /** Response time in ms (if measured independently by the exercise). */
+  /** Response time in ms (if measured independently by the exercise); 0 = no response time to count (e.g. a withheld no-go). */
   rt?: number;
   /** Custom sound effect style for correct answers: 'zen' for soft inhibition chimes. */
   sound?: 'ok' | 'zen' | 'none';

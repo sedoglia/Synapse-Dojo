@@ -13,6 +13,7 @@ export const fluency: Exercise = {
   domain: 'language',
   name: 'ex.fluency.name',
   desc: 'ex.fluency.desc',
+  how: 'ex.fluency.how',
   why: 'ex.fluency.why',
   example: 'ex.fluency.example',
   minutes: [1, 2],

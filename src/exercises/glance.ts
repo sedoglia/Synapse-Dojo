@@ -25,6 +25,7 @@ export const glance: Exercise = {
   domain: 'speed',
   name: 'ex.glance.name',
   desc: 'ex.glance.desc',
+  how: 'ex.glance.how',
   why: 'ex.glance.why',
   example: 'ex.glance.example',
   minutes: [2, 3],

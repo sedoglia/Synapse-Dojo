@@ -12,6 +12,7 @@ export const crossMove: Exercise = {
   domain: 'coordination',
   name: 'ex.crossMove.name',
   desc: 'ex.crossMove.desc',
+  how: 'ex.crossMove.how',
   why: 'ex.crossMove.why',
   example: 'ex.crossMove.example',
   minutes: [1, 2],

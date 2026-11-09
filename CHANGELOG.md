@@ -6,6 +6,32 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.14.0] - 2026-11-09
+
+### Fixed
+
+- **Adaptive engine, short sessions** (`src/adaptive.ts`): in games with few trials per session the next level was computed without the last answer and then lowered by a quarter-level warm-up, which cancelled the small step up. **Crack the Code** (one trial per session) therefore dropped 0.25 levels every session even when solved, and in simulation (300 players × 60 sessions) stayed stuck at level 1 with 99.9% success. The threshold now includes the level after the last answer, and sessions with fewer than 8 answers resume exactly where they stopped: Crack the Code converges on 77% success (target 80%).
+- **Nonogram and Tangram** forced the fast start every session, contrary to the documentation, and in simulation kept players at 59% success instead of the intended 75% (too hard). The fast start now applies only to the first session, as in every other game, and success converges on 75%.
+- **Memory Match**: efficiency was measured against one turn per pair, impossible without luck: even perfect memory scored about 60% and the level could never rise. Efficiency is now measured against the turns a perfect memory needs (about 1.61 per pair, Velleman & Warrington 2013); the level rises below 1.25 times that and drops beyond 1.8 times. Turning up new cards no longer counts as a mistake (it counted towards the speed-bonus accuracy gate, which almost never opened): a mistake is only forgetting a card already seen. Removed the double sounds on every pair and the wrong response time used for the bonus.
+- **Speed reading**: the speed bonus was also added in the Neuro Score, which must stay comparable across exercises.
+- **Choice reflex and Go/No-Go**: correctly withheld "don't tap" trials recorded the whole waiting window as a response time, skewing the speed bonus.
+- **Tangram**: quitting mid-puzzle left the stopwatch running in the background.
+- **Badges**: removed a rough estimate of speed bonuses guessed from result texts, which could make progress rise and then fall; badge icons are now all different (⚡, 🥋 and 🌌 were repeated).
+- **Documentation**: 2048 goes up to the 2048 tile (not 4096) and has the stone block at levels 9 and 10 (not 8 and 10).
+- **Tangram in 10 languages**: description, rationale, example, in-game messages, buttons, 49 figure names and the "Tangram Master" badge were still in English in Spanish, Portuguese, French, German, Russian, Chinese, Japanese, Hindi, Arabic and Indonesian; they are now translated (the "Flip ⇄" button included). Italian "pts tempo" is now "punti tempo".
+
+### Added
+
+- **Step-by-step instructions for all 40 games**: a "How to play" box with 3–4 numbered steps (what appears, what to do, what counts as a mistake, how difficulty changes) on the intro card and in the guide, in all 12 languages (segmenting principle, Mayer 2009).
+- **Adaptive Speed reading**: it was the only game without levels. The level now sets a reading-aloud pace to keep up with (90 → 180 words per minute), shown by a "hare" bar that empties at the target pace. The level rises when the text was understood and the bar beaten and drops after a wrong answer: comprehension always comes first. In the Neuro Score players read at their own pace.
+- **Rewards that bring players back**:
+  - **Streak multiplier**: +10% XP for every day in a row, up to +50% (loss aversion, Kahneman & Tversky 1979; spaced practice, Cepeda et al. 2006).
+  - **Welcome-back bonus**: +15 XP for the first exercise of the day.
+  - **Golden synapse**: about one exercise in five gives a 15–50 XP surprise with an animated golden card (variable reward: Schultz 1998; Fiorillo, Tobler & Schultz 2003), plus the new *Golden synapse* badge (3 bonuses found).
+  - **Near record**: "Only N points from your record!" when a score is within 5 points of the best.
+  - **A hook for tomorrow**: at the end of a workout, how many days the streak will reach by coming back tomorrow.
+- Scientific documentation: added Tangram (missing from the catalog), the short-session rule, the new rewards and 5 new references; the English version also gains 6 references that were only in the Italian one.
+
 ## [0.13.4] - 2026-11-09
 
 ### Added
