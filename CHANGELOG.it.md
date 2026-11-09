@@ -6,6 +6,19 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.13.4] - 2026-11-09
+
+### Aggiunto
+
+- **Nuovo esercizio "Memoria di carte" (`memoria`)**:
+  - Implementazione completa del classico gioco di memoria a coppie di carte coperte (*Pelmanism / Concentration*), portando il catalogo di Synapse Dojo a **40 giochi ufficiali** (4 nel dominio Memoria Episodica).
+  - **Fondamenti neuroscientifici rigorosi**: basato sul paradigma dell'associazione congiunta *What-Where binding* (Ungerleider & Mishkin, 1982; Pertzov et al., 2012) che integra la via visiva ventrale (identità della figura) e dorsale (coordinate spaziali della griglia) tramite la rete ippocampale relazionale (Eichenbaum, 2004) e il controllo dell'interferenza proattiva prefrontale (Postle et al., 2004; Jonides & Nee, 2006).
+  - **Dopamina e gamification**: animazioni 3D realistiche di rotazione delle carte con prospettiva, riscontri visivi dorati al match con particelle e coriandoli, notifiche fluttuanti di combo (*DOPPIO MATCH!*, *INARRESTABILE!*), rintocchi armonici su scala pentatonica ascendente (`sfx.ok`) e fanfara trionfale al completamento del tavolo.
+  - **Difficoltà adattiva a 10 livelli**: da 3 coppie (6 carte, 3×2) per principianti fino a 18 coppie (36 carte, 6×6) per maestri, calibrata sulla regola dell'85% di accuratezza (Wilson et al., 2019; Kaernbach, 1991).
+  - **6 mazzi tematici ad alto contrasto**: animali, cosmo, golosità, avventura, musica e simboli geometrici astratti (questi ultimi ad alto carico di interferenza visiva per allenare la discriminazione fine).
+  - **Integrazione completa con la progressione**: punteggio 0–100 pesato sull'efficienza delle mosse, bonus di velocità additivo e non punitivo (fino a +10 punti e +10 XP per risposte rapide ed efficienti), modalità prova guidata e supporto per il Neuro Score quotidiano.
+  - **Localizzazione integrale**: testi e descrizioni tradotti e verificati al 100% in tutte le 12 lingue supportate.
+
 ## [0.13.3] - 2026-11-08
 
 ### Sicurezza

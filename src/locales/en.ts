@@ -9,7 +9,7 @@ export const ui = {
   'onboard.go': 'Let’s go',
 
   'landing.heroTitle': 'Train your mind a few minutes a day',
-  'landing.heroSub': '39 cognitive and bilateral games inspired by research paradigms, to practise memory, attention, coordination, processing speed and reflexes. 100% free, no ads, no sign-up or passwords required.',
+  'landing.heroSub': '40 cognitive and bilateral games inspired by research paradigms, to practise memory, attention, coordination, processing speed and reflexes. 100% free, no ads, no sign-up or passwords required.',
   'landing.badgeFree': '100% Free',
   'landing.badgePrivacy': 'Total Privacy · Local Data',
   'landing.badgeScience': 'Research-Inspired',
@@ -44,7 +44,7 @@ export const ui = {
   'guide.checkH': '📏 Measure your Neuro Score (Daily Check)',
   'guide.checkP': 'The Neuro Score is a short daily battery covering all 9 areas, with one exercise per area chosen in daily rotation. Your score (0–1000) helps you follow your own trend in these exercises: read it over several weeks, not day by day, because the exercises rotate and each test is short. It has not yet been validated on real players, is not a clinical test and has no diagnostic value.',
   'guide.trainingH': '🥋 Free Gym (39 Exercises)',
-  'guide.trainingP': 'In the Gym section, you have unlimited access to all 39 exercises, categorized by domain. Use it to focus on specific skills you want to strengthen, explore different exercise mechanics, or challenge your personal high scores.',
+  'guide.trainingP': 'In the Gym section, you have unlimited access to all 40 exercises, categorized by domain. Use it to focus on specific skills you want to strengthen, explore different exercise mechanics, or challenge your personal high scores.',
   'guide.progressH': '📈 Progress & Statistics',
   'guide.progressP': 'Track your cognitive evolution over time. View your radar profile across all 9 skill domains, review your historical Neuro Score curve, unlock achievement badges (such as consecutive day streaks and master levels), and inspect your monthly training calendar.',
   'guide.boardH': '🏆 Weekly Leaderboard and Friend Groups',
@@ -402,7 +402,7 @@ export const ui = {
   'badge.combo10.name': 'Lightning',
   'badge.combo10.desc': '10 correct answers in a row',
   'badge.explorer.name': 'Explorer',
-  'badge.explorer.desc': 'Try all 39 exercises',
+  'badge.explorer.desc': 'Try all 40 exercises',
   'badge.balanced.name': 'Whole mind',
   'badge.balanced.desc': 'Train all 9 skills within 7 days',
   'badge.levelups25.name': 'Climbing',
@@ -441,7 +441,7 @@ export const ui = {
   'share.done.streak3': '3 training days in a row',
   'share.done.streak7': '7 training days in a row',
   'share.done.streak30': '30 training days in a row',
-  'share.done.explorer': 'All 39 exercises tried',
+  'share.done.explorer': 'All 40 exercises tried',
   'share.done.balanced': 'All 9 skills trained within 7 days',
   'share.note': 'The image shows only this milestone: no name, scores or age. Nothing is sent unless you choose where to share it.',
   'share.save': 'Save the image',
@@ -990,6 +990,19 @@ export const ui = {
 
 
 
+
+    // memoria
+  'ex.memoria.name': 'Memory Match',
+  'ex.memoria.desc': 'Flip cards two at a time to find all matching pairs with the fewest moves possible.',
+  'ex.memoria.why': 'Pelmanism and What-Where binding: binds visual object identity to 2D spatial coordinates in the hippocampus and visuospatial working memory.',
+  'ex.memoria.example': 'Flip card with 🦁, recall where the other 🦁 was and pair them.',
+  'ex.memoria.tip': 'Tap two cards to reveal them. If they match, they stay open; if not, remember their locations!',
+  'ex.memoria.moves': '{n} moves',
+  'ex.memoria.pairsLeft': '{k}/{n} pairs',
+  'ex.memoria.combo': 'COMBO ×{n}!',
+  'ex.memoria.match': 'PAIR FOUND!',
+  'ex.memoria.clear': 'BOARD CLEARED!',
+  'ex.memoria.detail': '{pairs} pairs in {turns} moves ({eff}% efficiency)',
 
   // tapSeq
   'ex.tapSeq.name': 'Bilateral Tap',

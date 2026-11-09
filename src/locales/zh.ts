@@ -962,6 +962,19 @@ const ui: Locale['ui'] = {
 
 
   
+    // memoria
+  'ex.memoria.name': '翻牌记忆',
+  'ex.memoria.desc': '每次翻开两张牌，以最少的步数找出所有相同的配对。',
+  'ex.memoria.why': '位置与特征结合（What-Where binding）：将物体特征与空间坐标相结合，锻炼海马体与视空间工作记忆。',
+  'ex.memoria.example': '翻开带有 🦁 的牌，回忆另一张 🦁 的位置并进行配对。',
+  'ex.memoria.tip': '每次点击两张牌。如果配对成功则保持打开；如果不匹配，请记住它们的位置！',
+  'ex.memoria.moves': '{n} 步',
+  'ex.memoria.pairsLeft': '{k}/{n} 对',
+  'ex.memoria.combo': '连击 ×{n}！',
+  'ex.memoria.match': '配对成功！',
+  'ex.memoria.clear': '通关成功！',
+  'ex.memoria.detail': '{turns} 步完成 {pairs} 对（效率 {eff}%）',
+
   'ex.tapSeq.name': "双侧交替律动",
   'ex.tapSeq.desc': "协调左右拇指复现快速交替的按键节奏",
   'ex.tapSeq.why': '左右交替的点击序列：这是对双手协调和注意力的练习。没有证据表明这类应用能增强胼胝体。',

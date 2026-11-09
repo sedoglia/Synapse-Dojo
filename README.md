@@ -18,10 +18,10 @@ Free cognitive training and bilateral coordination web application (source-avail
 
 - **🏋️ Daily Workout**: About 10–15 minutes with 4 daily exercises selected across your least recently trained skills. Once finished, you can immediately start another workout with different exercises and domains.
 - **📏 Measure Neuro Score**: Daily battery covering all **9 cognitive and motor domains** (selecting one rotating exercise per domain daily) to calculate a **Neuro Score** from 0 to 1000, for following your own trend in these exercises. Read it as a trend over several weeks: it has not yet been validated on real players, is not a clinical test, and cannot be compared with clinical norms.
-- **🥋 Free Gym**: Full catalog of **39 exercises** categorized into **9 cognitive and bilateral coordination domains**. Each exercise (except Speed reading, which is not adaptive) features a **continuous adaptive difficulty engine** that calibrates in real-time to stay near your own threshold, neither too easy nor too hard, saving your progress across sessions.
+- **🥋 Free Gym**: Full catalog of **40 exercises** categorized into **9 cognitive and bilateral coordination domains**. Each exercise (except Speed reading, which is not adaptive) features a **continuous adaptive difficulty engine** that calibrates in real-time to stay near your own threshold, neither too easy nor too hard, saving your progress across sessions.
 - **🏆 Weekly Leaderboard & Friend Groups** (optional, off by default): each week compare **consistency** (10 points per training day plus 1 per exercise, up to 12 a day), **improvement** against your own starting point and **best level** per exercise, with optional age groups and a separate board for relaxed-pace players. It resets every Monday, shows the top 3 and the players near you, and works for everyone or in **private groups** joined with a link or a code. It uses a random nickname, and leaving at any time deletes all data.
 
-### The 9 Domains and 39 Exercises
+### The 9 Domains and 40 Exercises
 
 | Domain | Exercises & Core Scientific Paradigms |
 |---|---|
@@ -29,7 +29,7 @@ Free cognitive training and bilateral coordination web application (source-avail
 | **🎯 Attention** | 🏎️ **Pilot** (Continuous visuo-motor multitasking, inspired by NeuroRacer), 📡 **Radar** (Multiple Object Tracking / MOT), 🎯 **Flanker Test** (Selective attention & flanker distractor inhibition), 🚦 **Go / No-Go** (Motor response inhibition), 🔠 **Multi-Source Interference** (Inspired by the MSIT: conflict between several sources of interference), 💠 **Color and Shape** (Visual feature binding) |
 | **🎛️ Executive Control** | 🎨 **Color Clash** (Stroop effect & cognitive interference), 🔀 **Dual Rule** (Task switching & switch cost reduction), 🃏 **Card Sorting** (Wisconsin Card Sorting Test - inductive rule deduction & set-shifting) |
 | **🧠 Working Memory** | 🔁 **Echo** (Single and dual auditory-visual N-Back with speech synthesis), 💡 **Light Grid** (Corsi block-tapping forward and backward), 🔟 **Last Digits** (Running memory span & continuous updating), 🧮 **Digit Span** (Verbal forward & backward digit span) |
-| **🔐 Episodic Memory** | 🔐 **Word Vault** (Old/new recognition memory), 🔗 **Pairs** (Symbol-word paired associates learning), 📜 **Story Memory** (Inspired by logical memory for short stories) |
+| **🔐 Episodic Memory** | 🔐 **Word Vault** (Old/new recognition memory), 🔗 **Pairs** (Symbol-word paired associates learning), 🎴 **Memory Match** (Pelmanism / Visuospatial What-Where binding & combo cascades), 📜 **Story Memory** (Inspired by logical memory for short stories) |
 | **🧊 Spatial Cognition** | 🧊 **Rotations** (Mental rotation of 2D chiral figures), 📐 **Spatial Matrix** (Mental rotation of matrix coordinates at 90°, 180°, and 270°), 🖼️ **Nonogram** (Visuospatial deduction, 2D constraint satisfaction & Gestalt pixel-art closure), 🧩 **Tangram** (Part-whole decomposition, mental rotation & geometric assembly) |
 | **🧩 Reasoning & Planning** | 🗼 **Towers** (Tower of London - advance strategic lookahead), 🔍 **Odd One Out** (Inductive reasoning & feature matching), 🧺 **Market Stall** (Knapsack problem: costs and earnings within a budget), 🧱 **2048** (Sequential planning, merge cascades & prefrontal inhibitory control), 🔓 **Crack the Code** (Deductive reasoning, constraint satisfaction & dopaminergic insight) |
 | **➗ Math & Reading** | ➗ **Math Sprint** (Rapid mental arithmetic - Kawashima learning therapy), 📖 **Speed Reading** (Rapid vocal reading with timer & comprehension check), 🔴 **Dot Calculation** (Approximate Number System: comparing quantities without counting), 🔤 **Anagrams** (Orthographic working memory & lexical retrieval), 💬 **Word Sprint** (fast orthographic classification by initial letter) |
@@ -49,7 +49,7 @@ Free cognitive training and bilateral coordination web application (source-avail
 - **Accessibility & Wellbeing**: Relaxed pace mode (adds 40% more time), large text option, automatic light and dark theme, and offline **Progressive Web App (PWA)** installation.
 - **Standalone Static Pages**:
   - [`index.html`](index.html): The complete interactive PWA game.
-  - [`guide.html`](guide.html): Comprehensive illustrated guide to all 39 games, paradigms, and FAQs.
+  - [`guide.html`](guide.html): Comprehensive illustrated guide to all 40 games, paradigms, and FAQs.
   - [`privacy.html`](privacy.html): Privacy policy, local data terms, and zero-cookie statement.
   - [`license.html`](license.html): Official PolyForm Noncommercial 1.0.0 license terms and copyright notices.
 
@@ -57,7 +57,7 @@ Free cognitive training and bilateral coordination web application (source-avail
 
 ## 🛠️ Technical Architecture
 
-Built purely with **TypeScript** and **Vite**, with **zero UI framework dependencies** (no React, Vue, or Angular bloat). This guarantees instant startup times, native DOM rendering performance, and a tiny gzipped bundle size (~34 KB for the core UI runtime, ~110 KB total for the entire app including all 39 games).
+Built purely with **TypeScript** and **Vite**, with **zero UI framework dependencies** (no React, Vue, or Angular bloat). This guarantees instant startup times, native DOM rendering performance, and a tiny gzipped bundle size (~34 KB for the core UI runtime, ~110 KB total for the entire app including all 40 games).
 
 ```
 synapse-dojo/
@@ -68,7 +68,7 @@ synapse-dojo/
 ├── cleanup/                Cron Worker that applies the leaderboard retention rules every night
 ├── scripts/                Build & deploy (deploy-web.mjs), dictionary checks (check-anagrams.mjs) & i18n verify (verify-i18n.mjs)
 ├── src/
-│   ├── exercises/          39 exercise implementations, index.ts (catalog & battery), types.ts, puzzle datasets
+│   ├── exercises/          40 exercise implementations, index.ts (catalog & battery), types.ts, puzzle datasets
 │   ├── screens/            App views: home, onboarding, training, play, progress, settings, board, boardJoin, groups, guide, privacy, license
 │   ├── locales/            12 standalone locale bundles (en.ts is the type-safe blueprint)
 │   ├── adaptive.ts         Continuous adaptive difficulty staircase engine (weighted up-down)

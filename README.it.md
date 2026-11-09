@@ -19,10 +19,10 @@ Gioco gratuito di allenamento cognitivo e coordinazione bilaterale (source-avail
 
 - **🏋️ Allenamento Giornaliero**: circa 10–15 minuti con 4 esercizi selezionati ogni giorno tra le abilità meno allenate di recente. Completato un allenamento, è possibile avviarne subito un altro con abilità ed esercizi differenti.
 - **📏 Misura il Neuro Score**: prova quotidiana che tocca tutte le **9 aree cognitive e motorie** (selezionando ogni giorno a rotazione un esercizio per area) e calcola un **Neuro Score** da 0 a 1000 per seguire il proprio andamento in questi esercizi. Va letto come tendenza su più settimane: non è ancora validato su giocatori reali, non è un test clinico e non è confrontabile con norme cliniche.
-- **🥋 Palestra Libera**: catalogo completo di **39 esercizi** suddivisi in **9 aree cognitive e motorie**. Ogni esercizio (tranne Lettura veloce, che non è adattiva) dispone di un **motore adattivo continuo** che calibra la difficoltà in tempo reale per restare vicino alla tua soglia, né troppo facile né troppo difficile, salvando il livello raggiunto tra una sessione e l'altra.
+- **🥋 Palestra Libera**: catalogo completo di **40 esercizi** suddivisi in **9 aree cognitive e motorie**. Ogni esercizio (tranne Lettura veloce, che non è adattiva) dispone di un **motore adattivo continuo** che calibra la difficoltà in tempo reale per restare vicino alla tua soglia, né troppo facile né troppo difficile, salvando il livello raggiunto tra una sessione e l'altra.
 - **🏆 Classifica Settimanale e Gruppi di Amici** (facoltativa, disattivata di default): ogni settimana confronta la **costanza** (10 punti per giorno di allenamento più 1 per esercizio, fino a 12 al giorno), il **miglioramento** rispetto al proprio punto di partenza e il **livello migliore** per esercizio, con fasce d'età facoltative e una classifica separata per chi usa il ritmo rilassato. Si azzera ogni lunedì, mostra la top 3 e i giocatori vicini a te, e si può giocare tra tutti o in **gruppi privati** a cui si entra con un link o un codice. Si usa con un nickname casuale e si esce in qualsiasi momento cancellando tutti i dati.
 
-### Le 9 Aree e i 39 Esercizi
+### Le 9 Aree e i 40 Esercizi
 
 | Abilità | Esercizi e Paradigmi di Riferimento |
 |---|---|
@@ -30,7 +30,7 @@ Gioco gratuito di allenamento cognitivo e coordinazione bilaterale (source-avail
 | **🎯 Attenzione** | 🏎️ **Pilota** (multitasking visuo-motorio, ispirato a NeuroRacer), 📡 **Radar** (Multiple Object Tracking), 🎯 **Test di Flanker** (attenzione selettiva e inibizione distrattori laterali), 🚦 **Go / No-Go** (controllo inibitorio motorio), 🔠 **Interferenza multipla** (ispirato al MSIT: conflitto tra più fonti di interferenza), 💠 **Colore e forma** (feature binding visivo) |
 | **🎛️ Controllo** | 🎨 **Scontro di colori** (effetto Stroop), 🔀 **Doppia regola** (task switching e costo di cambio), 🃏 **Ordinamento di carte** (Wisconsin Card Sorting Test - set-shifting) |
 | **🧠 Memoria di lavoro** | 🔁 **Eco** (test N-Back visivo e duale con audio sintetizzato), 💡 **Griglia di luci** (test dei blocchi di Corsi avanti e indietro), 🔟 **Ultime cifre** (running span e aggiornamento continuo), 🧮 **Span di cifre** (digit span verbale e inverso) |
-| **🔐 Memoria** | 🔐 **Cassaforte di parole** (memoria di riconoscimento ed episodica), 🔗 **Coppie** (paired associates simbolo-parola), 📜 **Memoria delle storie** (ispirato alla memoria logica di brevi racconti) |
+| **🔐 Memoria** | 🔐 **Cassaforte di parole** (memoria di riconoscimento ed episodica), 🔗 **Coppie** (paired associates simbolo-parola), 🎴 **Memoria di carte** (Pelmanism / What-Where binding visuo-spaziale e cascate di combo), 📜 **Memoria delle storie** (ispirato alla memoria logica di brevi racconti) |
 | **🧊 Spaziale** | 🧊 **Rotazioni** (rotazione mentale di figure 2D), 📐 **Matrice spaziale** (rotazione mentale di coordinate a 90°, 180° e 270°), 🖼️ **Nonogram** (deduzione visuo-spaziale, soddisfacimento di vincoli e pixel art), 🧩 **Tangram** (scomposizione parte-tutto, rotazione mentale e assemblaggio geometrico) |
 | **🧩 Ragionamento** | 🗼 **Torri** (Torre di Londra - pianificazione strategica anticipata), 🔍 **L'intruso** (odd-one-out e ragionamento induttivo), 🧺 **Banco del mercato** (problema dello zaino: costi e guadagni entro un budget), 🧱 **2048** (pianificazione sequenziale, cascate di fusioni e controllo inibitorio prefrontale), 🔓 **Decifra il Codice** (ragionamento deduttivo, soddisfacimento di vincoli e intuizione dopaminergica) |
 | **➗ Calcolo e lettura** | ➗ **Sprint di calcolo** (aritmetica rapida - metodo Kawashima), 📖 **Lettura veloce** (lettura ad alta voce con cronometro e verifica), 🔴 **Calcolo con i punti** (sistema numerico approssimato: confrontare quantità senza contare), 🔤 **Anagrammi** (memoria ortografica e ricombinazione lessicale), 💬 **Sprint di parole** (classificazione ortografica rapida per lettera iniziale) |
@@ -50,7 +50,7 @@ Gioco gratuito di allenamento cognitivo e coordinazione bilaterale (source-avail
 - **Accessibilità & Benessere**: modalità a ritmo rilassato (tempi maggiorati del 40%), supporto per testo grande, tema chiaro, tema scuro e installabilità come **PWA offline**.
 - **Pagine Dedicate del Progetto**:
   - [`index.html`](index.html): l'applicazione completa PWA.
-  - [`guide.html`](guide.html): guida approfondita e illustrata alle sezioni, a tutti i 39 giochi e alle FAQ.
+  - [`guide.html`](guide.html): guida approfondita e illustrata alle sezioni, a tutti i 40 giochi e alle FAQ.
   - [`privacy.html`](privacy.html): informativa su privacy, zero tracciamento e assenza di cookie.
   - [`license.html`](license.html): dettagli ufficiali della licenza PolyForm Noncommercial 1.0.0.
 
@@ -58,7 +58,7 @@ Gioco gratuito di allenamento cognitivo e coordinazione bilaterale (source-avail
 
 ## 🛠️ Architettura Tecnica
 
-Il progetto è costruito con **TypeScript** e **Vite**, senza l'impiego di framework pesanti (React, Vue o Angular), garantendo un caricamento istantaneo, rendering DOM nativo ultra-performante e un'impronta gzippata minuscola (~34 KB per il runtime UI di base, ~110 KB totali per l'intera app inclusi tutti i 39 giochi).
+Il progetto è costruito con **TypeScript** e **Vite**, senza l'impiego di framework pesanti (React, Vue o Angular), garantendo un caricamento istantaneo, rendering DOM nativo ultra-performante e un'impronta gzippata minuscola (~34 KB per il runtime UI di base, ~110 KB totali per l'intera app inclusi tutti i 40 giochi).
 
 ```
 synapse-dojo/
@@ -69,7 +69,7 @@ synapse-dojo/
 ├── cleanup/                Worker con cron che applica ogni notte le regole di conservazione della classifica
 ├── scripts/                build e deploy (deploy-web.mjs), verifica dizionari (check-anagrams.mjs) e coerenza i18n (verify-i18n.mjs)
 ├── src/
-│   ├── exercises/          i 39 esercizi (uno per file), index.ts (catalogo e batteria), types.ts e dataset dei puzzle
+│   ├── exercises/          i 40 esercizi (uno per file), index.ts (catalogo e batteria), types.ts e dataset dei puzzle
 │   ├── screens/            schermate dell'app: home, onboarding, training, play, progress, settings, board, boardJoin, groups, guide, privacy, license
 │   ├── locales/            moduli di traduzione per le 12 lingue (en.ts è la base di tipizzazione)
 │   ├── adaptive.ts         motore adattivo continuo (weighted up-down staircase)

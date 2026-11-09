@@ -105,6 +105,19 @@ const SCENES: Record<string, Scene> = {
   digits: () => row(h('span', { class: 'ex-seq' }, '4 8 1 ', h('b', {}, '7 2 9')), arrow(), answer('7 2 9')),
   vault: () => row(tag(t('ex.vault.seen')), answer('✓'), tag(t('ex.vault.new')), answer('✗')),
   pairs: () => row(h('span', { class: 'ex-big' }, '🍎'), h('span', {}, '–'), tag('?'), arrow(), answer('🍎 = …')),
+  memoria: () =>
+    row(
+      h(
+        'div',
+        { class: 'ex-card-pair' },
+        h('span', { class: 'ex-mini-card face' }, '🦁'),
+        h('span', { class: 'ex-mini-card back' }, '🎴'),
+        h('span', { class: 'ex-mini-card face' }, '🦁'),
+        h('span', { class: 'ex-mini-card back' }, '🎴'),
+      ),
+      arrow(),
+      answer('🦁 = 🦁 ✓'),
+    ),
   rotate: () => {
     const shape = chiralShape(5);
     const box = (angle: number, flip: boolean) => {

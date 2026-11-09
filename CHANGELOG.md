@@ -6,6 +6,19 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.13.4] - 2026-11-09
+
+### Added
+
+- **New "Memory Match" Exercise (`memoria`)**:
+  - Full implementation of the classic card matching game (*Pelmanism / Concentration*), expanding the Synapse Dojo suite to **40 official exercises** (4 in the Episodic Memory domain).
+  - **Rigorous Neuroscientific Foundations**: grounded in the *What-Where binding* paradigm (Ungerleider & Mishkin, 1982; Pertzov et al., 2012) connecting the ventral visual stream (item identity) with the dorsal stream (spatial grid locations) via hippocampal relational memory (Eichenbaum, 2004) and prefrontal proactive interference resolution (Postle et al., 2004; Jonides & Nee, 2006).
+  - **Dopamine-rich Gamification**: realistic 3D perspective card flips, golden particle/confetti bursts on matches, floating combo praise toasts (*DOUBLE MATCH!*, *UNSTOPPABLE!*), ascending pentatonic scale chimes (`sfx.ok`), and victory fanfare on board clearance.
+  - **10-level Adaptive Progression**: from 3 pairs (6 cards, 3×2) for beginners up to 18 pairs (36 cards, 6×6) for masters, calibrated under the 85% rule (Wilson et al., 2019; Kaernbach, 1991).
+  - **6 High-contrast Thematic Decks**: wildlife, space, sweets/food, adventure, music, and abstract geometric symbols (the latter maximizing visual interference to train fine discrimination).
+  - **Full Progression Integration**: 0–100 score based on move efficiency, non-punitive additive speed bonus (up to +10 score and +10 XP for quick solves), guided tutorial practice mode, and daily Neuro Score check battery integration.
+  - **Complete 12-Language Localization**: all interface strings and descriptions translated and verified across English, Italian, Spanish, German, French, Portuguese, Russian, Arabic, Hindi, Indonesian, Japanese, and Chinese.
+
 ## [0.13.3] - 2026-11-08
 
 ### Security

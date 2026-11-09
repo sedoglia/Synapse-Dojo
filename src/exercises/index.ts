@@ -22,6 +22,7 @@ import { span } from './span';
 import { vault } from './vault';
 import { pairs } from './pairs';
 import { stories } from './stories';
+import { memoria } from './memoria';
 
 import { rotate } from './rotate';
 import { matrix } from './matrix';
@@ -59,7 +60,7 @@ export const EXERCISES: Exercise[] = [
   // Working Memory
   echo, grid, digits, span,
   // Memory
-  vault, pairs, stories,
+  vault, pairs, stories, memoria,
   // Spatial
   rotate, matrix, nonogram, tangram,
   // Reasoning

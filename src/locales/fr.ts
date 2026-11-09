@@ -962,6 +962,19 @@ const ui: Locale['ui'] = {
 
 
   
+    // memoria
+  'ex.memoria.name': 'Mémoire de cartes',
+  'ex.memoria.desc': 'Retourne les cartes deux par deux et trouve toutes les paires identiques en un minimum de coups.',
+  'ex.memoria.why': 'Pelmanism et liaison What-Where : associe l\'identité visuelle aux coordonnées spatiales, stimulant l\'hippocampe et la mémoire de travail visuo-spatiale.',
+  'ex.memoria.example': 'Retourne une carte avec 🦁, rappelle-toi où était l\'autre 🦁 et assemble-les.',
+  'ex.memoria.tip': 'Touche deux cartes à la fois. Si elles correspondent, elles restent visibles ; sinon, mémorise leur place !',
+  'ex.memoria.moves': '{n} coups',
+  'ex.memoria.pairsLeft': '{k}/{n} paires',
+  'ex.memoria.combo': 'COMBO ×{n} !',
+  'ex.memoria.match': 'PAIRE TROUVÉE !',
+  'ex.memoria.clear': 'PLATEAU RÉSOLU !',
+  'ex.memoria.detail': '{pairs} paires en {turns} coups ({eff}% efficacité)',
+
   'ex.tapSeq.name': "Tap bilatéral",
   'ex.tapSeq.desc': "Coordonnez vos deux pouces pour reproduire des séquences alternées",
   'ex.tapSeq.why': 'Des séquences de tapes à gauche et à droite : un exercice de coordination bimanuelle et d’attention. Rien ne prouve qu’une application de ce type renforce le corps calleux.',

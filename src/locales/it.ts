@@ -9,7 +9,7 @@ const ui: Locale['ui'] = {
   'onboard.go': 'Iniziamo',
 
   'landing.heroTitle': 'Allena la mente pochi minuti al giorno',
-  'landing.heroSub': '39 esercizi cognitivi e bilaterali ispirati ai paradigmi della ricerca, per esercitare memoria, attenzione, coordinazione e riflessi. 100% gratuito, senza pubblicità, nessun account o password.',
+  'landing.heroSub': '40 esercizi cognitivi e bilaterali ispirati ai paradigmi della ricerca, per esercitare memoria, attenzione, coordinazione e riflessi. 100% gratuito, senza pubblicità, nessun account o password.',
   'landing.badgeFree': '100% Gratuito',
   'landing.badgePrivacy': 'Privacy totale · Dati locali',
   'landing.badgeScience': 'Ispirato alla ricerca',
@@ -29,8 +29,8 @@ const ui: Locale['ui'] = {
   'landing.pillar4Title': 'Classifica settimanale (facoltativa)',
   'landing.pillar4Desc': 'Se ti va, confronta costanza e miglioramento con altri giocatori o con gli amici, con un nickname casuale. È disattivata finché non aderisci e puoi uscire quando vuoi.',
   'landing.domainsTitle': 'Le 9 Aree Allenate',
-  'landing.guideCtaTitle': 'Vuoi scoprire tutti i dettagli dei 39 giochi?',
-  'landing.guideCtaDesc': 'Leggi la nostra guida dettagliata con gli studi a cui si ispirano gli esercizi e le regole di tutti i 39 giochi.',
+  'landing.guideCtaTitle': 'Vuoi scoprire tutti i dettagli dei 40 giochi?',
+  'landing.guideCtaDesc': 'Leggi la nostra guida dettagliata con gli studi a cui si ispirano gli esercizi e le regole di tutti i 40 giochi.',
   'landing.guideCtaBtn': 'Leggi la Guida Completa',
   'landing.footerTagline': 'Synapse Dojo · Allenamento Cognitivo Gratuito',
 
@@ -44,7 +44,7 @@ const ui: Locale['ui'] = {
   'guide.checkH': '📏 Misura il Neuro Score (Daily Check)',
   'guide.checkP': 'Il Neuro Score è una breve prova quotidiana su tutte le 9 aree, con un esercizio per area scelto a rotazione ogni giorno. Il punteggio (da 0 a 1000) ti aiuta a seguire il tuo andamento in questi esercizi: va letto su più settimane, non giorno per giorno, perché gli esercizi ruotano e ogni prova è breve. Non è ancora stato validato su giocatori reali, non è un test clinico e non ha valore diagnostico.',
   'guide.trainingH': '🥋 Palestra Libera (39 Esercizi)',
-  'guide.trainingP': 'Nella sezione Palestra trovi l’intero catalogo dei 39 esercizi, suddivisi nelle 9 abilità cerebrali e di coordinazione bilaterale. Puoi allenarti liberamente su qualunque esercizio senza limiti di tempo, approfondire compiti specifici o superare i tuoi record personali.',
+  'guide.trainingP': 'Nella sezione Palestra trovi l’intero catalogo dei 40 esercizi, suddivisi nelle 9 abilità cerebrali e di coordinazione bilaterale. Puoi allenarti liberamente su qualunque esercizio senza limiti di tempo, approfondire compiti specifici o superare i tuoi record personali.',
   'guide.progressH': '📈 Progressi e Statistiche',
   'guide.progressP': 'Consulta il tuo profilo cognitivo con i livelli raggiunti in ciascuna abilità, lo storico dei tuoi Neuro Score, i badge e traguardi sbloccati (come serie di giorni consecutivi o livelli avanzati) e il calendario mensile delle tue sessioni di allenamento.',
   'guide.boardH': '🏆 Classifica Settimanale e Gruppi di Amici',
@@ -402,7 +402,7 @@ const ui: Locale['ui'] = {
   'badge.combo10.name': 'Lampo',
   'badge.combo10.desc': '10 risposte giuste di fila',
   'badge.explorer.name': 'Esploratore',
-  'badge.explorer.desc': 'Prova tutti i 39 esercizi',
+  'badge.explorer.desc': 'Prova tutti i 40 esercizi',
   'badge.balanced.name': 'Mente completa',
   'badge.balanced.desc': 'Allena tutte le 9 abilità in 7 giorni',
   'badge.levelups25.name': 'In salita',
@@ -441,7 +441,7 @@ const ui: Locale['ui'] = {
   'share.done.streak3': '3 giorni di allenamento di fila',
   'share.done.streak7': '7 giorni di allenamento di fila',
   'share.done.streak30': '30 giorni di allenamento di fila',
-  'share.done.explorer': 'Tutti i 39 esercizi provati',
+  'share.done.explorer': 'Tutti i 40 esercizi provati',
   'share.done.balanced': 'Tutte le 9 abilità allenate in 7 giorni',
   'share.note': 'L’immagine mostra solo questo traguardo: niente nome, punteggi o età. Non viene inviato nulla finché non scegli tu dove condividerla.',
   'share.save': 'Salva l’immagine',
@@ -990,6 +990,19 @@ const ui: Locale['ui'] = {
 
 
 
+
+    // memoria
+  'ex.memoria.name': 'Memoria di carte',
+  'ex.memoria.desc': 'Scopri le carte coperte a due a due e trova tutte le coppie uguali con il minor numero di mosse possibile.',
+  'ex.memoria.why': 'Pelmanism e associazione congiunta (What-Where binding): associa l\'identità dell\'oggetto alle sue coordinate spaziali, stimolando l\'ippocampo e la memoria visuo-spaziale.',
+  'ex.memoria.example': 'Volti una carta con 🦁, ricordi dove si trovava l\'altro 🦁 e li unisci.',
+  'ex.memoria.tip': 'Tocca due carte per volta. Se sono uguali restano scoperte; se sono diverse, memorizza dove si trovano!',
+  'ex.memoria.moves': '{n} mosse',
+  'ex.memoria.pairsLeft': '{k}/{n} coppie',
+  'ex.memoria.combo': 'COMBO ×{n}!',
+  'ex.memoria.match': 'COPPIA TROVATA!',
+  'ex.memoria.clear': 'TAVOLO COMPLETATO!',
+  'ex.memoria.detail': '{pairs} coppie in {turns} mosse ({eff}% efficienza)',
 
   // tapSeq
   'ex.tapSeq.name': 'Tap Bilaterale',
