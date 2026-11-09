@@ -1,4 +1,10 @@
-import { defineConfig, loadEnv } from 'vite';
+import { defineConfig, loadEnv, type Connect } from 'vite';
+
+const CLEAN_PAGE = /^\/(guide|privacy|license)\/?(?=$|[?#])/;
+const cleanUrls: Connect.NextHandleFunction = (req, _res, next) => {
+  if (req.url) req.url = req.url.replace(CLEAN_PAGE, '/$1.html');
+  next();
+};
 
 // Relative base so the build works on any host or sub-path.
 // Cloudflare Web Analytics is added only when a token is set: reads it from
@@ -12,6 +18,13 @@ export default defineConfig(({ mode }) => {
     server: { proxy: { '/api': 'http://127.0.0.1:8788' } },
     build: { rolldownOptions: { input: { main: 'index.html', privacy: 'privacy.html', guide: 'guide.html', license: 'license.html' } } },
     plugins: [
+      {
+        // Cloudflare Pages serves /guide for guide.html (and redirects the .html form), so links use clean URLs;
+        // map them back to the files in `npm run dev` and `npm run preview`.
+        name: 'clean-urls',
+        configureServer: (server) => void server.middlewares.use(cleanUrls),
+        configurePreviewServer: (server) => void server.middlewares.use(cleanUrls),
+      },
       {
         name: 'cf-web-analytics',
         apply: 'build',

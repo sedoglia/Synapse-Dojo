@@ -22,7 +22,7 @@ export function privacyContent(): HTMLElement[] {
         ' ',
         h(
           'a',
-          { href: './license.html', class: 'link-btn', style: 'text-decoration: underline;' },
+          { href: './license', class: 'link-btn', style: 'text-decoration: underline;' },
           `👉 ${t('license.title')}`,
         ),
       ),
