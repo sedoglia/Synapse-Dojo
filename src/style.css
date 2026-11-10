@@ -6277,7 +6277,7 @@ html.big-text {
   }
 }
 
-/* ---------- Modern Modular Dopaminergic Progress ---------- */
+/* ---------- Modular progress page ---------- */
 .progress-tabs {
   position: sticky;
   top: 54px;
@@ -7234,7 +7234,7 @@ html.big-text {
   border-color: var(--bad);
 }
 
-/* Dopamine floating toasts */
+/* Floating combo toasts */
 .memoria-float-layer {
   position: absolute;
   inset: 0;

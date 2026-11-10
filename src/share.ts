@@ -330,7 +330,7 @@ export function openShare(m: Milestone) {
 }
 
 /**
- * High-dopamine celebration card and social reminder when milestones are earned.
+ * Celebration card and optional sharing reminder when milestones are earned.
  * Reminds players to celebrate their progress with friends and family, satisfying intrinsic competence and relatedness (Ryan & Deci 2000).
  */
 export function shareOffer(fresh: Badge[]): HTMLElement | null {

@@ -74,8 +74,8 @@ I numeri di versione vengono da `package.json` e ogni data è il giorno del comm
 
 - **Nuovo esercizio "Memoria di carte" (`memoria`)**:
   - Implementazione completa del classico gioco di memoria a coppie di carte coperte (*Pelmanism / Concentration*), portando il catalogo di Synapse Dojo a **40 giochi ufficiali** (4 nel dominio Memoria Episodica).
-  - **Fondamenti neuroscientifici rigorosi**: basato sul paradigma dell'associazione congiunta *What-Where binding* (Ungerleider & Mishkin, 1982; Pertzov et al., 2012) che integra la via visiva ventrale (identità della figura) e dorsale (coordinate spaziali della griglia) tramite la rete ippocampale relazionale (Eichenbaum, 2004) e il controllo dell'interferenza proattiva prefrontale (Postle et al., 2004; Jonides & Nee, 2006).
-  - **Dopamina e gamification**: animazioni 3D realistiche di rotazione delle carte con prospettiva, riscontri visivi dorati al match con particelle e coriandoli, notifiche fluttuanti di combo (*DOPPIO MATCH!*, *INARRESTABILE!*), rintocchi armonici su scala pentatonica ascendente (`sfx.ok`) e fanfara trionfale al completamento del tavolo.
+  - **Riferimenti di progettazione**: ispirato al paradigma dell'associazione congiunta *What-Where binding* (Ungerleider & Mishkin, 1982; Pertzov et al., 2012), alla memoria relazionale (Eichenbaum, 2004) e all'interferenza proattiva (Postle et al., 2004; Jonides & Nee, 2006).
+  - **Riscontri ludici**: animazioni 3D realistiche di rotazione delle carte con prospettiva, riscontri visivi dorati al match con particelle e coriandoli, notifiche fluttuanti di combo (*DOPPIO MATCH!*, *INARRESTABILE!*), rintocchi armonici su scala pentatonica ascendente (`sfx.ok`) e fanfara trionfale al completamento del tavolo.
   - **Difficoltà adattiva a 10 livelli**: da 3 coppie (6 carte, 3×2) per principianti fino a 18 coppie (36 carte, 6×6) per maestri, calibrata sulla regola dell'85% di accuratezza (Wilson et al., 2019; Kaernbach, 1991).
   - **6 mazzi tematici ad alto contrasto**: animali, cosmo, golosità, avventura, musica e simboli geometrici astratti (questi ultimi ad alto carico di interferenza visiva per allenare la discriminazione fine).
   - **Integrazione completa con la progressione**: punteggio 0–100 pesato sull'efficienza delle mosse, bonus di velocità additivo e non punitivo (fino a +10 punti e +10 XP per risposte rapide ed efficienti), modalità prova guidata e supporto per il Neuro Score quotidiano.
@@ -94,10 +94,10 @@ I numeri di versione vengono da `package.json` e ogni data è il giorno del comm
 
 ### Aggiunto
 
-- Potenziamento della difficoltà e rigore neuroscientifico per **Tangram**:
+- Revisione della difficoltà e del ritmo per **Tangram**:
   - **Cronometro visivo e barra a fasce dinamiche (Oro / Argento / Bronzo / Standard)**: introdotto un timer attivo a schermo con monitoraggio millisecondo per millisecondo; completare lo schema nella fascia Oro conferisce il massimo punteggio e sblocca il bonus rapidità (+10 XP) secondo la teoria della velocità di elaborazione visuo-spaziale (Salthouse, 1996; WAIS-IV Block Design).
   - **Sagoma cieca monolitica (*True Blind Silhouette*)**: disattivata l'evidenziazione magnetica `.target-ready` durante il drag e rimosse le linee interne di giunzione della sagoma; il giocatore deve operare una vera scomposizione parte-tutto (*Part-Whole Decomposition*, Shepard & Metzler, 1971) analizzando la figura senza radar o suggerimenti di forma.
-  - **Pezzi distrattori (*Decoy Pieces*) nei livelli 5–8**: aggiunti pezzi geometrici extra nel vassoio che non appartengono alla figura, stimolando la corteccia prefrontale dorsolaterale (DLPFC) nell'inibizione delle opzioni irrilevanti e nella selezione attiva delle caratteristiche.
+  - **Pezzi distrattori (*Decoy Pieces*) nei livelli 5–8**: aggiunti pezzi geometrici extra nel vassoio che non appartengono alla figura, così il giocatore deve capire quali pezzi usare e quali scartare.
   - **Sistema anti-bruteforce**: tracciamento dei tentativi a vuoto e feedback sobrio (`Nessun incastro valido qui`) per scoraggiare i click casuali impulsivi e premiare la simulazione mentale preventiva.
 
 ## [0.13.1] - 2026-11-08
@@ -151,12 +151,12 @@ I numeri di versione vengono da `package.json` e ogni data è il giorno del comm
 
 ### Modificato
 
-- Risolti i 7 problemi segnalati nel gioco **Tangram** con revisione geometrica, ergonomica e calibrazione dopaminica:
+- Risolti i 7 problemi segnalati nel gioco **Tangram** con revisione geometrica, ergonomica e del ritmo delle ricompense:
   - **Scala pezzi 1:1 e visibilità vassoio**: ingranditi i pezzi nel vassoio (da 54px a 72px) con viewBox compatto (`-52 -52 104 104`) riducendo il divario di scala rispetto alla sagoma; durante il drag il pezzo clonato segue il cursore a dimensione reale 1:1 (96px, 1 SVG unit = 1 CSS px) incastrandosi visivamente a pennello sul bersaglio.
   - **Eliminazione sobbalzi e spostamenti di layout**: rimosse le animazioni e i salti `translateY` che destabilizzavano la struttura durante la rotazione; la rotazione aggiorna direttamente in-place la trasformazione SVG del poligono (`transform="scale(...) rotate(...)"`) senza distruggere o rigenerare il DOM della scacchiera; ancoraggio superiore in `.stage-tangram` e mantenimento dello spazio del pulsante flip con `visibility: hidden` per garantire stabilità millimetrica a schermo.
   - **Correzione geometrica e incastro chiaro (Barca e tutti i pezzi)**: rigenerati tutti gli schemi eliminando 72 distorsioni geometriche del generatore precedente (es. ipotenusa e cateti dei triangoli MT/LT non ortogonali o deformati); corretti i vertici canonici del parallelogramma centrato `PR`; implementato il punto di snap in coordinate SVG con tolleranza generosa (58 unità) e feedback luminoso di orientamento (`.tangram-slot-hint-glow`), che mostra esattamente la sagoma desiderata in caso di angolazione errata eliminando i tentativi alla cieca.
   - **Durata partita calibrata (2 schemi)**: ridotto il numero di schemi per sessione da 3 a 2 (1 in pratica/controllo), portando la durata della sessione a ~1.5 minuti in linea con tutti gli altri esercizi del dojo.
-  - **Bonus rapidità XP e punteggio dopaminico**: ricalibrato il benchmark di velocità per livello (`18s + 6s per pezzo`) e collegato al sistema globale `ctx.withTimeBonus` e `ctx.isSpeedBonus` per premiare le risoluzioni agili e brillanti con +10 XP e bonus al punteggio.
+  - **Bonus rapidità XP e punteggio**: ricalibrato il benchmark di velocità per livello (`18s + 6s per pezzo`) e collegato al sistema globale `ctx.withTimeBonus` e `ctx.isSpeedBonus` per premiare le risoluzioni rapide con +10 XP e bonus al punteggio.
   - **80 schemi matematicamente certificati**: generata una libreria di 80 schemi convalidate geometricamente (10 schemi unici per livello su tutti gli 8 livelli, da 3 a 7 pezzi), con traduzione dei nomi in tutte le 12 lingue ufficiali.
   - **Controlli intuitivi e fluidi**: aggiunta rotazione fluida con rotellina del mouse (Wheel) e tasto destro del mouse, feedback magnetico verde in tempo reale durante il trascinamento (`.tangram-slot.target-ready`), e selezione rapida da tastiera (1-4, A/D, frecce, Spazio).
 
@@ -184,7 +184,7 @@ I numeri di versione vengono da `package.json` e ogni data è il giorno del comm
 
 - Riprogettazione radicale della sfida cognitiva del gioco **Tangram**:
   - Trasformazione della sagoma bersaglio in una **silhouette piena ("sagoma pura")**: eliminate tutte le linee guida interne tratteggiate e gli indicatori visivi di hover/trascinamento che suggerivano la posizione dei pezzi durante il gioco effettivo.
-  - Ripristino della reale complessità neuroscientifica e della scomposizione parte-tutto (*Wagemans et al., 2012; Shepard & Metzler, 1971*): il giocatore deve dedurre mentalmente la disposizione geometrica interna, orientare i tan e incastrarli senza "spoiler".
+  - Ripristino della reale complessità della scomposizione parte-tutto (*Wagemans et al., 2012; Shepard & Metzler, 1971*): il giocatore deve dedurre mentalmente la disposizione geometrica interna, orientare i tan e incastrarli senza "spoiler".
   - Sistema di feedback intelligente e non invasivo: toccare o rilasciare un pezzo sulla silhouette fornisce indicazioni precise ma sfidanti (distingue se il pezzo è errato o se la forma è corretta ma l'orientamento è da ruotare).
   - Modalità tutorial guidata preservata: le linee guida tratteggiate rimangono visibili esclusivamente nella modalità pratica/tutorial iniziale per facilitare l'onboarding dei nuovi giocatori.
   - Aggiornamento della descrizione dell'esercizio e dell'esempio pratico e sincronizzazione di tutte le nuove stringhe di feedback nelle 12 lingue supportate.
@@ -194,8 +194,8 @@ I numeri di versione vengono da `package.json` e ogni data è il giorno del comm
 ### Aggiunto
 
 - Nuovo gioco cognitivo **Tangram** (#39) nel dominio Visuo-Spaziale:
-  - Basi neuroscientifiche su rotazione mentale (*Shepard & Metzler, 1971*), scomposizione parte-tutto (*Wagemans et al., 2012*) e coordinazione fronto-parietale (corteccia parietale posteriore PPC, solco intraparietale IPS e dlPFC, *Baddeley 1986; Prado et al. 2011*).
-  - Circuito dopaminergico ad alto ingaggio e "Game Feel" (*Juice*, Swink 2008): incastro magnetico con suono ligneo tattile (`clack`) e feedback aptico, scala musicale pentatonica ascendente ad ogni pezzo posizionato (*Goal-Gradient Effect*, Hull 1932; Kivetz et al. 2006), fanfare di vittoria con esplosione di particelle/coriandoli (`burstConfetti`) e svelamento della figura tematica per stimolare l'insight Eureka e l'errore di predizione positivo della ricompensa (*RPE*, Schultz 1998; Tik et al. 2018).
+  - Ispirato ai paradigmi di ricerca sulla rotazione mentale (*Shepard & Metzler, 1971*) e sulla scomposizione parte-tutto (*Wagemans et al., 2012*).
+  - "Game Feel" (*Juice*, Swink 2008): incastro magnetico con suono ligneo tattile (`clack`) e feedback aptico, scala musicale pentatonica ascendente ad ogni pezzo posizionato, fanfare di vittoria con esplosione di particelle/coriandoli (`burstConfetti`) e svelamento della figura tematica.
   - Doppia modalità di interazione senza attrito: tocca per selezionare, ruota (↺ -45° / ↻ +45°) e tocca lo slot per incastrare, oppure trascina liberamente (Drag & Drop) con snap magnetico automatico; pieno supporto tastiera (frecce, A/D, R, Spazio, Invio, H, Z).
   - Sistema di difficoltà adattiva a scala (*Kaernbach 1991; Wilson et al. 2019 "85% rule"*): 8 livelli progressivi da 3 a 7 pezzi (tan) con una ricca libreria di 48 schemi geometrici certificati (animali, oggetti, personaggi, architetture e forme classiche).
   - Integrazione completa con le logiche di Synapse Dojo: sessioni bilanciate (1,5–2 minuti), bonus tempo e bonus velocità (+XP), memoria anticiclica recente (`synapse_tangram_recent_puzzles`) per evitare ripetizioni, badge di maestria dedicato *Maestro del Tangram* (livello 6) e localizzazione integrale in tutte le 12 lingue dell'app.
@@ -204,11 +204,11 @@ I numeri di versione vengono da `package.json` e ogni data è il giorno del comm
 
 ### Aggiunto
 
-- Riprogettazione modulare e neuroscientifica della pagina Progressi:
+- Riprogettazione modulare della pagina Progressi:
   - Suddivisione dell'esperienza in 4 sezioni tematiche ad accesso rapido (`Panoramica`, `Esercizi`, `Costanza`, `Traguardi`) tramite barra a schede segmentata sticky, eliminando lo scroll infinito e azzerando il carico cognitivo estraneo (*Extraneous Cognitive Load*, Sweller 1988; Cowan 2001; Miller 1956).
-  - Sezione *Panoramica* ad alto impatto dopaminergico: cruscotto esecutivo con statistiche visive immediate (serie attiva, sessioni totali, traguardi sbloccati), barra XP, banner d'azione per il Neuro Check del giorno, modulo *Prossimi Traguardi* (le 3 medaglie più vicine) per sfruttare il gradiente dell'obiettivo (*Goal-Gradient Effect*, Hull 1932; Kivetz et al. 2006) e indurre anticipazione dopaminergica (*wanting*, Berridge & Robinson 1998), e grafico radar con evidenziazione del punto di forza e opportunità di crescita con pulsante rapido di potenziamento.
+  - Sezione *Panoramica*: cruscotto riassuntivo con statistiche visive immediate (serie attiva, sessioni totali, traguardi sbloccati), barra XP, banner d'azione per il Neuro Check del giorno, modulo *Prossimi Traguardi* (le 3 medaglie più vicine; gradiente dell'obiettivo, Hull 1932; Kivetz et al. 2006) e grafico radar con evidenziazione del punto di forza e opportunità di crescita con pulsante rapido di allenamento.
   - Sezione *Esercizi & Competenze*: catalogazione a schede dei 38 compiti filtrabile per dominio cognitivo e per stato (giocati / da provare) con sparkline cronologico a 20 punti, livello, record e pulsante interattivo *▶ Gioca* per avviare subito la pratica con ritorno automatico alla schermata dei progressi.
-  - Sezione *Costanza & Abitudini*: calendario visivo delle ultime 4 settimane, obiettivo settimanale condivisibile, riepilogo metriche di regolarità e approfondimento educativo sulla neuroscienza della pratica distribuita (*Spacing Effect*, Cepeda et al. 2006; consolidamento dell'abitudine, Lally et al. 2010).
+  - Sezione *Costanza & Abitudini*: calendario visivo delle ultime 4 settimane, obiettivo settimanale condivisibile, riepilogo metriche di regolarità e breve spiegazione della pratica distribuita (*Spacing Effect*, Cepeda et al. 2006).
   - Sezione *Traguardi & Medaglie*: Trophy Room completa con oltre 50 traguardi, barra di completamento master e filtri dedicati (*Tutti*, *In arrivo*, *Sbloccati*, *Da sbloccare*) per sfruttare l'effetto Zeigarnik (1927) e di progresso dotato (Nunes & Drèze 2006).
   - Localizzazione integrale dei nuovi componenti e comandi in tutte le 12 lingue (`en`, `it`, `es`, `fr`, `de`, `pt`, `ru`, `zh`, `ja`, `ar`, `hi`, `id`).
 
@@ -220,8 +220,8 @@ I numeri di versione vengono da `package.json` e ogni data è il giorno del comm
 
 ### Aggiunto
 
-- Espansione del sistema di traguardi su basi neuroscientifiche da 17 a 53 badge complessivi (36 nuovi traguardi):
-  - Architettura a gradiente (*Goal-Gradient Effect*, Hull 1932; Kivetz et al. 2006) per mantenere costante l'anticipazione dopaminergica (*wanting*, Berridge & Robinson 1998) con micro-traguardi immediati, tappe intermedie e traguardi di maestria.
+- Espansione del sistema di traguardi da 17 a 53 badge complessivi (36 nuovi traguardi):
+  - Struttura a gradiente (*Goal-Gradient Effect*, Hull 1932; Kivetz et al. 2006) con micro-traguardi immediati, tappe intermedie e traguardi a lungo termine, così c'è sempre un obiettivo vicino.
   - Tappe di ancoraggio e consolidamento dell'abitudine (*Lally et al. 2010; Hebb 1949*): introdotti badge per 14 giorni (*Due settimane d'oro*), 21 giorni (*Abitudine d'acciaio*), 60 giorni (*Sentiero neuronale*) e 100 giorni (*Mente secolare*), oltre a *Settimana perfetta* (7/7 giorni), *Weekend attivo* e *Mente mattutina* (sessione completata prima delle 9:00).
   - Volume di allenamento e costanza: traguardi a 5, 25, 50 e 100 allenamenti del giorno completati; traguardi a 10, 50, 100, 250 e 500 esercizi totali; traguardi a 7 e 30 misurazioni del Neuro Score.
   - Riserva cognitiva multidominio e coordinazione bilaterale (*Stern 2002; Swinnen 2002; Livingston et al., Lancet 2024*): traguardi a 10 e 20 esercizi esplorati, *Mente versatile* (5 domini allenati nello stesso giorno) e *Ponte calloso* (tutti i 5 esercizi di coordinazione bilaterale provati).
@@ -237,14 +237,14 @@ I numeri di versione vengono da `package.json` e ogni data è il giorno del comm
 
 ### Modificato
 
-- Estensione, sblocco e ricalibrazione dei bonus di tempo e XP su base neuroscientifica:
+- Estensione, sblocco e ricalibrazione dei bonus di tempo e XP:
   - Analisi e verifica sistematica su tutti i 38 esercizi della piattaforma per garantire la presenza del bonus additivo di efficienza temporale (`withTimeBonus`, fino a +10 punti sul punteggio e +10 XP con badge `⚡ Bonus rapidità`).
   - Sblocco del bonus in Decifra il Codice (`ex.crackTheCode`): corretta la condizione in `src/ctx.ts` che esigeva almeno 2 prove corrette escludendo i giochi a singolo puzzle; introdotta la soglia minima dinamica `minCorrect = Math.min(2, Math.max(1, totalAnswers))` e benchmark scalato sulla complessità deduttiva della combinazione e degli indizi (`14 + codeLength * 6 + cluesCount * 2`).
   - Correzione e ricalibrazione in 2048 (`ex.game2048`): risolto il disallineamento in cui la durata dell'intero traguardo (20–40 s) veniva confrontata con il benchmark di 1,4 s; ora il tempo di reazione registrato corrisponde alla media dei tempi di decisione per mossa (`milestoneAvgRt`), premiando la fluidità e lo stato di flusso dello scorrimento.
   - Nonogram (`ex.nonogram`): allineata la compatibilità con le prove singole e verificata la taratura dei puzzle visuo-spaziali.
   - Integrazione nei giochi non strettamente a tempo mancanti: aggiunti i calcoli di bonus e punteggio in Rotazione Mentale (`ex.rotate`), Lettura Veloce (`ex.reading`, con bonus proporzionale a WPM elevati e 100% di comprensione), Colore e Forma (`ex.binding`), e nei compiti di coordinazione bilaterale (`ex.crossMove`, `ex.tapSeq`, `ex.swipePattern`, `ex.dualTask`).
-  - Rinforzo dopaminergico multisensoriale: in `src/screens/play.ts` l'ottenimento del bonus rapidità attiva ora il feedback audio-aptico cristallino `sfx.coins()` anche quando non si stabilisce un record assoluto, massimizzando il *Reward Prediction Error* (RPE) e la motivazione intrinseca al gioco continuativo.
-  - Documentazione scientifica aggiornata: integrata in `docs/basi-scientifiche.md` e `docs/scientific-foundations.md` la sezione 8 dedicata ai circuiti dopaminergici striatali, al modello di diffusione del drift (DDM) e all'attivazione da insight / momento Eureka.
+  - Riscontro del bonus rapidità: in `src/screens/play.ts` l'ottenimento del bonus rapidità attiva ora il feedback audio-aptico `sfx.coins()` anche quando non si stabilisce un record assoluto.
+  - Documentazione scientifica aggiornata: integrata in `docs/basi-scientifiche.md` e `docs/scientific-foundations.md` la sezione 8 su errore di predizione della ricompensa, modello di diffusione del drift (DDM) e momento «Aha!».
 
 ## [0.12.24] - 2026-11-08
 
@@ -280,7 +280,7 @@ I numeri di versione vengono da `package.json` e ogni data è il giorno del comm
   - Ricalibrazione della difficoltà adattiva e del carico cognitivo:
     - Sostituite le tessere domino pre-allineate con una disposizione ortogonale angolare e tessere gemelle separate (`CORNER_LAYOUTS` sui 4 angoli), richiedendo vera navigazione spaziale, allineamento e pianificazione attiva anziché banali fusioni automatiche in 2 scorrimenti.
     - Riprogettata la scala degli obiettivi da livello 1 a 10: avvio da Obiettivo 32 (🎯 32) anziché l'eccessivamente banale 16, crescendo progressivamente verso 64, 128, 256, 512, 1024 fino a 2048 (con ostacoli rocciosi ai livelli 9–10).
-    - Budget mosse calibrato scientificamente (da 28 a 55 mosse), verificato matematicamente su 2.000 simulazioni algoritmiche per mantenere il tasso di successo al 75–85% (staircase Kaernbach 1991) con una media di 10–18 mosse per puzzle.
+    - Budget mosse (da 28 a 55 mosse) verificato su 2.000 simulazioni algoritmiche per mantenere il tasso di successo al 75–85% (staircase Kaernbach 1991) con una media di 10–18 mosse per puzzle.
     - Durata della sessione preservata a circa 50–70 secondi complessivi per i 3 schemi, perfettamente allineata a tutti gli altri esercizi della palestra.
 
 ## [0.12.21] - 2026-11-07
@@ -316,7 +316,7 @@ I numeri di versione vengono da `package.json` e ogni data è il giorno del comm
 ### Modificato
 
 - Decifra il Codice (`ex.crackTheCode`):
-  - Sessione concentrata su un singolo enigma: ridotto il numero di schemi da 2 a 1 in modalità palestra (`ctx.count(1, 1, 1)`), rendendo ogni partita una sfida concisa e appagante da ~30–45 secondi che offre un gratificante rilascio di dopamina allo sblocco senza affaticamento cognitivo.
+  - Sessione concentrata su un singolo enigma: ridotto il numero di schemi da 2 a 1 in modalità palestra (`ctx.count(1, 1, 1)`), rendendo ogni partita una sfida concisa e appagante da ~30–45 secondi senza affaticamento.
   - Curva d'ingresso graduale dal Livello 1 (`start: 1`): corretta la partenza impostata al livello 1 (invece di livello 2) e introdotta una progressione dolce con combinazioni a 2 cifre per i livelli 1–2, a 3 cifre per i livelli 3–5 e a 4 cifre per i livelli 6–8.
   - Deduzione guidata e accessibile: i livelli 1 e 3 includono 2 indizi di esclusione ("Nessuna cifra corretta", che eliminano subito candidati sulla striscia appunti) affiancati da indizi di posizione diretti, rendendo la deduzione intuitiva e gratificante fin dal primo approccio.
   - Istruzioni per gli appunti cifre: aggiunto un sottotitolo esplicativo (`· Tocca una cifra per eliminarla o segnarla`) visibile direttamente nell'intestazione degli appunti.
@@ -337,7 +337,7 @@ I numeri di versione vengono da `package.json` e ogni data è il giorno del comm
 
 - Decifra il Codice (`ex.crackTheCode`):
   - Nuovo gioco di ragionamento deduttivo nell'area **Ragionamento**, ispirato ai classici enigmi a combinazione per lucchetti (Cognitive Train, Mastermind, Bulls & Cows).
-  - Basi neuroscientifiche: allena la rete fronto-parietale sinistra e i gangli della base nella risoluzione di vincoli logici multipli e nel test di ipotesi (Prado et al., 2011; Goel, 2007), aggiorna attivamente la memoria di lavoro (Baddeley, 2000; Miyake et al., 2000) e rilascia una gratificazione dopaminergica nel nucleus accumbens al momento della scoperta ("esperienza Eureka"; Tik et al., 2018; Kounios & Beeman, 2014).
+  - Ispirato alla ricerca sul ragionamento deduttivo (Prado et al., 2011; Goel, 2007), sull'aggiornamento della memoria di lavoro (Baddeley, 2000; Miyake et al., 2000) e sul momento «Aha!» (Kounios & Beeman, 2014; Tik et al., 2018).
   - Soluzione unica garantita al 100%: generatore dinamico con risolutore esatto a soddisfazione di vincoli che assicura che ogni combinazione abbia una sola e unica soluzione valida, eliminando ogni frustrazione o ambiguità.
   - Lucchetto interattivo e taccuino appunti: cilindri combinatori (con supporto tastiera 0-9 e frecce direzionali), animazione dello sblocco del grillo con coriandoli e suoni meccanici, e striscia appunti interattiva (0-9) per barrare le cifre escluse ed evidenziare quelle confermate negli indizi.
   - Difficoltà adattiva continua: 8 livelli calibrati dall'algoritmo Kaernbach (1991) verso la soglia ottimale dell'80% di accuratezza (Wilson et al., 2019). Da combinazioni a 3 cifre con 5 indizi generosi fino a codici a 4 cifre con indizi stretti.
@@ -390,7 +390,7 @@ I numeri di versione vengono da `package.json` e ogni data è il giorno del comm
   - Indicatore visivo dinamico dei vincoli: numeri di riga e colonna soddisfatti evidenziati in verde tenue; pulsante *Verifica* non punitivo e sistema di *Aiuto* (💡) con animazione pulsante.
   - Funzione *Annulla* (↩) con stack completo delle azioni per consentire la sperimentazione logica e la pianificazione visuo-spaziale.
   - Chiusura gestaltica gratificante: all'ultimo tocco la griglia unifica i blocchi rivelando la pixel art con animazione pop elastica, fanfara audio armonica Web Audio API, coriandoli a schermo e badge col nome del soggetto.
-  - Fondamenti neuroscientifici (tomografia discreta NP-completa, memoria di lavoro visuo-spaziale fronto-parietale e gratificazione dopaminergica "Aha!") documentati in `docs/basi-scientifiche.md`.
+  - Razionale di progettazione (tomografia discreta NP-completa, deduzione visuo-spaziale e momento «Aha!») documentato in `docs/basi-scientifiche.md`.
   - Localizzazione completa con 13 chiavi dedicate tradotte in tutte le 12 lingue supportate.
 
 ### Risolto
@@ -410,7 +410,7 @@ I numeri di versione vengono da `package.json` e ogni data è il giorno del comm
   - Difficoltà adattiva continua (*weighted up-down staircase*) con introduzione di blocchi ostacolo (`🪨`) ai livelli 8 e 10 per stimolare percorsi di scorrimento complessi.
   - Controlli accessibili per tutte le età: swipe/trascinamento, tastiera (frecce, WASD) e D-Pad tattile a schermo progettato per touchscreen e anziani, con funzione Annulla (↩).
   - Feedback sensoriale gratificante: scala musicale progressiva per le fusioni, animazioni di pulsazione, aptica e palette pastello ad alto contrasto.
-  - Razionale neuroscientifico documentato in `docs/basi-scientifiche.md` e traduzione nativa completa in tutte le 12 lingue supportate.
+  - Razionale di progettazione documentato in `docs/basi-scientifiche.md` e traduzione nativa completa in tutte le 12 lingue supportate.
 
 ## [0.12.11] - 2026-11-07
 
@@ -448,7 +448,7 @@ I numeri di versione vengono da `package.json` e ogni data è il giorno del comm
   - Estetica radar avanzata: reticolo a cerchi concentrici radiali corrispondenti alla geometria effettiva degli anelli (24%, 42%, 50%) e assi mirino di precisione.
   - Stella luminescente dorata con bagliore bloom, feedback aptico e tattile istantaneo su pressione (`:active`) e alone verde smeraldo sulle scelte corrette.
   - MOT Radar: orbi tridimensionali con illuminazione sferica a gradiente radiale, aura luminosa per i bersagli in fase di memorizzazione, griglia sonar in background e segnalazione tratteggiata chiara dei bersagli mancati.
-  - Sincronizzazione multisensoriale audio-visiva-aptica per stimolare il reward dopaminergico ed esaltare il *flow state*.
+  - Sincronizzazione audio-visiva-aptica per un'esperienza di gioco più coinvolgente.
 
 ## [0.12.7] - 2026-11-07
 
@@ -478,14 +478,14 @@ I numeri di versione vengono da `package.json` e ogni data è il giorno del comm
 - Eco (N-Back): introdotto il sistema di micro-feedback visuo-acustico Zen per le non-azioni corrette (*Correct Rejections* - Signal Detection Theory, Green & Swets 1966), risolvendo l'asimmetria di feedback sul 70% dei turni non-bersaglio:
   - Convalida visiva con pulsazione verde smeraldo sul timer, bagliore morbido sulla griglia e sui pulsanti non premuti, e dicitura esplicativa di conferma (`✓ Nessun bersaglio: corretto non premere`).
   - Nuovo rintocco armonico rilassante `sfx.zen` su onda sinusoidale morbida intonata sulla scala pentatonica progressiva.
-  - Progressione continua del moltiplicatore combo (`🔥 ×3`, `🔥 ×5`...) anche per l'autocontrollo e l'inibizione motoria, stimolando il circuito dopaminergico della ricompensa (Guitart-Masip et al., 2012) e proteggendo lo stato di flow.
+  - Progressione continua del moltiplicatore combo (`🔥 ×3`, `🔥 ×5`...) anche per le risposte trattenute correttamente, così anche l'autocontrollo viene premiato (Guitart-Masip et al., 2012).
   - Guida visiva aggiornata con chip zen `✓ ✋` nella schermata dimostrativa e localizzazione completa in tutte le 12 lingue.
 
 ## [0.12.3] - 2026-11-07
 
 ### Aggiunto
 
-- Ordinamento di Carte: riprogettazione completa in chiave neuro-gaming («Cifrario Segreto») per eliminare la freddezza clinica e massimizzare motivazione intrinseca, rilascio dopaminergico e stato di flow:
+- Ordinamento di Carte: riprogettazione completa del gioco («Cifrario Segreto») per renderlo meno arido e più coinvolgente:
   - Carte visivamente strutturate e tangibili con layout a pip simmetrici (1, 2, 3 o griglia 2x2) e animazioni fisiche d'ingresso.
   - Ricco comparto audio e feedback aptico (`sfx.whoosh` alla pescata, `sfx.clack` alla selezione, scala pentatonica armonica ascendente sulle combo, `sfx.sparkle` per la violazione del codice e `sfx.coins` per le deduzioni Eureka).
   - HUD deduttivo con 3 indicatori di frequenza (Colore, Forma, Quantità) per un testing di ipotesi non punitivo, con indizi informativi alla scoperta delle regole errate.

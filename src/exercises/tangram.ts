@@ -169,7 +169,7 @@ export const tangram: Exercise = {
       }));
 
       // Distractor (decoy) piece for advanced levels (Level 5–8) in non-practice mode:
-      // Forces prefrontal feature-selection & inhibition: deduce which pieces to use and which to discard!
+      // Decoy pieces: the player must work out which pieces to use and which to discard.
       const hasDecoy = !ctx.practice && currentLevel >= 5;
       if (hasDecoy) {
         // Find an unused classic tangram piece type if any, or pick a plausible distractor shape
@@ -229,7 +229,7 @@ export const tangram: Exercise = {
       const headerBar = h('div', { class: 'tangram-header' }, infoBadge, actionsRow);
 
       // Speed Benchmark & Dynamic Tier Stopwatch (Gold / Silver / Bronze / Standard)
-      // Visual feedback on processing speed stimulates striatal dopamine and focus (Salthouse 1996; WAIS-IV)
+      // Visual feedback on solving speed (speed bands, as in timed WAIS-IV subtests)
       const benchmarkSecs = 18 + piecesCountForLevel(currentLevel) * 6;
       const timerIcon = h('span', { class: 'tangram-timer-icon' }, '🏆');
       const timerLabel = h('span', { class: 'tangram-timer-label' }, t('ex.tangram.tierGold'));
@@ -824,7 +824,7 @@ export const tangram: Exercise = {
         );
         revealBanner.classList.remove('hidden');
 
-        // Brief delay for the player to enjoy the dopamine burst
+        // Brief delay for the player to enjoy the completed figure
         setTimeout(() => {
           onTrialFinished?.(true);
         }, 1300);
@@ -847,7 +847,7 @@ export const tangram: Exercise = {
 
     ctx.progress(1);
     // Benchmark for speed bonus calibrated per level:
-    // (18s base + 6s per piece) gives achievable, highly dopaminergic +10 XP speed bonus for swift play
+    // (18s base + 6s per piece) gives an achievable +10 XP speed bonus for swift play
     const benchmarkSecs = 18 + piecesCountForLevel(st.int) * 6;
     const { score, timeBonus } = ctx.withTimeBonus(st.score(), benchmarkSecs);
 
