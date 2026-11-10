@@ -6,6 +6,13 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [Unreleased]
+
+### Changed
+
+- **Redesigned guide** (`src/screens/guide.ts`): no longer one long wall of text but five tabs (Start, Science, Games, App, FAQ) in a sticky bar, a gradient header with the key numbers and a "sections explored" meter that chimes on each new tab and celebrates with confetti once all are seen. Details stay folded until tapped; games can be filtered by skill and, inside the app, "Try it now" starts a practice round straight from the guide. Animations respect reduced motion.
+- **New Science tab**: six principles the app is built on (neuroplasticity, optimal difficulty, spacing, dopamine and prediction error, sleep, lifestyle), each with what it means in Synapse Dojo and a DOI link to the study (Draganski 2004, Wilson 2019, Cepeda 2006, Schultz 1997, Diekelmann & Born 2010, Lancet Commission 2024, FINGER 2015), plus a "What to really expect" box on the limits of transfer (Simons 2016, Sala 2019). Texts in 12 languages; unused keys of the old guide removed.
+
 ## [0.14.1] - 2026-11-09
 
 ### Fixed
