@@ -6,12 +6,15 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
-## [Unreleased]
+## [0.15.0] - 2026-11-10
 
 ### Changed
 
 - **Redesigned guide** (`src/screens/guide.ts`): no longer one long wall of text but five tabs (Start, Science, Games, App, FAQ) in a sticky bar, a gradient header with the key numbers and a "sections explored" meter that chimes on each new tab and celebrates with confetti once all are seen. Details stay folded until tapped; games can be filtered by skill and, inside the app, "Try it now" starts a practice round straight from the guide. Animations respect reduced motion.
 - **New Science tab**: six principles the app is built on (neuroplasticity, optimal difficulty, spacing, dopamine and prediction error, sleep, lifestyle), each with what it means in Synapse Dojo and a DOI link to the study (Draganski 2004, Wilson 2019, Cepeda 2006, Schultz 1997, Diekelmann & Born 2010, Lancet Commission 2024, FINGER 2015), plus a "What to really expect" box on the limits of transfer (Simons 2016, Sala 2019). Texts in 12 languages; unused keys of the old guide removed.
+- **Scientific foundations reviewed** (`docs/scientific-foundations.md`, `docs/basi-scientifiche.md`): every DOI, PMID and PMC link checked against Crossref and PubMed. Fixed six wrong or non-existent references (Danek 2014, Batenburg & Kosters 2009 and 2012, Pertzov 2012, Novick & Sherman 2003, Schultz 2015), two dead links (Trick 2005, Repp 2006), four titles and the citations missing from the bibliography. Lampit 2014 is now reported in full: unsupervised home training showed no significant benefit, and more than three sessions a week were no better than three or fewer.
+- **No claims the evidence doesn't support**, in the app (12 languages), README, web pages and changelog: a "not a medical device" notice; the limits of ACTIVE, NeuroRacer and EndeavorRx spelled out; claims about dopamine release or brain areas in the games removed; "habit solidified" after 21 days removed (Lally 2010 found 66 days on median). Streak prompts are now conditional ("If you train today…"), the guide says two or three sessions a week are enough, and the progress page's "Boost" button is now "Train".
+- **Privacy notice completed** (12 languages, `privacy.html`, README): the online transfer is listed with the leaderboard as the two optional cases where data leaves the device, and Cloudflare's services (hosting, visit statistics, Turnstile) are named; last updated 10 November 2026.
 
 ## [0.14.1] - 2026-11-09
 

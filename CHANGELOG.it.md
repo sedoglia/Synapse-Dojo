@@ -6,12 +6,15 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
-## [Unreleased]
+## [0.15.0] - 2026-11-10
 
 ### Modificato
 
 - **Guida riprogettata** (`src/screens/guide.ts`): non più un unico lungo muro di testo ma cinque schede (Inizia, Scienza, Giochi, App, FAQ) con una barra fissa in alto, un'intestazione a gradiente con i numeri chiave e un indicatore «sezioni esplorate» che suona a ogni nuova scheda e festeggia con i coriandoli quando le hai viste tutte. I dettagli restano chiusi finché non li tocchi; i giochi si filtrano per abilità e dalla guida in app parte subito la prova di un esercizio («Prova ora»). Animazioni disattivate con «riduci movimento».
 - **Nuova scheda Scienza**: sei principi su cui si basa l'app (neuroplasticità, difficoltà ottimale, spaziatura, dopamina ed errore di previsione, sonno, stile di vita), ognuno con cosa significa in Synapse Dojo e il link DOI allo studio (Draganski 2004, Wilson 2019, Cepeda 2006, Schultz 1997, Diekelmann & Born 2010, Lancet Commission 2024, FINGER 2015), più un riquadro «Cosa aspettarsi davvero» sui limiti del trasferimento (Simons 2016, Sala 2019). Testi in 12 lingue; tolte le chiavi della vecchia guida non più usate.
+- **Basi scientifiche riviste** (`docs/basi-scientifiche.md`, `docs/scientific-foundations.md`): ogni link DOI, PMID e PMC verificato su Crossref e PubMed. Corretti sei riferimenti sbagliati o inesistenti (Danek 2014, Batenburg & Kosters 2009 e 2012, Pertzov 2012, Novick & Sherman 2003, Schultz 2015), due link non più raggiungibili (Trick 2005, Repp 2006), quattro titoli e le citazioni assenti dalla bibliografia. Lampit 2014 è riportato per intero: l'allenamento a casa senza supervisione non ha mostrato benefici significativi, e più di tre sessioni a settimana non hanno fatto meglio di tre o meno.
+- **Nessuna affermazione non sostenuta dalle prove**, nell'app (12 lingue), nei README, nelle pagine web e nel registro: avvertenza «non è un dispositivo medico»; limiti di ACTIVE, NeuroRacer ed EndeavorRx resi espliciti; tolte le affermazioni su rilascio di dopamina o aree cerebrali nei giochi; tolta l'«abitudine consolidata» a 21 giorni (Lally 2010 ha trovato una mediana di 66 giorni). Gli inviti alla serie sono ora condizionali («Se ti alleni oggi…»), la guida dice che due o tre sessioni a settimana bastano e il pulsante «Potenzia» dei progressi ora è «Allenati».
+- **Informativa privacy completata** (12 lingue, `privacy.html`, README): il trasferimento online è indicato, insieme alla classifica, tra i due casi facoltativi in cui i dati lasciano il dispositivo, e sono nominati i servizi di Cloudflare (hosting, statistiche di visita, Turnstile); ultimo aggiornamento 10 novembre 2026.
 
 ## [0.14.1] - 2026-11-09
 
