@@ -6,6 +6,13 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [Unreleased]
+
+### Modificato
+
+- **Guida riprogettata** (`src/screens/guide.ts`): non più un unico lungo muro di testo ma cinque schede (Inizia, Scienza, Giochi, App, FAQ) con una barra fissa in alto, un'intestazione a gradiente con i numeri chiave e un indicatore «sezioni esplorate» che suona a ogni nuova scheda e festeggia con i coriandoli quando le hai viste tutte. I dettagli restano chiusi finché non li tocchi; i giochi si filtrano per abilità e dalla guida in app parte subito la prova di un esercizio («Prova ora»). Animazioni disattivate con «riduci movimento».
+- **Nuova scheda Scienza**: sei principi su cui si basa l'app (neuroplasticità, difficoltà ottimale, spaziatura, dopamina ed errore di previsione, sonno, stile di vita), ognuno con cosa significa in Synapse Dojo e il link DOI allo studio (Draganski 2004, Wilson 2019, Cepeda 2006, Schultz 1997, Diekelmann & Born 2010, Lancet Commission 2024, FINGER 2015), più un riquadro «Cosa aspettarsi davvero» sui limiti del trasferimento (Simons 2016, Sala 2019). Testi in 12 lingue; tolte le chiavi della vecchia guida non più usate.
+
 ## [0.14.1] - 2026-11-09
 
 ### Corretto

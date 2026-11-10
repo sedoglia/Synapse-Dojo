@@ -1,4 +1,4 @@
-﻿// Standalone guide.html entry point for external links, bookmarks, and search engine crawlers.
+// Standalone guide.html entry point for external links, bookmarks, and search engine crawlers.
 import './style.css';
 import { h } from './dom';
 import { store } from './storage';
@@ -16,13 +16,11 @@ loadLang(asked ?? store.data.settings.lang).then((lang) => {
     page(
       t('guide.title'),
       null,
-      h('p', { class: 'muted center' }, t('guide.subtitle')),
-      ...guideContent(),
       h(
-        'p',
-        { class: 'center legal-links' },
-        h('a', { class: 'btn primary', href: './' }, `🏠 ${APP_NAME}`),
-        langPicker((l) => (location.search = `?lang=${l}`)),
+        'div',
+        { class: 'guide-screen-wrapper' },
+        h('div', { class: 'guide-lang' }, langPicker((l) => (location.search = `?lang=${l}`))),
+        ...guideContent({ start: './' }),
       ),
     ),
   );
