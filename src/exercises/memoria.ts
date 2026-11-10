@@ -1,21 +1,15 @@
 /**
  * Memoria / Memory Match (Pelmanism / Concentration)
  *
- * Neuroscientific foundations:
- * 1. "What-Where" Conjunctive Binding (Ungerleider & Mishkin, 1982; Pertzov et al., 2012):
- *    Requires dynamic integration between the ventral visual processing stream ("what" - card identity)
- *    and the dorsal visual processing stream ("where" - spatial coordinates in the grid), mediated
- *    by the hippocampus and medial temporal lobe relational memory network.
- * 2. Visual Working Memory & Episodic Relational Encoding (Baddeley, 2000; Eichenbaum, 2004):
- *    The player encodes, maintains, and continuously updates mental representations of multiple face-down cards
- *    across intervening trials, retrieving precise spatial locations when complementary stimuli appear.
- * 3. Prefrontal Executive Control & Proactive Interference Resolution (Postle et al., 2004; Jonides & Nee, 2006):
- *    Recruits dorsolateral (DLPFC) and ventrolateral (VLPFC) prefrontal cortex to resolve proactive interference
- *    from previously visited locations, suppressing impulsive blind guessing in favor of goal-directed retrieval.
- * 4. Dopaminergic Reward Prediction Error (RPE) & Eureka Flow (Schultz, 1998, 2015; Berridge & Robinson, 1998):
- *    Successful pair identification triggers sudden positive prediction errors, releasing dopamine
- *    in the nucleus accumbens. Cascading match combos and escalating pentatonic chimes reinforce sustained engagement.
- * 5. Dynamic Difficulty Adjustment (Wilson et al., 2019), efficiency measured against perfect memory (Velleman & Warrington, 2013):
+ * Design references (paradigms the game is inspired by; no effect of this game has been measured):
+ * 1. "What-where" binding (Ungerleider & Mishkin, 1982; Pertzov et al., 2012):
+ *    remember which picture ("what") lies at which grid position ("where").
+ * 2. Relational memory (Baddeley, 2000; Eichenbaum, 2004):
+ *    keep track of several face-down cards across turns and retrieve their positions.
+ * 3. Proactive interference (Postle et al., 2004; Jonides & Nee, 2006):
+ *    earlier cards and positions interfere with the current ones.
+ * 4. Feedback: match combos and rising chimes make progress visible and the game more enjoyable.
+ * 5. Adaptive difficulty (Wilson et al., 2019), efficiency measured against perfect memory (Velleman & Warrington, 2013):
  *    Scales grid size and relational load smoothly from 3 pairs (6 cards) to 18 pairs (36 cards) across 10 levels,
  *    targeting an optimal balance between challenge and self-efficacy.
  */
@@ -153,7 +147,7 @@ function round(
 
   const header = h('div', { class: 'memoria-header' }, pairsBadge, turnsBadge, comboTag);
 
-  // Floating feedback layer for dopamine toasts directly over matched cards
+  // Floating feedback layer for combo toasts directly over matched cards
   const floatLayer = h('div', { class: 'memoria-float-layer' });
 
   // Grid container

@@ -1,20 +1,15 @@
 /**
  * Crack the Code (Deductive Safe / Padlock)
  *
- * Neuroscientific foundations:
- * 1. Deductive Reasoning & Relational Integration (Prado, Chadha, & Booth, 2011):
- *    Recruits the left-lateralized frontoparietal network (dlPFC, inferior/superior parietal lobules,
- *    and frontopolar cortex BA 10) along with the basal ganglia to systematically coordinate multiple
- *    conditional constraints and rule out impossible hypotheses.
- * 2. Working Memory & Executive Updating (Baddeley, 2000; Miyake et al., 2000):
- *    Requires dynamic maintenance and updating of candidate digit sets across multiple clues,
- *    suppressing impulsive guesses in favor of analytical deduction.
- * 3. Dopaminergic Insight / "Aha!" Moment (Tik et al., 2018; Kounios & Beeman, 2014):
- *    Sudden cognitive breakthroughs during multi-constraint problem solving trigger an acute
- *    burst in the dopaminergic reward pathway (ventral tegmental area and nucleus accumbens),
- *    yielding high intrinsic satisfaction and sustained engagement.
- * 4. Dynamic Difficulty Adjustment (Kaernbach, 1991; Wilson et al., 2019):
- *    Maintains the challenge within the optimal ~80% accuracy zone, preventing both boredom and frustration.
+ * Design references (paradigms the game is inspired by; no effect of this game has been measured):
+ * 1. Deductive reasoning with multiple constraints (Prado, Chadha, & Booth, 2011; Goel, 2007):
+ *    combine conditional clues to rule out impossible hypotheses.
+ * 2. Working-memory updating (Baddeley, 2000; Miyake et al., 2000):
+ *    keep candidate digit sets up to date across clues instead of guessing.
+ * 3. Insight / "Aha!" moment (Kounios & Beeman, 2014; Tik et al., 2018):
+ *    the final discovery is meant to feel like a small moment of insight.
+ * 4. Adaptive difficulty (Kaernbach, 1991; Wilson et al., 2019):
+ *    keeps accuracy near ~80%, neither too easy nor too hard.
  */
 
 import { h, flash, secureRandom, shuffle as secureShuffle, pick as securePick } from '../dom';

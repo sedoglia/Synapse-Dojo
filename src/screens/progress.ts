@@ -152,7 +152,7 @@ function renderOverview(): (HTMLElement | null)[] {
   const nearList = nearBadges(3);
 
   return [
-    // 1. Executive Dopamine Stats Grid
+    // 1. Summary stats grid
     h(
       'div',
       { class: 'progress-stats-grid' },
