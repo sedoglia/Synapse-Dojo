@@ -72,6 +72,23 @@ export const meta = (): LangMeta => LANGS[store.data.settings.lang] ?? LANGS.en;
 const locale = (): Locale => loaded[store.data.settings.lang] ?? en;
 
 /**
+ * The device's preferred language among the supported ones ("it-IT" → "it"), English if none is supported.
+ * Starting in the device's language matters: an English app on an Italian phone gets auto-translated by the
+ * browser, which translates the interface but not the letter tiles, so games like Anagrams look broken.
+ */
+export function deviceLang(): Lang {
+  const prefs = typeof navigator === 'undefined' ? [] : navigator.languages?.length ? navigator.languages : [navigator.language];
+  for (const tag of prefs) {
+    const base = tag?.split('-')[0]?.toLowerCase();
+    if (isLang(base)) return base;
+  }
+  return 'en';
+}
+
+/** The language to start in: the saved one, or the device's on a first visit. */
+export const startLang = (): Lang => (store.fresh ? deviceLang() : store.data.settings.lang);
+
+/**
  * Loads a language's texts if needed. Unknown languages, or a failed download (offline), fall back to English.
  * If the file is gone because a new version was published, the choice is saved and the page reloads into it.
  */

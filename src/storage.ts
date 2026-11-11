@@ -200,6 +200,14 @@ function withDefaults(old: Partial<SaveData>): SaveData {
   };
 }
 
+function noSaveYet(): boolean {
+  try {
+    return !localStorage.getItem(STORAGE_KEY) && !localStorage.getItem('synapse-gym/v1');
+  } catch {
+    return true;
+  }
+}
+
 function load(): SaveData {
   try {
     let raw = localStorage.getItem(STORAGE_KEY);
@@ -247,6 +255,8 @@ export function parseSave(json: unknown): SaveData | null {
 }
 
 export const store = {
+  /** True when this browser had no save yet: the language then comes from the device, not the English default. */
+  fresh: noSaveYet(),
   data: load(),
 
   save() {
