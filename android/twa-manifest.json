@@ -1,0 +1,42 @@
+{
+  "packageId": "com.synapsedojo.app",
+  "host": "synapsedojo.com",
+  "name": "Synapse Dojo",
+  "launcherName": "Synapse Dojo",
+  "display": "standalone",
+  "orientation": "default",
+  "themeColor": "#5b5bf0",
+  "themeColorDark": "#5b5bf0",
+  "navigationColor": "#5b5bf0",
+  "navigationColorDark": "#5b5bf0",
+  "navigationDividerColor": "#00000000",
+  "navigationDividerColorDark": "#00000000",
+  "backgroundColor": "#f4f5fb",
+  "enableNotifications": false,
+  "startUrl": "/",
+  "iconUrl": "https://synapsedojo.com/icon-512.png",
+  "maskableIconUrl": "https://synapsedojo.com/icon-maskable-512.png",
+  "splashScreenFadeOutDuration": 300,
+  "signingKey": {
+    "path": "./android.keystore",
+    "alias": "android"
+  },
+  "appVersion": "0.15.1",
+  "appVersionCode": 1,
+  "shortcuts": [],
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "https://synapsedojo.com/manifest.json",
+  "fallbackType": "customtabs",
+  "features": {},
+  "alphaDependencies": {
+    "enabled": false
+  },
+  "enableSiteSettingsShortcut": true,
+  "isChromeOSOnly": false,
+  "isMetaQuest": false,
+  "fullScopeUrl": "https://synapsedojo.com/",
+  "minSdkVersion": 21,
+  "fingerprints": [],
+  "additionalTrustedOrigins": [],
+  "retainedBundles": []
+}

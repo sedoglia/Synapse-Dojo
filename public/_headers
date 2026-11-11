@@ -47,3 +47,9 @@ https://:version.:project.pages.dev/*
   Cache-Control: no-cache
 /manifest.json
   Cache-Control: no-cache
+
+# Digital Asset Links for the Android app (docs/android.md): Android checks this file to open the site full screen,
+# without the browser bar. It must be JSON, and a changed fingerprint has to show up at once.
+/.well-known/assetlinks.json
+  Content-Type: application/json
+  Cache-Control: no-cache
