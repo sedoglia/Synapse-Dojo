@@ -50,7 +50,7 @@ a riga di comando di Google per Node.js.
 | `public/icon-192.png`, `public/icon-512.png` | Icone «any» (l'icona così com'è, angoli arrotondati). |
 | `public/icon-maskable-512.png` | Icona «maskable»: a tutto campo, con il disegno nella zona sicura centrale. Android la ritaglia a cerchio, goccia o quadrato senza tagliare il disegno. |
 | `scripts/make-icons.mjs` | Rigenera i tre PNG da `public/icon.svg` (`node scripts/make-icons.mjs`). Serve solo se cambi l'icona SVG. |
-| `public/.well-known/assetlinks.json` | Collega il dominio all'app. Contiene l'impronta della chiave di caricamento; quella di Google Play va aggiunta dopo il primo caricamento (vedi [§8](#8-impronta-sha-256-e-assetlinksjson)). |
+| `public/.well-known/assetlinks.json` | Collega il dominio all'app. Contiene le impronte della chiave di caricamento e della chiave di firma di Google Play (vedi [§8](#8-impronta-sha-256-e-assetlinksjson)). |
 | `public/_headers` | Fa servire `assetlinks.json` come `application/json` e senza cache. |
 | `android/twa-manifest.json` | Configurazione di Bubblewrap: pacchetto, nome, colori, icone, versione, percorso della chiave. |
 | `.gitignore` | Esclude da git la chiave di firma (`*.keystore`, `*.jks`), i pacchetti `.aab`/`.apk` e tutto il progetto Android generato in `android/` tranne `twa-manifest.json`. |
@@ -240,7 +240,7 @@ impronte sono **due**, perché l'app installata da Play è firmata da Google, me
 | Impronta | Dove trovarla | Stato nel repository |
 | --- | --- | --- |
 | La tua chiave di caricamento (`android.keystore`) | Con `keytool`, subito (§8.1) | Già inserita |
-| La chiave di firma di Google Play | Nella Play Console, dopo aver creato l'app e caricato il primo `.aab` (§8.2) | Da aggiungere come seconda voce |
+| La chiave di firma di Google Play | Nella Play Console, dopo aver creato l'app e caricato il primo `.aab` (§8.2) | Già inserita |
 
 Un'impronta ha questa forma: 32 coppie di cifre esadecimali separate da due punti, per esempio
 `AB:CD:12:…:EF` (95 caratteri).
