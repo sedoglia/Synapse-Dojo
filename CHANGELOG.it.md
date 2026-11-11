@@ -6,12 +6,12 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
-## [Non rilasciato]
+## [0.16.0] - 2026-11-11
 
 ### Aggiunto
 
-- **Preparazione dell'app Android** (Trusted Web Activity con Bubblewrap): la configurazione `android/twa-manifest.json` (pacchetto `com.synapsedojo.app`), il file Digital Asset Links `public/.well-known/assetlinks.json` con le impronte SHA-256 della chiave di caricamento e della firma di Google Play e servito come JSON senza cache (`public/_headers`), e la guida passo-passo [`docs/android.md`](docs/android.md) dalla chiave di firma alla pubblicazione su Google Play. La chiave di firma, i pacchetti `.aab`/`.apk` e il progetto Android generato sono esclusi da git. Il sito resta l'unica fonte: ogni deploy aggiorna anche l'app.
-- **Icone PNG** (`public/icon-192.png`, `icon-512.png`, `icon-maskable-512.png`, generate da `icon.svg` con `scripts/make-icons.mjs`): il manifest ora distingue le icone «any» da quella «maskable», a tutto campo con il disegno nella zona sicura, così i launcher Android non tagliano i bordi. Il manifest dichiara anche `id`, `lang`, `categories` e `prefer_related_applications`; indirizzo iniziale, ambito e modalità di visualizzazione non cambiano.
+- **Preparazione dell'app Android** (Trusted Web Activity con Bubblewrap): la configurazione `android/twa-manifest.json` (pacchetto `com.synapsedojo.app`), il file Digital Asset Links `public/.well-known/assetlinks.json` con le impronte SHA-256 della chiave di caricamento e della firma di Google Play e servito come JSON senza cache (`public/_headers`), e la guida passo-passo [`docs/android.md`](docs/android.md) dalla chiave di firma alla pubblicazione su Google Play. La chiave di firma, i pacchetti `.aab`/`.apk` e il progetto Android generato sono esclusi da git. Il sito resta l'unica fonte: ogni deploy aggiorna anche l'app (`12ed725`, `fb3b169`).
+- **Icone PNG** (`public/icon-192.png`, `icon-512.png`, `icon-maskable-512.png`, generate da `icon.svg` con `scripts/make-icons.mjs`): il manifest ora distingue le icone «any» da quella «maskable», a tutto campo con il disegno nella zona sicura, così i launcher Android non tagliano i bordi. Il manifest dichiara anche `id`, `lang`, `categories` e `prefer_related_applications`; indirizzo iniziale, ambito e modalità di visualizzazione non cambiano (`12ed725`).
 
 ## [0.15.1] - 2026-11-11
 
