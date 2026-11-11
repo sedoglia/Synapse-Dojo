@@ -50,7 +50,7 @@ a riga di comando di Google per Node.js.
 | `public/icon-192.png`, `public/icon-512.png` | Icone «any» (l'icona così com'è, angoli arrotondati). |
 | `public/icon-maskable-512.png` | Icona «maskable»: a tutto campo, con il disegno nella zona sicura centrale. Android la ritaglia a cerchio, goccia o quadrato senza tagliare il disegno. |
 | `scripts/make-icons.mjs` | Rigenera i tre PNG da `public/icon.svg` (`node scripts/make-icons.mjs`). Serve solo se cambi l'icona SVG. |
-| `public/.well-known/assetlinks.json` | Collega il dominio all'app. **Contiene due segnaposto da sostituire** (vedi [§8](#8-impronta-sha-256-e-assetlinksjson)). |
+| `public/.well-known/assetlinks.json` | Collega il dominio all'app. Contiene l'impronta della chiave di caricamento; quella di Google Play va aggiunta dopo il primo caricamento (vedi [§8](#8-impronta-sha-256-e-assetlinksjson)). |
 | `public/_headers` | Fa servire `assetlinks.json` come `application/json` e senza cache. |
 | `android/twa-manifest.json` | Configurazione di Bubblewrap: pacchetto, nome, colori, icone, versione, percorso della chiave. |
 | `.gitignore` | Esclude da git la chiave di firma (`*.keystore`, `*.jks`), i pacchetti `.aab`/`.apk` e tutto il progetto Android generato in `android/` tranne `twa-manifest.json`. |
@@ -115,7 +115,7 @@ Poi apri nel browser e controlla che rispondano tutti:
 - <https://synapsedojo.com/manifest.json> (deve contenere le icone PNG)
 - <https://synapsedojo.com/icon-512.png>
 - <https://synapsedojo.com/icon-maskable-512.png>
-- <https://synapsedojo.com/.well-known/assetlinks.json> (per ora con i segnaposto: va bene così)
+- <https://synapsedojo.com/.well-known/assetlinks.json>
 
 Facoltativo: `bubblewrap validate --url=https://synapsedojo.com/` controlla che il sito rispetti i criteri di qualità
 richiesti a una TWA.

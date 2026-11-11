@@ -10,7 +10,7 @@ I numeri di versione vengono da `package.json` e ogni data è il giorno del comm
 
 ### Aggiunto
 
-- **Preparazione dell'app Android** (Trusted Web Activity con Bubblewrap): la configurazione `android/twa-manifest.json` (pacchetto `com.synapsedojo.app`), il file Digital Asset Links `public/.well-known/assetlinks.json` con i segnaposto per le impronte SHA-256 e servito come JSON senza cache (`public/_headers`), e la guida passo-passo [`docs/android.md`](docs/android.md) dalla chiave di firma alla pubblicazione su Google Play. La chiave di firma, i pacchetti `.aab`/`.apk` e il progetto Android generato sono esclusi da git. Il sito resta l'unica fonte: ogni deploy aggiorna anche l'app.
+- **Preparazione dell'app Android** (Trusted Web Activity con Bubblewrap): la configurazione `android/twa-manifest.json` (pacchetto `com.synapsedojo.app`), il file Digital Asset Links `public/.well-known/assetlinks.json` con l'impronta SHA-256 della chiave di caricamento e servito come JSON senza cache (`public/_headers`), e la guida passo-passo [`docs/android.md`](docs/android.md) dalla chiave di firma alla pubblicazione su Google Play. La chiave di firma, i pacchetti `.aab`/`.apk` e il progetto Android generato sono esclusi da git. Il sito resta l'unica fonte: ogni deploy aggiorna anche l'app.
 - **Icone PNG** (`public/icon-192.png`, `icon-512.png`, `icon-maskable-512.png`, generate da `icon.svg` con `scripts/make-icons.mjs`): il manifest ora distingue le icone «any» da quella «maskable», a tutto campo con il disegno nella zona sicura, così i launcher Android non tagliano i bordi. Il manifest dichiara anche `id`, `lang`, `categories` e `prefer_related_applications`; indirizzo iniziale, ambito e modalità di visualizzazione non cambiano.
 
 ## [0.15.1] - 2026-11-11
