@@ -63,12 +63,13 @@ Il progetto è costruito con **TypeScript** e **Vite**, senza l'impiego di frame
 
 ```
 synapse-dojo/
-├── public/                 manifest PWA, icone, font Nunito (OFL), robots.txt, sitemap.xml, _headers, service worker
+├── public/                 manifest PWA, icone SVG e PNG, font Nunito (OFL), robots.txt, sitemap.xml, _headers, service worker, .well-known/assetlinks.json
+├── android/                twa-manifest.json: configurazione Bubblewrap dell'app Android (guida in docs/android.md)
 ├── functions/api/          API della classifica e trasferimento (Cloudflare Pages Functions): join, submit, board, me, groups, transfer
 ├── server/board.ts         codice condiviso dalle API: autenticazione, validazione, settimane ISO, punti, gruppi
 ├── migrations/             schema del database D1 della classifica (applicato in automatico dal deploy)
 ├── cleanup/                Worker con cron che applica ogni notte le regole di conservazione della classifica
-├── scripts/                build e deploy (deploy-web.mjs), verifica dizionari (check-anagrams.mjs) e coerenza i18n (verify-i18n.mjs)
+├── scripts/                build e deploy (deploy-web.mjs), verifica dizionari (check-anagrams.mjs), coerenza i18n (verify-i18n.mjs) e icone PNG (make-icons.mjs)
 ├── src/
 │   ├── exercises/          i 40 esercizi (uno per file), index.ts (catalogo e batteria), types.ts e dataset dei puzzle
 │   ├── screens/            schermate dell'app: home, onboarding, training, play, progress, settings, board, boardJoin, groups, guide, privacy, license
@@ -152,6 +153,10 @@ Configurazione da fare una sola volta per la classifica:
 4. Imposta la chiave segreta con `npx wrangler pages secret put TURNSTILE_SECRET --project-name synapse-gym`.
 
 Tutto rientra nel piano gratuito di Cloudflare (Pages, Functions, cron dei Workers, D1 e Turnstile).
+
+### App Android
+
+La stessa app è pubblicabile su Google Play come **Trusted Web Activity**: un guscio Android generato con [Bubblewrap](https://github.com/GoogleChromeLabs/bubblewrap) che apre il sito a schermo intero. La configurazione è in `android/twa-manifest.json` e il file di verifica del dominio in `public/.well-known/assetlinks.json`; la guida completa, dalla chiave di firma alla scheda dello store, è in [docs/android.md](docs/android.md). Ogni `npm run deploy` aggiorna anche l'app; un nuovo pacchetto `.aab` serve solo quando cambia il guscio (nome, icona, colori, pacchetto o versione minima di Android).
 
 ---
 

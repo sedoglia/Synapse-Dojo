@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.synapsedojo.app",
+      "sha256_cert_fingerprints": [
+        "5B:8C:70:4D:A6:C9:E4:CA:0D:C5:76:0A:F0:85:A4:17:D8:62:FC:C0:FD:0E:8C:EB:1A:21:82:AF:27:D9:47:D6"
+      ]
+    }
+  }
+]

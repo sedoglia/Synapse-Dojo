@@ -62,12 +62,13 @@ Built purely with **TypeScript** and **Vite**, with **zero UI framework dependen
 
 ```
 synapse-dojo/
-├── public/                 PWA manifest, SVG icons, Nunito font (OFL), robots.txt, sitemap.xml, _headers, service worker
+├── public/                 PWA manifest, SVG and PNG icons, Nunito font (OFL), robots.txt, sitemap.xml, _headers, service worker, .well-known/assetlinks.json
+├── android/                twa-manifest.json: Bubblewrap configuration of the Android app (guide in docs/android.md)
 ├── functions/api/          Leaderboard & transfer API (Cloudflare Pages Functions): join, submit, board, me, groups, transfer
 ├── server/board.ts         Code shared by the API: authentication, validation, ISO weeks, points, groups
 ├── migrations/             Leaderboard D1 database schema (applied automatically on deploy)
 ├── cleanup/                Cron Worker that applies the leaderboard retention rules every night
-├── scripts/                Build & deploy (deploy-web.mjs), dictionary checks (check-anagrams.mjs) & i18n verify (verify-i18n.mjs)
+├── scripts/                Build & deploy (deploy-web.mjs), dictionary checks (check-anagrams.mjs), i18n verify (verify-i18n.mjs) & PNG icons (make-icons.mjs)
 ├── src/
 │   ├── exercises/          40 exercise implementations, index.ts (catalog & battery), types.ts, puzzle datasets
 │   ├── screens/            App views: home, onboarding, training, play, progress, settings, board, boardJoin, groups, guide, privacy, license
@@ -151,6 +152,10 @@ One-time setup for the leaderboard:
 4. Set the secret key with `npx wrangler pages secret put TURNSTILE_SECRET --project-name synapse-gym`.
 
 Everything fits in Cloudflare's free plan (Pages, Functions, Workers cron, D1 and Turnstile).
+
+### Android app
+
+The same app can be published on Google Play as a **Trusted Web Activity**: an Android shell generated with [Bubblewrap](https://github.com/GoogleChromeLabs/bubblewrap) that opens the site full screen. Its configuration lives in `android/twa-manifest.json` and the domain verification file in `public/.well-known/assetlinks.json`; the full guide, from the signing key to the store listing, is in [docs/android.md](docs/android.md) (Italian). Every `npm run deploy` also updates the app; a new `.aab` package is needed only when the shell changes (name, icon, colours, package or minimum Android version).
 
 ---
 
