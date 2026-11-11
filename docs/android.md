@@ -237,10 +237,10 @@ Entrambi sono ignorati da git. Se vuoi saltare il controllo di qualità del sito
 impronte sono **due**, perché l'app installata da Play è firmata da Google, mentre quella che installi tu per le prove
 è firmata con la tua chiave:
 
-| Segnaposto | Impronta da inserire | Dove trovarla |
+| Impronta | Dove trovarla | Stato nel repository |
 | --- | --- | --- |
-| `SOSTITUISCI_CON_SHA256_CHIAVE_DI_CARICAMENTO` | La tua chiave di caricamento (`android.keystore`) | Con `keytool`, subito (§8.1) |
-| `SOSTITUISCI_CON_SHA256_PLAY_APP_SIGNING` | La chiave di firma di Google Play | Nella Play Console, dopo aver creato l'app e caricato il primo `.aab` (§8.2) |
+| La tua chiave di caricamento (`android.keystore`) | Con `keytool`, subito (§8.1) | Già inserita |
+| La chiave di firma di Google Play | Nella Play Console, dopo aver creato l'app e caricato il primo `.aab` (§8.2) | Da aggiungere come seconda voce |
 
 Un'impronta ha questa forma: 32 coppie di cifre esadecimali separate da due punti, per esempio
 `AB:CD:12:…:EF` (95 caratteri).
@@ -271,7 +271,7 @@ copia l'impronta **SHA-256**.
 
 ### 8.3 Compila e pubblica il file
 
-Sostituisci i segnaposto in `public/.well-known/assetlinks.json` lasciando le virgolette, per esempio:
+Aggiungi le impronte in `public/.well-known/assetlinks.json` tra virgolette, una per riga, per esempio:
 
 ```json
 "sha256_cert_fingerprints": [
@@ -280,8 +280,7 @@ Sostituisci i segnaposto in `public/.well-known/assetlinks.json` lasciando le vi
 ]
 ```
 
-Attenzione alla sintassi: Chrome è severo, **niente virgola dopo l'ultimo elemento**. Se hai una sola impronta per ora,
-togli la riga del segnaposto rimasto (e la virgola prima). Poi:
+Attenzione alla sintassi: Chrome è severo, **niente virgola dopo l'ultimo elemento**. Poi:
 
 ```powershell
 npm run deploy
