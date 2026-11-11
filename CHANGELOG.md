@@ -6,15 +6,15 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
-## [Unreleased]
+## [0.15.1] - 2026-11-11
 
 ### Changed
 
-- **Starting language from the device** (`src/i18n.ts`, `src/storage.ts`): on a first visit the app starts in the device's preferred language when it is one of the 12 supported ones ("it-IT" → Italian), and only otherwise in English. Players with a save keep the language they chose.
+- **Starting language from the device** (`src/i18n.ts`, `src/storage.ts`): on a first visit the app starts in the device's preferred language when it is one of the 12 supported ones ("it-IT" → Italian), and only otherwise in English. Players with a save keep the language they chose (`17079a2`).
 
 ### Fixed
 
-- **Anagrams showing English words under an Italian interface**: an app that started in English and was auto-translated by Chrome showed Italian texts but tiles and answers from the English list (e.g. FLAME). The pages now declare `translate="no"` and `<meta name="google" content="notranslate">`, so the browser's translator no longer hides the games' real language.
+- **Anagrams showing English words under an Italian interface**: an app that started in English and was auto-translated by Chrome showed Italian texts but tiles and answers from the English list (e.g. FLAME). The pages now declare `translate="no"` and `<meta name="google" content="notranslate">`, so the browser's translator no longer hides the games' real language (`17079a2`).
 
 ## [0.15.0] - 2026-11-10
 

@@ -6,15 +6,15 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
-## [Non rilasciato]
+## [0.15.1] - 2026-11-11
 
 ### Modificato
 
-- **Lingua iniziale dal dispositivo** (`src/i18n.ts`, `src/storage.ts`): alla prima visita l'app parte nella lingua preferita del dispositivo se è tra le 12 supportate («it-IT» → italiano), e solo altrimenti in inglese. Chi ha già un salvataggio mantiene la lingua scelta.
+- **Lingua iniziale dal dispositivo** (`src/i18n.ts`, `src/storage.ts`): alla prima visita l'app parte nella lingua preferita del dispositivo se è tra le 12 supportate («it-IT» → italiano), e solo altrimenti in inglese. Chi ha già un salvataggio mantiene la lingua scelta (`17079a2`).
 
 ### Corretto
 
-- **Anagrammi con parole inglesi a interfaccia italiana**: un'app partita in inglese e tradotta in automatico da Chrome mostrava l'interfaccia in italiano ma tessere e soluzioni della lista inglese (es. FLAME). Le pagine ora dichiarano `translate="no"` e `<meta name="google" content="notranslate">`, così il traduttore del browser non maschera più la lingua reale dei giochi.
+- **Anagrammi con parole inglesi a interfaccia italiana**: un'app partita in inglese e tradotta in automatico da Chrome mostrava l'interfaccia in italiano ma tessere e soluzioni della lista inglese (es. FLAME). Le pagine ora dichiarano `translate="no"` e `<meta name="google" content="notranslate">`, così il traduttore del browser non maschera più la lingua reale dei giochi (`17079a2`).
 
 ## [0.15.0] - 2026-11-10
 
