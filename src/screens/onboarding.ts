@@ -10,6 +10,26 @@ import { showGuide } from './guide';
 import { showLicense } from './license';
 import { showTransferImportDialog } from '../transfer';
 
+/**
+ * Footer link to a standalone page: a real <a href> that crawlers can follow and that opens in a new tab with
+ * Ctrl/Cmd/middle click, while a plain click keeps the in-app screen.
+ */
+function pageLink(href: string, label: string, open: () => void) {
+  return h(
+    'a',
+    {
+      class: 'link-btn',
+      href,
+      onClick: (e: MouseEvent) => {
+        if (e.button !== 0 || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
+        e.preventDefault();
+        open();
+      },
+    },
+    label,
+  );
+}
+
 export function showOnboarding() {
   const input = h('input', {
     class: 'input',
@@ -183,23 +203,11 @@ export function showOnboarding() {
           h(
             'p',
             {},
-            h(
-              'button',
-              { class: 'link-btn', type: 'button', onClick: () => showPrivacy(showOnboarding) },
-              t('privacy.title'),
-            ),
+            pageLink('./privacy', t('privacy.title'), () => showPrivacy(showOnboarding)),
             h('span', {}, ' · '),
-            h(
-              'button',
-              { class: 'link-btn', type: 'button', onClick: () => showGuide(showOnboarding) },
-              t('guide.title'),
-            ),
+            pageLink('./guide', t('guide.title'), () => showGuide(showOnboarding)),
             h('span', {}, ' · '),
-            h(
-              'button',
-              { class: 'link-btn', type: 'button', onClick: () => showLicense(showOnboarding) },
-              t('license.title'),
-            ),
+            pageLink('./license', t('license.title'), () => showLicense(showOnboarding)),
             h('span', {}, ' · '),
             h(
               'a',
