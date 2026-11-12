@@ -62,10 +62,10 @@ Valori scelti in `android/twa-manifest.json`:
 | `packageId` | `com.synapsedojo.app` | Identificativo dell'app su Google Play. **Non si può più cambiare dopo la prima pubblicazione**: se ne vuoi un altro, cambialo ora qui e in `assetlinks.json`. |
 | `host` | `synapsedojo.com` | Dominio di produzione (da `sitemap.xml`, `robots.txt` e README). |
 | `name` / `launcherName` | `Synapse Dojo` | Il nome sotto l'icona può avere al massimo 12 caratteri: «Synapse Dojo» li ha esattamente. |
-| `themeColor`, `navigationColor` | `#5b5bf0` | Lo stesso viola del sito, anche in tema scuro. |
+| `themeColor`, `navigationColor` | `#f4f5fb` (scuro: `#11121a`) | Barra di stato e barra di navigazione hanno lo stesso colore dello sfondo del sito (`--bg` in `src/style.css`), così si confondono con la pagina. Android sceglie la variante scura quando il telefono è in tema scuro, come fa il sito. |
 | `backgroundColor` | `#f4f5fb` | Colore della schermata di avvio. |
 | `enableNotifications` | `false` | Il sito non usa notifiche, così l'app non chiede il permesso relativo. |
-| `appVersion` / `appVersionCode` | `0.15.1` / `1` | Il nome di versione segue `package.json`; il codice è un numero intero che deve crescere a ogni pacchetto caricato su Play. |
+| `appVersion` / `appVersionCode` | `0.16.0` / `2` | Il nome di versione segue `package.json`; il codice è un numero intero che deve crescere a ogni pacchetto caricato su Play. |
 | `signingKey` | `./android.keystore`, alias `android` | La chiave di firma, che creerai tu (vedi §5). Il file è ignorato da git. |
 
 ## 3. Prerequisiti
@@ -142,7 +142,7 @@ Bubblewrap legge il manifest online e fa una serie di domande. Rispondi con i va
 | Starting version code | `1` |
 | Display mode | `standalone` |
 | Orientation | `default` |
-| Status bar color | `#5B5BF0` |
+| Status bar color | `#F4F5FB` (i colori del tema scuro li riporta il §5.2) |
 | Splash screen color | `#F4F5FB` |
 | Icon URL | `https://synapsedojo.com/icon-512.png` |
 | Maskable icon URL | `https://synapsedojo.com/icon-maskable-512.png` |
