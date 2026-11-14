@@ -6,6 +6,17 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.17.0] - 2026-11-14
+
+### Aggiunto
+
+- **App Android anche senza Chrome** (`scripts/android-webview/`, `scripts/patch-android.mjs`, `npm run android:patch`): sui telefoni privi di un browser capace di aprire la Trusted Web Activity (per esempio i Huawei senza servizi Google, o le installazioni da AppGallery e Uptodown) l'app non apre più una scheda del browser con la barra dell'indirizzo, ma mostra il sito a schermo intero in una propria schermata WebView, con lo stesso aspetto che ha su Google Play. La schermata aggiunge ciò che un WebView non fa da sé: scelta del file per importare un salvataggio, salvataggio dei file creati dalla pagina (esportazione dei progressi, promemoria del calendario, cartolina da condividere) con la schermata «Salva» di sistema, pannello di condivisione di sistema, vibrazione, tema chiaro/scuro del telefono, barre di sistema del colore della pagina (anche con lo schermo «edge-to-edge» di Android 15+), tasto Indietro e apertura fuori dall'app dei link verso altri siti. Dove Chrome c'è, l'app continua a usare la Trusted Web Activity: per chi la installa da Google Play non cambia nulla. Il sito non è stato modificato. Versione Android 0.17.0, codice 3; guida [`docs/android.md`](docs/android.md) aggiornata con la procedura e gli altri store.
+
+### Modificato
+
+- **Barre di sistema dell'app Android dello stesso colore dello sfondo** (`android/twa-manifest.json`, pagine HTML): barra di stato e barra di navigazione passano dal viola allo sfondo del sito (`#F4F5FB` chiaro, `#11121A` scuro), e le pagine dichiarano un `theme-color` per ciascun tema (`44a1617`).
+- **Link reali a guida, privacy e licenza nel footer della home** (`src/screens/onboarding.ts`): prima erano pulsanti JavaScript che i motori di ricerca non seguono; il clic normale continua ad aprire la schermata interna (`eeee149`).
+
 ## [0.16.0] - 2026-11-11
 
 ### Aggiunto

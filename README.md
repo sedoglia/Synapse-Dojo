@@ -155,7 +155,7 @@ Everything fits in Cloudflare's free plan (Pages, Functions, Workers cron, D1 an
 
 ### Android app
 
-The same app can be published on Google Play as a **Trusted Web Activity**: an Android shell generated with [Bubblewrap](https://github.com/GoogleChromeLabs/bubblewrap) that opens the site full screen. Its configuration lives in `android/twa-manifest.json` and the domain verification file in `public/.well-known/assetlinks.json`; the full guide, from the signing key to the store listing, is in [docs/android.md](docs/android.md) (Italian). Every `npm run deploy` also updates the app; a new `.aab` package is needed only when the shell changes (name, icon, colours, package or minimum Android version).
+The same app can be published on Google Play as a **Trusted Web Activity**: an Android shell generated with [Bubblewrap](https://github.com/GoogleChromeLabs/bubblewrap) that opens the site full screen. Its configuration lives in `android/twa-manifest.json` and the domain verification file in `public/.well-known/assetlinks.json`; the full guide, from the signing key to the store listing, is in [docs/android.md](docs/android.md) (Italian). Every `npm run deploy` also updates the app; a new `.aab` package is needed only when the shell changes (name, icon, colours, package or minimum Android version). On phones without Chrome (for example Huawei phones without Google services) the same shell shows the site in its own WebView screen, whose sources are in `scripts/android-webview/` (`npm run android:patch` adds them to the generated project).
 
 ---
 
