@@ -19,8 +19,9 @@ Questa guida spiega, passo per passo e senza dare per scontata alcuna esperienza
 9. [Prova sul telefono](#9-prova-sul-telefono)
 10. [Pubblicazione su Google Play](#10-pubblicazione-su-google-play)
 11. [Aggiornare l'app in seguito](#11-aggiornare-lapp-in-seguito)
-12. [Problemi comuni](#12-problemi-comuni)
-13. [Fonti](#13-fonti)
+12. [Telefoni senza Chrome e altri store](#12-telefoni-senza-chrome-e-altri-store)
+13. [Problemi comuni](#13-problemi-comuni)
+14. [Fonti](#14-fonti)
 
 ---
 
@@ -39,6 +40,10 @@ usando Chrome (o un altro browser compatibile) installato sul telefono, senza ba
   l'impronta della chiave con cui l'app è firmata. Se l'impronta manca o è sbagliata, l'app si apre lo stesso ma con
   una barra del browser in alto: è il segnale che la verifica non è riuscita.
 
+- **Senza Chrome l'app usa una propria schermata WebView.** Sui telefoni che non hanno un browser capace di aprire
+  una TWA (per esempio i Huawei senza servizi Google) il guscio mostra il sito a schermo intero con il componente
+  WebView di Android, con lo stesso aspetto (vedi [§12](#12-telefoni-senza-chrome-e-altri-store)).
+
 Lo strumento usato per generare il guscio è [Bubblewrap](https://github.com/GoogleChromeLabs/bubblewrap), un programma
 a riga di comando di Google per Node.js.
 
@@ -53,6 +58,8 @@ a riga di comando di Google per Node.js.
 | `public/.well-known/assetlinks.json` | Collega il dominio all'app. Contiene le impronte della chiave di caricamento e della chiave di firma di Google Play (vedi [§8](#8-impronta-sha-256-e-assetlinksjson)). |
 | `public/_headers` | Fa servire `assetlinks.json` come `application/json` e senza cache. |
 | `android/twa-manifest.json` | Configurazione di Bubblewrap: pacchetto, nome, colori, icone, versione, percorso della chiave. |
+| `scripts/android-webview/` | Sorgenti della schermata WebView per i telefoni senza Chrome ([§12](#12-telefoni-senza-chrome-e-altri-store)). |
+| `scripts/patch-android.mjs` | Aggiunge la schermata WebView al progetto generato da Bubblewrap (`npm run android:patch`). Va rieseguito dopo ogni `bubblewrap update`. |
 | `.gitignore` | Esclude da git la chiave di firma (`*.keystore`, `*.jks`), i pacchetti `.aab`/`.apk` e tutto il progetto Android generato in `android/` tranne `twa-manifest.json`. |
 
 Valori scelti in `android/twa-manifest.json`:
@@ -65,7 +72,8 @@ Valori scelti in `android/twa-manifest.json`:
 | `themeColor`, `navigationColor` | `#f4f5fb` (scuro: `#11121a`) | Barra di stato e barra di navigazione hanno lo stesso colore dello sfondo del sito (`--bg` in `src/style.css`), così si confondono con la pagina. Android sceglie la variante scura quando il telefono è in tema scuro, come fa il sito. |
 | `backgroundColor` | `#f4f5fb` | Colore della schermata di avvio. |
 | `enableNotifications` | `false` | Il sito non usa notifiche, così l'app non chiede il permesso relativo. |
-| `appVersion` / `appVersionCode` | `0.16.0` / `2` | Il nome di versione segue `package.json`; il codice è un numero intero che deve crescere a ogni pacchetto caricato su Play. |
+| `fallbackType` | `webview` | Cosa fare quando nessun browser può aprire la TWA: mostrare il sito in un WebView invece che in una scheda del browser. Fa anche aggiungere a Bubblewrap il permesso `INTERNET`. |
+| `appVersion` / `appVersionCode` | `0.17.0` / `3` | Il nome di versione segue `package.json`; il codice è un numero intero che deve crescere a ogni pacchetto caricato su Play. |
 | `signingKey` | `./android.keystore`, alias `android` | La chiave di firma, che creerai tu (vedi §5). Il file è ignorato da git. |
 
 ## 3. Prerequisiti
@@ -179,10 +187,12 @@ git checkout -- android/twa-manifest.json
 cd android
 bubblewrap update --skipVersionUpgrade
 cd ..
+npm run android:patch
 ```
 
 `bubblewrap update` rigenera il progetto Android a partire da `twa-manifest.json`; `--skipVersionUpgrade` evita che
-aumenti il numero di versione. Se il diff mostra differenze che vuoi tenere (per esempio un pacchetto diverso), invece
+aumenti il numero di versione. `npm run android:patch` aggiunge al progetto appena rigenerato la schermata WebView
+([§12](#12-telefoni-senza-chrome-e-altri-store)): va eseguito **dopo ogni `bubblewrap update`**. Se il diff mostra differenze che vuoi tenere (per esempio un pacchetto diverso), invece
 di `git checkout` modifica il file e ricordati di aggiornare anche `package_name` in
 `public/.well-known/assetlinks.json`.
 
@@ -195,6 +205,8 @@ cartella `bin` dentro `%USERPROFILE%\.bubblewrap\jdk\`) e poi generare il proget
 cd android
 keytool -genkeypair -v -keystore android.keystore -alias android -keyalg RSA -keysize 2048 -validity 10000
 bubblewrap update --skipVersionUpgrade
+cd ..
+npm run android:patch
 ```
 
 `keytool` chiede le stesse informazioni e le password. ⚠ **Da verificare:** il nome esatto della sottocartella del JDK
@@ -309,7 +321,7 @@ dalla cartella `android`) e poi `bubblewrap fingerprint generateAssetLinks --out
    (installa `app-release-signed.apk` con `adb`, incluso nell'SDK scaricato da Bubblewrap).
 5. Apri **Synapse Dojo** dal telefono e controlla:
    - **niente barra degli indirizzi in alto**: la verifica del dominio è riuscita. Se la barra c'è, l'impronta della
-     tua chiave non è (ancora) in `assetlinks.json` o il sito non è stato ripubblicato (vedi §12);
+     tua chiave non è (ancora) in `assetlinks.json` o il sito non è stato ripubblicato (vedi §13);
    - icona, nome e colori corretti;
    - un esercizio, la classifica (con la verifica Turnstile) e il funzionamento offline in modalità aereo.
 
@@ -406,18 +418,99 @@ Procedura per un nuovo pacchetto:
 ```powershell
 npm install -g @bubblewrap/cli          # Bubblewrap aggiornato
 cd android
-bubblewrap update --appVersionName=0.16.0
+bubblewrap update --appVersionName=0.17.0
+cd ..
+npm run android:patch
+cd android
 bubblewrap build
 ```
 
 `bubblewrap update` aumenta di 1 `appVersionCode` (Play rifiuta un pacchetto con un codice già usato), imposta il nome
-di versione indicato (usa quello di `package.json`) e rigenera il progetto; poi committa `android/twa-manifest.json`
-aggiornato. Carica il nuovo `app-release-bundle.aab` sulla traccia di Play che usi (test o produzione).
+di versione indicato (usa quello di `package.json`) e rigenera il progetto; `npm run android:patch` vi rimette la
+schermata WebView; poi committa `android/twa-manifest.json` aggiornato. Carica il nuovo `app-release-bundle.aab`
+sulla traccia di Play che usi (test o produzione) e il nuovo `app-release-signed.apk` sugli altri store
+([§12.3](#123-altri-store-appgallery-uptodown)).
 
 Le modifiche manuali al progetto Android generato vengono cancellate da `bubblewrap update`: cambia sempre
-`android/twa-manifest.json`, mai i file generati.
+`android/twa-manifest.json` o i file in `scripts/android-webview/`, mai i file generati.
 
-## 12. Problemi comuni
+## 12. Telefoni senza Chrome e altri store
+
+### 12.1 Cosa succede senza Chrome
+
+Una TWA ha bisogno di un browser che la sappia aprire (Chrome e pochi altri). Dove non c'è, per esempio sui telefoni
+Huawei senza servizi Google, il guscio generato da Bubblewrap aprirebbe una normale scheda del browser, con la barra
+dell'indirizzo. Per questo l'app contiene anche una **schermata WebView** (`WebViewActivity`): mostra lo stesso sito a
+schermo intero usando il componente WebView di Android, presente su ogni telefono.
+
+- **La scelta è automatica** e si ripete a ogni avvio: se c'è un browser che supporta le TWA l'app usa la TWA, come
+  prima; solo altrimenti usa il WebView. Chi installa da Google Play ha Chrome, quindi per lui non cambia nulla.
+- **Il sito è lo stesso** e si aggiorna allo stesso modo con `npm run deploy`. I dati però non sono condivisi: il
+  WebView ha il suo salvataggio, separato da quello di Chrome sullo stesso telefono.
+- **Non serve `assetlinks.json`**: la verifica del dominio riguarda solo la TWA.
+
+La schermata aggiunge ciò che un browser fa da sé e un WebView no:
+
+| Funzione | Come è resa nel WebView |
+| --- | --- |
+| Importare un salvataggio (`<input type="file">`) | Si apre il selettore di file del telefono. |
+| Esportare i progressi, promemoria del calendario, salvare la cartolina (`<a download>`) | Si apre la schermata «Salva» di sistema, dove scegli la cartella. Non serve alcun permesso di archiviazione. |
+| Condividi (`navigator.share`) | Pannello di condivisione di Android, anche con l'immagine. |
+| Vibrazione | Permesso `VIBRATE` (non chiede nulla all'utente). |
+| Tema chiaro/scuro | Segue il telefono, come nel browser. |
+| Barre di sistema | Dello stesso colore della pagina; da Android 15 la pagina resta dentro i margini di sistema. |
+| Link verso altri siti, WhatsApp, Telegram | Si aprono fuori dall'app. |
+| Tasto Indietro | Torna alla pagina precedente, poi chiude l'app. |
+
+### 12.2 Dove sta il codice
+
+Bubblewrap riscrive tutto il progetto Android a ogni `bubblewrap update`, quindi le aggiunte stanno in
+`scripts/android-webview/` e lo script `scripts/patch-android.mjs` le rimette al loro posto:
+
+| File | A cosa serve |
+| --- | --- |
+| `WebViewActivity.java` | La schermata. |
+| `webview-bridge.js` | Piccolo script eseguito nella pagina: passa all'app i file da salvare e le richieste di condivisione. Il sito non va modificato. |
+| `res/values*/synapse_webview.xml` | Tema chiaro e scuro della schermata, con i colori di `twa-manifest.json`. |
+| `proguard-webview.pro` | Dice al compressore di codice di non rinominare i metodi chiamati dalla pagina. |
+
+Lo script inoltre dichiara la schermata e i permessi `INTERNET` e `VIBRATE` nel manifest, la collega a
+`LauncherActivity`, aggiunge la cartella dei file condivisi a `filepaths.xml` e la libreria `androidx.webkit` a
+`app/build.gradle` (serve perché su Android 10–12 la pagina usi il proprio tema scuro, invece di essere scurita in
+automatico dal WebView). Si può eseguire più volte; se dopo un
+aggiornamento di Bubblewrap non trova più le righe che si aspetta, si ferma con un errore invece di produrre un'app
+incompleta.
+
+### 12.3 Altri store (AppGallery, Uptodown)
+
+- **Google Play** vuole il pacchetto `app-release-bundle.aab`. **Gli altri store** vogliono l'APK:
+  `app-release-signed.apk`, firmato con la tua chiave di caricamento. Sono lo stesso codice e la stessa versione.
+- **Stesso pacchetto, firma diversa.** L'app scaricata da Play è firmata da Google, quella degli altri store dalla tua
+  chiave: Android non permette di aggiornare l'una con l'altra. Chi ha l'app di uno store e vuole passare a un altro
+  deve prima disinstallarla (perdendo i dati locali: prima conviene esportarli).
+- **Entrambe le impronte restano in `assetlinks.json`**: così anche l'APK degli altri store, su un telefono con
+  Chrome, si apre come TWA senza barra dell'indirizzo.
+- **Huawei AppGallery**: carica l'APK da AppGallery Connect, nella scheda della versione dell'app. L'app non usa
+  servizi Google (GMS), quindi non servono gli HMS. ⚠ **Da verificare** al momento dell'invio: menu e requisiti
+  cambiano spesso.
+- **Uptodown**: nella console sviluppatori, scheda *Files*, carica il nuovo APK e reinvia la scheda in revisione.
+
+### 12.4 Provare il WebView
+
+Su un telefono con Chrome l'app usa sempre la TWA. Per vedere il WebView serve un dispositivo senza browser che
+supporti le TWA: un Huawei senza servizi Google, oppure un emulatore con un'immagine «Default Android System Image»
+(AOSP, senza Chrome), per esempio:
+
+```powershell
+sdkmanager "emulator" "system-images;android-34;default;x86_64"
+avdmanager create avd -n webview-test -k "system-images;android-34;default;x86_64"
+emulator -avd webview-test
+adb install app-release-signed.apk
+```
+
+Con `adb shell dumpsys activity activities` la schermata in primo piano risulta `com.synapsedojo.app/.WebViewActivity`.
+
+## 13. Problemi comuni
 
 | Sintomo | Causa probabile | Cosa fare |
 | --- | --- | --- |
@@ -428,9 +521,11 @@ Le modifiche manuali al progetto Android generato vengono cancellate da `bubblew
 | `winget` non è riconosciuto | La cartella `WindowsApps` non è nel `PATH` | Usa il percorso completo: `& "$env:LOCALAPPDATA\Microsoft\WindowsApps\winget.exe" install …`. |
 | `minSdkVersion 21 cannot be smaller than version 24` | La libreria usata da Bubblewrap richiede Android 7.0 (API 24) | In `android/twa-manifest.json` `minSdkVersion` deve essere almeno `24` (valore già impostato nel repository); poi `bubblewrap update --skipVersionUpgrade`. |
 | Play rifiuta il pacchetto per il codice di versione | `appVersionCode` già usato | `bubblewrap update` (senza `--skipVersionUpgrade`) e di nuovo `bubblewrap build`. |
+| Senza Chrome l'app apre una scheda del browser con la barra dell'indirizzo | Il pacchetto è stato compilato senza la schermata WebView | Esegui `npm run android:patch` dopo `bubblewrap update` e ricompila ([§12](#12-telefoni-senza-chrome-e-altri-store)). |
+| `patch-android` si ferma con «Bubblewrap's template has changed» | Una versione nuova di Bubblewrap genera file diversi | Aggiorna i punti di inserimento in `scripts/patch-android.mjs` confrontandoli con i file generati in `android/app`. |
 | Password del keystore dimenticata | – | Senza password la chiave non è utilizzabile: chiedi la reimpostazione della chiave di caricamento dalla Play Console (pagina della firma dell'app). |
 
-## 13. Fonti
+## 14. Fonti
 
 Consultate a novembre 2026:
 

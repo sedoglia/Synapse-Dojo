@@ -6,6 +6,17 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.17.0] - 2026-11-14
+
+### Added
+
+- **Android app without Chrome too** (`scripts/android-webview/`, `scripts/patch-android.mjs`, `npm run android:patch`): on phones with no browser able to run the Trusted Web Activity (for example Huawei phones without Google services, or installs from AppGallery and Uptodown) the app no longer opens a browser tab with an address bar, but shows the site full screen in its own WebView screen, looking the same as on Google Play. The screen adds what a WebView does not do by itself: choosing a file to import a save, saving the files made by the page (progress export, calendar reminder, share card) through the system "Save" screen, the system share sheet, vibration, the phone's light/dark theme, system bars in the colour of the page (also with the edge-to-edge display of Android 15+), the Back key, and links to other sites opening outside the app. Where Chrome is present the app keeps using the Trusted Web Activity: nothing changes for installs from Google Play. The site was not modified. Android version 0.17.0, code 3; the guide [`docs/android.md`](docs/android.md) (Italian) now covers the procedure and the other stores.
+
+### Changed
+
+- **System bars of the Android app in the colour of the background** (`android/twa-manifest.json`, HTML pages): the status bar and the navigation bar go from purple to the site's background (`#F4F5FB` light, `#11121A` dark), and the pages declare one `theme-color` per theme (`44a1617`).
+- **Real links to the guide, privacy and licence pages in the home footer** (`src/screens/onboarding.ts`): they used to be JavaScript buttons, which search engines do not follow; a plain click still opens the in-app screen (`eeee149`).
+
 ## [0.16.0] - 2026-11-11
 
 ### Added

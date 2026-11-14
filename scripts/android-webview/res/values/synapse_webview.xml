@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Theme of WebViewActivity (source: scripts/android-webview/ in the repository). The colours are the ones
+     Bubblewrap takes from twa-manifest.json: colorPrimary is the light background, colorPrimaryDark the dark one. -->
+<resources>
+    <style name="SynapseWebView" parent="@android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/colorPrimary</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <!-- Before Android 8.1 the navigation buttons are always white: keep the bar black there. -->
+        <item name="android:navigationBarColor">@android:color/black</item>
+    </style>
+</resources>

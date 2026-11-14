@@ -20,12 +20,12 @@
     "path": "./android.keystore",
     "alias": "android"
   },
-  "appVersionName": "0.16.0",
-  "appVersionCode": 2,
+  "appVersionName": "0.17.0",
+  "appVersionCode": 3,
   "shortcuts": [],
   "generatorApp": "bubblewrap-cli",
   "webManifestUrl": "https://synapsedojo.com/manifest.json",
-  "fallbackType": "customtabs",
+  "fallbackType": "webview",
   "features": {},
   "alphaDependencies": {
     "enabled": false
@@ -40,5 +40,5 @@
   "additionalTrustedOrigins": [],
   "retainedBundles": [],
   "displayOverride": [],
-  "appVersion": "0.16.0"
+  "appVersion": "0.17.0"
 }

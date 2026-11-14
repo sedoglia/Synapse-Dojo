@@ -156,7 +156,7 @@ Tutto rientra nel piano gratuito di Cloudflare (Pages, Functions, cron dei Worke
 
 ### App Android
 
-La stessa app è pubblicabile su Google Play come **Trusted Web Activity**: un guscio Android generato con [Bubblewrap](https://github.com/GoogleChromeLabs/bubblewrap) che apre il sito a schermo intero. La configurazione è in `android/twa-manifest.json` e il file di verifica del dominio in `public/.well-known/assetlinks.json`; la guida completa, dalla chiave di firma alla scheda dello store, è in [docs/android.md](docs/android.md). Ogni `npm run deploy` aggiorna anche l'app; un nuovo pacchetto `.aab` serve solo quando cambia il guscio (nome, icona, colori, pacchetto o versione minima di Android).
+La stessa app è pubblicabile su Google Play come **Trusted Web Activity**: un guscio Android generato con [Bubblewrap](https://github.com/GoogleChromeLabs/bubblewrap) che apre il sito a schermo intero. La configurazione è in `android/twa-manifest.json` e il file di verifica del dominio in `public/.well-known/assetlinks.json`; la guida completa, dalla chiave di firma alla scheda dello store, è in [docs/android.md](docs/android.md). Ogni `npm run deploy` aggiorna anche l'app; un nuovo pacchetto `.aab` serve solo quando cambia il guscio (nome, icona, colori, pacchetto o versione minima di Android). Sui telefoni senza Chrome (per esempio i Huawei senza servizi Google) lo stesso guscio mostra il sito in una propria schermata WebView, i cui sorgenti sono in `scripts/android-webview/` (`npm run android:patch` li aggiunge al progetto generato).
 
 ---
 

@@ -1,7 +1,7 @@
 {
   "name": "synapse-dojo",
   "private": true,
-  "version": "0.16.0",
+  "version": "0.17.0",
   "type": "module",
   "license": "PolyForm-Noncommercial-1.0.0",
   "engines": {
@@ -17,6 +17,7 @@
     "dev:api": "wrangler d1 migrations apply synapse-board --local && wrangler pages dev dist --port 8788",
     "preview": "vite preview",
     "deploy": "node scripts/deploy-web.mjs",
+    "android:patch": "node scripts/patch-android.mjs",
     "deploy:web": "node scripts/deploy-web.mjs"
   },
   "devDependencies": {
