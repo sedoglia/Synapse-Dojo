@@ -6,6 +6,12 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.17.1] - 2026-11-15
+
+### Changed
+
+- **Visual polish of the home, gym and welcome page** (`src/style.css`): balanced headings and paragraphs without stranded last words, a larger and tighter welcome title, fixed-width digits for XP and streaks; on phones the guide button on the welcome page fits on two lines instead of three. With a mouse, menu and exercise cards lift slightly and primary buttons brighten; keyboard users get a clear focus ring. The welcome page enters with a short fade, skipped under "reduce motion". The changes are CSS only and leave the games out; background colours and the Android app are unchanged (`7898d83`).
+
 ## [0.17.0] - 2026-11-14
 
 ### Added
