@@ -7408,3 +7408,180 @@ html.big-text {
     animation: none;
   }
 }
+
+/* ==========================================================================
+   Polish layer (tasteskill review, Nov 2026).
+   Visual only: no layout, colour token or game change.
+   - Never touches anything inside .stage (the games), so no game target moves.
+   - Hover effects only on devices with a real pointer: phones, the Android TWA
+     and the WebView fallback never see them.
+   - --bg is untouched: the Android status and navigation bars use the same colour.
+   ========================================================================== */
+:root {
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --focus-ring: color-mix(in srgb, var(--accent) 70%, transparent);
+  --shadow-lift: 0 12px 32px rgba(27, 29, 42, 0.12);
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --shadow-lift: 0 12px 32px rgba(0, 0, 0, 0.45);
+  }
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Typography: balanced headings, no lone last words in paragraphs. */
+:is(h1, h2, h3):not(.stage *) {
+  text-wrap: balance;
+}
+:is(p, small, li):not(.stage *) {
+  text-wrap: pretty;
+}
+.hero h1,
+.landing-title {
+  letter-spacing: -0.02em;
+  font-weight: 900;
+}
+.landing-title {
+  font-size: clamp(2rem, 1.4rem + 2.6vw, 2.75rem);
+  line-height: 1.12;
+}
+.landing-section-title,
+.landing-start-card h2 {
+  letter-spacing: -0.01em;
+  font-weight: 800;
+}
+.xp-num,
+.streak,
+.today-hook,
+.plan-sub {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Keyboard focus: one clear ring everywhere (touch never shows it). */
+:is(button, a, select, summary, [tabindex]):focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+}
+.input:focus,
+.lang-picker select:focus-visible {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 22%, transparent);
+}
+.input {
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+/* Landing topbar: the guide button keeps to two short lines on phones. */
+.onboard-topbar .btn {
+  line-height: 1.25;
+  text-wrap: balance;
+  padding: 9px 14px;
+}
+@media (max-width: 420px) {
+  .onboard-topbar .btn {
+    font-size: 0.82rem;
+    padding: 8px 12px;
+  }
+  .onboard-topbar .lang-picker select {
+    max-width: 8.5em;
+  }
+}
+
+/* Cards and buttons answer the pointer (desktop only, never inside a game). */
+:is(.menu-card, .ex-card, .next-goal, .pillar-card, .btn, .icon-btn):not(.stage *) {
+  transition:
+    transform 0.18s var(--ease-out),
+    box-shadow 0.18s var(--ease-out),
+    filter 0.15s,
+    background-color 0.15s,
+    border-color 0.15s;
+}
+.chev {
+  display: inline-block;
+  transition: transform 0.18s var(--ease-out), opacity 0.18s;
+}
+@media (hover: hover) and (pointer: fine) {
+  :is(.menu-card, .ex-card, .next-goal):not(.stage *):hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lift);
+  }
+  :is(.menu-card, .ex-card, .next-goal):not(.stage *):hover:active {
+    transform: translateY(0) scale(0.98);
+  }
+  .menu-card:not(.featured):hover {
+    border-color: color-mix(in srgb, var(--accent) 35%, var(--border));
+  }
+  .menu-card:hover .chev {
+    transform: translateX(3px);
+    opacity: 1;
+  }
+  [dir='rtl'] .menu-card:hover .chev {
+    transform: scaleX(-1) translateX(3px);
+  }
+  .pillar-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lift);
+  }
+  .btn:not(.stage *):not(:disabled):hover {
+    filter: brightness(1.06);
+    border-color: color-mix(in srgb, var(--accent) 30%, var(--border));
+  }
+  .btn.primary:not(.stage *):not(:disabled):hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 22px color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+  .btn.primary:not(.stage *):not(:disabled):hover:active {
+    transform: scale(0.97);
+    box-shadow: none;
+  }
+  .icon-btn:not(.stage *):hover {
+    background: color-mix(in srgb, var(--accent) 14%, var(--surface-2));
+  }
+  .link-btn:hover {
+    color: var(--accent);
+  }
+}
+
+/* Landing hero: enters once on load (opacity and a short rise, nothing else). */
+@keyframes polish-rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.onboard-hero > *,
+.landing-start-card {
+  animation: polish-rise 0.55s var(--ease-out) both;
+}
+.onboard-hero > :nth-child(2) {
+  animation-delay: 0.06s;
+}
+.onboard-hero > :nth-child(3) {
+  animation-delay: 0.12s;
+}
+.onboard-hero > :nth-child(n + 4) {
+  animation-delay: 0.18s;
+}
+.landing-start-card {
+  animation-delay: 0.24s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .onboard-hero > *,
+  .landing-start-card {
+    animation: none;
+  }
+  :is(.menu-card, .ex-card, .next-goal, .pillar-card, .btn, .icon-btn, .chev):not(.stage *) {
+    transition: none;
+  }
+}
