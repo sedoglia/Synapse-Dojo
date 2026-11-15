@@ -10,7 +10,7 @@ I numeri di versione vengono da `package.json` e ogni data è il giorno del comm
 
 ### Sicurezza
 
-- **«Salva come» sicuro nella schermata WebView di Android** (`scripts/android-webview/WebViewActivity.java`): quando la pagina salva un file (esportazione dei progressi, promemoria del calendario, cartolina), l'app ora scrive solo su un indirizzo che la schermata «Salva» di sistema può davvero restituire: un documento `content://` di un provider esterno all'app, senza `..` nel percorso. Prima l'indirizzo scelto dal file manager era usato così com'era, e un'app malevola spacciata per file manager poteva far sovrascrivere all'app i propri file privati. Inoltre il file viene troncato quando è sovrascritto. Risolve l'avviso CodeQL `java/android/unsafe-content-uri-resolution`. App Android versione 0.17.2, codice 4 (`b7f7492`).
+- **«Salva come» sicuro nella schermata WebView di Android** (`scripts/android-webview/WebViewActivity.java`): quando la pagina salva un file (esportazione dei progressi, promemoria del calendario, cartolina), l'app ora scrive solo su un indirizzo che la schermata «Salva» di sistema può davvero restituire: un documento `content://` di un provider esterno all'app, senza `..` nel percorso. Prima l'indirizzo scelto dal file manager era usato così com'era, e un'app malevola spacciata per file manager poteva far sovrascrivere all'app i propri file privati. Inoltre il file viene troncato quando è sovrascritto. Anche il nome di un file condiviso, mandato dalla pagina, conserva solo l'ultima parte, rifiuta `..` e deve restare nella cartella dei file condivisi. Risolve gli avvisi CodeQL `java/android/unsafe-content-uri-resolution` e `java/path-injection`. App Android versione 0.17.2, codice 4 (`b7f7492`).
 
 ## [0.17.1] - 2026-11-15
 

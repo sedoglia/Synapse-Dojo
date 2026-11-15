@@ -10,7 +10,7 @@ Version numbers come from `package.json`, and each date is the day of the commit
 
 ### Security
 
-- **Safe "Save as" in the Android WebView screen** (`scripts/android-webview/WebViewActivity.java`): when the page saves a file (progress export, calendar reminder, share card), the app now writes only to an address that the system "Save" screen could really return: a `content://` document of a provider outside the app, with no `..` in its path. Before, the address chosen by the file manager was used as it came, so a malicious app posing as a file manager could make the app overwrite its own private files. The file is also truncated when overwritten. Fixes the CodeQL alert `java/android/unsafe-content-uri-resolution`. Android version 0.17.2, code 4 (`b7f7492`).
+- **Safe "Save as" in the Android WebView screen** (`scripts/android-webview/WebViewActivity.java`): when the page saves a file (progress export, calendar reminder, share card), the app now writes only to an address that the system "Save" screen could really return: a `content://` document of a provider outside the app, with no `..` in its path. Before, the address chosen by the file manager was used as it came, so a malicious app posing as a file manager could make the app overwrite its own private files. The file is also truncated when overwritten. The name of a shared file, also sent by the page, keeps only its last part, refuses `..` and must stay inside the shared folder. Fixes the CodeQL alerts `java/android/unsafe-content-uri-resolution` and `java/path-injection`. Android version 0.17.2, code 4 (`b7f7492`).
 
 ## [0.17.1] - 2026-11-15
 
