@@ -6,6 +6,12 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.17.1] - 2026-11-15
+
+### Modificato
+
+- **Rifinitura grafica di home, palestra e pagina di benvenuto** (`src/style.css`): titoli bilanciati e paragrafi senza parole isolate, titolo della pagina di benvenuto più grande e compatto, cifre a larghezza fissa per XP e serie; sui telefoni il pulsante della guida nella pagina di benvenuto sta su due righe invece di tre. Con il mouse le card del menu e degli esercizi si sollevano leggermente e i pulsanti principali si illuminano; chi usa la tastiera vede un anello di focus chiaro. La pagina di benvenuto compare con una breve dissolvenza, assente con «riduci animazioni». Le modifiche sono solo CSS ed escludono i giochi; colori di sfondo e app Android invariati (`7898d83`).
+
 ## [0.17.0] - 2026-11-14
 
 ### Aggiunto
