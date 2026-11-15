@@ -6,6 +6,12 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.17.2] - 2026-11-15
+
+### Sicurezza
+
+- **«Salva come» sicuro nella schermata WebView di Android** (`scripts/android-webview/WebViewActivity.java`): quando la pagina salva un file (esportazione dei progressi, promemoria del calendario, cartolina), l'app ora scrive solo su un indirizzo che la schermata «Salva» di sistema può davvero restituire: un documento `content://` di un provider esterno all'app, senza `..` nel percorso. Prima l'indirizzo scelto dal file manager era usato così com'era, e un'app malevola spacciata per file manager poteva far sovrascrivere all'app i propri file privati. Inoltre il file viene troncato quando è sovrascritto. Risolve l'avviso CodeQL `java/android/unsafe-content-uri-resolution`. App Android versione 0.17.2, codice 4 (`b7f7492`).
+
 ## [0.17.1] - 2026-11-15
 
 ### Modificato

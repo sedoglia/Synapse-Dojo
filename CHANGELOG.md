@@ -6,6 +6,12 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.17.2] - 2026-11-15
+
+### Security
+
+- **Safe "Save as" in the Android WebView screen** (`scripts/android-webview/WebViewActivity.java`): when the page saves a file (progress export, calendar reminder, share card), the app now writes only to an address that the system "Save" screen could really return: a `content://` document of a provider outside the app, with no `..` in its path. Before, the address chosen by the file manager was used as it came, so a malicious app posing as a file manager could make the app overwrite its own private files. The file is also truncated when overwritten. Fixes the CodeQL alert `java/android/unsafe-content-uri-resolution`. Android version 0.17.2, code 4 (`b7f7492`).
+
 ## [0.17.1] - 2026-11-15
 
 ### Changed

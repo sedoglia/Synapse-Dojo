@@ -73,7 +73,7 @@ Valori scelti in `android/twa-manifest.json`:
 | `backgroundColor` | `#f4f5fb` | Colore della schermata di avvio. |
 | `enableNotifications` | `false` | Il sito non usa notifiche, così l'app non chiede il permesso relativo. |
 | `fallbackType` | `webview` | Cosa fare quando nessun browser può aprire la TWA: mostrare il sito in un WebView invece che in una scheda del browser. Fa anche aggiungere a Bubblewrap il permesso `INTERNET`. |
-| `appVersion` / `appVersionCode` | `0.17.0` / `3` | Il nome di versione segue `package.json`; il codice è un numero intero che deve crescere a ogni pacchetto caricato su Play. |
+| `appVersion` / `appVersionCode` | `0.17.2` / `4` | Il nome di versione segue `package.json`; il codice è un numero intero che deve crescere a ogni pacchetto caricato su Play. |
 | `signingKey` | `./android.keystore`, alias `android` | La chiave di firma, che creerai tu (vedi §5). Il file è ignorato da git. |
 
 ## 3. Prerequisiti
@@ -418,7 +418,7 @@ Procedura per un nuovo pacchetto:
 ```powershell
 npm install -g @bubblewrap/cli          # Bubblewrap aggiornato
 cd android
-bubblewrap update --appVersionName=0.17.0
+bubblewrap update --appVersionName=0.17.2
 cd ..
 npm run android:patch
 cd android
