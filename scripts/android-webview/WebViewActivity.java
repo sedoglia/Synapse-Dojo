@@ -347,8 +347,11 @@ public class WebViewActivity extends Activity {
     /** A file name with no path in it, whatever the page sends. */
     private static String safeName(String name, String fallback) {
         String clean = name == null ? "" : name.replaceAll("[\\\\/:*?\"<>|\\p{Cntrl}]", "_").trim();
-        if (clean.isEmpty() || clean.startsWith(".")) return fallback;
-        return clean.length() > 100 ? clean.substring(clean.length() - 100) : clean;
+        if (clean.length() > 100) clean = clean.substring(clean.length() - 100);
+        // getName keeps only the last part of a path; with no ".." left, the name cannot leave its folder.
+        String base = new File(clean).getName();
+        if (base.isEmpty() || base.startsWith(".") || base.contains("..")) return fallback;
+        return base;
     }
 
     private static byte[] decode(String base64) {
@@ -398,6 +401,9 @@ public class WebViewActivity extends Activity {
                 //noinspection ResultOfMethodCallIgnored
                 dir.mkdirs();
                 File file = new File(dir, safeName(fileName, "synapse-dojo"));
+                if (!dir.getCanonicalFile().equals(file.getCanonicalFile().getParentFile())) {
+                    throw new IOException("The file name leaves the shared folder");
+                }
                 try (OutputStream out = new FileOutputStream(file)) {
                     out.write(fileBytes);
                 }
