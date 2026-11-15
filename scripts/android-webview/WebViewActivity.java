@@ -3,13 +3,17 @@ package com.synapsedojo.app;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.ClipData;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ProviderInfo;
 import android.content.res.Configuration;
 import android.graphics.Insets;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.DocumentsContract;
 import android.util.Base64;
 import android.util.Log;
 import android.view.ViewGroup;
@@ -236,16 +240,62 @@ public class WebViewActivity extends Activity {
             }
         } else if (requestCode == REQUEST_SAVE_FILE) {
             File pending = new File(getCacheDir(), PENDING_SAVE);
-            if (resultCode == RESULT_OK && data != null && data.getData() != null) {
-                try (InputStream in = new FileInputStream(pending);
-                     OutputStream out = getContentResolver().openOutputStream(data.getData())) {
-                    if (out != null) copy(in, out);
-                } catch (IOException | SecurityException e) {
-                    Log.w(TAG, "Could not save the file", e);
+            Uri target = resultCode == RESULT_OK && data != null ? data.getData() : null;
+            if (target != null && isSafeSaveTarget(target)) {
+                // The checks on the path are repeated here, next to the write, so that the analysis can see them.
+                String path = target.getPath();
+                if (path != null && !path.contains("..") && !path.startsWith("/data")) {
+                    try (InputStream in = new FileInputStream(pending);
+                         OutputStream out = getContentResolver().openOutputStream(target, "wt")) {
+                        if (out != null) copy(in, out);
+                    } catch (IOException | SecurityException e) {
+                        Log.w(TAG, "Could not save the file", e);
+                    }
                 }
+            } else if (target != null) {
+                Log.w(TAG, "Refused to save to " + target.getScheme() + "://" + target.getAuthority());
             }
             //noinspection ResultOfMethodCallIgnored
             pending.delete();
+        }
+    }
+
+    /**
+     * The address the "save as" screen answers comes from another app (the file manager the player chose), so it is
+     * checked before the app writes to it: it must be a document of a documents provider (what ACTION_CREATE_DOCUMENT
+     * returns), never a file:// path nor a provider of this app, which would let that app make us overwrite our own
+     * private files (progress, settings) with the page's data.
+     *
+     * Only this app's own package is looked up: other apps' providers may be hidden from us by package visibility
+     * (Android 11+), so asking about them could refuse a perfectly good file manager.
+     */
+    private boolean isSafeSaveTarget(Uri uri) {
+        if (!ContentResolver.SCHEME_CONTENT.equals(uri.getScheme())) return false;
+        String authority = uri.getAuthority();
+        if (authority == null || authority.isEmpty() || isOwnAuthority(authority)) return false;
+        try {
+            DocumentsContract.getDocumentId(uri); // throws unless the address has the shape of a document
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+        String path = uri.getPath();
+        return path != null && !path.contains("..");
+    }
+
+    private boolean isOwnAuthority(String authority) {
+        try {
+            ProviderInfo[] providers = getPackageManager()
+                    .getPackageInfo(getPackageName(), PackageManager.GET_PROVIDERS).providers;
+            if (providers == null) return false;
+            for (ProviderInfo provider : providers) {
+                if (provider.authority == null) continue;
+                for (String own : provider.authority.split(";")) {
+                    if (own.equalsIgnoreCase(authority)) return true;
+                }
+            }
+            return false;
+        } catch (PackageManager.NameNotFoundException e) {
+            return true; // cannot happen for our own package; refuse to be safe
         }
     }
 
