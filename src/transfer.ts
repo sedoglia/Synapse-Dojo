@@ -6,7 +6,7 @@ import { t, dateText } from './i18n';
 import { SITE_URL } from './config';
 
 export class TransferError extends Error {
-  constructor(readonly code: 'offline' | 'bad_code' | 'not_found' | 'expired' | 'invalid_data' | 'server') {
+  constructor(readonly code: 'offline' | 'bad_code' | 'not_found' | 'expired' | 'invalid_data' | 'busy' | 'server') {
     super(code);
   }
 }
@@ -34,6 +34,8 @@ export async function uploadTransferSave(): Promise<string> {
     throw new TransferError('offline');
   }
 
+  // 429: too many uploads from this network; 503: the space for pending transfers is full. Both pass within an hour.
+  if (res.status === 429 || res.status === 503) throw new TransferError('busy');
   if (!res.ok) {
     throw new TransferError('server');
   }
