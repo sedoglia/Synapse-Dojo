@@ -6,6 +6,12 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [0.17.3] - 2026-11-16
+
+### Security
+
+- **Limits on online transfer uploads** (`functions/api/transfer.ts`, `migrations/0005_transfer_limits.sql`): uploading a save for the transfer with a code needs no account, and each save can be up to about 1.8 MB, so one script could fill the leaderboard database in a few minutes and stop every write, scores included, until the nightly cleanup. Now all pending transfers together may take at most 100 MB, and each network may upload at most 5 saves an hour (for IPv6, the whole /64 block); beyond that the server answers "try again in an hour", in all 12 languages. The checks run before the upload is read. To count uploads, the database keeps a one-way encrypted fingerprint of the network, never the IP address, deleted together with the transfer; the privacy page and the in-app privacy screen say so. A player moving to a new device never meets either limit (#80).
+
 ## [0.17.2] - 2026-11-15
 
 ### Security

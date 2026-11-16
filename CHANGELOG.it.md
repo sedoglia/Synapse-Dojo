@@ -6,6 +6,12 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [0.17.3] - 2026-11-16
+
+### Sicurezza
+
+- **Limiti ai caricamenti del trasferimento online** (`functions/api/transfer.ts`, `migrations/0005_transfer_limits.sql`): caricare un salvataggio per il trasferimento con codice non richiede un account, e ogni salvataggio può arrivare a circa 1,8 MB, quindi un solo script poteva riempire in pochi minuti il database della classifica e bloccare ogni scrittura, punteggi compresi, fino alla pulizia notturna. Ora i trasferimenti in attesa possono occupare in tutto al massimo 100 MB, e ogni rete può caricare al massimo 5 salvataggi all'ora (per IPv6, l'intero blocco /64); oltre, il server risponde «riprova tra un'ora», in tutte le 12 lingue. I controlli avvengono prima di leggere il caricamento. Per contare i caricamenti il database conserva un'impronta cifrata e non reversibile della rete, mai l'indirizzo IP, cancellata insieme al trasferimento; la pagina privacy e la schermata privacy dell'app lo spiegano. Chi passa a un nuovo dispositivo non incontra mai nessuno dei due limiti (#80).
+
 ## [0.17.2] - 2026-11-15
 
 ### Sicurezza
