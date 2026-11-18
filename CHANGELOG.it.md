@@ -6,12 +6,12 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
-## [Non rilasciato]
+## [0.18.0] - 2026-11-18
 
 ### Modificato
 
-- **Il tempo conta per salire di livello nei rompicapo senza limite** (`src/ctx.ts`, `src/exercises/tangram.ts`, `src/exercises/nonogram.ts`, `src/exercises/crackTheCode.ts`): in allenamento una soluzione di Tangram, Nonogram o Decifra il Codice fa salire il livello solo se arriva entro 3 volte il tempo di riferimento del puzzle, lo stesso già usato per il bonus di rapidità. Il puzzle non viene mai interrotto e una soluzione lenta resta «risolta»; prima chi risolveva con molta calma saliva comunque, e il livello misurava la pazienza oltre all'abilità. Il Neuro Score non cambia. In simulazione l'accuratezza resta sull'obiettivo (72–76%) e solo i giocatori molto lenti si assestano circa mezzo livello più in basso. In Tangram le fasce Oro/Argento/Bronzo si allargano col ritmo rilassato.
-- **Tempo di reazione registra le mancate risposte** (`src/exercises/reaction.ts`): se lo schermo verde non viene toccato entro 2 secondi (2,8 col ritmo rilassato) la prova finisce come «Tempo scaduto», come i lapsus del Psychomotor Vigilance Task. Prima la prova restava in attesa all'infinito. La mancata risposta conta come errore per il livello ma non entra nella media né nel record.
+- **Il tempo conta per salire di livello nei rompicapo senza limite** (`src/ctx.ts`, `src/exercises/tangram.ts`, `src/exercises/nonogram.ts`, `src/exercises/crackTheCode.ts`): in allenamento una soluzione di Tangram, Nonogram o Decifra il Codice fa salire il livello solo se arriva entro 3 volte il tempo di riferimento del puzzle, lo stesso già usato per il bonus di rapidità. Il puzzle non viene mai interrotto e una soluzione lenta resta «risolta»; prima chi risolveva con molta calma saliva comunque, e il livello misurava la pazienza oltre all'abilità. Il Neuro Score non cambia. In simulazione l'accuratezza resta sull'obiettivo (72–76%) e solo i giocatori molto lenti si assestano circa mezzo livello più in basso. In Tangram le fasce Oro/Argento/Bronzo si allargano col ritmo rilassato (#82).
+- **Tempo di reazione registra le mancate risposte** (`src/exercises/reaction.ts`): se lo schermo verde non viene toccato entro 2 secondi (2,8 col ritmo rilassato) la prova finisce come «Tempo scaduto», come i lapsus del Psychomotor Vigilance Task. Prima la prova restava in attesa all'infinito. La mancata risposta conta come errore per il livello ma non entra nella media né nel record (#82).
 
 ## [0.17.3] - 2026-11-16
 

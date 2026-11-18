@@ -6,12 +6,12 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
-## [Unreleased]
+## [0.18.0] - 2026-11-18
 
 ### Changed
 
-- **Time counts toward level-ups in untimed puzzles** (`src/ctx.ts`, `src/exercises/tangram.ts`, `src/exercises/nonogram.ts`, `src/exercises/crackTheCode.ts`): in training, a Tangram, Nonogram or Crack the Code solve raises the level only if it comes within 3 times the puzzle's benchmark time, the same one already used for the speed bonus. The puzzle is never cut off and a slow solve still counts as solved; before, a player solving very calmly climbed anyway, and the level measured patience as well as skill. The Neuro Score is unchanged. In simulation accuracy stays on target (72–76%) and only very slow players settle about half a level lower. In Tangram the Gold/Silver/Bronze bands widen with the relaxed pace.
-- **Simple reaction records missed responses** (`src/exercises/reaction.ts`): if the green screen is not tapped within 2 seconds (2.8 with the relaxed pace) the trial ends as "Time's up", like the lapses of the Psychomotor Vigilance Task. Before, the trial waited forever. A miss counts as an error for the level but is left out of the average and the best time.
+- **Time counts toward level-ups in untimed puzzles** (`src/ctx.ts`, `src/exercises/tangram.ts`, `src/exercises/nonogram.ts`, `src/exercises/crackTheCode.ts`): in training, a Tangram, Nonogram or Crack the Code solve raises the level only if it comes within 3 times the puzzle's benchmark time, the same one already used for the speed bonus. The puzzle is never cut off and a slow solve still counts as solved; before, a player solving very calmly climbed anyway, and the level measured patience as well as skill. The Neuro Score is unchanged. In simulation accuracy stays on target (72–76%) and only very slow players settle about half a level lower. In Tangram the Gold/Silver/Bronze bands widen with the relaxed pace (#82).
+- **Simple reaction records missed responses** (`src/exercises/reaction.ts`): if the green screen is not tapped within 2 seconds (2.8 with the relaxed pace) the trial ends as "Time's up", like the lapses of the Psychomotor Vigilance Task. Before, the trial waited forever. A miss counts as an error for the level but is left out of the average and the best time (#82).
 
 ## [0.17.3] - 2026-11-16
 
