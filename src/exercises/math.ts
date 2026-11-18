@@ -1,6 +1,6 @@
 import { h, rand, pick, scale, flash } from '../dom';
 import { t, num } from '../i18n';
-import { keypad, keypadKeyboard } from '../widgets';
+import { keypad, keypadKeyboard, timeBar } from '../widgets';
 import type { Exercise } from './types';
 
 type Op = '+' | '−' | '×' | '÷';
@@ -15,6 +15,18 @@ interface Config {
 // The daily check keeps the original fixed mix so scores stay comparable over time.
 const QUICK: Config = { big: 20, ops: ['+', '−', '×', '÷'], mulMax: 9, mulA: 9 };
 const BIG = [10, 15, 20, 30, 40, 50, 60, 75, 90, 99];
+
+/** A right answer within this time counts toward the next level (it still sounds right when slower). */
+const FAST_MS = 4000;
+/**
+ * Time allowed per calculation in training, shown by a bar: twice the level-up time, and the point where the daily
+ * check's speed scale reaches zero. Arithmetic fluency is practised and measured against the clock (as in the timed
+ * fluency tests and in Kawashima's Learning Therapy), but time pressure also costs anxious solvers working memory
+ * (Ashcraft & Kirk 2001), so the limit is generous: past it an answer is being worked out step by step, not recalled.
+ * The difficulty itself stays adaptive (operations and number size); the limit does not shrink with the level.
+ * No limit in the daily check, whose scale is calibrated untimed, nor in the practice round.
+ */
+const LIMIT_MS = 8000;
 
 function configFor(level: number): Config {
   return {
@@ -63,11 +75,16 @@ export const math: Exercise = {
   async run(ctx) {
     const total = ctx.count(20, 12, 4);
     const st = ctx.stair(total, 1, 10);
-    const fastEnough = 4000 * ctx.pace;
+    const fastEnough = FAST_MS * ctx.pace;
+    const timed = ctx.mode === 'train';
+    const limit = LIMIT_MS * ctx.pace;
     const question = h('div', { class: 'math-q' });
     const answer = h('div', { class: 'math-a' });
+    const bar = timeBar();
+    bar.el.classList.toggle('off', !timed);
     let onKey: ((k: string) => void) | null = null;
     ctx.stage.append(
+      bar.el,
       h('div', { class: 'math-board' }, question, answer),
       keypad((k) => onKey?.(k)),
     );
@@ -83,7 +100,7 @@ export const math: Exercise = {
       let typed = '';
 
       const shown = performance.now();
-      const ok = await ctx.input<boolean>((done) => {
+      const listen = (done: (ok: boolean | null) => void) => {
         onKey = (k) => {
           if (k === 'del') typed = typed.slice(0, -1);
           else if (k === 'clr') typed = '';
@@ -96,16 +113,25 @@ export const math: Exercise = {
           off();
           onKey = null;
         };
-      });
-      const took = performance.now() - shown;
+      };
+      if (timed) bar.start(limit);
+      // null: the time ran out.
+      const said = timed ? await ctx.timed<boolean | null>(limit, null, listen) : await ctx.input<boolean | null>(listen);
+      bar.stop();
+      const ok = said === true;
+      const took = said === null ? limit : performance.now() - shown;
       solving += took;
-      ctx.track(st, ok && took <= fastEnough, { heard: ok, was: String(p.answer) });
+      ctx.track(st, ok && took <= fastEnough, {
+        heard: ok,
+        was: String(p.answer),
+        note: said === null ? t('common.timeout') : undefined,
+      });
 
       if (ok) {
         correct++;
         flash(answer, 'good');
       } else {
-        answer.textContent = `${typed} → ${p.answer}`;
+        answer.textContent = `${typed || (said === null ? '⏱' : '')} → ${p.answer}`;
         flash(answer, 'bad', 600);
       }
       await ctx.wait(ok ? 180 : 700);
