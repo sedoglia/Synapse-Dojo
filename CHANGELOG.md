@@ -6,12 +6,12 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
-## [Unreleased]
+## [0.19.0] - 2026-11-18
 
 ### Changed
 
-- **Math sprint has a time limit** (`src/exercises/math.ts`): in training each calculation must be solved within 8 seconds (11.2 with the relaxed pace), shown by a bar; when time runs out it counts as an error and the right result appears. The limit is twice the 4 seconds needed for a level-up and the point where the Neuro Score's speed scale reaches zero; it stays generous and fixed, because time pressure weighs on people anxious about arithmetic, while difficulty keeps adapting on operations and number size. The Neuro Score and the guided practice stay untimed. The game's instructions say so in all 12 languages.
-- **Bibliography**: added Dinges & Powell (1985), already cited for the missed responses in Simple reaction, and Ashcraft & Kirk (2001).
+- **Math sprint has a time limit** (`src/exercises/math.ts`): in training each calculation must be solved within 8 seconds (11.2 with the relaxed pace), shown by a bar; when time runs out it counts as an error and the right result appears. The limit is twice the 4 seconds needed for a level-up and the point where the Neuro Score's speed scale reaches zero; it stays generous and fixed, because time pressure weighs on people anxious about arithmetic, while difficulty keeps adapting on operations and number size. The Neuro Score and the guided practice stay untimed. The game's instructions say so in all 12 languages (#86).
+- **Bibliography**: added Dinges & Powell (1985), already cited for the missed responses in Simple reaction, and Ashcraft & Kirk (2001) (#86).
 
 ## [0.18.1] - 2026-11-18
 
