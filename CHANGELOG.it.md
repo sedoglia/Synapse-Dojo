@@ -6,12 +6,12 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
-## [Non rilasciato]
+## [0.19.0] - 2026-11-18
 
 ### Modificato
 
-- **Sprint di calcolo ha un limite di tempo** (`src/exercises/math.ts`): in allenamento ogni operazione va risolta entro 8 secondi (11,2 col ritmo rilassato), mostrati da una barra; allo scadere conta come errore e compare il risultato giusto. Il limite è il doppio dei 4 secondi che servono per salire di livello e il punto in cui la scala di velocità del Neuro Score arriva a zero; resta ampio e fisso, perché la pressione del tempo pesa su chi prova ansia per il calcolo, mentre la difficoltà continua ad adattarsi su operazioni e grandezza dei numeri. Il Neuro Score e la prova guidata restano senza limite. Le istruzioni del gioco lo dicono in tutte le 12 lingue.
-- **Bibliografia**: aggiunte le fonti di Dinges & Powell (1985), già citata per le mancate risposte del Tempo di reazione, e di Ashcraft & Kirk (2001).
+- **Sprint di calcolo ha un limite di tempo** (`src/exercises/math.ts`): in allenamento ogni operazione va risolta entro 8 secondi (11,2 col ritmo rilassato), mostrati da una barra; allo scadere conta come errore e compare il risultato giusto. Il limite è il doppio dei 4 secondi che servono per salire di livello e il punto in cui la scala di velocità del Neuro Score arriva a zero; resta ampio e fisso, perché la pressione del tempo pesa su chi prova ansia per il calcolo, mentre la difficoltà continua ad adattarsi su operazioni e grandezza dei numeri. Il Neuro Score e la prova guidata restano senza limite. Le istruzioni del gioco lo dicono in tutte le 12 lingue (#86).
+- **Bibliografia**: aggiunte le fonti di Dinges & Powell (1985), già citata per le mancate risposte del Tempo di reazione, e di Ashcraft & Kirk (2001) (#86).
 
 ## [0.18.1] - 2026-11-18
 
