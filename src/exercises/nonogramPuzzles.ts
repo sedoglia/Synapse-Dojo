@@ -1,6 +1,7 @@
 export interface NonogramPuzzle {
   id: string;
   level: number;
+  /** i18n key of the picture's name (`ex.nonogram.puzzle.<id>`). */
   name: string;
   icon: string;
   grid: string[];
@@ -17,7 +18,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l1_heart",
     level: 1,
-    name: "Cuore",
+    name: "ex.nonogram.puzzle.l1_heart",
     icon: "❤️",
     grid: [
       ".#.#",
@@ -29,7 +30,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l1_plus",
     level: 1,
-    name: "Più",
+    name: "ex.nonogram.puzzle.l1_plus",
     icon: "➕",
     grid: [
       ".#..",
@@ -41,7 +42,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l1_note",
     level: 1,
-    name: "Nota",
+    name: "ex.nonogram.puzzle.l1_note",
     icon: "🎵",
     grid: [
       "..##",
@@ -53,7 +54,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l1_cup",
     level: 1,
-    name: "Tazza",
+    name: "ex.nonogram.puzzle.l1_cup",
     icon: "☕",
     grid: [
       "#..#",
@@ -65,7 +66,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l1_arrow",
     level: 1,
-    name: "Freccia",
+    name: "ex.nonogram.puzzle.l1_arrow",
     icon: "⬆️",
     grid: [
       ".##.",
@@ -77,7 +78,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l1_boat",
     level: 1,
-    name: "Barca",
+    name: "ex.nonogram.puzzle.l1_boat",
     icon: "⛵",
     grid: [
       "..#.",
@@ -89,7 +90,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l1_cross",
     level: 1,
-    name: "Croce",
+    name: "ex.nonogram.puzzle.l1_cross",
     icon: "✝️",
     grid: [
       ".#..",
@@ -101,7 +102,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l1_house",
     level: 1,
-    name: "Casetta",
+    name: "ex.nonogram.puzzle.l1_house",
     icon: "🏠",
     grid: [
       ".#..",
@@ -113,7 +114,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l2_heart",
     level: 2,
-    name: "Cuore",
+    name: "ex.nonogram.puzzle.l2_heart",
     icon: "❤️",
     grid: [
       ".#.#.",
@@ -126,7 +127,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l2_tree",
     level: 2,
-    name: "Albero",
+    name: "ex.nonogram.puzzle.l2_tree",
     icon: "🌲",
     grid: [
       "..#..",
@@ -139,7 +140,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l2_house",
     level: 2,
-    name: "Casetta",
+    name: "ex.nonogram.puzzle.l2_house",
     icon: "🏠",
     grid: [
       "..#..",
@@ -152,7 +153,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l2_boat",
     level: 2,
-    name: "Barca",
+    name: "ex.nonogram.puzzle.l2_boat",
     icon: "⛵",
     grid: [
       "..#..",
@@ -165,7 +166,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l2_smile",
     level: 2,
-    name: "Sorriso",
+    name: "ex.nonogram.puzzle.l2_smile",
     icon: "🙂",
     grid: [
       ".#.#.",
@@ -178,7 +179,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l2_star",
     level: 2,
-    name: "Stella",
+    name: "ex.nonogram.puzzle.l2_star",
     icon: "⭐",
     grid: [
       "..#..",
@@ -191,7 +192,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l2_duck",
     level: 2,
-    name: "Papera",
+    name: "ex.nonogram.puzzle.l2_duck",
     icon: "🦆",
     grid: [
       ".##..",
@@ -204,7 +205,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l2_flower",
     level: 2,
-    name: "Fiore",
+    name: "ex.nonogram.puzzle.l2_flower",
     icon: "🌸",
     grid: [
       ".#.#.",
@@ -217,7 +218,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l2_umbrella",
     level: 2,
-    name: "Ombrello",
+    name: "ex.nonogram.puzzle.l2_umbrella",
     icon: "☂️",
     grid: [
       ".###.",
@@ -230,7 +231,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l2_moon",
     level: 2,
-    name: "Luna",
+    name: "ex.nonogram.puzzle.l2_moon",
     icon: "🌙",
     grid: [
       "..##.",
@@ -243,7 +244,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l3_mushroom",
     level: 3,
-    name: "Fungo",
+    name: "ex.nonogram.puzzle.l3_mushroom",
     icon: "🍄",
     grid: [
       ".###.",
@@ -256,7 +257,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l3_coffee",
     level: 3,
-    name: "Caffè",
+    name: "ex.nonogram.puzzle.l3_coffee",
     icon: "☕",
     grid: [
       "..#..",
@@ -269,7 +270,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l3_anchor",
     level: 3,
-    name: "Ancora",
+    name: "ex.nonogram.puzzle.l3_anchor",
     icon: "⚓",
     grid: [
       "..#..",
@@ -282,7 +283,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l3_bell",
     level: 3,
-    name: "Campana",
+    name: "ex.nonogram.puzzle.l3_bell",
     icon: "🔔",
     grid: [
       "..#..",
@@ -295,7 +296,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l3_key",
     level: 3,
-    name: "Chiave",
+    name: "ex.nonogram.puzzle.l3_key",
     icon: "🔑",
     grid: [
       ".###.",
@@ -308,7 +309,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l4_crown",
     level: 3,
-    name: "Corona",
+    name: "ex.nonogram.puzzle.l4_crown",
     icon: "👑",
     grid: [
       "#.#.#",
@@ -321,7 +322,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l4_star",
     level: 3,
-    name: "Stella",
+    name: "ex.nonogram.puzzle.l4_star",
     icon: "⭐",
     grid: [
       "..#..",
@@ -334,7 +335,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l4_fish",
     level: 3,
-    name: "Pesce",
+    name: "ex.nonogram.puzzle.l4_fish",
     icon: "🐟",
     grid: [
       "..#.#",
@@ -347,7 +348,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l4_sword",
     level: 3,
-    name: "Spada",
+    name: "ex.nonogram.puzzle.l4_sword",
     icon: "🗡️",
     grid: [
       "..#..",
@@ -360,7 +361,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l4_ghost",
     level: 3,
-    name: "Fantasma",
+    name: "ex.nonogram.puzzle.l4_ghost",
     icon: "👻",
     grid: [
       ".###.",
@@ -373,7 +374,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l3_crab",
     level: 3,
-    name: "Granchietto",
+    name: "ex.nonogram.puzzle.l3_crab",
     icon: "🦀",
     grid: [
       "#...#",
@@ -386,7 +387,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l3_alien",
     level: 3,
-    name: "Alieno",
+    name: "ex.nonogram.puzzle.l3_alien",
     icon: "👾",
     grid: [
       ".#.#.",
@@ -399,7 +400,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l3_spider",
     level: 3,
-    name: "Ragno",
+    name: "ex.nonogram.puzzle.l3_spider",
     icon: "🕷️",
     grid: [
       "#.#.#",
@@ -412,7 +413,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l3_lock",
     level: 3,
-    name: "Lucchetto",
+    name: "ex.nonogram.puzzle.l3_lock",
     icon: "🔒",
     grid: [
       ".###.",
@@ -425,7 +426,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l3_cherry",
     level: 3,
-    name: "Ciliegia",
+    name: "ex.nonogram.puzzle.l3_cherry",
     icon: "🍒",
     grid: [
       "...#.",
@@ -438,7 +439,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l3_turtle",
     level: 3,
-    name: "Tartarughina",
+    name: "ex.nonogram.puzzle.l3_turtle",
     icon: "🐢",
     grid: [
       "..#..",
@@ -451,7 +452,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l5_umbrella",
     level: 4,
-    name: "Ombrello",
+    name: "ex.nonogram.puzzle.l5_umbrella",
     icon: "☂️",
     grid: [
       "..##..",
@@ -465,7 +466,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l5_clock",
     level: 4,
-    name: "Orologio",
+    name: "ex.nonogram.puzzle.l5_clock",
     icon: "⏰",
     grid: [
       ".#..#.",
@@ -479,7 +480,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l5_car",
     level: 4,
-    name: "Automobile",
+    name: "ex.nonogram.puzzle.l5_car",
     icon: "🚗",
     grid: [
       "..##..",
@@ -493,7 +494,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l5_cherries",
     level: 4,
-    name: "Ciliegie",
+    name: "ex.nonogram.puzzle.l5_cherries",
     icon: "🍒",
     grid: [
       "....#.",
@@ -507,7 +508,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l5_sailboat",
     level: 4,
-    name: "Barca a vela",
+    name: "ex.nonogram.puzzle.l5_sailboat",
     icon: "⛵",
     grid: [
       "..#...",
@@ -521,7 +522,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l4_rocket",
     level: 4,
-    name: "Razzo",
+    name: "ex.nonogram.puzzle.l4_rocket",
     icon: "🚀",
     grid: [
       "..##..",
@@ -535,7 +536,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l4_shield",
     level: 4,
-    name: "Scudo",
+    name: "ex.nonogram.puzzle.l4_shield",
     icon: "🛡️",
     grid: [
       "######",
@@ -549,7 +550,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l4_potion",
     level: 4,
-    name: "Pozione",
+    name: "ex.nonogram.puzzle.l4_potion",
     icon: "🧪",
     grid: [
       "..##..",
@@ -563,7 +564,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l4_cactus",
     level: 4,
-    name: "Cactus",
+    name: "ex.nonogram.puzzle.l4_cactus",
     icon: "🌵",
     grid: [
       "..##..",
@@ -577,7 +578,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l4_butterfly",
     level: 4,
-    name: "Farfallina",
+    name: "ex.nonogram.puzzle.l4_butterfly",
     icon: "🦋",
     grid: [
       "#....#",
@@ -591,7 +592,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l4_mushroom_small",
     level: 4,
-    name: "Funghetto",
+    name: "ex.nonogram.puzzle.l4_mushroom_small",
     icon: "🍄",
     grid: [
       ".####.",
@@ -605,7 +606,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l4_key_old",
     level: 4,
-    name: "Chiave antica",
+    name: "ex.nonogram.puzzle.l4_key_old",
     icon: "🗝️",
     grid: [
       ".####.",
@@ -619,7 +620,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l4_hourglass",
     level: 4,
-    name: "Clessidra",
+    name: "ex.nonogram.puzzle.l4_hourglass",
     icon: "⌛",
     grid: [
       "######",
@@ -633,7 +634,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l4_bat",
     level: 4,
-    name: "Pipistrello",
+    name: "ex.nonogram.puzzle.l4_bat",
     icon: "🦇",
     grid: [
       "#....#",
@@ -647,7 +648,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l4_cup",
     level: 4,
-    name: "Trofeo piccolo",
+    name: "ex.nonogram.puzzle.l4_cup",
     icon: "🏆",
     grid: [
       "######",
@@ -661,7 +662,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l4_teapot",
     level: 4,
-    name: "Teiera",
+    name: "ex.nonogram.puzzle.l4_teapot",
     icon: "🫖",
     grid: [
       ".##...",
@@ -675,7 +676,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l6_cat",
     level: 5,
-    name: "Gatto",
+    name: "ex.nonogram.puzzle.l6_cat",
     icon: "🐱",
     grid: [
       "#....#",
@@ -689,7 +690,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l6_guitar",
     level: 5,
-    name: "Chitarra",
+    name: "ex.nonogram.puzzle.l6_guitar",
     icon: "🎸",
     grid: [
       "....#.",
@@ -703,7 +704,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l6_skull",
     level: 5,
-    name: "Teschio",
+    name: "ex.nonogram.puzzle.l6_skull",
     icon: "💀",
     grid: [
       ".####.",
@@ -717,7 +718,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l6_anchor_big",
     level: 5,
-    name: "Ancora grande",
+    name: "ex.nonogram.puzzle.l6_anchor_big",
     icon: "⚓",
     grid: [
       "..##..",
@@ -731,7 +732,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l6_tulip",
     level: 5,
-    name: "Tulipano",
+    name: "ex.nonogram.puzzle.l6_tulip",
     icon: "🌷",
     grid: [
       "#.#.##",
@@ -745,7 +746,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l5_fox",
     level: 5,
-    name: "Volpe",
+    name: "ex.nonogram.puzzle.l5_fox",
     icon: "🦊",
     grid: [
       "#....#",
@@ -759,7 +760,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l5_rabbit",
     level: 5,
-    name: "Coniglio",
+    name: "ex.nonogram.puzzle.l5_rabbit",
     icon: "🐰",
     grid: [
       ".#..#.",
@@ -773,7 +774,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l5_gamepad",
     level: 5,
-    name: "Controller",
+    name: "ex.nonogram.puzzle.l5_gamepad",
     icon: "🎮",
     grid: [
       ".####.",
@@ -787,7 +788,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l5_airplane",
     level: 5,
-    name: "Aereo",
+    name: "ex.nonogram.puzzle.l5_airplane",
     icon: "✈️",
     grid: [
       "..##..",
@@ -801,7 +802,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l5_helmet",
     level: 5,
-    name: "Elmo",
+    name: "ex.nonogram.puzzle.l5_helmet",
     icon: "🪖",
     grid: [
       "..##..",
@@ -815,7 +816,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l5_spider_big",
     level: 5,
-    name: "Ragno gigante",
+    name: "ex.nonogram.puzzle.l5_spider_big",
     icon: "🕷️",
     grid: [
       "#....#",
@@ -829,7 +830,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l5_chest",
     level: 5,
-    name: "Scrigno",
+    name: "ex.nonogram.puzzle.l5_chest",
     icon: "🪙",
     grid: [
       ".####.",
@@ -843,7 +844,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l5_whale",
     level: 5,
-    name: "Balena",
+    name: "ex.nonogram.puzzle.l5_whale",
     icon: "🐳",
     grid: [
       "...#..",
@@ -857,7 +858,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l5_dinosaur",
     level: 5,
-    name: "Dinosauro",
+    name: "ex.nonogram.puzzle.l5_dinosaur",
     icon: "🦖",
     grid: [
       "...###",
@@ -871,7 +872,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l5_candle",
     level: 5,
-    name: "Candela",
+    name: "ex.nonogram.puzzle.l5_candle",
     icon: "🕯️",
     grid: [
       "..##..",
@@ -885,7 +886,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l5_compass",
     level: 5,
-    name: "Bussola",
+    name: "ex.nonogram.puzzle.l5_compass",
     icon: "🧭",
     grid: [
       ".####.",
@@ -899,7 +900,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l7_robot",
     level: 6,
-    name: "Robot",
+    name: "ex.nonogram.puzzle.l7_robot",
     icon: "🤖",
     grid: [
       "..###..",
@@ -914,7 +915,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l7_butterfly",
     level: 6,
-    name: "Farfalla",
+    name: "ex.nonogram.puzzle.l7_butterfly",
     icon: "🦋",
     grid: [
       "#.....#",
@@ -929,7 +930,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l7_apple",
     level: 6,
-    name: "Mela",
+    name: "ex.nonogram.puzzle.l7_apple",
     icon: "🍎",
     grid: [
       "...##..",
@@ -944,7 +945,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l7_diamond",
     level: 6,
-    name: "Diamante",
+    name: "ex.nonogram.puzzle.l7_diamond",
     icon: "💎",
     grid: [
       "..###..",
@@ -959,7 +960,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l7_trophy",
     level: 6,
-    name: "Trofeo",
+    name: "ex.nonogram.puzzle.l7_trophy",
     icon: "🏆",
     grid: [
       "#######",
@@ -974,7 +975,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l6_lighthouse",
     level: 6,
-    name: "Faro",
+    name: "ex.nonogram.puzzle.l6_lighthouse",
     icon: "🗼",
     grid: [
       "...#...",
@@ -989,7 +990,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l6_locomotive",
     level: 6,
-    name: "Treno",
+    name: "ex.nonogram.puzzle.l6_locomotive",
     icon: "🚂",
     grid: [
       "..###..",
@@ -1004,7 +1005,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l6_anchor_regal",
     level: 6,
-    name: "Ancora maestosa",
+    name: "ex.nonogram.puzzle.l6_anchor_regal",
     icon: "⚓",
     grid: [
       "...#...",
@@ -1019,7 +1020,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l6_sword_shield",
     level: 6,
-    name: "Spada e scudo",
+    name: "ex.nonogram.puzzle.l6_sword_shield",
     icon: "🛡️",
     grid: [
       "...#...",
@@ -1034,7 +1035,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l6_submarine",
     level: 6,
-    name: "Sottomarino",
+    name: "ex.nonogram.puzzle.l6_submarine",
     icon: "🚢",
     grid: [
       "...##..",
@@ -1049,7 +1050,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l6_panda",
     level: 6,
-    name: "Panda",
+    name: "ex.nonogram.puzzle.l6_panda",
     icon: "🐼",
     grid: [
       ".#...#.",
@@ -1064,7 +1065,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l6_elephant",
     level: 6,
-    name: "Elefante",
+    name: "ex.nonogram.puzzle.l6_elephant",
     icon: "🐘",
     grid: [
       ".#####.",
@@ -1079,7 +1080,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l6_tree_pine",
     level: 6,
-    name: "Pino maestoso",
+    name: "ex.nonogram.puzzle.l6_tree_pine",
     icon: "🌲",
     grid: [
       "...#...",
@@ -1094,7 +1095,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l6_castle_tower",
     level: 6,
-    name: "Torre",
+    name: "ex.nonogram.puzzle.l6_castle_tower",
     icon: "🏰",
     grid: [
       "#.#.#.#",
@@ -1109,7 +1110,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l6_heart_gem",
     level: 6,
-    name: "Cuore di diamante",
+    name: "ex.nonogram.puzzle.l6_heart_gem",
     icon: "💖",
     grid: [
       ".##.##.",
@@ -1124,7 +1125,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l6_crown_king",
     level: 6,
-    name: "Corona regale",
+    name: "ex.nonogram.puzzle.l6_crown_king",
     icon: "👑",
     grid: [
       "#..#..#",
@@ -1139,7 +1140,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l6_compass_rose",
     level: 6,
-    name: "Rosa dei venti",
+    name: "ex.nonogram.puzzle.l6_compass_rose",
     icon: "🧭",
     grid: [
       "...#...",
@@ -1154,7 +1155,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l6_tree_oak",
     level: 6,
-    name: "Grande quercia",
+    name: "ex.nonogram.puzzle.l6_tree_oak",
     icon: "🌳",
     grid: [
       "..###..",
@@ -1169,7 +1170,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l8_owl",
     level: 7,
-    name: "Gufo",
+    name: "ex.nonogram.puzzle.l8_owl",
     icon: "🦉",
     grid: [
       ".#...#.",
@@ -1184,7 +1185,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l8_castle",
     level: 7,
-    name: "Castello",
+    name: "ex.nonogram.puzzle.l8_castle",
     icon: "🏰",
     grid: [
       "#.#.#.#",
@@ -1199,7 +1200,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l8_penguin",
     level: 7,
-    name: "Pinguino",
+    name: "ex.nonogram.puzzle.l8_penguin",
     icon: "🐧",
     grid: [
       "..###..",
@@ -1214,7 +1215,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l8_crab",
     level: 7,
-    name: "Granchio",
+    name: "ex.nonogram.puzzle.l8_crab",
     icon: "🦀",
     grid: [
       "#.....#",
@@ -1229,7 +1230,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l8_dog",
     level: 7,
-    name: "Cagnolino",
+    name: "ex.nonogram.puzzle.l8_dog",
     icon: "🐶",
     grid: [
       "#.....#",
@@ -1244,7 +1245,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l7_lion",
     level: 7,
-    name: "Leone",
+    name: "ex.nonogram.puzzle.l7_lion",
     icon: "🦁",
     grid: [
       ".#####.",
@@ -1259,7 +1260,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l7_chameleon",
     level: 7,
-    name: "Camaleonte",
+    name: "ex.nonogram.puzzle.l7_chameleon",
     icon: "🦎",
     grid: [
       "..###..",
@@ -1274,7 +1275,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l7_eagle",
     level: 7,
-    name: "Aquila",
+    name: "ex.nonogram.puzzle.l7_eagle",
     icon: "🦅",
     grid: [
       "#.....#",
@@ -1289,7 +1290,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l7_octopus",
     level: 7,
-    name: "Polpo",
+    name: "ex.nonogram.puzzle.l7_octopus",
     icon: "🐙",
     grid: [
       "..###..",
@@ -1304,7 +1305,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l7_knight",
     level: 7,
-    name: "Cavaliere",
+    name: "ex.nonogram.puzzle.l7_knight",
     icon: "♞",
     grid: [
       "..###..",
@@ -1319,7 +1320,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l7_spaceship",
     level: 7,
-    name: "Astronave",
+    name: "ex.nonogram.puzzle.l7_spaceship",
     icon: "🛸",
     grid: [
       "...#...",
@@ -1334,7 +1335,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l7_pirate",
     level: 7,
-    name: "Bandiera pirata",
+    name: "ex.nonogram.puzzle.l7_pirate",
     icon: "🏴‍☠️",
     grid: [
       "#######",
@@ -1349,7 +1350,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l7_volcano",
     level: 7,
-    name: "Vulcano",
+    name: "ex.nonogram.puzzle.l7_volcano",
     icon: "🌋",
     grid: [
       "..#.#..",
@@ -1364,7 +1365,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l7_wolf",
     level: 7,
-    name: "Lupo",
+    name: "ex.nonogram.puzzle.l7_wolf",
     icon: "🐺",
     grid: [
       ".#...#.",
@@ -1379,7 +1380,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l7_sword_fire",
     level: 7,
-    name: "Spada fiammeggiante",
+    name: "ex.nonogram.puzzle.l7_sword_fire",
     icon: "🗡️",
     grid: [
       "...#...",
@@ -1394,7 +1395,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l7_pegasus_wings",
     level: 7,
-    name: "Ali d'angelo",
+    name: "ex.nonogram.puzzle.l7_pegasus_wings",
     icon: "🪽",
     grid: [
       "#.....#",
@@ -1409,7 +1410,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l7_dolphin",
     level: 7,
-    name: "Delfino",
+    name: "ex.nonogram.puzzle.l7_dolphin",
     icon: "🐬",
     grid: [
       "..##...",
@@ -1424,7 +1425,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l7_shield_crest",
     level: 7,
-    name: "Stemma",
+    name: "ex.nonogram.puzzle.l7_shield_crest",
     icon: "🛡️",
     grid: [
       ".#####.",
@@ -1439,7 +1440,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l8_dragon",
     level: 8,
-    name: "Drago",
+    name: "ex.nonogram.puzzle.l8_dragon",
     icon: "🐉",
     grid: [
       "...##..",
@@ -1454,7 +1455,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l8_phoenix",
     level: 8,
-    name: "Fenice",
+    name: "ex.nonogram.puzzle.l8_phoenix",
     icon: "🦅",
     grid: [
       "#..#..#",
@@ -1469,7 +1470,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l8_samurai",
     level: 8,
-    name: "Samurai",
+    name: "ex.nonogram.puzzle.l8_samurai",
     icon: "⚔️",
     grid: [
       "#.....#",
@@ -1484,7 +1485,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l8_temple",
     level: 8,
-    name: "Tempio",
+    name: "ex.nonogram.puzzle.l8_temple",
     icon: "⛩️",
     grid: [
       "#######",
@@ -1499,7 +1500,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l8_scorpion",
     level: 8,
-    name: "Scorpione",
+    name: "ex.nonogram.puzzle.l8_scorpion",
     icon: "🦂",
     grid: [
       "..##.#.",
@@ -1514,7 +1515,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l8_kraken",
     level: 8,
-    name: "Kraken",
+    name: "ex.nonogram.puzzle.l8_kraken",
     icon: "🦑",
     grid: [
       "..###..",
@@ -1529,7 +1530,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l8_valkyrie",
     level: 8,
-    name: "Valchiria",
+    name: "ex.nonogram.puzzle.l8_valkyrie",
     icon: "🪽",
     grid: [
       "#..#..#",
@@ -1544,7 +1545,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l8_sphinx",
     level: 8,
-    name: "Sfinge",
+    name: "ex.nonogram.puzzle.l8_sphinx",
     icon: "🗿",
     grid: [
       "..###..",
@@ -1559,7 +1560,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l8_gargoyle",
     level: 8,
-    name: "Gargoyle",
+    name: "ex.nonogram.puzzle.l8_gargoyle",
     icon: "🦇",
     grid: [
       "#.....#",
@@ -1574,7 +1575,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l8_pegasus",
     level: 8,
-    name: "Pegaso",
+    name: "ex.nonogram.puzzle.l8_pegasus",
     icon: "🦄",
     grid: [
       "..##.#.",
@@ -1589,7 +1590,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l8_medusa",
     level: 8,
-    name: "Medusa",
+    name: "ex.nonogram.puzzle.l8_medusa",
     icon: "🐍",
     grid: [
       ".#####.",
@@ -1604,7 +1605,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l8_centaur",
     level: 8,
-    name: "Centauro",
+    name: "ex.nonogram.puzzle.l8_centaur",
     icon: "🏹",
     grid: [
       "...#...",
@@ -1619,7 +1620,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l8_hydra",
     level: 8,
-    name: "Idra",
+    name: "ex.nonogram.puzzle.l8_hydra",
     icon: "🐉",
     grid: [
       "#.#.#.#",
@@ -1634,7 +1635,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l8_anubis",
     level: 8,
-    name: "Anubi",
+    name: "ex.nonogram.puzzle.l8_anubis",
     icon: "🐺",
     grid: [
       "#.....#",
@@ -1649,7 +1650,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l8_wizard",
     level: 8,
-    name: "Mago",
+    name: "ex.nonogram.puzzle.l8_wizard",
     icon: "🧙",
     grid: [
       "...#...",
@@ -1664,7 +1665,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l8_griffin",
     level: 8,
-    name: "Grifone",
+    name: "ex.nonogram.puzzle.l8_griffin",
     icon: "🦅",
     grid: [
       "..##.#.",
@@ -1679,7 +1680,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l8_cerberus",
     level: 8,
-    name: "Cerbero",
+    name: "ex.nonogram.puzzle.l8_cerberus",
     icon: "🐕",
     grid: [
       "#.#.#.#",
@@ -1694,7 +1695,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l8_chimera",
     level: 8,
-    name: "Chimera",
+    name: "ex.nonogram.puzzle.l8_chimera",
     icon: "🦁",
     grid: [
       ".#...#.",
@@ -1709,7 +1710,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l8_minotaur",
     level: 8,
-    name: "Minotauro",
+    name: "ex.nonogram.puzzle.l8_minotaur",
     icon: "🐂",
     grid: [
       "#.....#",
@@ -1724,7 +1725,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l8_yeti",
     level: 8,
-    name: "Yeti",
+    name: "ex.nonogram.puzzle.l8_yeti",
     icon: "❄️",
     grid: [
       "..###..",
@@ -1739,7 +1740,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l8_cyclops",
     level: 8,
-    name: "Ciclope",
+    name: "ex.nonogram.puzzle.l8_cyclops",
     icon: "👁️",
     grid: [
       "..###..",
@@ -1754,7 +1755,7 @@ export const NONOGRAM_PUZZLES: NonogramPuzzle[] = [
   {
     id: "l8_vampire",
     level: 8,
-    name: "Vampiro",
+    name: "ex.nonogram.puzzle.l8_vampire",
     icon: "🧛",
     grid: [
       "#.....#",
