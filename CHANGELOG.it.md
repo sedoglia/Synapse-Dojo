@@ -6,11 +6,11 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
-## [Non rilasciato]
+## [0.20.1] - 2026-11-18
 
 ### Corretto
 
-- **I nomi dei disegni del Nonogram seguono la lingua dell'app** (`src/exercises/nonogramPuzzles.ts`, `src/exercises/nonogram.ts`, `src/locales/*.ts`): i 124 nomi erano scritti in italiano nel file dei puzzle, quindi il messaggio di vittoria e quello di tempo scaduto mostravano per esempio «Svelato: Ragno!» anche in inglese o in giapponese. Ora sono traduzioni come le figure del Tangram, in tutte le 12 lingue.
+- **I nomi dei disegni del Nonogram seguono la lingua dell'app** (`src/exercises/nonogramPuzzles.ts`, `src/exercises/nonogram.ts`, `src/locales/*.ts`): i 124 nomi erano scritti in italiano nel file dei puzzle, quindi il messaggio di vittoria e quello di tempo scaduto mostravano per esempio «Svelato: Ragno!» anche in inglese o in giapponese. Ora sono traduzioni come le figure del Tangram, in tutte le 12 lingue (#90).
 
 ## [0.20.0] - 2026-11-18
 
