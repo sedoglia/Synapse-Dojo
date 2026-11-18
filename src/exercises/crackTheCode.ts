@@ -45,6 +45,12 @@ export function cluesCountFor(level: number): number {
   return 4;
 }
 
+/**
+ * Benchmark cracking time in seconds, scaled with deductive complexity (digits to resolve and clues to cross-reference):
+ * the speed bonus reference and, three times over, the limit for a level-up crack.
+ */
+const benchmarkFor = (level: number): number => 14 + codeLengthFor(level) * 6 + cluesCountFor(level) * 2;
+
 /** Adaptive attempt budget based on difficulty level */
 export function attemptsFor(level: number): number {
   if (level === 1) return 6;
@@ -268,6 +274,7 @@ export const crackTheCode: Exercise = {
       const dialValues: number[] = new Array(codeLen).fill(0);
       let focusedDial = 0;
       let triesLeft = ctx.practice ? 99 : attemptsFor(lvl);
+      const startedAt = performance.now();
 
       // Build Safe / Padlock UI
       ctx.stage.className = 'stage stage-crack-the-code';
@@ -566,7 +573,11 @@ export const crackTheCode: Exercise = {
         };
       });
 
-      const ok = ctx.track(st, solved, {
+      // A crack counts toward the next level only within a reasonable time for its digits and clues; a slow one still
+      // sounds right and counts as solved.
+      const inTime = ctx.solvedInTime((performance.now() - startedAt) / 1000, benchmarkFor(lvl));
+      const ok = ctx.track(st, solved && inTime, {
+        heard: solved,
         was: solved ? undefined : puzzle.solution.join(' '),
       });
 
@@ -581,9 +592,7 @@ export const crackTheCode: Exercise = {
     }
 
     ctx.progress(1);
-    // Benchmark scales with deductive complexity (digits to resolve and clues to cross-reference)
-    const benchmarkSecs = 14 + codeLengthFor(st.threshold()) * 6 + cluesCountFor(st.threshold()) * 2;
-    const { score, timeBonus } = ctx.withTimeBonus(st.score(), benchmarkSecs);
+    const { score, timeBonus } = ctx.withTimeBonus(st.score(), benchmarkFor(st.threshold()));
     const detail = t('ex.crackTheCode.detail', { ok: solvedCount, n: trials, lvl: st.int });
 
     return {
