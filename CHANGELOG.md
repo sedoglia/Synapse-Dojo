@@ -6,6 +6,12 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [Unreleased]
+
+### Fixed
+
+- **Nonogram picture names follow the app's language** (`src/exercises/nonogramPuzzles.ts`, `src/exercises/nonogram.ts`, `src/locales/*.ts`): the 124 names were written in Italian in the puzzle file, so the victory and time's-up messages showed, for example, "Revealed: Ragno!" even in English or Japanese. They are now translations like the Tangram figures, in all 12 languages.
+
 ## [0.20.0] - 2026-11-18
 
 ### Changed

@@ -1,5 +1,5 @@
 import { h, flash, pick } from '../dom';
-import { t } from '../i18n';
+import { t, type I18nKey } from '../i18n';
 import { sfx } from '../audio';
 import { getRecentHistory, saveRecentHistory } from '../storage';
 import { timeBar } from '../widgets';
@@ -352,7 +352,7 @@ export const nonogram: Exercise = {
           revealBanner.classList.remove('hidden');
           revealBanner.replaceChildren(
             h('div', { class: 'reveal-icon' }, puzzle.icon),
-            h('div', { class: 'reveal-title' }, t('ex.nonogram.solved', { name: puzzle.name })),
+            h('div', { class: 'reveal-title' }, t('ex.nonogram.solved', { name: t(puzzle.name as I18nKey) })),
           );
           flash(revealBanner, 'pop', 500);
 
@@ -512,7 +512,7 @@ export const nonogram: Exercise = {
         revealBanner.classList.remove('hidden');
         revealBanner.replaceChildren(
           h('div', { class: 'reveal-icon' }, puzzle.icon),
-          h('div', { class: 'reveal-title' }, `⏱ ${t('common.timeout')} · ${puzzle.name}`),
+          h('div', { class: 'reveal-title' }, `⏱ ${t('common.timeout')} · ${t(puzzle.name as I18nKey)}`),
         );
       }
       // Clean: no hints, no mistakes found by a check, and within a reasonable time for the grid.
