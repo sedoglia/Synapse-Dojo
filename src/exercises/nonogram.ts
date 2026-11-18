@@ -19,6 +19,9 @@ const gridSizeFor = (level: number): number => {
   return 7;
 };
 
+/** Benchmark solving time in seconds: the speed bonus reference and, three times over, the limit for a level-up solve. */
+const benchmarkFor = (level: number): number => 20 + level * 6;
+
 const RECENT_KEY = 'synapse_nonogram_recent_puzzles';
 const MAX_RECENT_MEMORY = 30;
 
@@ -73,6 +76,8 @@ export const nonogram: Exercise = {
       let checkMistakesCount = 0;
       let mode: InputMode = 'fill';
       let solved = false;
+      const startedAt = performance.now();
+      let solveSecs = 0;
 
       // Container elements
       const stage = ctx.stage;
@@ -319,6 +324,7 @@ export const nonogram: Exercise = {
         const triggerVictory = async () => {
           if (solved) return;
           solved = true;
+          solveSecs = (performance.now() - startedAt) / 1000;
 
           // Play triumph sounds
           sfx.sparkle();
@@ -482,15 +488,15 @@ export const nonogram: Exercise = {
         };
       });
 
-      const cleanSolve = result && hintsUsed === 0 && checkMistakesCount === 0;
+      // Clean: no hints, no mistakes found by a check, and within a reasonable time for the grid.
+      const cleanSolve = result && hintsUsed === 0 && checkMistakesCount === 0 && ctx.solvedInTime(solveSecs, benchmarkFor(currentLevel));
       ctx.track(st, cleanSolve, { heard: result });
       if (result) correct++;
       await ctx.wait(300);
     }
 
     ctx.progress(1);
-    const benchmarkSecs = 20 + st.threshold() * 6;
-    const { score, timeBonus } = ctx.withTimeBonus(st.score(), benchmarkSecs);
+    const { score, timeBonus } = ctx.withTimeBonus(st.score(), benchmarkFor(st.threshold()));
 
     return {
       score,

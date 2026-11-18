@@ -88,6 +88,12 @@ const piecesCountForLevel = (l: number): number => {
   return 7;
 };
 
+/**
+ * Benchmark solving time in seconds (18 s plus 6 s per piece): the end of the Gold band, the speed bonus reference and,
+ * three times over, the time within which a solve counts toward the next level.
+ */
+const benchmarkFor = (level: number): number => 18 + piecesCountForLevel(level) * 6;
+
 function clientToSvgPoint(svg: SVGSVGElement, clientX: number, clientY: number): { x: number; y: number } {
   const pt = svg.createSVGPoint();
   pt.x = clientX;
@@ -230,7 +236,7 @@ export const tangram: Exercise = {
 
       // Speed Benchmark & Dynamic Tier Stopwatch (Gold / Silver / Bronze / Standard)
       // Visual feedback on solving speed (speed bands, as in timed WAIS-IV subtests)
-      const benchmarkSecs = 18 + piecesCountForLevel(currentLevel) * 6;
+      const benchmarkSecs = benchmarkFor(currentLevel) * ctx.pace;
       const timerIcon = h('span', { class: 'tangram-timer-icon' }, '🏆');
       const timerLabel = h('span', { class: 'tangram-timer-label' }, t('ex.tangram.tierGold'));
       const timerSec = h('span', { class: 'tangram-timer-sec' }, '00:00');
@@ -240,6 +246,7 @@ export const tangram: Exercise = {
       const timerRow = h('div', { class: 'tangram-timer-row' }, timerBadge, timerTrack);
 
       const puzzleStartTime = performance.now();
+      let solveSecs = 0;
       let activeTier: 'gold' | 'silver' | 'bronze' | 'standard' = 'gold';
 
       const updateTimerDisplay = () => {
@@ -793,6 +800,7 @@ export const tangram: Exercise = {
       const triggerVictory = () => {
         if (solved) return;
         solved = true;
+        solveSecs = (performance.now() - puzzleStartTime) / 1000;
         clearInterval(timerInterval);
 
         // Confetti explosion + fanfare chime
@@ -838,18 +846,20 @@ export const tangram: Exercise = {
       // Wait for solve or abort
       const result = await trialPromise;
       clearInterval(timerInterval);
-      // Clean solve requires completing without hints and with focused, deliberate moves
-      const cleanSolve = Boolean(result && hintsUsed === 0 && misplaces <= (currentLevel <= 3 ? 6 : 4));
+      // Clean solve requires completing without hints, with focused, deliberate moves and in reasonable time
+      const cleanSolve = Boolean(
+        result &&
+          hintsUsed === 0 &&
+          misplaces <= (currentLevel <= 3 ? 6 : 4) &&
+          ctx.solvedInTime(solveSecs, benchmarkFor(currentLevel)),
+      );
       ctx.track(st, cleanSolve, { heard: result });
       if (result) correct++;
       await ctx.wait(350);
     }
 
     ctx.progress(1);
-    // Benchmark for speed bonus calibrated per level:
-    // (18s base + 6s per piece) gives an achievable +10 XP speed bonus for swift play
-    const benchmarkSecs = 18 + piecesCountForLevel(st.int) * 6;
-    const { score, timeBonus } = ctx.withTimeBonus(st.score(), benchmarkSecs);
+    const { score, timeBonus } = ctx.withTimeBonus(st.score(), benchmarkFor(st.int));
 
     return {
       score,

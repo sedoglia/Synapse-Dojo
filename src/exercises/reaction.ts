@@ -9,6 +9,13 @@ import type { Exercise } from './types';
  */
 const targetMsFor = (level: number) => Math.max(280, Math.round(600 * Math.pow(0.933, level - 1)));
 
+/**
+ * No tap within this window is a lapse, as in the Psychomotor Vigilance Task (Dinges & Powell 1985): the trial ends as
+ * a miss instead of waiting forever, so a wandering mind is recorded and never leaves the exercise hanging. Over three
+ * times the level-1 target, it never cuts off a slow but attentive answer.
+ */
+const LAPSE_MS = 2000;
+
 export const reaction: Exercise = {
   id: 'reaction',
   icon: '⏱️',
@@ -74,7 +81,8 @@ export const reaction: Exercise = {
         }),
       );
 
-      const rt = await ctx.input<number>((done) => {
+      const lapseMs = LAPSE_MS * ctx.pace;
+      const rt = await ctx.timed<number | null>(lapseMs, null, (done) => {
         ctx.stage.onpointerdown = (e) => {
           e.preventDefault();
           // It stops at the touch itself, not when the page gets round to handling it. Old browsers use another clock.
@@ -87,8 +95,19 @@ export const reaction: Exercise = {
         };
       });
 
-      rts.push(rt);
       const target = targetMsFor(st.level) * ctx.pace;
+      if (rt === null) {
+        // A lapse is a miss for the level, but not a reaction time: it stays out of the average and the best.
+        ctx.track(st, false, { note: t('fb.tooSlow') });
+        flash(pad, 'bad', 400);
+        pad.className = 'reaction-pad slow';
+        text.textContent = t('common.timeout');
+        subtext.textContent = t('ex.reaction.target', { ms: Math.round(target) });
+        await ctx.wait(1000);
+        continue;
+      }
+
+      rts.push(rt);
       const ok = rt <= target;
       // A slow tap has no "right answer" to show: it says the time and the target it missed.
       ctx.track(st, ok, { note: `${Math.round(rt)} ms · ${t('ex.reaction.target', { ms: Math.round(target) })}` });

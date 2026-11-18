@@ -9,6 +9,14 @@ const BONUS_MIN_ACCURACY = 0.65;
  * rewarding (Schultz 1998).
  */
 const BONUS_WINDOW_SHARE = 0.65;
+/**
+ * Puzzles with no time limit (Tangram, Nonogram, Crack the code): a solve counts toward the next level only within this
+ * multiple of the benchmark time. The player can always finish and hears it was solved, so the "Aha!" is never cut
+ * short; but a solve that took several times the benchmark says the level is above the player's own, as a correct but
+ * slow answer does in Math sprint. Generous on purpose: timed tests such as the WAIS-IV Block Design allow a few times
+ * the typical solving time per item, and the staircase converges on its accuracy target whatever the criterion.
+ */
+const SLOW_SOLVE_FACTOR = 3;
 
 /** Thrown into a running exercise when the player quits. */
 export class Aborted extends Error {}
@@ -157,6 +165,14 @@ export class Ctx {
    * their own: the ones played against a response window. Accurate enough, and answered well inside the window.
    * Never in the daily check or the practice round.
    */
+  /**
+   * Whether an untimed puzzle was solved fast enough to count toward the level (see `SLOW_SOLVE_FACTOR`). Training only:
+   * the daily check keeps its own calibrated scale, and the practice round is not scored.
+   */
+  solvedInTime(secs: number, benchmarkSecs: number): boolean {
+    return this.mode !== 'train' || secs / this.pace <= benchmarkSecs * SLOW_SOLVE_FACTOR;
+  }
+
   get isSpeedBonus(): boolean {
     if (this.mode !== 'train' || this.accuracy < BONUS_MIN_ACCURACY || this.windowShares.length < 5) return false;
     const share = this.windowShares.reduce((a, b) => a + b, 0) / this.windowShares.length;
