@@ -6,6 +6,12 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [Unreleased]
+
+### Changed
+
+- **Nonogram and Tangram have a time limit** (`src/ctx.ts`, `src/exercises/nonogram.ts`, `src/exercises/tangram.ts`): in training each puzzle must be completed within 3 times its benchmark time, the same one that since 0.18 decides whether a solve raises the level: 78 to 204 seconds in Nonogram, 108 to 180 seconds in Tangram (× 1.4 with the relaxed pace). In Nonogram a bar shows the time; in Tangram, after Bronze, the timer counts down the time left. When it runs out the grid locks and the solution appears: the picture revealed in Nonogram, the silhouette completed in Tangram. The trial counts as not solved, as a slow solve already did for the level, so the adaptive difficulty converges as before. A solve found at the last moment counts even if its animation runs past the limit. The Neuro Score and the guided practice stay untimed. Both games' instructions say so in all 12 languages.
+
 ## [0.19.0] - 2026-11-18
 
 ### Changed

@@ -6,6 +6,12 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [Non rilasciato]
+
+### Modificato
+
+- **Nonogram e Tangram hanno un limite di tempo** (`src/ctx.ts`, `src/exercises/nonogram.ts`, `src/exercises/tangram.ts`): in allenamento ogni schema va completato entro 3 volte il suo tempo di riferimento, lo stesso che dalla 0.18 decide se una soluzione fa salire di livello: da 78 a 204 secondi nel Nonogram, da 108 a 180 secondi nel Tangram (× 1,4 col ritmo rilassato). Nel Nonogram una barra mostra il tempo; nel Tangram, dopo il Bronzo, il cronometro conta il tempo che resta. Allo scadere la griglia si blocca e compare la soluzione: il disegno svelato nel Nonogram, la sagoma completata nel Tangram. La prova conta come non riuscita, come già accadeva per il livello a una soluzione lenta, quindi la difficoltà adattiva converge come prima. Una soluzione trovata negli ultimi istanti vale anche se la sua animazione supera il limite. Il Neuro Score e la prova guidata restano senza limite. Le istruzioni dei due giochi lo dicono in tutte le 12 lingue.
+
 ## [0.19.0] - 2026-11-18
 
 ### Modificato

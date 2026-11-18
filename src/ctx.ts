@@ -10,11 +10,12 @@ const BONUS_MIN_ACCURACY = 0.65;
  */
 const BONUS_WINDOW_SHARE = 0.65;
 /**
- * Puzzles with no time limit (Tangram, Nonogram, Crack the code): a solve counts toward the next level only within this
- * multiple of the benchmark time. The player can always finish and hears it was solved, so the "Aha!" is never cut
- * short; but a solve that took several times the benchmark says the level is above the player's own, as a correct but
- * slow answer does in Math sprint. Generous on purpose: timed tests such as the WAIS-IV Block Design allow a few times
- * the typical solving time per item, and the staircase converges on its accuracy target whatever the criterion.
+ * Long puzzles (Tangram, Nonogram, Crack the code): a solve counts toward the next level only within this multiple of
+ * the benchmark time, since a solve that took several times the benchmark says the level is above the player's own, as
+ * a correct but slow answer does in Math sprint. In Tangram and Nonogram it is also the time limit in training, as in
+ * timed tests such as the WAIS-IV Block Design, which allow a few times the typical solving time per item; Crack the
+ * code is bounded by its attempts instead, so a slow crack still counts as solved. Generous on purpose, and the
+ * staircase converges on its accuracy target whatever the criterion.
  */
 const SLOW_SOLVE_FACTOR = 3;
 
@@ -171,6 +172,11 @@ export class Ctx {
    */
   solvedInTime(secs: number, benchmarkSecs: number): boolean {
     return this.mode !== 'train' || secs / this.pace <= benchmarkSecs * SLOW_SOLVE_FACTOR;
+  }
+
+  /** Time limit in ms for a long puzzle in training (see `SLOW_SOLVE_FACTOR`); 0 = none (daily check, practice). */
+  puzzleLimit(benchmarkSecs: number): number {
+    return this.mode === 'train' ? benchmarkSecs * SLOW_SOLVE_FACTOR * this.pace * 1000 : 0;
   }
 
   get isSpeedBonus(): boolean {
