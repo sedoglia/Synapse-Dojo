@@ -34,8 +34,16 @@ const REF_CARDS: CardDef[] = [
   { count: 4, color: 'blue', shape: 'square' },
 ];
 
-/** Smooth, humane timing curve: from 5.5s down to 2.2s at max level */
-const limitFor = (level: number) => Math.max(2200, Math.round(5500 * Math.pow(0.90, level - 1)));
+/**
+ * Time per card: from 5.5 s at level 1 down to 3 s at the top level, about 7% less per level. The original Wisconsin
+ * Card Sorting Test has no time limit: below about 3 s an error comes more and more from haste rather than from
+ * perseveration or a lost rule, which is what this exercise measures. Every level stays shorter than the one before,
+ * so the difficulty keeps growing all the way to the top.
+ */
+const MIN_LIMIT_MS = 3000;
+const MAX_LIMIT_MS = 5500;
+const limitFor = (level: number) =>
+  Math.round(MAX_LIMIT_MS * Math.pow(MIN_LIMIT_MS / MAX_LIMIT_MS, (Math.min(level, 10) - 1) / 9));
 /** From this level the rule changes without notice. */
 const SILENT_FROM = 6;
 

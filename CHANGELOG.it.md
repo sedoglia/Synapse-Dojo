@@ -6,6 +6,12 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [Non rilasciato]
+
+### Modificato
+
+- **Ordinamento carte: almeno 3 secondi per carta** (`src/exercises/sorting.ts`): il tempo per carta scende ora da 5,5 a 3 secondi invece che a 2,2, circa il 7% in meno a ogni livello, così ogni livello resta più difficile del precedente. Il Wisconsin Card Sorting Test a cui si ispira non ha limite di tempo, e sotto i 3 secondi un errore nasceva sempre più dalla fretta che dalla perseverazione su una regola superata, che è ciò che il gioco misura. Chi era già ai livelli alti troverà un po' più di tempo e salirà di livello. Il Neuro Score, che concede 60 secondi, non cambia.
+
 ## [0.18.0] - 2026-11-18
 
 ### Modificato

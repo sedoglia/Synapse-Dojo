@@ -6,6 +6,12 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [Unreleased]
+
+### Changed
+
+- **Card Sorting: at least 3 seconds per card** (`src/exercises/sorting.ts`): the time per card now goes down from 5.5 to 3 seconds instead of 2.2, about 7% less at each level, so every level stays harder than the one before. The Wisconsin Card Sorting Test it draws on has no time limit, and below 3 seconds an error came more and more from haste rather than from sticking to an outdated rule, which is what the game measures. Players already at the higher levels will get a little more time and climb. The Neuro Score, which allows 60 seconds, is unchanged.
+
 ## [0.18.0] - 2026-11-18
 
 ### Changed
