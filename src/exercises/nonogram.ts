@@ -2,6 +2,7 @@ import { h, flash, pick } from '../dom';
 import { t } from '../i18n';
 import { sfx } from '../audio';
 import { getRecentHistory, saveRecentHistory } from '../storage';
+import { timeBar } from '../widgets';
 import type { Exercise } from './types';
 import { NONOGRAM_PUZZLES, parsePuzzleGrid, type NonogramPuzzle } from './nonogramPuzzles';
 
@@ -113,7 +114,11 @@ export const nonogram: Exercise = {
       const boardEl = h('div', { class: `nonogram-board size-${size}` });
       const revealBanner = h('div', { class: 'nonogram-reveal-banner hidden' });
 
-      stage.append(headerBar, modePill, boardEl, revealBanner);
+      // Time limit in training, shown by a bar that empties (none in the daily check and the practice round).
+      const limit = ctx.puzzleLimit(benchmarkFor(currentLevel));
+      const bar = timeBar();
+
+      stage.append(headerBar, ...(limit ? [bar.el] : []), modePill, boardEl, revealBanner);
 
       const rowClueEls: HTMLElement[] = [];
       const colClueEls: HTMLElement[] = [];
@@ -248,8 +253,8 @@ export const nonogram: Exercise = {
 
       const isCompletedCorrectly = (): boolean => isTargetMatch() || areAllCluesSatisfied();
 
-      // Main interaction loop
-      const result = await ctx.input<boolean>((done) => {
+      // Main interaction loop: resolves true when solved, false when the time runs out.
+      const play = (done: (solved: boolean) => void) => {
         let isPointerDown = false;
         let dragAction: CellState = 0;
         let lastTouchedCell = '';
@@ -486,13 +491,35 @@ export const nonogram: Exercise = {
           window.removeEventListener('pointerup', handlePointerEnd);
           window.removeEventListener('pointercancel', handlePointerEnd);
         };
-      });
+      };
 
+      if (limit) bar.start(limit);
+      // A solve found just before the end counts even if its short reveal runs past the limit.
+      const result = (limit ? await ctx.timed<boolean>(limit, false, play) : await ctx.input<boolean>(play)) || solved;
+      bar.stop();
+      if (!result) {
+        // Time's up: the board locks and the hidden picture is shown, so the attempt still ends on the solution.
+        solved = true;
+        boardEl.style.pointerEvents = 'none';
+        boardEl.classList.add('solved');
+        for (let r = 0; r < size; r++) {
+          for (let c = 0; c < size; c++) {
+            const el = cellEls[r][c];
+            el.classList.add(target[r][c] ? 'revealed-block' : 'revealed-empty');
+            if (!target[r][c]) el.textContent = '';
+          }
+        }
+        revealBanner.classList.remove('hidden');
+        revealBanner.replaceChildren(
+          h('div', { class: 'reveal-icon' }, puzzle.icon),
+          h('div', { class: 'reveal-title' }, `⏱ ${t('common.timeout')} · ${puzzle.name}`),
+        );
+      }
       // Clean: no hints, no mistakes found by a check, and within a reasonable time for the grid.
       const cleanSolve = result && hintsUsed === 0 && checkMistakesCount === 0 && ctx.solvedInTime(solveSecs, benchmarkFor(currentLevel));
-      ctx.track(st, cleanSolve, { heard: result });
+      ctx.track(st, cleanSolve, { heard: result, note: result ? undefined : t('common.timeout') });
       if (result) correct++;
-      await ctx.wait(300);
+      await ctx.wait(result ? 300 : 2000);
     }
 
     ctx.progress(1);

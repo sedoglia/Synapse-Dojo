@@ -237,6 +237,9 @@ export const tangram: Exercise = {
       // Speed Benchmark & Dynamic Tier Stopwatch (Gold / Silver / Bronze / Standard)
       // Visual feedback on solving speed (speed bands, as in timed WAIS-IV subtests)
       const benchmarkSecs = benchmarkFor(currentLevel) * ctx.pace;
+      // Time limit in training (none in the daily check and the practice round): after Bronze the bar counts it down.
+      const limit = ctx.puzzleLimit(benchmarkFor(currentLevel));
+      const limitSecs = limit / 1000;
       const timerIcon = h('span', { class: 'tangram-timer-icon' }, '🏆');
       const timerLabel = h('span', { class: 'tangram-timer-label' }, t('ex.tangram.tierGold'));
       const timerSec = h('span', { class: 'tangram-timer-sec' }, '00:00');
@@ -270,7 +273,11 @@ export const tangram: Exercise = {
           progress = Math.max(0, 1 - (elapsedSecs - benchmarkSecs * 1.4) / (benchmarkSecs * 0.4));
         } else {
           tier = 'standard';
-          progress = 0;
+          progress = limitSecs ? Math.max(0, (limitSecs - elapsedSecs) / (limitSecs - benchmarkSecs * 1.8)) : 0;
+          if (limitSecs) {
+            const left = Math.max(0, Math.ceil(limitSecs - elapsedSecs));
+            timerSec.textContent = `⏳ ${Math.floor(left / 60)}:${(left % 60).toString().padStart(2, '0')}`;
+          }
         }
 
         if (tier !== activeTier) {
@@ -791,11 +798,13 @@ export const tangram: Exercise = {
 
       // Victory resolution handler
       let onTrialFinished: ((ok: boolean) => void) | null = null;
-      const trialPromise = ctx.input<boolean>((done) => {
+      // Resolves true when solved, false when the time runs out.
+      const play = (done: (ok: boolean) => void) => {
         onTrialFinished = done;
         // Quitting mid-puzzle must also stop the stopwatch, which would otherwise tick forever.
         return () => clearInterval(timerInterval);
-      });
+      };
+      const trialPromise = limit ? ctx.timed<boolean>(limit, false, play) : ctx.input<boolean>(play);
 
       const triggerVictory = () => {
         if (solved) return;
@@ -843,9 +852,31 @@ export const tangram: Exercise = {
       renderTray();
       updateControlsState();
 
-      // Wait for solve or abort
-      const result = await trialPromise;
+      // Wait for solve, timeout or abort. A solve found just before the end counts even if its celebration runs past it.
+      const result = (await trialPromise) || solved;
       clearInterval(timerInterval);
+      if (!result) {
+        // Time's up: the board locks and the missing pieces slide into place, so the attempt still ends on the solution.
+        solved = true;
+        tangramWrap.style.pointerEvents = 'none';
+        for (const slot of slots) {
+          if (slot.filledByPieceId !== null) continue;
+          const piece = pieces.find((p) => p.placedSlotId === null && p.type === slot.type && !p.isDecoy);
+          if (!piece) continue;
+          piece.rot = slot.rot;
+          piece.flip = Boolean(slot.flip);
+          piece.placedSlotId = slot.id;
+          slot.filledByPieceId = piece.id;
+        }
+        selectedPieceId = null;
+        renderBoard();
+        renderTray();
+        revealBanner.replaceChildren(
+          h('span', { class: 'tangram-reveal-icon' }, puzzle.icon),
+          h('span', { class: 'tangram-reveal-text' }, `⏱ ${t('common.timeout')} · ${t(puzzle.name as any)}`),
+        );
+        revealBanner.classList.remove('hidden');
+      }
       // Clean solve requires completing without hints, with focused, deliberate moves and in reasonable time
       const cleanSolve = Boolean(
         result &&
@@ -853,9 +884,9 @@ export const tangram: Exercise = {
           misplaces <= (currentLevel <= 3 ? 6 : 4) &&
           ctx.solvedInTime(solveSecs, benchmarkFor(currentLevel)),
       );
-      ctx.track(st, cleanSolve, { heard: result });
+      ctx.track(st, cleanSolve, { heard: result, note: result ? undefined : t('common.timeout') });
       if (result) correct++;
-      await ctx.wait(350);
+      await ctx.wait(result ? 350 : 2200);
     }
 
     ctx.progress(1);
