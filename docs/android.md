@@ -490,12 +490,58 @@ incompleta.
   deve prima disinstallarla (perdendo i dati locali: prima conviene esportarli).
 - **Entrambe le impronte restano in `assetlinks.json`**: così anche l'APK degli altri store, su un telefono con
   Chrome, si apre come TWA senza barra dell'indirizzo.
-- **Huawei AppGallery**: carica l'APK da AppGallery Connect, nella scheda della versione dell'app. L'app non usa
-  servizi Google (GMS), quindi non servono gli HMS. ⚠ **Da verificare** al momento dell'invio: menu e requisiti
-  cambiano spesso.
+- **Huawei AppGallery**: carica l'APK da AppGallery Connect, nella bozza della versione. L'app non usa servizi Google
+  (GMS), quindi non servono gli HMS. La procedura completa è in [§12.4](#124-huawei-appgallery).
 - **Uptodown**: nella console sviluppatori, scheda *Files*, carica il nuovo APK e reinvia la scheda in revisione.
 
-### 12.4 Provare il WebView
+### 12.4 Huawei AppGallery
+
+Prima versione inviata il 20 novembre 2026 (0.17.2, codice 4). In AppGallery Connect, scheda *Distribute*, ci sono
+due pagine da compilare.
+
+**App information** (scheda dello store, vale per tutte le versioni):
+
+- **Lingue**: inglese (US) come lingua predefinita; l'italiano si aggiunge con *Manage languages*, ripetendo testi e
+  screenshot.
+- **App name** `Synapse Dojo`; **Brief introduction** al massimo 80 caratteri; **Full introduction** al massimo 8000.
+  Valgono le stesse avvertenze di Google Play (svago, non è un dispositivo medico) e conviene dire che l'app funziona
+  offline, perché Huawei può rifiutare le app che sembrano «solo un sito web». Non nominare altri store o browser.
+- **Icon**: `public/icon-maskable-512.png`, quadrata con gli angoli squadrati (Huawei li arrotonda da sé).
+- **Screenshots**: da 3 a 8. Vanno bene gli 8 file 1080×1920 di `android/store-assets/screenshots/` (`en-light` per
+  l'inglese, `it-light` per l'italiano), gli stessi di Google Play.
+- **Category**: l'app è registrata come gioco, quindi il menu offre solo *Games*: **Games › Puzzle & casual ›
+  Puzzle**, tipo **Casual game**. Il tipo (app o gioco) si sceglie alla creazione e non si cambia da qui.
+
+**Version information › Draft** (per ogni versione):
+
+| Sezione | Valore |
+| --- | --- |
+| Country/Region for release | *Selected countries/regions*: tutto tranne **Chinese mainland**, dove i giochi richiedono una licenza (ISBN). Gli Stati Uniti non compaiono: AppGallery non vi distribuisce. Gli elenchi «(partial)» dipendono da Huawei. |
+| Open testing | No |
+| App version | *Manage packages › Upload*: `android/app-release-signed.apk` (non l'`.aab`, che richiederebbe *App Signing* e la consegna della chiave a Huawei). Poi selezionarlo. |
+| Payment / In-app purchases | Free; nessuna casella spuntata. |
+| Content rating | Questionario (*Set*): vedi sotto. Risultato **3+** ovunque (Brasile «AL»). |
+| Privacy statement | Privacy policy URL e Data subject right URL: `https://synapsedojo.com/privacy`. |
+| Privacy tags | *Collect personal data*: **Yes**; scenario solo **App functionality**; voci: *Identifiers › User identifiers*, *Basic information › Age* e *Account information*, *App information › App settings* e *App usage information*. Le descrizioni le compila Huawei. |
+| AI function declaration | Not involved |
+| Copyright information | Vuoto (facoltativo). |
+| For reviewer | *Sign-in required* non spuntato; nelle note: nessun account, progressi solo sul dispositivo, classifica facoltativa e spenta di default, niente pubblicità né acquisti. |
+| Release time | Immediately once approved |
+
+Nel questionario dell'età le risposte sono tutte **No** (violenza, linguaggio, droghe, azzardo, acquisti, chat,
+posizione, accesso libero a internet) tranne due, che devono restare coerenti con i *Privacy tags* perché Huawei
+confronta le sezioni:
+
+- *I giocatori possono generare contenuti o socializzare?* **Yes**: il nome dei gruppi privati è scritto a mano ed è
+  visto dagli altri membri, e la classifica mette a confronto i giocatori. Alla domanda successiva su voce o testo:
+  **No**, non c'è chat.
+- *Il gioco richiede un account o raccoglie dati personali con altri mezzi?* **Yes**: la fascia d'età facoltativa e
+  l'identificativo anonimo della classifica.
+
+Poi *Save Draft* e *Submit*. L'esito arriva per email e compare in *Review comments*. Per le versioni successive:
+*Version/Update*, nuovo APK e le stesse risposte; la scheda *App information* si modifica solo se cambia qualcosa.
+
+### 12.5 Provare il WebView
 
 Su un telefono con Chrome l'app usa sempre la TWA. Per vedere il WebView serve un dispositivo senza browser che
 supporti le TWA: un Huawei senza servizi Google, oppure un emulatore con un'immagine «Default Android System Image»
@@ -537,3 +583,5 @@ Consultate a novembre 2026:
 - Play App Signing: <https://support.google.com/googleplay/android-developer/answer/9842756>.
 - Sicurezza dei dati: <https://support.google.com/googleplay/android-developer/answer/10787469>.
 - Registrazione dell'account sviluppatore: <https://support.google.com/googleplay/android-developer/answer/6112435>.
+- Huawei AppGallery (§12.4): i campi e i limiti come apparivano in AppGallery Connect durante il primo invio, il 20
+  novembre 2026.
