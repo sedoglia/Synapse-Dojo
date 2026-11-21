@@ -6,16 +6,16 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
-## [Unreleased]
+## [0.21.1] - 2026-11-21
 
 ### Changed
 
-- **The training count is always shown, also on the welcome screen** (`src/screens/home.ts`, `src/screens/onboarding.ts`, `src/board.ts`, `src/locales/*.ts`): until either week reaches 20 people, "👥 Every week people train with Synapse Dojo: join them!" takes the place of the number, so a small number doesn't discourage anyone. The line now also appears under the badges of the welcome screen, for first-time visitors. In all 12 languages.
+- **The training count is always shown, also on the welcome screen** (`src/screens/home.ts`, `src/screens/onboarding.ts`, `src/board.ts`, `src/locales/*.ts`): until either week reaches 20 people, "👥 Every week people train with Synapse Dojo: join them!" takes the place of the number, so a small number doesn't discourage anyone. The line now also appears under the badges of the welcome screen, for first-time visitors. In all 12 languages (#96).
 
 ### Fixed
 
-- **The guide says when data leaves the device** (`src/locales/*.ts`): the personal data FAQ mentioned only the leaderboard; it now also lists the online transfer and the anonymous weekly count, and the Settings card says you can leave the count. In all 12 languages.
-- **More precise legal basis for the anonymous count** (`src/locales/*.ts`): the privacy notice states the actual purpose of the legitimate interest, showing on the home screen how many people train and keeping that number from being inflated, instead of a generic "measuring how much the game is used". The terms follow each language's law ("base légale" in French, the LGPD's "legítimo interesse" in Portuguese, "keberatan" in Indonesian), and in Chinese and Japanese the data section uses full-width punctuation.
+- **The guide says when data leaves the device** (`src/locales/*.ts`): the personal data FAQ mentioned only the leaderboard; it now also lists the online transfer and the anonymous weekly count, and the Settings card says you can leave the count. In all 12 languages (#97).
+- **More precise legal basis for the anonymous count** (`src/locales/*.ts`): the privacy notice states the actual purpose of the legitimate interest, showing on the home screen how many people train and keeping that number from being inflated, instead of a generic "measuring how much the game is used". The terms follow each language's law ("base légale" in French, the LGPD's "legítimo interesse" in Portuguese, "keberatan" in Indonesian), and in Chinese and Japanese the data section uses full-width punctuation (#95).
 
 ## [0.21.0] - 2026-11-21
 
