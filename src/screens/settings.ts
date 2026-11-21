@@ -76,7 +76,7 @@ async function importSave(file: File) {
   else showOnboarding();
 }
 
-function toggle(key: 'sound' | 'relaxed' | 'bigText' | 'shareOffer', label: string): HTMLElement {
+function toggle(key: 'sound' | 'relaxed' | 'bigText' | 'shareOffer' | 'community', label: string): HTMLElement {
   const box = h('input', {
     type: 'checkbox',
     checked: store.data.settings[key],
@@ -169,6 +169,9 @@ export function showSettings() {
         toggle('relaxed', t('settings.relaxed')),
         toggle('bigText', t('settings.bigText')),
         toggle('shareOffer', t('settings.shareOffer')),
+        // Only where the server exists: a copy opened from a file never sends anything.
+        boardAvailable() ? toggle('community', t('settings.community')) : null,
+        boardAvailable() ? h('p', { class: 'muted small' }, t('settings.communityHint')) : null,
       ),
       (() => {
         const time = h('input', { class: 'input time', type: 'time', value: '18:00' });

@@ -1,6 +1,6 @@
 import { h, todayKey } from '../dom';
 import { store } from '../storage';
-import { t } from '../i18n';
+import { num, t } from '../i18n';
 import { APP_NAME } from '../config';
 import { render, rankName, xpBar, langPicker } from '../ui';
 import { currentPlan } from '../stats';
@@ -13,7 +13,7 @@ import { showGuide } from './guide';
 import { showBoard } from './board';
 import { showBoardJoin } from './boardJoin';
 import { homeShown } from '../update';
-import { boardAvailable, boardErrorText, BoardError, clearInvite, fetchBoard, joinGroup, previewGroup } from '../board';
+import { boardAvailable, boardErrorText, BoardError, clearInvite, fetchBoard, fetchCommunity, joinGroup, previewGroup } from '../board';
 
 /** The suggestion to join appears from the very first visit and comes back a week after "Not now". */
 const PROMPT_SNOOZE_DAYS = 7;
@@ -128,6 +128,25 @@ function boardCard(): HTMLElement | null {
   return menuCard('🏆', t('home.board'), sub, () => showBoard(showHome));
 }
 
+/**
+ * "This week N people trained": a descriptive norm about the behaviour the game asks for (training, not visits),
+ * shown to everyone, members of the board or not (Goldstein, Cialdini & Griskevicius 2008). The number counts
+ * everyone who trained and did not turn the anonymous count off in Settings.
+ * Stays empty until the server answers, and when the number is too small to encourage anyone.
+ */
+function communityLine(): HTMLElement {
+  const line = h('p', { class: 'community', 'aria-live': 'polite' });
+  fetchCommunity()
+    .then((res) => {
+      if (!res) return;
+      line.textContent = `👥 ${t(res.week === 'current' ? 'home.community' : 'home.communityLast', { n: num(res.people, 0) })}`;
+    })
+    .catch(() => {
+      /* offline: no line */
+    });
+  return line;
+}
+
 function menuCard(icon: string, title: string, sub: string | HTMLElement, onClick: () => void, cls = '') {
   return h(
     'button',
@@ -198,6 +217,7 @@ export function showHome() {
           h('div', { class: `streak ${streak ? 'on' : ''}` }, `🔥 ${streakText}`),
           h('div', { class: `streak ${week >= 4 ? 'on' : ''}` }, `🎯 ${t('home.week', { n: Math.min(4, week) })}`),
         ),
+        communityLine(),
         trainedToday
           ? null
           : h(
