@@ -6,11 +6,11 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
-## [Unreleased]
+## [0.21.0] - 2026-11-21
 
 ### Added
 
-- **The home screen says how many people trained this week** (`functions/api/stats.ts`, `functions/api/ping.ts`, `migrations/0006_community_pings.sql`, `src/screens/home.ts`, `src/board.ts`): a line under the goals, for example "👥 This week 128 people trained", shows that others are training too (social proof). It counts training, not visits: once a week, at the first activity, the game sends its server only today's date, with no identifier, name or result, and the total never drops below the leaderboard players who trained. Below 20 people last week's total is shown, or no line, because a small number discourages rather than motivates. Each network can add at most 150 people a week and 15 an hour, so a care home or a hospital is counted in full and an automated loop is not; the network is kept only as a keyed hash tied to the week and deleted after 2 weeks. It can be turned off with "Count me in the anonymous weekly total" in Settings; the privacy notice has a new section, in all 12 languages.
+- **The home screen says how many people trained this week** (`functions/api/stats.ts`, `functions/api/ping.ts`, `migrations/0006_community_pings.sql`, `src/screens/home.ts`, `src/board.ts`): a line under the goals, for example "👥 This week 128 people trained", shows that others are training too (social proof). It counts training, not visits: once a week, at the first activity, the game sends its server only today's date, with no identifier, name or result, and the total never drops below the leaderboard players who trained. Below 20 people last week's total is shown, or no line, because a small number discourages rather than motivates. Each network can add at most 150 people a week and 15 an hour, so a care home or a hospital is counted in full and an automated loop is not; the network is kept only as a keyed hash tied to the week and deleted after 2 weeks. It can be turned off with "Count me in the anonymous weekly total" in Settings; the privacy notice has a new section, in all 12 languages (#93).
 
 ## [0.20.1] - 2026-11-18
 
