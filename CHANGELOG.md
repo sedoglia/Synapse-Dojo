@@ -6,6 +6,12 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [Unreleased]
+
+### Fixed
+
+- **The privacy notice says group members without results stay 30 days** (`src/locales/*.ts`): the leaderboard deletes players who never submitted results after 7 days, but not members of a group, who stay like everyone else until 30 days of inactivity; the notice only mentioned the 7 days. In all 12 languages. The technical docs also mention the cleanup of the anonymous weekly counts.
+
 ## [0.21.1] - 2026-11-21
 
 ### Changed
