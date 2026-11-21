@@ -6,6 +6,12 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [Unreleased]
+
+### Fixed
+
+- **More precise legal basis for the anonymous count** (`src/locales/*.ts`): the privacy notice states the actual purpose of the legitimate interest, showing on the home screen how many people train and keeping that number from being inflated, instead of a generic "measuring how much the game is used". The terms follow each language's law ("base légale" in French, the LGPD's "legítimo interesse" in Portuguese, "keberatan" in Indonesian), and in Chinese and Japanese the data section uses full-width punctuation.
+
 ## [0.21.0] - 2026-11-21
 
 ### Added
