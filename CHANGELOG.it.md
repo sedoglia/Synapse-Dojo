@@ -6,16 +6,16 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
-## [Non rilasciato]
+## [0.21.1] - 2026-11-21
 
 ### Modificato
 
-- **Il conteggio di chi si allena si vede sempre, anche nella pagina di benvenuto** (`src/screens/home.ts`, `src/screens/onboarding.ts`, `src/board.ts`, `src/locales/*.ts`): finché nessuna delle due settimane arriva a 20 persone, al posto del numero compare «👥 Ogni settimana c'è chi si allena con Synapse Dojo: unisciti anche tu!», così un numero piccolo non scoraggia. La riga ora appare anche sotto le etichette della pagina di benvenuto, per chi arriva la prima volta. In tutte le 12 lingue.
+- **Il conteggio di chi si allena si vede sempre, anche nella pagina di benvenuto** (`src/screens/home.ts`, `src/screens/onboarding.ts`, `src/board.ts`, `src/locales/*.ts`): finché nessuna delle due settimane arriva a 20 persone, al posto del numero compare «👥 Ogni settimana c'è chi si allena con Synapse Dojo: unisciti anche tu!», così un numero piccolo non scoraggia. La riga ora appare anche sotto le etichette della pagina di benvenuto, per chi arriva la prima volta. In tutte le 12 lingue (#96).
 
 ### Corretto
 
-- **La guida dice quando i dati escono dal dispositivo** (`src/locales/*.ts`): la FAQ sui dati personali citava solo la classifica; ora elenca anche il trasferimento online e il conteggio anonimo settimanale, e la scheda Impostazioni dice che si può uscire dal conteggio. In tutte le 12 lingue.
-- **Base giuridica del conteggio anonimo più precisa** (`src/locales/*.ts`): l'informativa privacy indica lo scopo reale del legittimo interesse, cioè mostrare nella schermata iniziale quante persone si allenano e impedire che il numero venga falsato, invece di un generico «misurare l'uso del gioco». I termini seguono le norme di ogni lingua («base légale» in francese, «legítimo interesse» della LGPD in portoghese, «keberatan» in indonesiano) e in cinese e giapponese la sezione sui dati usa la punteggiatura a larghezza piena.
+- **La guida dice quando i dati escono dal dispositivo** (`src/locales/*.ts`): la FAQ sui dati personali citava solo la classifica; ora elenca anche il trasferimento online e il conteggio anonimo settimanale, e la scheda Impostazioni dice che si può uscire dal conteggio. In tutte le 12 lingue (#97).
+- **Base giuridica del conteggio anonimo più precisa** (`src/locales/*.ts`): l'informativa privacy indica lo scopo reale del legittimo interesse, cioè mostrare nella schermata iniziale quante persone si allenano e impedire che il numero venga falsato, invece di un generico «misurare l'uso del gioco». I termini seguono le norme di ogni lingua («base légale» in francese, «legítimo interesse» della LGPD in portoghese, «keberatan» in indonesiano) e in cinese e giapponese la sezione sui dati usa la punteggiatura a larghezza piena (#95).
 
 ## [0.21.0] - 2026-11-21
 
