@@ -1282,6 +1282,7 @@ const ui: Locale['ui'] = {
   'home.boardGap1': 'あと1点で順位がひとつ上がります',
   'home.community': '今週は {n} 人がトレーニングしました',
   'home.communityLast': '先週は {n} 人がトレーニングしました',
+  'home.communityJoin': '毎週、Synapse Dojo でトレーニングしている人がいます。あなたも一緒にどうぞ！',
   'settings.community': '週ごとの匿名の集計に含める',
   'settings.communityHint': 'ゲームは週に1回、誰かがトレーニングしたことだけをサーバーに伝えます。名前や結果は含みません。ホーム画面の人数はこれで数えています。',
   'privacy.communityH': 'トレーニングした人の匿名カウント',

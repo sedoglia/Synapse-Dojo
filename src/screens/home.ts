@@ -132,14 +132,19 @@ function boardCard(): HTMLElement | null {
  * "This week N people trained": a descriptive norm about the behaviour the game asks for (training, not visits),
  * shown to everyone, members of the board or not (Goldstein, Cialdini & Griskevicius 2008). The number counts
  * everyone who trained and did not turn the anonymous count off in Settings.
- * Stays empty until the server answers, and when the number is too small to encourage anyone.
+ * Also on the welcome screen, for people who haven't started yet. Stays empty until the server answers; while the
+ * number is too small to encourage anyone, a sentence without it says that people train here every week.
  */
-function communityLine(): HTMLElement {
+export function communityLine(): HTMLElement {
   const line = h('p', { class: 'community', 'aria-live': 'polite' });
   fetchCommunity()
     .then((res) => {
       if (!res) return;
-      line.textContent = `👥 ${t(res.week === 'current' ? 'home.community' : 'home.communityLast', { n: num(res.people, 0) })}`;
+      const text =
+        res.week === null
+          ? t('home.communityJoin')
+          : t(res.week === 'current' ? 'home.community' : 'home.communityLast', { n: num(res.people, 0) });
+      line.textContent = `👥 ${text}`;
     })
     .catch(() => {
       /* offline: no line */

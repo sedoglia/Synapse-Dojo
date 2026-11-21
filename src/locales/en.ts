@@ -1322,6 +1322,7 @@ export const ui = {
   'home.boardGap1': '1 point to move up a place',
   'home.community': 'This week {n} people trained',
   'home.communityLast': 'Last week {n} people trained',
+  'home.communityJoin': 'Every week people train with Synapse Dojo: join them!',
   'settings.community': 'Count me in the anonymous weekly total',
   'settings.communityHint': 'Once a week the game tells the server only that someone trained, without your name or results: that is the number of people shown on the home screen.',
   'privacy.communityH': 'Anonymous count of who trains',

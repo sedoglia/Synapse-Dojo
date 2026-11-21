@@ -1282,6 +1282,7 @@ const ui: Locale['ui'] = {
   'home.boardGap1': 'Te falta 1 punto para subir un puesto',
   'home.community': 'Esta semana han entrenado {n} personas',
   'home.communityLast': 'La semana pasada entrenaron {n} personas',
+  'home.communityJoin': 'Cada semana hay gente que entrena con Synapse Dojo: ¡únete tú también!',
   'settings.community': 'Cuéntame en el total anónimo de la semana',
   'settings.communityHint': 'Una vez por semana el juego solo le dice al servidor que alguien ha entrenado, sin tu nombre ni tus resultados: es el número de personas que ves en la pantalla de inicio.',
   'privacy.communityH': 'Recuento anónimo de quién entrena',

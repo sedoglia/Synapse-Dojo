@@ -358,17 +358,18 @@ export interface CommunityTotals {
 export const COMMUNITY_MIN_PEOPLE = 20;
 
 /**
- * How many people trained this week (or last week, if this week's number is still too small), or null when
- * neither is worth showing. Asked without the player's key: the totals are the same for everyone.
+ * How many people trained this week (or last week, if this week's number is still too small). `week` is null when
+ * neither reaches the threshold: then only a sentence without the number is shown. Null when the server can't be
+ * reached. Asked without the player's key: the totals are the same for everyone.
  */
-export async function fetchCommunity(): Promise<{ week: 'current' | 'previous'; people: number } | null> {
+export async function fetchCommunity(): Promise<{ week: 'current' | 'previous' | null; people: number } | null> {
   if (!boardAvailable()) return null;
   const res = await fetch(`${API}stats?week=${localWeek()}`).catch(() => null);
   if (!res?.ok) return null;
   const { current, previous } = (await res.json()) as { current: CommunityTotals; previous: CommunityTotals };
   if (current.people >= COMMUNITY_MIN_PEOPLE) return { week: 'current', people: current.people };
   if (previous.people >= COMMUNITY_MIN_PEOPLE) return { week: 'previous', people: previous.people };
-  return null;
+  return { week: null, people: 0 };
 }
 
 let pinging = false;
