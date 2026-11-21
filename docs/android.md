@@ -382,18 +382,55 @@ programmi › Contenuti dell'app* per i questionari) servono:
 - **Annunci**: l'app **non contiene annunci**.
 - **Accesso all'app**: tutte le funzioni sono accessibili senza credenziali.
 - **Sicurezza dei dati** (Data safety): obbligatorio anche per i test chiusi e anche se l'app non raccoglie dati.
-  Dichiara cosa raccoglie o condivide l'app, incluso ciò che lasciano i servizi di terze parti. Compilalo seguendo
-  l'informativa in <https://synapsedojo.com/privacy>: i progressi restano sul dispositivo; lasciano il dispositivo solo,
-  e solo se l'utente lo sceglie, i dati della **classifica** e il **trasferimento online** del salvataggio; il sito usa
-  i servizi di Cloudflare (hosting, statistiche di visita, Turnstile). Indica che i dati sono cifrati in transito
-  (HTTPS).
-- **Eliminazione dell'account**: se Google considera l'iscrizione alla classifica un «account», Play chiede sia un modo
-  per eliminarlo nell'app (la classifica permette già di uscire e cancellare il profilo) sia un **link web** dove
-  chiederne la cancellazione. ⚠ **Da verificare** nel modulo Sicurezza dei dati al momento della compilazione.
+  Dichiara cosa raccoglie o condivide l'app, incluso ciò che lasciano i servizi di terze parti, seguendo l'informativa
+  in <https://synapsedojo.com/privacy>. Le risposte date (verificate con la release 0.21.1, codice 5):
+
+  | Domanda | Risposta |
+  | --- | --- |
+  | L'app raccoglie o condivide dati utente richiesti? | **Sì** |
+  | Dati cifrati in transito? | **Sì** (HTTPS) |
+  | Metodi di creazione dell'account | **La mia app non consente agli utenti di creare un account**; account creati fuori dall'app: **No** |
+  | Modo per chiedere l'eliminazione dei dati | **Sì**, URL `https://synapsedojo.com/privacy` |
+  | *Attività nelle app › Interazioni con l'app* | **Raccolti**, non condivisi, non trattati in modo temporaneo; **gli utenti possono scegliere** se attivarne la raccolta; scopi **Funzionalità dell'app** (classifica) e **Analisi** (statistiche di visita e conteggio anonimo settimanale di chi si allena) |
+
+  Le altre voci di *Tipi di dati* restano quelle della prima compilazione. Va aggiornato solo se dal dispositivo esce
+  un tipo di dato nuovo: il conteggio anonimo della 0.21 rientrava già in *Interazioni con l'app › Analisi*.
+- **Eliminazione dell'account**: per Google l'app non ha account (la classifica usa un identificativo anonimo), ma il
+  link `https://synapsedojo.com/privacy` spiega comunque come uscire dalla classifica e cancellarne i dati.
 
 > ⚠ **Da verificare:** i nomi esatti dei menu della Play Console cambiano spesso; se non trovi una voce, usa la barra di
 > ricerca della Play Console. Le norme di Google Play chiedono anche che un'app non sia «solo un sito web» con poche
 > funzioni: Synapse Dojo funziona offline e ha contenuti propri, ma è bene metterlo in evidenza nella scheda.
+
+### 10.5 Pubblicare un aggiornamento su Google Play
+
+L'app è nel **test chiuso (Alpha)**: prima versione pubblicata il 15 novembre 2026 (codice 4), aggiornamento 0.21.1
+(codice 5) inviato il 21 novembre 2026. Per ogni nuovo pacchetto ([§11](#11-aggiornare-lapp-in-seguito)):
+
+1. **Testa e rilascia › Test › Test chiuso › Alpha › Crea nuova release**, poi *Carica*
+   `android/app-release-bundle.aab`. Controlla che la riga del bundle mostri il nuovo codice e versione (per esempio
+   `5 (0.21.1)`), API 24 e successive e l'SDK target atteso.
+2. **Release precedente**: **non** includere la versione precedente, così i tester ricevono l'aggiornamento.
+3. **Nome della release**: va bene quello proposto, `codice (versione)`.
+4. **Note di rilascio**: un blocco per lingua tra tag, al massimo **500 caratteri** per lingua (lo stesso testo va bene
+   per AppGallery e Uptodown):
+
+   ```text
+   <en-US>
+   What's new in …
+   </en-US>
+   <it-IT>
+   Novità della versione …
+   </it-IT>
+   ```
+
+5. **Avanti**: nell'anteprima controlla che nessun dispositivo perda la compatibilità e che gli avvisi siano solo gialli
+   (quelli rossi bloccano). Implementazione **100%**, poi **Salva**.
+6. Se è uscito dal dispositivo un tipo di dato nuovo, aggiorna la **Sicurezza dei dati**: *Monitora e migliora › Norme e
+   programmi › Contenuti app*, scheda **Azione completata** (in *Attenzione richiesta* compare solo ciò che Google
+   chiede di nuovo), *Sicurezza dei dati › Gestisci*. Se *Salva* resta grigio non c'è nulla di cambiato.
+7. **Panoramica della pubblicazione** (icona del foglio con il pallino blu): invia le modifiche in revisione. Con la
+   **pubblicazione gestita disattivata** la release parte da sola appena Google la approva; l'esito arriva per email.
 
 ## 11. Aggiornare l'app in seguito
 
@@ -428,8 +465,8 @@ bubblewrap build
 `bubblewrap update` aumenta di 1 `appVersionCode` (Play rifiuta un pacchetto con un codice già usato), imposta il nome
 di versione indicato (usa quello di `package.json`) e rigenera il progetto; `npm run android:patch` vi rimette la
 schermata WebView; poi committa `android/twa-manifest.json` aggiornato. Carica il nuovo `app-release-bundle.aab`
-sulla traccia di Play che usi (test o produzione) e il nuovo `app-release-signed.apk` sugli altri store
-([§12.3](#123-altri-store-appgallery-uptodown)).
+sulla traccia di Play che usi (test o produzione, vedi [§10.5](#105-pubblicare-un-aggiornamento-su-google-play)) e il
+nuovo `app-release-signed.apk` sugli altri store ([§12.3](#123-altri-store-appgallery-uptodown)).
 
 Le modifiche manuali al progetto Android generato vengono cancellate da `bubblewrap update`: cambia sempre
 `android/twa-manifest.json` o i file in `scripts/android-webview/`, mai i file generati.
