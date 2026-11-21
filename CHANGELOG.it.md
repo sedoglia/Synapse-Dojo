@@ -14,6 +14,7 @@ I numeri di versione vengono da `package.json` e ogni data è il giorno del comm
 
 ### Corretto
 
+- **La guida dice quando i dati escono dal dispositivo** (`src/locales/*.ts`): la FAQ sui dati personali citava solo la classifica; ora elenca anche il trasferimento online e il conteggio anonimo settimanale, e la scheda Impostazioni dice che si può uscire dal conteggio. In tutte le 12 lingue.
 - **Base giuridica del conteggio anonimo più precisa** (`src/locales/*.ts`): l'informativa privacy indica lo scopo reale del legittimo interesse, cioè mostrare nella schermata iniziale quante persone si allenano e impedire che il numero venga falsato, invece di un generico «misurare l'uso del gioco». I termini seguono le norme di ogni lingua («base légale» in francese, «legítimo interesse» della LGPD in portoghese, «keberatan» in indonesiano) e in cinese e giapponese la sezione sui dati usa la punteggiatura a larghezza piena.
 
 ## [0.21.0] - 2026-11-21

@@ -14,6 +14,7 @@ Version numbers come from `package.json`, and each date is the day of the commit
 
 ### Fixed
 
+- **The guide says when data leaves the device** (`src/locales/*.ts`): the personal data FAQ mentioned only the leaderboard; it now also lists the online transfer and the anonymous weekly count, and the Settings card says you can leave the count. In all 12 languages.
 - **More precise legal basis for the anonymous count** (`src/locales/*.ts`): the privacy notice states the actual purpose of the legitimate interest, showing on the home screen how many people train and keeping that number from being inflated, instead of a generic "measuring how much the game is used". The terms follow each language's law ("base légale" in French, the LGPD's "legítimo interesse" in Portuguese, "keberatan" in Indonesian), and in Chinese and Japanese the data section uses full-width punctuation.
 
 ## [0.21.0] - 2026-11-21
