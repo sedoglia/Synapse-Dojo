@@ -1,10 +1,10 @@
 import {
   fail,
   json,
+  networkHash,
   newTransferCode,
   normalizeTransferCode,
   readBody,
-  sha256,
   type Handler,
 } from '../../server/board';
 
@@ -25,30 +25,6 @@ const HOUR_MS = 3_600_000;
 const MAX_PENDING_BYTES = 100_000_000;
 const UPLOADS_PER_HOUR = 5;
 
-/** Expands an IPv6 address to its eight groups, or returns null. */
-function ipv6Groups(ip: string): string[] | null {
-  const [head, tail, extra] = ip.split('::');
-  if (extra !== undefined) return null;
-  const left = head ? head.split(':') : [];
-  const right = tail ? tail.split(':') : [];
-  const fill = tail === undefined ? 0 : 8 - left.length - right.length;
-  if (fill < 0) return null;
-  const groups = [...left, ...Array<string>(fill).fill('0'), ...right];
-  return groups.length === 8 ? groups.map((g) => g.toLowerCase().replace(/^0+(?=.)/, '')) : null;
-}
-
-/**
- * The uploader's network, hashed with a server secret so the stored value can't be turned back into an address.
- * An IPv6 user gets a whole /64 block, so the limit counts that block rather than the single address.
- */
-async function networkHash(request: Request, secret = ''): Promise<string | null> {
-  const ip = request.headers.get('CF-Connecting-IP')?.trim();
-  if (!ip) return null;
-  const v6 = ip.includes(':') ? ipv6Groups(ip) : null;
-  const network = v6 ? `${v6.slice(0, 4).join(':')}::/64` : ip;
-  return (await sha256(`transfer|${secret}|${network}`)).slice(0, 32);
-}
-
 /**
  * Temporary save transfer for migrating progress across devices.
  * POST: Uploads temporary save data and returns an 8-character code formatted as XXXX-XXXX.
@@ -58,7 +34,7 @@ async function networkHash(request: Request, secret = ''): Promise<string | null
 export const onRequestPost: Handler = async ({ request, env }) => {
   // Limits first, so that a refused upload costs neither reading its body nor parsing it.
   const now = Date.now();
-  const ipHash = await networkHash(request, env.TURNSTILE_SECRET);
+  const ipHash = await networkHash(request, `transfer|${env.TURNSTILE_SECRET ?? ''}`);
   const usage = await env.DB.prepare(
     `SELECT (SELECT COALESCE(SUM(size), 0) FROM temp_transfers WHERE created > ?1) AS pending,
             (SELECT COUNT(*) FROM temp_transfers WHERE ip_hash = ?2 AND created > ?3) AS recent`,

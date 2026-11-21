@@ -7457,7 +7457,18 @@ html {
 }
 .xp-num,
 .streak,
+/* Community total under the chips: quiet, and taking no space until it has something to say. */
+.community {
+  margin: 8px 0 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.community:empty {
+  display: none;
+}
+
 .today-hook,
+.community,
 .plan-sub {
   font-variant-numeric: tabular-nums;
 }

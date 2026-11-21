@@ -55,6 +55,30 @@ export async function readBody(request: Request, max = MAX_BODY): Promise<Record
 const hex = (buf: ArrayBuffer) => [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, '0')).join('');
 export const sha256 = async (s: string) => hex(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s)));
 
+/** Expands an IPv6 address to its eight groups, or returns null. */
+function ipv6Groups(ip: string): string[] | null {
+  const [head, tail, extra] = ip.split('::');
+  if (extra !== undefined) return null;
+  const left = head ? head.split(':') : [];
+  const right = tail ? tail.split(':') : [];
+  const fill = tail === undefined ? 0 : 8 - left.length - right.length;
+  if (fill < 0) return null;
+  const groups = [...left, ...Array<string>(fill).fill('0'), ...right];
+  return groups.length === 8 ? groups.map((g) => g.toLowerCase().replace(/^0+(?=.)/, '')) : null;
+}
+
+/**
+ * The sender's network, hashed together with `salt` (which includes a server secret) so the stored value can't be
+ * turned back into an address. An IPv6 user gets a whole /64 block, so limits count that block, not one address.
+ */
+export async function networkHash(request: Request, salt: string): Promise<string | null> {
+  const ip = request.headers.get('CF-Connecting-IP')?.trim();
+  if (!ip) return null;
+  const v6 = ip.includes(':') ? ipv6Groups(ip) : null;
+  const network = v6 ? `${v6.slice(0, 4).join(':')}::/64` : ip;
+  return (await sha256(`${salt}|${network}`)).slice(0, 32);
+}
+
 export function randomSecret(): string {
   const bytes = crypto.getRandomValues(new Uint8Array(32));
   return btoa(String.fromCharCode(...bytes)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
@@ -99,6 +123,14 @@ export function isoWeek(date: Date): string {
   d.setUTCDate(d.getUTCDate() + 3 - ((d.getUTCDay() + 6) % 7)); // Thursday of the same week
   const week = Math.ceil(((d.getTime() - Date.UTC(d.getUTCFullYear(), 0, 1)) / DAY + 1) / 7);
   return `${d.getUTCFullYear()}-W${String(week).padStart(2, '0')}`;
+}
+
+/** The ISO week `weeks` weeks before or after a "YYYY-Www" week. */
+export function shiftWeek(week: string, weeks: number): string {
+  const [year, w] = week.split('-W').map(Number);
+  const jan4 = new Date(Date.UTC(year, 0, 4)); // always in week 1
+  const monday = jan4.getTime() - ((jan4.getUTCDay() + 6) % 7) * DAY;
+  return isoWeek(new Date(monday + ((w - 1 + weeks) * 7 + 3) * DAY));
 }
 
 /**
@@ -176,7 +208,7 @@ export async function cleanUp(db: D1Database, now = new Date()) {
   const transferCutoff = now.getTime() - KEEP_TRANSFER_DAYS * DAY;
   const idlePlayers =
     'SELECT id FROM players WHERE last_seen < ?1 OR (last_submit = 0 AND last_seen < ?2 AND id NOT IN (SELECT player_id FROM group_members))';
-  const [weeks, idleEntries, , bansIdle, players, , groups, bansOrphan, transfers] = await db.batch([
+  const [weeks, idleEntries, , bansIdle, players, , groups, bansOrphan, transfers, pings] = await db.batch([
     db.prepare('DELETE FROM entries WHERE week < ?').bind(oldWeek),
     db.prepare(`DELETE FROM entries WHERE player_id IN (${idlePlayers})`).bind(idle, idleGhost),
     db.prepare(`DELETE FROM group_members WHERE player_id IN (${idlePlayers})`).bind(idle, idleGhost),
@@ -186,6 +218,7 @@ export async function cleanUp(db: D1Database, now = new Date()) {
     db.prepare(DROP_EMPTY_GROUPS),
     db.prepare(DROP_ORPHAN_BANS),
     db.prepare('DELETE FROM temp_transfers WHERE created < ?').bind(transferCutoff),
+    db.prepare('DELETE FROM community_pings WHERE week < ?').bind(oldWeek),
   ]);
   return {
     entries: (weeks.meta.changes ?? 0) + (idleEntries.meta.changes ?? 0),
@@ -193,6 +226,7 @@ export async function cleanUp(db: D1Database, now = new Date()) {
     groups: groups.meta.changes ?? 0,
     bans: (bansIdle.meta.changes ?? 0) + (bansOrphan.meta.changes ?? 0),
     transfers: transfers.meta.changes ?? 0,
+    pings: pings.meta.changes ?? 0,
   };
 }
 

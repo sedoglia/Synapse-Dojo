@@ -29,6 +29,8 @@ export interface Settings {
   bigText: boolean;
   /** Offer to share a milestone when one is earned (sharing from Progress always stays available). */
   shareOffer: boolean;
+  /** Count this device, anonymously, in the weekly total of people who trained (shown on the home screen). */
+  community: boolean;
 }
 
 export interface LevelPoint {
@@ -75,6 +77,8 @@ export interface SaveData {
   boardInvite: string | null;
   /** The home-screen suggestion to join the leaderboard: hidden until `snoozed` (a date), or for good. */
   boardPrompt: { snoozed?: string; never?: boolean };
+  /** Last ISO week counted in the anonymous weekly total, so each week is counted once (also after a transfer). */
+  communityWeek: string | null;
   /** Version of the level scales this save uses. */
   balance: number;
   /** Exercises that were redesigned: scores from before this date don't count as personal bests. */
@@ -96,10 +100,11 @@ function defaults(): SaveData {
     badges: {},
     bestStreak: 0,
     counters: {},
-    settings: { lang, sound: true, relaxed: false, bigText: false, shareOffer: true },
+    settings: { lang, sound: true, relaxed: false, bigText: false, shareOffer: true, community: true },
     board: null,
     boardInvite: null,
     boardPrompt: {},
+    communityWeek: null,
     balance: BALANCE,
     bestFrom: {},
   };
@@ -183,7 +188,7 @@ function cleanSettings(saved: unknown): Partial<Settings> {
   const s = saved as Record<string, unknown>;
   const out: Partial<Settings> = {};
   if (typeof s.lang === 'string') out.lang = s.lang as Lang;
-  for (const k of ['sound', 'relaxed', 'bigText', 'shareOffer'] as const) if (typeof s[k] === 'boolean') out[k] = s[k];
+  for (const k of ['sound', 'relaxed', 'bigText', 'shareOffer', 'community'] as const) if (typeof s[k] === 'boolean') out[k] = s[k];
   return out;
 }
 
@@ -197,6 +202,7 @@ function withDefaults(old: Partial<SaveData>): SaveData {
     board: cleanBoard(saved.board),
     boardInvite: typeof saved.boardInvite === 'string' && /^[A-Z0-9]{10}$/.test(saved.boardInvite) ? saved.boardInvite : null,
     boardPrompt: cleanPrompt(saved.boardPrompt),
+    communityWeek: typeof saved.communityWeek === 'string' && /^\d{4}-W\d{2}$/.test(saved.communityWeek) ? saved.communityWeek : null,
   };
 }
 
