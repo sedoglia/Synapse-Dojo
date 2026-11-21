@@ -511,6 +511,9 @@ due pagine da compilare.
   l'inglese, `it-light` per l'italiano), gli stessi di Google Play.
 - **Category**: l'app è registrata come gioco, quindi il menu offre solo *Games*: **Games › Puzzle & casual ›
   Puzzle**, tipo **Casual game**. Il tipo (app o gioco) si sceglie alla creazione e non si cambia da qui.
+- **New features**: il testo delle novità di ogni aggiornamento (al massimo 1000 caratteri) si scrive **qui**, per
+  ogni lingua, sotto *Brief introduction*, e non nella bozza della versione. Viene pubblicato insieme alla versione
+  successiva. Lo stesso testo va bene per Google Play, che però accetta al massimo 500 caratteri.
 
 **Version information › Draft** (per ogni versione):
 
@@ -525,7 +528,7 @@ due pagine da compilare.
 | Privacy tags | *Collect personal data*: **Yes**; scenari **App functionality** e, dalla 0.21.1, **Analytics** per *App usage information* (il conteggio anonimo settimanale di chi si allena); voci: *Identifiers › User identifiers*, *Basic information › Age* e *Account information*, *App information › App settings* e *App usage information*. Le descrizioni le compila Huawei. |
 | AI function declaration | Not involved |
 | Copyright information | Vuoto (facoltativo). |
-| For reviewer | *Sign-in required* non spuntato; nelle note: nessun account, progressi solo sul dispositivo, classifica facoltativa e spenta di default, niente pubblicità né acquisti. |
+| For reviewer | *Sign-in required* non spuntato; nelle note (al massimo 300 caratteri): nessun account, progressi solo sul dispositivo, classifica facoltativa e spenta di default, conteggio anonimo settimanale (solo la data) disattivabile nelle Impostazioni, niente pubblicità né acquisti. |
 | Release time | Immediately once approved |
 
 Nel questionario dell'età le risposte sono tutte **No** (violenza, linguaggio, droghe, azzardo, acquisti, chat,
@@ -539,7 +542,8 @@ confronta le sezioni:
   l'identificativo anonimo della classifica.
 
 Poi *Save Draft* e *Submit*. L'esito arriva per email e compare in *Review comments*. Per le versioni successive:
-*Version/Update*, nuovo APK e le stesse risposte; la scheda *App information* si modifica solo se cambia qualcosa.
+*Version/Update*, nuovo APK e le stesse risposte; nella scheda *App information* si aggiornano *New features* in ogni
+lingua e, se cambia qualcosa, gli altri testi.
 
 ### 12.5 Provare il WebView
 
