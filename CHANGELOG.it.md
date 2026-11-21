@@ -6,11 +6,11 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
-## [Non rilasciato]
+## [0.21.2] - 2026-11-21
 
 ### Corretto
 
-- **L'informativa dice che i membri dei gruppi senza risultati restano 30 giorni** (`src/locales/*.ts`): la classifica cancella dopo 7 giorni chi non ha mai inviato risultati, ma non chi fa parte di un gruppo, che resta come gli altri fino a 30 giorni di inutilizzo; l'informativa citava solo i 7 giorni. In tutte le 12 lingue. La documentazione tecnica cita anche la pulizia dei conteggi anonimi settimanali.
+- **L'informativa dice che i membri dei gruppi senza risultati restano 30 giorni** (`src/locales/*.ts`): la classifica cancella dopo 7 giorni chi non ha mai inviato risultati, ma non chi fa parte di un gruppo, che resta come gli altri fino a 30 giorni di inutilizzo; l'informativa citava solo i 7 giorni. In tutte le 12 lingue. La documentazione tecnica cita anche la pulizia dei conteggi anonimi settimanali (#103).
 
 ## [0.21.1] - 2026-11-21
 
