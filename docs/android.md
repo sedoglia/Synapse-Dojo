@@ -73,7 +73,7 @@ Valori scelti in `android/twa-manifest.json`:
 | `backgroundColor` | `#f4f5fb` | Colore della schermata di avvio. |
 | `enableNotifications` | `false` | Il sito non usa notifiche, così l'app non chiede il permesso relativo. |
 | `fallbackType` | `webview` | Cosa fare quando nessun browser può aprire la TWA: mostrare il sito in un WebView invece che in una scheda del browser. Fa anche aggiungere a Bubblewrap il permesso `INTERNET`. |
-| `appVersion` / `appVersionCode` | `0.17.2` / `4` | Il nome di versione segue `package.json`; il codice è un numero intero che deve crescere a ogni pacchetto caricato su Play. |
+| `appVersion` / `appVersionCode` | `0.21.1` / `5` | Il nome di versione segue `package.json`; il codice è un numero intero che deve crescere a ogni pacchetto caricato su Play. |
 | `signingKey` | `./android.keystore`, alias `android` | La chiave di firma, che creerai tu (vedi §5). Il file è ignorato da git. |
 
 ## 3. Prerequisiti
@@ -418,7 +418,7 @@ Procedura per un nuovo pacchetto:
 ```powershell
 npm install -g @bubblewrap/cli          # Bubblewrap aggiornato
 cd android
-bubblewrap update --appVersionName=0.17.2
+bubblewrap update --appVersionName=0.21.1
 cd ..
 npm run android:patch
 cd android
@@ -496,7 +496,7 @@ incompleta.
 
 ### 12.4 Huawei AppGallery
 
-Prima versione inviata il 20 novembre 2026 (0.17.2, codice 4). In AppGallery Connect, scheda *Distribute*, ci sono
+Prima versione inviata il 20 novembre 2026 (0.17.2, codice 4) e pubblicata il 21 novembre; seconda versione 0.21.1, codice 5. In AppGallery Connect, scheda *Distribute*, ci sono
 due pagine da compilare.
 
 **App information** (scheda dello store, vale per tutte le versioni):
@@ -522,7 +522,7 @@ due pagine da compilare.
 | Payment / In-app purchases | Free; nessuna casella spuntata. |
 | Content rating | Questionario (*Set*): vedi sotto. Risultato **3+** ovunque (Brasile «AL»). |
 | Privacy statement | Privacy policy URL e Data subject right URL: `https://synapsedojo.com/privacy`. |
-| Privacy tags | *Collect personal data*: **Yes**; scenario solo **App functionality**; voci: *Identifiers › User identifiers*, *Basic information › Age* e *Account information*, *App information › App settings* e *App usage information*. Le descrizioni le compila Huawei. |
+| Privacy tags | *Collect personal data*: **Yes**; scenari **App functionality** e, dalla 0.21.1, **Analytics** per *App usage information* (il conteggio anonimo settimanale di chi si allena); voci: *Identifiers › User identifiers*, *Basic information › Age* e *Account information*, *App information › App settings* e *App usage information*. Le descrizioni le compila Huawei. |
 | AI function declaration | Not involved |
 | Copyright information | Vuoto (facoltativo). |
 | For reviewer | *Sign-in required* non spuntato; nelle note: nessun account, progressi solo sul dispositivo, classifica facoltativa e spenta di default, niente pubblicità né acquisti. |
