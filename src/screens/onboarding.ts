@@ -4,7 +4,7 @@ import { t, type I18nKey } from '../i18n';
 import { APP_NAME, GITHUB_REPO } from '../config';
 import { render, langPicker } from '../ui';
 import { DOMAINS } from '../exercises';
-import { showHome } from './home';
+import { communityLine, showHome } from './home';
 import { showPrivacy } from './privacy';
 import { showGuide } from './guide';
 import { showLicense } from './license';
@@ -89,6 +89,7 @@ export function showOnboarding() {
           h('span', { class: 'trust-chip' }, `✨ ${t('landing.badgeFree')}`),
           h('span', { class: 'trust-chip' }, `🔒 ${t('landing.badgePrivacy')}`),
         ),
+        communityLine(),
       ),
 
       // Primary Start / Join Card

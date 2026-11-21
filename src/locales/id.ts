@@ -1282,6 +1282,7 @@ const ui: Locale['ui'] = {
   'home.boardGap1': 'Kurang 1 poin untuk naik satu peringkat',
   'home.community': 'Minggu ini {n} orang berlatih',
   'home.communityLast': 'Minggu lalu {n} orang berlatih',
+  'home.communityJoin': 'Setiap minggu ada orang yang berlatih dengan Synapse Dojo: ayo ikut!',
   'settings.community': 'Hitung aku dalam total anonim mingguan',
   'settings.communityHint': 'Seminggu sekali game hanya memberi tahu server bahwa seseorang berlatih, tanpa nama atau hasilmu: dari situlah jumlah orang di layar utama.',
   'privacy.communityH': 'Hitungan anonim orang yang berlatih',

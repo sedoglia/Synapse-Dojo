@@ -1282,6 +1282,7 @@ const ui: Locale['ui'] = {
   'home.boardGap1': 'Noch 1 Punkt bis zum nächsten Platz',
   'home.community': 'Diese Woche haben {n} Personen trainiert',
   'home.communityLast': 'Letzte Woche haben {n} Personen trainiert',
+  'home.communityJoin': 'Jede Woche trainieren Menschen mit Synapse Dojo: Mach mit!',
   'settings.community': 'Mich in der anonymen Wochenzahl mitzählen',
   'settings.communityHint': 'Einmal pro Woche teilt das Spiel dem Server nur mit, dass jemand trainiert hat, ohne Namen oder Ergebnisse: Daraus entsteht die Personenzahl auf dem Startbildschirm.',
   'privacy.communityH': 'Anonyme Zählung, wer trainiert',

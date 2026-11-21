@@ -8,6 +8,10 @@ I numeri di versione vengono da `package.json` e ogni data è il giorno del comm
 
 ## [Non rilasciato]
 
+### Modificato
+
+- **Il conteggio di chi si allena si vede sempre, anche nella pagina di benvenuto** (`src/screens/home.ts`, `src/screens/onboarding.ts`, `src/board.ts`, `src/locales/*.ts`): finché nessuna delle due settimane arriva a 20 persone, al posto del numero compare «👥 Ogni settimana c'è chi si allena con Synapse Dojo: unisciti anche tu!», così un numero piccolo non scoraggia. La riga ora appare anche sotto le etichette della pagina di benvenuto, per chi arriva la prima volta. In tutte le 12 lingue.
+
 ### Corretto
 
 - **Base giuridica del conteggio anonimo più precisa** (`src/locales/*.ts`): l'informativa privacy indica lo scopo reale del legittimo interesse, cioè mostrare nella schermata iniziale quante persone si allenano e impedire che il numero venga falsato, invece di un generico «misurare l'uso del gioco». I termini seguono le norme di ogni lingua («base légale» in francese, «legítimo interesse» della LGPD in portoghese, «keberatan» in indonesiano) e in cinese e giapponese la sezione sui dati usa la punteggiatura a larghezza piena.

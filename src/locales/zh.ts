@@ -1282,6 +1282,7 @@ const ui: Locale['ui'] = {
   'home.boardGap1': '再得 1 分就能上升一名',
   'home.community': '本周有 {n} 人参加了训练',
   'home.communityLast': '上周有 {n} 人参加了训练',
+  'home.communityJoin': '每周都有人在用 Synapse Dojo 训练：一起来吧！',
   'settings.community': '将我计入每周匿名总数',
   'settings.communityHint': '游戏每周只告诉服务器一次“有人训练了”，不包含你的名字或成绩：主页上显示的人数就是这样得来的。',
   'privacy.communityH': '匿名统计训练人数',
