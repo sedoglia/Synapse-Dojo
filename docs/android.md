@@ -530,6 +530,20 @@ incompleta.
 - **Huawei AppGallery**: carica l'APK da AppGallery Connect, nella bozza della versione. L'app non usa servizi Google
   (GMS), quindi non servono gli HMS. La procedura completa è in [§12.4](#124-huawei-appgallery).
 - **Uptodown**: nella console sviluppatori, scheda *Files*, carica il nuovo APK e reinvia la scheda in revisione.
+  Versione 0.21.1 (codice 5) caricata il 21 novembre 2026. Per ogni versione:
+  - **Manage file licensing**:
+
+    | Campo | Valore |
+    | --- | --- |
+    | Distribution Model | Free |
+    | IAP, Subscription, Ads | No |
+    | License Type | **Source available** o **Other** (`PolyForm Noncommercial 1.0.0`) se il menu li offre, altrimenti **Proprietary**: la licenza non è open source, perché vieta l'uso commerciale |
+    | License Text URL | `https://synapsedojo.com/license` |
+    | Source Code URL | `https://github.com/sedoglia/Synapse-Dojo` |
+    | Notice URL | `https://github.com/sedoglia/Synapse-Dojo/blob/main/LICENSE` (contiene la riga «Required Notice» chiesta dalla licenza; facoltativo) |
+
+  - **New features for each language version**: il testo delle novità in *Italian* e in *English*, lo stesso di Google
+    Play e AppGallery.
 
 ### 12.4 Huawei AppGallery
 
