@@ -1,5 +1,5 @@
 import { h } from './dom';
-import { t, words, stories, graphemes, wordNear, type I18nKey } from './i18n';
+import { t, words, stories, graphemes, wordNear, upper, initial, type I18nKey } from './i18n';
 import { chiralShape, render as renderShape } from './exercises/rotate';
 import { renderBoard } from './exercises/towers';
 import { glyph, type Item } from './exercises/odd';
@@ -27,7 +27,7 @@ function miniGrid(size: number, lit: Record<number, string>, cls = 'ex-mini'): H
 const wordOf = (n: number) => words().find((w) => graphemes(w).length === n) ?? wordNear(words(), n);
 /** The letters of a word moved one step to the left: always different from the word, still readable as a puzzle. */
 const scramble = (w: string) => {
-  const c = graphemes(w.toUpperCase());
+  const c = graphemes(upper(w));
   return [...c.slice(1), c[0]].join(' ');
 };
 
@@ -159,12 +159,12 @@ const SCENES: Record<string, Scene> = {
   dots: () => row(tag('●●●●'), tag('vs'), tag('●●●●●●●'), arrow(), answer(t('ex.dots.right'))),
   anagrams: () => {
     const w = wordOf(5);
-    return row(h('span', { class: 'ex-seq' }, scramble(w)), arrow(), answer(w.toUpperCase()));
+    return row(h('span', { class: 'ex-seq' }, scramble(w)), arrow(), answer(upper(w)));
   },
   fluency: () => {
-    const yes = wordOf(4).toUpperCase();
-    const first = [...yes][0];
-    const no = (words().find((w) => !w.toUpperCase().startsWith(first)) ?? '').toUpperCase();
+    const yes = upper(wordOf(4));
+    const first = initial(yes);
+    const no = upper(words().find((w) => initial(w) !== first) ?? '');
     return row(tag(`${t('ex.fluency.targetLetter')} ${first}`), arrow(), tag(yes), answer('✓'), tag(no), answer('✗'));
   },
   matrix: () => row(miniGrid(9, { 0: '🔷' }), arrow(), tag('↻ 90°'), arrow(), miniGrid(9, { 2: '🔷' })),

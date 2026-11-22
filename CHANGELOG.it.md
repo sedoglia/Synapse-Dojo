@@ -6,6 +6,17 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [Non rilasciato]
+
+### Aggiunto
+
+- **13 nuove lingue, 25 in tutto** (`src/locales/*.ts`, `src/i18n.ts`, `src/textRules.ts`): bengalese, urdu, turco, vietnamita, coreano, persiano, cinese tradizionale, thai, polacco, ucraino, marathi, telugu e tamil, scelte in base ai parlanti non ancora coperti. Sono tradotti tutti i testi, le etichette e i badge, e ogni lingua ha parole, risposte degli anagrammi, brani di lettura, storie e soprannomi propri. Urdu e persiano sono impaginati da destra a sinistra; un telefono impostato sul cinese di Taiwan, Hong Kong o Macao parte in cinese tradizionale, e il cinese semplificato ora si chiama 简体中文. I giochi di parole seguono le lettere di ogni lingua: le maiuscole turche distinguono la i con e senza punto (İ/I), Word Sprint chiede le parole coreane per consonante iniziale (ㄱ, ㄴ…), quelle thai per la prima consonante dopo un'eventuale vocale iniziale e quelle vietnamite per la lettera senza tono, mentre gli anagrammi vietnamiti usano parole di una sillaba. `npm run check:anagrams` ora controlla anche Word Sprint, e i due controlli accettano i codici delle lingue da verificare.
+
+### Corretto
+
+- **Etichette rimaste in inglese** (`src/locales/*.ts`, `src/exercises/crackTheCode.ts`, `src/exercises/game2048.ts`, `src/screens/progress.ts`): il testo da condividere per il livello 6 del Tangram era in inglese in tutte le lingue, il nome del Tangram non era tradotto in arabo, hindi, giapponese, russo e cinese, e le etichette per i lettori di schermo delle frecce del 2048, delle rotelle di Decifra il Codice e dei filtri dei Progressi erano in inglese ovunque. `npm run check:i18n` ora segnala anche i testi rimasti in inglese. In cinese due badge citano l'esercizio giusto ed è corretto un refuso in una storia.
+- **Plurali dopo i numeri** (`src/i18n.ts`, `src/exercises/anagrams.ts`, `src/exercises/matrix.ts`, `src/exercises/tangram.ts`, `src/screens/play.ts`, `src/locales/*.ts`): le lettere degli Anagrammi, i blocchi della Matrice Spaziale, i pezzi del Tangram e il bonus di tempo mettevano un numero davanti a una parola fissa, sbagliato in russo, ucraino e polacco («5 буквы») e in arabo. Ora i testi possono avere forme plurali, `{n|one:# lettera|other:# lettere}`, scelte con le regole di ogni lingua («21 буква», «22 litery», «حرفان»), e `npm run check:i18n` controlla che ogni lingua dia tutte le forme che le servono.
+
 ## [0.22.0] - 2026-11-22
 
 ### Modificato

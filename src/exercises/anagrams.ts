@@ -1,6 +1,6 @@
 import { h, shuffle, flash, pick } from '../dom';
 import { sfx } from '../audio';
-import { t, num, words, anagramWords, graphemes, wordNear } from '../i18n';
+import { t, num, words, anagramWords, graphemes, wordNear, upper, meta } from '../i18n';
 import { getRecentHistory, saveRecentHistory } from '../storage';
 import { timeBar } from '../widgets';
 import { canon, isPlayable, scramble, solutionsOf } from './anagramRules';
@@ -43,7 +43,7 @@ export const anagrams: Exercise = {
   example: 'ex.anagrams.example',
   minutes: [1.5, 2.5],
   levels: { min: 1, max: MAX_LEVEL, start: 2 },
-  levelLabel: (l) => `${lenFor(l)} ${t('ex.anagrams.letters')} • ${num(limitFor(l) / 1000, 0)} s`,
+  levelLabel: (l) => `${t('ex.anagrams.letterCount', { n: lenFor(l) })} • ${num(limitFor(l) / 1000, 0)} s`,
 
   async run(ctx) {
     const trials = ctx.count(8, 6, 2);
@@ -58,8 +58,9 @@ export const anagrams: Exercise = {
 
     ctx.stage.append(status, bar.el, slotContainer, tileContainer, actions);
 
-    const solutions = solutionsOf(words(), anagramWords());
-    const puzzles = words().filter((w) => isPlayable(w, solutions, graphemes));
+    const lang = meta().speech;
+    const solutions = solutionsOf(words(), anagramWords(), lang);
+    const puzzles = words().filter((w) => isPlayable(w, solutions, graphemes, lang));
     const usedInSession = new Set<string>();
     let correct = 0;
 
@@ -73,18 +74,18 @@ export const anagrams: Exercise = {
       const bestDist = Math.min(...puzzles.map(dist));
       const pool = puzzles.filter((w) => dist(w) === bestDist);
 
-      let candidates = pool.filter((w) => !usedInSession.has(w.toUpperCase()) && !recentWords.has(w.toUpperCase()));
+      let candidates = pool.filter((w) => !usedInSession.has(upper(w)) && !recentWords.has(upper(w)));
       if (!candidates.length) {
         // If all words of this length were recently played, recycle within session constraints
-        candidates = pool.filter((w) => !usedInSession.has(w.toUpperCase()));
+        candidates = pool.filter((w) => !usedInSession.has(upper(w)));
       }
       const chosen = candidates.length ? pick(candidates) : (pool.length ? pick(pool) : wordNear(puzzles, targetLen));
-      const targetWord = chosen.toUpperCase();
+      const targetWord = upper(chosen);
       usedInSession.add(targetWord);
       saveRecentHistory(RECENT_KEY, targetWord, MAX_RECENT_MEMORY);
 
       const letters = graphemes(targetWord);
-      const scrambled = scramble(targetWord, solutions, graphemes, shuffle);
+      const scrambled = scramble(targetWord, solutions, graphemes, shuffle, lang);
 
       status.textContent = t('ex.anagrams.hint');
 
@@ -136,7 +137,7 @@ export const anagrams: Exercise = {
 
           if (selectedIndices.length === letters.length) {
             const candidate = selectedIndices.map((k) => scrambled[k]).join('');
-            if (solutions.has(canon(candidate))) {
+            if (solutions.has(canon(candidate, lang))) {
               done(candidate);
             } else {
               // Hypothesis testing: an invalid attempt does not instantly abort the trial.
@@ -173,8 +174,8 @@ export const anagrams: Exercise = {
           selectedIndices.length = 0;
           sfx.whoosh();
           const before = scrambled.join('');
-          let next = scramble(targetWord, solutions, graphemes, shuffle);
-          for (let tries = 0; next.join('') === before && tries < 8; tries++) next = scramble(targetWord, solutions, graphemes, shuffle);
+          let next = scramble(targetWord, solutions, graphemes, shuffle, lang);
+          for (let tries = 0; next.join('') === before && tries < 8; tries++) next = scramble(targetWord, solutions, graphemes, shuffle, lang);
           scrambled.splice(0, scrambled.length, ...next);
           flash(tileContainer, 'pop', 200);
           render();
@@ -205,9 +206,9 @@ export const anagrams: Exercise = {
             e.preventDefault();
             reshuffle();
           } else if (e.key.length === 1 && !e.ctrlKey && !e.metaKey && !e.altKey) {
-            const pressed = canon(e.key);
+            const pressed = canon(e.key, lang);
             const tileIdx = scrambled.findIndex(
-              (char, idx) => !selectedIndices.includes(idx) && canon(char) === pressed,
+              (char, idx) => !selectedIndices.includes(idx) && canon(char, lang) === pressed,
             );
             if (tileIdx !== -1) {
               e.preventDefault();
@@ -230,7 +231,7 @@ export const anagrams: Exercise = {
 
       bar.stop();
 
-      const isSolved = typedWord !== null && solutions.has(canon(typedWord));
+      const isSolved = typedWord !== null && solutions.has(canon(typedWord, lang));
       const ok = ctx.track(st, isSolved, {
         was: targetWord,
         note: typedWord === null ? t('common.timeout') : undefined,

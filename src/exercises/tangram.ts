@@ -121,7 +121,7 @@ export const tangram: Exercise = {
   example: 'ex.tangram.example',
   minutes: [1.5, 2.5],
   levels: { min: 1, max: 8, start: 2 },
-  levelLabel: (l) => `${piecesCountForLevel(l)} ${t('ex.tangram.pieces')}`,
+  levelLabel: (l) => t('ex.tangram.pieceCount', { n: piecesCountForLevel(l) }),
 
   async run(ctx) {
     // 3 schemes per match in training (2 in daily check, 1 in practice)
@@ -211,7 +211,7 @@ export const tangram: Exercise = {
       const infoBadge = h(
         'div',
         { class: 'tangram-badge' },
-        `${t('ex.tangram.level', { l: currentLevel })} · ${puzzle.slots.length} ${t('ex.tangram.pieces')} · ${puzzle.icon}`,
+        `${t('ex.tangram.level', { l: currentLevel })} · ${t('ex.tangram.pieceCount', { n: puzzle.slots.length })} · ${puzzle.icon}`,
         ...(hasDecoy ? [h('span', { class: 'tangram-decoy-badge' }, '⚠️ ' + t('ex.tangram.decoyWarning'))] : []),
       );
 
