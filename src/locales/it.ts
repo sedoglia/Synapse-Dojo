@@ -369,7 +369,6 @@ const ui: Locale['ui'] = {
   'result.sinceFirst': '{pct} rispetto alla prima volta',
   'result.newBadge': 'Nuovo traguardo!',
   'result.speedBonus': 'Bonus rapidità (+10 XP)',
-  'result.timeBonusPts': 'punti tempo',
   'level.player': 'Livello {n}',
   'level.up': 'Sei salito al livello {n}!',
   'home.next': 'Prossimo traguardo',
@@ -741,7 +740,6 @@ const ui: Locale['ui'] = {
   'ex.stories.filler': 'Pausa: pari o dispari? Rispondi con calma, non conta per il punteggio.',
   'ex.stories.detail': '{ok}/{n} dettagli corretti',
   'ex.stories.text': '{name} aveva con sé {item}. Si trovava {place} {time}, dove ha concluso la sua commissione.',
-  'ex.anagrams.letters': 'lettere',
   'ex.resources.task8': 'Girasoli',
   'ex.resources.task7': 'Pesce',
   'ex.resources.task6': 'Uova',
@@ -865,7 +863,6 @@ const ui: Locale['ui'] = {
   'ex.matrix.why': 'Richiede rotazione mentale e trasformazione di coordinate spaziali mentre tieni a mente una disposizione.',
   'ex.matrix.example': 'Memorizza i blocchi blu e tocca dove si trovano dopo aver ruotato la griglia',
   'ex.matrix.memorize': 'Memorizza i blocchi blu',
-  'ex.matrix.itemsToRemember': 'blocchi da memorizzare',
   'ex.matrix.same': 'Tocca le celle che erano illuminate',
   'ex.matrix.noRot': 'Stessa posizione (nessuna rotazione)',
   'ex.matrix.rot90': 'Ruota di 90° in senso orario: tocca dove si trovano ora i blocchi',
@@ -1038,7 +1035,6 @@ const ui: Locale['ui'] = {
   'ex.tangram.why': 'Rotazione mentale e scomposizione parte-tutto: capire come i pezzi compongono una sagoma, come nel Block Design dei test di intelligenza e negli studi di Shepard & Metzler (1971). Il momento in cui tutto si incastra è un piccolo «Aha!», un’esperienza che le persone descrivono come piacevole.',
   'ex.tangram.example': 'Analizza la sagoma nera misteriosa: deduci dove va ciascun pezzo e ruotalo per incastrarlo senza aiuti!',
   'ex.tangram.detail': '{ok}/{n} figure completate',
-  'ex.tangram.pieces': 'pezzi',
   'ex.tangram.level': 'Livello {l}',
   'ex.tangram.rotateLeft': 'Ruota ↺ (-45°)',
   'ex.tangram.rotateRight': 'Ruota ↻ (+45°)',
@@ -1424,6 +1420,10 @@ const ui: Locale['ui'] = {
   'progress.filterDomain': 'Filtra per abilità',
   'progress.filterStatus': 'Filtra per stato',
   'progress.filterBadges': 'Filtra i badge',
+  'ex.anagrams.letterCount': '{n|one:# lettera|many:# lettere|other:# lettere}',
+  'ex.matrix.toRemember': '{n|one:# blocco da memorizzare|many:# blocchi da memorizzare|other:# blocchi da memorizzare}',
+  'ex.tangram.pieceCount': '{n|one:# pezzo|many:# pezzi|other:# pezzi}',
+  'result.timeBonus': '{n|one:+# punto tempo|many:+# punti tempo|other:+# punti tempo}',
 };
 
 const words: string[] = [

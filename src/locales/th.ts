@@ -369,7 +369,6 @@ const ui: Locale['ui'] = {
   'result.sinceFirst': '{pct} จากครั้งแรก',
   'result.newBadge': 'ความสำเร็จใหม่!',
   'result.speedBonus': 'โบนัสความเร็ว (+10 XP)',
-  'result.timeBonusPts': 'คะแนนเวลา',
   'level.player': 'เลเวล {n}',
   'level.up': 'คุณขึ้นถึงเลเวล {n} แล้ว!',
   'home.next': 'ความสำเร็จถัดไป',
@@ -741,7 +740,6 @@ const ui: Locale['ui'] = {
   'ex.stories.filler': 'พักสักครู่: เลขคู่หรือคี่ ไม่ต้องรีบ ส่วนนี้ไม่นับคะแนน',
   'ex.stories.detail': 'รายละเอียดถูก {ok}/{n}',
   'ex.stories.text': '{name}มี{item}ติดตัวมาด้วย และอยู่{place} {time} เพื่อทำธุระของตัวเองให้เสร็จ',
-  'ex.anagrams.letters': 'ตัวอักษร',
   'ex.resources.task8': 'ทานตะวัน',
   'ex.resources.task7': 'ปลา',
   'ex.resources.task6': 'ไข่',
@@ -863,7 +861,6 @@ const ui: Locale['ui'] = {
   'ex.matrix.why': 'ต้องใช้การหมุนภาพในใจและการแปลงพิกัดในพื้นที่ ในขณะที่ต้องจำรูปแบบไว้ด้วย',
   'ex.matrix.example': 'จำรูปแบบไว้ แล้ววางตำแหน่งหลังจากหมุนภาพในใจ',
   'ex.matrix.memorize': 'จำบล็อกสีฟ้าไว้',
-  'ex.matrix.itemsToRemember': 'บล็อกที่ต้องจำ',
   'ex.matrix.same': 'แตะช่องที่เคยสว่าง',
   'ex.matrix.noRot': 'ตำแหน่งเดิม (ไม่หมุน)',
   'ex.matrix.rot90': 'หมุน 90° ตามเข็มนาฬิกา: แตะตำแหน่งที่บล็อกอยู่ตอนนี้',
@@ -1036,7 +1033,6 @@ const ui: Locale['ui'] = {
   'ex.tangram.why': 'การหมุนภาพในใจและการแยกส่วนย่อยจากภาพรวม: คิดว่าชิ้นส่วนประกอบกันเป็นเงาภาพได้อย่างไร เหมือนในแบบทดสอบย่อย Block Design ของแบบทดสอบเชาวน์ปัญญา และงานวิจัยของ Shepard & Metzler (1971) ช่วงเวลาที่ทุกอย่างลงตัวคือ “อ๋อ!” เล็ก ๆ ที่ผู้คนบอกว่ารู้สึกดี',
   'ex.tangram.example': 'วิเคราะห์เงาภาพทึบ: อนุมานว่าชิ้นไหนประกอบเป็นภาพ แล้วหมุนและใส่ให้พอดีโดยไม่มีเส้นนำ!',
   'ex.tangram.detail': 'ไขภาพได้ {ok}/{n}',
-  'ex.tangram.pieces': 'ชิ้น',
   'ex.tangram.level': 'ระดับ {l}',
   'ex.tangram.rotateLeft': 'หมุน ↺ (-45°)',
   'ex.tangram.rotateRight': 'หมุน ↻ (+45°)',
@@ -1419,6 +1415,10 @@ const ui: Locale['ui'] = {
   'progress.filterDomain': 'กรองตามด้าน',
   'progress.filterStatus': 'กรองตามสถานะ',
   'progress.filterBadges': 'กรองเหรียญรางวัล',
+  'ex.anagrams.letterCount': '{n|other:# ตัวอักษร}',
+  'ex.matrix.toRemember': '{n|other:บล็อกที่ต้องจำ # บล็อก}',
+  'ex.tangram.pieceCount': '{n|other:# ชิ้น}',
+  'result.timeBonus': '{n|other:+# คะแนนเวลา}',
 };
 
 const nicknames = {

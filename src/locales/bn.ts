@@ -369,7 +369,6 @@ const ui: Locale['ui'] = {
   'result.sinceFirst': 'প্রথমবারের তুলনায় {pct}',
   'result.newBadge': 'নতুন অর্জন!',
   'result.speedBonus': 'গতির বোনাস (+10 XP)',
-  'result.timeBonusPts': 'সময়ের পয়েন্ট',
   'level.player': 'লেভেল {n}',
   'level.up': 'আপনি লেভেল {n}-এ পৌঁছেছেন!',
   'home.next': 'পরবর্তী অর্জন',
@@ -741,7 +740,6 @@ const ui: Locale['ui'] = {
   'ex.stories.filler': 'বিরতি: জোড় না বিজোড়? ধীরে-সুস্থে উত্তর দিন, এটি স্কোরে গোনা হয় না।',
   'ex.stories.detail': '{ok}/{n}টি খুঁটিনাটি সঠিক',
   'ex.stories.text': '{name} সঙ্গে {item} নিয়ে {time} {place} ছিলেন এবং সেখানে নিজের কাজ শেষ করেছিলেন।',
-  'ex.anagrams.letters': 'অক্ষর',
   'ex.resources.task8': 'সূর্যমুখী',
   'ex.resources.task7': 'মাছ',
   'ex.resources.task6': 'ডিম',
@@ -863,7 +861,6 @@ const ui: Locale['ui'] = {
   'ex.matrix.why': 'একটি বিন্যাস মনে রেখে মানসিক ঘূর্ণন ও স্থানিক অবস্থানের রূপান্তর দাবি করে।',
   'ex.matrix.example': 'নকশাটি মুখস্থ করুন এবং মনে মনে ঘুরিয়ে উপাদানগুলো বসান',
   'ex.matrix.memorize': 'নীল ব্লকগুলো মুখস্থ করুন',
-  'ex.matrix.itemsToRemember': 'মনে রাখার ব্লক',
   'ex.matrix.same': 'যে ঘরগুলো জ্বলে উঠেছিল সেগুলো ট্যাপ করুন',
   'ex.matrix.noRot': 'একই অবস্থান (কোনো ঘূর্ণন নেই)',
   'ex.matrix.rot90': 'ঘড়ির কাঁটার দিকে 90° ঘোরান: ব্লকগুলো এখন যেখানে, সেখানে ট্যাপ করুন',
@@ -1036,7 +1033,6 @@ const ui: Locale['ui'] = {
   'ex.tangram.why': 'মানসিক ঘূর্ণন এবং অংশ থেকে সম্পূর্ণের বিশ্লেষণ: টুকরোগুলো মিলে কীভাবে একটি আকৃতি গড়ে তা বোঝা, যেমন বুদ্ধি পরীক্ষার ব্লক ডিজাইন (Block Design) উপ-পরীক্ষায় এবং Shepard ও Metzler (1971)-এর গবেষণায়। সবকিছু মিলে যাওয়ার মুহূর্তটি একটি ছোট্ট “আহা!”, যাকে মানুষ আনন্দদায়ক বলে বর্ণনা করেন।',
   'ex.tangram.example': 'ভরাট আকৃতিটি খুঁটিয়ে দেখুন: কোন টুকরোগুলো দিয়ে তৈরি তা অনুমান করুন, সহায়ক রেখা ছাড়াই ঘুরিয়ে বসিয়ে দিন!',
   'ex.tangram.detail': '{ok}/{n}টি আকৃতি সমাধান',
-  'ex.tangram.pieces': 'টুকরো',
   'ex.tangram.level': 'লেভেল {l}',
   'ex.tangram.rotateLeft': 'ঘোরান ↺ (-45°)',
   'ex.tangram.rotateRight': 'ঘোরান ↻ (+45°)',
@@ -1419,6 +1415,10 @@ const ui: Locale['ui'] = {
   'progress.filterDomain': 'ক্ষেত্র অনুযায়ী ছাঁকুন',
   'progress.filterStatus': 'অবস্থা অনুযায়ী ছাঁকুন',
   'progress.filterBadges': 'ব্যাজ ছাঁকুন',
+  'ex.anagrams.letterCount': '{n|other:# অক্ষর}',
+  'ex.matrix.toRemember': '{n|other:মনে রাখার # টি ব্লক}',
+  'ex.tangram.pieceCount': '{n|other:# টুকরো}',
+  'result.timeBonus': '{n|other:+# সময়ের পয়েন্ট}',
 };
 
 const nicknames = {

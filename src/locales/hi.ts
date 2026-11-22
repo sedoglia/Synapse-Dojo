@@ -10,7 +10,6 @@ const ui: Locale['ui'] = {
   'ex.tangram.why': 'मानसिक घुमाव और भाग-से-पूर्ण विश्लेषण: समझना कि टुकड़े मिलकर आकृति कैसे बनाते हैं, जैसे बुद्धि परीक्षणों के ब्लॉक डिज़ाइन उप-परीक्षण और Shepard व Metzler (1971) के अध्ययनों में। जब सब कुछ फिट हो जाता है, वह एक छोटा "अहा!" पल होता है, जिसे लोग सुखद बताते हैं।',
   'ex.tangram.example': 'काली आकृति को ध्यान से देखें: हर टुकड़े की जगह सोचें और बिना मदद घुमाकर बिठाएँ।',
   'ex.tangram.detail': '{ok}/{n} आकृतियाँ पूरी',
-  'ex.tangram.pieces': 'टुकड़े',
   'ex.tangram.level': 'स्तर {l}',
   'ex.tangram.rotateLeft': 'घुमाएँ ↺ (-45°)',
   'ex.tangram.rotateRight': 'घुमाएँ ↻ (+45°)',
@@ -848,7 +847,6 @@ const ui: Locale['ui'] = {
   'ex.stories.filler': 'विराम: सम या विषम? आराम से उत्तर दें, इसका स्कोर पर कोई असर नहीं पड़ता।',
   'ex.stories.detail': "{ok}/{n} विवरण सही",
   'ex.stories.text': '{name} के पास {item} था। वे {time} {place} थे, जहाँ उन्होंने अपना काम पूरा किया।',
-  'ex.anagrams.letters': 'अक्षर',
   'ex.resources.task8': 'सूरजमुखी',
   'ex.resources.task7': 'मछली',
   'ex.resources.task6': 'अंडे',
@@ -860,7 +858,6 @@ const ui: Locale['ui'] = {
   'ex.resources.confirm': 'ख़रीदें',
   'ex.resources.sell': '🧺 बाज़ार में बेचें',
   'ex.reaction.target': 'लक्ष्य: < {ms} ms',
-  'result.timeBonusPts': 'समय अंक',
   'result.speedBonus': 'गति बोनस (+10 XP)',
   'ex.flanker.name': "फ़्लैंकर टेस्ट",
   'ex.flanker.desc': "मध्य तीर पर ध्यान केंद्रित करें और आसपास के तीरों को अनदेखा करें",
@@ -952,7 +949,6 @@ const ui: Locale['ui'] = {
   'ex.matrix.why': 'किसी व्यवस्था को याद रखते हुए मानसिक घूर्णन और स्थानिक निर्देशांकों का रूपांतरण करना पड़ता है।',
   'ex.matrix.example': 'पैटर्न याद रखें और मानसिक घुमाव के बाद स्थिति चुनें',
   'ex.matrix.memorize': 'नीले ब्लॉकों को याद रखें',
-  'ex.matrix.itemsToRemember': 'याद रखने वाले ब्लॉक',
   'ex.matrix.same': 'उन खानों पर टैप करें जो प्रकाशित थे',
   'ex.matrix.noRot': 'समान स्थिति (कोई घुमाव नहीं)',
   'ex.matrix.rot90': '90° दक्षिणावर्त घुमाएं: वर्तमान स्थिति पर टैप करें',
@@ -1386,6 +1382,10 @@ const ui: Locale['ui'] = {
   'progress.filterDomain': 'क्षेत्र के अनुसार छाँटें',
   'progress.filterStatus': 'स्थिति के अनुसार छाँटें',
   'progress.filterBadges': 'बैज छाँटें',
+  'ex.anagrams.letterCount': '{n|other:# अक्षर}',
+  'ex.matrix.toRemember': '{n|other:याद रखने वाले # ब्लॉक}',
+  'ex.tangram.pieceCount': '{n|one:# टुकड़ा|other:# टुकड़े}',
+  'result.timeBonus': '{n|other:+# समय अंक}',
 };
 
 const words: string[] = [

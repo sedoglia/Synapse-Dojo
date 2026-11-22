@@ -369,7 +369,6 @@ const ui: Locale['ui'] = {
   'result.sinceFirst': 'உங்கள் முதல் முறையிலிருந்து {pct}',
   'result.newBadge': 'புதிய சாதனை!',
   'result.speedBonus': 'வேகப் போனஸ் (+10 XP)',
-  'result.timeBonusPts': 'நேரப் புள்ளிகள்',
   'level.player': 'நிலை {n}',
   'level.up': 'நீங்கள் நிலை {n}-ஐ அடைந்தீர்கள்!',
   'home.next': 'அடுத்த சாதனை',
@@ -741,7 +740,6 @@ const ui: Locale['ui'] = {
   'ex.stories.filler': 'இடைவேளை: இரட்டையா ஒற்றையா? நிதானமாகச் செய்யுங்கள், இது மதிப்பெண்ணில் சேராது.',
   'ex.stories.detail': '{ok}/{n} விவரங்கள் சரி',
   'ex.stories.text': '{name} {item} வைத்திருந்தார். {time} அவர் {place} இருந்தார்; அங்கே தன் வேலையை முடித்தார்.',
-  'ex.anagrams.letters': 'எழுத்துகள்',
   'ex.resources.task8': 'சூரியகாந்திப் பூக்கள்',
   'ex.resources.task7': 'மீன்',
   'ex.resources.task6': 'முட்டைகள்',
@@ -863,7 +861,6 @@ const ui: Locale['ui'] = {
   'ex.matrix.why': 'ஓர் அமைப்பை நினைவில் வைத்தபடியே மனச் சுழற்சியையும் இட ஆயத்தொலைவு மாற்றத்தையும் கோருகிறது.',
   'ex.matrix.example': 'அமைப்பை மனப்பாடம் செய்து, மனச் சுழற்சிக்குப் பின் கூறுகளை வையுங்கள்',
   'ex.matrix.memorize': 'நீலக் கட்டைகளை மனப்பாடம் செய்யுங்கள்',
-  'ex.matrix.itemsToRemember': 'நினைவில் கொள்ள வேண்டிய கட்டைகள்',
   'ex.matrix.same': 'ஒளிர்ந்த கட்டங்களைத் தட்டுங்கள்',
   'ex.matrix.noRot': 'அதே நிலை (சுழற்சி இல்லை)',
   'ex.matrix.rot90': 'கடிகாரத் திசையில் 90° சுழற்றுங்கள்: கட்டைகள் இப்போது இருக்கும் இடத்தைத் தட்டுங்கள்',
@@ -1036,7 +1033,6 @@ const ui: Locale['ui'] = {
   'ex.tangram.why': 'மனச் சுழற்சியும் பகுதி-முழுமைப் பிரிப்பும்: துண்டுகள் எப்படி ஒரு நிழலுருவத்தை உருவாக்குகின்றன என்று கண்டறிதல், நுண்ணறிவுச் சோதனைகளின் Block Design துணைச் சோதனையிலும் Shepard & Metzler (1971) ஆய்வுகளிலும் உள்ளதைப் போல. எல்லாம் பொருந்தும் கணம் ஒரு சிறிய "ஆஹா!", மக்கள் இனிமையானது என்று விவரிக்கும் அனுபவம்.',
   'ex.tangram.example': 'திடமான நிழலுருவத்தை ஆராயுங்கள்: எந்தத் துண்டுகள் அதை உருவாக்குகின்றன என்று உய்த்தறிந்து, வழிகாட்டும் கோடுகள் இன்றிச் சுழற்றிப் பொருத்துங்கள்!',
   'ex.tangram.detail': '{ok}/{n} உருவங்கள் தீர்க்கப்பட்டன',
-  'ex.tangram.pieces': 'துண்டுகள்',
   'ex.tangram.level': 'நிலை {l}',
   'ex.tangram.rotateLeft': 'சுழற்று ↺ (-45°)',
   'ex.tangram.rotateRight': 'சுழற்று ↻ (+45°)',
@@ -1419,6 +1415,10 @@ const ui: Locale['ui'] = {
   'progress.filterDomain': 'திறன் பகுதி வாரியாக வடிகட்டு',
   'progress.filterStatus': 'நிலை வாரியாக வடிகட்டு',
   'progress.filterBadges': 'பதக்கங்களை வடிகட்டு',
+  'ex.anagrams.letterCount': '{n|one:# எழுத்து|other:# எழுத்துகள்}',
+  'ex.matrix.toRemember': '{n|one:நினைவில் கொள்ள # கட்டம்|other:நினைவில் கொள்ள # கட்டங்கள்}',
+  'ex.tangram.pieceCount': '{n|one:# துண்டு|other:# துண்டுகள்}',
+  'result.timeBonus': '{n|one:+# நேரப் புள்ளி|other:+# நேரப் புள்ளிகள்}',
 };
 
 const nicknames = {

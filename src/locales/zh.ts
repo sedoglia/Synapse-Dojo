@@ -10,7 +10,6 @@ const ui: Locale['ui'] = {
   'ex.tangram.why': '心理旋转与部分—整体分解:弄清楚碎片如何拼成剪影,类似智力测验中的积木图案(Block Design)和 Shepard 与 Metzler(1971)的研究。一切严丝合缝的那一刻是一个小小的“啊哈!”,人们形容这种体验令人愉悦。',
   'ex.tangram.example': '观察黑色剪影：推断每块拼块的位置，旋转后不靠提示拼进去。',
   'ex.tangram.detail': '完成 {ok}/{n} 个图形',
-  'ex.tangram.pieces': '块',
   'ex.tangram.level': '第 {l} 级',
   'ex.tangram.rotateLeft': '旋转 ↺（-45°）',
   'ex.tangram.rotateRight': '旋转 ↻（+45°）',
@@ -848,7 +847,6 @@ const ui: Locale['ui'] = {
   'ex.stories.filler': '暂停：偶数还是奇数？慢慢回答，这不计入分数。',
   'ex.stories.detail': "细节正确 {ok}/{n}",
   'ex.stories.text': '{name} 随身携带着 {item}。当时位于 {place} {time}，并在那里完成了事项。',
-  'ex.anagrams.letters': '字母',
   'ex.resources.task8': '向日葵',
   'ex.resources.task7': '鱼',
   'ex.resources.task6': '鸡蛋',
@@ -860,7 +858,6 @@ const ui: Locale['ui'] = {
   'ex.resources.confirm': '购买',
   'ex.resources.sell': '🧺 在集市出售',
   'ex.reaction.target': '目标: < {ms} 毫秒',
-  'result.timeBonusPts': '时间分',
   'result.speedBonus': '速度奖励 (+10 XP)',
   'ex.flanker.name': "侧抑测试 (Flanker)",
   'ex.flanker.desc': "关注中心箭头方向，忽略两侧干扰箭头",
@@ -952,7 +949,6 @@ const ui: Locale['ui'] = {
   'ex.matrix.why': '在记住布局的同时，需要进行心理旋转和空间坐标转换。',
   'ex.matrix.example': '记住图案并在心理旋转后放置方块',
   'ex.matrix.memorize': '记住蓝色方块',
-  'ex.matrix.itemsToRemember': '需要记忆的方块',
   'ex.matrix.same': '点击之前点亮的格子',
   'ex.matrix.noRot': '原位置（无旋转）',
   'ex.matrix.rot90': '顺时针旋转90°：点击方块当前所在位置',
@@ -1386,6 +1382,10 @@ const ui: Locale['ui'] = {
   'progress.filterDomain': '按领域筛选',
   'progress.filterStatus': '按状态筛选',
   'progress.filterBadges': '筛选徽章',
+  'ex.anagrams.letterCount': '{n|other:#个字}',
+  'ex.matrix.toRemember': '{n|other:需要记忆 # 个方块}',
+  'ex.tangram.pieceCount': '{n|other:#块}',
+  'result.timeBonus': '{n|other:+# 时间分}',
 };
 
 const words: string[] = [

@@ -10,7 +10,6 @@ const ui: Locale['ui'] = {
   'ex.tangram.why': 'Мысленное вращение и разбиение целого на части: понять, как детали складываются в силуэт, как в субтесте «Кубики Коса» (Block Design) тестов интеллекта и в исследованиях Шепарда и Метцлер (1971). Момент, когда всё сходится, — маленькое «Ага!», которое люди описывают как приятное.',
   'ex.tangram.example': 'Изучи чёрный силуэт: пойми, куда идёт каждая деталь, и поверни её, чтобы вставить без подсказок.',
   'ex.tangram.detail': 'Собрано фигур: {ok}/{n}',
-  'ex.tangram.pieces': 'деталей',
   'ex.tangram.level': 'Уровень {l}',
   'ex.tangram.rotateLeft': 'Повернуть ↺ (-45°)',
   'ex.tangram.rotateRight': 'Повернуть ↻ (+45°)',
@@ -848,7 +847,6 @@ const ui: Locale['ui'] = {
   'ex.stories.filler': 'Пауза: чётное или нечётное? Отвечайте спокойно, на результат это не влияет.',
   'ex.stories.detail': "{ok}/{n} деталей верно",
   'ex.stories.text': '{name} имел(а) при себе {item}. Находился(лась) {place} {time}, где завершил(а) дела.',
-  'ex.anagrams.letters': 'букв',
   'ex.resources.task8': 'Подсолнухи',
   'ex.resources.task7': 'Рыба',
   'ex.resources.task6': 'Яйца',
@@ -860,7 +858,6 @@ const ui: Locale['ui'] = {
   'ex.resources.confirm': 'Купить',
   'ex.resources.sell': '🧺 Продать на рынке',
   'ex.reaction.target': 'Цель: < {ms} мс',
-  'result.timeBonusPts': 'очк. времени',
   'result.speedBonus': 'Бонус скорости (+10 XP)',
   'ex.flanker.name': "Тест Фланкера",
   'ex.flanker.desc': "Сосредоточьтесь на центральной стрелке и игнорируйте боковые стрелки",
@@ -952,7 +949,6 @@ const ui: Locale['ui'] = {
   'ex.matrix.why': 'Требует мысленного вращения и преобразования пространственных координат, пока вы удерживаете расположение в памяти.',
   'ex.matrix.example': 'Запомните узор и расставьте элементы после мысленного вращения',
   'ex.matrix.memorize': 'Запомните синие блоки',
-  'ex.matrix.itemsToRemember': 'блоков для запоминания',
   'ex.matrix.same': 'Нажмите на клетки, которые были подсвечены',
   'ex.matrix.noRot': 'Исходное положение (без вращения)',
   'ex.matrix.rot90': 'Поверните на 90° по часовой стрелке: укажите новые позиции',
@@ -1386,6 +1382,10 @@ const ui: Locale['ui'] = {
   'progress.filterDomain': 'Фильтр по области',
   'progress.filterStatus': 'Фильтр по статусу',
   'progress.filterBadges': 'Фильтр наград',
+  'ex.anagrams.letterCount': '{n|one:# буква|few:# буквы|many:# букв|other:# буквы}',
+  'ex.matrix.toRemember': '{n|one:# блок для запоминания|few:# блока для запоминания|many:# блоков для запоминания|other:# блока для запоминания}',
+  'ex.tangram.pieceCount': '{n|one:# деталь|few:# детали|many:# деталей|other:# детали}',
+  'result.timeBonus': '{n|one:+# очко за время|few:+# очка за время|many:+# очков за время|other:+# очка за время}',
 };
 
 const words: string[] = [

@@ -10,7 +10,6 @@ const ui: Locale['ui'] = {
   'ex.tangram.why': 'التدوير الذهني وتفكيك الكل إلى أجزاء: فهم كيف تكوّن القطع الشكل، كما في اختبار تصميم المكعبات (Block Design) في اختبارات الذكاء وفي دراسات Shepard وMetzler (1971). لحظة اكتمال الشكل هي "آها!" صغيرة، تجربة يصفها الناس بأنها ممتعة.',
   'ex.tangram.example': 'تأمّل الصورة الظلية السوداء: استنتج مكان كل قطعة وأدرها لتثبّتها دون مساعدة.',
   'ex.tangram.detail': '{ok}/{n} أشكال مكتملة',
-  'ex.tangram.pieces': 'قطع',
   'ex.tangram.level': 'المستوى {l}',
   'ex.tangram.rotateLeft': 'تدوير ↺ (-45°)',
   'ex.tangram.rotateRight': 'تدوير ↻ (+45°)',
@@ -848,7 +847,6 @@ const ui: Locale['ui'] = {
   'ex.stories.filler': 'استراحة: زوجي أم فردي؟ أجب بهدوء، فهذا لا يُحتسب في النتيجة.',
   'ex.stories.detail': "{ok}/{n} تفاصيل صحيحة",
   'ex.stories.text': 'كان {name} يحمل {item}. وكان موجوداً {place} {time}، حيث أنهى مهمته.',
-  'ex.anagrams.letters': 'حروف',
   'ex.resources.task8': 'عبّاد الشمس',
   'ex.resources.task7': 'سمك',
   'ex.resources.task6': 'بيض',
@@ -860,7 +858,6 @@ const ui: Locale['ui'] = {
   'ex.resources.confirm': 'اشترِ',
   'ex.resources.sell': '🧺 بيع في السوق',
   'ex.reaction.target': 'الهدف: < {ms} مللي ثانية',
-  'result.timeBonusPts': 'نقاط الوقت',
   'result.speedBonus': 'مكافأة السرعة (+10 XP)',
   'ex.flanker.name': "اختبار فلانكر",
   'ex.flanker.desc': "ركز على السهم الأوسط وتجاهل الأسهم الجانبية المشتتة",
@@ -952,7 +949,6 @@ const ui: Locale['ui'] = {
   'ex.matrix.why': 'يتطلب التدوير الذهني وتحويل الإحداثيات المكانية مع الاحتفاظ بترتيب ما في الذاكرة.',
   'ex.matrix.example': 'احفظ النمط وضع العناصر بعد التدوير الذهني',
   'ex.matrix.memorize': 'احفظ الكتل الزرقاء',
-  'ex.matrix.itemsToRemember': 'كتل للحفظ',
   'ex.matrix.same': 'اضغط على الخلايا التي كانت مضاءة',
   'ex.matrix.noRot': 'نفس الموضع (بدون تدوير)',
   'ex.matrix.rot90': 'تدوير 90 درجة مع عقارب الساعة: اضغط على المواضع الحالية',
@@ -1386,6 +1382,10 @@ const ui: Locale['ui'] = {
   'progress.filterDomain': 'تصفية حسب المجال',
   'progress.filterStatus': 'تصفية حسب الحالة',
   'progress.filterBadges': 'تصفية الشارات',
+  'ex.anagrams.letterCount': '{n|zero:# حرف|one:حرف واحد|two:حرفان|few:# أحرف|many:# حرفًا|other:# حرف}',
+  'ex.matrix.toRemember': '{n|zero:# كتلة للحفظ|one:كتلة واحدة للحفظ|two:كتلتان للحفظ|few:# كتل للحفظ|many:# كتلة للحفظ|other:# كتلة للحفظ}',
+  'ex.tangram.pieceCount': '{n|zero:# قطعة|one:قطعة واحدة|two:قطعتان|few:# قطع|many:# قطعة|other:# قطعة}',
+  'result.timeBonus': '{n|zero:+# نقطة وقت|one:+# نقطة وقت|two:+# نقطة وقت|few:+# نقاط وقت|many:+# نقطة وقت|other:+# نقطة وقت}',
 };
 
 const words: string[] = [

@@ -90,7 +90,7 @@ async function run() {
 
   // 3. Parameter / Placeholder consistency
   console.log('\n--- 2. Parameter / Placeholder Consistency ---');
-  const paramRegex = /\{(\w+)\}/g;
+  const paramRegex = /\{(\w+)(?:\|[^{}]*)?\}/g; // {name} and plural {n|one:…|other:…}
   let paramMismatches = 0;
 
   for (const key of enKeys) {
@@ -114,6 +114,28 @@ async function run() {
         if (missingParams.length > 0) console.log(`    Missing in ${lang}: ${missingParams.join(', ')}`);
         if (extraParams.length > 0) console.log(`    Extra in ${lang}: ${extraParams.join(', ')}`);
         paramMismatches++;
+      }
+    }
+  }
+  // Plural forms {n|cat:…}: known categories only, `other` always, every '#' inside an arm, and when a language
+  // varies the form it must give every category its plural rules have (else Russian "5 буквы" would slip through).
+  const SPEECH = { en: 'en', 'zh-TW': 'zh-TW' };
+  for (const lang of LANGS) {
+    const cats = new Intl.PluralRules(SPEECH[lang] ?? lang).resolvedOptions().pluralCategories;
+    for (const [key, val] of Object.entries(locales[lang].ui)) {
+      for (const m of val.matchAll(/\{(\w+)\|([^{}]*)\}/g)) {
+        const arms = m[2].split('|').map((a) => [a.slice(0, a.indexOf(':')), a.slice(a.indexOf(':') + 1)]);
+        const names = arms.map(([c]) => c);
+        const bad = names.filter((c) => !cats.includes(c));
+        const problem =
+          bad.length ? `unknown categories ${bad.join(',')}` :
+          !names.includes('other') ? 'no "other" form' :
+          arms.some(([c, f]) => !f.includes('#') && !['zero', 'one', 'two'].includes(c)) ? 'a form without #' :
+          arms.length > 1 && cats.some((c) => !names.includes(c)) ? `missing ${cats.filter((c) => !names.includes(c)).join(',')}` : '';
+        if (problem) {
+          console.log(`[!] Plural in ${lang} "${key}": ${problem} (${m[0]})`);
+          paramMismatches++;
+        }
       }
     }
   }

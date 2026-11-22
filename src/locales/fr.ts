@@ -10,7 +10,6 @@ const ui: Locale['ui'] = {
   'ex.tangram.why': 'Rotation mentale et décomposition partie-tout : comprendre comment les pièces forment une silhouette, comme dans le subtest Cubes (Block Design) des tests d’intelligence et dans les études de Shepard et Metzler (1971). Le moment où tout s’emboîte est un petit « Aha ! », une expérience que l’on décrit comme agréable.',
   'ex.tangram.example': 'Analyse la silhouette noire : déduis où va chaque pièce et fais-la pivoter pour l’emboîter sans aide.',
   'ex.tangram.detail': '{ok}/{n} figures terminées',
-  'ex.tangram.pieces': 'pièces',
   'ex.tangram.level': 'Niveau {l}',
   'ex.tangram.rotateLeft': 'Pivoter ↺ (-45°)',
   'ex.tangram.rotateRight': 'Pivoter ↻ (+45°)',
@@ -848,7 +847,6 @@ const ui: Locale['ui'] = {
   'ex.stories.filler': 'Pause : pair ou impair ? Prends ton temps, cela ne compte pas dans le score.',
   'ex.stories.detail': "{ok}/{n} détails corrects",
   'ex.stories.text': '{name} portait {item}. Cette personne se trouvait {place} {time}, où elle a terminé sa mission.',
-  'ex.anagrams.letters': 'lettres',
   'ex.resources.task8': 'Tournesols',
   'ex.resources.task7': 'Poisson',
   'ex.resources.task6': 'Œufs',
@@ -860,7 +858,6 @@ const ui: Locale['ui'] = {
   'ex.resources.confirm': 'Acheter',
   'ex.resources.sell': '🧺 Vendre au marché',
   'ex.reaction.target': 'Objectif : < {ms} ms',
-  'result.timeBonusPts': 'pts temps',
   'result.speedBonus': 'Bonus de vitesse (+10 XP)',
   'ex.flanker.name': "Test de Flanker",
   'ex.flanker.desc': "Concentrez-vous sur la flèche centrale et ignorez les flèches latérales",
@@ -952,7 +949,6 @@ const ui: Locale['ui'] = {
   'ex.matrix.why': 'Demande une rotation mentale et une transformation de coordonnées spatiales tout en gardant une disposition en mémoire.',
   'ex.matrix.example': 'Mémorisez le motif et replacez les blocs après rotation mentale',
   'ex.matrix.memorize': 'Mémorisez les blocs bleus',
-  'ex.matrix.itemsToRemember': 'blocs à mémoriser',
   'ex.matrix.same': 'Touchez les cases qui étaient illuminées',
   'ex.matrix.noRot': 'Même position (sans rotation)',
   'ex.matrix.rot90': 'Tournez de 90° dans le sens horaire : touchez les nouvelles positions',
@@ -1386,6 +1382,10 @@ const ui: Locale['ui'] = {
   'progress.filterDomain': 'Filtrer par domaine',
   'progress.filterStatus': 'Filtrer par état',
   'progress.filterBadges': 'Filtrer les badges',
+  'ex.anagrams.letterCount': '{n|one:# lettre|many:# lettres|other:# lettres}',
+  'ex.matrix.toRemember': '{n|one:# bloc à mémoriser|many:# blocs à mémoriser|other:# blocs à mémoriser}',
+  'ex.tangram.pieceCount': '{n|one:# pièce|many:# pièces|other:# pièces}',
+  'result.timeBonus': '{n|one:+# pt temps|many:+# pts temps|other:+# pts temps}',
 };
 
 const words: string[] = [

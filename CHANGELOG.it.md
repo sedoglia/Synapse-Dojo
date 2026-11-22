@@ -15,6 +15,7 @@ I numeri di versione vengono da `package.json` e ogni data è il giorno del comm
 ### Corretto
 
 - **Etichette rimaste in inglese** (`src/locales/*.ts`, `src/exercises/crackTheCode.ts`, `src/exercises/game2048.ts`, `src/screens/progress.ts`): il testo da condividere per il livello 6 del Tangram era in inglese in tutte le lingue, il nome del Tangram non era tradotto in arabo, hindi, giapponese, russo e cinese, e le etichette per i lettori di schermo delle frecce del 2048, delle rotelle di Decifra il Codice e dei filtri dei Progressi erano in inglese ovunque. `npm run check:i18n` ora segnala anche i testi rimasti in inglese. In cinese due badge citano l'esercizio giusto ed è corretto un refuso in una storia.
+- **Plurali dopo i numeri** (`src/i18n.ts`, `src/exercises/anagrams.ts`, `src/exercises/matrix.ts`, `src/exercises/tangram.ts`, `src/screens/play.ts`, `src/locales/*.ts`): le lettere degli Anagrammi, i blocchi della Matrice Spaziale, i pezzi del Tangram e il bonus di tempo mettevano un numero davanti a una parola fissa, sbagliato in russo, ucraino e polacco («5 буквы») e in arabo. Ora i testi possono avere forme plurali, `{n|one:# lettera|other:# lettere}`, scelte con le regole di ogni lingua («21 буква», «22 litery», «حرفان»), e `npm run check:i18n` controlla che ogni lingua dia tutte le forme che le servono.
 
 ## [0.22.0] - 2026-11-22
 

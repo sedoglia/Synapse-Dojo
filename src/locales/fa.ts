@@ -369,7 +369,6 @@ const ui: Locale['ui'] = {
   'result.sinceFirst': '{pct} نسبت به بار اول',
   'result.newBadge': 'دستاورد تازه!',
   'result.speedBonus': 'جایزهٔ سرعت (+10 XP)',
-  'result.timeBonusPts': 'امتیاز زمان',
   'level.player': 'سطح {n}',
   'level.up': 'به سطح {n} رسیدید!',
   'home.next': 'دستاورد بعدی',
@@ -741,7 +740,6 @@ const ui: Locale['ui'] = {
   'ex.stories.filler': 'مکث: زوج یا فرد؟ عجله نکنید، این در امتیاز شما حساب نمی‌شود.',
   'ex.stories.detail': '{ok}/{n} جزئیات درست',
   'ex.stories.text': '{name} {item} همراه داشت. {time} {place} بود و کارش را آنجا انجام داد.',
-  'ex.anagrams.letters': 'حرف',
   'ex.resources.task8': 'آفتابگردان',
   'ex.resources.task7': 'ماهی',
   'ex.resources.task6': 'تخم‌مرغ',
@@ -863,7 +861,6 @@ const ui: Locale['ui'] = {
   'ex.matrix.why': 'چرخش ذهنی و تبدیل مختصات فضایی را می‌طلبد، در حالی که یک چیدمان را در حافظه نگه می‌دارید.',
   'ex.matrix.example': 'الگو را به خاطر بسپارید و پس از چرخش ذهنی خانه‌ها را سر جایشان بگذارید',
   'ex.matrix.memorize': 'خانه‌های آبی را به خاطر بسپارید',
-  'ex.matrix.itemsToRemember': 'خانه برای به خاطر سپردن',
   'ex.matrix.same': 'روی خانه‌هایی که روشن بودند بزنید',
   'ex.matrix.noRot': 'همان جا (بدون چرخش)',
   'ex.matrix.rot90': '90° در جهت عقربه‌های ساعت بچرخانید: جایی را بزنید که خانه‌ها اکنون هستند',
@@ -1036,7 +1033,6 @@ const ui: Locale['ui'] = {
   'ex.tangram.why': 'چرخش ذهنی و تجزیهٔ جزء و کل: پی بردن به اینکه قطعه‌ها چگونه یک سایه‌نما را می‌سازند، مانند خرده‌آزمون طراحی با مکعب‌ها (Block Design) در آزمون‌های هوش و پژوهش‌های Shepard & Metzler (1971). لحظه‌ای که همه‌چیز جا می‌افتد یک «آها!» کوچک است، تجربه‌ای که مردم آن را دلپذیر توصیف می‌کنند.',
   'ex.tangram.example': 'سایه‌نمای توپُر را بررسی کنید: استنتاج کنید کدام قطعه‌ها آن را می‌سازند، بدون خطوط راهنما آن‌ها را بچرخانید و جا بیندازید!',
   'ex.tangram.detail': '{ok}/{n} شکل حل شد',
-  'ex.tangram.pieces': 'قطعه',
   'ex.tangram.level': 'سطح {l}',
   'ex.tangram.rotateLeft': 'چرخش ↺ (-45°)',
   'ex.tangram.rotateRight': 'چرخش ↻ (+45°)',
@@ -1419,6 +1415,10 @@ const ui: Locale['ui'] = {
   'progress.filterDomain': 'پالایش بر اساس حوزه',
   'progress.filterStatus': 'پالایش بر اساس وضعیت',
   'progress.filterBadges': 'پالایش نشان‌ها',
+  'ex.anagrams.letterCount': '{n|other:# حرف}',
+  'ex.matrix.toRemember': '{n|other:# خانه برای به خاطر سپردن}',
+  'ex.tangram.pieceCount': '{n|other:# قطعه}',
+  'result.timeBonus': '{n|other:+# امتیاز زمان}',
 };
 
 const nicknames = {

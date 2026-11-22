@@ -75,7 +75,7 @@ export const matrix: Exercise = {
       // --- STUDY PHASE ---
       statusTitle.textContent = t('ex.matrix.memorize');
       badge.className = 'matrix-badge';
-      badge.textContent = `🔷 ${count} ${t('ex.matrix.itemsToRemember')}`;
+      badge.textContent = `🔷 ${t('ex.matrix.toRemember', { n: count })}`;
       timerBar.style.display = 'block';
       timerFill.style.transition = 'none';
       timerFill.style.width = '100%';

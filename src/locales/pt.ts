@@ -10,7 +10,6 @@ const ui: Locale['ui'] = {
   'ex.tangram.why': 'Rotação mental e decomposição parte-todo: entender como as peças formam uma silhueta, como no subteste Cubos (Block Design) dos testes de inteligência e nos estudos de Shepard e Metzler (1971). O momento em que tudo se encaixa é um pequeno «Ahá!», uma experiência que as pessoas descrevem como agradável.',
   'ex.tangram.example': 'Analise a silhueta preta: deduza onde vai cada peça e gire-a para encaixar sem ajuda.',
   'ex.tangram.detail': '{ok}/{n} figuras concluídas',
-  'ex.tangram.pieces': 'peças',
   'ex.tangram.level': 'Nível {l}',
   'ex.tangram.rotateLeft': 'Girar ↺ (-45°)',
   'ex.tangram.rotateRight': 'Girar ↻ (+45°)',
@@ -848,7 +847,6 @@ const ui: Locale['ui'] = {
   'ex.stories.filler': 'Pausa: par ou ímpar? Responda com calma, isso não conta para a pontuação.',
   'ex.stories.detail': "{ok}/{n} detalhes corretos",
   'ex.stories.text': '{name} estava com {item}. Estava {place} {time}, onde concluiu sua tarefa.',
-  'ex.anagrams.letters': 'letras',
   'ex.resources.task8': 'Girassóis',
   'ex.resources.task7': 'Peixe',
   'ex.resources.task6': 'Ovos',
@@ -860,7 +858,6 @@ const ui: Locale['ui'] = {
   'ex.resources.confirm': 'Comprar',
   'ex.resources.sell': '🧺 Vender no mercado',
   'ex.reaction.target': 'Objetivo: < {ms} ms',
-  'result.timeBonusPts': 'pts de tempo',
   'result.speedBonus': 'Bônus de rapidez (+10 XP)',
   'ex.flanker.name': "Teste de Flanker",
   'ex.flanker.desc': "Concentre-se na seta central e ignore as setas laterais",
@@ -952,7 +949,6 @@ const ui: Locale['ui'] = {
   'ex.matrix.why': 'Exige rotação mental e transformação de coordenadas espaciais enquanto você guarda uma disposição na memória.',
   'ex.matrix.example': 'Memorize o padrão e posicione os elementos após rotação mental',
   'ex.matrix.memorize': 'Memorize os blocos azuis',
-  'ex.matrix.itemsToRemember': 'blocos a memorizar',
   'ex.matrix.same': 'Toque nas células que estavam iluminadas',
   'ex.matrix.noRot': 'Mesma posição (sem rotação)',
   'ex.matrix.rot90': 'Gire 90° no sentido horário: toque onde os blocos estão agora',
@@ -1386,6 +1382,10 @@ const ui: Locale['ui'] = {
   'progress.filterDomain': 'Filtrar por área',
   'progress.filterStatus': 'Filtrar por estado',
   'progress.filterBadges': 'Filtrar medalhas',
+  'ex.anagrams.letterCount': '{n|one:# letra|many:# letras|other:# letras}',
+  'ex.matrix.toRemember': '{n|one:# bloco a memorizar|many:# blocos a memorizar|other:# blocos a memorizar}',
+  'ex.tangram.pieceCount': '{n|one:# peça|many:# peças|other:# peças}',
+  'result.timeBonus': '{n|one:+# pt de tempo|many:+# pts de tempo|other:+# pts de tempo}',
 };
 
 const words: string[] = [

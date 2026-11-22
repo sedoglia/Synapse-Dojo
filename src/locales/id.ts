@@ -10,7 +10,6 @@ const ui: Locale['ui'] = {
   'ex.tangram.why': 'Rotasi mental dan penguraian bagian-keseluruhan: memahami bagaimana kepingan membentuk siluet, seperti pada subtes Block Design dalam tes kecerdasan dan studi Shepard & Metzler (1971). Saat semuanya pas adalah "Aha!" kecil, pengalaman yang digambarkan orang sebagai menyenangkan.',
   'ex.tangram.example': 'Amati siluet hitam: simpulkan letak tiap kepingan dan putar agar pas tanpa bantuan.',
   'ex.tangram.detail': '{ok}/{n} bentuk selesai',
-  'ex.tangram.pieces': 'kepingan',
   'ex.tangram.level': 'Level {l}',
   'ex.tangram.rotateLeft': 'Putar ↺ (-45°)',
   'ex.tangram.rotateRight': 'Putar ↻ (+45°)',
@@ -848,7 +847,6 @@ const ui: Locale['ui'] = {
   'ex.stories.filler': 'Jeda: genap atau ganjil? Jawab dengan tenang, ini tidak dihitung dalam skor.',
   'ex.stories.detail': "{ok}/{n} detail benar",
   'ex.stories.text': '{name} membawa {item}. Mereka berada {place} {time}, di mana tugas diselesaikan.',
-  'ex.anagrams.letters': 'huruf',
   'ex.resources.task8': 'Bunga Matahari',
   'ex.resources.task7': 'Ikan',
   'ex.resources.task6': 'Telur',
@@ -860,7 +858,6 @@ const ui: Locale['ui'] = {
   'ex.resources.confirm': 'Beli',
   'ex.resources.sell': '🧺 Jual di pasar',
   'ex.reaction.target': 'Target: < {ms} ms',
-  'result.timeBonusPts': 'poin waktu',
   'result.speedBonus': 'Bonus kecepatan (+10 XP)',
   'ex.flanker.name': "Tes Flanker",
   'ex.flanker.desc': "Fokus pada panah tengah dan abaikan panah pengalih di sampingnya",
@@ -952,7 +949,6 @@ const ui: Locale['ui'] = {
   'ex.matrix.why': 'Menuntut rotasi mental dan transformasi koordinat spasial sambil mengingat suatu susunan.',
   'ex.matrix.example': 'Ingat pola dan tempatkan elemen setelah rotasi mental',
   'ex.matrix.memorize': 'Ingat balok-balok biru',
-  'ex.matrix.itemsToRemember': 'balok untuk diingat',
   'ex.matrix.same': 'Ketuk kotak yang sebelumnya menyala',
   'ex.matrix.noRot': 'Posisi sama (tanpa rotasi)',
   'ex.matrix.rot90': 'Putar 90° searah jarum jam: ketuk posisi balok sekarang',
@@ -1386,6 +1382,10 @@ const ui: Locale['ui'] = {
   'progress.filterDomain': 'Saring menurut ranah',
   'progress.filterStatus': 'Saring menurut status',
   'progress.filterBadges': 'Saring lencana',
+  'ex.anagrams.letterCount': '{n|other:# huruf}',
+  'ex.matrix.toRemember': '{n|other:# balok untuk diingat}',
+  'ex.tangram.pieceCount': '{n|other:# kepingan}',
+  'result.timeBonus': '{n|other:+# poin waktu}',
 };
 
 const words: string[] = [

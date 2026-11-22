@@ -369,7 +369,6 @@ export const ui = {
   'result.sinceFirst': '{pct} since your first time',
   'result.newBadge': 'New achievement!',
   'result.speedBonus': 'Speed bonus (+10 XP)',
-  'result.timeBonusPts': 'time pts',
   'level.player': 'Level {n}',
   'level.up': 'You reached level {n}!',
   'home.next': 'Next achievement',
@@ -741,7 +740,6 @@ export const ui = {
   'ex.stories.filler': 'Pause: even or odd? Take your time, this doesn’t count towards your score.',
   'ex.stories.detail': '{ok}/{n} details correct',
   'ex.stories.text': '{name} had {item} with them. They were {place} {time}, where they completed their task.',
-  'ex.anagrams.letters': 'letters',
   'ex.resources.task8': 'Sunflowers',
   'ex.resources.task7': 'Fish',
   'ex.resources.task6': 'Eggs',
@@ -865,7 +863,6 @@ export const ui = {
   'ex.matrix.why': 'Demands mental rotation and spatial coordinate transformation while you keep a layout in memory.',
   'ex.matrix.example': 'Memorize the pattern and place elements after mental rotation',
   'ex.matrix.memorize': 'Memorize the blue blocks',
-  'ex.matrix.itemsToRemember': 'blocks to remember',
   'ex.matrix.same': 'Tap the cells that were illuminated',
   'ex.matrix.noRot': 'Same position (no rotation)',
   'ex.matrix.rot90': 'Rotate 90° clockwise: tap where the blocks are now',
@@ -1038,7 +1035,6 @@ export const ui = {
   'ex.tangram.why': 'Mental rotation and part-whole decomposition: working out how the pieces make up a silhouette, as in the Block Design subtest of intelligence tests and the studies of Shepard & Metzler (1971). The moment everything fits is a small "Aha!", an experience people describe as pleasant.',
   'ex.tangram.example': 'Analyze the solid silhouette: deduce which pieces form it, rotate and fit them without guidelines!',
   'ex.tangram.detail': '{ok}/{n} figures solved',
-  'ex.tangram.pieces': 'pieces',
   'ex.tangram.level': 'Level {l}',
   'ex.tangram.rotateLeft': 'Rotate ↺ (-45°)',
   'ex.tangram.rotateRight': 'Rotate ↻ (+45°)',
@@ -1426,6 +1422,10 @@ export const ui = {
   'progress.filterDomain': 'Filter by domain',
   'progress.filterStatus': 'Filter by status',
   'progress.filterBadges': 'Filter badges',
+  'ex.anagrams.letterCount': '{n|one:# letter|other:# letters}',
+  'ex.matrix.toRemember': '{n|one:# block to remember|other:# blocks to remember}',
+  'ex.tangram.pieceCount': '{n|one:# piece|other:# pieces}',
+  'result.timeBonus': '{n|one:+# time pt|other:+# time pts}',
 };
 
 const nicknames = {

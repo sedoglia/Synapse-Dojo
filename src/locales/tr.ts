@@ -369,7 +369,6 @@ const ui: Locale['ui'] = {
   'result.sinceFirst': 'İlk seferinden bu yana {pct}',
   'result.newBadge': 'Yeni başarı!',
   'result.speedBonus': 'Hız bonusu (+10 XP)',
-  'result.timeBonusPts': 'süre puanı',
   'level.player': 'Seviye {n}',
   'level.up': 'Seviye atladın! Yeni seviye: {n}',
   'home.next': 'Sıradaki başarı',
@@ -741,7 +740,6 @@ const ui: Locale['ui'] = {
   'ex.stories.filler': 'Ara: çift mi tek mi? Acele etme, bu puanına sayılmaz.',
   'ex.stories.detail': '{ok}/{n} ayrıntı doğru',
   'ex.stories.text': '{name}, {time} {place} bulunuyordu; yanında {item} vardı ve orada işini tamamladı.',
-  'ex.anagrams.letters': 'harf',
   'ex.resources.task8': 'Ayçiçekleri',
   'ex.resources.task7': 'Balık',
   'ex.resources.task6': 'Yumurta',
@@ -863,7 +861,6 @@ const ui: Locale['ui'] = {
   'ex.matrix.why': 'Bir yerleşimi bellekte tutarken zihinsel döndürme ve uzamsal koordinat dönüşümü gerektirir.',
   'ex.matrix.example': 'Deseni ezberle ve zihninde döndürdükten sonra öğeleri yerleştir',
   'ex.matrix.memorize': 'Mavi blokları ezberle',
-  'ex.matrix.itemsToRemember': 'hatırlanacak blok',
   'ex.matrix.same': 'Yanan hücrelere dokun',
   'ex.matrix.noRot': 'Aynı konum (döndürme yok)',
   'ex.matrix.rot90': 'Saat yönünde 90° döndür: blokların şimdi olduğu yere dokun',
@@ -1036,7 +1033,6 @@ const ui: Locale['ui'] = {
   'ex.tangram.why': 'Zihinsel döndürme ve parça-bütün ayrıştırması: zekâ testlerinin Küp Desenleri (Block Design) alt testinde ve Shepard ile Metzler’in (1971) çalışmalarında olduğu gibi, parçaların bir silueti nasıl oluşturduğunu bulmak. Her şeyin yerine oturduğu an küçük bir “Aha!” anıdır; insanlar bunu hoş bir deneyim olarak anlatır.',
   'ex.tangram.example': 'Dolu silueti incele: hangi parçaların onu oluşturduğunu çıkar, yardımcı çizgi olmadan döndürüp yerleştir!',
   'ex.tangram.detail': '{ok}/{n} şekil çözüldü',
-  'ex.tangram.pieces': 'parça',
   'ex.tangram.level': 'Seviye {l}',
   'ex.tangram.rotateLeft': 'Döndür ↺ (-45°)',
   'ex.tangram.rotateRight': 'Döndür ↻ (+45°)',
@@ -1419,6 +1415,10 @@ const ui: Locale['ui'] = {
   'progress.filterDomain': 'Alana göre filtrele',
   'progress.filterStatus': 'Duruma göre filtrele',
   'progress.filterBadges': 'Rozetleri filtrele',
+  'ex.anagrams.letterCount': '{n|other:# harf}',
+  'ex.matrix.toRemember': '{n|other:hatırlanacak # blok}',
+  'ex.tangram.pieceCount': '{n|other:# parça}',
+  'result.timeBonus': '{n|other:+# süre puanı}',
 };
 
 const nicknames = {

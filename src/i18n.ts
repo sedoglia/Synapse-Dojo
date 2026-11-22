@@ -126,9 +126,23 @@ export async function loadLang(lang: unknown): Promise<Lang> {
   return lang;
 }
 
+/**
+ * Plural forms: `{n|one:# letter|other:# letters}` picks the arm for the number in `n` by the language's CLDR plural
+ * rules (Russian one/few/many, Arabic zero/one/two/few/many…) and writes the number where `#` is. A missing category
+ * falls back to `other`, so languages whose nouns don't change after a number need just `{n|other:# 字}`.
+ */
+const PLURAL = /\{(\w+)\|([^{}]*)\}/g;
+
 export function t(key: Key, params: Record<string, string | number> = {}): string {
   const s = locale().ui[key] ?? en.ui[key] ?? key;
-  return s.replace(/\{(\w+)\}/g, (_, p) => String(params[p] ?? `{${p}}`));
+  return s
+    .replace(PLURAL, (whole, p: string, arms: string) => {
+      if (params[p] === undefined) return whole;
+      const forms = new Map(arms.split('|').map((a) => [a.slice(0, a.indexOf(':')), a.slice(a.indexOf(':') + 1)]));
+      const form = forms.get(new Intl.PluralRules(meta().speech).select(Number(params[p]))) ?? forms.get('other') ?? '';
+      return form.replaceAll('#', String(params[p]));
+    })
+    .replace(/\{(\w+)\}/g, (_, p) => String(params[p] ?? `{${p}}`));
 }
 
 /** Locale for numbers and dates, always with Latin digits like every other number in the app. */

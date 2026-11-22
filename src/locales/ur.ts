@@ -369,7 +369,6 @@ const ui: Locale['ui'] = {
   'result.sinceFirst': 'پہلی بار سے {pct}',
   'result.newBadge': 'نئی کامیابی!',
   'result.speedBonus': 'رفتار کا انعام (+10 XP)',
-  'result.timeBonusPts': 'وقت کے پوائنٹس',
   'level.player': 'لیول {n}',
   'level.up': 'آپ لیول {n} پر پہنچ گئے!',
   'home.next': 'اگلی کامیابی',
@@ -741,7 +740,6 @@ const ui: Locale['ui'] = {
   'ex.stories.filler': 'وقفہ: جفت یا طاق؟ آرام سے کریں، یہ آپ کے اسکور میں شامل نہیں ہوتا۔',
   'ex.stories.detail': '{ok}/{n} تفصیلات درست',
   'ex.stories.text': '{name} اپنے ساتھ {item} لیے ہوئے تھے۔ وہ {time} {place} تھے، جہاں انہوں نے اپنا کام پورا کیا۔',
-  'ex.anagrams.letters': 'حروف',
   'ex.resources.task8': 'سورج مکھی',
   'ex.resources.task7': 'مچھلی',
   'ex.resources.task6': 'انڈے',
@@ -863,7 +861,6 @@ const ui: Locale['ui'] = {
   'ex.matrix.why': 'ترتیب کو یاد میں رکھتے ہوئے ذہنی گردش اور مکانی محل وقوع کی تبدیلی مانگتا ہے۔',
   'ex.matrix.example': 'نمونہ یاد کریں اور ذہن میں گھمانے کے بعد خانے رکھیں',
   'ex.matrix.memorize': 'نیلے خانے یاد کریں',
-  'ex.matrix.itemsToRemember': 'یاد رکھنے کے خانے',
   'ex.matrix.same': 'وہ خانے دبائیں جو روشن تھے',
   'ex.matrix.noRot': 'وہی جگہ (کوئی گردش نہیں)',
   'ex.matrix.rot90': 'گھڑی کی سمت 90° گھمائیں: دبائیں کہ خانے اب کہاں ہیں',
@@ -1036,7 +1033,6 @@ const ui: Locale['ui'] = {
   'ex.tangram.why': 'ذہنی گردش اور کُل کو حصوں میں بانٹنا: یہ سمجھنا کہ ٹکڑے مل کر خاکہ کیسے بناتے ہیں، جیسے ذہانت کے ٹیسٹوں کے Block Design حصے اور Shepard & Metzler (1971) کی تحقیقات میں۔ جس لمحے سب کچھ بیٹھ جائے وہ ایک چھوٹا سا “آہا!” ہوتا ہے، ایک ایسا تجربہ جسے لوگ خوشگوار بتاتے ہیں۔',
   'ex.tangram.example': 'ٹھوس خاکے کو غور سے دیکھیں: اندازہ لگائیں کہ کون سے ٹکڑے اسے بناتے ہیں، انہیں گھمائیں اور بغیر رہنما لکیروں کے فٹ کریں!',
   'ex.tangram.detail': '{ok}/{n} شکلیں حل',
-  'ex.tangram.pieces': 'ٹکڑے',
   'ex.tangram.level': 'لیول {l}',
   'ex.tangram.rotateLeft': 'گھمائیں ↺ (-45°)',
   'ex.tangram.rotateRight': 'گھمائیں ↻ (+45°)',
@@ -1419,6 +1415,10 @@ const ui: Locale['ui'] = {
   'progress.filterDomain': 'شعبے کے لحاظ سے چھانٹیں',
   'progress.filterStatus': 'حالت کے لحاظ سے چھانٹیں',
   'progress.filterBadges': 'بیج چھانٹیں',
+  'ex.anagrams.letterCount': '{n|one:# حرف|other:# حروف}',
+  'ex.matrix.toRemember': '{n|one:یاد رکھنے کے لیے # خانہ|other:یاد رکھنے کے لیے # خانے}',
+  'ex.tangram.pieceCount': '{n|one:# ٹکڑا|other:# ٹکڑے}',
+  'result.timeBonus': '{n|one:+# وقت کا پوائنٹ|other:+# وقت کے پوائنٹس}',
 };
 
 const nicknames = {

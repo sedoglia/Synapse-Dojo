@@ -369,7 +369,6 @@ const ui: Locale['ui'] = {
   'result.sinceFirst': '처음보다 {pct}',
   'result.newBadge': '새 업적!',
   'result.speedBonus': '속도 보너스 (+10 XP)',
-  'result.timeBonusPts': '시간 점수',
   'level.player': '레벨 {n}',
   'level.up': '레벨 {n} 달성!',
   'home.next': '다음 업적',
@@ -741,7 +740,6 @@ const ui: Locale['ui'] = {
   'ex.stories.filler': '잠깐 쉬어요: 짝수일까요, 홀수일까요? 천천히 하세요. 점수에 들어가지 않아요.',
   'ex.stories.detail': '세부 내용 {ok}/{n} 정답',
   'ex.stories.text': '{name} 님은 {item} 하나를 들고 {time}에 {place}에 있었고, 그곳에서 할 일을 마쳤어요.',
-  'ex.anagrams.letters': '글자',
   'ex.resources.task8': '해바라기',
   'ex.resources.task7': '생선',
   'ex.resources.task6': '달걀',
@@ -863,7 +861,6 @@ const ui: Locale['ui'] = {
   'ex.matrix.why': '배치를 기억하는 동안 심적 회전과 공간 좌표 변환이 필요해요.',
   'ex.matrix.example': '무늬를 외우고 머릿속으로 돌린 뒤 요소를 놓으세요',
   'ex.matrix.memorize': '파란 블록을 외우세요',
-  'ex.matrix.itemsToRemember': '기억할 블록',
   'ex.matrix.same': '불이 들어왔던 칸을 누르세요',
   'ex.matrix.noRot': '같은 위치 (회전 없음)',
   'ex.matrix.rot90': '시계 방향으로 90° 회전: 블록이 지금 있는 곳을 누르세요',
@@ -1036,7 +1033,6 @@ const ui: Locale['ui'] = {
   'ex.tangram.why': '심적 회전과 부분-전체 분해: 조각들이 어떻게 실루엣을 이루는지 알아내요. 지능 검사의 토막 짜기 소검사와 Shepard & Metzler(1971)의 연구와 같은 원리예요. 모든 것이 딱 맞는 순간은 작은 “아하!”이며, 사람들은 이를 즐거운 경험이라고 말해요.',
   'ex.tangram.example': '꽉 찬 실루엣을 살펴보고 어떤 조각으로 이루어졌는지 추론한 다음, 안내선 없이 돌려서 맞추세요!',
   'ex.tangram.detail': '그림 {ok}/{n}개 해결',
-  'ex.tangram.pieces': '조각',
   'ex.tangram.level': '레벨 {l}',
   'ex.tangram.rotateLeft': '회전 ↺ (-45°)',
   'ex.tangram.rotateRight': '회전 ↻ (+45°)',
@@ -1419,6 +1415,10 @@ const ui: Locale['ui'] = {
   'progress.filterDomain': '영역별 보기',
   'progress.filterStatus': '상태별 보기',
   'progress.filterBadges': '배지 보기',
+  'ex.anagrams.letterCount': '{n|other:#글자}',
+  'ex.matrix.toRemember': '{n|other:기억할 블록 #개}',
+  'ex.tangram.pieceCount': '{n|other:#조각}',
+  'result.timeBonus': '{n|other:+# 시간 점수}',
 };
 
 const nicknames = {

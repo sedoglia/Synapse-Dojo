@@ -369,7 +369,6 @@ const ui: Locale['ui'] = {
   'result.sinceFirst': '{pct} od pierwszego razu',
   'result.newBadge': 'Nowe osiągnięcie!',
   'result.speedBonus': 'Premia za szybkość (+10 XP)',
-  'result.timeBonusPts': 'pkt za czas',
   'level.player': 'Poziom {n}',
   'level.up': 'Osiągasz poziom {n}!',
   'home.next': 'Następne osiągnięcie',
@@ -741,7 +740,6 @@ const ui: Locale['ui'] = {
   'ex.stories.filler': 'Przerwa: parzysta czy nieparzysta? Nie spiesz się, to nie liczy się do wyniku.',
   'ex.stories.detail': 'Poprawne szczegóły: {ok}/{n}',
   'ex.stories.text': '{name} ma przy sobie {item}. Jest {place} {time} i załatwia tam swoją sprawę.',
-  'ex.anagrams.letters': 'zn.',
   'ex.resources.task8': 'Słoneczniki',
   'ex.resources.task7': 'Ryby',
   'ex.resources.task6': 'Jajka',
@@ -863,7 +861,6 @@ const ui: Locale['ui'] = {
   'ex.matrix.why': 'Wymaga rotacji umysłowej i przekształcania współrzędnych przestrzennych przy jednoczesnym trzymaniu układu w pamięci.',
   'ex.matrix.example': 'Zapamiętaj wzór i umieść elementy po obrocie w wyobraźni',
   'ex.matrix.memorize': 'Zapamiętaj niebieskie bloki',
-  'ex.matrix.itemsToRemember': 'do zapamiętania',
   'ex.matrix.same': 'Dotknij pól, które były podświetlone',
   'ex.matrix.noRot': 'Ta sama pozycja (bez obrotu)',
   'ex.matrix.rot90': 'Obrót o 90° w prawo: dotknij miejsc, gdzie są teraz bloki',
@@ -1036,7 +1033,6 @@ const ui: Locale['ui'] = {
   'ex.tangram.why': 'Rotacja umysłowa i rozkładanie całości na części: ustalanie, jak elementy tworzą sylwetkę, jak w podteście „Klocki” z testów inteligencji i w badaniach Sheparda i Metzlera (1971). Chwila, gdy wszystko pasuje, to małe „Aha!”, przeżycie, które ludzie opisują jako przyjemne.',
   'ex.tangram.example': 'Przyjrzyj się jednolitej sylwetce: wydedukuj, z jakich elementów się składa, obracaj je i dopasowuj bez linii pomocniczych!',
   'ex.tangram.detail': 'Ułożone figury: {ok}/{n}',
-  'ex.tangram.pieces': 'elem.',
   'ex.tangram.level': 'Poziom {l}',
   'ex.tangram.rotateLeft': 'Obróć ↺ (-45°)',
   'ex.tangram.rotateRight': 'Obróć ↻ (+45°)',
@@ -1419,6 +1415,10 @@ const ui: Locale['ui'] = {
   'progress.filterDomain': 'Filtruj według obszaru',
   'progress.filterStatus': 'Filtruj według stanu',
   'progress.filterBadges': 'Filtruj odznaki',
+  'ex.anagrams.letterCount': '{n|one:# litera|few:# litery|many:# liter|other:# litery}',
+  'ex.matrix.toRemember': '{n|one:# blok do zapamiętania|few:# bloki do zapamiętania|many:# bloków do zapamiętania|other:# bloku do zapamiętania}',
+  'ex.tangram.pieceCount': '{n|one:# element|few:# elementy|many:# elementów|other:# elementu}',
+  'result.timeBonus': '{n|one:+# pkt za czas|few:+# pkt za czas|many:+# pkt za czas|other:+# pkt za czas}',
 };
 
 const words: string[] = [

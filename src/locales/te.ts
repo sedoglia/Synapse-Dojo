@@ -369,7 +369,6 @@ const ui: Locale['ui'] = {
   'result.sinceFirst': 'మీ మొదటిసారి నుండి {pct}',
   'result.newBadge': 'కొత్త ఘనత!',
   'result.speedBonus': 'వేగం బోనస్ (+10 XP)',
-  'result.timeBonusPts': 'సమయం పాయింట్లు',
   'level.player': 'స్థాయి {n}',
   'level.up': 'మీరు స్థాయి {n} కి చేరారు!',
   'home.next': 'తదుపరి ఘనత',
@@ -741,7 +740,6 @@ const ui: Locale['ui'] = {
   'ex.stories.filler': 'విరామం: సరి లేదా బేసి? తొందర లేదు, ఇది మీ స్కోరులో లెక్కించబడదు.',
   'ex.stories.detail': '{ok}/{n} వివరాలు సరైనవి',
   'ex.stories.text': '{name} దగ్గర {item} ఉంది. వారు {time} {place} ఉన్నారు, అక్కడ తమ పని పూర్తి చేశారు.',
-  'ex.anagrams.letters': 'అక్షరాలు',
   'ex.resources.task8': 'పొద్దుతిరుగుడు పువ్వులు',
   'ex.resources.task7': 'చేపలు',
   'ex.resources.task6': 'గుడ్లు',
@@ -863,7 +861,6 @@ const ui: Locale['ui'] = {
   'ex.matrix.why': 'ఒక అమరికను జ్ఞాపకంలో ఉంచుకుంటూనే మానసిక భ్రమణం, ప్రాదేశిక స్థానాల మార్పిడి అవసరం.',
   'ex.matrix.example': 'నమూనాను గుర్తుంచుకుని, మానసికంగా తిప్పిన తర్వాత అంశాలను ఉంచండి',
   'ex.matrix.memorize': 'నీలం బ్లాకులను గుర్తుంచుకోండి',
-  'ex.matrix.itemsToRemember': 'గుర్తుంచుకోవాల్సిన బ్లాకులు',
   'ex.matrix.same': 'వెలిగిన గడులను నొక్కండి',
   'ex.matrix.noRot': 'అదే స్థానం (భ్రమణం లేదు)',
   'ex.matrix.rot90': 'సవ్యదిశలో 90° తిప్పండి: బ్లాకులు ఇప్పుడు ఎక్కడ ఉన్నాయో అక్కడ నొక్కండి',
@@ -1036,7 +1033,6 @@ const ui: Locale['ui'] = {
   'ex.tangram.why': 'మానసిక భ్రమణం, భాగం-మొత్తం విశ్లేషణ: ముక్కలు కలిసి ఒక ఆకృతిని ఎలా ఏర్పరుస్తాయో కనుగొనడం, తెలివితేటల పరీక్షలలోని Block Design ఉప-పరీక్షలో, Shepard & Metzler (1971) అధ్యయనాలలో లాగా. అంతా సరిగ్గా అమరిన క్షణం ఒక చిన్న “ఆహా!”, ప్రజలు దాన్ని ఆహ్లాదకరమైన అనుభవంగా వర్ణిస్తారు.',
   'ex.tangram.example': 'ఘన ఆకృతిని పరిశీలించండి: దాన్ని ఏ ముక్కలు ఏర్పరుస్తాయో కనుగొని, మార్గదర్శక గీతలు లేకుండా వాటిని తిప్పి అమర్చండి!',
   'ex.tangram.detail': '{ok}/{n} ఆకృతులు పూర్తయ్యాయి',
-  'ex.tangram.pieces': 'ముక్కలు',
   'ex.tangram.level': 'స్థాయి {l}',
   'ex.tangram.rotateLeft': 'తిప్పండి ↺ (-45°)',
   'ex.tangram.rotateRight': 'తిప్పండి ↻ (+45°)',
@@ -1419,6 +1415,10 @@ const ui: Locale['ui'] = {
   'progress.filterDomain': 'రంగం ప్రకారం వడపోయండి',
   'progress.filterStatus': 'స్థితి ప్రకారం వడపోయండి',
   'progress.filterBadges': 'బ్యాడ్జ్‌లను వడపోయండి',
+  'ex.anagrams.letterCount': '{n|one:# అక్షరం|other:# అక్షరాలు}',
+  'ex.matrix.toRemember': '{n|one:గుర్తుంచుకోవాల్సిన # బ్లాక్|other:గుర్తుంచుకోవాల్సిన # బ్లాకులు}',
+  'ex.tangram.pieceCount': '{n|one:# ముక్క|other:# ముక్కలు}',
+  'result.timeBonus': '{n|one:+# సమయం పాయింట్|other:+# సమయం పాయింట్లు}',
 };
 
 const nicknames = {

@@ -10,7 +10,6 @@ const ui: Locale['ui'] = {
   'ex.tangram.why': 'Подумки обертати й розбивати ціле на частини: зрозуміти, як деталі складаються в силует, як у субтесті «Кубики Косса» (Block Design) тестів інтелекту та в дослідженнях Шепарда й Метцлер (1971). Мить, коли все складається, — маленьке «Ага!», яке люди описують як приємне.',
   'ex.tangram.example': 'Роздивись чорний силует: зрозумій, куди йде кожна деталь, і поверни її, щоб вставити без підказок.',
   'ex.tangram.detail': 'Складено фігур: {ok}/{n}',
-  'ex.tangram.pieces': 'деталей',
   'ex.tangram.level': 'Рівень {l}',
   'ex.tangram.rotateLeft': 'Повернути ↺ (-45°)',
   'ex.tangram.rotateRight': 'Повернути ↻ (+45°)',
@@ -848,7 +847,6 @@ const ui: Locale['ui'] = {
   'ex.stories.filler': 'Пауза: парне чи непарне? Відповідай спокійно, на результат це не впливає.',
   'ex.stories.detail': '{ok}/{n} деталей правильно',
   'ex.stories.text': '{name} мав(-ла) при собі {item}. Був(-ла) {place} {time} і там завершив(-ла) свої справи.',
-  'ex.anagrams.letters': 'літер',
   'ex.resources.task8': 'Соняшники',
   'ex.resources.task7': 'Риба',
   'ex.resources.task6': 'Яйця',
@@ -860,7 +858,6 @@ const ui: Locale['ui'] = {
   'ex.resources.confirm': 'Купити',
   'ex.resources.sell': '🧺 Продати на ринку',
   'ex.reaction.target': 'Ціль: < {ms} мс',
-  'result.timeBonusPts': 'бал. за час',
   'result.speedBonus': 'Бонус швидкості (+10 XP)',
   'ex.flanker.name': 'Тест Фланкера',
   'ex.flanker.desc': 'Зосередься на центральній стрілці й ігноруй бічні стрілки',
@@ -953,7 +950,6 @@ const ui: Locale['ui'] = {
   'ex.matrix.why': 'Потребує обертати подумки й перетворювати просторові координати, поки ти тримаєш розташування в памʼяті.',
   'ex.matrix.example': 'Запамʼятай візерунок і розстав елементи після обертання подумки',
   'ex.matrix.memorize': 'Запамʼятай сині блоки',
-  'ex.matrix.itemsToRemember': 'блоків, щоб запамʼятати',
   'ex.matrix.same': 'Натисни на клітинки, що були підсвічені',
   'ex.matrix.noRot': 'Початкове положення (без обертання)',
   'ex.matrix.rot90': 'Поверни на 90° за годинниковою стрілкою: вкажи нові позиції',
@@ -1382,6 +1378,10 @@ const ui: Locale['ui'] = {
   'progress.filterDomain': 'Фільтр за сферою',
   'progress.filterStatus': 'Фільтр за статусом',
   'progress.filterBadges': 'Фільтр нагород',
+  'ex.anagrams.letterCount': '{n|one:# літера|few:# літери|many:# літер|other:# літери}',
+  'ex.matrix.toRemember': '{n|one:# блок для запамʼятовування|few:# блоки для запамʼятовування|many:# блоків для запамʼятовування|other:# блока для запамʼятовування}',
+  'ex.tangram.pieceCount': '{n|one:# деталь|few:# деталі|many:# деталей|other:# деталі}',
+  'result.timeBonus': '{n|one:+# бал за час|few:+# бали за час|many:+# балів за час|other:+# бала за час}',
 };
 
 const words: string[] = [

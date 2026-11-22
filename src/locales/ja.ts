@@ -10,7 +10,6 @@ const ui: Locale['ui'] = {
   'ex.tangram.why': 'メンタルローテーションと部分‐全体の分解:ピースがどうシルエットを作るかを考えます。知能検査の積木模様(Block Design)やShepard & Metzler(1971)の研究と同じ考え方です。すべてがはまる瞬間は小さな「アハ!」体験で、人はそれを心地よいと感じます。',
   'ex.tangram.example': '黒いシルエットをよく見て、各ピースの位置を推理し、回転させてヒントなしではめ込もう。',
   'ex.tangram.detail': '{ok}/{n} 個の図形を完成',
-  'ex.tangram.pieces': 'ピース',
   'ex.tangram.level': 'レベル {l}',
   'ex.tangram.rotateLeft': '回転 ↺（-45°）',
   'ex.tangram.rotateRight': '回転 ↻（+45°）',
@@ -848,7 +847,6 @@ const ui: Locale['ui'] = {
   'ex.stories.filler': '休憩：偶数か奇数か？ ゆっくり答えてください。スコアには影響しません。',
   'ex.stories.detail': "正解 {ok}/{n} 問",
   'ex.stories.text': '{name} は {item} を持っていました。{time} に {place} にいて、用事を済ませました。',
-  'ex.anagrams.letters': '文字',
   'ex.resources.task8': 'ひまわり',
   'ex.resources.task7': '魚',
   'ex.resources.task6': '卵',
@@ -860,7 +858,6 @@ const ui: Locale['ui'] = {
   'ex.resources.confirm': '買う',
   'ex.resources.sell': '🧺 市場で売る',
   'ex.reaction.target': '目標: < {ms} ms',
-  'result.timeBonusPts': 'タイム点',
   'result.speedBonus': 'スピードボーナス (+10 XP)',
   'ex.flanker.name': "フランカー課題",
   'ex.flanker.desc': "両端の矢印を無視して、中央の矢印の向きだけに集中します",
@@ -952,7 +949,6 @@ const ui: Locale['ui'] = {
   'ex.matrix.why': '配置を覚えておきながら、心的回転と空間座標の変換を行う必要があります。',
   'ex.matrix.example': 'パターンを記憶し心的回転後にブロックを配置',
   'ex.matrix.memorize': '青いブロックを記憶してください',
-  'ex.matrix.itemsToRemember': '覚えるブロック',
   'ex.matrix.same': '光っていたマスをタップしてください',
   'ex.matrix.noRot': '同じ位置（回転なし）',
   'ex.matrix.rot90': '時計回りに90°回転：現在の位置をタップ',
@@ -1386,6 +1382,10 @@ const ui: Locale['ui'] = {
   'progress.filterDomain': '分野で絞り込む',
   'progress.filterStatus': '状態で絞り込む',
   'progress.filterBadges': 'バッジを絞り込む',
+  'ex.anagrams.letterCount': '{n|other:#文字}',
+  'ex.matrix.toRemember': '{n|other:覚えるブロック #個}',
+  'ex.tangram.pieceCount': '{n|other:#ピース}',
+  'result.timeBonus': '{n|other:+# タイム点}',
 };
 
 const words: string[] = [

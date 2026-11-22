@@ -334,7 +334,7 @@ async function practiceRound(ex: Exercise, step: { i: number; n: number } | null
       h('div', { class: 'intro-icon' }, ex.icon),
       h('h2', {}, t(ex.name)),
       num,
-      h('div', { class: 'muted' }, `/ 100 · ${res.detail}${res.timeBonus ? ` · ⚡ +${res.timeBonus} ${t('result.timeBonusPts')}` : ''}`),
+      h('div', { class: 'muted' }, `/ 100 · ${res.detail}${res.timeBonus ? ` · ⚡ ${t('result.timeBonus', { n: res.timeBonus })}` : ''}`),
       ctx.bestStreak >= 3 ? h('div', { class: 'muted' }, `🔥 ${t('result.combo', { n: ctx.bestStreak })}`) : null,
       speedBonusEarned ? h('div', { class: 'badge-speed' }, `⚡ ${t('result.speedBonus')}`) : null,
       isBest

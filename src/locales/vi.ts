@@ -369,7 +369,6 @@ const ui: Locale['ui'] = {
   'result.sinceFirst': '{pct} so với lần đầu tiên',
   'result.newBadge': 'Thành tích mới!',
   'result.speedBonus': 'Thưởng tốc độ (+10 XP)',
-  'result.timeBonusPts': 'điểm thời gian',
   'level.player': 'Cấp {n}',
   'level.up': 'Bạn đã lên cấp {n}!',
   'home.next': 'Thành tích tiếp theo',
@@ -741,7 +740,6 @@ const ui: Locale['ui'] = {
   'ex.stories.filler': 'Nghỉ một chút: chẵn hay lẻ? Cứ thong thả, phần này không tính điểm.',
   'ex.stories.detail': 'Đúng {ok}/{n} chi tiết',
   'ex.stories.text': '{name} mang theo {item}. {name} có mặt {place} {time} và làm xong việc của mình ở đó.',
-  'ex.anagrams.letters': 'chữ cái',
   'ex.resources.task8': 'Hoa hướng dương',
   'ex.resources.task7': 'Cá',
   'ex.resources.task6': 'Trứng',
@@ -863,7 +861,6 @@ const ui: Locale['ui'] = {
   'ex.matrix.why': 'Đòi hỏi xoay hình trong đầu và biến đổi tọa độ không gian trong khi vẫn giữ một bố cục trong trí nhớ.',
   'ex.matrix.example': 'Ghi nhớ mẫu và đặt các khối sau khi xoay trong đầu',
   'ex.matrix.memorize': 'Ghi nhớ các khối xanh lam',
-  'ex.matrix.itemsToRemember': 'khối cần nhớ',
   'ex.matrix.same': 'Chạm vào các ô đã sáng lên',
   'ex.matrix.noRot': 'Giữ nguyên vị trí (không xoay)',
   'ex.matrix.rot90': 'Xoay 90° theo chiều kim đồng hồ: chạm vào chỗ các khối bây giờ',
@@ -1036,7 +1033,6 @@ const ui: Locale['ui'] = {
   'ex.tangram.why': 'Xoay hình trong đầu và tách tổng thể thành các phần: tìm ra cách các mảnh tạo nên một hình bóng, như trong bài xếp khối (Block Design) của các bài kiểm tra trí tuệ và nghiên cứu của Shepard & Metzler (1971). Khoảnh khắc mọi thứ khớp vào nhau là một chữ “À!” nhỏ, trải nghiệm mà mọi người mô tả là dễ chịu.',
   'ex.tangram.example': 'Phân tích hình bóng: suy ra những mảnh nào tạo nên nó, xoay và ghép chúng mà không có đường gợi ý!',
   'ex.tangram.detail': 'Giải được {ok}/{n} hình',
-  'ex.tangram.pieces': 'mảnh',
   'ex.tangram.level': 'Cấp độ {l}',
   'ex.tangram.rotateLeft': 'Xoay ↺ (-45°)',
   'ex.tangram.rotateRight': 'Xoay ↻ (+45°)',
@@ -1419,6 +1415,10 @@ const ui: Locale['ui'] = {
   'progress.filterDomain': 'Lọc theo lĩnh vực',
   'progress.filterStatus': 'Lọc theo trạng thái',
   'progress.filterBadges': 'Lọc huy hiệu',
+  'ex.anagrams.letterCount': '{n|other:# chữ cái}',
+  'ex.matrix.toRemember': '{n|other:# khối cần nhớ}',
+  'ex.tangram.pieceCount': '{n|other:# mảnh}',
+  'result.timeBonus': '{n|other:+# điểm thời gian}',
 };
 
 // Every word is a single syllable: Vietnamese writes compound words with spaces, which cannot be puzzles.

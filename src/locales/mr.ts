@@ -10,7 +10,6 @@ const ui: Locale['ui'] = {
   'ex.tangram.why': 'मानसिक फिरवणे आणि भागांपासून संपूर्णाचे विश्लेषण: तुकडे एकत्र येऊन आकृती कशी बनवतात हे समजणे, जसे बुद्धिमत्ता चाचण्यांच्या ब्लॉक डिझाइन उपचाचणीत आणि Shepard व Metzler (1971) यांच्या अभ्यासात. सगळे तुकडे बसतात तेव्हा एक छोटा “अहा!” क्षण येतो, जो लोकांना आनंददायक वाटतो.',
   'ex.tangram.example': 'काळी आकृती नीट पाहा: प्रत्येक तुकड्याची जागा कल्पून पाहा आणि मदतीशिवाय फिरवून बसवा.',
   'ex.tangram.detail': '{ok}/{n} आकृती पूर्ण',
-  'ex.tangram.pieces': 'तुकडे',
   'ex.tangram.level': 'पातळी {l}',
   'ex.tangram.rotateLeft': 'फिरवा ↺ (-45°)',
   'ex.tangram.rotateRight': 'फिरवा ↻ (+45°)',
@@ -848,7 +847,6 @@ const ui: Locale['ui'] = {
   'ex.stories.filler': 'विराम: सम की विषम? निवांत उत्तर द्या, याचा गुणांवर काही परिणाम होत नाही.',
   'ex.stories.detail': '{ok}/{n} तपशील बरोबर',
   'ex.stories.text': '{name} {time} {place} होते, सोबत {item} घेऊन; तिथे त्यांनी आपले काम पूर्ण केले.',
-  'ex.anagrams.letters': 'अक्षरे',
   'ex.resources.task8': 'सूर्यफूल',
   'ex.resources.task7': 'मासे',
   'ex.resources.task6': 'अंडी',
@@ -860,7 +858,6 @@ const ui: Locale['ui'] = {
   'ex.resources.confirm': 'खरेदी करा',
   'ex.resources.sell': '🧺 बाजारात विका',
   'ex.reaction.target': 'लक्ष्य: < {ms} ms',
-  'result.timeBonusPts': 'वेळेचे गुण',
   'result.speedBonus': 'वेग बोनस (+10 XP)',
   'ex.flanker.name': 'फ्लँकर चाचणी',
   'ex.flanker.desc': 'मधल्या बाणावर लक्ष केंद्रित करा आणि आजूबाजूच्या बाणांकडे दुर्लक्ष करा',
@@ -953,7 +950,6 @@ const ui: Locale['ui'] = {
   'ex.matrix.why': 'एखादी रचना लक्षात ठेवत असताना मनातल्या मनात फिरवणे आणि अवकाशीय निर्देशांकांचे रूपांतर करावे लागते.',
   'ex.matrix.example': 'नमुना लक्षात ठेवा आणि मनात फिरवल्यानंतरच्या जागा निवडा',
   'ex.matrix.memorize': 'निळे ठोकळे लक्षात ठेवा',
-  'ex.matrix.itemsToRemember': 'लक्षात ठेवायचे ठोकळे',
   'ex.matrix.same': 'जे चौकोन उजळले होते त्यांवर टॅप करा',
   'ex.matrix.noRot': 'त्याच जागा (फिरवणे नाही)',
   'ex.matrix.rot90': 'घड्याळाच्या दिशेने 90° फिरवा: नव्या जागांवर टॅप करा',
@@ -1382,6 +1378,10 @@ const ui: Locale['ui'] = {
   'progress.filterDomain': 'क्षेत्रानुसार निवडा',
   'progress.filterStatus': 'स्थितीनुसार निवडा',
   'progress.filterBadges': 'बॅज निवडा',
+  'ex.anagrams.letterCount': '{n|one:# अक्षर|other:# अक्षरे}',
+  'ex.matrix.toRemember': '{n|one:लक्षात ठेवायचा # ठोकळा|other:लक्षात ठेवायचे # ठोकळे}',
+  'ex.tangram.pieceCount': '{n|one:# तुकडा|other:# तुकडे}',
+  'result.timeBonus': '{n|one:+# वेळेचा गुण|other:+# वेळेचे गुण}',
 };
 
 const words: string[] = [
