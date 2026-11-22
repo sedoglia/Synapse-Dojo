@@ -1,6 +1,6 @@
 import { h, flash, pick } from '../dom';
 import { sfx } from '../audio';
-import { t, words } from '../i18n';
+import { t, words, upper, initial } from '../i18n';
 import { onKeys } from '../widgets';
 import type { Exercise } from './types';
 
@@ -24,10 +24,13 @@ export const fluency: Exercise = {
     const total = ctx.count(25, 15, 5);
     const st = ctx.stair(total, 1, 12);
 
-    const allWords = words().map((w) => w.toUpperCase());
+    const allWords = words().map(upper);
     // Only initials with enough words, or the same one or two words would keep coming back and be learnt by heart.
     const counts = new Map<string, number>();
-    for (const w of allWords) if (w[0]) counts.set(w[0], (counts.get(w[0]) ?? 0) + 1);
+    for (const w of allWords) {
+      const c = initial(w);
+      if (c) counts.set(c, (counts.get(c) ?? 0) + 1);
+    }
     const byCount = [...counts].sort((a, b) => b[1] - a[1]);
     const rich = byCount.filter(([, n]) => n >= MIN_WORDS).map(([c]) => c);
     const targetLetter = pick(rich.length ? rich : byCount.slice(0, 5).map(([c]) => c));
@@ -81,8 +84,8 @@ export const fluency: Exercise = {
       ctx.progress(i / total, `${i + 1}/${total}`);
 
       const shouldMatch = Math.random() < 0.45;
-      const matchingPool = allWords.filter((w) => w.startsWith(targetLetter));
-      const nonMatchingPool = allWords.filter((w) => !w.startsWith(targetLetter));
+      const matchingPool = allWords.filter((w) => initial(w) === targetLetter);
+      const nonMatchingPool = allWords.filter((w) => initial(w) !== targetLetter);
 
       let wordToTest = shouldMatch
         ? (matchingPool.length ? pick(matchingPool) : pick(allWords))
@@ -92,7 +95,7 @@ export const fluency: Exercise = {
       for (let tries = 0; wordToTest === lastWord && tries < 5; tries++) wordToTest = pick(shouldMatch && matchingPool.length ? matchingPool : nonMatchingPool.length ? nonMatchingPool : allWords);
       lastWord = wordToTest;
 
-      const isActualMatch = wordToTest.startsWith(targetLetter);
+      const isActualMatch = initial(wordToTest) === targetLetter;
 
       card.textContent = wordToTest;
       flash(card, 'pop', 150);

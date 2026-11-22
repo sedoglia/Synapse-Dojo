@@ -267,10 +267,10 @@ export const game2048: Exercise = {
       const boardWrap = h('div', { class: 'game2048-wrap' }, headerRow, gridEl);
 
       // On-screen tactile controls (D-Pad for elderly accessibility and touch devices)
-      const btnUp = h('button', { class: 'game2048-dbtn d-up', 'aria-label': 'Up' }, '▲');
-      const btnLeft = h('button', { class: 'game2048-dbtn d-left', 'aria-label': 'Left' }, '◀');
-      const btnDown = h('button', { class: 'game2048-dbtn d-down', 'aria-label': 'Down' }, '▼');
-      const btnRight = h('button', { class: 'game2048-dbtn d-right', 'aria-label': 'Right' }, '▶');
+      const btnUp = h('button', { class: 'game2048-dbtn d-up', 'aria-label': t('ex.game2048.up') }, '▲');
+      const btnLeft = h('button', { class: 'game2048-dbtn d-left', 'aria-label': t('ex.game2048.left') }, '◀');
+      const btnDown = h('button', { class: 'game2048-dbtn d-down', 'aria-label': t('ex.game2048.down') }, '▼');
+      const btnRight = h('button', { class: 'game2048-dbtn d-right', 'aria-label': t('ex.game2048.right') }, '▶');
 
       const dpad = h(
         'div',

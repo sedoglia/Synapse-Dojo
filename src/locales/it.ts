@@ -1415,6 +1415,15 @@ const ui: Locale['ui'] = {
   'ex.rhythm.how': 'Parte un battito e una luce indica quale mano deve toccare.\nTocca il pulsante indicato a tempo con il battito (tasti A/← e D/→).\nI primi 3 battiti servono a trovare il ritmo; poi il puntino deve cadere nella zona verde.\nMentre migliori la zona verde si restringe.',
   'ex.crossMove.how': 'Compare una sfera ⚡ a sinistra o a destra, e la regola in alto dice STESSO LATO o INCROCIA.\nSTESSO LATO: tocca il pulsante dal lato della sfera. INCROCIA: tocca il lato OPPOSTO.\nUsa la mano sinistra per il pulsante sinistro e la destra per quello destro (tasti A/← e D/→).\nIl tempo per rispondere si accorcia mentre migliori.',
   'ex.dualTask.how': 'Premi e TIENI PREMUTO il pulsante sinistro con la mano sinistra per tutto il turno.\nIntanto compare un numero: con la mano destra tocca Pari o Dispari.\nRispondi prima che la barra si esaurisca; lasciare il pulsante sinistro conta come errore.\nIl tempo per rispondere si accorcia mentre migliori.',
+  'ex.crackTheCode.up': 'Aumenta la cifra',
+  'ex.crackTheCode.down': 'Diminuisci la cifra',
+  'ex.game2048.up': 'Su',
+  'ex.game2048.left': 'Sinistra',
+  'ex.game2048.down': 'Giù',
+  'ex.game2048.right': 'Destra',
+  'progress.filterDomain': 'Filtra per abilità',
+  'progress.filterStatus': 'Filtra per stato',
+  'progress.filterBadges': 'Filtra i badge',
 };
 
 const words: string[] = [

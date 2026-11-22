@@ -1,6 +1,6 @@
 import { h } from './dom';
 import { store } from './storage';
-import { t, meta, type I18nKey } from './i18n';
+import { t, meta, graphemes, type I18nKey } from './i18n';
 import { APP_NAME, SITE_URL } from './config';
 import type { Badge } from './rewards';
 
@@ -70,10 +70,10 @@ const FONT = 'Nunito, system-ui, -apple-system, "Segoe UI", sans-serif';
 export const shareText = (m: Milestone) =>
   m.kind === 'badge' ? t('share.textBadge', { name: t(m.badge.name), url: SITE_URL }) : t('share.textWeek', { n: m.days, url: SITE_URL });
 
-/** Chinese and Japanese can break between any two characters; the other languages break at spaces. */
+/** Chinese, Japanese and Thai, written without spaces, can break between any two letters; the others break at spaces. */
 function wrap(ctx: CanvasRenderingContext2D, text: string, maxWidth: number): string[] {
-  const unspaced = store.data.settings.lang === 'zh' || store.data.settings.lang === 'ja';
-  const tokens = unspaced ? [...text] : text.split(/\s+/);
+  const unspaced = meta().charsPerWord !== undefined;
+  const tokens = unspaced ? graphemes(text) : text.split(/\s+/);
   const glue = unspaced ? '' : ' ';
   const lines: string[] = [];
   let line = '';

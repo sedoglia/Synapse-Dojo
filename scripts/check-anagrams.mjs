@@ -1,12 +1,16 @@
-// Checks the Anagrams game in every language, using the same rules as the game. Run with `npm run check:anagrams`.
-// Run it after changing a word list; new words also need their valid anagrams added to `anagramWords`.
+// Checks the word games in every language (Anagrams and Word Sprint), using the same rules as the games.
+// Run with `npm run check:anagrams` after changing a word list; new words also need their valid anagrams in `anagramWords`.
+// Pass language codes to check only those: `npm run check:anagrams -- tr ko`.
 import { readdirSync } from 'node:fs';
 import { randomInt } from 'node:crypto';
-import { canon, isPlayable, scramble, solutionsOf } from '../src/exercises/anagramRules.ts';
+import { canon as canonIn, isPlayable, scramble, solutionsOf } from '../src/exercises/anagramRules.ts';
+import { initialIn } from '../src/textRules.ts';
 
 const LOCALES = new URL('../src/locales/', import.meta.url);
 const SCRAMBLES_PER_WORD = 200;
 const LEVEL_LENGTHS = [3, 4, 5, 6, 7, 8]; // what `lenFor` in anagrams.ts asks for, the lengths the levels can ask for
+const SPRINT_MIN_WORDS = 6; // MIN_WORDS in fluency.ts: an initial needs this many words to be asked
+const SPRINT_MIN_INITIALS = 4; // fewer initials than this and Word Sprint would keep asking the same letter
 
 const shuffle = (items) => {
   for (let i = items.length - 1; i > 0; i--) {
@@ -17,18 +21,20 @@ const shuffle = (items) => {
 };
 
 const errors = [];
-const langs = readdirSync(LOCALES).map((f) => f.replace('.ts', ''));
+const only = process.argv.slice(2);
+const langs = readdirSync(LOCALES).map((f) => f.replace('.ts', '')).filter((l) => !only.length || only.includes(l));
 
 for (const lang of langs) {
   const { default: locale } = await import(new URL(`${lang}.ts`, LOCALES));
   const segmenter = new Intl.Segmenter(lang, { granularity: 'grapheme' });
+  const canon = (word) => canonIn(word, lang);
   const split = (word) => [...segmenter.segment(word)].map((s) => s.segment);
   const letterKey = (word) => split(canon(word)).sort().join('|');
   const fail = (message) => errors.push(`${lang}: ${message}`);
 
   const { words, anagramWords = [] } = locale;
-  const solutions = solutionsOf(words, anagramWords);
-  const puzzles = words.filter((w) => isPlayable(w, solutions, split));
+  const solutions = solutionsOf(words, anagramWords, lang);
+  const puzzles = words.filter((w) => isPlayable(w, solutions, split, lang));
 
   // Every extra answer must be reachable: same letters as a word the game can ask, and not a repeat of a listed word.
   const wordKeys = new Set(words.map(letterKey));
@@ -49,7 +55,7 @@ for (const lang of langs) {
       if (!solutions.has(other)) fail(`"${other}" is not accepted for "${word}"`);
     }
     for (let i = 0; i < SCRAMBLES_PER_WORD; i++) {
-      const order = scramble(target, solutions, split, shuffle);
+      const order = scramble(target, solutions, split, shuffle, lang);
       if (solutions.has(canon(order.join('')))) fail(`"${word}" started already solved as "${order.join('')}"`);
       if ([...order].sort().join('|') !== split(target).sort().join('|')) fail(`"${word}" changed its letters`);
     }
@@ -66,10 +72,20 @@ for (const lang of langs) {
   const lengths = new Set(puzzles.map((w) => split(canon(w)).length));
   const reachable = LEVEL_LENGTHS.filter((n) => lengths.has(n)).join(',');
 
+  // No word is listed twice, even in another case.
+  if (new Set(words.map(canon)).size !== words.length) fail('words has duplicates');
+
+  // Word Sprint: enough initials with enough words each, and each initial a single letter the player can see.
+  const initials = Map.groupBy(words, (w) => initialIn(lang, w));
+  const rich = [...initials].filter(([, ws]) => ws.length >= SPRINT_MIN_WORDS).map(([c]) => c);
+  if (rich.length < SPRINT_MIN_INITIALS) fail(`Word Sprint has only ${rich.length} initials with ${SPRINT_MIN_WORDS}+ words (${rich.join(' ')})`);
+  for (const c of initials.keys()) if (!c || /[^\p{L}\p{M}]/u.test(c)) fail(`Word Sprint initial "${c}" is not a letter`);
+
   const ambiguous = [...byLetters.values()].filter((group) => group.length > 1).length;
   console.log(
     `${lang}: ${puzzles.length}/${words.length} playable, ${anagramWords.length} extra answers, ` +
-      `${ambiguous} letter sets with several answers, exact lengths for levels: ${reachable || 'none'}`,
+      `${ambiguous} letter sets with several answers, exact lengths for levels: ${reachable || 'none'}, ` +
+      `Word Sprint initials: ${rich.join(' ')}`,
   );
 }
 

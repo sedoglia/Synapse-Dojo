@@ -4,8 +4,8 @@ const ui: Locale['ui'] = {
   // Tangram
   'badge.tangramMaster.name': 'タングラムの達人',
   'badge.tangramMaster.desc': 'タングラムで複雑なシルエットを完成させ、レベル 6 に到達する',
-  'share.done.tangramMaster': 'Level 6 reached in Tangram',
-  'ex.tangram.name': 'Tangram',
+  'share.done.tangramMaster': 'タングラムでレベル6到達',
+  'ex.tangram.name': 'タングラム',
   'ex.tangram.desc': '補助線のない黒いシルエットを、図形ピースでどう分けて埋めるかを推理します',
   'ex.tangram.why': 'メンタルローテーションと部分‐全体の分解:ピースがどうシルエットを作るかを考えます。知能検査の積木模様(Block Design)やShepard & Metzler(1971)の研究と同じ考え方です。すべてがはまる瞬間は小さな「アハ!」体験で、人はそれを心地よいと感じます。',
   'ex.tangram.example': '黒いシルエットをよく見て、各ピースの位置を推理し、回転させてヒントなしではめ込もう。',
@@ -1377,6 +1377,15 @@ const ui: Locale['ui'] = {
   'ex.rhythm.how': 'ビートが鳴り、光がどちらの手でタップするかを示します。\n示されたボタンをビートに合わせてタップ（キー A/← と D/→）。\n最初の 3 拍はリズムをつかむため。その後は点が緑のゾーンに入る必要があります。\n上達すると緑のゾーンが狭くなります。',
   'ex.crossMove.how': '左か右に ⚡ の玉が現れ、上のルールに「同じ側」か「クロス」と出ます。\n同じ側：玉と同じ側のボタンをタップ。クロス：反対側をタップ。\n左のボタンは左手、右のボタンは右手で（キー A/← と D/→）。\n上達すると回答時間が短くなります。',
   'ex.dualTask.how': 'ラウンドの間ずっと、左手で左のボタンを押し続けます。\nその間に数字が出ます：右手で「偶数」か「奇数」をタップ。\nバーがなくなる前に答えます。左のボタンを離すとミスになります。\n上達すると回答時間が短くなります。',
+  'ex.crackTheCode.up': '数字を増やす',
+  'ex.crackTheCode.down': '数字を減らす',
+  'ex.game2048.up': '上',
+  'ex.game2048.left': '左',
+  'ex.game2048.down': '下',
+  'ex.game2048.right': '右',
+  'progress.filterDomain': '分野で絞り込む',
+  'progress.filterStatus': '状態で絞り込む',
+  'progress.filterBadges': 'バッジを絞り込む',
 };
 
 const words: string[] = [

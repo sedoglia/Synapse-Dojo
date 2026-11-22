@@ -1,12 +1,14 @@
 import { store } from './storage';
 import { pick } from './dom';
 import { reloadForNewVersion } from './update';
+import { upperIn, initialIn } from './textRules';
 import en, { ui as enUi } from './locales/en';
 
 /**
  * Languages: English is bundled as the default and fallback, the others are loaded on demand.
  * `letters` are the Echo letters (easy to tell apart when spoken), `speech` the voice used to say them,
- * `charsPerWord` converts characters to words for Speed reading in scripts without spaces.
+ * `charsPerWord` converts characters to words for Speed reading in scripts without spaces (and tells the share
+ * card it can break a line between any two letters).
  */
 interface LangMeta {
   name: string;
@@ -19,7 +21,7 @@ interface LangMeta {
 export const LANGS = {
   en: { name: 'English', speech: 'en-US', letters: ['H', 'K', 'L', 'O', 'Q', 'R', 'Y'] },
   es: { name: 'Español', speech: 'es-ES', letters: ['A', 'O', 'U', 'H', 'J', 'K', 'Z'] },
-  zh: { name: '中文', speech: 'zh-CN', letters: ['一', '三', '五', '七', '八', '十', '千'], charsPerWord: 1.5 },
+  zh: { name: '简体中文', speech: 'zh-CN', letters: ['一', '三', '五', '七', '八', '十', '千'], charsPerWord: 1.5 },
   hi: { name: 'हिन्दी', speech: 'hi-IN', letters: ['क', 'ग', 'प', 'म', 'र', 'ल', 'स'] },
   ar: { name: 'العربية', speech: 'ar-SA', letters: ['ب', 'د', 'س', 'ك', 'ل', 'م', 'ن'], rtl: true },
   pt: { name: 'Português', speech: 'pt-BR', letters: ['A', 'O', 'U', 'J', 'K', 'R', 'Z'] },
@@ -29,6 +31,19 @@ export const LANGS = {
   ja: { name: '日本語', speech: 'ja-JP', letters: ['カ', 'サ', 'タ', 'ナ', 'ハ', 'マ', 'ヤ'], charsPerWord: 2 },
   id: { name: 'Bahasa Indonesia', speech: 'id-ID', letters: ['A', 'O', 'U', 'K', 'R', 'W', 'Y'] },
   it: { name: 'Italiano', speech: 'it-IT', letters: ['A', 'E', 'I', 'O', 'U', 'H', 'Z'] },
+  bn: { name: 'বাংলা', speech: 'bn-BD', letters: ['ক', 'গ', 'প', 'ম', 'র', 'ল', 'স'] },
+  ur: { name: 'اردو', speech: 'ur-PK', letters: ['ب', 'د', 'س', 'ک', 'ل', 'م', 'ن'], rtl: true },
+  tr: { name: 'Türkçe', speech: 'tr-TR', letters: ['A', 'O', 'U', 'K', 'R', 'Y', 'Z'] },
+  vi: { name: 'Tiếng Việt', speech: 'vi-VN', letters: ['A', 'O', 'U', 'B', 'H', 'K', 'X'] },
+  ko: { name: '한국어', speech: 'ko-KR', letters: ['가', '나', '다', '라', '마', '바', '사'] },
+  fa: { name: 'فارسی', speech: 'fa-IR', letters: ['ب', 'د', 'س', 'ک', 'ل', 'م', 'ن'], rtl: true },
+  'zh-TW': { name: '繁體中文', speech: 'zh-TW', letters: ['一', '三', '五', '七', '八', '十', '千'], charsPerWord: 1.5 },
+  th: { name: 'ไทย', speech: 'th-TH', letters: ['ก', 'ง', 'ด', 'น', 'ม', 'ร', 'ส'], charsPerWord: 4 },
+  pl: { name: 'Polski', speech: 'pl-PL', letters: ['A', 'O', 'U', 'K', 'R', 'W', 'Z'] },
+  uk: { name: 'Українська', speech: 'uk-UA', letters: ['А', 'О', 'У', 'Б', 'К', 'Р', 'Ш'] },
+  mr: { name: 'मराठी', speech: 'mr-IN', letters: ['क', 'ग', 'प', 'म', 'र', 'ल', 'स'] },
+  te: { name: 'తెలుగు', speech: 'te-IN', letters: ['క', 'గ', 'ప', 'మ', 'ర', 'ల', 'స'] },
+  ta: { name: 'தமிழ்', speech: 'ta-IN', letters: ['க', 'ச', 'ப', 'ம', 'ர', 'வ', 'ய'] },
 } satisfies Record<string, LangMeta>;
 
 export type Lang = keyof typeof LANGS;
@@ -71,14 +86,18 @@ export const isLang = (v: unknown): v is Lang => typeof v === 'string' && Object
 export const meta = (): LangMeta => LANGS[store.data.settings.lang] ?? LANGS.en;
 const locale = (): Locale => loaded[store.data.settings.lang] ?? en;
 
+/** Traditional Chinese tags: Taiwan, Hong Kong, Macau, or the script named outright ("zh-Hant-HK"). */
+const TRADITIONAL = /^zh-(hant|tw|hk|mo)\b/i;
+
 /**
- * The device's preferred language among the supported ones ("it-IT" → "it"), English if none is supported.
+ * The device's preferred language among the supported ones ("it-IT" → "it", "zh-HK" → "zh-TW"), English if none is supported.
  * Starting in the device's language matters: an English app on an Italian phone gets auto-translated by the
  * browser, which translates the interface but not the letter tiles, so games like Anagrams look broken.
  */
 export function deviceLang(): Lang {
   const prefs = typeof navigator === 'undefined' ? [] : navigator.languages?.length ? navigator.languages : [navigator.language];
   for (const tag of prefs) {
+    if (tag && TRADITIONAL.test(tag)) return 'zh-TW';
     const base = tag?.split('-')[0]?.toLowerCase();
     if (isLang(base)) return base;
   }
@@ -140,6 +159,11 @@ export function wordNear(list: readonly string[], n: number): string {
   const near = pool.filter((w) => dist(w) === best);
   return pick(near);
 }
+
+/** A word in the current language's capitals (Turkish "i" → "İ"). */
+export const upper = (word: string) => upperIn(meta().speech, word);
+/** The letter Word Sprint files a word under in the current language (Korean "사과" → "ㅅ"). */
+export const initial = (word: string) => initialIn(meta().speech, word);
 
 export const words = () => locale().words;
 export const anagramWords = () => locale().anagramWords ?? [];

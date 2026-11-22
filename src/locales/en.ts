@@ -1417,6 +1417,15 @@ export const ui = {
   'ex.rhythm.how': 'A beat plays and a light shows which hand must tap.\nTap the indicated pad in time with the beat (keys A/← and D/→).\nThe first 3 beats are for finding the rhythm; after that the dot must land inside the green zone.\nThe green zone narrows as you improve.',
   'ex.crossMove.how': 'An ⚡ orb appears on the left or on the right, and the rule at the top says SAME SIDE or CROSS.\nSAME SIDE: tap the button on the orb’s side. CROSS: tap the OPPOSITE side.\nUse your left hand for the left button and your right hand for the right one (keys A/← and D/→).\nThe time to answer shrinks as you improve.',
   'ex.dualTask.how': 'Press and HOLD the left button with your left hand for the whole round.\nMeanwhile a number appears: with your right hand tap Even or Odd.\nAnswer before the bar runs out; letting go of the left button counts as a mistake.\nThe time to answer shrinks as you improve.',
+  'ex.crackTheCode.up': 'Increase digit',
+  'ex.crackTheCode.down': 'Decrease digit',
+  'ex.game2048.up': 'Up',
+  'ex.game2048.left': 'Left',
+  'ex.game2048.down': 'Down',
+  'ex.game2048.right': 'Right',
+  'progress.filterDomain': 'Filter by domain',
+  'progress.filterStatus': 'Filter by status',
+  'progress.filterBadges': 'Filter badges',
 };
 
 const nicknames = {

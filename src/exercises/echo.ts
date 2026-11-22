@@ -50,10 +50,13 @@ function mini(pos: number, letter: string): HTMLElement {
 function speak(letter: string): boolean {
   if (!store.data.settings.sound || !('speechSynthesis' in window)) return false;
   const lang = meta().speech;
-  const u = new SpeechSynthesisUtterance(letter.toLowerCase());
+  const u = new SpeechSynthesisUtterance(letter.toLocaleLowerCase(lang));
   u.lang = lang;
   u.rate = 0.95;
-  u.voice = speechSynthesis.getVoices().find((v) => v.lang.replace('_', '-').startsWith(lang.slice(0, 2))) ?? null;
+  const voices = speechSynthesis.getVoices();
+  const tag = (v: SpeechSynthesisVoice) => v.lang.replace('_', '-').toLowerCase();
+  // The exact voice first (zh-TW rather than zh-CN), then any voice of the same language.
+  u.voice = voices.find((v) => tag(v) === lang.toLowerCase()) ?? voices.find((v) => tag(v).startsWith(lang.slice(0, 2).toLowerCase())) ?? null;
   // Speaking right after cancel() is sometimes dropped by Chrome, so only cancel when needed and speak a tick later.
   if (speechSynthesis.speaking || speechSynthesis.pending) speechSynthesis.cancel();
   setTimeout(() => speechSynthesis.speak(u), 30);

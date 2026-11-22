@@ -4,7 +4,7 @@ const ui: Locale['ui'] = {
   // Tangram
   'badge.tangramMaster.name': 'Master Tangram',
   'badge.tangramMaster.desc': 'Capai level 6 di Tangram dengan menyelesaikan siluet rumit',
-  'share.done.tangramMaster': 'Level 6 reached in Tangram',
+  'share.done.tangramMaster': 'Level 6 di Tangram tercapai',
   'ex.tangram.name': 'Tangram',
   'ex.tangram.desc': 'Simpulkan cara mengurai dan mengisi siluet padat tanpa garis bantu dengan kepingan geometris',
   'ex.tangram.why': 'Rotasi mental dan penguraian bagian-keseluruhan: memahami bagaimana kepingan membentuk siluet, seperti pada subtes Block Design dalam tes kecerdasan dan studi Shepard & Metzler (1971). Saat semuanya pas adalah "Aha!" kecil, pengalaman yang digambarkan orang sebagai menyenangkan.',
@@ -1377,6 +1377,15 @@ const ui: Locale['ui'] = {
   'ex.rhythm.how': 'Ketukan berbunyi dan cahaya menunjukkan tangan mana yang harus mengetuk.\nKetuk tombol yang ditunjuk sesuai irama (tombol A/← dan D/→).\n3 ketukan pertama untuk menemukan irama; setelah itu titik harus jatuh di zona hijau.\nSemakin mahir, zona hijau makin sempit.',
   'ex.crossMove.how': 'Bola ⚡ muncul di kiri atau kanan, dan aturan di atas berbunyi SISI SAMA atau SILANG.\nSISI SAMA: ketuk tombol di sisi bola. SILANG: ketuk sisi yang BERLAWANAN.\nPakai tangan kiri untuk tombol kiri dan tangan kanan untuk tombol kanan (tombol A/← dan D/→).\nWaktu menjawab makin pendek seiring kemajuanmu.',
   'ex.dualTask.how': 'Tekan dan TAHAN tombol kiri dengan tangan kiri sepanjang ronde.\nSementara itu muncul angka: dengan tangan kanan ketuk Genap atau Ganjil.\nJawab sebelum bilah habis; melepas tombol kiri dihitung salah.\nWaktu menjawab makin pendek seiring kemajuanmu.',
+  'ex.crackTheCode.up': 'Naikkan angka',
+  'ex.crackTheCode.down': 'Turunkan angka',
+  'ex.game2048.up': 'Atas',
+  'ex.game2048.left': 'Kiri',
+  'ex.game2048.down': 'Bawah',
+  'ex.game2048.right': 'Kanan',
+  'progress.filterDomain': 'Saring menurut ranah',
+  'progress.filterStatus': 'Saring menurut status',
+  'progress.filterBadges': 'Saring lencana',
 };
 
 const words: string[] = [

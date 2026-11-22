@@ -4,7 +4,7 @@ const ui: Locale['ui'] = {
   // Tangram
   'badge.tangramMaster.name': 'Tangram-Meister',
   'badge.tangramMaster.desc': 'Erreiche Stufe 6 im Tangram mit komplexen Silhouetten',
-  'share.done.tangramMaster': 'Level 6 reached in Tangram',
+  'share.done.tangramMaster': 'Level 6 bei Tangram erreicht',
   'ex.tangram.name': 'Tangram',
   'ex.tangram.desc': 'Finde heraus, wie du volle Silhouetten ohne Hilfslinien mit geometrischen Teilen zerlegst und füllst',
   'ex.tangram.why': 'Mentale Rotation und Teil-Ganzes-Zerlegung: herausfinden, wie die Teile eine Silhouette bilden, wie beim Mosaik-Test (Block Design) in Intelligenztests und in den Studien von Shepard & Metzler (1971). Der Moment, in dem alles passt, ist ein kleines „Aha!“, ein Erlebnis, das Menschen als angenehm beschreiben.',
@@ -1377,6 +1377,15 @@ const ui: Locale['ui'] = {
   'ex.rhythm.how': 'Ein Takt ertönt, und ein Licht zeigt, welche Hand tippen soll.\nTippe die angezeigte Taste im Takt (Tasten A/← und D/→).\nDie ersten 3 Schläge dienen zum Einfinden; danach muss der Punkt in der grünen Zone landen.\nJe besser du wirst, desto schmaler die grüne Zone.',
   'ex.crossMove.how': 'Links oder rechts erscheint eine Kugel ⚡, und die Regel oben lautet GLEICHE SEITE oder KREUZEN.\nGLEICHE SEITE: tippe die Taste auf der Seite der Kugel. KREUZEN: tippe die GEGENÜBERLIEGENDE Seite.\nNimm die linke Hand für die linke Taste und die rechte für die rechte (Tasten A/← und D/→).\nDie Antwortzeit wird kürzer, je besser du wirst.',
   'ex.dualTask.how': 'Drück die linke Taste mit der linken Hand und HALTE sie die ganze Runde gedrückt.\nInzwischen erscheint eine Zahl: tippe mit der rechten Hand Gerade oder Ungerade.\nAntworte, bevor der Balken abläuft; die linke Taste loszulassen zählt als Fehler.\nDie Antwortzeit wird kürzer, je besser du wirst.',
+  'ex.crackTheCode.up': 'Ziffer erhöhen',
+  'ex.crackTheCode.down': 'Ziffer verringern',
+  'ex.game2048.up': 'Hoch',
+  'ex.game2048.left': 'Links',
+  'ex.game2048.down': 'Runter',
+  'ex.game2048.right': 'Rechts',
+  'progress.filterDomain': 'Nach Bereich filtern',
+  'progress.filterStatus': 'Nach Status filtern',
+  'progress.filterBadges': 'Abzeichen filtern',
 };
 
 const words: string[] = [

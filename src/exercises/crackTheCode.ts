@@ -297,7 +297,7 @@ export const crackTheCode: Exercise = {
           {
             type: 'button',
             class: 'ctc-dial-btn up',
-            'aria-label': 'Increase digit',
+            'aria-label': t('ex.crackTheCode.up'),
             onclick: (e: MouseEvent) => {
               e.stopPropagation();
               setDial(i, (dialValues[i] + 1) % 10);
@@ -311,7 +311,7 @@ export const crackTheCode: Exercise = {
           {
             type: 'button',
             class: 'ctc-dial-btn down',
-            'aria-label': 'Decrease digit',
+            'aria-label': t('ex.crackTheCode.down'),
             onclick: (e: MouseEvent) => {
               e.stopPropagation();
               setDial(i, (dialValues[i] + 9) % 10);

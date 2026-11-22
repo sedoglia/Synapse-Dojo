@@ -379,8 +379,8 @@ function renderExercises(): HTMLElement[] {
   else if (exerciseFilter === 'unplayed') list = list.filter((e) => !store.lastPlayed(e.id));
 
   return [
-    h('div', { class: 'chip-bar', role: 'group', 'aria-label': 'Domain filter' }, ...domainChips),
-    h('div', { class: 'chip-bar', style: { paddingTop: '0' }, role: 'group', 'aria-label': 'Status filter' }, ...statusChips),
+    h('div', { class: 'chip-bar', role: 'group', 'aria-label': t('progress.filterDomain') }, ...domainChips),
+    h('div', { class: 'chip-bar', style: { paddingTop: '0' }, role: 'group', 'aria-label': t('progress.filterStatus') }, ...statusChips),
     h(
       'section',
       { class: 'card' },
@@ -579,7 +579,7 @@ function renderBadges(): HTMLElement[] {
         ),
         h('div', { class: 'goal-bar' }, h('div', { style: { width: `${pct}%` } })),
       ),
-      h('div', { class: 'chip-bar', role: 'group', 'aria-label': 'Badge status filter' }, ...filterChips),
+      h('div', { class: 'chip-bar', role: 'group', 'aria-label': t('progress.filterBadges') }, ...filterChips),
       h(
         'div',
         { class: 'badges', style: { marginTop: '10px' } },

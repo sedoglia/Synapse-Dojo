@@ -68,7 +68,7 @@ The evidence above leads to the platform's building blocks:
    - **Achievements & Trophies (Trophy Room & Zeigarnik Effect)**: A structured showcase of 50+ badges with filtering for *All*, *In Progress*, *Earned*, and *Locked*. Prioritizing nearly completed goals leverages the Zeigarnik effect (1927) and the endowed progress effect (Nunes & Drèze 2006), which invite players to finish what they started.
 
 10. **Step-by-step instructions for every game:**
-   Every exercise has a "How to play" box with 3–4 numbered steps (what appears, what to do, what counts as a mistake, how difficulty changes), shown on the intro card and in the guide, in all 12 languages. Breaking instructions into short steps lowers cognitive load and helps most when learning a new task (segmenting principle, Mayer 2009), while the illustrated example and the guided practice remain available for the first game.
+   Every exercise has a "How to play" box with 3–4 numbered steps (what appears, what to do, what counts as a mistake, how difficulty changes), shown on the intro card and in the guide, in all 25 languages. Breaking instructions into short steps lowers cognitive load and helps most when learning a new task (segmenting principle, Mayer 2009), while the illustrated example and the guided practice remain available for the first game.
 
 ---
 

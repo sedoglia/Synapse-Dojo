@@ -68,7 +68,7 @@ Dalle evidenze sopra descritte derivano i pilastri costruttivi della piattaforma
    - **Traguardi & Medaglie (Trophy Room & Effetto Zeigarnik)**: Vetrina celebrativa di tutte le oltre 50 medaglie, filtrabili per stato (*Tutti*, *In arrivo*, *Sbloccati*, *Da sbloccare*). Mostrare chiaramente i compiti quasi conclusi sfrutta l'effetto Zeigarnik (1927) e l'effetto di progresso dotato (*Endowed Progress Effect*, Nunes & Drèze 2006), che invogliano a completare ciò che è iniziato.
 
 10. **Istruzioni passo-passo per ogni gioco:**  
-   Ogni esercizio ha un riquadro «Come si gioca» con 3–4 passi numerati (cosa appare, cosa fare, cosa conta come errore, come cambia la difficoltà), mostrato nella scheda introduttiva e nella guida, in tutte le 12 lingue. Spezzare le istruzioni in passi brevi riduce il carico cognitivo e aiuta soprattutto chi impara un compito nuovo (principio di segmentazione, Mayer 2009), mentre l'esempio illustrato e la prova guidata restano disponibili per la prima partita.
+   Ogni esercizio ha un riquadro «Come si gioca» con 3–4 passi numerati (cosa appare, cosa fare, cosa conta come errore, come cambia la difficoltà), mostrato nella scheda introduttiva e nella guida, in tutte le 25 lingue. Spezzare le istruzioni in passi brevi riduce il carico cognitivo e aiuta soprattutto chi impara un compito nuovo (principio di segmentazione, Mayer 2009), mentre l'esempio illustrato e la prova guidata restano disponibili per la prima partita.
 
 ---
 

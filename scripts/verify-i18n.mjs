@@ -8,10 +8,14 @@ const __dirname = dirname(__filename);
 const ROOT = join(__dirname, '..');
 const LOCALES_DIR = join(ROOT, 'src', 'locales');
 
-const LANGS = ['en', 'es', 'zh', 'hi', 'ar', 'pt', 'fr', 'ru', 'de', 'ja', 'id', 'it'];
+// Pass language codes to check only those (plus English): `npm run check:i18n -- tr ko`.
+const ONLY = process.argv.slice(2);
+const LANGS = ['en', ...readdirSync(LOCALES_DIR).map((f) => f.replace('.ts', '')).filter((l) => l !== 'en' && (!ONLY.length || ONLY.includes(l)))];
+/** Languages that do not write in the Latin alphabet: a text still in plain English there was left untranslated. */
+const NON_LATIN = new Set(['zh', 'zh-TW', 'hi', 'ar', 'ru', 'ja', 'bn', 'ur', 'ko', 'fa', 'th', 'uk', 'mr', 'te', 'ta']);
 
 async function run() {
-  console.log('=== VERIFYING LOCALIZATION FOR 12 LANGUAGES ===\n');
+  console.log(`=== VERIFYING LOCALIZATION FOR ${LANGS.length} LANGUAGES ===\n`);
 
   // 1. Load all locales
   const locales = {};
@@ -57,6 +61,31 @@ async function run() {
       }
       extraKeyCount += extra.length;
     }
+  }
+
+  // 2b. Texts left in English: in non-Latin languages English prose outside {params}, brand names and units is
+  // suspicious; in every language a long text identical to English is.
+  console.log('\n--- 1b. Untranslated texts ---');
+  const ALLOWED_LATIN = /Synapse Dojo|Neuro Score|PolyForm|Noncommercial|GitHub|Google|Play|AppGallery|Huawei|Uptodown|Android|iOS|Chrome|Safari|Firefox|Edge|Cloudflare|PWA|HTML|JSON|URL|QR|Wi-Fi|PIN|ID|ms|wpm|UFOV|ACTIVE|NeuroRacer|MSIT|Stroop|Wisconsin|Corsi|Kawashima|Trail Making|Tower of London|N-Back|Go\/No-Go|Flanker|Tangram|Nonogram|2048|Mayer|Pelmanism|https?:\/\/\S+|[\w.+-]+@[\w.-]+|synapsedojo\.com/g;
+  let untranslated = 0;
+  for (const lang of LANGS) {
+    if (lang === 'en') continue;
+    const ui = locales[lang].ui;
+    const hits = [];
+    for (const k of enKeys) {
+      const v = ui[k];
+      if (!v) continue;
+      const stripped = v.replace(/\{\w+\}/g, '').replace(ALLOWED_LATIN, '');
+      // Names in brackets and proper nouns are fine; two lowercase English words in a row are a sentence left as is.
+      const prose = stripped.replace(/\([^)]*\)/g, '').replace(/et al/g, '');
+      if (NON_LATIN.has(lang) && /[a-z]{2,}\s+[a-z]{2,}/.test(prose)) hits.push(k);
+      else if (v === enUi[k] && /[A-Za-z]{4,}.*\s.*[A-Za-z]{4,}/.test(stripped)) hits.push(k);
+    }
+    if (hits.length) {
+      console.log(`[?] ${lang}: ${hits.length} texts may still be in English:`);
+      for (const k of hits) console.log(`    ~ ${k}: "${ui[k]}"`);
+      untranslated += hits.length;
+    } else console.log(`[✓] ${lang}: no English left.`);
   }
 
   // 3. Parameter / Placeholder consistency

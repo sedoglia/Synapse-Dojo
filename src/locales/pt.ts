@@ -4,7 +4,7 @@ const ui: Locale['ui'] = {
   // Tangram
   'badge.tangramMaster.name': 'Mestre do Tangram',
   'badge.tangramMaster.desc': 'Alcance o nível 6 no Tangram completando silhuetas complexas',
-  'share.done.tangramMaster': 'Level 6 reached in Tangram',
+  'share.done.tangramMaster': 'Nível 6 alcançado no Tangram',
   'ex.tangram.name': 'Tangram',
   'ex.tangram.desc': 'Deduza como decompor e preencher silhuetas maciças sem linhas-guia usando peças geométricas',
   'ex.tangram.why': 'Rotação mental e decomposição parte-todo: entender como as peças formam uma silhueta, como no subteste Cubos (Block Design) dos testes de inteligência e nos estudos de Shepard e Metzler (1971). O momento em que tudo se encaixa é um pequeno «Ahá!», uma experiência que as pessoas descrevem como agradável.',
@@ -1377,6 +1377,15 @@ const ui: Locale['ui'] = {
   'ex.rhythm.how': 'Toca uma batida e uma luz indica qual mão deve tocar.\nToque o botão indicado no tempo da batida (teclas A/← e D/→).\nAs 3 primeiras batidas servem para pegar o ritmo; depois o ponto precisa cair na zona verde.\nConforme você melhora a zona verde se estreita.',
   'ex.crossMove.how': 'Aparece uma esfera ⚡ à esquerda ou à direita, e a regra no alto diz MESMO LADO ou CRUZE.\nMESMO LADO: toque o botão do lado da esfera. CRUZE: toque o lado OPOSTO.\nUse a mão esquerda para o botão esquerdo e a direita para o direito (teclas A/← e D/→).\nO tempo para responder diminui conforme você melhora.',
   'ex.dualTask.how': 'Aperte e MANTENHA pressionado o botão esquerdo com a mão esquerda durante toda a rodada.\nEnquanto isso aparece um número: com a mão direita toque Par ou Ímpar.\nResponda antes que a barra acabe; soltar o botão esquerdo conta como erro.\nO tempo para responder diminui conforme você melhora.',
+  'ex.crackTheCode.up': 'Aumentar o dígito',
+  'ex.crackTheCode.down': 'Diminuir o dígito',
+  'ex.game2048.up': 'Cima',
+  'ex.game2048.left': 'Esquerda',
+  'ex.game2048.down': 'Baixo',
+  'ex.game2048.right': 'Direita',
+  'progress.filterDomain': 'Filtrar por área',
+  'progress.filterStatus': 'Filtrar por estado',
+  'progress.filterBadges': 'Filtrar medalhas',
 };
 
 const words: string[] = [

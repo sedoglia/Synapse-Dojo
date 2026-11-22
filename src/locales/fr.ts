@@ -4,7 +4,7 @@ const ui: Locale['ui'] = {
   // Tangram
   'badge.tangramMaster.name': 'Maître du Tangram',
   'badge.tangramMaster.desc': 'Atteins le niveau 6 au Tangram en complétant des silhouettes complexes',
-  'share.done.tangramMaster': 'Level 6 reached in Tangram',
+  'share.done.tangramMaster': 'Niveau 6 atteint au Tangram',
   'ex.tangram.name': 'Tangram',
   'ex.tangram.desc': 'Déduis comment décomposer et remplir des silhouettes pleines sans lignes guides avec des pièces géométriques',
   'ex.tangram.why': 'Rotation mentale et décomposition partie-tout : comprendre comment les pièces forment une silhouette, comme dans le subtest Cubes (Block Design) des tests d’intelligence et dans les études de Shepard et Metzler (1971). Le moment où tout s’emboîte est un petit « Aha ! », une expérience que l’on décrit comme agréable.',
@@ -1377,6 +1377,15 @@ const ui: Locale['ui'] = {
   'ex.rhythm.how': 'Un battement retentit et une lumière indique quelle main doit toucher.\nTouche le bouton indiqué en rythme (touches A/← et D/→).\nLes 3 premiers battements servent à trouver le rythme ; ensuite le point doit tomber dans la zone verte.\nEn progressant la zone verte se rétrécit.',
   'ex.crossMove.how': 'Une sphère ⚡ apparaît à gauche ou à droite, et la règle en haut dit MÊME CÔTÉ ou CROISE.\nMÊME CÔTÉ : touche le bouton du côté de la sphère. CROISE : touche le côté OPPOSÉ.\nUtilise la main gauche pour le bouton gauche et la droite pour le droit (touches A/← et D/→).\nLe temps de réponse raccourcit en progressant.',
   'ex.dualTask.how': 'Appuie et MAINTIENS le bouton gauche avec la main gauche pendant tout le tour.\nPendant ce temps un nombre apparaît : avec la main droite touche Pair ou Impair.\nRéponds avant que la barre s’épuise ; lâcher le bouton gauche compte comme une erreur.\nLe temps de réponse raccourcit en progressant.',
+  'ex.crackTheCode.up': 'Augmenter le chiffre',
+  'ex.crackTheCode.down': 'Diminuer le chiffre',
+  'ex.game2048.up': 'Haut',
+  'ex.game2048.left': 'Gauche',
+  'ex.game2048.down': 'Bas',
+  'ex.game2048.right': 'Droite',
+  'progress.filterDomain': 'Filtrer par domaine',
+  'progress.filterStatus': 'Filtrer par état',
+  'progress.filterBadges': 'Filtrer les badges',
 };
 
 const words: string[] = [

@@ -4,7 +4,7 @@ const ui: Locale['ui'] = {
   // Tangram
   'badge.tangramMaster.name': 'Maestro del Tangram',
   'badge.tangramMaster.desc': 'Alcanza el nivel 6 en Tangram completando siluetas complejas',
-  'share.done.tangramMaster': 'Level 6 reached in Tangram',
+  'share.done.tangramMaster': 'Nivel 6 alcanzado en Tangram',
   'ex.tangram.name': 'Tangram',
   'ex.tangram.desc': 'Deduce cómo descomponer y rellenar siluetas macizas sin líneas guía usando piezas geométricas',
   'ex.tangram.why': 'Rotación mental y descomposición parte-todo: entender cómo las piezas forman una silueta, como en el subtest de Cubos (Block Design) de los tests de inteligencia y en los estudios de Shepard y Metzler (1971). El momento en que todo encaja es un pequeño «¡Ajá!», una experiencia que las personas describen como agradable.',
@@ -1377,6 +1377,15 @@ const ui: Locale['ui'] = {
   'ex.rhythm.how': 'Suena un ritmo y una luz indica qué mano debe tocar.\nToca el botón indicado al compás (teclas A/← y D/→).\nLos 3 primeros golpes sirven para encontrar el ritmo; después el punto debe caer en la zona verde.\nAl mejorar, la zona verde se estrecha.',
   'ex.crossMove.how': 'Aparece una esfera ⚡ a la izquierda o a la derecha, y la regla de arriba dice MISMO LADO o CRUZA.\nMISMO LADO: toca el botón del lado de la esfera. CRUZA: toca el lado OPUESTO.\nUsa la mano izquierda para el botón izquierdo y la derecha para el derecho (teclas A/← y D/→).\nEl tiempo para responder se acorta al mejorar.',
   'ex.dualTask.how': 'Pulsa y MANTÉN pulsado el botón izquierdo con la mano izquierda durante toda la ronda.\nMientras, aparece un número: con la mano derecha toca Par o Impar.\nResponde antes de que se agote la barra; soltar el botón izquierdo cuenta como error.\nEl tiempo para responder se acorta al mejorar.',
+  'ex.crackTheCode.up': 'Subir la cifra',
+  'ex.crackTheCode.down': 'Bajar la cifra',
+  'ex.game2048.up': 'Arriba',
+  'ex.game2048.left': 'Izquierda',
+  'ex.game2048.down': 'Abajo',
+  'ex.game2048.right': 'Derecha',
+  'progress.filterDomain': 'Filtrar por área',
+  'progress.filterStatus': 'Filtrar por estado',
+  'progress.filterBadges': 'Filtrar insignias',
 };
 
 const words: string[] = [
