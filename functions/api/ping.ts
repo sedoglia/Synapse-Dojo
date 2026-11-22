@@ -8,15 +8,16 @@ import { fail, localDay, networkHash, readBody, type Handler } from '../../serve
  * network can add.
  *
  * Two limits per network tell a real place apart from someone sending the request in a loop by how the signals
- * arrive, not by who sends them. A care home, a hospital's guest Wi-Fi or a mobile carrier's shared address
- * produce signals spread over the days, so DAY_LIMIT leaves them room (up to 7 × DAY_LIMIT in the 7-day total);
- * a loop produces a burst, which HOUR_LIMIT stops.
+ * arrive, not by who sends them. A care home, a hospital's guest Wi-Fi or a mobile carrier's shared address send
+ * signals spread over the days; a loop sends a burst. The limits leave room for a group session, a ward or a room
+ * where up to HOUR_LIMIT people start together: since each device signals again 7 days later, such a group keeps
+ * arriving on the same weekday. One network can add at most 7 × DAY_LIMIT to the 7-day total.
  *
  * Networks that hit the daily limit, to see whether it is too low (wrangler d1 execute synapse-board --remote):
- *   SELECT day, COUNT(*) AS capped FROM community_days WHERE n >= 30 GROUP BY day;
+ *   SELECT day, COUNT(*) AS capped FROM community_days WHERE n >= 60 GROUP BY day;
  */
-const DAY_LIMIT = 30;
-const HOUR_LIMIT = 15;
+const DAY_LIMIT = 60;
+const HOUR_LIMIT = 30;
 const HOUR = 3_600_000;
 
 export const onRequestPost: Handler = async ({ request, env }) => {
