@@ -6,11 +6,11 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
-## [Non rilasciato]
+## [0.22.0] - 2026-11-22
 
 ### Modificato
 
-- **Il conteggio di chi si allena copre gli ultimi 7 giorni** (`functions/api/ping.ts`, `functions/api/stats.ts`, `migrations/0007_community_days.sql`, `src/board.ts`, `src/screens/home.ts`, `src/locales/*.ts`): prima seguiva la settimana di calendario e il lunedì ripartiva da zero; ora è una finestra mobile, «👥 Negli ultimi 7 giorni si sono allenate N persone», che cambia gradualmente ogni giorno. Ogni dispositivo invia la sola data al massimo una volta ogni 7 giorni, a un'attività; il server conta per giorno e somma gli ultimi 7, senza mai scendere sotto i giocatori della classifica attivi negli stessi giorni. Ogni rete può aggiungere al massimo 60 persone al giorno e 30 all'ora, abbastanza per una sessione di gruppo in una casa di riposo o in un reparto; l'impronta della rete è legata al giorno e cancellata dopo 2 settimane. Il conteggio riparte da zero: finché resta sotto le 20 persone compare la frase senza numero. Informativa privacy, etichetta dell'opzione, guida statica e README aggiornati, in tutte le 12 lingue.
+- **Il conteggio di chi si allena copre gli ultimi 7 giorni** (`functions/api/ping.ts`, `functions/api/stats.ts`, `migrations/0007_community_days.sql`, `src/board.ts`, `src/screens/home.ts`, `src/locales/*.ts`): prima seguiva la settimana di calendario e il lunedì ripartiva da zero; ora è una finestra mobile, «👥 Negli ultimi 7 giorni si sono allenate N persone», che cambia gradualmente ogni giorno. Ogni dispositivo invia la sola data al massimo una volta ogni 7 giorni, a un'attività; il server conta per giorno e somma gli ultimi 7, senza mai scendere sotto i giocatori della classifica attivi negli stessi giorni. Ogni rete può aggiungere al massimo 60 persone al giorno e 30 all'ora, abbastanza per una sessione di gruppo in una casa di riposo o in un reparto; l'impronta della rete è legata al giorno e cancellata dopo 2 settimane. Il conteggio riparte da zero: finché resta sotto le 20 persone compare la frase senza numero. Informativa privacy, etichetta dell'opzione, guida statica e README aggiornati, in tutte le 12 lingue (#106, #107).
 
 ## [0.21.2] - 2026-11-21
 
