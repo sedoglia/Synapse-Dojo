@@ -72,7 +72,7 @@ synapse-dojo/
 ├── src/
 │   ├── exercises/          40 exercise implementations, index.ts (catalog & battery), types.ts, puzzle datasets
 │   ├── screens/            App views: home, onboarding, training, play, progress, settings, board, boardJoin, groups, guide, privacy, license
-│   ├── locales/            12 standalone locale bundles (en.ts is the type-safe blueprint)
+│   ├── locales/            25 standalone locale bundles (en.ts is the type-safe blueprint)
 │   ├── adaptive.ts         Continuous adaptive difficulty staircase engine (weighted up-down)
 │   ├── audio.ts            Procedural Web Audio API sound synthesis & native SpeechSynthesis
 │   ├── board.ts            Leaderboard client: weekly summary, background upload, groups and invites
