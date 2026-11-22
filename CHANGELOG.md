@@ -6,11 +6,11 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
-## [Unreleased]
+## [0.23.1] - 2026-11-22
 
 ### Added
 
-- **Offer to switch to the device's language** (`src/screens/home.ts`, `src/i18n.ts`, `src/main.ts`, `src/storage.ts`, `src/locales/*.ts`): only a first visit starts in the device's language, so players who came before their language was added stayed in English, the fallback. When the device's language is supported and the app is in English, the home screen now asks once which language to use, in the device's language with the English underneath, with two buttons named after the languages ("Türkçe" / "English"). The answer is remembered for that device language; players who chose a language other than English never see it.
+- **Offer to switch to the device's language** (`src/screens/home.ts`, `src/i18n.ts`, `src/main.ts`, `src/storage.ts`, `src/locales/*.ts`): only a first visit starts in the device's language, so players who came before their language was added stayed in English, the fallback. When the device's language is supported and the app is in English, the home screen now asks once which language to use, in the device's language with the English underneath, with two buttons named after the languages ("Türkçe" / "English"). The answer is remembered for that device language; players who chose a language other than English never see it (#112).
 
 ## [0.23.0] - 2026-11-22
 
