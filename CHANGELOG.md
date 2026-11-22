@@ -6,11 +6,11 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
-## [Unreleased]
+## [0.22.0] - 2026-11-22
 
 ### Changed
 
-- **The training count covers the last 7 days** (`functions/api/ping.ts`, `functions/api/stats.ts`, `migrations/0007_community_days.sql`, `src/board.ts`, `src/screens/home.ts`, `src/locales/*.ts`): it used to follow the calendar week and started again from zero on Mondays; it is now a rolling window, "👥 In the last 7 days N people trained", that changes gradually every day. Each device sends only the date at most once every 7 days, at an activity; the server counts per day and adds up the last 7, never below the leaderboard players active on the same days. Each network can add at most 60 people a day and 30 an hour, enough for a group session in a care home or a hospital ward; the network hash is tied to the day and deleted after 2 weeks. The count starts again from zero: below 20 people the sentence without a number is shown. Privacy notice, the option's label, static privacy page and README updated, in all 12 languages.
+- **The training count covers the last 7 days** (`functions/api/ping.ts`, `functions/api/stats.ts`, `migrations/0007_community_days.sql`, `src/board.ts`, `src/screens/home.ts`, `src/locales/*.ts`): it used to follow the calendar week and started again from zero on Mondays; it is now a rolling window, "👥 In the last 7 days N people trained", that changes gradually every day. Each device sends only the date at most once every 7 days, at an activity; the server counts per day and adds up the last 7, never below the leaderboard players active on the same days. Each network can add at most 60 people a day and 30 an hour, enough for a group session in a care home or a hospital ward; the network hash is tied to the day and deleted after 2 weeks. The count starts again from zero: below 20 people the sentence without a number is shown. Privacy notice, the option's label, static privacy page and README updated, in all 12 languages (#106, #107).
 
 ## [0.21.2] - 2026-11-21
 
