@@ -125,13 +125,11 @@ export function isoWeek(date: Date): string {
   return `${d.getUTCFullYear()}-W${String(week).padStart(2, '0')}`;
 }
 
-/** The ISO week `weeks` weeks before or after a "YYYY-Www" week. */
-export function shiftWeek(week: string, weeks: number): string {
-  const [year, w] = week.split('-W').map(Number);
-  const jan4 = new Date(Date.UTC(year, 0, 4)); // always in week 1
-  const monday = jan4.getTime() - ((jan4.getUTCDay() + 6) % 7) * DAY;
-  return isoWeek(new Date(monday + ((w - 1 + weeks) * 7 + 3) * DAY));
-}
+/** The "YYYY-MM-DD" date `days` days before or after another one. */
+export const shiftDay = (date: string, days: number) => dayKey(new Date(new Date(`${date}T00:00:00Z`).getTime() + days * DAY));
+
+/** Days kept for the anonymous count of people who trained (the total itself covers only the last 7). */
+export const KEEP_COMMUNITY_DAYS = 14;
 
 /**
  * The player's local date, accepted only if it is within a day of the server's (time zones run from
@@ -218,7 +216,7 @@ export async function cleanUp(db: D1Database, now = new Date()) {
     db.prepare(DROP_EMPTY_GROUPS),
     db.prepare(DROP_ORPHAN_BANS),
     db.prepare('DELETE FROM temp_transfers WHERE created < ?').bind(transferCutoff),
-    db.prepare('DELETE FROM community_pings WHERE week < ?').bind(oldWeek),
+    db.prepare('DELETE FROM community_days WHERE day < ?').bind(dayKey(new Date(now.getTime() - KEEP_COMMUNITY_DAYS * DAY))),
   ]);
   return {
     entries: (weeks.meta.changes ?? 0) + (idleEntries.meta.changes ?? 0),

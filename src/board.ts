@@ -344,7 +344,7 @@ export async function fetchBoard(q: BoardQuery): Promise<BoardResult> {
 
 // ---- Community totals ----
 
-/** `people`: everyone who trained (anonymous count); `players` and `activities`: the leaderboard's own totals. */
+/** `people`: everyone who trained in the last 7 days (anonymous count); `players`, `activities`: the leaderboard's. */
 export interface CommunityTotals {
   people: number;
   players: number;
@@ -352,42 +352,44 @@ export interface CommunityTotals {
 }
 
 /**
- * Below this many people a total is not shown: "3 people trained" says the game is empty, and a small number
- * discourages more than it motivates (Cialdini 2003). Last week's total is used while this week is still young.
+ * Below this many people the number is not shown, only a sentence without it: "3 people trained" says the game is
+ * empty, and a small number discourages more than it motivates (Cialdini 2003).
  */
 export const COMMUNITY_MIN_PEOPLE = 20;
 
+/** Days between two signals from the same device: each one counts in the 7-day total once. */
+const COMMUNITY_EVERY_DAYS = 7;
+
 /**
- * How many people trained this week (or last week, if this week's number is still too small). `week` is null when
- * neither reaches the threshold: then only a sentence without the number is shown. Null when the server can't be
- * reached. Asked without the player's key: the totals are the same for everyone.
+ * How many people trained in the last 7 days, or `people: null` when the number is below the threshold.
+ * Null when the server can't be reached. Asked without the player's key: the totals are the same for everyone.
  */
-export async function fetchCommunity(): Promise<{ week: 'current' | 'previous' | null; people: number } | null> {
+export async function fetchCommunity(): Promise<{ people: number | null } | null> {
   if (!boardAvailable()) return null;
-  const res = await fetch(`${API}stats?week=${localWeek()}`).catch(() => null);
+  const res = await fetch(`${API}stats?date=${todayKey()}`).catch(() => null);
   if (!res?.ok) return null;
-  const { current, previous } = (await res.json()) as { current: CommunityTotals; previous: CommunityTotals };
-  if (current.people >= COMMUNITY_MIN_PEOPLE) return { week: 'current', people: current.people };
-  if (previous.people >= COMMUNITY_MIN_PEOPLE) return { week: 'previous', people: previous.people };
-  return { week: null, people: 0 };
+  const { people } = (await res.json()) as CommunityTotals;
+  return { people: people >= COMMUNITY_MIN_PEOPLE ? people : null };
 }
 
 let pinging = false;
 
 /**
- * Adds this device, once a week, to the anonymous total of people who trained: a request with only today's date,
- * no id, sent at the first activity of the week. Off when the player turned it off in Settings; retried at the
- * next activity or start-up if the device was offline. Never blocks or fails the game.
+ * Adds this device to the anonymous total of people who trained in the last 7 days: a request with only today's
+ * date, no id, sent at an activity at most once every 7 days, so each device counts once in any 7-day total.
+ * Off when the player turned it off in Settings; retried at the next activity or start-up if the device was
+ * offline. Never blocks or fails the game.
  */
 export function pingCommunity() {
-  const week = localWeek();
-  if (pinging || !store.data.settings.community || store.data.communityWeek === week || !boardAvailable()) return;
-  if (store.daysThisWeek() === 0) return;
+  const today = todayKey();
+  const last = store.data.communityDay;
+  if (pinging || !store.data.settings.community || !boardAvailable() || !store.activeDays().has(today)) return;
+  if (last && last <= today && daysBetween(last, today) < COMMUNITY_EVERY_DAYS) return;
   pinging = true;
-  fetch(`${API}ping`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ date: todayKey() }) })
+  fetch(`${API}ping`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ date: today }) })
     .then((res) => {
       if (!res.ok) return;
-      store.data.communityWeek = week;
+      store.data.communityDay = today;
       store.save();
     })
     .catch(() => {

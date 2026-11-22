@@ -140,10 +140,7 @@ export function communityLine(): HTMLElement {
   fetchCommunity()
     .then((res) => {
       if (!res) return;
-      const text =
-        res.week === null
-          ? t('home.communityJoin')
-          : t(res.week === 'current' ? 'home.community' : 'home.communityLast', { n: num(res.people, 0) });
+      const text = res.people === null ? t('home.communityJoin') : t('home.community', { n: num(res.people, 0) });
       line.textContent = `👥 ${text}`;
     })
     .catch(() => {

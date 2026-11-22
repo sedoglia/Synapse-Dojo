@@ -1,52 +1,58 @@
-import { ALL, DAY_CAP, fail, json, readableWeek, shiftWeek, type Handler } from '../../server/board';
+import { ALL, DAY_CAP, fail, isoWeek, json, localDay, parseCounts, shiftDay, type Handler } from '../../server/board';
 
 /**
- * GET /api/stats?week=YYYY-Www
- * How many people trained in a week and the one before, for the home screen: others are training too (social proof).
- * `people` comes from the anonymous weekly signals (see ping.ts); since players can turn those off, it is never
- * less than the leaderboard players who trained. `players` and `activities` are the leaderboard's own totals,
+ * GET /api/stats?date=YYYY-MM-DD (the player's local date)
+ * How many people trained in the 7 days ending on that date, for the home screen: others are training too (social
+ * proof). A rolling window, so the number never drops to zero on Mondays.
+ * `people` comes from the anonymous signals (see ping.ts); since players can turn those off, it is never less than
+ * the leaderboard players who trained in the window. `players` and `activities` are the leaderboard's own totals,
  * activities counted up to DAY_CAP a day as consistency points are. Totals only, never a player, so the answer
  * is the same for everyone and comes from the edge cache.
  */
 const CACHE_SECONDS = 300;
 
-interface Totals {
-  people: number;
-  players: number;
-  activities: number;
+interface Entry {
+  player_id: string;
+  week: string;
+  day_counts: string;
 }
-
-const DAYS = [0, 1, 2, 3, 4, 5, 6].map((i) => `min(coalesce(json_extract(day_counts, '$[${i}]'), 0), ${DAY_CAP})`).join(' + ');
 
 export const onRequestGet: Handler = async ({ request, env, waitUntil }) => {
   const url = new URL(request.url);
-  const week = readableWeek(url.searchParams.get('week'));
-  if (!week) return fail(400, 'bad_week');
+  const date = url.searchParams.get('date');
+  const today = localDay(date);
+  if (!today || !date) return fail(400, 'bad_date');
 
   const cache = caches.default;
   const cacheKey = new Request(url.toString(), { method: 'GET' });
   const hit = await cache.match(cacheKey);
   if (hit) return hit;
 
-  const previous = shiftWeek(week, -1);
+  // The window is this ISO week up to today plus the end of the previous week (the days after today's weekday).
+  const from = shiftDay(date, -6);
+  const lastWeek = isoWeek(new Date(`${shiftDay(date, -7)}T00:00:00Z`));
   const db = env.DB;
-  const [board, pings] = await db.batch<{ week: string; players?: number; activities?: number; people?: number }>([
+  const [pings, board] = await db.batch([
+    db.prepare('SELECT COALESCE(SUM(n), 0) AS people FROM community_days WHERE day BETWEEN ? AND ?').bind(from, date),
     db
-      .prepare(
-        `SELECT week, COUNT(*) AS players, COALESCE(SUM(${DAYS}), 0) AS activities
-         FROM entries WHERE ex = ? AND days > 0 AND week IN (?, ?) GROUP BY week`,
-      )
-      .bind(ALL, week, previous),
-    db.prepare('SELECT week, SUM(n) AS people FROM community_pings WHERE week IN (?, ?) GROUP BY week').bind(week, previous),
+      .prepare('SELECT player_id, week, day_counts FROM entries WHERE ex = ? AND days > 0 AND week IN (?, ?)')
+      .bind(ALL, today.week, lastWeek),
   ]);
-  const of = (w: string): Totals => {
-    const b = board.results.find((r) => r.week === w);
-    const p = pings.results.find((r) => r.week === w);
-    const players = b?.players ?? 0;
-    return { people: Math.max(p?.people ?? 0, players), players, activities: b?.activities ?? 0 };
-  };
 
-  const res = json({ week, current: of(week), previous: of(previous) }, 200, { 'Cache-Control': `public, max-age=${CACHE_SECONDS}` });
+  // A player active on both sides of the week boundary has two rows: count them once.
+  const active = new Set<string>();
+  let activities = 0;
+  for (const row of board.results as unknown as Entry[]) {
+    const counts = parseCounts(row.day_counts);
+    const days = row.week === today.week ? counts.slice(0, today.day + 1) : counts.slice(today.day + 1);
+    const done = days.reduce((sum, c) => sum + Math.min(c, DAY_CAP), 0);
+    if (done > 0) active.add(row.player_id);
+    activities += done;
+  }
+
+  const players = active.size;
+  const people = Math.max((pings.results[0] as { people: number }).people, players);
+  const res = json({ date, people, players, activities }, 200, { 'Cache-Control': `public, max-age=${CACHE_SECONDS}` });
   waitUntil(cache.put(cacheKey, res.clone()));
   return res;
 };
