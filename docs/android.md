@@ -391,7 +391,7 @@ programmi › Contenuti dell'app* per i questionari) servono:
   | Dati cifrati in transito? | **Sì** (HTTPS) |
   | Metodi di creazione dell'account | **La mia app non consente agli utenti di creare un account**; account creati fuori dall'app: **No** |
   | Modo per chiedere l'eliminazione dei dati | **Sì**, URL `https://synapsedojo.com/privacy` |
-  | *Attività nelle app › Interazioni con l'app* | **Raccolti**, non condivisi, non trattati in modo temporaneo; **gli utenti possono scegliere** se attivarne la raccolta; scopi **Funzionalità dell'app** (classifica) e **Analisi** (statistiche di visita e conteggio anonimo settimanale di chi si allena) |
+  | *Attività nelle app › Interazioni con l'app* | **Raccolti**, non condivisi, non trattati in modo temporaneo; **gli utenti possono scegliere** se attivarne la raccolta; scopi **Funzionalità dell'app** (classifica) e **Analisi** (statistiche di visita e conteggio anonimo di chi si allena negli ultimi 7 giorni) |
 
   Le altre voci di *Tipi di dati* restano quelle della prima compilazione. Va aggiornato solo se dal dispositivo esce
   un tipo di dato nuovo: il conteggio anonimo della 0.21 rientrava già in *Interazioni con l'app › Analisi*.
@@ -576,10 +576,10 @@ due pagine da compilare.
 | Payment / In-app purchases | Free; nessuna casella spuntata. |
 | Content rating | Questionario (*Set*): vedi sotto. Risultato **3+** ovunque (Brasile «AL»). |
 | Privacy statement | Privacy policy URL e Data subject right URL: `https://synapsedojo.com/privacy`. |
-| Privacy tags | *Collect personal data*: **Yes**; scenari **App functionality** e, dalla 0.21.1, **Analytics** per *App usage information* (il conteggio anonimo settimanale di chi si allena); voci: *Identifiers › User identifiers*, *Basic information › Age* e *Account information*, *App information › App settings* e *App usage information*. Le descrizioni le compila Huawei. |
+| Privacy tags | *Collect personal data*: **Yes**; scenari **App functionality** e, dalla 0.21.1, **Analytics** per *App usage information* (il conteggio anonimo di chi si allena negli ultimi 7 giorni); voci: *Identifiers › User identifiers*, *Basic information › Age* e *Account information*, *App information › App settings* e *App usage information*. Le descrizioni le compila Huawei. |
 | AI function declaration | Not involved |
 | Copyright information | Vuoto (facoltativo). |
-| For reviewer | *Sign-in required* non spuntato; nelle note (al massimo 300 caratteri): nessun account, progressi solo sul dispositivo, classifica facoltativa e spenta di default, conteggio anonimo settimanale (solo la data) disattivabile nelle Impostazioni, niente pubblicità né acquisti. |
+| For reviewer | *Sign-in required* non spuntato; nelle note (al massimo 300 caratteri): nessun account, progressi solo sul dispositivo, classifica facoltativa e spenta di default, conteggio anonimo (al massimo ogni 7 giorni) (solo la data) disattivabile nelle Impostazioni, niente pubblicità né acquisti. |
 | Release time | Immediately once approved |
 
 Nel questionario dell'età le risposte sono tutte **No** (violenza, linguaggio, droghe, azzardo, acquisti, chat,
