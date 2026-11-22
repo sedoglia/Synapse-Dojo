@@ -1419,6 +1419,7 @@ const ui: Locale['ui'] = {
   'ex.matrix.toRemember': '{n|other:บล็อกที่ต้องจำ # บล็อก}',
   'ex.tangram.pieceCount': '{n|other:# ชิ้น}',
   'result.timeBonus': '{n|other:+# คะแนนเวลา}',
+  'langOffer.text': 'ตอนนี้ Synapse Dojo มีภาษาของคุณแล้ว คุณต้องการใช้ภาษาใด',
 };
 
 const nicknames = {

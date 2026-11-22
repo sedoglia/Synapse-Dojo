@@ -1386,6 +1386,7 @@ const ui: Locale['ui'] = {
   'ex.matrix.toRemember': '{n|one:# блок для запоминания|few:# блока для запоминания|many:# блоков для запоминания|other:# блока для запоминания}',
   'ex.tangram.pieceCount': '{n|one:# деталь|few:# детали|many:# деталей|other:# детали}',
   'result.timeBonus': '{n|one:+# очко за время|few:+# очка за время|many:+# очков за время|other:+# очка за время}',
+  'langOffer.text': 'Synapse Dojo теперь доступен и на вашем языке. Какой язык вы хотите использовать?',
 };
 
 const words: string[] = [

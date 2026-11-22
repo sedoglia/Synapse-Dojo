@@ -133,16 +133,36 @@ export async function loadLang(lang: unknown): Promise<Lang> {
  */
 const PLURAL = /\{(\w+)\|([^{}]*)\}/g;
 
-export function t(key: Key, params: Record<string, string | number> = {}): string {
-  const s = locale().ui[key] ?? en.ui[key] ?? key;
+function format(loc: Locale, speech: string, key: Key, params: Record<string, string | number>): string {
+  const s = loc.ui[key] ?? en.ui[key] ?? key;
   return s
     .replace(PLURAL, (whole, p: string, arms: string) => {
       if (params[p] === undefined) return whole;
       const forms = new Map(arms.split('|').map((a) => [a.slice(0, a.indexOf(':')), a.slice(a.indexOf(':') + 1)]));
-      const form = forms.get(new Intl.PluralRules(meta().speech).select(Number(params[p]))) ?? forms.get('other') ?? '';
+      const form = forms.get(new Intl.PluralRules(speech).select(Number(params[p]))) ?? forms.get('other') ?? '';
       return form.replaceAll('#', String(params[p]));
     })
     .replace(/\{(\w+)\}/g, (_, p) => String(params[p] ?? `{${p}}`));
+}
+
+export function t(key: Key, params: Record<string, string | number> = {}): string {
+  return format(locale(), meta().speech, key, params);
+}
+
+/**
+ * A text in another language than the current one, downloading that language if needed: for speaking to the player
+ * in their device's language while the app is still in English. Falls back to English if the download fails.
+ */
+export async function tIn(lang: Lang, key: Key, params: Record<string, string | number> = {}): Promise<string> {
+  // Unlike loadLang, a failed download changes nothing: the saved language stays as it is.
+  if (!loaded[lang]) {
+    try {
+      loaded[lang] = (await loaders[`./locales/${lang}.ts`]()).default;
+    } catch {
+      return format(en, LANGS.en.speech, key, params);
+    }
+  }
+  return format(loaded[lang] ?? en, LANGS[lang].speech, key, params);
 }
 
 /** Locale for numbers and dates, always with Latin digits like every other number in the app. */

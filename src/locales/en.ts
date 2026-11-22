@@ -1426,6 +1426,7 @@ export const ui = {
   'ex.matrix.toRemember': '{n|one:# block to remember|other:# blocks to remember}',
   'ex.tangram.pieceCount': '{n|one:# piece|other:# pieces}',
   'result.timeBonus': '{n|one:+# time pt|other:+# time pts}',
+  'langOffer.text': 'Synapse Dojo is now also available in your language. Which language would you like to use?',
 };
 
 const nicknames = {

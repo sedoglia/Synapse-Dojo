@@ -1386,6 +1386,7 @@ const ui: Locale['ui'] = {
   'ex.matrix.toRemember': '{n|other:需要记忆 # 个方块}',
   'ex.tangram.pieceCount': '{n|other:#块}',
   'result.timeBonus': '{n|other:+# 时间分}',
+  'langOffer.text': 'Synapse Dojo 现在也支持你的语言了。你想使用哪种语言？',
 };
 
 const words: string[] = [

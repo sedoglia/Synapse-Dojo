@@ -1386,6 +1386,7 @@ const ui: Locale['ui'] = {
   'ex.matrix.toRemember': '{n|zero:# كتلة للحفظ|one:كتلة واحدة للحفظ|two:كتلتان للحفظ|few:# كتل للحفظ|many:# كتلة للحفظ|other:# كتلة للحفظ}',
   'ex.tangram.pieceCount': '{n|zero:# قطعة|one:قطعة واحدة|two:قطعتان|few:# قطع|many:# قطعة|other:# قطعة}',
   'result.timeBonus': '{n|zero:+# نقطة وقت|one:+# نقطة وقت|two:+# نقطة وقت|few:+# نقاط وقت|many:+# نقطة وقت|other:+# نقطة وقت}',
+  'langOffer.text': 'أصبح Synapse Dojo متاحًا الآن بلغتك أيضًا. أي لغة تريد أن تستخدم؟',
 };
 
 const words: string[] = [

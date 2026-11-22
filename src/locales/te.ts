@@ -1419,6 +1419,7 @@ const ui: Locale['ui'] = {
   'ex.matrix.toRemember': '{n|one:గుర్తుంచుకోవాల్సిన # బ్లాక్|other:గుర్తుంచుకోవాల్సిన # బ్లాకులు}',
   'ex.tangram.pieceCount': '{n|one:# ముక్క|other:# ముక్కలు}',
   'result.timeBonus': '{n|one:+# సమయం పాయింట్|other:+# సమయం పాయింట్లు}',
+  'langOffer.text': 'Synapse Dojo ఇప్పుడు మీ భాషలో కూడా అందుబాటులో ఉంది. మీరు ఏ భాషను ఉపయోగించాలనుకుంటున్నారు?',
 };
 
 const nicknames = {

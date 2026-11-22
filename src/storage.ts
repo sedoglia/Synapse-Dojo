@@ -79,6 +79,11 @@ export interface SaveData {
   boardPrompt: { snoozed?: string; never?: boolean };
   /** Day of the last signal for the anonymous 7-day total, so a device counts once in it (also after a transfer). */
   communityDay: string | null;
+  /**
+   * The device language the player was last offered (or started in), so the offer to switch from English to it is
+   * made once; a device later set to another supported language gets its own offer.
+   */
+  langOffer: string | null;
   /** Version of the level scales this save uses. */
   balance: number;
   /** Exercises that were redesigned: scores from before this date don't count as personal bests. */
@@ -105,6 +110,7 @@ function defaults(): SaveData {
     boardInvite: null,
     boardPrompt: {},
     communityDay: null,
+    langOffer: null,
     balance: BALANCE,
     bestFrom: {},
   };
@@ -203,6 +209,7 @@ function withDefaults(old: Partial<SaveData>): SaveData {
     boardInvite: typeof saved.boardInvite === 'string' && /^[A-Z0-9]{10}$/.test(saved.boardInvite) ? saved.boardInvite : null,
     boardPrompt: cleanPrompt(saved.boardPrompt),
     communityDay: typeof saved.communityDay === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(saved.communityDay) ? saved.communityDay : null,
+    langOffer: typeof saved.langOffer === 'string' && saved.langOffer.length <= 10 ? saved.langOffer : null,
   };
 }
 

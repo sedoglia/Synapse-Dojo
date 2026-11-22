@@ -1386,6 +1386,7 @@ const ui: Locale['ui'] = {
   'ex.matrix.toRemember': '{n|one:# bloc à mémoriser|many:# blocs à mémoriser|other:# blocs à mémoriser}',
   'ex.tangram.pieceCount': '{n|one:# pièce|many:# pièces|other:# pièces}',
   'result.timeBonus': '{n|one:+# pt temps|many:+# pts temps|other:+# pts temps}',
+  'langOffer.text': 'Synapse Dojo est maintenant disponible dans ta langue. Quelle langue veux-tu utiliser ?',
 };
 
 const words: string[] = [

@@ -6,6 +6,12 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [Non rilasciato]
+
+### Aggiunto
+
+- **Proposta di passare alla lingua del dispositivo** (`src/screens/home.ts`, `src/i18n.ts`, `src/main.ts`, `src/storage.ts`, `src/locales/*.ts`): solo la prima visita parte nella lingua del dispositivo, quindi chi era arrivato prima che la sua lingua fosse aggiunta è rimasto in inglese, la lingua di ripiego. Se la lingua del dispositivo è supportata e l'app è in inglese, la home ora chiede una volta quale lingua usare, nella lingua del dispositivo con l'inglese sotto, con due pulsanti che portano i nomi delle lingue («Türkçe» / «English»). La risposta è ricordata per quella lingua del dispositivo; chi ha scelto una lingua diversa dall'inglese non la vede mai.
+
 ## [0.23.0] - 2026-11-22
 
 ### Aggiunto
