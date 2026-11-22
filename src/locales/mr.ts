@@ -1382,6 +1382,7 @@ const ui: Locale['ui'] = {
   'ex.matrix.toRemember': '{n|one:लक्षात ठेवायचा # ठोकळा|other:लक्षात ठेवायचे # ठोकळे}',
   'ex.tangram.pieceCount': '{n|one:# तुकडा|other:# तुकडे}',
   'result.timeBonus': '{n|one:+# वेळेचा गुण|other:+# वेळेचे गुण}',
+  'langOffer.text': 'Synapse Dojo आता तुमच्या भाषेतही उपलब्ध आहे. तुम्हाला कोणती भाषा वापरायची आहे?',
 };
 
 const words: string[] = [

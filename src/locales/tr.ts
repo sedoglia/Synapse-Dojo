@@ -1419,6 +1419,7 @@ const ui: Locale['ui'] = {
   'ex.matrix.toRemember': '{n|other:hatırlanacak # blok}',
   'ex.tangram.pieceCount': '{n|other:# parça}',
   'result.timeBonus': '{n|other:+# süre puanı}',
+  'langOffer.text': 'Synapse Dojo artık senin dilinde de kullanılabilir. Hangi dili kullanmak istersin?',
 };
 
 const nicknames = {

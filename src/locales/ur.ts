@@ -1419,6 +1419,7 @@ const ui: Locale['ui'] = {
   'ex.matrix.toRemember': '{n|one:یاد رکھنے کے لیے # خانہ|other:یاد رکھنے کے لیے # خانے}',
   'ex.tangram.pieceCount': '{n|one:# ٹکڑا|other:# ٹکڑے}',
   'result.timeBonus': '{n|one:+# وقت کا پوائنٹ|other:+# وقت کے پوائنٹس}',
+  'langOffer.text': 'Synapse Dojo اب آپ کی زبان میں بھی دستیاب ہے۔ آپ کون سی زبان استعمال کرنا چاہیں گے؟',
 };
 
 const nicknames = {

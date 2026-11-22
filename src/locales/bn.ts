@@ -1419,6 +1419,7 @@ const ui: Locale['ui'] = {
   'ex.matrix.toRemember': '{n|other:মনে রাখার # টি ব্লক}',
   'ex.tangram.pieceCount': '{n|other:# টুকরো}',
   'result.timeBonus': '{n|other:+# সময়ের পয়েন্ট}',
+  'langOffer.text': 'Synapse Dojo এখন আপনার ভাষাতেও পাওয়া যাচ্ছে। আপনি কোন ভাষা ব্যবহার করতে চান?',
 };
 
 const nicknames = {

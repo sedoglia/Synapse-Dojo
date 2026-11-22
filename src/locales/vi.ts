@@ -1419,6 +1419,7 @@ const ui: Locale['ui'] = {
   'ex.matrix.toRemember': '{n|other:# khối cần nhớ}',
   'ex.tangram.pieceCount': '{n|other:# mảnh}',
   'result.timeBonus': '{n|other:+# điểm thời gian}',
+  'langOffer.text': 'Synapse Dojo nay đã có bằng ngôn ngữ của bạn. Bạn muốn dùng ngôn ngữ nào?',
 };
 
 // Every word is a single syllable: Vietnamese writes compound words with spaces, which cannot be puzzles.

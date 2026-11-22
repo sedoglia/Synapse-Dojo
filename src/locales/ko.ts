@@ -1419,6 +1419,7 @@ const ui: Locale['ui'] = {
   'ex.matrix.toRemember': '{n|other:기억할 블록 #개}',
   'ex.tangram.pieceCount': '{n|other:#조각}',
   'result.timeBonus': '{n|other:+# 시간 점수}',
+  'langOffer.text': '이제 Synapse Dojo를 사용자의 언어로도 이용할 수 있어요. 어떤 언어를 사용할까요?',
 };
 
 const nicknames = {

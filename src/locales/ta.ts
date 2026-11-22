@@ -1419,6 +1419,7 @@ const ui: Locale['ui'] = {
   'ex.matrix.toRemember': '{n|one:நினைவில் கொள்ள # கட்டம்|other:நினைவில் கொள்ள # கட்டங்கள்}',
   'ex.tangram.pieceCount': '{n|one:# துண்டு|other:# துண்டுகள்}',
   'result.timeBonus': '{n|one:+# நேரப் புள்ளி|other:+# நேரப் புள்ளிகள்}',
+  'langOffer.text': 'Synapse Dojo இப்போது உங்கள் மொழியிலும் கிடைக்கிறது. எந்த மொழியைப் பயன்படுத்த விரும்புகிறீர்கள்?',
 };
 
 const nicknames = {

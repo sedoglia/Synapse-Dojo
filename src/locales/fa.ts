@@ -1419,6 +1419,7 @@ const ui: Locale['ui'] = {
   'ex.matrix.toRemember': '{n|other:# خانه برای به خاطر سپردن}',
   'ex.tangram.pieceCount': '{n|other:# قطعه}',
   'result.timeBonus': '{n|other:+# امتیاز زمان}',
+  'langOffer.text': 'Synapse Dojo اکنون به زبان شما هم در دسترس است. می‌خواهید از کدام زبان استفاده کنید؟',
 };
 
 const nicknames = {

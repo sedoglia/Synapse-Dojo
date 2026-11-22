@@ -1,8 +1,8 @@
 import { h, todayKey } from '../dom';
 import { store } from '../storage';
-import { num, t } from '../i18n';
+import { num, t, tIn, deviceLang, LANGS, type Lang } from '../i18n';
 import { APP_NAME } from '../config';
-import { render, rankName, xpBar, langPicker } from '../ui';
+import { render, rankName, xpBar, langPicker, setLang } from '../ui';
 import { currentPlan } from '../stats';
 import { playerLevel, nextBadge, XP } from '../rewards';
 import { playDailyCheck, playPlan } from './play';
@@ -48,6 +48,40 @@ function promptCard(): HTMLElement | null {
       h('button', { class: 'btn primary', onClick: () => showBoardJoin(showHome, () => showBoard(showHome)) }, t('prompt.join')),
       h('button', { class: 'btn', onClick: () => hide({ snoozed: snoozeDate() }) }, t('prompt.later')),
       h('button', { class: 'btn ghost', onClick: () => hide({ never: true }) }, t('prompt.never')),
+    ),
+  );
+}
+
+/**
+ * Players who first came when their language wasn't available started in English, the fallback, and stayed there.
+ * When the device's language is now supported, ask once, in that language with the English underneath, and with
+ * buttons that are just the two language names so either reader can answer. Never shown to someone who picked a
+ * language other than English, and the answer is remembered for this device language.
+ */
+function langOfferCard(): HTMLElement | null {
+  const offer = deviceLang();
+  const current = store.data.settings.lang;
+  if (offer === 'en' || current !== 'en' || store.data.langOffer === offer) return null;
+  const answer = async (lang: Lang) => {
+    store.data.langOffer = offer;
+    if (lang !== current) await setLang(lang);
+    else store.save();
+    showHome();
+  };
+  const own = h('p', { lang: offer, dir: 'rtl' in LANGS[offer] ? 'rtl' : 'ltr' }, '…');
+  // Offline, the language can't be downloaded: then only the English line stays.
+  void tIn(offer, 'langOffer.text').then((text) => (text === t('langOffer.text') ? own.remove() : (own.textContent = text)));
+  return h(
+    'section',
+    { class: 'card lang-offer' },
+    h('h3', {}, `🌐 ${LANGS[offer].name}`),
+    own,
+    h('p', { class: 'small muted' }, t('langOffer.text')),
+    h(
+      'div',
+      { class: 'row left' },
+      h('button', { class: 'btn primary', lang: offer, onClick: () => answer(offer) }, LANGS[offer].name),
+      h('button', { class: 'btn', lang: current, onClick: () => answer(current) }, LANGS[current].name),
     ),
   );
 }
@@ -233,6 +267,7 @@ export function showHome() {
       h(
         'main',
         { class: 'content menu' },
+        langOfferCard(),
         inviteCard(),
         promptCard(),
         menuCard(
