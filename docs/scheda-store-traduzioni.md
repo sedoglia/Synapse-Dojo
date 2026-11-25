@@ -28,7 +28,9 @@ Se Google propone di tradurre la scheda automaticamente, non serve: questi testi
 1. AppGallery Connect › l’app › **Distribute › App information**: compila prima l’inglese, la lingua predefinita.
 2. **Manage languages**: aggiungi le altre lingue; per ognuna incolla *App name*, *Brief introduction* e *Full introduction*.
    Per gli screenshot vanno bene quelli inglesi (per l’italiano ci sono quelli `it-light`).
-3. **Save**, poi **Submit for review**.
+3. **Save**, poi apri **New version – Draft**, lascia l’APK già pubblicato e premi **Submit**, confermando l’avviso
+   sul codice di versione uguale: non serve un nuovo pacchetto. Procedura completa in
+   [android.md §12.4](android.md#124-huawei-appgallery).
 
 ### Uptodown
 
