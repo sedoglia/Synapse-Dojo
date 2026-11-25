@@ -1,8 +1,10 @@
-# Scheda dello store nelle altre 23 lingue
+# Scheda dello store in tutte le 25 lingue
 
-Traduzioni dei testi di [scheda-store.md](scheda-store.md) (inglese e italiano) nelle altre lingue dell’app. Il contenuto è
-lo stesso, con le stesse cautele: niente promesse di effetti sulla salute, uso senza rete solo dopo il primo avvio, conteggi
-anonimi dichiarati. I nomi di esercizi e sezioni sono quelli che l’app usa in ogni lingua (per esempio Eco, «En qué se basa»).
+Titolo, descrizione breve e descrizione completa di Synapse Dojo per gli store, in tutte le lingue dell’app: inglese (lingua
+predefinita), italiano e le altre 23. I testi inglese e italiano sono gli stessi di [scheda-store.md](scheda-store.md), che
+spiega anche le correzioni rispetto alla descrizione generata da Testers Community; le altre lingue ne sono la traduzione,
+con le stesse cautele: niente promesse di effetti sulla salute, uso senza rete solo dopo il primo avvio, conteggi anonimi
+dichiarati. I nomi di esercizi e sezioni sono quelli che l’app usa in ogni lingua (per esempio Eco, «En qué se basa»).
 
 Tutti i testi rispettano i limiti di Google Play: titolo 30, descrizione breve 80, descrizione completa 4000 caratteri.
 In AppGallery gli stessi testi vanno in *App name*, *Brief introduction* e *Full introduction*.
@@ -12,19 +14,25 @@ In AppGallery gli stessi testi vanno in *App name*, *Brief introduction* e *Full
 ### Google Play
 
 1. Play Console › l’app › **Crescita › Presenza sullo store › Schede dello store › Scheda principale dello store**.
-2. **Gestisci traduzioni › Aggiungi le tue traduzioni**: spunta le lingue con il codice indicato sotto ogni titolo qui
-   sotto (per esempio `es-ES`) e conferma.
-3. Per ogni lingua, dal selettore in alto, incolla titolo, descrizione breve e descrizione completa. Grafica e screenshot,
+2. Nella lingua predefinita (inglese, `en-US`) sostituisci titolo, descrizione breve e descrizione completa.
+3. **Gestisci traduzioni › Aggiungi le tue traduzioni**: spunta le altre lingue con il codice indicato sotto ogni titolo qui
+   sotto (per esempio `it-IT`, `es-ES`) e conferma.
+4. Per ogni lingua, dal selettore in alto, incolla titolo, descrizione breve e descrizione completa. Grafica e screenshot,
    se non ne carichi di propri, restano quelli della lingua predefinita.
-4. **Salva**. Le traduzioni vanno in revisione insieme alla scheda, senza una nuova release.
+5. **Salva**. Le traduzioni vanno in revisione insieme alla scheda, senza una nuova release.
 
 Se Google propone di tradurre la scheda automaticamente, non serve: questi testi sono già pronti.
 
 ### Huawei AppGallery
 
-1. AppGallery Connect › l’app › **Distribute › App information › Manage languages**: aggiungi le lingue.
-2. Per ogni lingua incolla *App name*, *Brief introduction* e *Full introduction*; per gli screenshot vanno bene quelli inglesi.
+1. AppGallery Connect › l’app › **Distribute › App information**: compila prima l’inglese, la lingua predefinita.
+2. **Manage languages**: aggiungi le altre lingue; per ognuna incolla *App name*, *Brief introduction* e *Full introduction*.
+   Per gli screenshot vanno bene quelli inglesi (per l’italiano ci sono quelli `it-light`).
 3. **Save**, poi **Submit for review**.
+
+### Uptodown
+
+Solo inglese e italiano, e solo dopo la fine della revisione in corso (vedi [scheda-store.md](scheda-store.md)).
 
 Se uno store non offre una lingua (succede con alcune varianti regionali), saltala.
 
@@ -32,6 +40,8 @@ Se uno store non offre una lingua (succede con alcune varianti regionali), salta
 
 | Lingua | Codice Play | Titolo | Breve | Completa |
 | --- | --- | ---: | ---: | ---: |
+| English | `en-US` | 28 | 77 | 3069 |
+| Italiano | `it-IT` | 29 | 75 | 3258 |
 | Español | `es-ES` | 30 | 70 | 3355 |
 | Português (Brasil) | `pt-BR` | 29 | 71 | 3198 |
 | Français | `fr-FR` | 29 | 65 | 3450 |
@@ -55,6 +65,118 @@ Se uno store non offre una lingua (succede con alcune varianti regionali), salta
 | العربية | `ar` | 26 | 75 | 2603 |
 | فارسی | `fa` | 23 | 73 | 2901 |
 | اردو | `ur` | 24 | 59 | 2837 |
+
+## English (`en-US`)
+
+**Titolo**
+
+```text
+Synapse Dojo: Brain Training
+```
+
+**Descrizione breve**
+
+```text
+Fun brain training games: 40 exercises inspired by classic cognitive science.
+```
+
+**Descrizione completa**
+
+```text
+Synapse Dojo is a collection of free brain training games. Challenge your mind for a few minutes each day with 40 short exercises inspired by classic cognitive science research, with no ads and no sign-up.
+
+Inspired by Classic Cognitive Science
+• Train across 9 domains: speed, attention, executive control, working memory, episodic memory, spatial cognition, reasoning and planning, math and reading, and bilateral coordination.
+• Play game versions of classic neuropsychological tasks such as the Stroop test, N-Back, Corsi blocks, Tower of London, mental rotation and the UFOV task from the ACTIVE study.
+• Try exercises you won't find elsewhere, like Echo, a dual N-Back task with a spoken letter, and Bilateral Rhythm, where you tap with both hands to an audio-visual metronome.
+• Discover where each exercise comes from: a "What it's based on" card names the research paradigm and the reference study.
+• Stay challenged with adaptive difficulty that adjusts in real time, using a psychophysical staircase that keeps you at 70–85% accuracy, so exercises are never too easy or too frustrating.
+
+Your Daily Mental Workout
+• Daily Workout: 10–15 minutes, with 4 exercises chosen from the skills you trained least recently.
+• Free Gym: play any of the 40 games whenever you like.
+• Neuro Score: a daily 0–1000 summary across all domains to follow your own trend over the weeks. It is not a clinical test.
+• Every exercise has a step-by-step "How to play" guide, an illustrated example and a practice round that does not count.
+• Add a daily reminder to your phone's calendar from Settings, with no notifications from the app.
+
+Rewards for Consistent Effort
+• Earn XP, level up and collect more than 50 badges.
+• Streaks without stress: missing a day never takes away what you earned, and 2–3 sessions a week are enough.
+• Optional weekly leaderboard (off by default) that rewards consistency and improvement, under a random nickname.
+• Private groups let friends and family encourage each other to keep going.
+
+Designed for Everyone
+• Relaxed pace mode gives 40% more time on timed exercises.
+• Large text option and a light or dark theme that follows your phone.
+• After the first launch the exercises also work without an internet connection.
+• 25 languages, with word games adapted to each alphabet.
+
+Free and Private
+• Completely free: no ads, no subscriptions, no in-app purchases and no notifications.
+• No account, no e-mail, no cookies, no profiling.
+• Your progress is saved only on your device. The app sends only anonymous counts with no identifier; the optional leaderboard and the transfer code send more only if you use them.
+• Export a backup file at any time, or move to a new device with a temporary code.
+
+Synapse Dojo is made for adults and older adults who enjoy puzzles and want a short daily mental routine, and for anyone curious about the classic experiments of cognitive psychology.
+
+Synapse Dojo is designed for personal enjoyment and curiosity. It is not a medical device and does not claim to diagnose, treat, prevent or cure any condition.
+```
+
+## Italiano (`it-IT`)
+
+**Titolo**
+
+```text
+Synapse Dojo: Allena la mente
+```
+
+**Descrizione breve**
+
+```text
+Giochi di allenamento mentale: 40 esercizi ispirati alle scienze cognitive.
+```
+
+**Descrizione completa**
+
+```text
+Synapse Dojo è una raccolta di giochi gratuiti di allenamento mentale. Metti alla prova la mente pochi minuti al giorno con 40 brevi esercizi ispirati alla ricerca classica delle scienze cognitive, senza pubblicità e senza registrazione.
+
+Ispirato alle scienze cognitive
+• Allenati in 9 aree: velocità, attenzione, controllo esecutivo, memoria di lavoro, memoria episodica, cognizione spaziale, ragionamento e pianificazione, calcolo e lettura, coordinazione bilaterale.
+• Gioca con le versioni giocose di prove classiche della neuropsicologia, come il test di Stroop, l'N-Back, i blocchi di Corsi, la Torre di Londra, la rotazione mentale e il compito UFOV dello studio ACTIVE.
+• Prova esercizi che non trovi altrove, come Eco, un N-Back doppio con una lettera pronunciata, e Ritmo Bilaterale, in cui tocchi con entrambe le mani a tempo con un metronomo audio-visivo.
+• Scopri da dove nasce ogni esercizio: una scheda «Su cosa si basa» indica il paradigma di ricerca e lo studio di riferimento.
+• La difficoltà si adatta in tempo reale con una scala psicofisica che ti tiene tra il 70 e l'85% di risposte giuste: mai troppo facile, mai frustrante.
+
+Il tuo allenamento quotidiano
+• Allenamento giornaliero: 10-15 minuti, con 4 esercizi scelti tra le abilità che alleni da più tempo.
+• Palestra libera: gioca quando vuoi con tutti i 40 giochi.
+• Neuro Score: un riepilogo quotidiano da 0 a 1000 su tutte le aree, per seguire il tuo andamento nelle settimane. Non è un test clinico.
+• Ogni esercizio ha la guida «Come si gioca» passo passo, un esempio illustrato e una prova guidata che non conta.
+• Dalle Impostazioni aggiungi un promemoria quotidiano al calendario del telefono, senza notifiche dall'app.
+
+Premi per la costanza
+• Guadagna XP, sali di livello e colleziona più di 50 badge.
+• Serie senza ansia: saltare un giorno non ti toglie nulla di ciò che hai guadagnato, e bastano 2-3 sessioni a settimana.
+• Classifica settimanale facoltativa (disattivata finché non aderisci) che premia costanza e miglioramento, con un nickname casuale.
+• Con i gruppi privati amici e familiari si incoraggiano a vicenda.
+
+Pensato per tutti
+• Il ritmo rilassato dà il 40% di tempo in più negli esercizi a tempo.
+• Testo grande e tema chiaro o scuro che segue quello del telefono.
+• Dopo il primo avvio gli esercizi funzionano anche senza connessione.
+• 25 lingue, con i giochi di parole adattati a ogni alfabeto.
+
+Gratuito e rispettoso della privacy
+• Completamente gratuito: niente pubblicità, abbonamenti, acquisti in-app o notifiche.
+• Nessun account, nessuna e-mail, nessun cookie, nessuna profilazione.
+• I progressi restano solo sul tuo dispositivo. L'app invia solo conteggi anonimi, senza alcun identificativo; la classifica facoltativa e il codice di trasferimento inviano altro solo se li usi.
+• Esporta un file di backup quando vuoi, o passa a un nuovo dispositivo con un codice temporaneo.
+
+Synapse Dojo è pensato per adulti e anziani che amano i rompicapi e vogliono una breve routine mentale quotidiana, e per chi è curioso di conoscere gli esperimenti classici della psicologia cognitiva.
+
+Synapse Dojo è pensato per svago e curiosità personale. Non è un dispositivo medico e non pretende di diagnosticare, curare, prevenire o guarire alcuna condizione.
+```
 
 ## Español (`es-ES`)
 
