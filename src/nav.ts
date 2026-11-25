@@ -18,17 +18,34 @@ let ignorePop = false;
 let exitTimer: ReturnType<typeof setTimeout> | undefined;
 let note: HTMLElement | null = null;
 
-const APP_FLAG = 'sd-android-app';
+const APP_FLAG = 'synapse-dojo/android-app';
 
-/** Opened as the Android app (Trusted Web Activity, WebView fallback) or installed as a PWA. */
+/**
+ * Opened as the Android app (Trusted Web Activity, WebView fallback) or installed as a PWA.
+ *
+ * Chrome marks the app only on some launches, with an `android-app://` referrer: reopening the app can load the
+ * page in a new tab without it. So the first sighting is remembered for good. Chrome shares this storage between
+ * the app and its own tabs on the same phone, which then also ask for a second Back on the home screen: harmless.
+ */
 export function inApp(): boolean {
   try {
-    if (document.referrer.startsWith('android-app://')) sessionStorage.setItem(APP_FLAG, '1');
-    if (sessionStorage.getItem(APP_FLAG)) return true;
+    if (document.referrer.startsWith('android-app://')) localStorage.setItem(APP_FLAG, '1');
+    if (localStorage.getItem(APP_FLAG)) return true;
   } catch {
     /* storage blocked: fall through */
   }
   return 'SynapseDojoAndroid' in window || matchMedia('(display-mode: standalone)').matches;
+}
+
+/**
+ * Back on the home screen left the guard off for a moment. If the app went to the background in that moment (or
+ * Chrome froze the page and its timer), the guard comes back as soon as the page is shown again.
+ */
+function resume() {
+  if (document.visibilityState !== 'visible' || guarded) return;
+  clearTimeout(exitTimer);
+  hideNote();
+  sync();
 }
 
 function sync() {
@@ -93,5 +110,7 @@ export function startBackNavigation() {
   if (started) return;
   started = true;
   addEventListener('popstate', onPop);
+  addEventListener('pageshow', resume);
+  document.addEventListener('visibilitychange', resume);
   sync();
 }
