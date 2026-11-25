@@ -596,6 +596,25 @@ Poi *Save Draft* e *Submit*. L'esito arriva per email e compare in *Review comme
 *Version/Update*, nuovo APK e le stesse risposte; nella scheda *App information* si aggiornano *New features* in ogni
 lingua e, se cambia qualcosa, gli altri testi.
 
+**Aggiornare solo la scheda, senza un nuovo APK.** Testi in ogni lingua, icona, screenshot, video, categoria e sito di
+un'app già pubblicata si cambiano senza sostituire il pacchetto, ma passano comunque da una versione inviata in
+revisione che riusa l'APK pubblicato ([guida di Huawei](https://developer.huawei.com/consumer/en/doc/app/agc-help-maintain-update-0000002271413697)):
+
+1. **App information**: modifica i testi (lingua predefinita inglese, poi le altre da *Manage languages*) e premi
+   **Save**. I testi pronti, in tutte le 25 lingue, sono in [scheda-store-traduzioni.md](scheda-store-traduzioni.md).
+   Controlla anche *New features* in ogni lingua: viene pubblicato insieme alla revisione, quindi va svuotato o
+   aggiornato se contiene ancora le novità della versione precedente.
+2. Apri la pagina **New version – Draft** che AppGallery crea per l'aggiornamento.
+3. **Non caricare un nuovo APK**: resta quello pubblicato (0.21.1, codice 5). Le altre sezioni restano compilate con
+   le risposte della tabella qui sopra.
+4. **Submit** in alto a destra. L'avviso che il codice di versione del pacchetto è uguale a quello già pubblicato è
+   previsto: conferma e prosegui.
+5. L'esito arriva per email e in *Review comments*; con *Release time* su *Immediately once approved* la scheda nuova
+   esce appena approvata.
+
+Non serve ricompilare con Bubblewrap né cambiare `appVersionCode`. Su Google Play invece le modifiche alla scheda vanno
+in revisione da sole con **Salva**, senza alcuna versione ([§10.4](#104-scheda-dello-store-e-questionari)).
+
 ### 12.5 Provare il WebView
 
 Su un telefono con Chrome l'app usa sempre la TWA. Per vedere il WebView serve un dispositivo senza browser che

@@ -141,7 +141,9 @@ Synapse Dojo è pensato per svago e curiosità personale. Non è un dispositivo 
 2. In inglese: **App name** può restare `Synapse Dojo` o diventare `Synapse Dojo: Brain Training` (massimo 64
    caratteri); **Brief introduction** = descrizione breve; **Full introduction** = descrizione completa.
 3. Passa all'italiano dal selettore della lingua (o *Manage languages*) e incolla i testi italiani.
-4. **Save**, poi **Submit for review**. Se chiede una versione, va bene la 0.21.1 già pubblicata.
+4. **Save**, poi apri **New version – Draft**, lascia l'APK già pubblicato (0.21.1, codice 5) e premi **Submit**;
+   conferma l'avviso sul codice di versione uguale. Procedura completa in
+   [android.md §12.4](android.md#124-huawei-appgallery).
 
 ### Uptodown
 
