@@ -6,11 +6,11 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
-## [Non rilasciato]
+## [0.24.3] - 2026-11-25
 
 ### Corretto
 
-- **Indietro chiudeva l’app dopo un esercizio, senza avviso** (`src/nav.ts`): le voci che intercettano Indietro si aggiungevano, due alla volta, solo quando non ne restava nessuna, e i tocchi non rabboccavano quelle consumate; dopo esercizio → Palestra la cronologia era vuota e il Indietro successivo chiudeva l’app. Ora ogni tocco le riporta a tre, abbastanza per esercizio → Palestra → home → «Premi di nuovo Indietro per uscire» senza toccare lo schermo in mezzo.
+- **Indietro chiudeva l’app dopo un esercizio, senza avviso** (`src/nav.ts`): le voci che intercettano Indietro si aggiungevano, due alla volta, solo quando non ne restava nessuna, e i tocchi non rabboccavano quelle consumate; dopo esercizio → Palestra la cronologia era vuota e il Indietro successivo chiudeva l’app. Ora ogni tocco le riporta a tre, abbastanza per esercizio → Palestra → home → «Premi di nuovo Indietro per uscire» senza toccare lo schermo in mezzo (#120).
 
 ## [0.24.2] - 2026-11-25
 
