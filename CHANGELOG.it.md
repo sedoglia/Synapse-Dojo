@@ -6,6 +6,12 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [Non rilasciato]
+
+### Corretto
+
+- **Indietro chiudeva ancora l’app dopo il primo uso** (`src/nav.ts`, `src/screens/play.ts`): Chrome salta le voci di cronologia aggiunte da una pagina senza un tocco dell’utente in mezzo, una difesa contro i siti che intrappolano i visitatori. La voce che intercetta Indietro veniva rimessa subito dopo ogni Indietro, senza tocco, quindi il Indietro successivo la saltava e chiudeva l’app. Ora le voci si aggiungono solo dopo un tocco fatto da quando si è arrivati sulla voce corrente, due alla volta, così anche due Indietro di fila (Privacy → Impostazioni → home) restano nell’app dove Chrome lo permette. Durante un esercizio Indietro esce subito dall’esercizio, perché un secondo Indietro senza tocchi potrebbe chiudere l’app; il doppio tocco resta sulla ✕. Indietro premuto appena aperta l’app, prima di toccare lo schermo, la chiude: è il comportamento normale di Android e una pagina web non può cambiarlo.
+
 ## [0.24.1] - 2026-11-25
 
 ### Corretto
