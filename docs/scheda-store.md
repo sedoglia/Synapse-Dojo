@@ -1495,13 +1495,13 @@ report dei tester del 25 novembre 2026 e le versioni 0.24.0–0.24.3 del sito. R
 - 10K–100K installazioni (domanda 7) è la stima del modello, non una previsione: meglio una cifra credibile.
 
 Google legge queste risposte: conviene che siano concrete e scritte con parole proprie, non il testo identico che il
-fornitore propone a tutte le app. Le parti tra parentesi quadre sono da completare o scegliere.
+fornitore propone a tutte le app. Le risposte sono complete: restano da scegliere solo le opzioni delle domande 2 e 7.
 
 **1. How did you recruit users for your closed test? For example, did you ask friends and family, or use a paid testing
 provider?**
 
 ```text
-I used a paid testing provider, Testers Community, which recruited 25 testers for the closed test and gave me a written report with their feedback at the end. [If true, add: I also shared the app with a few friends and family members who match the target audience.]
+I used a paid testing provider, Testers Community, which recruited 25 testers for the closed test and gave me a written report with their feedback at the end. I also shared the app with friends and family members who match the target audience, so I could hear directly from the kind of people it is made for.
 ```
 
 **2. How easy was it to recruit testers for your app?** Consigliata **Easy**: con un fornitore a pagamento il
@@ -1543,10 +1543,8 @@ Every suggestion from the testers was addressed and released in versions 0.24.0 
 - Quitting an exercise with ✕ now needs a second tap within a few seconds, so a stray touch no longer throws away a round.
 - The Progress screen no longer names a "Top skill" before any exercise; it invites the player to complete a few first.
 - Settings has a new section to rate the app in the store, share it, and send a suggestion by e-mail, so feedback can keep coming after launch.
-- The store listing was rewritten with clear sections and keywords[, and translated into all 25 languages of the app].
+- The store listing was rewritten with clear sections and keywords, and translated into all 25 languages of the app.
 ```
-
-Se non hai ancora pubblicato la scheda tradotta quando invii il modulo, togli la parte tra parentesi quadre.
 
 **9. How did you decide that your app is ready for production?**
 
@@ -1554,8 +1552,7 @@ Se non hai ancora pubblicato la scheda tradotta quando invii il modulo, togli la
 The testers reported no crashes or blocking bugs on any device or Android version. Every issue they raised was fixed, released and checked on a real Android phone, and the latest version has been running without problems. The store listing, privacy policy, content rating and data safety answers are complete and consistent with what the app actually does.
 ```
 
-**10. What did you do differently this time?** [Se è la tua prima app su Google Play, usa la proposta; altrimenti
-racconta cosa hai cambiato rispetto alla precedente.]
+**10. What did you do differently this time?** Synapse Dojo è la prima app su Google Play.
 
 ```text
 This is my first app on Google Play. Before asking for production access I ran a full closed test with 25 testers on many devices, treated their report as a to-do list, and only applied once every point was fixed and verified on a real phone.
