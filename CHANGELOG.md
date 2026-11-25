@@ -6,6 +6,12 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [Unreleased]
+
+### Fixed
+
+- **"Press Back again to exit" only on the first launch** (`src/nav.ts`): the installed app was recognised by its `android-app://` referrer, which Chrome sends only on some launches, and the result lasted for that tab only; reopening the app, the page took itself for a website and Back left at once again. The recognition is now remembered for good, and the entry that catches Back also comes back when the page becomes visible again, in case the app went to the background right after the first Back.
+
 ## [0.24.0] - 2026-11-25
 
 ### Added
