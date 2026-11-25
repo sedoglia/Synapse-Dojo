@@ -1483,58 +1483,80 @@ Synapse Dojo ذاتی تفریح اور تجسس کے لیے بنایا گیا �
 
 ## Google Play: modulo per l'accesso alla produzione
 
-Alla fine dei 14 giorni di test chiuso la Dashboard della Play Console propone il modulo per chiedere l'accesso alla
-produzione. Risposte basate su ciò che è successo davvero (report di Testers Community del 25 novembre 2026 e
-versioni 0.24.0–0.24.3 del sito), in inglese. Dove c'è una scelta tua, è indicata tra parentesi quadre.
+Alla fine del test chiuso (12 tester per 14 giorni consecutivi; con Testers Community 25 tester) la Dashboard della Play
+Console propone il modulo per chiedere l'accesso alla produzione. Le risposte qui sotto, in inglese, partono dal modello
+del report «Production Access Questionnaire» di Testers Community ma raccontano solo ciò che è successo davvero: il
+report dei tester del 25 novembre 2026 e le versioni 0.24.0–0.24.3 del sito. Rispetto al modello:
 
-**1. How did you recruit users for your closed test?**
+- niente «surveys and direct communication»: il feedback è arrivato dal report scritto del fornitore;
+- niente «improve cognitive skills», «enhancing mental agility» o «effective» (domande 5 e 6): sono promesse di effetti
+  sulla salute che l'app e la scheda escludono;
+- le modifiche della domanda 8 sono quelle rilasciate davvero, non quelle che il modello dava per fatte;
+- 10K–100K installazioni (domanda 7) è la stima del modello, non una previsione: meglio una cifra credibile.
+
+Google legge queste risposte: conviene che siano concrete e scritte con parole proprie, non il testo identico che il
+fornitore propone a tutte le app. Le parti tra parentesi quadre sono da completare o scegliere.
+
+**1. How did you recruit users for your closed test? For example, did you ask friends and family, or use a paid testing
+provider?**
 
 ```text
-I used a paid testing provider (Testers Community), which supplied the testers for the 14-day closed test and a written report with their feedback. [If true, add: I also shared the app with a few friends and family members who match the target audience.]
+I used a paid testing provider, Testers Community, which recruited 25 testers for the closed test and gave me a written report with their feedback at the end. [If true, add: I also shared the app with a few friends and family members who match the target audience.]
 ```
 
-**2. How easy was it to recruit testers for your app?** [Scegli tu; con un fornitore a pagamento di solito *Easy*.]
+**2. How easy was it to recruit testers for your app?** Consigliata **Easy**: con un fornitore a pagamento il
+reclutamento non è stato un problema. Se hai provato prima da solo con difficoltà, scegli l'opzione che lo descrive.
 
-**3. Describe the engagement you received from testers during your closed test**
+**3. Describe the engagement you received from testers during your closed test.**
 
 ```text
-Testers installed the app on a range of devices and Android versions and used its main features: the daily workout, the free gym with its 40 exercises, progress screens and settings. No crashes or blocking bugs were reported. They sent five concrete suggestions about navigation, the Progress screen, quitting exercises, the store description and sharing, which I fixed during the test.
+The 25 testers installed the app on a range of phones and Android versions and went through all of its features: the daily workout, the free gym with its 40 exercises, the Progress screen, settings and the privacy pages. They reported no crashes or blocking bugs, and sent five concrete suggestions on navigation, quitting exercises, the Progress screen, rating and sharing, and the store description. I acted on all of them during the test.
 ```
 
 **4. Provide a summary of the feedback that you received from testers. Include how you collected the feedback.**
 
 ```text
-Feedback was collected through the provider's written test report. Testers found the app stable on all devices, with no crashes. They suggested: (1) the Android Back button closed the app instead of going to the previous screen; (2) quitting an exercise with the ✕ button had no confirmation; (3) the Progress screen showed a "Top skill" at 0% before any exercise; (4) there was no way to rate or share the app; (5) the store description was short and hard to scan.
+Feedback was collected through the provider's written test report, which covered the testing on all devices and Android versions. The app was described as stable on all devices and Android versions, with no crashes. The suggestions were: (1) the Android Back button closed the app from any screen instead of going back; (2) quitting an exercise with the ✕ button happened at once, without confirmation; (3) the Progress screen named a "Top skill" at 0% before any exercise was played; (4) there was no way to rate or share the app, and no channel for suggestions; (5) the store description was short, not easy to scan and missing keywords.
 ```
 
 **5. Who is the intended audience for your app?**
 
 ```text
-Adults and older adults who enjoy puzzles and want a short daily mental routine of 10–15 minutes, and anyone curious about classic cognitive psychology tasks. The app is free, has no ads, needs no account and is available in 25 languages. It is a game for enjoyment and curiosity, not a medical or diagnostic tool.
+Adults and older adults who enjoy puzzles and want a short daily mental routine of 10–15 minutes, and anyone curious about the classic tasks of cognitive psychology. The app is free, has no ads, needs no account and is available in 25 languages, with a relaxed-pace mode and large text for people who need them. It is a game for enjoyment and curiosity, not a medical or diagnostic tool.
 ```
 
 **6. Describe how your app provides value to the users.**
 
 ```text
-It offers 40 short games inspired by classic cognitive psychology tasks (Stroop, N-Back, Corsi blocks, Tower of London and others), with difficulty that adapts to each player, a daily workout, a personal score to follow one's own trend, and a card for each exercise explaining the research it comes from. Everything is free, with no ads, no account and progress kept on the device.
+Synapse Dojo offers 40 short games inspired by classic cognitive psychology tasks (Stroop, N-Back, Corsi blocks, Tower of London and others), with difficulty that adapts to each player, a daily workout of 10–15 minutes, a personal score to follow one's own trend, and a card for each exercise explaining the research it comes from. Rewards encourage consistency rather than talent, and an optional weekly leaderboard and private groups let friends and family keep each other going. Everything is free, with no ads, no account and progress kept on the device.
 ```
 
-**7. How many installs do you expect your app to have in your first year?** [Scegli tu una stima realistica.]
+**7. How many installs do you expect your app to have in your first year?** Scegli la fascia più bassa che ti sembra
+credibile per un'app gratuita, senza campagne pubblicitarie, al primo anno: probabilmente la prima del menu (fino a
+10K). La risposta non decide l'approvazione, ma una stima gonfiata non aiuta.
 
 **8. What changes did you make to your app based on what you learned during your closed test?**
 
 ```text
-The Android Back button now goes to the previous screen, leaves an exercise, and on the home screen asks to press Back again before closing the app. Quitting an exercise with ✕ needs a second tap within a few seconds. The Progress screen no longer names a "Top skill" before any exercise. Settings has a new section to rate the app, share it and send a suggestion. The store description was rewritten and expanded. These changes were released in versions 0.24.0 to 0.24.3 and checked on a real device.
+Every suggestion from the testers was addressed and released in versions 0.24.0 to 0.24.3:
+- The Android Back button now goes to the previous screen, leaves a running exercise, and on the home screen asks to press Back again before closing the app. I verified this on my own phone and refined it over three small updates until it behaved correctly in every case.
+- Quitting an exercise with ✕ now needs a second tap within a few seconds, so a stray touch no longer throws away a round.
+- The Progress screen no longer names a "Top skill" before any exercise; it invites the player to complete a few first.
+- Settings has a new section to rate the app in the store, share it, and send a suggestion by e-mail, so feedback can keep coming after launch.
+- The store listing was rewritten with clear sections and keywords[, and translated into all 25 languages of the app].
 ```
+
+Se non hai ancora pubblicato la scheda tradotta quando invii il modulo, togli la parte tra parentesi quadre.
 
 **9. How did you decide that your app is ready for production?**
 
 ```text
-Testers reported no crashes or blocking bugs on any device; every issue they raised was fixed and verified on a real Android phone; and the app's content, privacy policy and data safety answers are complete and consistent.
+The testers reported no crashes or blocking bugs on any device or Android version. Every issue they raised was fixed, released and checked on a real Android phone, and the latest version has been running without problems. The store listing, privacy policy, content rating and data safety answers are complete and consistent with what the app actually does.
 ```
 
-**10. What did you do differently this time?** [Se è la tua prima app su Google Play, dillo; altrimenti racconta cosa hai cambiato rispetto alla precedente. Una proposta:]
+**10. What did you do differently this time?** [Se è la tua prima app su Google Play, usa la proposta; altrimenti
+racconta cosa hai cambiato rispetto alla precedente.]
 
 ```text
-This is my first app on Google Play. I tested it with a closed group of testers on many devices before asking for production access, and acted on all of their feedback before applying.
+This is my first app on Google Play. Before asking for production access I ran a full closed test with 25 testers on many devices, treated their report as a to-do list, and only applied once every point was fixed and verified on a real phone.
 ```
