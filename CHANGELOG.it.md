@@ -6,11 +6,11 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
-## [Non rilasciato]
+## [0.24.1] - 2026-11-25
 
 ### Corretto
 
-- **«Premi di nuovo Indietro per uscire» solo al primo avvio** (`src/nav.ts`): l’app installata veniva riconosciuta dal referrer `android-app://`, che Chrome passa solo in alcuni avvii, e il riconoscimento valeva per la sola scheda; riaprendo l’app la pagina si credeva un sito e Indietro tornava a uscire subito. Ora il riconoscimento è ricordato in modo permanente, e la voce che intercetta Indietro torna anche quando la pagina ridiventa visibile, se l’app era andata in secondo piano subito dopo il primo Indietro.
+- **«Premi di nuovo Indietro per uscire» solo al primo avvio** (`src/nav.ts`): l’app installata veniva riconosciuta dal referrer `android-app://`, che Chrome passa solo in alcuni avvii, e il riconoscimento valeva per la sola scheda; riaprendo l’app la pagina si credeva un sito e Indietro tornava a uscire subito. Ora il riconoscimento è ricordato in modo permanente, e la voce che intercetta Indietro torna anche quando la pagina ridiventa visibile, se l’app era andata in secondo piano subito dopo il primo Indietro (#116).
 
 ## [0.24.0] - 2026-11-25
 
