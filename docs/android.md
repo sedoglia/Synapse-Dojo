@@ -601,7 +601,7 @@ un'app già pubblicata si cambiano senza sostituire il pacchetto, ma passano com
 revisione che riusa l'APK pubblicato ([guida di Huawei](https://developer.huawei.com/consumer/en/doc/app/agc-help-maintain-update-0000002271413697)):
 
 1. **App information**: modifica i testi (lingua predefinita inglese, poi le altre da *Manage languages*) e premi
-   **Save**. I testi pronti, in tutte le 25 lingue, sono in [scheda-store-traduzioni.md](scheda-store-traduzioni.md).
+   **Save**. I testi pronti, in tutte le 25 lingue, sono in [scheda-store.md](scheda-store.md).
    Controlla anche *New features* in ogni lingua: viene pubblicato insieme alla revisione, quindi va svuotato o
    aggiornato se contiene ancora le novità della versione precedente.
 2. Apri la pagina **New version – Draft** che AppGallery crea per l'aggiornamento.
