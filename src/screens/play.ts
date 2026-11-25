@@ -3,7 +3,7 @@ import { Ctx, Aborted, type Mode } from '../ctx';
 import { sfx } from '../audio';
 import { store, NEURO_SCALE } from '../storage';
 import { t } from '../i18n';
-import { render, page, countUp, rankName, sparkline, xpBar, howBox } from '../ui';
+import { render, page, onBack, countUp, rankName, sparkline, xpBar, howBox } from '../ui';
 import { dailyCheckBattery, byId, type Exercise, type ExerciseResult } from '../exercises';
 import { nextPlan, markPlanDone } from '../stats';
 import { exampleCard } from '../examples';
@@ -156,13 +156,34 @@ async function runExercise(ex: Exercise, mode: Mode, level: number): Promise<{ r
   const verdict = h('div', { class: 'verdict' });
   let hideVerdict: ReturnType<typeof setTimeout> | undefined;
 
+  // Quitting takes a second tap within a few seconds, so a stray touch on ✕ (or the phone's Back) does not throw
+  // away the round. A tap rather than a dialog: a dialog would stop the clock and spoil the timed trial under way.
+  let quitArmed: ReturnType<typeof setTimeout> | undefined;
+  const quitBtn = h('button', { class: 'icon-btn quit-btn', 'aria-label': t('common.quit'), onClick: () => askQuit() }, '✕');
+  const askQuit = () => {
+    if (ctx.aborted) return;
+    if (quitArmed) {
+      clearTimeout(quitArmed);
+      ctx.abort();
+      return;
+    }
+    quitBtn.classList.add('armed');
+    quitBtn.setAttribute('aria-label', t('play.quitAgain'));
+    toast(t('play.quitAgain'), 'hint');
+    quitArmed = setTimeout(() => {
+      quitArmed = undefined;
+      quitBtn.classList.remove('armed');
+      quitBtn.setAttribute('aria-label', t('common.quit'));
+    }, 3000);
+  };
+
   const playView = h(
     'div',
     { class: `play ${mode === 'practice' ? 'practice' : ''}` },
     h(
       'header',
       { class: 'play-bar' },
-      h('button', { class: 'icon-btn', 'aria-label': t('common.quit'), onClick: () => ctx.abort() }, '✕'),
+      quitBtn,
       mode === 'practice' ? h('span', { class: 'practice-tag' }, `🎓 ${t('practice.tag')}`) : null,
       h('div', { class: 'progress' }, bar),
       combo,
@@ -172,7 +193,7 @@ async function runExercise(ex: Exercise, mode: Mode, level: number): Promise<{ r
     verdict,
     stage,
   );
-  render(playView);
+  render(onBack(playView, askQuit));
 
   try {
     for (const n of ['3', '2', '1']) {
@@ -187,6 +208,7 @@ async function runExercise(ex: Exercise, mode: Mode, level: number): Promise<{ r
     if (e instanceof Aborted) return null;
     throw e;
   } finally {
+    clearTimeout(quitArmed);
     ctx.abort(); // releases any listener an exercise might still hold
     if ('speechSynthesis' in window) speechSynthesis.cancel();
   }

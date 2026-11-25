@@ -8,6 +8,7 @@ import { showOnboarding } from './screens/onboarding';
 import { resumeBoardSync, takeInviteFromUrl } from './board';
 import { watchForUpdates } from './update';
 import { showTransferImportDialog } from './transfer';
+import { startBackNavigation } from './nav';
 
 function takeTransferFromUrl(): string | null {
   const url = new URL(location.href);
@@ -29,6 +30,7 @@ loadLang(startLang()).then((lang) => {
   applySettings();
   if (store.data.name) showHome();
   else showOnboarding();
+  startBackNavigation();
   resumeBoardSync();
   if (incomingTransfer) {
     showTransferImportDialog(incomingTransfer, () => {

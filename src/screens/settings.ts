@@ -1,7 +1,7 @@
 import { h, todayKey } from '../dom';
 import { store, parseSave, type Settings } from '../storage';
 import { t, dateText } from '../i18n';
-import { APP_NAME, VERSION, GITHUB_REPO } from '../config';
+import { APP_NAME, VERSION, GITHUB_REPO, SITE_URL, CONTACT_EMAIL, ANDROID_PACKAGE } from '../config';
 import { render, page, applySettings, langSelect, setLang } from '../ui';
 import { showHome } from './home';
 import { showOnboarding } from './onboarding';
@@ -149,6 +149,43 @@ function boardSection(): HTMLElement | null {
   );
 }
 
+/** Rating, sharing and suggestions: how players who like the game can help others find it, or improve it. */
+function supportSection(): HTMLElement {
+  const copied = h('p', { class: 'muted small', role: 'status', hidden: true });
+  const shareApp = async () => {
+    const text = t('settings.shareAppText');
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: APP_NAME, text, url: SITE_URL });
+        return;
+      }
+      await navigator.clipboard.writeText(`${text} ${SITE_URL}`);
+      copied.textContent = t('settings.linkCopied');
+      copied.hidden = false;
+    } catch {
+      // Cancelled, or neither sharing nor the clipboard is available: nothing else to do.
+    }
+  };
+  const subject = encodeURIComponent(`${t('settings.feedbackSubject')} (v${VERSION})`);
+  return h(
+    'section',
+    { class: 'card form' },
+    h('h3', {}, `❤️ ${t('settings.support')}`),
+    h('p', { class: 'muted small' }, t('settings.supportHint')),
+    h(
+      'div',
+      { class: 'row left' },
+      // Only on Android: the store page opens in whichever store the phone has; elsewhere there is nothing to rate.
+      /Android/i.test(navigator.userAgent)
+        ? h('a', { class: 'btn primary', href: `market://details?id=${ANDROID_PACKAGE}` }, `⭐ ${t('settings.rate')}`)
+        : null,
+      h('button', { class: 'btn', type: 'button', onClick: () => void shareApp() }, `📤 ${t('settings.shareApp')}`),
+      h('a', { class: 'btn', href: `mailto:${CONTACT_EMAIL}?subject=${subject}` }, `💬 ${t('settings.feedback')}`),
+    ),
+    copied,
+  );
+}
+
 export function showSettings() {
   const nameInput = h('input', { class: 'input', value: store.data.name, maxlength: 24 });
   nameInput.addEventListener('change', () => {
@@ -216,6 +253,7 @@ export function showSettings() {
           ),
         );
       })(),
+      supportSection(),
       h(
         'section',
         { class: 'card' },

@@ -240,6 +240,12 @@ h3 {
 .btn:active {
   transform: scale(0.97);
 }
+/* Links drawn as buttons (store page, e-mail) look like the buttons next to them. */
+a.btn {
+  text-decoration: none;
+  color: var(--text);
+  text-align: center;
+}
 .btn.primary {
   background: linear-gradient(135deg, var(--accent), #7c5cf0);
   border-color: transparent;
@@ -2011,6 +2017,20 @@ html.big-text {
   font-weight: 700;
   font-size: 0.9rem;
   border: 2px solid #f59e0b;
+}
+.play-bar .quit-btn.armed {
+  background: var(--bad);
+  color: #fff;
+}
+/* "Press Back again to exit", shown over any screen. */
+.exit-note {
+  position: fixed;
+  left: 50%;
+  bottom: max(24px, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  z-index: 1000;
+  width: max-content;
+  max-width: calc(100vw - 32px);
 }
 @keyframes toast-in {
   from {

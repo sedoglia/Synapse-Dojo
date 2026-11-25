@@ -6,6 +6,18 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [Non rilasciato]
+
+### Aggiunto
+
+- **Valuta, condividi e suggerisci** (`src/screens/settings.ts`, `src/config.ts`, `src/style.css`, `src/locales/*.ts`): le Impostazioni hanno una sezione «Ti piace Synapse Dojo?» con tre pulsanti. «Valuta l’app» compare solo su Android e apre la pagina dell’app nello store del telefono (`market://`, quindi Google Play o AppGallery); «Condividi l’app» usa la condivisione di sistema, o copia il link dove non c’è; «Invia un suggerimento» apre un’e-mail all’indirizzo di contatto già indicato nella pagina Privacy, con la versione nell’oggetto. Richiesto dai tester del test chiuso su Google Play.
+
+### Corretto
+
+- **Il tasto Indietro di Android chiudeva l’app** (`src/nav.ts`, `src/ui.ts`, `src/main.ts`, `src/style.css`, `src/locales/*.ts`): il gioco è una sola pagina che non aggiungeva voci alla cronologia, quindi Indietro usciva da qualsiasi schermata, anche nel mezzo di un esercizio. Ora fa quello che fa la freccia ← della schermata (o chiude il riquadro aperto); nella home e al primo avvio l’app chiede di premerlo di nuovo entro 2,5 secondi prima di chiudersi. In una scheda del browser la home si comporta come qualsiasi sito.
+- **Uscita da un esercizio per errore** (`src/screens/play.ts`, `src/style.css`, `src/locales/*.ts`): ✕ e Indietro interrompevano subito l’esercizio. Ora il primo tocco colora ✕ di rosso e chiede di premere di nuovo entro 3 secondi; niente finestra di conferma, che fermerebbe il cronometro della prova in corso.
+- **«Punto di forza» allo 0% senza esercizi** (`src/screens/progress.ts`, `src/locales/*.ts`): prima di qualsiasi esercizio i Progressi indicavano comunque un dominio come punto di forza, con lo 0%. Ora al suo posto c’è l’invito a completare qualche esercizio.
+
 ## [0.23.1] - 2026-11-22
 
 ### Aggiunto

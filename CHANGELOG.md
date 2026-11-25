@@ -6,6 +6,18 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [Unreleased]
+
+### Added
+
+- **Rate, share and suggest** (`src/screens/settings.ts`, `src/config.ts`, `src/style.css`, `src/locales/*.ts`): Settings has an "Enjoying Synapse Dojo?" section with three buttons. "Rate the app" appears only on Android and opens the app's page in the phone's store (`market://`, so Google Play or AppGallery); "Share the app" uses the system share sheet, or copies the link where there is none; "Send a suggestion" opens an e-mail to the contact address already given on the Privacy page, with the version in the subject. Asked for by the testers of the Google Play closed test.
+
+### Fixed
+
+- **Android's Back button closed the app** (`src/nav.ts`, `src/ui.ts`, `src/main.ts`, `src/style.css`, `src/locales/*.ts`): the game is a single page that added no history entries, so Back left it from any screen, even in the middle of an exercise. It now does what the screen's own ← does (or closes the open dialog); on the home screen and on a first visit the app asks for a second press within 2.5 seconds before closing. In a browser tab the home screen behaves like any other site.
+- **Quitting an exercise by mistake** (`src/screens/play.ts`, `src/style.css`, `src/locales/*.ts`): ✕ and Back stopped the exercise at once. The first tap now turns ✕ red and asks for a second press within 3 seconds; no confirmation dialog, which would stop the clock of the trial under way.
+- **"Top skill" at 0% before any exercise** (`src/screens/progress.ts`, `src/locales/*.ts`): before any exercise, Progress still named a domain as the top skill, at 0%. It now invites the player to complete a few exercises instead.
+
 ## [0.23.1] - 2026-11-22
 
 ### Added

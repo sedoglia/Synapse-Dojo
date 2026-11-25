@@ -11,3 +11,7 @@ export const VERSION = version;
 export const GITHUB_REPO = 'https://github.com/sedoglia/Synapse-Dojo';
 /** Shown on the privacy page: who to write to about the game or its data. */
 export const CONTACT = 'Sergio Dogliani, sedoglia@gmail.com';
+/** The address part of CONTACT, for the "Send a suggestion" button in Settings. */
+export const CONTACT_EMAIL = CONTACT.slice(CONTACT.lastIndexOf(' ') + 1);
+/** The Android app's package; `market://` opens its page in the phone's store (Google Play, AppGallery…). */
+export const ANDROID_PACKAGE = 'com.synapsedojo.app';
