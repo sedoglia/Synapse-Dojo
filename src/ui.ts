@@ -1,6 +1,7 @@
 ﻿import { h } from './dom';
 import { t, LANGS, loadLang, meta, type Lang, type I18nKey } from './i18n';
 import { store } from './storage';
+import { setBack } from './nav';
 
 /** Reflects language and accessibility settings on the document. */
 export function applySettings() {
@@ -41,25 +42,36 @@ export const langPicker = (onChange: (lang: Lang) => void) =>
 
 const app = () => document.getElementById('app')!;
 
+/** What the phone's Back button does on each view: the same as the view's own ← (see nav.ts). */
+const backActions = new WeakMap<HTMLElement, () => void>();
+
+/** Gives a view built without `page` (the exercise screen) its Back action. */
+export function onBack(view: HTMLElement, action: () => void): HTMLElement {
+  backActions.set(view, action);
+  return view;
+}
+
 export function render(view: HTMLElement) {
   app().replaceChildren(view);
+  setBack(backActions.get(view) ?? null);
   window.scrollTo(0, 0);
 }
 
 /** Standard page: a top bar with a back button and a title, then content. */
-export function page(title: string, onBack: (() => void) | null, ...content: (HTMLElement | null)[]): HTMLElement {
-  return h(
+export function page(title: string, back: (() => void) | null, ...content: (HTMLElement | null)[]): HTMLElement {
+  const view = h(
     'div',
     { class: 'page' },
     h(
       'header',
       { class: 'topbar' },
-      onBack ? h('button', { class: 'icon-btn', 'aria-label': t('common.back'), onClick: onBack }, '←') : h('span'),
+      back ? h('button', { class: 'icon-btn', 'aria-label': t('common.back'), onClick: back }, '←') : h('span'),
       h('h1', {}, title),
       h('span'),
     ),
     h('main', { class: 'content' }, ...content),
   );
+  return back ? onBack(view, back) : view;
 }
 
 export function rankIndex(score: number): 0 | 1 | 2 | 3 | 4 {

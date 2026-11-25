@@ -274,7 +274,10 @@ function renderOverview(): (HTMLElement | null)[] {
       h('h3', {}, `🧠 ${t('progress.domains')}`),
       domainRadar(),
       h('p', { class: 'muted small center' }, t('progress.domainsHint')),
-      h(
+      // Before any exercise every domain is at 0%: naming one the "top skill" would be meaningless.
+      strongest.score <= 0
+        ? h('p', { class: 'muted small center' }, t('progress.highlightsEmpty'))
+        : h(
         'div',
         { class: 'domain-highlights' },
         h(
