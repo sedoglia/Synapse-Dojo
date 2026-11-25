@@ -12,13 +12,14 @@ import { t } from './i18n';
  *
  * Chrome's Back skips a history entry if the page added the next one without a tap or key press in between (its
  * defence against pages that trap visitors). So guards are added only after the person touched the page since the
- * last ones were added: at once when a tap leads to another screen, otherwise at the next tap. Two are added at a
- * time, so two Backs in a row still stay in the app where Chrome allows it; if it skips the first, Back lands on
- * the page's own entry and the page simply knows it has none left. Back pressed before touching anything, or
- * after the guards ran out, closes the app: that is Android's normal behaviour and a web page cannot change it.
+ * last ones were added: at once when a tap leads to another screen, otherwise at the next tap. Every tap tops
+ * them up to GUARDS, enough for the longest way home with no tap in between (exercise → Gym → home → "press again
+ * to exit"); if Chrome skips some, Back lands lower and the page reads from the entry how many are left. Back
+ * pressed before touching anything, or after the guards ran out, closes the app: that is Android's normal
+ * behaviour and a web page cannot change it.
  */
 
-const GUARDS = 2;
+const GUARDS = 3;
 
 let started = false;
 let handler: (() => void) | null = null;
@@ -63,9 +64,9 @@ function dropGuards() {
 
 function sync() {
   const want = handler !== null || inApp();
-  if (want && !depth()) {
-    if (!touchedSincePush) return; // added by onTouch at the next tap
-    for (let i = 1; i <= GUARDS; i++) history.pushState({ synapseGuard: i }, '');
+  if (want && depth() < GUARDS) {
+    if (!touchedSincePush) return; // topped up by onTouch at the next tap
+    for (let i = depth() + 1; i <= GUARDS; i++) history.pushState({ synapseGuard: i }, '');
     touchedSincePush = !('userActivation' in navigator);
   } else if (!want) {
     dropGuards();
@@ -74,7 +75,7 @@ function sync() {
 
 function onTouch() {
   touchedSincePush = true;
-  if (!depth()) sync();
+  sync();
 }
 
 function hideNote() {
