@@ -6,11 +6,11 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
-## [Unreleased]
+## [0.24.2] - 2026-11-25
 
 ### Fixed
 
-- **Back still closed the app after the first use** (`src/nav.ts`, `src/screens/play.ts`): Chrome skips history entries that a page added with no tap from the person in between, a defence against sites that trap visitors. The entry that catches Back was put back right after each Back, with no tap, so the next Back skipped it and closed the app. Entries are now added only after a tap made since arriving on the current entry, two at a time, so two Backs in a row (Privacy → Settings → home) also stay in the app where Chrome allows it. During an exercise Back leaves the exercise at once, since a second Back with no tap could close the app; the double tap stays on ✕. Back pressed right after opening the app, before touching the screen, closes it: that is Android's normal behaviour and a web page cannot change it.
+- **Back still closed the app after the first use** (`src/nav.ts`, `src/screens/play.ts`): Chrome skips history entries that a page added with no tap from the person in between, a defence against sites that trap visitors. The entry that catches Back was put back right after each Back, with no tap, so the next Back skipped it and closed the app. Entries are now added only after a tap made since arriving on the current entry, two at a time, so two Backs in a row (Privacy → Settings → home) also stay in the app where Chrome allows it. During an exercise Back leaves the exercise at once, since a second Back with no tap could close the app; the double tap stays on ✕. Back pressed right after opening the app, before touching the screen, closes it: that is Android's normal behaviour and a web page cannot change it (#118).
 
 ## [0.24.1] - 2026-11-25
 
