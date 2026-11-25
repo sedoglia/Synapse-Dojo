@@ -10,6 +10,8 @@ generata da Testers Community il 25 novembre 2026, corretta dove prometteva più
 Limiti: Google Play 30 / 80 / 4000 caratteri; AppGallery nome 64, *Brief introduction* 80, *Full introduction* 8000.
 Il conteggio dei caratteri di ogni testo è indicato tra parentesi.
 
+Le traduzioni nelle altre 23 lingue dell’app sono in [scheda-store-traduzioni.md](scheda-store-traduzioni.md).
+
 ## English (en-US)
 
 ### Title (28)
