@@ -156,8 +156,8 @@ async function runExercise(ex: Exercise, mode: Mode, level: number): Promise<{ r
   const verdict = h('div', { class: 'verdict' });
   let hideVerdict: ReturnType<typeof setTimeout> | undefined;
 
-  // Quitting takes a second tap within a few seconds, so a stray touch on ✕ (or the phone's Back) does not throw
-  // away the round. A tap rather than a dialog: a dialog would stop the clock and spoil the timed trial under way.
+  // Quitting takes a second tap within a few seconds, so a stray touch on ✕ does not throw away the round.
+  // A tap rather than a dialog: a dialog would stop the clock and spoil the timed trial under way.
   let quitArmed: ReturnType<typeof setTimeout> | undefined;
   const quitBtn = h('button', { class: 'icon-btn quit-btn', 'aria-label': t('common.quit'), onClick: () => askQuit() }, '✕');
   const askQuit = () => {
@@ -193,7 +193,8 @@ async function runExercise(ex: Exercise, mode: Mode, level: number): Promise<{ r
     verdict,
     stage,
   );
-  render(onBack(playView, askQuit));
+  // The phone's Back quits at once: a second Back with no tap in between could close the whole app (see nav.ts).
+  render(onBack(playView, () => ctx.abort()));
 
   try {
     for (const n of ['3', '2', '1']) {
