@@ -58,8 +58,8 @@ a riga di comando di Google per Node.js.
 | `public/.well-known/assetlinks.json` | Collega il dominio all'app. Contiene le impronte della chiave di caricamento e della chiave di firma di Google Play (vedi [§8](#8-impronta-sha-256-e-assetlinksjson)). |
 | `public/_headers` | Fa servire `assetlinks.json` come `application/json` e senza cache. |
 | `android/twa-manifest.json` | Configurazione di Bubblewrap: pacchetto, nome, colori, icone, versione, percorso della chiave. |
-| `scripts/android-webview/` | Sorgenti della schermata WebView per i telefoni senza Chrome ([§12](#12-telefoni-senza-chrome-e-altri-store)). |
-| `scripts/patch-android.mjs` | Aggiunge la schermata WebView al progetto generato da Bubblewrap (`npm run android:patch`). Va rieseguito dopo ogni `bubblewrap update`. |
+| `scripts/android-webview/` | Sorgenti della schermata WebView per i telefoni senza Chrome ([§12](#12-telefoni-senza-chrome-e-altri-store)) e della richiesta dell'età a Google Play ([§12.6](#126-età-comunicata-da-google-play)). |
+| `scripts/patch-android.mjs` | Aggiunge schermata WebView e richiesta dell'età al progetto generato da Bubblewrap (`npm run android:patch`). Va rieseguito dopo ogni `bubblewrap update`. |
 | `.gitignore` | Esclude da git la chiave di firma (`*.keystore`, `*.jks`), i pacchetti `.aab`/`.apk` e tutto il progetto Android generato in `android/` tranne `twa-manifest.json`. |
 
 Valori scelti in `android/twa-manifest.json`:
@@ -73,7 +73,7 @@ Valori scelti in `android/twa-manifest.json`:
 | `backgroundColor` | `#f4f5fb` | Colore della schermata di avvio. |
 | `enableNotifications` | `false` | Il sito non usa notifiche, così l'app non chiede il permesso relativo. |
 | `fallbackType` | `webview` | Cosa fare quando nessun browser può aprire la TWA: mostrare il sito in un WebView invece che in una scheda del browser. Fa anche aggiungere a Bubblewrap il permesso `INTERNET`. |
-| `appVersion` / `appVersionCode` | `0.21.1` / `5` | Il nome di versione è quello di `package.json` al momento dell'ultimo pacchetto compilato; il codice è un numero intero che deve crescere a ogni pacchetto caricato su Play. Le release solo del sito non cambiano questi valori: per esempio la 0.22.0 è online, mentre l'app negli store resta 0.21.1 (codice 5) e apre comunque il sito aggiornato. |
+| `appVersion` / `appVersionCode` | `0.25.0` / `6` | Il nome di versione è quello di `package.json` al momento dell'ultimo pacchetto compilato; il codice è un numero intero che deve crescere a ogni pacchetto caricato su Play. Le release solo del sito non cambiano questi valori: l'app negli store resta all'ultimo pacchetto e apre comunque il sito aggiornato. |
 | `signingKey` | `./android.keystore`, alias `android` | La chiave di firma, che creerai tu (vedi §5). Il file è ignorato da git. |
 
 ## 3. Prerequisiti
@@ -383,7 +383,7 @@ programmi › Contenuti dell'app* per i questionari) servono:
 - **Accesso all'app**: tutte le funzioni sono accessibili senza credenziali.
 - **Sicurezza dei dati** (Data safety): obbligatorio anche per i test chiusi e anche se l'app non raccoglie dati.
   Dichiara cosa raccoglie o condivide l'app, incluso ciò che lasciano i servizi di terze parti, seguendo l'informativa
-  in <https://synapsedojo.com/privacy>. Le risposte date (verificate con la release 0.21.1, codice 5):
+  in <https://synapsedojo.com/privacy>. Le risposte date (verificate con la release 0.25.0, codice 6):
 
   | Domanda | Risposta |
   | --- | --- |
@@ -394,7 +394,9 @@ programmi › Contenuti dell'app* per i questionari) servono:
   | *Attività nelle app › Interazioni con l'app* | **Raccolti**, non condivisi, non trattati in modo temporaneo; **gli utenti possono scegliere** se attivarne la raccolta; scopi **Funzionalità dell'app** (classifica) e **Analisi** (statistiche di visita e conteggio anonimo di chi si allena negli ultimi 7 giorni) |
 
   Le altre voci di *Tipi di dati* restano quelle della prima compilazione. Va aggiornato solo se dal dispositivo esce
-  un tipo di dato nuovo: il conteggio anonimo della 0.21 rientrava già in *Interazioni con l'app › Analisi*.
+  un tipo di dato nuovo: il conteggio anonimo della 0.21 rientrava già in *Interazioni con l'app › Analisi*, e l'età
+  comunicata da Google Play dalla 0.25.0 resta sul dispositivo, quindi non è un dato raccolto
+  ([§12.6](#126-età-comunicata-da-google-play)).
 - **Eliminazione dell'account**: per Google l'app non ha account (la classifica usa un identificativo anonimo), ma il
   link `https://synapsedojo.com/privacy` spiega comunque come uscire dalla classifica e cancellarne i dati.
 
@@ -405,15 +407,15 @@ programmi › Contenuti dell'app* per i questionari) servono:
 ### 10.5 Pubblicare un aggiornamento su Google Play
 
 L'app è nel **test chiuso (Alpha)**: prima versione pubblicata il 15 novembre 2026 (codice 4), aggiornamento 0.21.1
-(codice 5) inviato il 21 novembre 2026. Per ogni nuovo pacchetto ([§11](#11-aggiornare-lapp-in-seguito)):
+(codice 5) pubblicato il 21 novembre 2026, aggiornamento 0.25.0 (codice 6) inviato il 26 novembre 2026. Per ogni nuovo pacchetto ([§11](#11-aggiornare-lapp-in-seguito)):
 
 1. **Testa e rilascia › Test › Test chiuso › Alpha › Crea nuova release**, poi *Carica*
    `android/app-release-bundle.aab`. Controlla che la riga del bundle mostri il nuovo codice e versione (per esempio
-   `5 (0.21.1)`), API 24 e successive e l'SDK target atteso.
+   `6 (0.25.0)`), API 24 e successive e l'SDK target atteso.
 2. **Release precedente**: **non** includere la versione precedente, così i tester ricevono l'aggiornamento.
 3. **Nome della release**: va bene quello proposto, `codice (versione)`.
 4. **Note di rilascio**: un blocco per lingua tra tag, al massimo **500 caratteri** per lingua (lo stesso testo va bene
-   per AppGallery e Uptodown):
+   per AppGallery e Uptodown, togliendo le righe che riguardano solo Google Play, come quella sull'età nella 0.25.0):
 
    ```text
    <en-US>
@@ -447,6 +449,8 @@ come per la PWA.
 
 - nome, icona (`public/icon.svg` → `node scripts/make-icons.mjs` → deploy), colori o schermata di avvio;
 - indirizzo iniziale, dominio o pacchetto (il pacchetto in realtà non si può cambiare dopo la pubblicazione);
+- quando cambia il codice nativo del guscio (`scripts/android-webview/`, `scripts/patch-android.mjs`), come la richiesta
+  dell'età a Google Play aggiunta nella 0.25.0;
 - quando Google Play richiede un **livello API di destinazione** più recente (succede circa una volta l'anno: la Play
   Console lo segnala con un avviso). In quel caso aggiorna prima Bubblewrap con `npm install -g @bubblewrap/cli`.
 
@@ -455,7 +459,7 @@ Procedura per un nuovo pacchetto:
 ```powershell
 npm install -g @bubblewrap/cli          # Bubblewrap aggiornato
 cd android
-bubblewrap update --appVersionName=0.22.0   # la versione attuale di package.json
+bubblewrap update --appVersionName=0.25.0   # la versione attuale di package.json
 cd ..
 npm run android:patch
 cd android
@@ -464,7 +468,7 @@ bubblewrap build
 
 `bubblewrap update` aumenta di 1 `appVersionCode` (Play rifiuta un pacchetto con un codice già usato), imposta il nome
 di versione indicato (usa quello di `package.json`) e rigenera il progetto; `npm run android:patch` vi rimette la
-schermata WebView; poi committa `android/twa-manifest.json` aggiornato. Carica il nuovo `app-release-bundle.aab`
+schermata WebView e la richiesta dell'età; poi committa `android/twa-manifest.json` aggiornato. Carica il nuovo `app-release-bundle.aab`
 sulla traccia di Play che usi (test o produzione, vedi [§10.5](#105-pubblicare-un-aggiornamento-su-google-play)) e il
 nuovo `app-release-signed.apk` sugli altri store ([§12.3](#123-altri-store-appgallery-uptodown)).
 
@@ -529,10 +533,14 @@ incompleta.
   deve prima disinstallarla (perdendo i dati locali: prima conviene esportarli).
 - **Entrambe le impronte restano in `assetlinks.json`**: così anche l'APK degli altri store, su un telefono con
   Chrome, si apre come TWA senza barra dell'indirizzo.
-- **Huawei AppGallery**: carica l'APK da AppGallery Connect, nella bozza della versione. L'app non usa servizi Google
-  (GMS), quindi non servono gli HMS. La procedura completa è in [§12.4](#124-huawei-appgallery).
+- **Huawei AppGallery**: carica l'APK da AppGallery Connect, nella bozza della versione. L'app non ha bisogno dei servizi
+  Google (GMS) né degli HMS: contiene la libreria di Google Play per l'età, che sui telefoni senza Play fallisce subito
+  e viene ignorata ([§12.6](#126-età-comunicata-da-google-play)). La procedura completa è in [§12.4](#124-huawei-appgallery).
 - **Uptodown**: nella console sviluppatori, scheda *Files*, carica il nuovo APK e reinvia la scheda in revisione.
-  Versione 0.21.1 (codice 5) caricata il 21 novembre 2026. Per ogni versione:
+  Versione 0.21.1 (codice 5) caricata il 21 novembre 2026, versione 0.25.0 (codice 6) il 26 novembre 2026. Caricare
+  il file mette da solo la scheda in revisione: finché è *Pending revision* il pulsante *Submit for review* resta grigio.
+  Nella scheda *Information* va compilato anche *Privacy policy URL* (`https://synapsedojo.com/privacy`). Per ogni
+  versione:
   - **Manage file licensing**:
 
     | Campo | Valore |
@@ -549,7 +557,8 @@ incompleta.
 
 ### 12.4 Huawei AppGallery
 
-Prima versione inviata il 20 novembre 2026 (0.17.2, codice 4) e pubblicata il 21 novembre; seconda versione 0.21.1, codice 5. In AppGallery Connect, scheda *Distribute*, ci sono
+Prima versione inviata il 20 novembre 2026 (0.17.2, codice 4) e pubblicata il 21 novembre; seconda versione 0.21.1,
+codice 5, pubblicata il 23 novembre; terza versione 0.25.0, codice 6, inviata il 26 novembre. In AppGallery Connect, scheda *Distribute*, ci sono
 due pagine da compilare.
 
 **App information** (scheda dello store, vale per tutte le versioni):
@@ -581,7 +590,7 @@ due pagine da compilare.
 | Privacy tags | *Collect personal data*: **Yes**; scenari **App functionality** e, dalla 0.21.1, **Analytics** per *App usage information* (il conteggio anonimo di chi si allena negli ultimi 7 giorni); voci: *Identifiers › User identifiers*, *Basic information › Age* e *Account information*, *App information › App settings* e *App usage information*. Le descrizioni le compila Huawei. |
 | AI function declaration | Not involved |
 | Copyright information | Vuoto (facoltativo). |
-| For reviewer | *Sign-in required* non spuntato; nelle note (al massimo 300 caratteri): nessun account, progressi solo sul dispositivo, classifica facoltativa e spenta di default, conteggio anonimo (al massimo ogni 7 giorni) (solo la data) disattivabile nelle Impostazioni, niente pubblicità né acquisti. |
+| For reviewer | *Sign-in required* non spuntato; nelle note (al massimo 300 caratteri): nessun account, progressi solo sul dispositivo, classifica facoltativa e spenta di default, conteggio anonimo (al massimo ogni 7 giorni) (solo la data) disattivabile nelle Impostazioni, niente pubblicità né acquisti. Dalla 0.25.0 conviene aggiungere che la libreria per l'età di Google Play sui telefoni Huawei viene saltata e l'app funziona come sempre. |
 | Release time | Immediately once approved |
 
 Nel questionario dell'età le risposte sono tutte **No** (violenza, linguaggio, droghe, azzardo, acquisti, chat,
@@ -607,7 +616,7 @@ revisione che riusa l'APK pubblicato ([guida di Huawei](https://developer.huawei
    Controlla anche *New features* in ogni lingua: viene pubblicato insieme alla revisione, quindi va svuotato o
    aggiornato se contiene ancora le novità della versione precedente.
 2. Apri la pagina **New version – Draft** che AppGallery crea per l'aggiornamento.
-3. **Non caricare un nuovo APK**: resta quello pubblicato (0.21.1, codice 5). Le altre sezioni restano compilate con
+3. **Non caricare un nuovo APK**: resta l'ultimo pubblicato. Le altre sezioni restano compilate con
    le risposte della tabella qui sopra.
 4. **Submit** in alto a destra. L'avviso che il codice di versione del pacchetto è uguale a quello già pubblicato è
    previsto: conferma e prosegui.

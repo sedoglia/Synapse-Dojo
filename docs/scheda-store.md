@@ -38,7 +38,7 @@ Se Google propone di tradurre la scheda automaticamente, non serve: questi testi
    **Full introduction** = descrizione completa.
 2. **Manage languages**: aggiungi le altre lingue e per ognuna incolla gli stessi tre testi. Per gli screenshot vanno
    bene quelli inglesi (per l’italiano ci sono quelli `it-light`).
-3. **Save**, poi apri **New version – Draft**, lascia l’APK già pubblicato (0.21.1, codice 5) e premi **Submit**,
+3. **Save**, poi apri **New version – Draft**, lascia l’ultimo APK pubblicato e premi **Submit**,
    confermando l’avviso sul codice di versione uguale: non serve un nuovo pacchetto. Procedura completa in
    [android.md §12.4](android.md#124-huawei-appgallery).
 
