@@ -1,4 +1,4 @@
-// Adds the WebView screen to the Android project that Bubblewrap generates in android/ (docs/android.md §11).
+// Adds the WebView screen and the Play age signal to the Android project that Bubblewrap generates in android/ (docs/android.md §11).
 //
 // Bubblewrap rewrites the whole project at every `bubblewrap update`, so the additions live in
 // scripts/android-webview/ and this script puts them back:
@@ -58,6 +58,10 @@ if (!activity.includes(`package ${twa.packageId};`)) {
   fail(`WebViewActivity.java is not in the package ${twa.packageId} of twa-manifest.json.`);
 }
 copy(join(source, 'WebViewActivity.java'), join(javaDir, 'WebViewActivity.java'));
+if (!readFileSync(join(source, 'AgeSignal.java'), 'utf8').includes(`package ${twa.packageId};`)) {
+  fail(`AgeSignal.java is not in the package ${twa.packageId} of twa-manifest.json.`);
+}
+copy(join(source, 'AgeSignal.java'), join(javaDir, 'AgeSignal.java'));
 copy(join(source, 'webview-bridge.js'), join(main, 'assets', 'webview-bridge.js'));
 copy(join(source, 'proguard-webview.pro'), join(app, 'proguard-webview.pro'));
 for (const dir of readdirSync(join(source, 'res'))) {
@@ -80,6 +84,28 @@ insertBefore(
     }
 
 `,
+);
+
+// 2b. Before opening the site the launcher asks Google Play for the age signal (at most for a second), and passes
+//     the page only whether the user is a minor or an adult (docs/android.md §12.6). The base class calls
+//     shouldLaunchImmediately() only when it is really about to open the site, so the request starts there.
+insertBefore(
+  join(javaDir, 'LauncherActivity.java'),
+  'AgeSignal.fetch',
+  '    @Override\n    protected Uri getLaunchingUrl()',
+  `    @Override
+    protected boolean shouldLaunchImmediately() {
+        AgeSignal.fetch(this, this::launchTwa);
+        return false;
+    }
+
+`,
+);
+insertBefore(
+  join(javaDir, 'LauncherActivity.java'),
+  'AgeSignal.addTo',
+  '        return uri;\n    }',
+  '        uri = AgeSignal.addTo(uri);\n\n',
 );
 
 // 3. The manifest declares it, with the permissions a WebView needs: the network, and vibration for the haptic
@@ -123,6 +149,14 @@ insertBefore(
   'androidx.webkit:webkit',
   "implementation 'com.google.androidbrowserhelper:androidbrowserhelper",
   "implementation 'androidx.webkit:webkit:1.8.0'\n        ",
+);
+
+// 7. Google Play's age signals library, used by AgeSignal.java.
+insertBefore(
+  join(app, 'build.gradle'),
+  'com.google.android.play:age-signals',
+  "implementation 'com.google.androidbrowserhelper:androidbrowserhelper",
+  "implementation 'com.google.android.play:age-signals:0.0.6'\n        ",
 );
 
 console.log('Done. Now build: cd android; bubblewrap build');

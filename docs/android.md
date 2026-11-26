@@ -510,11 +510,13 @@ Bubblewrap riscrive tutto il progetto Android a ogni `bubblewrap update`, quindi
 | `webview-bridge.js` | Piccolo script eseguito nella pagina: passa all'app i file da salvare e le richieste di condivisione. Il sito non va modificato. |
 | `res/values*/synapse_webview.xml` | Tema chiaro e scuro della schermata, con i colori di `twa-manifest.json`. |
 | `proguard-webview.pro` | Dice al compressore di codice di non rinominare i metodi chiamati dalla pagina. |
+| `AgeSignal.java` | Chiede a Google Play la fascia d'età prima di aprire il sito ([§12.6](#126-età-comunicata-da-google-play)). |
 
 Lo script inoltre dichiara la schermata e i permessi `INTERNET` e `VIBRATE` nel manifest, la collega a
 `LauncherActivity`, aggiunge la cartella dei file condivisi a `filepaths.xml` e la libreria `androidx.webkit` a
 `app/build.gradle` (serve perché su Android 10–12 la pagina usi il proprio tema scuro, invece di essere scurita in
-automatico dal WebView). Si può eseguire più volte; se dopo un
+automatico dal WebView). Aggiunge anche la libreria `com.google.android.play:age-signals` e, in `LauncherActivity`,
+la chiamata ad `AgeSignal` prima dell'apertura del sito. Si può eseguire più volte; se dopo un
 aggiornamento di Bubblewrap non trova più le righe che si aspetta, si ferma con un errore invece di produrre un'app
 incompleta.
 
@@ -629,6 +631,57 @@ adb install app-release-signed.apk
 ```
 
 Con `adb shell dumpsys activity activities` la schermata in primo piano risulta `com.synapsedojo.app/.WebViewActivity`.
+
+### 12.6 Età comunicata da Google Play
+
+Alcune leggi sulla verifica dell'età negli store (California AB 1043 e Brasile ECA Digital da gennaio 2027, Texas,
+Alabama e altre) fanno sì che Google Play comunichi alle app la fascia d'età dell'utente tramite l'API
+[Play Age Signals](https://developer.android.com/google/play/age-signals/overview). La legge californiana, per quanto
+risulta, chiede anche allo sviluppatore di richiederla quando l'app viene scaricata e avviata. Google Play non obbliga
+a usarla: la scelta e la valutazione legale restano dello sviluppatore.
+
+**Come funziona.**
+
+1. All'avvio `LauncherActivity` non apre subito il sito (`shouldLaunchImmediately()` restituisce `false`) e
+   `AgeSignal.fetch()` chiama `checkAgeSignals()`. Appena arriva la risposta, dopo un errore o al massimo dopo
+   1 secondo, apre il sito con `launchTwa()`.
+2. Della risposta tiene solo se l'utente ha meno di 18 anni (`ageUpper` < 18) o almeno 18 (`ageLower` ≥ 18) e lo
+   aggiunge all'indirizzo di avvio come `#sd-age=minor` o `#sd-age=adult`. Fascia esatta, `installId` e il resto non
+   escono dalla classe. Se l'età non è nota l'indirizzo resta com'è.
+3. Il sito (`src/ageSignal.ts`, il primo modulo caricato) legge il frammento, lo toglie subito dall'indirizzo e
+   conserva solo `minor` in `localStorage` (chiave `synapse-dojo/age-signal`, fuori dal salvataggio e dai
+   trasferimenti). Il frammento non arriva mai a un server, nemmeno alle statistiche di visita. Se l'app viene
+   riaperta mentre la pagina è ancora aperta, Chrome può cambiare solo il frammento senza ricaricare: il sito lo legge
+   anche da `hashchange` e, se il segnale è cambiato, ricarica la pagina.
+4. Per un minore non vengono offerti classifica e gruppi (`socialAvailable()` in `src/board.ts`): niente proposta in
+   home, niente inviti, al posto dell'iscrizione nelle Impostazioni un avviso. Se era già iscritto, all'avvio esce
+   dalla classifica con la cancellazione dei dati sul server (ritentata all'avvio successivo se offline). Esercizi,
+   progressi e conteggio anonimo restano invariati. Con `adult` il blocco si toglie; una risposta vuota lascia quello
+   che si sapeva.
+
+L'app non mostra mai il riquadro di Play che chiede all'utente di condividere l'età (`requestAgeSignalsAccess()`).
+Fuori dai luoghi in cui la condivisione è obbligatoria la risposta è quasi sempre vuota. Sui telefoni senza Google
+Play (AppGallery, Uptodown) la chiamata fallisce subito e l'app si apre come prima.
+
+**Dichiarazioni.** Le norme di Google consentono di usare il segnale solo per offrire esperienze adatte all'età, mai
+per pubblicità, marketing, profilazione o statistiche, ed è l'unico uso che ne fa l'app. La libreria non raccoglie
+dati e l'informazione resta sul dispositivo, quindi la *Sicurezza dei dati* non cambia. L'informativa privacy ha la
+sezione «Età comunicata da Google Play (app per Android)».
+
+**Provare.** Per il sito basta aprire `http://localhost:5173/#sd-age=minor` (e poi `#sd-age=adult` per tornare
+indietro); il sito accetta anche la forma codificata `#sd-age%3Dminor`. Su un telefono reale la risposta arriva
+solo dove la condivisione è obbligatoria o se l'utente ha scelto di condividere l'età nelle impostazioni di Google
+Play. Per simulare una risposta con l'età nell'app si usa `FakeAgeSignalsManager` della libreria, solo in una build
+di prova e mai nel pacchetto pubblicato: in `android/app/.../AgeSignal.java` (il file generato, non quello in
+`scripts/android-webview/`) si sostituisce il manager con un `FakeAgeSignalsManager` a cui
+`setNextAgeSignalsResult()` dà per esempio `ageLower` 13 e `ageUpper` 15, si compila con
+`gradlew :app:assembleRelease` e si firma l'APK con una chiave temporanea. L'indirizzo aperto da Chrome si legge con
+`adb forward tcp:9222 localabstract:chrome_devtools_remote` e `http://127.0.0.1:9222/json`; nella schermata WebView
+il socket è `webview_devtools_remote_<pid>` (visibile sulle immagini AOSP). Alla fine `npm run android:patch`
+rimette il file originale.
+
+**Aggiornare la libreria.** La versione è in `scripts/patch-android.mjs` (passo 7); le versioni pubblicate sono in
+[Google Maven](https://dl.google.com/android/maven2/com/google/android/play/age-signals/maven-metadata.xml).
 
 ## 13. Problemi comuni
 
