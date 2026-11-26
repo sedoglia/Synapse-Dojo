@@ -6,11 +6,11 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
-## [Unreleased]
+## [0.25.0] - 2026-11-26
 
 ### Added
 
-- **Age passed on by Google Play in the Android app** (`scripts/android-webview/AgeSignal.java`, `scripts/patch-android.mjs`, `src/ageSignal.ts`): before opening the site the app asks Google Play for the age range through the Play Age Signals API 0.0.6, which from January 2027 shares it on a mandatory basis in California and Brazil, and passes the page only whether the user is a minor or an adult, in an address fragment that the site removes at once. Minors are not offered the leaderboard and groups, and an existing membership is closed with its data deleted; the rest of the game is unchanged. The information stays on the device, Google Play's Data safety form does not change, and the privacy policy has a new section in all 25 languages (docs/android.md §12.6). A new Android package is needed.
+- **Age passed on by Google Play in the Android app** (`scripts/android-webview/AgeSignal.java`, `scripts/patch-android.mjs`, `src/ageSignal.ts`): before opening the site the app asks Google Play for the age range through the Play Age Signals API 0.0.6, which from January 2027 shares it on a mandatory basis in California and Brazil, and passes the page only whether the user is a minor or an adult, in an address fragment that the site removes at once. Minors are not offered the leaderboard and groups, and an existing membership is closed with its data deleted; the rest of the game is unchanged. The information stays on the device, Google Play's Data safety form does not change, and the privacy policy has a new section in all 25 languages (docs/android.md §12.6). A new Android package is needed (#129).
 
 ## [0.24.3] - 2026-11-25
 
