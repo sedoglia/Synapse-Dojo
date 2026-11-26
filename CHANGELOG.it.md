@@ -6,11 +6,11 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
-## [Non pubblicato]
+## [0.25.0] - 2026-11-26
 
 ### Aggiunto
 
-- **Età comunicata da Google Play nell’app per Android** (`scripts/android-webview/AgeSignal.java`, `scripts/patch-android.mjs`, `src/ageSignal.ts`): prima di aprire il sito l’app chiede a Google Play la fascia d’età con l’API Play Age Signals 0.0.6, che da gennaio 2027 la comunica obbligatoriamente in California e in Brasile, e passa alla pagina solo se l’utente è minorenne o maggiorenne, in un frammento dell’indirizzo che il sito toglie subito. Ai minori non vengono offerti classifica e gruppi, e un’iscrizione esistente viene chiusa con la cancellazione dei dati; il resto del gioco non cambia. L’informazione resta sul dispositivo, la Sicurezza dei dati di Google Play non cambia e l’informativa privacy ha una sezione nuova in tutte le 25 lingue (docs/android.md §12.6). Serve un nuovo pacchetto Android.
+- **Età comunicata da Google Play nell’app per Android** (`scripts/android-webview/AgeSignal.java`, `scripts/patch-android.mjs`, `src/ageSignal.ts`): prima di aprire il sito l’app chiede a Google Play la fascia d’età con l’API Play Age Signals 0.0.6, che da gennaio 2027 la comunica obbligatoriamente in California e in Brasile, e passa alla pagina solo se l’utente è minorenne o maggiorenne, in un frammento dell’indirizzo che il sito toglie subito. Ai minori non vengono offerti classifica e gruppi, e un’iscrizione esistente viene chiusa con la cancellazione dei dati; il resto del gioco non cambia. L’informazione resta sul dispositivo, la Sicurezza dei dati di Google Play non cambia e l’informativa privacy ha una sezione nuova in tutte le 25 lingue (docs/android.md §12.6). Serve un nuovo pacchetto Android (#129).
 
 ## [0.24.3] - 2026-11-25
 
