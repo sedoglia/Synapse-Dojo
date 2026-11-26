@@ -650,7 +650,9 @@ a usarla: la scelta e la valutazione legale restano dello sviluppatore.
    escono dalla classe. Se l'età non è nota l'indirizzo resta com'è.
 3. Il sito (`src/ageSignal.ts`, il primo modulo caricato) legge il frammento, lo toglie subito dall'indirizzo e
    conserva solo `minor` in `localStorage` (chiave `synapse-dojo/age-signal`, fuori dal salvataggio e dai
-   trasferimenti). Il frammento non arriva mai a un server, nemmeno alle statistiche di visita.
+   trasferimenti). Il frammento non arriva mai a un server, nemmeno alle statistiche di visita. Se l'app viene
+   riaperta mentre la pagina è ancora aperta, Chrome può cambiare solo il frammento senza ricaricare: il sito lo legge
+   anche da `hashchange` e, se il segnale è cambiato, ricarica la pagina.
 4. Per un minore non vengono offerti classifica e gruppi (`socialAvailable()` in `src/board.ts`): niente proposta in
    home, niente inviti, al posto dell'iscrizione nelle Impostazioni un avviso. Se era già iscritto, all'avvio esce
    dalla classifica con la cancellazione dei dati sul server (ritentata all'avvio successivo se offline). Esercizi,
@@ -667,9 +669,16 @@ dati e l'informazione resta sul dispositivo, quindi la *Sicurezza dei dati* non 
 sezione «Età comunicata da Google Play (app per Android)».
 
 **Provare.** Per il sito basta aprire `http://localhost:5173/#sd-age=minor` (e poi `#sd-age=adult` per tornare
-indietro). Per l'app, la libreria include `FakeAgeSignalsManager` per i test automatici; su un telefono reale la
-risposta arriva solo dove la condivisione è obbligatoria o se l'utente ha scelto di condividere l'età nelle
-impostazioni di Google Play.
+indietro); il sito accetta anche la forma codificata `#sd-age%3Dminor`. Su un telefono reale la risposta arriva
+solo dove la condivisione è obbligatoria o se l'utente ha scelto di condividere l'età nelle impostazioni di Google
+Play. Per simulare una risposta con l'età nell'app si usa `FakeAgeSignalsManager` della libreria, solo in una build
+di prova e mai nel pacchetto pubblicato: in `android/app/.../AgeSignal.java` (il file generato, non quello in
+`scripts/android-webview/`) si sostituisce il manager con un `FakeAgeSignalsManager` a cui
+`setNextAgeSignalsResult()` dà per esempio `ageLower` 13 e `ageUpper` 15, si compila con
+`gradlew :app:assembleRelease` e si firma l'APK con una chiave temporanea. L'indirizzo aperto da Chrome si legge con
+`adb forward tcp:9222 localabstract:chrome_devtools_remote` e `http://127.0.0.1:9222/json`; nella schermata WebView
+il socket è `webview_devtools_remote_<pid>` (visibile sulle immagini AOSP). Alla fine `npm run android:patch`
+rimette il file originale.
 
 **Aggiornare la libreria.** La versione è in `scripts/patch-android.mjs` (passo 7); le versioni pubblicate sono in
 [Google Maven](https://dl.google.com/android/maven2/com/google/android/play/age-signals/maven-metadata.xml).

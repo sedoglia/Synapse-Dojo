@@ -65,6 +65,7 @@ final class AgeSignal {
     /** The launch address with the signal in its fragment, or unchanged when the age is unknown. */
     static Uri addTo(Uri uri) {
         if (sValue == null || uri == null) return uri;
-        return uri.buildUpon().fragment("sd-age=" + sValue).build();
+        // encodedFragment, not fragment: the latter would turn "=" into "%3D".
+        return uri.buildUpon().encodedFragment("sd-age=" + sValue).build();
     }
 }

@@ -11,9 +11,16 @@
 const KEY = 'synapse-dojo/age-signal';
 let minorThisVisit = false;
 
-function take(): void {
-  const match = /^#sd-age=(minor|adult)$/.exec(location.hash);
-  if (!match) return;
+/** Reads and removes the signal from the address; true if there was one. */
+function take(): boolean {
+  let hash = location.hash;
+  try {
+    hash = decodeURIComponent(hash); // also accepts #sd-age%3Dminor
+  } catch {
+    /* malformed escape: read it as it is */
+  }
+  const match = /^#sd-age=(minor|adult)$/.exec(hash);
+  if (!match) return false;
   history.replaceState(history.state, '', location.pathname + location.search);
   try {
     if (match[1] === 'minor') localStorage.setItem(KEY, 'minor');
@@ -22,9 +29,16 @@ function take(): void {
     /* storage unavailable: the signal applies to this visit only */
     minorThisVisit = match[1] === 'minor';
   }
+  return true;
 }
 
 take();
+// Reopening the app while the page is still open may change only the fragment, without a reload: start again so
+// that every screen and the leaderboard check see the new signal.
+window.addEventListener('hashchange', () => {
+  const before = isMinor();
+  if (take() && isMinor() !== before) location.reload();
+});
 
 /** True when Google Play told the Android app that the user is under 18. */
 export function isMinor(): boolean {
