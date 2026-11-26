@@ -6,12 +6,12 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
-## [Non pubblicato]
+## [0.25.1] - 2026-11-26
 
 ### Corretto
 
-- **La versione senza JavaScript dell’informativa non citava l’età comunicata da Google Play** (`privacy.html`): il riepilogo in `<noscript>`, letto da chi ha JavaScript disattivato e da alcuni motori di ricerca, ha ora il paragrafo sull’età comunicata da Google Play nell’app per Android, come l’informativa completa.
-- **Date della sitemap ferme al 9 novembre** (`public/sitemap.xml`): l’ultima modifica è ora quella reale di ogni pagina (home e informativa il 26 novembre, guida e licenza il 22 novembre, con le nuove lingue).
+- **La versione senza JavaScript dell’informativa non citava l’età comunicata da Google Play** (`privacy.html`): il riepilogo in `<noscript>`, letto da chi ha JavaScript disattivato e da alcuni motori di ricerca, ha ora il paragrafo sull’età comunicata da Google Play nell’app per Android, come l’informativa completa (#133).
+- **Date della sitemap ferme al 9 novembre** (`public/sitemap.xml`): l’ultima modifica è ora quella reale di ogni pagina (home e informativa il 26 novembre, guida e licenza il 22 novembre, con le nuove lingue) (#133).
 
 ## [0.25.0] - 2026-11-26
 
