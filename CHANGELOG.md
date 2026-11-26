@@ -6,6 +6,13 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [Unreleased]
+
+### Fixed
+
+- **The no-JavaScript version of the privacy policy did not mention the age passed on by Google Play** (`privacy.html`): the `<noscript>` summary, read by people with JavaScript turned off and by some search engines, now has the paragraph on the age passed on by Google Play in the Android app, like the full policy.
+- **Sitemap dates stuck at 9 November** (`public/sitemap.xml`): each page now has its real last change (home and privacy policy on 26 November, guide and licence on 22 November, with the new languages).
+
 ## [0.25.0] - 2026-11-26
 
 ### Added
