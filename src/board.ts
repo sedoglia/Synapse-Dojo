@@ -3,6 +3,7 @@ import { store, type BoardAccount } from './storage';
 import { levelScore, DETRAIN_DAYS } from './adaptive';
 import { EXERCISES, type Exercise } from './exercises';
 import { t, nicknames } from './i18n';
+import { isMinor } from './ageSignal';
 
 /**
  * Opt-in weekly leaderboard (API in functions/api/). It ranks showing up and getting better, not raw ability:
@@ -79,6 +80,9 @@ const SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY?.trim();
 
 /** The leaderboard needs the Cloudflare API, so it's off when the game is opened from a file. */
 export const boardAvailable = () => location.protocol === 'https:' || ['localhost', '127.0.0.1'].includes(location.hostname);
+
+/** The leaderboard and its groups, where players meet others: not offered to a minor in the Android app. */
+export const socialAvailable = () => boardAvailable() && !isMinor();
 
 async function call(method: string, path: string, body?: unknown): Promise<Response> {
   const acc = store.data.board;
@@ -224,7 +228,7 @@ async function flush() {
 export function syncBoard() {
   pingCommunity();
   const acc = store.data.board;
-  if (!acc) return;
+  if (!acc || isMinor()) return;
   changes++;
   if (!acc.pending) {
     acc.pending = true;

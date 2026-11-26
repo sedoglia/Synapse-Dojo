@@ -13,7 +13,7 @@ import { showGuide } from './guide';
 import { showBoard } from './board';
 import { showBoardJoin } from './boardJoin';
 import { homeShown } from '../update';
-import { boardAvailable, boardErrorText, BoardError, clearInvite, fetchBoard, fetchCommunity, joinGroup, previewGroup } from '../board';
+import { boardErrorText, BoardError, clearInvite, fetchBoard, fetchCommunity, joinGroup, previewGroup, socialAvailable } from '../board';
 
 /** The suggestion to join appears from the very first visit and comes back a week after "Not now". */
 const PROMPT_SNOOZE_DAYS = 7;
@@ -30,7 +30,7 @@ function snoozeDate(): string {
  */
 function promptCard(): HTMLElement | null {
   const p = store.data.boardPrompt;
-  if (store.data.board || store.data.boardInvite || !boardAvailable() || p.never) return null;
+  if (store.data.board || store.data.boardInvite || !socialAvailable() || p.never) return null;
   if (p.snoozed && p.snoozed > todayKey()) return null;
   const hide = (prompt: typeof p) => {
     store.data.boardPrompt = prompt;
@@ -89,7 +89,7 @@ function langOfferCard(): HTMLElement | null {
 /** A group invite link was opened: say which group it is and offer to join (through the opt-in if needed). */
 function inviteCard(): HTMLElement | null {
   const code = store.data.boardInvite;
-  if (!code || !boardAvailable()) return null;
+  if (!code || !socialAvailable()) return null;
   const title = h('h3', {}, `👥 ${t('invite.title', { name: '…' })}`);
   const text = h('p', { class: 'small' }, store.data.board ? t('invite.textMember') : t('invite.text'));
   const error = h('p', { class: 'small board-error', role: 'alert' });
@@ -140,7 +140,7 @@ function inviteCard(): HTMLElement | null {
  * otherwise how many points would move the player up (a reachable next step, never "18th of 18").
  */
 function boardCard(): HTMLElement | null {
-  if (!store.data.board) return null;
+  if (!store.data.board || !socialAvailable()) return null;
   const sub = h('small', {}, t('home.boardSub'));
   fetchBoard({ metric: 'days' })
     .then((res) => {

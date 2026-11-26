@@ -8,6 +8,7 @@ import { showOnboarding } from './onboarding';
 import { showPrivacy } from './privacy';
 import { showGuide } from './guide';
 import { showLicense } from './license';
+import { isMinor } from '../ageSignal';
 import { boardAvailable, boardErrorText, leaveBoard, nickname, updateBoardProfile, syncBoard } from '../board';
 import { showBoard } from './board';
 import { ageSelect, joinCard } from './boardJoin';
@@ -92,6 +93,9 @@ function toggle(key: 'sound' | 'relaxed' | 'bigText' | 'shareOffer' | 'community
 /** Opt-in leaderboard: a clear explanation and a join button, or the player's nickname, groups and how to leave. */
 function boardSection(): HTMLElement | null {
   if (!boardAvailable()) return null;
+  if (isMinor()) {
+    return h('section', { class: 'card form' }, h('h3', {}, `🏆 ${t('settings.board')}`), h('p', { class: 'muted small' }, t('settings.boardMinor')));
+  }
   const acc = store.data.board;
   if (!acc) return joinCard(showSettings);
   const error = h('p', { class: 'small board-error', role: 'alert' });
