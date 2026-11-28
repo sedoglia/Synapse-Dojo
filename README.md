@@ -64,7 +64,7 @@ Built purely with **TypeScript** and **Vite**, with **zero UI framework dependen
 ```
 synapse-dojo/
 ├── public/                 PWA manifest, SVG and PNG icons, Nunito font (OFL), robots.txt, sitemap.xml, _headers, service worker, .well-known/assetlinks.json
-├── android/                twa-manifest.json: Bubblewrap configuration of the Android app (guide in docs/android.md)
+├── android/                twa-manifest.json: Bubblewrap configuration of the Android app
 ├── functions/api/          Leaderboard & transfer API (Cloudflare Pages Functions): join, submit, board, me, groups, transfer
 ├── server/board.ts         Code shared by the API: authentication, validation, ISO weeks, points, groups
 ├── migrations/             Leaderboard D1 database schema (applied automatically on deploy)
@@ -156,7 +156,7 @@ Everything fits in Cloudflare's free plan (Pages, Functions, Workers cron, D1 an
 
 ### Android app
 
-The same app can be published on Google Play as a **Trusted Web Activity**: an Android shell generated with [Bubblewrap](https://github.com/GoogleChromeLabs/bubblewrap) that opens the site full screen. Its configuration lives in `android/twa-manifest.json` and the domain verification file in `public/.well-known/assetlinks.json`; the full guide, from the signing key to the store listing, is in [docs/android.md](docs/android.md) (Italian). Every `npm run deploy` also updates the app; a new `.aab` package is needed only when the shell changes (name, icon, colours, package, minimum Android version or its native code). On phones without Chrome (for example Huawei phones without Google services) the same shell shows the site in its own WebView screen, whose sources are in `scripts/android-webview/` (`npm run android:patch` adds them to the generated project). The same folder holds the code that asks Google Play for the user's age range before opening the site and passes the page only whether the user is a minor; the information never leaves the device.
+The same app can be published on Google Play as a **Trusted Web Activity**: an Android shell generated with [Bubblewrap](https://github.com/GoogleChromeLabs/bubblewrap) that opens the site full screen. Its configuration lives in `android/twa-manifest.json` and the domain verification file in `public/.well-known/assetlinks.json`. Every `npm run deploy` also updates the app; a new `.aab` package is needed only when the shell changes (name, icon, colours, package, minimum Android version or its native code). On phones without Chrome (for example Huawei phones without Google services) the same shell shows the site in its own WebView screen, whose sources are in `scripts/android-webview/` (`npm run android:patch` adds them to the generated project). The same folder holds the code that asks Google Play for the user's age range before opening the site and passes the page only whether the user is a minor; the information never leaves the device.
 
 ---
 
