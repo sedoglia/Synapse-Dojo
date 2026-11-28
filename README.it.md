@@ -54,6 +54,7 @@ Gioco gratuito di allenamento cognitivo e coordinazione bilaterale (source-avail
   - [`guide.html`](guide.html): guida approfondita e illustrata alle sezioni, a tutti i 40 giochi e alle FAQ.
   - [`privacy.html`](privacy.html): informativa su privacy, zero tracciamento e assenza di cookie.
   - [`license.html`](license.html): dettagli ufficiali della licenza PolyForm Noncommercial 1.0.0.
+  - **Pagine dei giochi** (`/games/<slug>` in inglese, `/<lingua>/games/<slug>` nelle altre 24 lingue, più un indice in `/games/` e `/<lingua>/games/`): una pagina HTML semplice per ogni esercizio, con le regole, lo studio da cui nasce e un pulsante che lo apre nel gioco (`/?play=<id>`). Le scrive [`scripts/build-seo-pages.mjs`](scripts/build-seo-pages.mjs) dopo `vite build`, partendo dai testi dell'app e dal modello [`game.html`](game.html), e le aggiunge alla sitemap; gli slug sono in [`src/seoPages.ts`](src/seoPages.ts).
 
 ---
 

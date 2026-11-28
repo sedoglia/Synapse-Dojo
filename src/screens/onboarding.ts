@@ -9,6 +9,7 @@ import { showPrivacy } from './privacy';
 import { showGuide } from './guide';
 import { showLicense } from './license';
 import { showTransferImportDialog } from '../transfer';
+import { gamesPath } from '../seoPages';
 
 /**
  * Footer link to a standalone page: a real <a href> that crawlers can follow and that opens in a new tab with
@@ -209,6 +210,8 @@ export function showOnboarding() {
             pageLink('./guide', t('guide.title'), () => showGuide(showOnboarding)),
             h('span', {}, ' · '),
             pageLink('./license', t('license.title'), () => showLicense(showOnboarding)),
+            h('span', {}, ' · '),
+            h('a', { class: 'link-btn', href: gamesPath(store.data.settings.lang) }, t('seo.all')),
             h('span', {}, ' · '),
             h(
               'a',
