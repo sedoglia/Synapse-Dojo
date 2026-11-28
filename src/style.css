@@ -7740,3 +7740,26 @@ html {
 .seo-note h2 {
   font-size: 0.9rem;
 }
+
+/* ---------- daily challenge ---------- */
+.daily-squares {
+  margin: 0;
+  font-size: 1.6rem;
+  letter-spacing: 0.15em;
+  text-align: center;
+}
+.daily-squares.big {
+  font-size: 2.2rem;
+}
+.daily-line {
+  margin: 0;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+.daily-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+}

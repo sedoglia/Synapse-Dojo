@@ -62,6 +62,8 @@ export class Ctx {
   correctAnswers = 0;
   /** First session of this exercise: no saved level yet, so the staircase may climb fast to find it. */
   fresh = false;
+  /** The daily challenge: the same puzzle for everyone, built from `seed` at a fixed `level` (see src/daily.ts). */
+  daily: { seed: string; level: number } | null = null;
 
   constructor(
     public stage: HTMLElement,

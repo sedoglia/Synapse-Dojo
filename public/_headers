@@ -47,6 +47,10 @@ https://:version.:project.pages.dev/*
   Cache-Control: no-cache
 /:lang/games/*
   Cache-Control: no-cache
+/daily
+  Cache-Control: no-cache
+/:lang/daily
+  Cache-Control: no-cache
 /404.html
   Cache-Control: no-cache
 /manifest.json

@@ -30,9 +30,35 @@ export function h<K extends keyof HTMLElementTagNameMap>(
  * CWE-338 compliant.
  */
 export function secureRandom(): number {
+  if (seeded) return seeded();
   const buf = new Uint32Array(1);
   crypto.getRandomValues(buf);
   return buf[0] / (0xffffffff + 1);
+}
+
+let seeded: (() => number) | null = null;
+
+/**
+ * Runs `fn` with a repeatable sequence of numbers in place of secure random ones, so that the same seed builds the
+ * same puzzle on every device (the daily challenge: one lock for everyone). Only for game content, never for codes or
+ * anything secret; `fn` must be synchronous, so nothing else can draw from the sequence meanwhile.
+ */
+export function withSeed<T>(seed: string, fn: () => T): T {
+  // FNV-1a hash of the seed, then mulberry32: small, fast and the same in every JavaScript engine.
+  let a = 2166136261;
+  for (let i = 0; i < seed.length; i++) a = Math.imul(a ^ seed.charCodeAt(i), 16777619);
+  const prev = seeded;
+  seeded = () => {
+    a = (a + 0x6d2b79f5) | 0;
+    let x = Math.imul(a ^ (a >>> 15), 1 | a);
+    x = (x + Math.imul(x ^ (x >>> 7), 61 | x)) ^ x;
+    return ((x ^ (x >>> 14)) >>> 0) / 4294967296;
+  };
+  try {
+    return fn();
+  } finally {
+    seeded = prev;
+  }
 }
 
 export const rand = (min: number, max: number) => Math.floor(secureRandom() * (max - min + 1)) + min;

@@ -88,6 +88,17 @@ export interface SaveData {
   balance: number;
   /** Exercises that were redesigned: scores from before this date don't count as personal bests. */
   bestFrom: Record<string, string>;
+  /** The last daily challenge played (src/daily.ts): one result a day, the one that is shared. */
+  daily: DailyRecord | null;
+}
+
+export interface DailyRecord {
+  date: string;
+  used: number;
+  max: number;
+  solved: boolean;
+  secs: number;
+  code: string;
 }
 
 function defaults(): SaveData {
@@ -113,6 +124,7 @@ function defaults(): SaveData {
     langOffer: null,
     balance: BALANCE,
     bestFrom: {},
+    daily: null,
   };
 }
 
@@ -198,6 +210,24 @@ function cleanSettings(saved: unknown): Partial<Settings> {
   return out;
 }
 
+/** A daily challenge result as saved, or null if it is malformed (a hand-edited backup must not break the screen). */
+function cleanDaily(d: unknown): DailyRecord | null {
+  if (typeof d !== 'object' || d === null) return null;
+  const r = d as Record<string, unknown>;
+  const count = (v: unknown) => typeof v === 'number' && Number.isInteger(v) && v >= 0 && v <= 99;
+  return typeof r.date === 'string' &&
+    /^\d{4}-\d{2}-\d{2}$/.test(r.date) &&
+    count(r.used) &&
+    count(r.max) &&
+    typeof r.solved === 'boolean' &&
+    typeof r.secs === 'number' &&
+    Number.isFinite(r.secs) &&
+    typeof r.code === 'string' &&
+    /^\d{1,8}$/.test(r.code)
+    ? { date: r.date, used: r.used as number, max: r.max as number, solved: r.solved, secs: r.secs, code: r.code }
+    : null;
+}
+
 function withDefaults(old: Partial<SaveData>): SaveData {
   const base = defaults();
   const saved = migrate(old);
@@ -210,6 +240,7 @@ function withDefaults(old: Partial<SaveData>): SaveData {
     boardPrompt: cleanPrompt(saved.boardPrompt),
     communityDay: typeof saved.communityDay === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(saved.communityDay) ? saved.communityDay : null,
     langOffer: typeof saved.langOffer === 'string' && saved.langOffer.length <= 10 ? saved.langOffer : null,
+    daily: cleanDaily(saved.daily),
   };
 }
 

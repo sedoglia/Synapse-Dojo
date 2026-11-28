@@ -6,6 +6,7 @@ import { APP_NAME } from './config';
 import { deviceLang, isLang, loadLang, startLang } from './i18n';
 import { byId, type Exercise } from './exercises';
 import { playPractice } from './screens/play';
+import { showDaily } from './screens/daily';
 import { applySettings } from './ui';
 import { showHome } from './screens/home';
 import { showOnboarding } from './screens/onboarding';
@@ -25,17 +26,17 @@ function takeTransferFromUrl(): string | null {
 
 /**
  * `?play=<exercise id>&lang=<language>`: the "Play" button of a standalone game page (/games/<slug>) opens that
- * exercise straight away. The page's language is used only on a first visit; afterwards the saved one wins.
+ * exercise straight away; `?daily` (from /daily) opens the daily challenge. The page's language is used only on a first visit; afterwards the saved one wins.
  */
-function takePlayFromUrl(): { ex: Exercise | null; lang: string | null } {
+function takePlayFromUrl(): { ex: Exercise | null; daily: boolean; lang: string | null } {
   const url = new URL(location.href);
   const id = url.searchParams.get('play');
+  const daily = url.searchParams.has('daily');
   const lang = url.searchParams.get('lang');
-  if (id === null && lang === null) return { ex: null, lang: null };
-  url.searchParams.delete('play');
-  url.searchParams.delete('lang');
+  if (id === null && !daily && lang === null) return { ex: null, daily: false, lang: null };
+  for (const k of ['play', 'daily', 'lang']) url.searchParams.delete(k);
   history.replaceState(history.state, '', url.toString());
-  return { ex: (id && byId(id)) || null, lang };
+  return { ex: (id && byId(id)) || null, daily, lang };
 }
 
 document.title = APP_NAME;
@@ -57,6 +58,7 @@ loadLang(store.fresh && isLang(incomingPlay.lang) ? incomingPlay.lang : startLan
   const firstScreen = () => (store.data.name ? showHome() : showOnboarding());
   // From a game page: that exercise first, then the usual first screen (where a newcomer picks a name).
   if (incomingPlay.ex && !incomingTransfer) playPractice(incomingPlay.ex, firstScreen);
+  else if (incomingPlay.daily && !incomingTransfer) showDaily(firstScreen);
   else firstScreen();
   startBackNavigation();
   resumeBoardSync();
