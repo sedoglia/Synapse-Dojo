@@ -65,7 +65,7 @@ Il progetto è costruito con **TypeScript** e **Vite**, senza l'impiego di frame
 ```
 synapse-dojo/
 ├── public/                 manifest PWA, icone SVG e PNG, font Nunito (OFL), robots.txt, sitemap.xml, _headers, service worker, .well-known/assetlinks.json
-├── android/                twa-manifest.json: configurazione Bubblewrap dell'app Android (guida in docs/android.md)
+├── android/                twa-manifest.json: configurazione Bubblewrap dell'app Android
 ├── functions/api/          API della classifica e trasferimento (Cloudflare Pages Functions): join, submit, board, me, groups, transfer
 ├── server/board.ts         codice condiviso dalle API: autenticazione, validazione, settimane ISO, punti, gruppi
 ├── migrations/             schema del database D1 della classifica (applicato in automatico dal deploy)
@@ -157,7 +157,7 @@ Tutto rientra nel piano gratuito di Cloudflare (Pages, Functions, cron dei Worke
 
 ### App Android
 
-La stessa app è pubblicabile su Google Play come **Trusted Web Activity**: un guscio Android generato con [Bubblewrap](https://github.com/GoogleChromeLabs/bubblewrap) che apre il sito a schermo intero. La configurazione è in `android/twa-manifest.json` e il file di verifica del dominio in `public/.well-known/assetlinks.json`; la guida completa, dalla chiave di firma alla scheda dello store, è in [docs/android.md](docs/android.md). Ogni `npm run deploy` aggiorna anche l'app; un nuovo pacchetto `.aab` serve solo quando cambia il guscio (nome, icona, colori, pacchetto, versione minima di Android o il suo codice nativo). Sui telefoni senza Chrome (per esempio i Huawei senza servizi Google) lo stesso guscio mostra il sito in una propria schermata WebView, i cui sorgenti sono in `scripts/android-webview/` (`npm run android:patch` li aggiunge al progetto generato). Nella stessa cartella c'è il codice che, prima di aprire il sito, chiede a Google Play la fascia d'età e passa alla pagina solo se l'utente è minorenne; l'informazione non esce mai dal dispositivo.
+La stessa app è pubblicabile su Google Play come **Trusted Web Activity**: un guscio Android generato con [Bubblewrap](https://github.com/GoogleChromeLabs/bubblewrap) che apre il sito a schermo intero. La configurazione è in `android/twa-manifest.json` e il file di verifica del dominio in `public/.well-known/assetlinks.json`. Ogni `npm run deploy` aggiorna anche l'app; un nuovo pacchetto `.aab` serve solo quando cambia il guscio (nome, icona, colori, pacchetto, versione minima di Android o il suo codice nativo). Sui telefoni senza Chrome (per esempio i Huawei senza servizi Google) lo stesso guscio mostra il sito in una propria schermata WebView, i cui sorgenti sono in `scripts/android-webview/` (`npm run android:patch` li aggiunge al progetto generato). Nella stessa cartella c'è il codice che, prima di aprire il sito, chiede a Google Play la fascia d'età e passa alla pagina solo se l'utente è minorenne; l'informazione non esce mai dal dispositivo.
 
 ---
 
