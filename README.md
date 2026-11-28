@@ -53,6 +53,7 @@ Free cognitive training and bilateral coordination web application (source-avail
   - [`guide.html`](guide.html): Comprehensive illustrated guide to all 40 games, paradigms, and FAQs.
   - [`privacy.html`](privacy.html): Privacy policy, local data terms, and zero-cookie statement.
   - [`license.html`](license.html): Official PolyForm Noncommercial 1.0.0 license terms and copyright notices.
+  - **Game pages** (`/games/<slug>` in English, `/<lang>/games/<slug>` in the other 24 languages, plus an index at `/games/` and `/<lang>/games/`): one plain-HTML page per exercise with its rules, the study behind it and a button that opens it in the game (`/?play=<id>`). They are written after `vite build` by [`scripts/build-seo-pages.mjs`](scripts/build-seo-pages.mjs) from the app's own texts and the [`game.html`](game.html) template, and added to the sitemap; the slugs are in [`src/seoPages.ts`](src/seoPages.ts).
 
 ---
 

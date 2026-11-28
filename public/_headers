@@ -43,6 +43,10 @@ https://:version.:project.pages.dev/*
   Cache-Control: no-cache
 /sw.js
   Cache-Control: no-cache
+/games/*
+  Cache-Control: no-cache
+/:lang/games/*
+  Cache-Control: no-cache
 /404.html
   Cache-Control: no-cache
 /manifest.json

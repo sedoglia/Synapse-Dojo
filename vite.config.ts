@@ -1,8 +1,11 @@
 import { defineConfig, loadEnv, type Connect } from 'vite';
 
 const CLEAN_PAGE = /^\/(guide|privacy|license)\/?(?=$|[?#])/;
+// The game pages written by scripts/build-seo-pages.mjs (only in `npm run preview`, after a build).
+const GAME_PAGE = /^(\/(?:[a-z]{2}(?:-tw)?\/)?games\/[a-z0-9-]+)(?=$|[?#])/;
+const GAME_INDEX = /^(\/(?:[a-z]{2}(?:-tw)?\/)?games)\/?(?=$|[?#])/;
 const cleanUrls: Connect.NextHandleFunction = (req, _res, next) => {
-  if (req.url) req.url = req.url.replace(CLEAN_PAGE, '/$1.html');
+  if (req.url) req.url = req.url.replace(CLEAN_PAGE, '/$1.html').replace(GAME_INDEX, '$1/index.html').replace(GAME_PAGE, '$1.html');
   next();
 };
 
@@ -16,7 +19,7 @@ export default defineConfig(({ mode }) => {
     base: './',
     // Leaderboard API during `npm run dev`: run `npm run dev:api` (wrangler on port 8788) alongside.
     server: { proxy: { '/api': 'http://127.0.0.1:8788' } },
-    build: { rolldownOptions: { input: { main: 'index.html', privacy: 'privacy.html', guide: 'guide.html', license: 'license.html' } } },
+    build: { rolldownOptions: { input: { main: 'index.html', privacy: 'privacy.html', guide: 'guide.html', license: 'license.html', game: 'game.html' } } },
     plugins: [
       {
         // Cloudflare Pages serves /guide for guide.html (and redirects the .html form), so links use clean URLs;

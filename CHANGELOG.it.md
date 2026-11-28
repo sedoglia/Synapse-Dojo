@@ -6,6 +6,14 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
+## [Non pubblicato]
+
+### Aggiunto
+
+- **Una pagina per ogni gioco, in ogni lingua** (`scripts/build-seo-pages.mjs`, `game.html`, `src/seoPages.ts`, `src/gamePage.ts`): dopo `vite build`, una pagina HTML semplice per ogni esercizio in tutte le 25 lingue (`/games/<slug>`, `/<lingua>/games/<slug>`, 1000 pagine) e un indice dei giochi per lingua (`/games/`, `/<lingua>/games/`). Ognuna ha le regole, l'esempio, lo studio da cui nasce l'esercizio, l'avvertenza medica, gli altri giochi della stessa area, i collegamenti `hreflang` tra le lingue e i dati strutturati; slug e titoli in inglese usano i termini cercati («reaction-time-test», «Stroop Test»). Le pagine entrano nella sitemap, sono linkate dalla guida e dalla prima schermata e non richiedono un nuovo pacchetto Android.
+- **Un esercizio si apre direttamente da un link** (`src/main.ts`): `/?play=<id>&lang=<lingua>`, il pulsante «Gioca» delle pagine, avvia subito quell'esercizio; alla prima visita si parte nella lingua della pagina e il nome si sceglie dopo.
+- Otto testi nuovi per le pagine in tutte le 25 lingue (`seo.*`).
+
 ## [0.25.1] - 2026-11-26
 
 ### Corretto

@@ -9,8 +9,8 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && npm run check:api && vite build --mode web",
-    "build:web": "tsc && npm run check:api && vite build --mode web",
+    "build": "tsc && npm run check:api && vite build --mode web && node scripts/build-seo-pages.mjs",
+    "build:web": "tsc && npm run check:api && vite build --mode web && node scripts/build-seo-pages.mjs",
     "check:anagrams": "node scripts/check-anagrams.mjs",
     "check:i18n": "node scripts/verify-i18n.mjs",
     "check:api": "wrangler types server/worker-configuration.d.ts && tsc -p tsconfig.api.json",

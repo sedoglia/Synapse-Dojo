@@ -5,6 +5,8 @@ import { sfx, haptic } from '../audio';
 import { EXERCISES, DOMAINS, type Domain } from '../exercises';
 import type { Exercise } from '../exercises/types';
 import { burstConfetti, playPractice } from './play';
+import { store } from '../storage';
+import { gamePath } from '../seoPages';
 
 /** A study behind a guide card: shown as a chip that opens the paper through its DOI. */
 interface Source {
@@ -166,7 +168,9 @@ function gamesPanel(onPlay?: (ex: Exercise) => void): HTMLElement[] {
           h('p', {}, h('b', { class: 'guide-label' }, t('guide.gameHow')), ' ', t(ex.desc)),
           howBox(ex.how),
           ex.example ? h('p', { class: 'guide-example' }, `💡 ${t(ex.example)}`) : null,
-          onPlay ? h('button', { class: 'btn primary guide-play', onClick: () => onPlay(ex) }, `▶ ${t('guide.playBtn')}`) : null,
+          onPlay
+            ? h('button', { class: 'btn primary guide-play', onClick: () => onPlay(ex) }, `▶ ${t('guide.playBtn')}`)
+            : h('a', { class: 'btn primary guide-play', href: gamePath(store.data.settings.lang, ex.id) ?? './' }, `▶ ${t('guide.playBtn')}`),
         ),
       ),
     ),
