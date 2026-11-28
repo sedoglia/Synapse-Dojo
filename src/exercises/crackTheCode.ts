@@ -12,7 +12,7 @@
  *    keeps accuracy near ~80%, neither too easy nor too hard.
  */
 
-import { h, flash, secureRandom, shuffle as secureShuffle, pick as securePick } from '../dom';
+import { h, flash, secureRandom, shuffle as secureShuffle, pick as securePick, withSeed } from '../dom';
 import { sfx } from '../audio';
 import { t } from '../i18n';
 import type { Exercise } from './types';
@@ -256,13 +256,16 @@ export const crackTheCode: Exercise = {
     const trials = ctx.count(1, 1, 1);
     const st = ctx.stair(trials, 1, MAX_LEVEL, { target: 0.8 });
     let solvedCount = 0;
+    let attempts: { used: number; max: number; solved: boolean; secs: number; code: string } | undefined;
 
     for (let trial = 0; trial < trials; trial++) {
       ctx.progress(trial / trials, `${trial + 1}/${trials}`);
       ctx.stage.replaceChildren();
 
-      const lvl = ctx.practice ? 1 : st.int;
-      const puzzle = generatePuzzle(lvl);
+      const daily = ctx.daily;
+      const lvl = daily ? daily.level : ctx.practice ? 1 : st.int;
+      // The daily challenge draws its lock from the date, so every player gets the same one.
+      const puzzle = daily ? withSeed(daily.seed, () => generatePuzzle(lvl)) : generatePuzzle(lvl);
       const codeLen = puzzle.length;
 
       // Scratchpad state for digits 0-9: 0 = neutral, 1 = eliminated, 2 = confirmed
@@ -575,7 +578,10 @@ export const crackTheCode: Exercise = {
 
       // A crack counts toward the next level only within a reasonable time for its digits and clues; a slow one still
       // sounds right and counts as solved.
-      const inTime = ctx.solvedInTime((performance.now() - startedAt) / 1000, benchmarkFor(lvl));
+      const secs = (performance.now() - startedAt) / 1000;
+      const maxTries = attemptsFor(lvl);
+      attempts = { used: maxTries - triesLeft + (solved ? 1 : 0), max: maxTries, solved, secs: Math.round(secs), code: puzzle.solution.join('') };
+      const inTime = ctx.solvedInTime(secs, benchmarkFor(lvl));
       const ok = ctx.track(st, solved && inTime, {
         heard: solved,
         was: solved ? undefined : puzzle.solution.join(' '),
@@ -600,6 +606,7 @@ export const crackTheCode: Exercise = {
       detail,
       level: st.next(),
       timeBonus,
+      attempts,
     };
   },
 };

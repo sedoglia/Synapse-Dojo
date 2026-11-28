@@ -2,7 +2,7 @@ import { defineConfig, loadEnv, type Connect } from 'vite';
 
 const CLEAN_PAGE = /^\/(guide|privacy|license)\/?(?=$|[?#])/;
 // The game pages written by scripts/build-seo-pages.mjs (only in `npm run preview`, after a build).
-const GAME_PAGE = /^(\/(?:[a-z]{2}(?:-tw)?\/)?games\/[a-z0-9-]+)(?=$|[?#])/;
+const GAME_PAGE = /^(\/(?:[a-z]{2}(?:-tw)?\/)?(?:games\/[a-z0-9-]+|daily))(?=$|[?#])/;
 const GAME_INDEX = /^(\/(?:[a-z]{2}(?:-tw)?\/)?games)\/?(?=$|[?#])/;
 const cleanUrls: Connect.NextHandleFunction = (req, _res, next) => {
   if (req.url) req.url = req.url.replace(CLEAN_PAGE, '/$1.html').replace(GAME_INDEX, '$1/index.html').replace(GAME_PAGE, '$1.html');

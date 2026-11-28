@@ -11,6 +11,8 @@ export interface ExerciseResult {
   level?: number; // starting level for the next session (adaptive exercises)
   timeBonus?: number; // optional time bonus points added to score (0–10)
   speedBonus?: boolean; // explicitly mark speed bonus (e.g. in real-time games)
+  /** Crack the code: how the last lock went, for the daily challenge's result and shared line. */
+  attempts?: { used: number; max: number; solved: boolean; secs: number; code: string };
 }
 
 export interface Exercise {

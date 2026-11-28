@@ -54,6 +54,11 @@ export function gamesPath(lang: string): string {
   return lang === 'en' ? '/games/' : `/${lang.toLowerCase()}/games/`;
 }
 
+/** The public page of the daily challenge: "/daily" in English, "/it/daily" in Italian. */
+export function dailyPath(lang: string): string {
+  return lang === 'en' ? '/daily' : `/${lang.toLowerCase()}/daily`;
+}
+
 /** The page of one exercise in a language, or null for an exercise without a page. */
 export function gamePath(lang: string, id: string): string | null {
   const slug = SEO_SLUGS[id];

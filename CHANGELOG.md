@@ -6,6 +6,13 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
+## [Unreleased]
+
+### Added
+
+- **Daily challenge** (`src/daily.ts`, `src/screens/daily.ts`, `src/exercises/crackTheCode.ts`, `src/dom.ts`): one Crack the code lock a day, the same for every player, drawn from the date with a repeatable sequence of numbers (`withSeed`), easier on Monday and harder towards Saturday. The result is saved once a day and can be shared as a line of squares, one per attempt (🟥 wrong, 🟩 right, ⬜ left over), with the time and a link: no name, age or score of the player. It has its own card on the home screen and a public page in 25 languages (`/daily`, `/<lang>/daily`), added to the sitemap; `/?daily` opens it.
+- Ten new texts in all 25 languages (`daily.*`).
+
 ## [0.26.0] - 2026-11-28
 
 ### Added

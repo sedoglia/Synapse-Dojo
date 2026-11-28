@@ -95,8 +95,13 @@ function intro(ex: Exercise, step: string | null): Promise<IntroChoice> {
   });
 }
 
-/** Runs a single exercise in the play view. Returns null if the player quit. */
-async function runExercise(ex: Exercise, mode: Mode, level: number): Promise<{ res: ExerciseResult; ctx: Ctx } | null> {
+/** Runs a single exercise in the play view. Returns null if the player quit. `daily` is set for the daily challenge. */
+export async function runExercise(
+  ex: Exercise,
+  mode: Mode,
+  level: number,
+  daily: Ctx['daily'] = null,
+): Promise<{ res: ExerciseResult; ctx: Ctx } | null> {
   const bar = h('div', { class: 'progress-fill' });
   const label = h('span', { class: 'progress-label' });
   const combo = h('span', { class: 'combo' });
@@ -153,6 +158,7 @@ async function runExercise(ex: Exercise, mode: Mode, level: number): Promise<{ r
     },
   });
   ctx.fresh = mode === 'train' && !store.hasLevel(ex.id);
+  ctx.daily = daily;
   const verdict = h('div', { class: 'verdict' });
   let hideVerdict: ReturnType<typeof setTimeout> | undefined;
 

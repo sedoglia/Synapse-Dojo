@@ -12,7 +12,7 @@ import { execFileSync } from 'node:child_process';
 import { mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { SEO_SLUGS, gamePath, gamesPath } from '../src/seoPages.ts';
+import { SEO_SLUGS, dailyPath, gamePath, gamesPath } from '../src/seoPages.ts';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = join(ROOT, 'dist');
@@ -296,6 +296,7 @@ function hubPage(lang) {
           <h1>${esc(t(lang, 'seo.hubTitle'))}</h1>
           <p class="seo-lead">${esc(t(lang, 'seo.hubLead'))}</p>
           <a class="btn primary big seo-play" href="/?lang=${lang}">🚀 ${esc(t(lang, 'guide.ctaBtn'))}</a>
+          <a class="btn" href="${dailyPath(lang)}">🔓 ${esc(t(lang, 'daily.pageTitle'))}</a>
           <p class="seo-store" data-store-link><a class="btn" href="${storeHref(lang)}" rel="noopener">▶ ${esc(t(lang, 'seo.android'))}</a></p>
         </header>
         ${sections.join('\n        ')}
@@ -324,6 +325,55 @@ function hubPage(lang) {
   });
 }
 
+// ---------- the daily challenge's page, where a shared result leads ----------
+
+function dailyPage(lang) {
+  const path = dailyPath(lang);
+  const ex = EXERCISES.find((e) => e.id === 'crackTheCode');
+  if (!ex) fail('crackTheCode not found');
+  const steps = t(lang, 'ex.crackTheCode.how').split('\n').filter((s) => s.trim());
+  const title = t(lang, 'daily.pageTitle');
+  const lead = t(lang, 'daily.pageLead');
+  const body = `<div id="app"><div class="page seo-page">
+      ${topbar(lang, gamesPath(lang))}
+      <main class="content">
+        <article class="card seo-game">
+          <div class="intro-icon" aria-hidden="true">🔓</div>
+          <h1>${esc(title)}</h1>
+          <p class="daily-squares" aria-hidden="true">🟥🟥🟩⬜⬜</p>
+          <p class="seo-lead">${esc(lead)}</p>
+          <a class="btn primary big seo-play" href="/?daily=1&amp;lang=${lang}">▶ ${esc(t(lang, 'daily.play'))}</a>
+          <section class="how-box">
+            <h2>📋 ${esc(t(lang, 'intro.how'))}</h2>
+            <ol class="how-steps">${steps.map((s) => `<li>${esc(s)}</li>`).join('')}</ol>
+          </section>
+          <p class="guide-example">💡 ${esc(t(lang, 'ex.crackTheCode.example'))}</p>
+          <section class="seo-why">
+            <h2>🔬 ${esc(label(lang, 'guide.gameWhy'))}</h2>
+            <p>${esc(t(lang, 'ex.crackTheCode.why'))}</p>
+          </section>
+          <p class="seo-part muted">${esc(t(lang, 'seo.part'))}</p>
+          <p class="seo-store" data-store-link><a class="btn" href="${storeHref(lang)}" rel="noopener">▶ ${esc(t(lang, 'seo.android'))}</a></p>
+        </article>
+        <p class="center"><a class="btn" href="${gamesPath(lang)}">${esc(t(lang, 'seo.all'))}</a></p>
+        ${langLinks(lang, dailyPath)}
+        ${footer(lang)}
+      </main>
+    </div></div>`;
+  return pageHtml({
+    lang,
+    title: `${title} | Synapse Dojo`,
+    description: lead,
+    path,
+    alternates: dailyPath,
+    ld: {
+      '@context': 'https://schema.org',
+      '@graph': [{ ...app(lang), '@type': ['WebApplication', 'Game'], name: title, url: abs(path), description: lead }],
+    },
+    body,
+  });
+}
+
 // ---------- write the pages and the sitemap ----------
 
 /** URL path → file in dist: "/it/games/" → it/games/index.html, "/games/stroop-test" → games/stroop-test.html. */
@@ -338,6 +388,8 @@ const urls = [];
 for (const { code } of LANGS) {
   write(gamesPath(code), hubPage(code));
   urls.push(gamesPath(code));
+  write(dailyPath(code), dailyPage(code));
+  urls.push(dailyPath(code));
   for (const ex of EXERCISES) {
     write(gamePath(code, ex.id), gamePage(code, ex));
     urls.push(gamePath(code, ex.id));
@@ -361,4 +413,4 @@ const entries = urls
 if (!sitemap.includes('</urlset>')) fail('dist/sitemap.xml has no </urlset>');
 writeFileSync(sitemapFile, sitemap.replace('</urlset>', `${entries}\n</urlset>`));
 
-console.log(`build-seo-pages: ${urls.length} pages (${EXERCISES.length} games × ${LANGS.length} languages + indexes), sitemap updated.`);
+console.log(`build-seo-pages: ${urls.length} pages (${EXERCISES.length} games × ${LANGS.length} languages + indexes and daily challenge), sitemap updated.`);

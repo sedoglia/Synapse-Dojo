@@ -7,6 +7,8 @@ import { currentPlan } from '../stats';
 import { playerLevel, nextBadge, XP } from '../rewards';
 import { playDailyCheck, playPlan } from './play';
 import { showTraining } from './training';
+import { showDaily, dailyDoneToday } from './daily';
+import { dailyNumber, dailySquares } from '../daily';
 import { showProgress } from './progress';
 import { showSettings } from './settings';
 import { showGuide } from './guide';
@@ -206,6 +208,7 @@ export function showHome() {
   // Before the first exercise of the day: what training now is worth (a streak about to grow is a goal within reach,
   // Kivetz et al. 2006; one about to lapse is something to protect, Kahneman & Tversky 1979).
   const trainedToday = store.activeDays().has(todayKey());
+  const daily = dailyDoneToday();
   const streakText = streak === 0 ? t('home.streak0') : streak === 1 ? t('home.streak1') : t('home.streak', { n: streak });
 
   const planSub = h(
@@ -276,6 +279,13 @@ export function showHome() {
           planSub,
           playPlan,
           plan.complete ? 'done' : 'featured',
+        ),
+        menuCard(
+          daily ? '✅' : '🔓',
+          t('daily.number', { n: dailyNumber() }),
+          daily ? `${dailySquares(daily)} · ${t('daily.share')}` : t('daily.sub'),
+          () => showDaily(showHome),
+          daily ? 'done' : '',
         ),
         menuCard(
           '📏',
