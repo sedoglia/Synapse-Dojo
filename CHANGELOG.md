@@ -6,13 +6,13 @@ All notable changes to Synapse Dojo (called Synapse Gym until 0.6.0) are listed 
 
 Version numbers come from `package.json`, and each date is the day of the commit that set that version. A commit made after a version bump is listed under the next version, which is the first one to include it. The short code in parentheses is the Git commit.
 
-## [Unreleased]
+## [0.26.0] - 2026-11-28
 
 ### Added
 
-- **A page for every game, in every language** (`scripts/build-seo-pages.mjs`, `game.html`, `src/seoPages.ts`, `src/gamePage.ts`): after `vite build`, one plain-HTML page per exercise in all 25 languages (`/games/<slug>`, `/<lang>/games/<slug>`, 1,000 pages) and an index of the games per language (`/games/`, `/<lang>/games/`). Each has the rules, the example, the study behind the exercise, the medical note, the other games of the same area, `hreflang` links between languages and structured data; English slugs and titles use the terms people search for ("reaction-time-test", "Stroop Test"). The pages are added to the sitemap, linked from the guide and the first screen, and need no new Android package.
-- **Play an exercise straight from a link** (`src/main.ts`): `/?play=<id>&lang=<lang>`, the "Play" button of the game pages, opens that exercise at once; a first visit starts in the page's language and picks a name afterwards.
-- Eight new texts for the pages in all 25 languages (`seo.*`).
+- **A page for every game, in every language** (`scripts/build-seo-pages.mjs`, `game.html`, `src/seoPages.ts`, `src/gamePage.ts`): after `vite build`, one plain-HTML page per exercise in all 25 languages (`/games/<slug>`, `/<lang>/games/<slug>`, 1,000 pages) and an index of the games per language (`/games/`, `/<lang>/games/`). Each has the rules, the example, the study behind the exercise, the medical note, the other games of the same area, `hreflang` links between languages and structured data; English slugs and titles use the terms people search for ("reaction-time-test", "Stroop Test"). The pages are added to the sitemap, linked from the guide and the first screen, and need no new Android package (#135).
+- **Play an exercise straight from a link** (`src/main.ts`): `/?play=<id>&lang=<lang>`, the "Play" button of the game pages, opens that exercise at once; a first visit starts in the page's language and picks a name afterwards (#135).
+- Eight new texts for the pages in all 25 languages (`seo.*`) (#135).
 
 ## [0.25.1] - 2026-11-26
 
