@@ -6,12 +6,12 @@ Qui sono elencate tutte le modifiche rilevanti a Synapse Dojo (chiamato Synapse 
 
 I numeri di versione vengono da `package.json` e ogni data è il giorno del commit che ha impostato quella versione. Un commit fatto dopo un cambio di versione è elencato sotto la versione successiva, la prima a includerlo. Il codice breve tra parentesi è il commit Git.
 
-## [Non pubblicato]
+## [0.27.0] - 2026-11-28
 
 ### Aggiunto
 
-- **Sfida del giorno** (`src/daily.ts`, `src/screens/daily.ts`, `src/exercises/crackTheCode.ts`, `src/dom.ts`): un lucchetto di Crack the code al giorno, uguale per tutti, generato dalla data con una sequenza di numeri ripetibile (`withSeed`), più facile il lunedì e più difficile verso il sabato. Il risultato si salva una volta al giorno e si condivide come una riga di quadratini, uno per tentativo (🟥 sbagliato, 🟩 giusto, ⬜ avanzato), con il tempo e un link: niente nome, età o punteggio del giocatore. Ha una scheda in home e una pagina pubblica in 25 lingue (`/daily`, `/<lingua>/daily`), inserita nella sitemap; `/?daily` la apre.
-- Dieci testi nuovi in tutte le 25 lingue (`daily.*`).
+- **Sfida del giorno** (`src/daily.ts`, `src/screens/daily.ts`, `src/exercises/crackTheCode.ts`, `src/dom.ts`): un lucchetto di Crack the code al giorno, uguale per tutti, generato dalla data con una sequenza di numeri ripetibile (`withSeed`), più facile il lunedì e più difficile verso il sabato. Il risultato si salva una volta al giorno e si condivide come una riga di quadratini, uno per tentativo (🟥 sbagliato, 🟩 giusto, ⬜ avanzato), con il tempo e un link: niente nome, età o punteggio del giocatore. Ha una scheda in home e una pagina pubblica in 25 lingue (`/daily`, `/<lingua>/daily`), inserita nella sitemap; `/?daily` la apre (#137).
+- Dieci testi nuovi in tutte le 25 lingue (`daily.*`) (#137).
 
 ## [0.26.0] - 2026-11-28
 
